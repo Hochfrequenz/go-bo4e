@@ -1,10 +1,10 @@
 package com
 
 import (
-	"../enum"
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
+	"github.com/hochfrequenz/go-bo4e/enum"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )

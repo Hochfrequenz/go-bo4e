@@ -1,6 +1,6 @@
 package com
 
-import "../enum"
+import "github.com/hochfrequenz/go-bo4e/enum"
 
 // Adresse is a general purpose address struct
 type Adresse struct {
