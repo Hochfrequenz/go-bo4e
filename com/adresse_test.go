@@ -1,9 +1,10 @@
 package com
 
 import (
+	"../enum"
+	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -18,15 +19,16 @@ func (s *Suite) SetupSuite() {
 
 // Test_Deserialization deserializes an address json
 func (s *Suite) Test_Deserialization() {
-	_ = Adresse{
+	var adresse = Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
-		Landescode:   Landescode.DE,
+		Landescode:   enum.DE,
 	}
-	then.Assert
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	serializedAdresse, err := json.Marshal(adresse)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
 }
 
 func (s *Suite) AfterTest(_, _ string) {

@@ -1,9 +1,8 @@
 package enum
-
 type Landescode int
 
 const (
-	AC Landescode = iota
+	AC Landescode = iota // AC
 	AD            // Andorra
 	AE            // United Arab Emirates
 	AF            // Afghanistan
