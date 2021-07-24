@@ -19,6 +19,8 @@ type Adresse struct {
 
 // AdresseStructLevelValidation does a cross check on a Adresse object
 func AdresseStructLevelValidation(sl validator.StructLevel) {
+	// ToDo: use required_without/required_if instead of own validator
+	// see https://github.com/go-playground/validator/search?q=required_without
 	address := sl.Current().Interface().(Adresse)
 	if (len(address.Strasse) == 0 && len(address.Postfach) == 0) || (len(address.Strasse) > 0 && len(address.Postfach) > 0) {
 		sl.ReportError(address.Strasse, "Strasse", "Postfach", "StrasseXORPostfach", "")
