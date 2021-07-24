@@ -1,10 +1,8 @@
-package com
+package landescode
 
 import (
-	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -19,16 +17,7 @@ func (s *Suite) SetupSuite() {
 
 // Test_Deserialization deserializes an address json
 func (s *Suite) Test_Deserialization() {
-	var adresse = Adresse{
-		Postleitzahl: "82031",
-		Ort:          "Grünwald",
-		Strasse:      "Nördlicher Münchner Straße",
-		Hausnummer:   "27A",
-		Landescode:   landescode.DE,
-	}
-	serializedAdresse, err := json.Marshal(adresse)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
+	then.AssertThat(s.T(), DE.String(), is.EqualTo("DE"))
 }
 
 func (s *Suite) AfterTest(_, _ string) {

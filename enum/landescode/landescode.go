@@ -1,4 +1,6 @@
-package enum
+package landescode
+
+//go:generate stringer --type Landescode
 
 type Landescode int
 
