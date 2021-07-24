@@ -1,5 +1,9 @@
 # go-bo4e
 
+![Unittest status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/Unittests/badge.svg)
+![Coverage status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/coverage/badge.svg)
+![Linter status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/golangci-lint/badge.svg)
+
 BO4E Implementation in Go. Highlights are
 
 - includes `json` tags for easy (un)marshalling
@@ -7,6 +11,7 @@ BO4E Implementation in Go. Highlights are
 - is linted and has decent test coverage
 
 ## Installation
+
 ```
 go get github.com/hochfrequenz/go-bo4e
 ```
