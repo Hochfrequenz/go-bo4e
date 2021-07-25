@@ -4,7 +4,7 @@
 ![Coverage status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/coverage/badge.svg)
 ![Linter status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/golangci-lint/badge.svg)
 
-BO4E Implementation in Go. Highlights are
+**B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)) Implementation in Go. Highlights are
 
 - includes `json` tags for easy (un)marshalling
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
