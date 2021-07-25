@@ -10,18 +10,26 @@ BO4E Implementation in Go. Highlights are
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
+**This package does (as of July 2021) only contain a minimal working example and does not implement any business objects yet.**
+
 ## Installation
 
 ```
 go get github.com/hochfrequenz/go-bo4e
 ```
 
+## Other Noteworthy BO4E Implementations
+
+- [C# / .NET](https://github.com/Hochfrequenz/BO4E-dotnet/)
+- [Python](https://github.com/Hochfrequenz/BO4E-python/)
+- [Kotlin](https://github.com/openEnWi/ktBO4E-lib)
+
 ## Contributing
 
-Contributions are welcome. Feel free to open a Pull Request against the develop branch of this repository. Please
-provide unit tests if you contribute logic beyond bare bare business object definitions. We do track our modification
-proposals to the official BO4E standard in a separate
-repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
+Contributions are welcome.
+Feel free to open a Pull Request against the main branch of this repository.
+Please provide unit tests if you contribute logic beyond bare bare business object definitions.
+We do track our modification proposals to the official BO4E standard in a separate repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ## Hochfrequenz
 
