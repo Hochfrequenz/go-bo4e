@@ -20,7 +20,8 @@ func (s *Suite) TestAddressDeserialization() {
 	}
 	serializedAdresse, err := json.Marshal(adresse)
 	jsonString := string(serializedAdresse)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
 	var deserializedAdresse Adresse
