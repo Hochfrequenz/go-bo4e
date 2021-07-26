@@ -11,7 +11,7 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package does (as of July 2021) only contain a minimal working example and does not implement any business objects yet.**
+**This package does (as of July 2021) only contain a minimal working example and does only implement BO Messlokation so far.**
 
 ## Installation
 
