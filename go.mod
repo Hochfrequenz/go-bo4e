@@ -12,6 +12,7 @@ require (
 )
 
 replace (
+	github.com/hochfrequenz/go-bo4e/bo => ./bo
 	github.com/hochfrequenz/go-bo4e/com => ./com
 	github.com/hochfrequenz/go-bo4e/enum => ./enum
 )

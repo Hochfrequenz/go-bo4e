@@ -6,20 +6,11 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
-	"github.com/stretchr/testify/suite"
-	"testing"
+	"strings"
 )
 
-type Suite struct {
-	suite.Suite
-}
-
-// SetupSuite sets up the tests
-func (s *Suite) SetupSuite() {
-}
-
 // Test_Deserialization deserializes an address json
-func (s *Suite) Test_Deserialization() {
+func (s *Suite) TestAddressDeserialization() {
 	var adresse = Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
@@ -28,6 +19,9 @@ func (s *Suite) Test_Deserialization() {
 		Landescode:   landescode.DE,
 	}
 	serializedAdresse, err := json.Marshal(adresse)
+	jsonString := string(serializedAdresse)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
 	var deserializedAdresse Adresse
@@ -37,10 +31,10 @@ func (s *Suite) Test_Deserialization() {
 }
 
 //  Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
-func (s *Suite) Test_StrasseXorPostfach_Validation() {
+func (s *Suite) TestStrasseXorPostfachValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(AdresseStructLevelValidation, Adresse{})
-	invalidAdressMaps := map[string][]Adresse{
+	invalidAdressMaps := map[string][]interface{}{
 		"StrasseRequiresHausnummer": {
 			Adresse{
 				// no hausnummer given
@@ -82,28 +76,20 @@ func (s *Suite) Test_StrasseXorPostfach_Validation() {
 			},
 		},
 	}
-	for validationTag, invalidAddresses := range invalidAdressMaps {
-		for _, invalidAddress := range invalidAddresses {
-			err := validate.Struct(invalidAddress)
-			then.AssertThat(s.T(), err, is.Not(is.Nil()))
-			tagFound := false
-			for _, validationError := range err.(validator.ValidationErrors) {
-				then.AssertThat(s.T(), validationError, is.Not(is.Nil()))
-				// sometimes theres more than one tag/validation error
-				if validationError.Tag() == validationTag {
-					tagFound = true
-					break
-				}
-			}
-			then.AssertThat(s.T(), tagFound, is.True())
-		}
+	VerfiyFailedValidations(s, validate, invalidAdressMaps)
+}
+
+//  Test_Successful_Validation asserts that the validation does not fail for a valid Adresse
+func (s *Suite) Test_Successful_Adresse_Validation() {
+	validate := validator.New()
+	validAddresses := []interface{}{
+		Adresse{
+			Postleitzahl: "82031",
+			Ort:          "Grünwald",
+			Hausnummer:   "27A",
+			Strasse:      "Nördliche Münchner Straße",
+			Landescode:   landescode.DE,
+		},
 	}
-
-}
-
-func (s *Suite) AfterTest(_, _ string) {
-}
-
-func TestInit(t *testing.T) {
-	suite.Run(t, new(Suite))
+	VerfiySuccessfulValidations(s, validate, validAddresses)
 }
