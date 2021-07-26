@@ -20,6 +20,7 @@ go get github.com/hochfrequenz/go-bo4e
 ```
 
 ## Minimal Working Example
+
 ```go
 package main
 
@@ -63,6 +64,7 @@ func main() {
 }
 
 ```
+
 [Use this in the Go Playground](https://play.golang.org/p/1i7VJdx1CHE).
 
 ## Other Noteworthy BO4E Implementations
@@ -83,4 +85,4 @@ We do track our modification proposals to the official BO4E standard in a separa
 [Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting company with offices in Berlin and Bremen.
 We're not only the main contributor to open source BO4E software but, according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1), also among the most attractive employers within the German energy market.
 Applications of talented developers are welcome at any time!
-Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only) and our [Stack Overflow profile](https://stackoverflow.com/jobs/companies/hochfrequenz-unternehmensberatung-gmbh) that also contains job openings.
+Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only).
