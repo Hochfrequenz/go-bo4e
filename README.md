@@ -19,6 +19,52 @@
 go get github.com/hochfrequenz/go-bo4e
 ```
 
+## Minimal Working Example
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/go-playground/validator"
+	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
+	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+)
+
+func main() {
+	melo := bo.Messlokation{
+		BusinessObject: bo.BusinessObject{
+			BoTyp:             botyp.Messlokation,
+			VersionStruktur:   "1",
+			ExterneReferenzen: nil,
+		},
+		MesslokationsId: "DE0000011111222223333344444555556",
+		Sparte:          sparte.Strom,
+		Messadresse: &com.Adresse{
+			Postleitzahl: "82031",
+			Ort:          "Grünwald",
+			Strasse:      "Nördliche Münchner Straße",
+			Hausnummer:   "27A",
+			Landescode:   landescode.DE,
+		},
+	}
+	vali := validator.New()
+	err := vali.Struct(melo)
+	if err == nil {
+		fmt.Println("The MeLo is valid.")
+	}
+	meloBytes, err := json.Marshal(melo)
+	meloJson := string(meloBytes)
+	fmt.Print(meloJson)
+}
+
+```
+[Use this in the Go Playground](https://play.golang.org/p/1i7VJdx1CHE).
+
 ## Other Noteworthy BO4E Implementations
 
 - [C# / .NET](https://github.com/Hochfrequenz/BO4E-dotnet/)
