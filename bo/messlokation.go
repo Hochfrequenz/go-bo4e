@@ -14,9 +14,9 @@ type Messlokation struct {
 	NetzebeneMessung             netzebene.Netzebene `json:"netzebeneMessung"`                                                                                // grid level of measurement
 	MessgebietNr                 string              `json:"messgebietNr,omitempty"`                                                                          // number of the measurement area in ene't database
 	Gerate                       []com.Hardware      `json:"geraete,omitempty"`                                                                               // list of devices
-	Messdienstleistung           *com.Dienstleistung  `json:"messdienstleistung,omitempty"`                                                                    // list of metering services
-	GrundzustaendigerMsbCodeNr   string              `json:"grundzustaendigerMSBCodeNr,omitempty" validate:"omitempty,numeric"`                                         // Code number of the "grundzuständige Messstellenbetreiber", responsitble for this MeLo
-	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric"`                                       // Code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
+	Messdienstleistung           *com.Dienstleistung `json:"messdienstleistung,omitempty"`                                                                    // list of metering services
+	GrundzustaendigerMsbCodeNr   string              `json:"grundzustaendigerMSBCodeNr,omitempty" validate:"omitempty,numeric"`                               // Code number of the "grundzuständige Messstellenbetreiber", responsitble for this MeLo
+	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric"`                             // Code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
 	// ToDo implement BO zaehler
 	//	messlokationszaehler: Optional[List[Zaehler]] = attr.ib(default=None)
 	//
