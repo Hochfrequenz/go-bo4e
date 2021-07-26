@@ -6,10 +6,11 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"strings"
 )
 
 // Test_Deserialization deserializes an address json
-func (s *Suite) Test_Deserialization() {
+func (s *Suite) TestAddressDeserialization() {
 	var adresse = Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
@@ -18,7 +19,8 @@ func (s *Suite) Test_Deserialization() {
 		Landescode:   landescode.DE,
 	}
 	serializedAdresse, err := json.Marshal(adresse)
-	// jsonString := string(serializedAdresse)
+	jsonString := string(serializedAdresse)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
 	var deserializedAdresse Adresse
@@ -28,7 +30,7 @@ func (s *Suite) Test_Deserialization() {
 }
 
 //  Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
-func (s *Suite) Test_StrasseXorPostfach_Validation() {
+func (s *Suite) TestStrasseXorPostfachValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(AdresseStructLevelValidation, Adresse{})
 	invalidAdressMaps := map[string][]interface{}{

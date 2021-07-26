@@ -9,21 +9,20 @@ import (
 // Messlokation contains information about a metering location aka "MeLo"
 type Messlokation struct {
 	BusinessObject
-	MesslokationsId  string              `json:"messlokationsId" example:"DE0123456789012345678901234567890" validate:"alphanumeric,required"` // ID of the metering location
-	Sparte           sparte.Sparte       `json:"sparte" validate:"required"`                                                                   // division
-	NetzebeneMessung netzebene.Netzebene `json:"netzebeneMessung"`                                                                             // grid level of measurement
-	// ToDo
-	//	messgebietnr: Optional[str] = attr.ib(default=None)
-	//	geraete: Optional[List[Hardware]] = attr.ib(default=None)
-	//	messdienstleistung: Optional[List[Dienstleistung]] = attr.ib(default=None)
+	MesslokationsId              string              `json:"messlokationsId" example:"DE0123456789012345678901234567890" validate:"alphanumeric,required,length=33"` // ID of the metering location
+	Sparte                       sparte.Sparte       `json:"sparte" validate:"required"`                                                                             // division
+	NetzebeneMessung             netzebene.Netzebene `json:"netzebeneMessung"`                                                                                       // grid level of measurement
+	MessgebietNr                 string              `json:"messgebietNr,omitempty"`                                                                                 // number of the measurement area in ene't database
+	Gerate                       []com.Hardware      `json:"geraete,omitempty"`                                                                                      // list of devices
+	Messdienstleistung           com.Dienstleistung  `json:"messdienstleistung,omitempty"`                                                                           // list of metering services
+	GrundzustaendigerMsbCodeNr   string              `json:"grundzustaendigerMSBCodeNr,omitempty" validate:"numeric"`                                                // Code number of the "grundzuständige Messstellenbetreiber", responsitble for this MeLo
+	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"numeric"`                                              // Code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
+	// ToDo implement BO zaehler
 	//	messlokationszaehler: Optional[List[Zaehler]] = attr.ib(default=None)
 	//
-	//	# only one of the following two optional codenr attributes can be set
-	//	grundzustaendiger_msb_codenr: Optional[str] = attr.ib(default=None)
-	//	grundzustaendiger_msbim_codenr: Optional[str] = attr.ib(default=None)
 	//
-	//	# only one of the following three optional address attributes can be set
-	Messadresse com.Adresse `json:"messadresse"` // address of the melo
-	//	geoadresse: Optional[Geokoordinaten] = attr.ib(default=None)
-	//	katasterinformation: Optional[Katasteradresse] = attr.ib(default=None)
+	// only one of the following three optional address attributes can be set
+	Messadresse         com.Adresse         `json:"messadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // address of the melo
+	Geoadresse          com.Geokoordinaten  `json:"geoadresse" validate:"required_without_all=Messadresse KatasterInformation"` // gps coordinates
+	Katasterinformation com.Katasteradresse `json:"katasterinformation" validate:"required_without_all=Messadresse Geoadresse"` // cadastre address
 }

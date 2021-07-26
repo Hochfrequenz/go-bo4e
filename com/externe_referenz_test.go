@@ -4,8 +4,8 @@ import (
 	"github.com/go-playground/validator"
 )
 
-//  Test_Failed_Validation asserts that the validation fails, if not both name and value are provided
-func (s *Suite) Test_Failed_Validation() {
+// TestFailedExterneReferenzValidation asserts that the validation fails, if not both name and value are provided
+func (s *Suite) TestFailedExterneReferenzValidation() {
 	validate := validator.New()
 	invalidReferenzMap := map[string][]interface{}{
 		"required": {
@@ -26,8 +26,8 @@ func (s *Suite) Test_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidReferenzMap)
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid ExterneReferenz
-func (s *Suite) Test_Successful_ExterneReferenz_Validation() {
+// TestSuccessfulExterneReferenzValidation asserts that the validation does not fail for a valid ExterneReferenz
+func (s *Suite) TestSuccessfulExterneReferenzValidation() {
 	validate := validator.New()
 	validReferences := []interface{}{
 		ExterneReferenz{

@@ -12,7 +12,7 @@ const (
 	Geschaeftspartner                 // business partner
 	Kosten                            // costs
 	Marktlokation                     // market location / "MaLo"
-	Messlokatoin                      // metering location / "MeLo"
+	Messlokation                      // metering location / "MeLo"
 	Marktteilnehmer                   // market partner
 	Netznutzungsrechnung              //
 	Preisblatt                        // price sheet
