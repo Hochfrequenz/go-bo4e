@@ -1,6 +1,7 @@
 package sparte
 
 //go:generate stringer --type Sparte
+//go:generate jsonenums --type Sparte
 
 type Sparte int
 

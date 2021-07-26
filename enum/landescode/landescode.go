@@ -1,6 +1,7 @@
 package landescode
 
 //go:generate stringer --type Landescode
+//go:generate jsonenums -type=Landescode
 
 type Landescode int
 

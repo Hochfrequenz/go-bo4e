@@ -1,6 +1,7 @@
 package dienstleistung
 
 //go:generate stringer --type Dienstleistung
+//go:generate jsonenums --type Dienstleistung
 type Dienstleistung int
 
 const (

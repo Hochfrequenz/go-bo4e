@@ -1,6 +1,7 @@
 package botyp
 
 //go:generate stringer --type BOTyp
+//go:generate jsonenums --type BOTyp
 
 type BOTyp int
 

@@ -1,6 +1,7 @@
 package netzebene
 
 //go:generate stringer --type Netzebene
+//go:generate jsonenums --type Netzebene
 
 type Netzebene int
 

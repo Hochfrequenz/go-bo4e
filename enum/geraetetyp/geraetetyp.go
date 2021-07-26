@@ -1,6 +1,7 @@
 package geraetetyp
 
 //go:generate stringer --type Geraetetyp
+//go:generate jsonenums --type Geraetetyp
 type Geraetetyp int
 
 const (
