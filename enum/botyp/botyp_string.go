@@ -8,27 +8,27 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Angebot-0]
-	_ = x[Ansprechpartner-1]
-	_ = x[Ausschreibung-2]
-	_ = x[Energiemenge-3]
-	_ = x[Geschaeftspartner-4]
-	_ = x[Kosten-5]
-	_ = x[Marktlokation-6]
-	_ = x[Messlokation-7]
-	_ = x[Marktteilnehmer-8]
-	_ = x[Netznutzungsrechnung-9]
-	_ = x[Preisblatt-10]
-	_ = x[PreisblattDienstleistung-11]
-	_ = x[PreisblattKonzessionsabgabe-12]
-	_ = x[PreisblattMessung-13]
-	_ = x[PreisblattUmlagen-14]
-	_ = x[Rechnung-15]
-	_ = x[Tarifinfo-16]
-	_ = x[TarifPreisblatt-17]
-	_ = x[Vertrag-18]
-	_ = x[Zaehler-19]
-	_ = x[Zeitreihe-20]
+	_ = x[Angebot-1]
+	_ = x[Ansprechpartner-2]
+	_ = x[Ausschreibung-3]
+	_ = x[Energiemenge-4]
+	_ = x[Geschaeftspartner-5]
+	_ = x[Kosten-6]
+	_ = x[Marktlokation-7]
+	_ = x[Messlokation-8]
+	_ = x[Marktteilnehmer-9]
+	_ = x[Netznutzungsrechnung-10]
+	_ = x[Preisblatt-11]
+	_ = x[PreisblattDienstleistung-12]
+	_ = x[PreisblattKonzessionsabgabe-13]
+	_ = x[PreisblattMessung-14]
+	_ = x[PreisblattUmlagen-15]
+	_ = x[Rechnung-16]
+	_ = x[Tarifinfo-17]
+	_ = x[TarifPreisblatt-18]
+	_ = x[Vertrag-19]
+	_ = x[Zaehler-20]
+	_ = x[Zeitreihe-21]
 }
 
 const _BOTyp_name = "AngebotAnsprechpartnerAusschreibungEnergiemengeGeschaeftspartnerKostenMarktlokationMesslokationMarktteilnehmerNetznutzungsrechnungPreisblattPreisblattDienstleistungPreisblattKonzessionsabgabePreisblattMessungPreisblattUmlagenRechnungTarifinfoTarifPreisblattVertragZaehlerZeitreihe"
@@ -36,8 +36,9 @@ const _BOTyp_name = "AngebotAnsprechpartnerAusschreibungEnergiemengeGeschaeftspa
 var _BOTyp_index = [...]uint16{0, 7, 22, 35, 47, 64, 70, 83, 95, 110, 130, 140, 164, 191, 208, 225, 233, 242, 257, 264, 271, 280}
 
 func (i BOTyp) String() string {
+	i -= 1
 	if i < 0 || i >= BOTyp(len(_BOTyp_index)-1) {
-		return "BOTyp(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "BOTyp(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _BOTyp_name[_BOTyp_index[i]:_BOTyp_index[i+1]]
 }

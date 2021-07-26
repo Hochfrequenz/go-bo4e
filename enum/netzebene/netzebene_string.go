@@ -8,16 +8,16 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[NSP-0]
-	_ = x[MSP-1]
-	_ = x[HSP-2]
-	_ = x[HSS-3]
-	_ = x[MSP_NSP_UMSP-4]
-	_ = x[HSP_MSP_UMSP-5]
-	_ = x[HSS_HSP_UMSP-6]
-	_ = x[HD-7]
-	_ = x[MD-8]
-	_ = x[N-9]
+	_ = x[NSP-1]
+	_ = x[MSP-2]
+	_ = x[HSP-3]
+	_ = x[HSS-4]
+	_ = x[MSP_NSP_UMSP-5]
+	_ = x[HSP_MSP_UMSP-6]
+	_ = x[HSS_HSP_UMSP-7]
+	_ = x[HD-8]
+	_ = x[MD-9]
+	_ = x[N-10]
 }
 
 const _Netzebene_name = "NSPMSPHSPHSSMSP_NSP_UMSPHSP_MSP_UMSPHSS_HSP_UMSPHDMDN"
@@ -25,8 +25,9 @@ const _Netzebene_name = "NSPMSPHSPHSSMSP_NSP_UMSPHSP_MSP_UMSPHSS_HSP_UMSPHDMDN"
 var _Netzebene_index = [...]uint8{0, 3, 6, 9, 12, 24, 36, 48, 50, 52, 53}
 
 func (i Netzebene) String() string {
+	i -= 1
 	if i < 0 || i >= Netzebene(len(_Netzebene_index)-1) {
-		return "Netzebene(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "Netzebene(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _Netzebene_name[_Netzebene_index[i]:_Netzebene_index[i+1]]
 }

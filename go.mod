@@ -3,7 +3,6 @@ module github.com/hochfrequenz/go-bo4e
 go 1.16
 
 require (
-	github.com/campoy/jsonenums v0.0.0-20201009151607-0f0230183423 // indirect
 	github.com/corbym/gocrest v1.0.5
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
