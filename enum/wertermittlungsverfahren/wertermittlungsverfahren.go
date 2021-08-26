@@ -1,4 +1,4 @@
-package lokationstyp
+package wertermittlungsverfahren
 
 //go:generate stringer --type Wertermittlungsverfahren
 //go:generate jsonenums --type Wertermittlungsverfahren
