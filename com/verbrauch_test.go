@@ -14,8 +14,8 @@ import (
 // Test_Deserialization deserializes an Verbrauch json
 func (s *Suite) TestVerbrauchDeserialization() {
 	var verbrauch = Verbrauch{
-		Startdatum:               time.Now(),
-		Enddatum:                 time.Now().Add(time.Minute * 15),
+		Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
 		Wert:                     17,
@@ -23,8 +23,8 @@ func (s *Suite) TestVerbrauchDeserialization() {
 	}
 	serializedVerbrauch, err := json.Marshal(verbrauch)
 	jsonString := string(serializedVerbrauch)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
+	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())                      // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedVerbrauch, is.Not(is.Nil()))
 	var deserializedVerbrauch Verbrauch
