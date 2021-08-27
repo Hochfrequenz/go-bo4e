@@ -21,7 +21,7 @@ func (s *Suite) TestFailedEnergiemengeValidation() {
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validate := validator.New()
-	invalidMesslokationMap := map[string][]interface{}{
+	invalidEnergiemengeMap := map[string][]interface{}{
 		"required": {
 			Energiemenge{
 				BusinessObject: BusinessObject{
@@ -59,7 +59,7 @@ func (s *Suite) TestFailedEnergiemengeValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidMesslokationMap)
+	VerfiyFailedValidations(s, validate, invalidEnergiemengeMap)
 }
 
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors

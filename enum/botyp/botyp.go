@@ -6,17 +6,18 @@ package botyp
 type BOTyp int
 
 const (
-	Angebot              BOTyp = iota + 1 // offer
-	Ansprechpartner                       // contact person
-	Ausschreibung                         // tender offer
-	Energiemenge                          // energy amount
-	Geschaeftspartner                     // business partner
-	Kosten                                // costs
-	Marktlokation                         // market location / "MaLo"
-	Messlokation                          // metering location / "MeLo"
-	Marktteilnehmer                       // market partner
-	Netznutzungsrechnung                  //
-	Preisblatt                            // price sheet
+	Angebot           BOTyp = iota + 1 // offer
+	Ansprechpartner                    // contact person
+	Ausschreibung                      // tender offer
+	Energiemenge                       // energy amount
+	Geschaeftspartner                  // business partner
+	Kosten                             // costs
+	Lastgang
+	Marktlokation        // market location / "MaLo"
+	Messlokation         // metering location / "MeLo"
+	Marktteilnehmer      // market partner
+	Netznutzungsrechnung //
+	Preisblatt           // price sheet
 	PreisblattDienstleistung
 	PreisblattKonzessionsabgabe
 	PreisblattMessung
