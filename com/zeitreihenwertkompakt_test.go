@@ -19,8 +19,8 @@ func (s *Suite) TestZeitreihenwertkompaktDeserialization() {
 	}
 	serializedZeitreihenwert, err := json.Marshal(zeitreihenwertkompakt)
 	jsonString := string(serializedZeitreihenwert)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ERSATZWERT"), is.True())  // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Z77_SPANNUNGSAUSFALL"), is.True())  // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "ERSATZWERT"), is.True())           // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "Z77_SPANNUNGSAUSFALL"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.Nil()))
 	var deserializedZeitreihenwert Zeitreihenwertkompakt
