@@ -11,7 +11,13 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package (as of July 2021) is more of a minimal working example and does only implement BO Messlokation so far.**
+**This package (as of July 2021) is more of a minimal working example and does only implement**
+
+- BO Energiemenge
+- BO Messlokation
+- BO Lastgang
+
+so far.
 
 ## Installation
 
