@@ -6,6 +6,6 @@ import (
 
 // A Dienstleistung is a billable Service
 type Dienstleistung struct {
-	DienstleistungsTyp dienstleistung.Dienstleistung `json:"dienstleistungstyp" validate:"required"`       // type of the service
-	Bezeichnung        string                        `json:"bezeichnung" validate:"alphaunicode,required"` // description
+	DienstleistungsTyp dienstleistung.Dienstleistungstyp `json:"dienstleistungstyp" validate:"required"`       // type of the service
+	Bezeichnung        string                            `json:"bezeichnung" validate:"alphaunicode,required"` // description
 }
