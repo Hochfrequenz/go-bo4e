@@ -3,6 +3,7 @@ package botyp
 //go:generate stringer --type BOTyp
 //go:generate jsonenums --type BOTyp
 
+// BOTyp is an enumeration that contains all available Business Objects
 type BOTyp int
 
 const (
