@@ -8,20 +8,20 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[W-0]
-	_ = x[WH-1]
-	_ = x[KW-2]
-	_ = x[KWH-3]
-	_ = x[KVARH-4]
-	_ = x[MW-5]
-	_ = x[MWH-6]
-	_ = x[Stueck-7]
-	_ = x[KUBIKMETER-8]
-	_ = x[Stunde-9]
-	_ = x[Tag-10]
-	_ = x[Monat-11]
-	_ = x[Jahr-12]
-	_ = x[Prozent-13]
+	_ = x[W-1]
+	_ = x[WH-2]
+	_ = x[KW-3]
+	_ = x[KWH-4]
+	_ = x[KVARH-5]
+	_ = x[MW-6]
+	_ = x[MWH-7]
+	_ = x[Stueck-8]
+	_ = x[KUBIKMETER-9]
+	_ = x[Stunde-10]
+	_ = x[Tag-11]
+	_ = x[Monat-12]
+	_ = x[Jahr-13]
+	_ = x[Prozent-14]
 }
 
 const _Mengeneinheit_name = "WWHKWKWHKVARHMWMWHStueckKUBIKMETERStundeTagMonatJahrProzent"
@@ -29,8 +29,9 @@ const _Mengeneinheit_name = "WWHKWKWHKVARHMWMWHStueckKUBIKMETERStundeTagMonatJah
 var _Mengeneinheit_index = [...]uint8{0, 1, 3, 5, 8, 13, 15, 18, 24, 34, 40, 43, 48, 52, 59}
 
 func (i Mengeneinheit) String() string {
+	i -= 1
 	if i < 0 || i >= Mengeneinheit(len(_Mengeneinheit_index)-1) {
-		return "Mengeneinheit(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "Mengeneinheit(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _Mengeneinheit_name[_Mengeneinheit_index[i]:_Mengeneinheit_index[i+1]]
 }

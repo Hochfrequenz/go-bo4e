@@ -5,6 +5,6 @@ package lokationstyp
 type Lokationstyp int
 
 const (
-	MaLo Lokationstyp = iota // Marktlokation / market location
-	MeLo                     // Messlokation / metering location
+	MaLo Lokationstyp = iota + 1 // Marktlokation / market location
+	MeLo                         // Messlokation / metering location
 )

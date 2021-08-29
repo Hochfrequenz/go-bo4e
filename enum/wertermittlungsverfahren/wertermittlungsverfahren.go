@@ -6,6 +6,6 @@ package wertermittlungsverfahren
 type Wertermittlungsverfahren int
 
 const (
-	PROGNOSE Wertermittlungsverfahren = iota // Prognose / prognosis
-	MESSUNG                                  // Messung / measurement
+	PROGNOSE Wertermittlungsverfahren = iota + 1 // Prognose / prognosis
+	MESSUNG                                      // Messung / measurement
 )

@@ -8,8 +8,8 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[PROGNOSE-0]
-	_ = x[MESSUNG-1]
+	_ = x[PROGNOSE-1]
+	_ = x[MESSUNG-2]
 }
 
 const _Wertermittlungsverfahren_name = "PROGNOSEMESSUNG"
@@ -17,8 +17,9 @@ const _Wertermittlungsverfahren_name = "PROGNOSEMESSUNG"
 var _Wertermittlungsverfahren_index = [...]uint8{0, 8, 15}
 
 func (i Wertermittlungsverfahren) String() string {
+	i -= 1
 	if i < 0 || i >= Wertermittlungsverfahren(len(_Wertermittlungsverfahren_index)-1) {
-		return "Wertermittlungsverfahren(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "Wertermittlungsverfahren(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _Wertermittlungsverfahren_name[_Wertermittlungsverfahren_index[i]:_Wertermittlungsverfahren_index[i+1]]
 }

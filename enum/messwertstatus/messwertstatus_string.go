@@ -8,13 +8,13 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[ABGELESEN-0]
-	_ = x[ERSATZWERT-1]
-	_ = x[VORSCHLAGSWERT-2]
-	_ = x[PROGNOSEWERT-3]
-	_ = x[VORLAUFIGERWERT-4]
-	_ = x[ENERGIEMENGESUMMIERT-5]
-	_ = x[FEHLT-6]
+	_ = x[ABGELESEN-1]
+	_ = x[ERSATZWERT-2]
+	_ = x[VORSCHLAGSWERT-3]
+	_ = x[PROGNOSEWERT-4]
+	_ = x[VORLAUFIGERWERT-5]
+	_ = x[ENERGIEMENGESUMMIERT-6]
+	_ = x[FEHLT-7]
 }
 
 const _Messwertstatus_name = "ABGELESENERSATZWERTVORSCHLAGSWERTPROGNOSEWERTVORLAUFIGERWERTENERGIEMENGESUMMIERTFEHLT"
@@ -22,8 +22,9 @@ const _Messwertstatus_name = "ABGELESENERSATZWERTVORSCHLAGSWERTPROGNOSEWERTVORLA
 var _Messwertstatus_index = [...]uint8{0, 9, 19, 33, 45, 60, 80, 85}
 
 func (i Messwertstatus) String() string {
+	i -= 1
 	if i < 0 || i >= Messwertstatus(len(_Messwertstatus_index)-1) {
-		return "Messwertstatus(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "Messwertstatus(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _Messwertstatus_name[_Messwertstatus_index[i]:_Messwertstatus_index[i+1]]
 }
