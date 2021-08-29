@@ -1,6 +1,7 @@
 package landescode
 
 import (
+	"fmt"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/stretchr/testify/suite"
@@ -15,9 +16,9 @@ type Suite struct {
 func (s *Suite) SetupSuite() {
 }
 
-// Test_Deserialization deserializes an address json
-func (s *Suite) Test_Deserialization() {
-	then.AssertThat(s.T(), DE.String(), is.EqualTo("DE"))
+// Test_Landescode_ToString deserializes an address json
+func (s *Suite) Test_Landescode_ToString() {
+	then.AssertThat(s.T(), fmt.Sprintf("%v", DE), is.EqualTo("DE"))
 }
 
 func (s *Suite) AfterTest(_, _ string) {

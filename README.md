@@ -3,6 +3,7 @@
 ![Unittest status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/coverage/badge.svg)
 ![Linter status badge](https://github.com/Hochfrequenz/go-bo4e/workflows/golangci-lint/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Hochfrequenz/go-bo4e)](https://goreportcard.com/report/github.com/Hochfrequenz/go-bo4e)
 [![Go Reference](https://pkg.go.dev/badge/github.com/hochfrequenz/go-bo4e.svg)](https://pkg.go.dev/github.com/hochfrequenz/go-bo4e)
 
 **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)) Implementation in Go. Highlights are
@@ -11,7 +12,13 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package (as of July 2021) is more of a minimal working example and does only implement BO Messlokation so far.**
+**This package (as of July 2021) is more of a minimal working example and does only implement**
+
+- BO Energiemenge
+- BO Messlokation
+- BO Lastgang
+
+so far.
 
 ## Installation
 

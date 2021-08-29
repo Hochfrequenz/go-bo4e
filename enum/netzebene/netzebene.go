@@ -2,7 +2,7 @@ package netzebene
 
 //go:generate stringer --type Netzebene
 //go:generate jsonenums --type Netzebene
-
+// Netzebene ist eine Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.
 type Netzebene int
 
 const (
