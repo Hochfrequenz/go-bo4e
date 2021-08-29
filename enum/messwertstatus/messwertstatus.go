@@ -2,7 +2,8 @@ package messwertstatus
 
 //go:generate stringer --type Messwertstatus
 //go:generate jsonenums --type Messwertstatus
-type Messwertstatus int // Der Status eines Zählerstandes
+// The Messwertstatus is the status of a meter reading
+type Messwertstatus int
 
 const (
 	ABGELESEN            Messwertstatus = iota + 1 // Abgelesener Wert (abrechnungsrelevant)

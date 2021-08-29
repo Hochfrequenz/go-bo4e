@@ -2,7 +2,8 @@ package messwertstatuszusatz
 
 //go:generate stringer --type Messwertstatuszusatz
 //go:generate jsonenums --type Messwertstatuszusatz
-type Messwertstatuszusatz int // Aufzählung von zusätzlichen Informationen zum Status, beispielsweise in Lastgängen oder Zählwerkständen.
+// Messwertstatuszusatz ist eine Aufzählung von zusätzlichen Informationen zum Status, beispielsweise in Lastgängen oder Zählwerkständen.
+type Messwertstatuszusatz int
 
 const (
 	Z84_LEERSTAND                                      Messwertstatuszusatz = iota + 1 // Leerstand
