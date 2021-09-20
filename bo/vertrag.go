@@ -18,8 +18,8 @@ type Vertrag struct {
 	Sparte              sparte.Sparte                 `json:"sparte" validate:"required"`                  // Unterscheidungsmöglichkeiten für die Sparte
 	Vertragsbeginn      time.Time                     `json:"startdatum" validate:"required"`              // inclusive start
 	Vertragsende        time.Time                     `json:"enddatum" validate:"required"`                // exclusive end
-	Vertragspartner1    string                        //	Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..." Siehe BO Geschaeftspartner
-	Vertragspartner2    string                        // Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2". Siehe BO Geschaeftspartner
+	Vertragspartner1    string                        //todo: bo gptyp                  //	Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..." Siehe BO Geschaeftspartner
+	Vertragspartner2    string                        // todo: bo gptyp                  // Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2". Siehe BO Geschaeftspartner
 	UnterzeichnerVp1    []com.Unterschrift            `json:"unterzeichnervp1,omitempty"`              //	Unterzeichner des Vertragspartner1
 	UnterzeichnerVp2    []com.Unterschrift            `json:"unterzeichnervp2,omitempty"`              //	Unterzeichner des Vertragspartner2
 	Vertragskonditionen *com.Vertragskonditionen      `json:"vertragskonditionen,omitempty"`           // Festlegungen zu Laufzeiten und Kündigungsfristen
