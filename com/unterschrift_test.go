@@ -38,6 +38,9 @@ func (s *Suite) Test_Successful_Unterschrift_Validation() {
 			Datum: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Ort:   "Musterstadt",
 		},
+		Unterschrift{
+			Name: "Max Mustermann",
+		},
 	}
 	VerfiySuccessfulValidations(s, validate, validUnterschrift)
 }
