@@ -9,19 +9,19 @@ import (
 
 var (
 	_VertragsartNameToValue = map[string]Vertragsart{
-		"ENERGIELIEFERVERTRAG":       ENERGIELIEFERVERTRAG,
-		"NETZNUTZUNGSVERTRAG":        NETZNUTZUNGSVERTRAG,
-		"BILANZIERUNGSVERTRAG":       BILANZIERUNGSVERTRAG,
-		"MESSSTELLENBETRIEBSVERTRAG": MESSSTELLENBETRIEBSVERTRAG,
-		"BUENDELVERTRAG":             BUENDELVERTRAG,
+		"Energieliefervertrag":       Energieliefervertrag,
+		"Netznutzung":                Netznutzung,
+		"Bilanzierungsvertrag":       Bilanzierungsvertrag,
+		"Messstellenbetriebsvertrag": Messstellenbetriebsvertrag,
+		"Buendelvertrag":             Buendelvertrag,
 	}
 
 	_VertragsartValueToName = map[Vertragsart]string{
-		ENERGIELIEFERVERTRAG:       "ENERGIELIEFERVERTRAG",
-		NETZNUTZUNGSVERTRAG:        "NETZNUTZUNGSVERTRAG",
-		BILANZIERUNGSVERTRAG:       "BILANZIERUNGSVERTRAG",
-		MESSSTELLENBETRIEBSVERTRAG: "MESSSTELLENBETRIEBSVERTRAG",
-		BUENDELVERTRAG:             "BUENDELVERTRAG",
+		Energieliefervertrag:       "Energieliefervertrag",
+		Netznutzung:                "Netznutzung",
+		Bilanzierungsvertrag:       "Bilanzierungsvertrag",
+		Messstellenbetriebsvertrag: "Messstellenbetriebsvertrag",
+		Buendelvertrag:             "Buendelvertrag",
 	}
 )
 
@@ -29,11 +29,11 @@ func init() {
 	var v Vertragsart
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_VertragsartNameToValue = map[string]Vertragsart{
-			interface{}(ENERGIELIEFERVERTRAG).(fmt.Stringer).String():       ENERGIELIEFERVERTRAG,
-			interface{}(NETZNUTZUNGSVERTRAG).(fmt.Stringer).String():        NETZNUTZUNGSVERTRAG,
-			interface{}(BILANZIERUNGSVERTRAG).(fmt.Stringer).String():       BILANZIERUNGSVERTRAG,
-			interface{}(MESSSTELLENBETRIEBSVERTRAG).(fmt.Stringer).String(): MESSSTELLENBETRIEBSVERTRAG,
-			interface{}(BUENDELVERTRAG).(fmt.Stringer).String():             BUENDELVERTRAG,
+			interface{}(Energieliefervertrag).(fmt.Stringer).String():       Energieliefervertrag,
+			interface{}(Netznutzung).(fmt.Stringer).String():                Netznutzung,
+			interface{}(Bilanzierungsvertrag).(fmt.Stringer).String():       Bilanzierungsvertrag,
+			interface{}(Messstellenbetriebsvertrag).(fmt.Stringer).String(): Messstellenbetriebsvertrag,
+			interface{}(Buendelvertrag).(fmt.Stringer).String():             Buendelvertrag,
 		}
 	}
 }
