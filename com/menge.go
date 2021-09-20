@@ -1,12 +1,11 @@
 package com
 
 import (
-	"time"
+	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 )
 
-// Unterschrift ist die Modellierung einer Unterschrift, z.B. für Verträge, Angebote etc.
-type Unterschrift struct {
-	Name  string    `json:"name" validate:"required"`   // Name des Unterschreibers
-	Datum time.Time `json:"datum" validate:"omitempty"` // Datum der Unterschrift
-	Ort   string    `json:"ort" validate:"omitempty"`   // Ort, an dem die Unterschrift geleistet wird
+// Menge ist die Abbildung einer Menge mit Wert und Einheit.
+type Menge struct {
+	Wert    float32                     `json:"wert" validate:"omitempty,required"`    //Gibt den absoluten Wert der Menge an
+	Einheit mengeneinheit.Mengeneinheit `json:"einheit" validate:"required"` //Gibt die Einheit zum jeweiligen Wert an
 }

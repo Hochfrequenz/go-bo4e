@@ -63,6 +63,16 @@ func (s *Suite) TestVerbrauchFailedValidation() {
 				Einheit:                  0,
 			},
 		},
+		"gtfield": {
+			Verbrauch{
+				Startdatum:               time.Now(),
+				Enddatum:                 time.Now().Add(time.Minute * -15),
+				Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
+				Obiskennzahl:             "1-0:1.8.1",
+				Wert:                     17,
+				Einheit:                  mengeneinheit.KWH,
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
 }

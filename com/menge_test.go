@@ -6,62 +6,51 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
-	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"strings"
-	"time"
 )
 
-// Test_Deserialization deserializes an Verbrauch json
-func (s *Suite) TestVerbrauchDeserialization() {
-	var verbrauch = Verbrauch{
-		Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
-		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
-		Einheit:                  mengeneinheit.KWH,
+// Test_Menge_Deserialization deserializes an Menge json
+func (s *Suite) Test_Menge_Deserialization() {
+	var menge = Menge{
+		Wert:    42,
+		Einheit: mengeneinheit.KUBIKMETER,
 	}
-	serializedVerbrauch, err := json.Marshal(verbrauch)
-	jsonString := string(serializedVerbrauch)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())                      // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
+	serializedMenge, err := json.Marshal(menge)
+	jsonString := string(serializedMenge)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "KUBIKMETER"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVerbrauch, is.Not(is.Nil()))
-	var deserializedVerbrauch Verbrauch
-	err = json.Unmarshal(serializedVerbrauch, &deserializedVerbrauch)
+	then.AssertThat(s.T(), serializedMenge, is.Not(is.Nil()))
+	var deserializedVerbrauch Menge
+	err = json.Unmarshal(serializedMenge, &deserializedVerbrauch)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(verbrauch))
+	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(menge))
 }
 
-//  Test_Successful_Verbrauch_Validation asserts that the validation does not fail for a valid Verbrauch
-func (s *Suite) Test_Successful_Verbrauch_Validation() {
+//  Test_Successful_Menge_Validation asserts that the validation does not fail for a valid Menge
+func (s *Suite) Test_Successful_Menge_Validation() {
 	validate := validator.New()
-	validVerbrauch := []interface{}{
-		Verbrauch{
-			Startdatum:               time.Now(),
-			Enddatum:                 time.Now().Add(time.Minute * 15),
-			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
-			Obiskennzahl:             "1-0:1.8.1",
-			Wert:                     17,
-			Einheit:                  mengeneinheit.KWH,
+	validMenges := []interface{}{
+		Menge{
+			Wert:    42,
+			Einheit: mengeneinheit.KUBIKMETER,
+		},
+		Menge{
+			Wert:    0, // 0 is a valid value
+			Einheit: mengeneinheit.W,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validVerbrauch)
+	VerfiySuccessfulValidations(s, validate, validMenges)
 }
 
-//  TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) TestVerbrauchFailedValidation() {
+//  TestMengeFailedValidation verifies that invalid verbrauch values are considered invalid
+func (s *Suite) TestMengeFailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
-			Verbrauch{
-				Startdatum:               time.Now(),
-				Enddatum:                 time.Now().Add(time.Minute * 15),
-				Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
-				Obiskennzahl:             "1-0:1.8.1",
-				Wert:                     0,
-				Einheit:                  0,
+			Menge{
+				Wert: 42,
 			},
+			Menge{},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)

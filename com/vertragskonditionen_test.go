@@ -10,73 +10,79 @@ import (
 	"time"
 )
 
-// TestZeitraumDeserialization deserializes a Zeitraum json
-func (s *Suite) TestZeitraumDeserialization() {
-	var zeitraum = Zeitraum{
-		Einheit:        zeiteinheit.Minute,
-		Dauer:          15,
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+// TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
+func (s *Suite) TestVertragskonditionenDeserialization() {
+	var vertragskonditionen = Vertragskonditionen{
+		Beschreibung:     "hallo",
+		AnzahlAbschlaege: 17,
+		Vertragslaufzeit: Zeitraum{
+			Einheit: zeiteinheit.Minute,
+			Dauer:   15,
+		},
+		Kuendigungsfrist: Zeitraum{
+			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		},
+		Vertragsverlaengerung: Zeitraum{
+			Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		},
+		Abschlagszyklus: Zeitraum{
+			Einheit: zeiteinheit.Jahr,
+			Dauer:   7,
+		},
 	}
-	serializedZeitraum, err := json.Marshal(zeitraum)
-	jsonString := string(serializedZeitraum)
+	serializedVertragskonditionen, err := json.Marshal(vertragskonditionen)
+	jsonString := string(serializedVertragskonditionen)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Minute"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitraum
-	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
+	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.Nil()))
+	var deserializedVertragskonditionen Vertragskonditionen
+	err = json.Unmarshal(serializedVertragskonditionen, &deserializedVertragskonditionen)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitraum))
+	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(vertragskonditionen))
 }
 
-// TestZeitraumDeserializationWithoutEinheit
-func (s *Suite) TestZeitraumDeserializationWithoutEinheit() {
-	var zeitraum = Zeitraum{
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-	}
-	serializedZeitraum, err := json.Marshal(zeitraum)
-	jsonString := string(serializedZeitraum)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "zeiteinheit"), is.False())
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitraum
-	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitraum))
-}
-
-//  Test_Zeitraum_Failed_Validation verifies that the validation fails for invalid Zeitraum s
-func (s *Suite) Test_Zeitraum_Failed_Validation() {
+//  Test_Vertragskonditionen_Failed_Validation verifies that the validation fails for invalid Vertragskonditionen s
+func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
 		"required_with": {
-			Zeitraum{
-				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragskonditionen{
+				// is only invalid if a zeitraum is invalid
+				Vertragslaufzeit: Zeitraum{
+					Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+				},
 			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidZeitraums)
 }
 
-//  Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
-func (s *Suite) Test_Successful_Zeitraum_Validation() {
+//  Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
+func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 	validate := validator.New()
-	validZeitraums := []interface{}{
-		Zeitraum{
-			Einheit:        zeiteinheit.Zeiteinheit(0),
-			Dauer:          0,
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		},
-		Zeitraum{
-			Einheit: zeiteinheit.Minute,
-			Dauer:   0,
-		},
-		Zeitraum{
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+	validVertragskonditionens := []interface{}{
+		Vertragskonditionen{
+			Beschreibung:     "hallo",
+			AnzahlAbschlaege: 17,
+			Vertragslaufzeit: Zeitraum{
+				Einheit: zeiteinheit.Minute,
+				Dauer:   15,
+			},
+			Kuendigungsfrist: Zeitraum{
+				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+				Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+			},
+			Vertragsverlaengerung: Zeitraum{
+				Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+			},
+			Abschlagszyklus: Zeitraum{
+				Einheit: zeiteinheit.Jahr,
+				Dauer:   7,
+			},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validZeitraums)
+	VerfiySuccessfulValidations(s, validate, validVertragskonditionens)
 }
