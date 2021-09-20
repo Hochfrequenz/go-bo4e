@@ -42,7 +42,7 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 			tagFound := false
 			for _, validationError := range err.(validator.ValidationErrors) {
 				then.AssertThat(s.T(), validationError, is.Not(is.Nil()))
-				// sometimes theres more than one tag/validation error
+				// sometimes there's more than one tag/validation error
 				if validationError.Tag() == validationTag {
 					tagFound = true
 					break
