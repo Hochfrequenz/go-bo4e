@@ -6,27 +6,31 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
-	"strings"
 	"time"
 )
 
 // Test_Vertragspartner_Deserialization deserializes an Vertrag json
 func (s *Suite) Test_Vertrag_Deserialization() {
 	var contract = Vertrag{
-		BusinessObject: BusinessObject{},
+		BusinessObject: BusinessObject{
+			BoTyp:             botyp.Vertrag,
+			VersionStruktur:   "2",
+			ExterneReferenzen: nil,
+		},
 		Vertragsnummer: "",
 		Beschreibung:   "",
-		Vertragsstatus: 0,
-		Vertragsart:    0,
-		Sparte:         0,
-		Vertragsbeginn: time.Time{},
-		Vertragsende:   time.Time{},
+		Vertragsstatus: vertragsstatus.Abgelehnt,
+		Vertragsart:    vertragsart.Buendelvertrag,
+		Sparte:         sparte.Strom,
+		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragspartner1: Geschaeftspartner{
 			BusinessObject: BusinessObject{
 				BoTyp:             botyp.Geschaeftspartner,
@@ -34,6 +38,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				ExterneReferenzen: nil,
 			},
 			Name1:                "Mustermann",
+			Anrede:               anrede.Herr,
 			Gewerbekennzeichnung: false,
 			Partneradresse: com.Adresse{
 				Postleitzahl: "82031",
@@ -52,6 +57,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
+			Anrede:               anrede.Frau,
 			Name1:                "Musterfrau",
 			Gewerbekennzeichnung: false,
 			Partneradresse: com.Adresse{
@@ -68,11 +74,15 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		UnterzeichnerVp1:    nil,
 		UnterzeichnerVp2:    nil,
 		Vertragskonditionen: nil,
-		Vertragsteile:       nil,
+		Vertragsteile: []com.Vertragsteil{
+			{
+				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
+				Lokation:           "DE0123456789012345678901234567890",
+			},
+		},
 	}
 	serializedContract, err := json.Marshal(contract)
-	jsonString := string(serializedContract)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Divers"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedContract, is.Not(is.Nil()))
 	var deserializedVertrag Vertrag
