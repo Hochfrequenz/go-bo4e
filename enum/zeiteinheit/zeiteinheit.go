@@ -1,8 +1,8 @@
 package zeiteinheit
 
+// Zeiteinheit ist eine Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.
 //go:generate stringer --type Zeiteinheit
 //go:generate jsonenums --type Zeiteinheit
-// Zeiteinheit ist eine Auflistung möglicher Einheiten zur Verwendung in zeitbezogenen Angaben.
 type Zeiteinheit int
 
 const (

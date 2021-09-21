@@ -1,8 +1,8 @@
 package geschaeftspartnerrolle
 
+// Geschaeftspartnerrolle are the possible roles of a Geschaeftspartner
 //go:generate stringer --type Geschaeftspartnerrolle
 //go:generate jsonenums --type Geschaeftspartnerrolle
-// Geschaeftspartnerrolle are the possible roles of a Geschaeftspartner
 type Geschaeftspartnerrolle int
 
 const (
