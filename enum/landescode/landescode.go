@@ -1,8 +1,8 @@
 package landescode
 
+// Landescode describes a country according to ISO 3166-1 (alpha2)
 //go:generate stringer --type Landescode
 //go:generate jsonenums -type=Landescode
-// Landescode describes a country according to ISO 3166-1 (alpha2)
 type Landescode int
 
 const (

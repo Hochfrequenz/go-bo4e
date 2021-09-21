@@ -1,8 +1,8 @@
 package geraetetyp
 
+// Geraetetyp ist eine Auflistung möglicher abzurechnender Gerätetypen.
 //go:generate stringer --type Geraetetyp
 //go:generate jsonenums --type Geraetetyp
-// Geraetetyp ist eine Auflistung möglicher abzurechnender Gerätetypen.
 type Geraetetyp int
 
 const (
