@@ -9,6 +9,6 @@ const (
 	Eintarif          Tarifart = iota + 1 // Eintarif
 	Zweitarif                             // Zweitarif
 	Mehrtarif                             // Mehrtarif
-	SmartMeter                           // Smart Meter Tarif
-	Leistungsgemessen                    //	Leistungsgemessener Tarif
+	SmartMeter                            // Smart Meter Tarif
+	Leistungsgemessen                     //	Leistungsgemessener Tarif
 )

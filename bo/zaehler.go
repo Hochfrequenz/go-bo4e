@@ -20,6 +20,6 @@ type Zaehler struct {
 	Zaehlerkonstante   float32                               `json:"zaehlerkonstante,omitempty"`             // Zählerkonstante auf dem Zähler
 	EichungBis         time.Time                             `json:"eichung_bis,omitempty"`                  // Bis zu diesem Datum ist der Zähler geeicht
 	LetzteEichung      time.Time                             `json:"letzte_eichung,omitempty"`               // Zu diesem Datum fand die letzte Eichprüfung des Zählers statt
-	Zaehlwerke         []com.Zaehlwerk                      `json:"zaehlwerke" validate:"required,min=1"`   // Die Zählwerke des Zählers
+	Zaehlwerke         []com.Zaehlwerk                       `json:"zaehlwerke" validate:"required,min=1"`   // Die Zählwerke des Zählers
 	//Zaehlerhersteller  Geschaeftspartner                     `json:"zaehlerhersteller,omitempty"`            // Der Hersteller des Zählers
 }

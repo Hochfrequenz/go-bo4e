@@ -6,6 +6,6 @@ package energierichtung
 type Energierichtung int
 
 const (
-	Aussp  Energierichtung = iota + 1 // supply
-	Einsp                               // feeding
+	Aussp Energierichtung = iota + 1 // supply
+	Einsp                            // feeding
 )
