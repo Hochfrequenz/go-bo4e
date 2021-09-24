@@ -12,6 +12,9 @@ type Zaehlerstand struct {
 	Wertermittlungsverfahren wertermittlungsverfahren.Wertermittlungsverfahren `json:"wertermittlungsverfahren" validate:"required"`         // type of the consumption
 	Wert                     float32                                           `json:"wert" validate:"required" example:"17086"`                // value (of einheit)
 	Einheit                  mengeneinheit.Mengeneinheit                       `json:"einheit" validate:"required" example:"KWH"`            // unit (associated to the wert)
+	Brennwert				 float32
+	Zustandszahl             float32
+
 }
 
 // Zaehlerstaende is a table type of Zaehlerstand with defined Descending Sorting of the Ablesedatum for sort.Sort(...)

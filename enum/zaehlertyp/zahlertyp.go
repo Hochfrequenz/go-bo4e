@@ -6,9 +6,9 @@ package zaehlertyp
 type Zaehlertyp int
 
 const (
-	Drehstromgaehler      Zaehlertyp = iota + 1 // Drehstromzähler
+	Drehstromzaehler      Zaehlertyp = iota + 1 // Drehstromzähler
 	Balgengaszaehler                            //	Balgengaszähler
-	Drehkolbengaehler                           //	Drehkolbengaszähler
+	Drehkolbenzaehler                           //	Drehkolbengaszähler
 	SmartMeter                                  // Smart Meter Zähler
 	Leistungszaehler                            //	leistungsmessender Zähler
 	Maximumgaehler                              //	Maximumzähler
