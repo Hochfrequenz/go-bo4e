@@ -40,7 +40,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 			Einheit:        mengeneinheit.KWH,
 			Zaehlerstaende: nil,
 		}},
-		//Zaehlerhersteller: nil,
+		Zaehlerhersteller: nil,
 	}
 	serializedMeter, err := json.Marshal(meter)
 	then.AssertThat(s.T(), err, is.Nil())
