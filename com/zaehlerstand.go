@@ -14,7 +14,6 @@ type Zaehlerstand struct {
 	Einheit                  mengeneinheit.Mengeneinheit                       `json:"einheit" validate:"required" example:"KWH"`    // unit (associated to the wert)
 	Brennwert                float32                                           `json:"brennwert,omitempty"`                          // used to calculate caloric Energy from gas volume
 	Zustandszahl             float32                                           `json:"zustandszahl,omitempty"`                       // used to calculate caloric Energy from gas volume
-
 }
 
 // Zaehlerstaende is a table type of Zaehlerstand with defined Descending Sorting of the Ablesedatum for sort.Sort(...)
