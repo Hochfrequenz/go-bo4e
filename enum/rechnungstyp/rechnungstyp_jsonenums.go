@@ -9,21 +9,27 @@ import (
 
 var (
 	_RechnungstypNameToValue = map[string]Rechnungstyp{
-		"Endkundenrechnung":           Endkundenrechnung,
-		"Netznutzungsrechnung":        Netznutzungsrechnung,
-		"Mehrmindermengenrechnung":    Mehrmindermengenrechnung,
-		"Messstellenbetriebsrechnung": Messstellenbetriebsrechnung,
-		"Beschaffungsrechnung":        Beschaffungsrechnung,
-		"Ausgleichsenergierichtung":   Ausgleichsenergierichtung,
+		"Endkundenrechnung":              Endkundenrechnung,
+		"Netznutzungsrechnung":           Netznutzungsrechnung,
+		"Mehrmindermengenrechnung":       Mehrmindermengenrechnung,
+		"Messstellenbetriebsrechnung":    Messstellenbetriebsrechnung,
+		"Beschaffungsrechnung":           Beschaffungsrechnung,
+		"Ausgleichsenergierechnung":      Ausgleichsenergierechnung,
+		"Abschlagsrechnung":              Abschlagsrechnung,
+		"WiMRechnung":                    WiMRechnung,
+		"SelbstAusgestellteRechnungMeMi": SelbstAusgestellteRechnungMeMi,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
-		Endkundenrechnung:           "Endkundenrechnung",
-		Netznutzungsrechnung:        "Netznutzungsrechnung",
-		Mehrmindermengenrechnung:    "Mehrmindermengenrechnung",
-		Messstellenbetriebsrechnung: "Messstellenbetriebsrechnung",
-		Beschaffungsrechnung:        "Beschaffungsrechnung",
-		Ausgleichsenergierichtung:   "Ausgleichsenergierichtung",
+		Endkundenrechnung:              "Endkundenrechnung",
+		Netznutzungsrechnung:           "Netznutzungsrechnung",
+		Mehrmindermengenrechnung:       "Mehrmindermengenrechnung",
+		Messstellenbetriebsrechnung:    "Messstellenbetriebsrechnung",
+		Beschaffungsrechnung:           "Beschaffungsrechnung",
+		Ausgleichsenergierechnung:      "Ausgleichsenergierechnung",
+		Abschlagsrechnung:              "Abschlagsrechnung",
+		WiMRechnung:                    "WiMRechnung",
+		SelbstAusgestellteRechnungMeMi: "SelbstAusgestellteRechnungMeMi",
 	}
 )
 
@@ -31,12 +37,15 @@ func init() {
 	var v Rechnungstyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_RechnungstypNameToValue = map[string]Rechnungstyp{
-			interface{}(Endkundenrechnung).(fmt.Stringer).String():           Endkundenrechnung,
-			interface{}(Netznutzungsrechnung).(fmt.Stringer).String():        Netznutzungsrechnung,
-			interface{}(Mehrmindermengenrechnung).(fmt.Stringer).String():    Mehrmindermengenrechnung,
-			interface{}(Messstellenbetriebsrechnung).(fmt.Stringer).String(): Messstellenbetriebsrechnung,
-			interface{}(Beschaffungsrechnung).(fmt.Stringer).String():        Beschaffungsrechnung,
-			interface{}(Ausgleichsenergierichtung).(fmt.Stringer).String():   Ausgleichsenergierichtung,
+			interface{}(Endkundenrechnung).(fmt.Stringer).String():              Endkundenrechnung,
+			interface{}(Netznutzungsrechnung).(fmt.Stringer).String():           Netznutzungsrechnung,
+			interface{}(Mehrmindermengenrechnung).(fmt.Stringer).String():       Mehrmindermengenrechnung,
+			interface{}(Messstellenbetriebsrechnung).(fmt.Stringer).String():    Messstellenbetriebsrechnung,
+			interface{}(Beschaffungsrechnung).(fmt.Stringer).String():           Beschaffungsrechnung,
+			interface{}(Ausgleichsenergierechnung).(fmt.Stringer).String():      Ausgleichsenergierechnung,
+			interface{}(Abschlagsrechnung).(fmt.Stringer).String():              Abschlagsrechnung,
+			interface{}(WiMRechnung).(fmt.Stringer).String():                    WiMRechnung,
+			interface{}(SelbstAusgestellteRechnungMeMi).(fmt.Stringer).String(): SelbstAusgestellteRechnungMeMi,
 		}
 	}
 }

@@ -13,12 +13,15 @@ func _() {
 	_ = x[Mehrmindermengenrechnung-3]
 	_ = x[Messstellenbetriebsrechnung-4]
 	_ = x[Beschaffungsrechnung-5]
-	_ = x[Ausgleichsenergierichtung-6]
+	_ = x[Ausgleichsenergierechnung-6]
+	_ = x[Abschlagsrechnung-7]
+	_ = x[WiMRechnung-8]
+	_ = x[SelbstAusgestellteRechnungMeMi-9]
 }
 
-const _Rechnungstyp_name = "EndkundenrechnungNetznutzungsrechnungMehrmindermengenrechnungMessstellenbetriebsrechnungBeschaffungsrechnungAusgleichsenergierichtung"
+const _Rechnungstyp_name = "EndkundenrechnungNetznutzungsrechnungMehrmindermengenrechnungMessstellenbetriebsrechnungBeschaffungsrechnungAusgleichsenergierechnungAbschlagsrechnungWiMRechnungSelbstAusgestellteRechnungMeMi"
 
-var _Rechnungstyp_index = [...]uint8{0, 17, 37, 61, 88, 108, 133}
+var _Rechnungstyp_index = [...]uint8{0, 17, 37, 61, 88, 108, 133, 150, 161, 191}
 
 func (i Rechnungstyp) String() string {
 	i -= 1
