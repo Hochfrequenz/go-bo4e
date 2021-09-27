@@ -1,7 +1,7 @@
 package com
 
 import (
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"

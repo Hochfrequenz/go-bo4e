@@ -9,7 +9,7 @@
 **B**usiness **O**bjects for **E**nergy ([BO4E](https://www.bo4e.de/)) Implementation in Go. Highlights are
 
 - includes `json` tags for easy (un)marshalling
-- comes with builtin [validator](https://github.com/go-playground/validator) logic
+- comes with builtin [validator](https://github.com/go-playground/validator/v10) logic
 - is linted and has decent test coverage
 
 **This package (as of September 2021) does only implement**
@@ -38,7 +38,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"

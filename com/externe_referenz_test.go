@@ -1,7 +1,7 @@
 package com
 
 import (
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 // TestFailedExterneReferenzValidation asserts that the validation fails, if not both name and value are provided
