@@ -8,6 +8,8 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
+	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
@@ -71,18 +73,16 @@ func (s *Suite) TestFailedZaehlerValidation() {
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
 				Zaehlerkonstante:   17,
-				Zaehlwerke: []com.Zaehlwerk{
-				},
-				Zaehlerhersteller: nil,
+				Zaehlwerke:         []com.Zaehlwerk{},
+				Zaehlerhersteller:  nil,
 			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidVertrags)
 }
 
-//  Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
+//  Test_Successful_Zaehler_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Zaehler_Validation() {
-
 	validate := validator.New()
 	validZaehler := []interface{}{
 		Zaehler{
@@ -108,7 +108,25 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 				Einheit:        mengeneinheit.KWH,
 				Zaehlerstaende: nil,
 			}},
-			//Zaehlerhersteller:  Geschaeftspartner{},
+			Zaehlerhersteller: &Geschaeftspartner{
+				BusinessObject: BusinessObject{
+					BoTyp:             botyp.Geschaeftspartner,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				Name1:                "Musterfrau",
+				Gewerbekennzeichnung: false,
+				Partneradresse: com.Adresse{
+					Postleitzahl: "82031",
+					Ort:          "Grünwald",
+					Strasse:      "Nördlicher Münchner Straße",
+					Hausnummer:   "27A",
+					Landescode:   landescode.DE,
+				},
+				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+					geschaeftspartnerrolle.Dienstleister,
+				},
+			},
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validZaehler)
