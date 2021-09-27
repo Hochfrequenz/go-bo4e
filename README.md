@@ -19,6 +19,7 @@
 - BO Lastgang
 - BO Messlokation
 - BO Vertrag
+- BO Zaehler
 
 so far.
 
