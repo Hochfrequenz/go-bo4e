@@ -12,7 +12,7 @@ const (
 	Messstellenbetriebsrechnung                            // Rechnung eines Messstellenbetreibers an den Messkunden
 	Beschaffungsrechnung                                   // Rechnungen zwischen einem Händler und Einkäufer von Energie
 	Ausgleichsenergierechnung                              // Rechnung an den Verursacher von Ausgleichsenergie
-	Abschlagsrechnung                                      // Rechnung über einen Abschlag
-	WiMRechnung                                            // Rechnung im Rahmen der Wechselprozesse im Messwesen
-	SelbstAusgestellteRechnungMeMi                         // Rechnung für eine Mehrmenge vom VNB an den Lieferanten
+	Abschlagsrechnung                                      // Rechnung über einen Abschlag (non-standard)
+	WiMRechnung                                            // Rechnung im Rahmen der Wechselprozesse im Messwesen (non-standard)
+	SelbstAusgestellteRechnungMeMi                         // Rechnung für eine Mehrmenge vom VNB an den Lieferanten (non-standard)
 )
