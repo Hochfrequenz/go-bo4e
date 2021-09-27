@@ -16,7 +16,7 @@ type Zaehlerstand struct {
 	Zustandszahl             float32                                           `json:"zustandszahl,omitempty"`                       // used to calculate caloric Energy from gas volume
 }
 
-// Zaehlerstaende is a table type of Zaehlerstand with defined Descending Sorting of the Ablesedatum for sort.Sort(...)
+// Zaehlerstaende is a table type of Zaehlerstand with defined descending sorting of the Zaehlerstand.Ablesedatum for sort.Sort(...)
 type Zaehlerstaende []Zaehlerstand
 
 func (z Zaehlerstaende) Len() int {
