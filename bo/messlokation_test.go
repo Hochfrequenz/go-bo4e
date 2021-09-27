@@ -1,13 +1,83 @@
 package bo
 
 import (
+	"encoding/json"
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
+	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
+	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
+	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"strings"
 )
+
+// Test_Messlokation_Deserialization tests serialization and deserialization of Messlokation
+func (s *Suite) Test_Messlokation_Deserialization() {
+	var melo = Messlokation{
+		BusinessObject: BusinessObject{
+			BoTyp:             botyp.Messlokation,
+			VersionStruktur:   "1",
+			ExterneReferenzen: nil,
+		},
+		MesslokationsId:              "DE0000011111222223333344444555556",
+		Sparte:                       sparte.Strom,
+		NetzebeneMessung:             netzebene.MD,
+		MessgebietNr:                 "",
+		Gerate:                       nil,
+		Messdienstleistung:           nil,
+		GrundzustaendigerMsbCodeNr:   "",
+		GrundzustaendigerMsbImCodeNr: "",
+		Messadresse: &com.Adresse{
+			Postleitzahl: "82031",
+			Ort:          "Grünwald",
+			Strasse:      "Nördliche Münchner Straße",
+			Hausnummer:   "27A",
+			Landescode:   landescode.DE,
+		},
+		Messlokationszaehler: []Zaehler{
+			{
+				BusinessObject: BusinessObject{
+					BoTyp:             botyp.Zaehler,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				Zaehlernummer:      "0815",
+				Sparte:             sparte.Strom,
+				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
+				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
+				Tarifart:           tarifart.Eintarif,
+				Zaehlerkonstante:   0,
+				Zaehlwerke: []com.Zaehlwerk{{
+					ZaehlwerkId:   "1",
+					Bezeichnung:   "",
+					Richtung:      energierichtung.Aussp,
+					ObisKennzahl:  "1-0:1.8.0",
+					Wandlerfaktor: 0,
+					Einheit:       mengeneinheit.KWH,
+				}},
+			},
+		},
+	}
+	serializedMelo, err := json.Marshal(melo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), serializedMelo, is.Not(is.Nil()))
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "MD"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Strom"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Einrichtungszaehler"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
+	var deserializedMelo Messlokation
+	err = json.Unmarshal(serializedMelo, &deserializedMelo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedMelo, is.EqualTo(melo))
+}
 
 // TestFailedMesslokationValidation verifies that the validators of Messlokation work
 func (s *Suite) TestFailedMesslokationValidation() {
