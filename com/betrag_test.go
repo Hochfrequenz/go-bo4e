@@ -18,10 +18,6 @@ func (s *Suite) TestFailedBetragValidation() {
 				Wert:     1,
 				Waehrung: 0,
 			},
-			Betrag{
-				Wert:     0,
-				Waehrung: waehrungscode.ANG,
-			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidBetragMap)
@@ -34,6 +30,10 @@ func (s *Suite) TestSuccessfulBetragValidation() {
 		Betrag{
 			Wert:     18.36,
 			Waehrung: waehrungscode.EUR,
+		},
+		Betrag{
+			Wert:     0, // wert 0 is allowed
+			Waehrung: waehrungscode.ANG,
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validBetraege)
