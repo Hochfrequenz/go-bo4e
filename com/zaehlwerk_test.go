@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// TestVertragsteilDeserialization deserializes a Vertragsteil json
+// TestZaehlwerkDeserialization deserializes a Zaehlwerk json
 func (s *Suite) TestZaehlwerkDeserialization() {
 	var zaehlwerk = Zaehlwerk{
 		ZaehlwerkId:    "1",
