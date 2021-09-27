@@ -38,7 +38,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -73,10 +72,9 @@ func main() {
 	meloJson := string(meloBytes)
 	fmt.Print(meloJson)
 }
-
 ```
 
-[Use this in the Go Playground](https://play.golang.org/p/1i7VJdx1CHE).
+[Use this in the Go Playground](https://play.golang.org/p/_ovTlNDeMI8).
 
 ## Other Noteworthy BO4E Implementations
 
