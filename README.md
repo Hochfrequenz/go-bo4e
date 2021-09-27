@@ -12,12 +12,13 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package (as of September 2021) does only implement**
+**This package (as of September 2021) implements**
 
 - BO Energiemenge
 - BO Geschaeftspartner
 - BO Lastgang
 - BO Messlokation
+- BO Rechnung
 - BO Vertrag
 - BO Zaehler
 
@@ -38,7 +39,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -85,14 +86,17 @@ func main() {
 
 ## Contributing
 
-Contributions are welcome.
-Feel free to open a Pull Request against the main branch of this repository.
-Please provide unit tests if you contribute logic beyond bare bare business object definitions.
-We do track our modification proposals to the official BO4E standard in a separate repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
+Contributions are welcome. Feel free to open a Pull Request against the main branch of this repository. Please provide
+unit tests if you contribute logic beyond bare bare business object definitions. We do track our modification proposals
+to the official BO4E standard in a separate
+repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ## Hochfrequenz
 
-[Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting company with offices in Berlin and Bremen.
-We're not only the main contributor to open source BO4E software but, according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1), also among the most attractive employers within the German energy market.
-Applications of talented developers are welcome at any time!
-Please consider visiting our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (German only).
+[Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting
+company with offices in Berlin and Bremen. We're not only the main contributor to open source BO4E software but,
+according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmensberatung1), also among the most
+attractive employers within the German energy market. Applications of talented developers are welcome at any time!
+Please consider visiting
+our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (
+German only).

@@ -3,7 +3,7 @@ package com
 import (
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )

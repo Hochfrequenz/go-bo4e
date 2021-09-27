@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Zaehlerstand is the value of a meter for a specific point in time
+// Zaehlerstand is the value of a meter for a specific point in time (non-standard)
 type Zaehlerstand struct {
 	Ablesedatum              time.Time                                         `json:"ablesedatum" validate:"required"`              // point in time
 	Wertermittlungsverfahren wertermittlungsverfahren.Wertermittlungsverfahren `json:"wertermittlungsverfahren" validate:"required"` // type of the consumption
