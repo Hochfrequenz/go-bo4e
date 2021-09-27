@@ -11,5 +11,8 @@ const (
 	Mehrmindermengenrechnung                            // Eine Rechnung vom Netzbetreiber an den Netznutzer. (i.d.R. der Lieferant) zur Abrechnung von Mengen-Differenzen zwischen Bilanzierung und Messung
 	Messstellenbetriebsrechnung                         // Rechnung eines Messstellenbetreibers an den Messkunden
 	Beschaffungsrechnung                                // Rechnungen zwischen einem Händler und Einkäufer von Energie
-	Ausgleichsenergierichtung                           // Rechnung an den Verursacher von Ausgleichsenergie
+	Ausgleichsenergierechnung                           // Rechnung an den Verursacher von Ausgleichsenergie
+	Abschlagsrechnung                                       // Rechnung über einen Abschlag
+	WiMRechnung                                              // Rechnung im Rahmen der Wechselprozesse im Messwesen
+	SelbstAusgestellteRechnungMeMi                 // Rechnung für eine Mehrmenge vom VNB an den Lieferanten
 )
