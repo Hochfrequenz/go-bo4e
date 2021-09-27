@@ -22,10 +22,10 @@ func (s *Suite) TestZaehlerstandDeserialization() {
 	}
 	serializedZaehlerstand, err := json.Marshal(zaehlerstand)
 	jsonString := string(serializedZaehlerstand)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "MESSUNG"), is.True()) // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())     // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "MESSUNG"), is.True())      // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())          // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zustandszahl"), is.True()) // is not omitted
-	then.AssertThat(s.T(), strings.Contains(jsonString, "brennwert"), is.False()) // is omitted
+	then.AssertThat(s.T(), strings.Contains(jsonString, "brennwert"), is.False())   // is omitted
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.Nil()))
 	var deserializedZaehlerstand Zaehlerstand
@@ -34,7 +34,7 @@ func (s *Suite) TestZaehlerstandDeserialization() {
 	then.AssertThat(s.T(), deserializedZaehlerstand, is.EqualTo(zaehlerstand))
 }
 
-//  Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
+//  Test_Zaehlerstand_Failed_Validation verifies that the validation fails for invalid Zaehlerstand s
 func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 	validate := validator.New()
 	invalidZaehlerstand := map[string][]interface{}{
@@ -47,7 +47,7 @@ func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidZaehlerstand)
 }
 
-//  Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
+//  Test_Successful_Zaehlerstand_Validation asserts that the validation does not fail for a valid Zaehlerstand
 func (s *Suite) Test_Successful_Zaehlerstand_Validation() {
 	validate := validator.New()
 	validZaehlerstaende := []interface{}{
