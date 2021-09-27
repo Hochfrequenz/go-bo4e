@@ -74,7 +74,7 @@ func main() {
 }
 ```
 
-[Use this in the Go Playground](https://play.golang.org/p/_ovTlNDeMI8).
+[Use this in the Go Playground](https://play.golang.org/p/sqiuCa9GQ8f).
 
 ## Other Noteworthy BO4E Implementations
 
