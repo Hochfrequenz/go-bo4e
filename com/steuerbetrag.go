@@ -1,7 +1,6 @@
 package com
 
 import (
-	"errors"
 	"fmt"
 	"github.com/go-playground/validator"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkennzeichen"
@@ -34,7 +33,7 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 	case steuerkennzeichen.Vst0, steuerkennzeichen.Ust0:
 		expectedSteuerwert = steuerbetrag.Basiswert * 0.0
 	default:
-		err := errors.New(fmt.Sprintf("Validation of Steuerkennzeichen %v", steuerbetrag.Steuerkennzeichen))
+		err := fmt.Errorf("Validation of Steuerkennzeichen %v", steuerbetrag.Steuerkennzeichen)
 		panic(err)
 	}
 	if expectedSteuerwert != steuerbetrag.Steuerwert {
