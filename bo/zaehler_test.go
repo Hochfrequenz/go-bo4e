@@ -15,7 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 )
 
-// Test_Vertragspartner_Deserialization deserializes an Vertrag json
+// Test_Zaehler_Deserialization deserializes an Zaehler json
 func (s *Suite) Test_Zaehler_Deserialization() {
 	var meter = Zaehler{
 		BusinessObject: BusinessObject{
