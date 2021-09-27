@@ -227,6 +227,26 @@ func (s *Suite) TestFailedRechnungValidation() {
 				},
 			},
 		},
+		"Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto": {
+			Rechnung{
+				Zuzahlen: com.Betrag{
+					Wert:     4, // expected 10-2-3 = 5
+					Waehrung: waehrungscode.EUR,
+				},
+				GesamtBrutto: com.Betrag{
+					Wert:     10,
+					Waehrung: waehrungscode.EUR,
+				},
+				RabattBrutto: &com.Betrag{
+					Wert:     2,
+					Waehrung: waehrungscode.EUR,
+				},
+				Vorausgezahlt: &com.Betrag{
+					Wert:     3,
+					Waehrung: waehrungscode.EUR,
+				},
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidRechnungs)
 }
@@ -328,10 +348,13 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 				Wert:     285.6,
 				Waehrung: waehrungscode.EUR,
 			},
-			Vorausgezahlt: nil,
-			RabattBrutto:  nil,
+			Vorausgezahlt: &com.Betrag{
+				Wert:     85.6,
+				Waehrung: waehrungscode.EUR,
+			},
+			RabattBrutto: nil,
 			Zuzahlen: com.Betrag{
-				Wert:     18.36,
+				Wert:     200.0,
 				Waehrung: waehrungscode.EUR,
 			},
 			Steuerbetraege: nil,

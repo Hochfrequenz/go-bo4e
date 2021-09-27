@@ -24,11 +24,11 @@ type Rechnung struct {
 	Rechnungsempfaenger     Geschaeftspartner               `json:"rechnungsempfaenger" validate:"required"`                    // Der Empfänger der Rechnung
 	GesamtNetto             com.Betrag                      `json:"gesamtnetto" validate:"required"`                            // Die Summe der Nettobeträge der Rechnungsteile
 	GesamtSteuer            com.Betrag                      `json:"gesamtsteuer" validate:"required"`                           // Die Summe der Steuerbeträge der Rechnungsteile
-	GesamtBrutto            com.Betrag                      `json:"gesamtbrutto" validate:"required"`                           // Die Summe aus Netto- und Steuerbeträge // todo: struct level validation
+	GesamtBrutto            com.Betrag                      `json:"gesamtbrutto" validate:"required"`                           // Die Summe aus Netto- und Steuerbeträge
 	Vorausgezahlt           *com.Betrag                     `json:"vorausgezahlt"`                                              // Die Summe evtl. vorausbezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert.
 	RabattBrutto            *com.Betrag                     `json:"rabattBrutto"`                                               // Gesamtrabatt auf den Bruttobetrag
-	Zuzahlen                com.Betrag                      `json:"zuzahlen" validate:"required"`                               // Der zu zahlende Betrag, der sich aus (gesamtbrutto - vorausbezahlt - rabattBrutto) ergibt // todo: struct level validation
-	Steuerbetraege          []com.Steuerbetrag              `json:"steuerbetraege"`                                             // Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für GesamtSteuer. // todo: struct level validation
+	Zuzahlen                com.Betrag                      `json:"zuzahlen" validate:"required"`                               // Der zu zahlende Betrag, der sich aus (gesamtbrutto - vorausbezahlt - rabattBrutto) ergibt
+	Steuerbetraege          []com.Steuerbetrag              `json:"steuerbetraege"`                                             // Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für GesamtSteuer
 	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen" validate:"required,min=1"`              // Die Rechnungspositionen
 }
 
@@ -39,6 +39,7 @@ func RechnungStructLevelValidation(sl validator.StructLevel) {
 	RechnungStructLevelValidationGesamtNetto(sl)
 	RechnungStructLevelValidationGesamtSteuer(sl)
 	RechnungStructLevelValidationGesamtBrutto(sl)
+	RechnungStructLevelValidationZuZahlen(sl)
 }
 
 // RechnungStructLevelValidationGesamtNetto verifies that the sum of all Rechnungsposition.Netto equals the Rechnung.GesamtNetto
@@ -60,6 +61,32 @@ func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 		if expectedGesamtNetto != rechnung.GesamtNetto {
 			sl.ReportError(rechnung.GesamtNetto, "Wert", "GesamtNetto", "GesamtNetto==sum(TeilsummeNetto)", "")
 		}
+	}
+}
+
+// RechnungStructLevelValidationZuZahlen verifies that Rechnung.Zuzahlen = Rechnung.GesamtBrutto - Rechnung.Vorausgezahlt - Rechnung.RabattBrutto
+func RechnungStructLevelValidationZuZahlen(sl validator.StructLevel) {
+	rechnung := sl.Current().Interface().(Rechnung)
+	expectedZuZahlen := com.Betrag{
+		Wert:     rechnung.GesamtBrutto.Wert,
+		Waehrung: rechnung.GesamtBrutto.Waehrung,
+	}
+	if rechnung.Vorausgezahlt != nil {
+		if rechnung.Vorausgezahlt.Waehrung != expectedZuZahlen.Waehrung {
+			sl.ReportError(rechnung.Vorausgezahlt, "Waehrung", "Vorausgezahlt", "Vorausgezahlt.Waehrung==GesamtBrutto.Waehrung", "")
+			return
+		}
+		expectedZuZahlen.Wert -= rechnung.Vorausgezahlt.Wert
+	}
+	if rechnung.RabattBrutto != nil {
+		if rechnung.RabattBrutto.Waehrung != expectedZuZahlen.Waehrung {
+			sl.ReportError(rechnung.Vorausgezahlt, "Waehrung", "RabattBrutto", "RabattBrutto.Waehrung==GesamtBrutto.Waehrung", "")
+			return
+		}
+		expectedZuZahlen.Wert -= rechnung.RabattBrutto.Wert
+	}
+	if expectedZuZahlen != rechnung.Zuzahlen {
+		sl.ReportError(rechnung.Zuzahlen, "Wert", "Zuzahlen", "Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto", "")
 	}
 }
 
