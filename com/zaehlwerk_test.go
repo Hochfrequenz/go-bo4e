@@ -24,6 +24,7 @@ func (s *Suite) TestZaehlwerkDeserialization() {
 	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
 	jsonString := string(serializedZaehlwerk)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "Aussp"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
 	var deserializedZaehlwerk Zaehlwerk
