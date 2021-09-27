@@ -51,12 +51,30 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 	then.AssertThat(s.T(), deserializedMeter, is.EqualTo(meter))
 }
 
-// TestFailedGVertragValidation verifies that the validators of a Vertrag work
+// TestFailedZaehlerValidation verifies that the validators of a Zaehler work
 func (s *Suite) TestFailedZaehlerValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
 			Zaehler{},
+		},
+		"min": { // min 1 zaehlwerk is required
+			Zaehler{
+				BusinessObject: BusinessObject{
+					BoTyp:             botyp.Zaehler,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				Zaehlernummer:      "0815",
+				Sparte:             sparte.Strom,
+				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
+				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
+				Tarifart:           tarifart.Eintarif,
+				Zaehlerkonstante:   17,
+				Zaehlwerke: []com.Zaehlwerk{
+				},
+				Zaehlerhersteller: nil,
+			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidVertrags)
