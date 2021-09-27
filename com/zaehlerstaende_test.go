@@ -10,12 +10,16 @@ import (
 
 // TestZaehlerstaneLen tests the Zaehlerstaende.Len function
 func (s *Suite) TestZaehlerstandeLen() {
-	zaehlerstaende := Zaehlerstaende{
+	zaehlerstaende3 := Zaehlerstaende{
 		Zaehlerstand{},
 		Zaehlerstand{},
 		Zaehlerstand{},
 	}
-	then.AssertThat(s.T(), zaehlerstaende.Len(), is.EqualTo(3))
+	zaehlerstaende0 := Zaehlerstaende{}
+	then.AssertThat(s.T(), zaehlerstaende3.Len(), is.EqualTo(3))
+	then.AssertThat(s.T(), zaehlerstaende0.Len(), is.EqualTo(0))
+	zaehlerstaende0 = nil
+	then.AssertThat(s.T(), zaehlerstaende0.Len(), is.EqualTo(0))
 }
 
 //  Test_Zaehlerstande_Swap tests the Zaehlerstaende.Swap function
@@ -74,9 +78,17 @@ func (s *Suite) Test_Zaehlerstaende_Less() {
 			Wert:                     18,
 			Einheit:                  mengeneinheit.KW,
 		},
+		Zaehlerstand{
+			Ablesedatum:              time.Time{},
+			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
+			Wert:                     18,
+			Einheit:                  mengeneinheit.KW,
+		},
 	}
 	then.AssertThat(s.T(), zaehlerstaende.Less(1, 2), is.True())
 	then.AssertThat(s.T(), zaehlerstaende.Less(2, 1), is.False())
 	then.AssertThat(s.T(), zaehlerstaende.Less(3, 0), is.False())
 	then.AssertThat(s.T(), zaehlerstaende.Less(0, 3), is.False())
+	then.AssertThat(s.T(), zaehlerstaende.Less(0, 4), is.True())
+	then.AssertThat(s.T(), zaehlerstaende.Less(4, 0), is.False())
 }
