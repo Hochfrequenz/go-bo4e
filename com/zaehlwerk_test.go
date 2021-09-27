@@ -57,7 +57,7 @@ func (s *Suite) Test_Successful_Zaehlwerk_Validation() {
 			Bezeichnung:    "ZW, Juhee",
 			Richtung:       energierichtung.Aussp,
 			ObisKennzahl:   "1-0:1.8.0",
-			Wandlerfaktor:  0,
+			Wandlerfaktor:  1.0, // Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu kommen. => must not be empty
 			Einheit:        mengeneinheit.KWH,
 			Zaehlerstaende: nil,
 		},
