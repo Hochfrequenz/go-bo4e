@@ -49,6 +49,8 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMeter, is.Not(is.Nil()))
 	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Einrichtungszaehler"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
 	var deserializedMeter Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
 	then.AssertThat(s.T(), err, is.Nil())
