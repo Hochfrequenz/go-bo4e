@@ -48,6 +48,9 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 					break
 				}
 			}
+			if !tagFound {
+				then.AssertThat(s.T(), validationTag, is.Nil())
+			}
 			then.AssertThat(s.T(), tagFound, is.True())
 		}
 	}

@@ -137,6 +137,7 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 // TestFailedRechnungValidation verifies that the validators of a Rechnung work
 func (s *Suite) TestFailedRechnungValidation() {
 	validate := validator.New()
+	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
 	invalidRechnungs := map[string][]interface{}{
 		"required": {
 			Rechnung{},
@@ -152,6 +153,56 @@ func (s *Suite) TestFailedRechnungValidation() {
 				Rechnungspositionen: []com.Rechnungsposition{}, // min 1 entry required
 			},
 		},
+		"Rechnungspositionen[0].Waehrung==Rechnungspositionen[j].Waehrung": {
+			Rechnung{
+				Rechnungspositionen: []com.Rechnungsposition{
+					{
+						TeilsummeNetto: com.Betrag{
+							Waehrung: waehrungscode.AMD,
+						},
+					},
+					{
+						TeilsummeNetto: com.Betrag{
+							Waehrung: waehrungscode.ZAR, // != AMD
+						},
+					},
+				},
+			},
+		},
+		"Steuerbetraege[0].Waehrung==Steuerbetraege[j].Waehrung": {
+			Rechnung{
+				Steuerbetraege: []com.Steuerbetrag{
+					{
+						Waehrung: waehrungscode.ALL,
+					},
+					{
+						Waehrung: waehrungscode.ZWL, // != ALL
+					},
+				},
+			},
+		},
+		"GesamtNetto==sum(TeilsummeNetto)": {
+			Rechnung{
+				GesamtNetto: com.Betrag{
+					Wert:     8, // expected 7
+					Waehrung: waehrungscode.EUR,
+				},
+				Rechnungspositionen: []com.Rechnungsposition{
+					{
+						TeilsummeNetto: com.Betrag{
+							Wert:     6,
+							Waehrung: waehrungscode.EUR,
+						},
+					},
+					{
+						TeilsummeNetto: com.Betrag{
+							Wert:     1,
+							Waehrung: waehrungscode.EUR, // != AMD
+						},
+					},
+				},
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidRechnungs)
 }
@@ -159,6 +210,7 @@ func (s *Suite) TestFailedRechnungValidation() {
 //  Test_Successful_Rechnung_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Rechnung_Validation() {
 	validate := validator.New()
+	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
 	validRechnung := []interface{}{
 		Rechnung{
 			BusinessObject: BusinessObject{
@@ -241,7 +293,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 				},
 			},
 			GesamtNetto: com.Betrag{
-				Wert:     18.36,
+				Wert:     240,
 				Waehrung: waehrungscode.EUR,
 			},
 			GesamtSteuer: com.Betrag{
