@@ -18,10 +18,14 @@ func (s *Suite) TestZaehlerstandDeserialization() {
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Wert:                     847439,
 		Einheit:                  mengeneinheit.KWH,
+		Zustandszahl:             17.23,
 	}
 	serializedZaehlerstand, err := json.Marshal(zaehlerstand)
 	jsonString := string(serializedZaehlerstand)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "MESSUNG"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())     // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "zustandszahl"), is.True()) // is not omitted
+	then.AssertThat(s.T(), strings.Contains(jsonString, "brennwert"), is.False()) // is omitted
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.Nil()))
 	var deserializedZaehlerstand Zaehlerstand
