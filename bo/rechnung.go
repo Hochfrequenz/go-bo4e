@@ -38,6 +38,7 @@ type Rechnung struct {
 func RechnungStructLevelValidation(sl validator.StructLevel) {
 	RechnungStructLevelValidationGesamtNetto(sl)
 	RechnungStructLevelValidationGesamtSteuer(sl)
+	RechnungStructLevelValidationGesamtBrutto(sl)
 }
 
 // RechnungStructLevelValidationGesamtNetto verifies that the sum of all Rechnungsposition.Netto equals the Rechnung.GesamtNetto
@@ -58,6 +59,28 @@ func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 		}
 		if expectedGesamtNetto != rechnung.GesamtNetto {
 			sl.ReportError(rechnung.GesamtNetto, "Wert", "GesamtNetto", "GesamtNetto==sum(TeilsummeNetto)", "")
+		}
+	}
+}
+
+// RechnungStructLevelValidationGesamtBrutto verifies that the sum of all Rechnungsposition. equals the Rechnung.GesamtBrutto
+func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
+	rechnung := sl.Current().Interface().(Rechnung)
+	if rechnung.Rechnungspositionen != nil {
+		expectedGesamtBrutto := com.Betrag{}
+		for index, rp := range rechnung.Rechnungspositionen {
+			if index == 0 {
+				// by default use the waehrung of the first entry
+				expectedGesamtBrutto.Waehrung = rp.TeilsummeSteuer.Waehrung
+			} else if expectedGesamtBrutto.Waehrung != rp.TeilsummeSteuer.Waehrung {
+				// the waehrung has to be consistent over all Rechnungspositionen; Otherwise adding stuff doesn't make sense
+				sl.ReportError(rp.TeilsummeSteuer.Waehrung, "Waehrung", "Rechnungspositionen", "Rechnungspositionen[0].Waehrung==Rechnungspositionen[j].Waehrung", "")
+				return
+			}
+			expectedGesamtBrutto.Wert += rp.TeilsummeSteuer.Basiswert + rp.TeilsummeSteuer.Steuerwert
+		}
+		if expectedGesamtBrutto != rechnung.GesamtBrutto {
+			sl.ReportError(rechnung.GesamtBrutto, "Wert", "GesamtBrutto", "GesamtBrutto==sum(TeilsummeSteuer)", "")
 		}
 	}
 }

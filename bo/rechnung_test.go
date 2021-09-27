@@ -203,6 +203,30 @@ func (s *Suite) TestFailedRechnungValidation() {
 				},
 			},
 		},
+		"GesamtBrutto==sum(TeilsummeSteuer)": {
+			Rechnung{
+				GesamtBrutto: com.Betrag{
+					Wert:     9, // expected 1+2+3+4 = 10
+					Waehrung: waehrungscode.EUR,
+				},
+				Rechnungspositionen: []com.Rechnungsposition{
+					{
+						TeilsummeSteuer: com.Steuerbetrag{
+							Basiswert:  1,
+							Steuerwert: 2,
+							Waehrung:   waehrungscode.EUR,
+						},
+					},
+					{
+						TeilsummeSteuer: com.Steuerbetrag{
+							Basiswert:  3,
+							Steuerwert: 4,
+							Waehrung:   waehrungscode.EUR,
+						},
+					},
+				},
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidRechnungs)
 }
@@ -301,7 +325,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 				Waehrung: waehrungscode.EUR,
 			},
 			GesamtBrutto: com.Betrag{
-				Wert:     18.36,
+				Wert:     285.6,
 				Waehrung: waehrungscode.EUR,
 			},
 			Vorausgezahlt: nil,
@@ -337,7 +361,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 					TeilsummeSteuer: com.Steuerbetrag{
 						Steuerkennzeichen: steuerkennzeichen.Ust19,
 						Basiswert:         240,
-						Steuerwert:        0,
+						Steuerwert:        45.6,
 						Waehrung:          waehrungscode.EUR,
 					},
 					TeilrabattNetto: nil,
