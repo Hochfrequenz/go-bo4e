@@ -36,14 +36,14 @@ go get github.com/hochfrequenz/go-bo4e
 package main
 
 import (
-"encoding/json"
-"fmt"
-"github.com/go-playground/validator/v10"
-"github.com/hochfrequenz/go-bo4e/bo"
-"github.com/hochfrequenz/go-bo4e/com"
-"github.com/hochfrequenz/go-bo4e/enum/botyp"
-"github.com/hochfrequenz/go-bo4e/enum/landescode"
-"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"encoding/json"
+	"fmt"
+	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
+	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 )
 
 func main() {
