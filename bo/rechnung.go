@@ -17,7 +17,7 @@ type Rechnung struct {
 	Rechnungsdatum          time.Time                       `json:"rechnungsdatum" validate:"required"`                                                 // Ausstellungsdatum der Rechnung
 	Faelligkeitsdatum       time.Time                       `json:"faelligkeitsdatum" validate:"required"`                                              // Zu diesem Datum ist die Zahlung fällig
 	Rechnungstyp            rechnungstyp.Rechnungstyp       `json:"rechnungstyp" validate:"required"`                                                   // Ein kontextbezogender Rechnungstyp
-	OriginalRechnungsnummer *string                          `json:"originalRechnungsnummer" validate:"required_if=Storno true"`                         // Im Falle einer Stornorechnung (Storno = true) steht hier die Rechnungsnummer der stornierten Rechnung
+	OriginalRechnungsnummer *string                         `json:"originalRechnungsnummer" validate:"required_if=Storno true"`                         // Im Falle einer Stornorechnung (Storno = true) steht hier die Rechnungsnummer der stornierten Rechnung
 	Rechnungsperiode        com.Zeitraum                    `json:"rechnungsperiode" validate:"required"`                                               // Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung
 	Rechnungsersteller      Geschaeftspartner               `json:"rechnungsersteller" validate:"required"`                                             // Der Aussteller der Rechnung
 	Rechnungsempfaenger     Geschaeftspartner               `json:"rechnungsempfaenger" validate:"required"`                                            // Der Empfänger der Rechnung
