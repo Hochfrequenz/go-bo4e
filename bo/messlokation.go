@@ -17,10 +17,7 @@ type Messlokation struct {
 	Messdienstleistung           *com.Dienstleistung `json:"messdienstleistung,omitempty"`                                                                    // list of metering services
 	GrundzustaendigerMsbCodeNr   string              `json:"grundzustaendigerMSBCodeNr,omitempty" validate:"omitempty,numeric"`                               // Code number of the "grundzuständige Messstellenbetreiber", responsitble for this MeLo
 	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric"`                             // Code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
-	// ToDo implement BO zaehler
-	//	messlokationszaehler: Optional[List[Zaehler]] = attr.ib(default=None)
-	//
-	//
+	Messlokationszaehler         []Zaehler           `json:"messlokationszaehler,omitempty"`                                                                  // meters associated to this Messlokation
 	// only one of the following three optional address attributes can be set
 	Messadresse         *com.Adresse         `json:"messadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // address of the melo
 	Geoadresse          *com.Geokoordinaten  `json:"geoadresse" validate:"required_without_all=Messadresse KatasterInformation"` // gps coordinates
