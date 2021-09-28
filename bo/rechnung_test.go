@@ -185,19 +185,19 @@ func (s *Suite) TestFailedRechnungValidation() {
 		"GesamtNetto==sum(TeilsummeNetto)": {
 			Rechnung{
 				GesamtNetto: com.Betrag{
-					Wert:     decimal.NewFromFloat(8), // expected 7
+					Wert:     decimal.New(8, 1), // expected 7
 					Waehrung: waehrungscode.EUR,
 				},
 				Rechnungspositionen: []com.Rechnungsposition{
 					{
 						TeilsummeNetto: com.Betrag{
-							Wert:     decimal.NewFromFloat(6),
+							Wert:     decimal.New(6, 1),
 							Waehrung: waehrungscode.EUR,
 						},
 					},
 					{
 						TeilsummeNetto: com.Betrag{
-							Wert:     decimal.NewFromFloat(1),
+							Wert:     decimal.New(1, 1),
 							Waehrung: waehrungscode.EUR, // != AMD
 						},
 					},
@@ -207,21 +207,21 @@ func (s *Suite) TestFailedRechnungValidation() {
 		"GesamtBrutto==sum(TeilsummeSteuer)": {
 			Rechnung{
 				GesamtBrutto: com.Betrag{
-					Wert:     decimal.NewFromFloat(9), // expected 1+2+3+4 = 10
+					Wert:     decimal.New(9, 1), // expected 1+2+3+4 = 10
 					Waehrung: waehrungscode.EUR,
 				},
 				Rechnungspositionen: []com.Rechnungsposition{
 					{
 						TeilsummeSteuer: com.Steuerbetrag{
-							Basiswert:  decimal.NewFromFloat(1),
-							Steuerwert: decimal.NewFromFloat(2),
+							Basiswert:  decimal.New(1, 1),
+							Steuerwert: decimal.New(2, 1),
 							Waehrung:   waehrungscode.EUR,
 						},
 					},
 					{
 						TeilsummeSteuer: com.Steuerbetrag{
-							Basiswert:  decimal.NewFromFloat(3),
-							Steuerwert: decimal.NewFromFloat(4),
+							Basiswert:  decimal.New(3, 1),
+							Steuerwert: decimal.New(4, 1),
 							Waehrung:   waehrungscode.EUR,
 						},
 					},

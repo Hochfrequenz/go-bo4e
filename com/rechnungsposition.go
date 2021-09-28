@@ -51,7 +51,7 @@ func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 		// todo: write a bo4e modification proposal: https://github.com/Hochfrequenz/bo4e-modification-proposals/issues/7
 		return
 	}
-	if expectedTeilsummeNetto.Wert != rp.TeilsummeNetto.Wert {
+	if !expectedTeilsummeNetto.Wert.Equals(rp.TeilsummeNetto.Wert) {
 		sl.ReportError(rp.TeilsummeNetto.Wert, "Wert", "TeilsummeNetto", "TeilsummeNetto.Wert==Einzelpreis*Positionsmenge", "")
 	}
 }

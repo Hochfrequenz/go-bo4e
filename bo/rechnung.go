@@ -5,6 +5,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/rechnungsstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/rechnungstyp"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -32,8 +33,6 @@ type Rechnung struct {
 	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen" validate:"required,min=1"`              // Die Rechnungspositionen
 }
 
-// todo: implement a struct level validator
-
 // RechnungStructLevelValidation combines all the single validators
 func RechnungStructLevelValidation(sl validator.StructLevel) {
 	RechnungStructLevelValidationGesamtNetto(sl)
@@ -46,7 +45,10 @@ func RechnungStructLevelValidation(sl validator.StructLevel) {
 func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 	rechnung := sl.Current().Interface().(Rechnung)
 	if rechnung.Rechnungspositionen != nil {
-		expectedGesamtNetto := com.Betrag{}
+		expectedGesamtNetto := com.Betrag{
+			Wert:     decimal.Zero,
+			Waehrung: 0,
+		}
 		for index, rp := range rechnung.Rechnungspositionen {
 			if index == 0 {
 				// by default use the waehrung of the first entry
@@ -58,7 +60,7 @@ func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 			}
 			expectedGesamtNetto.Wert = expectedGesamtNetto.Wert.Add(rp.TeilsummeNetto.Wert)
 		}
-		if expectedGesamtNetto != rechnung.GesamtNetto {
+		if expectedGesamtNetto.Waehrung != rechnung.GesamtNetto.Waehrung || !expectedGesamtNetto.Wert.Equals(rechnung.GesamtNetto.Wert) {
 			sl.ReportError(rechnung.GesamtNetto, "Wert", "GesamtNetto", "GesamtNetto==sum(TeilsummeNetto)", "")
 		}
 	}
@@ -85,7 +87,7 @@ func RechnungStructLevelValidationZuZahlen(sl validator.StructLevel) {
 		}
 		expectedZuZahlen.Wert = expectedZuZahlen.Wert.Sub(rechnung.RabattBrutto.Wert)
 	}
-	if expectedZuZahlen != rechnung.Zuzahlen {
+	if expectedZuZahlen.Waehrung != rechnung.Zuzahlen.Waehrung || !expectedZuZahlen.Wert.Equals(rechnung.Zuzahlen.Wert) {
 		sl.ReportError(rechnung.Zuzahlen, "Wert", "Zuzahlen", "Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto", "")
 	}
 }
@@ -94,7 +96,10 @@ func RechnungStructLevelValidationZuZahlen(sl validator.StructLevel) {
 func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
 	rechnung := sl.Current().Interface().(Rechnung)
 	if rechnung.Rechnungspositionen != nil {
-		expectedGesamtBrutto := com.Betrag{}
+		expectedGesamtBrutto := com.Betrag{
+			Wert:     decimal.Zero,
+			Waehrung: 0,
+		}
 		for index, rp := range rechnung.Rechnungspositionen {
 			if index == 0 {
 				// by default use the waehrung of the first entry
@@ -106,7 +111,7 @@ func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
 			}
 			expectedGesamtBrutto.Wert = expectedGesamtBrutto.Wert.Add(rp.TeilsummeSteuer.Basiswert).Add(rp.TeilsummeSteuer.Steuerwert)
 		}
-		if expectedGesamtBrutto != rechnung.GesamtBrutto {
+		if expectedGesamtBrutto.Waehrung != rechnung.GesamtBrutto.Waehrung || !expectedGesamtBrutto.Wert.Equals(rechnung.GesamtBrutto.Wert) {
 			sl.ReportError(rechnung.GesamtBrutto, "Wert", "GesamtBrutto", "GesamtBrutto==sum(TeilsummeSteuer)", "")
 		}
 	}
@@ -115,7 +120,10 @@ func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
 // RechnungStructLevelValidationGesamtSteuer verifies that the sum of all Rechnungsposition.Netto equals the Rechnung.GesamtSteuer
 func RechnungStructLevelValidationGesamtSteuer(sl validator.StructLevel) {
 	rechnung := sl.Current().Interface().(Rechnung)
-	expectedGesamtSteuer := com.Betrag{}
+	expectedGesamtSteuer := com.Betrag{
+		Wert:     decimal.Zero,
+		Waehrung: 0,
+	}
 	if rechnung.Steuerbetraege != nil {
 		for index, sb := range rechnung.Steuerbetraege {
 			if index == 0 {
@@ -129,7 +137,7 @@ func RechnungStructLevelValidationGesamtSteuer(sl validator.StructLevel) {
 			}
 			expectedGesamtSteuer.Wert = expectedGesamtSteuer.Wert.Add(sb.Steuerwert)
 		}
-		if expectedGesamtSteuer != rechnung.GesamtSteuer {
+		if expectedGesamtSteuer.Waehrung != rechnung.GesamtSteuer.Waehrung || !expectedGesamtSteuer.Wert.Equals(rechnung.GesamtSteuer.Wert) {
 			sl.ReportError(rechnung.GesamtSteuer, "Wert", "GesamtSteuer", "GesamtSteuer==sum(Steuerbetraege)", "")
 		}
 	}

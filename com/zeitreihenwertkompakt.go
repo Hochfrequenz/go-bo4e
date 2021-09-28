@@ -8,7 +8,7 @@ import (
 
 // Zeitreihenwertkompakt ist eine Abbildung eines kompakten Zeitreihenwertes in dem ausschliesslich der Wert und Statusinformationen stehen.
 type Zeitreihenwertkompakt struct {
-	Wert         decimal.Decimal                           `json:"wert" validate:"required" example:"17"` // 	Der im Zeitintervall gültige Wert.
+	Wert         decimal.Decimal                           `json:"wert" validate:"required" example:"17"` // Der im Zeitintervall gültige Wert.
 	Status       messwertstatus.Messwertstatus             `json:"status,omitempty"`                      // Der Status gibt an, wie der Wert zu interpretieren ist, z.B. in Berechnungen.
 	Statuszusatz messwertstatuszusatz.Messwertstatuszusatz `json:"statuszusatz,omitempty"`                // Eine Zusatzinformation zum Status, beispielsweise ein Grund für einen fehlenden Wert.
 }

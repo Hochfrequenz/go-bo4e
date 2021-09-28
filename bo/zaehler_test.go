@@ -32,7 +32,10 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 		Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 		Tarifart:           tarifart.Eintarif,
-		Zaehlerkonstante:   decimal.NullDecimal{Valid: false, Decimal: decimal.NewFromFloat(0.0)},
+		Zaehlerkonstante: decimal.NullDecimal{
+			Decimal: decimal.Zero,
+			Valid:   false,
+		},
 		//EichungBis:         time.Time{},
 		//LetzteEichung:      time.Time{},
 		Zaehlwerke: []com.Zaehlwerk{{
@@ -40,7 +43,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 			Bezeichnung:    "",
 			Richtung:       energierichtung.Aussp,
 			ObisKennzahl:   "1-0:1.8.0",
-			Wandlerfaktor:  decimal.NewFromFloat(0),
+			Wandlerfaktor:  decimal.Zero,
 			Einheit:        mengeneinheit.KWH,
 			Zaehlerstaende: nil,
 		}},
