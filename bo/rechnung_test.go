@@ -19,6 +19,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -40,7 +41,7 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 		OriginalRechnungsnummer: "hallo",
 		Rechnungsperiode: com.Zeitraum{
 			Einheit:        zeiteinheit.Minute,
-			Dauer:          15,
+			Dauer:          decimal.NullDecimal{},
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
@@ -105,21 +106,21 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 			},
 		},
 		GesamtNetto: com.Betrag{
-			Wert:     18.36,
+			Wert:     decimal.NewFromFloat(18.36),
 			Waehrung: waehrungscode.EUR,
 		},
 		GesamtSteuer: com.Betrag{
-			Wert:     18.36,
+			Wert:     decimal.NewFromFloat(18.36),
 			Waehrung: waehrungscode.EUR,
 		},
 		GesamtBrutto: com.Betrag{
-			Wert:     18.36,
+			Wert:     decimal.NewFromFloat(18.36),
 			Waehrung: waehrungscode.EUR,
 		},
 		Vorausgezahlt: nil,
 		RabattBrutto:  nil,
 		Zuzahlen: com.Betrag{
-			Wert:     18.36,
+			Wert:     decimal.NewFromFloat(18.36),
 			Waehrung: waehrungscode.EUR,
 		},
 		Steuerbetraege:      nil,
@@ -184,19 +185,19 @@ func (s *Suite) TestFailedRechnungValidation() {
 		"GesamtNetto==sum(TeilsummeNetto)": {
 			Rechnung{
 				GesamtNetto: com.Betrag{
-					Wert:     8, // expected 7
+					Wert:     decimal.NewFromFloat(8), // expected 7
 					Waehrung: waehrungscode.EUR,
 				},
 				Rechnungspositionen: []com.Rechnungsposition{
 					{
 						TeilsummeNetto: com.Betrag{
-							Wert:     6,
+							Wert:     decimal.NewFromFloat(6),
 							Waehrung: waehrungscode.EUR,
 						},
 					},
 					{
 						TeilsummeNetto: com.Betrag{
-							Wert:     1,
+							Wert:     decimal.NewFromFloat(1),
 							Waehrung: waehrungscode.EUR, // != AMD
 						},
 					},
@@ -206,21 +207,21 @@ func (s *Suite) TestFailedRechnungValidation() {
 		"GesamtBrutto==sum(TeilsummeSteuer)": {
 			Rechnung{
 				GesamtBrutto: com.Betrag{
-					Wert:     9, // expected 1+2+3+4 = 10
+					Wert:     decimal.NewFromFloat(9), // expected 1+2+3+4 = 10
 					Waehrung: waehrungscode.EUR,
 				},
 				Rechnungspositionen: []com.Rechnungsposition{
 					{
 						TeilsummeSteuer: com.Steuerbetrag{
-							Basiswert:  1,
-							Steuerwert: 2,
+							Basiswert:  decimal.NewFromFloat(1),
+							Steuerwert: decimal.NewFromFloat(2),
 							Waehrung:   waehrungscode.EUR,
 						},
 					},
 					{
 						TeilsummeSteuer: com.Steuerbetrag{
-							Basiswert:  3,
-							Steuerwert: 4,
+							Basiswert:  decimal.NewFromFloat(3),
+							Steuerwert: decimal.NewFromFloat(4),
 							Waehrung:   waehrungscode.EUR,
 						},
 					},
@@ -230,19 +231,19 @@ func (s *Suite) TestFailedRechnungValidation() {
 		"Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto": {
 			Rechnung{
 				Zuzahlen: com.Betrag{
-					Wert:     4, // expected 10-2-3 = 5
+					Wert:     decimal.NewFromFloat(4), // expected 10-2-3 = 5
 					Waehrung: waehrungscode.EUR,
 				},
 				GesamtBrutto: com.Betrag{
-					Wert:     10,
+					Wert:     decimal.NewFromFloat(10),
 					Waehrung: waehrungscode.EUR,
 				},
 				RabattBrutto: &com.Betrag{
-					Wert:     2,
+					Wert:     decimal.NewFromFloat(2),
 					Waehrung: waehrungscode.EUR,
 				},
 				Vorausgezahlt: &com.Betrag{
-					Wert:     3,
+					Wert:     decimal.NewFromFloat(3),
 					Waehrung: waehrungscode.EUR,
 				},
 			},
@@ -272,7 +273,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 			OriginalRechnungsnummer: "hallo",
 			Rechnungsperiode: com.Zeitraum{
 				Einheit:        zeiteinheit.Minute,
-				Dauer:          15,
+				Dauer:          decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(15)},
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
@@ -337,24 +338,24 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 				},
 			},
 			GesamtNetto: com.Betrag{
-				Wert:     240,
+				Wert:     decimal.NewFromFloat(240),
 				Waehrung: waehrungscode.EUR,
 			},
 			GesamtSteuer: com.Betrag{
-				Wert:     18.36,
+				Wert:     decimal.NewFromFloat(18.36),
 				Waehrung: waehrungscode.EUR,
 			},
 			GesamtBrutto: com.Betrag{
-				Wert:     285.6,
+				Wert:     decimal.NewFromFloat(285.6),
 				Waehrung: waehrungscode.EUR,
 			},
 			Vorausgezahlt: &com.Betrag{
-				Wert:     85.6,
+				Wert:     decimal.NewFromFloat(85.6),
 				Waehrung: waehrungscode.EUR,
 			},
 			RabattBrutto: nil,
 			Zuzahlen: com.Betrag{
-				Wert:     200.0,
+				Wert:     decimal.NewFromFloat(200.),
 				Waehrung: waehrungscode.EUR,
 			},
 			Steuerbetraege: nil,
@@ -368,23 +369,23 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 					Artikelnummer:   bdewartikelnummer.Abgabekwkg,
 					LokationsId:     "54321012345",
 					PositionsMenge: com.Menge{
-						Wert:    20,
+						Wert:    decimal.NewFromFloat(20),
 						Einheit: mengeneinheit.KWH,
 					},
 					Einzelpreis: com.Preis{
-						Wert:       12,
+						Wert:       decimal.NewFromFloat(12),
 						Einheit:    waehrungseinheit.EUR,
 						Bezugswert: mengeneinheit.KWH,
 						Status:     preisstatus.Endgueltig,
 					},
 					TeilsummeNetto: com.Betrag{
-						Wert:     240,
+						Wert:     decimal.NewFromFloat(240),
 						Waehrung: waehrungscode.EUR,
 					},
 					TeilsummeSteuer: com.Steuerbetrag{
 						Steuerkennzeichen: steuerkennzeichen.Ust19,
-						Basiswert:         240,
-						Steuerwert:        45.6,
+						Basiswert:         decimal.NewFromFloat(240),
+						Steuerwert:        decimal.NewFromFloat(45.6),
 						Waehrung:          waehrungscode.EUR,
 					},
 					TeilrabattNetto: nil,

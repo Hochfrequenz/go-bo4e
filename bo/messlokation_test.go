@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
@@ -53,13 +54,13 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
-				Zaehlerkonstante:   0,
+				Zaehlerkonstante:   decimal.NullDecimal{},
 				Zaehlwerke: []com.Zaehlwerk{{
 					ZaehlwerkId:   "1",
 					Bezeichnung:   "",
 					Richtung:      energierichtung.Aussp,
 					ObisKennzahl:  "1-0:1.8.0",
-					Wandlerfaktor: 0,
+					Wandlerfaktor: decimal.NewFromFloat(1),
 					Einheit:       mengeneinheit.KWH,
 				}},
 			},

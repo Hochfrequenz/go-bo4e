@@ -4,6 +4,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkennzeichen"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
+	"github.com/shopspring/decimal"
 )
 
 // TestFailedSteuerbetragValidation asserts that the validation fails for invalid Steuerbetrag
@@ -14,16 +15,16 @@ func (s *Suite) TestFailedSteuerbetragValidation() {
 		"required": {
 			Steuerbetrag{
 				Steuerkennzeichen: 0,
-				Basiswert:         0,
-				Steuerwert:        0,
+				Basiswert:         decimal.NewFromFloat(0),
+				Steuerwert:        decimal.NewFromFloat(0),
 				Waehrung:          0,
 			},
 		},
 		"Steuerwert=Basiswert*Steuerkennzeichen": {
 			Steuerbetrag{
 				Steuerkennzeichen: steuerkennzeichen.Ust19,
-				Basiswert:         100,
-				Steuerwert:        7, // expected 19
+				Basiswert:         decimal.NewFromFloat(100),
+				Steuerwert:        decimal.NewFromFloat(7), // expected 19
 				Waehrung:          0,
 			},
 		},
@@ -42,20 +43,20 @@ func (s *Suite) TestSuccessfulSteuerbetragValidation() {
 		},
 		Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust7,
-			Basiswert:         100,
-			Steuerwert:        7,
+			Basiswert:         decimal.NewFromFloat(100),
+			Steuerwert:        decimal.NewFromFloat(7),
 			Waehrung:          waehrungscode.ALL,
 		},
 		Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust19,
-			Basiswert:         50,
-			Steuerwert:        9.5,
+			Basiswert:         decimal.NewFromFloat(50),
+			Steuerwert:        decimal.NewFromFloat(9.5),
 			Waehrung:          waehrungscode.EUR,
 		},
 		Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Vst0,
-			Basiswert:         100,
-			Steuerwert:        0,
+			Basiswert:         decimal.NewFromFloat(100),
+			Steuerwert:        decimal.NewFromFloat(0),
 			Waehrung:          waehrungscode.EUR,
 		},
 	}

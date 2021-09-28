@@ -56,7 +56,7 @@ func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 				sl.ReportError(rp.TeilsummeNetto.Waehrung, "Waehrung", "Rechnungspositionen", "Rechnungspositionen[0].Waehrung==Rechnungspositionen[j].Waehrung", "")
 				return
 			}
-			expectedGesamtNetto.Wert += rp.TeilsummeNetto.Wert
+			expectedGesamtNetto.Wert = expectedGesamtNetto.Wert.Add(rp.TeilsummeNetto.Wert)
 		}
 		if expectedGesamtNetto != rechnung.GesamtNetto {
 			sl.ReportError(rechnung.GesamtNetto, "Wert", "GesamtNetto", "GesamtNetto==sum(TeilsummeNetto)", "")
@@ -76,14 +76,14 @@ func RechnungStructLevelValidationZuZahlen(sl validator.StructLevel) {
 			sl.ReportError(rechnung.Vorausgezahlt, "Waehrung", "Vorausgezahlt", "Vorausgezahlt.Waehrung==GesamtBrutto.Waehrung", "")
 			return
 		}
-		expectedZuZahlen.Wert -= rechnung.Vorausgezahlt.Wert
+		expectedZuZahlen.Wert = expectedZuZahlen.Wert.Sub(rechnung.Vorausgezahlt.Wert)
 	}
 	if rechnung.RabattBrutto != nil {
 		if rechnung.RabattBrutto.Waehrung != expectedZuZahlen.Waehrung {
 			sl.ReportError(rechnung.Vorausgezahlt, "Waehrung", "RabattBrutto", "RabattBrutto.Waehrung==GesamtBrutto.Waehrung", "")
 			return
 		}
-		expectedZuZahlen.Wert -= rechnung.RabattBrutto.Wert
+		expectedZuZahlen.Wert = expectedZuZahlen.Wert.Sub(rechnung.RabattBrutto.Wert)
 	}
 	if expectedZuZahlen != rechnung.Zuzahlen {
 		sl.ReportError(rechnung.Zuzahlen, "Wert", "Zuzahlen", "Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto", "")
@@ -104,7 +104,7 @@ func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
 				sl.ReportError(rp.TeilsummeSteuer.Waehrung, "Waehrung", "Rechnungspositionen", "Rechnungspositionen[0].Waehrung==Rechnungspositionen[j].Waehrung", "")
 				return
 			}
-			expectedGesamtBrutto.Wert += rp.TeilsummeSteuer.Basiswert + rp.TeilsummeSteuer.Steuerwert
+			expectedGesamtBrutto.Wert = expectedGesamtBrutto.Wert.Add(rp.TeilsummeSteuer.Basiswert).Add(rp.TeilsummeSteuer.Steuerwert)
 		}
 		if expectedGesamtBrutto != rechnung.GesamtBrutto {
 			sl.ReportError(rechnung.GesamtBrutto, "Wert", "GesamtBrutto", "GesamtBrutto==sum(TeilsummeSteuer)", "")
@@ -127,7 +127,7 @@ func RechnungStructLevelValidationGesamtSteuer(sl validator.StructLevel) {
 				sl.ReportError(sb.Waehrung, "Waehrung", "Steuerbetraege", "Steuerbetraege[0].Waehrung==Steuerbetraege[j].Waehrung", "")
 				return
 			}
-			expectedGesamtSteuer.Wert += sb.Steuerwert
+			expectedGesamtSteuer.Wert = expectedGesamtSteuer.Wert.Add(sb.Steuerwert)
 		}
 		if expectedGesamtSteuer != rechnung.GesamtSteuer {
 			sl.ReportError(rechnung.GesamtSteuer, "Wert", "GesamtSteuer", "GesamtSteuer==sum(Steuerbetraege)", "")

@@ -7,6 +7,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -17,7 +18,7 @@ func (s *Suite) TestFailedEnergiemengeValidation() {
 		Enddatum:                 time.Now().Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validate := validator.New()
@@ -70,7 +71,7 @@ func (s *Suite) TestSuccessfulEnergiemengeValidation() {
 		Enddatum:                 time.Now().Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validEnergiemengen := []interface{}{

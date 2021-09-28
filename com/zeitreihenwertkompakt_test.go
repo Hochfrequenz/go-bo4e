@@ -7,13 +7,14 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
 // Test_Deserialization deserializes a Zeitreihenwertkompakt json
 func (s *Suite) TestZeitreihenwertkompaktDeserialization() {
 	var zeitreihenwertkompakt = Zeitreihenwertkompakt{
-		Wert:         17.43,
+		Wert:         decimal.NewFromFloat(17.43),
 		Status:       messwertstatus.ERSATZWERT,
 		Statuszusatz: messwertstatuszusatz.Z77_SPANNUNGSAUSFALL,
 	}
@@ -35,7 +36,7 @@ func (s *Suite) Test_Zeitreihenwertkompakt_Failed_Validation() {
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
 		"required": {
 			Zeitreihenwertkompakt{
-				Wert:         0,
+				Wert:         decimal.NewFromFloat(0),
 				Status:       0,
 				Statuszusatz: 0,
 			},
@@ -49,7 +50,7 @@ func (s *Suite) Test_Successful_Zeitreihenwertkompakt_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{
 		Zeitreihenwertkompakt{
-			Wert:         17,
+			Wert:         decimal.NewFromFloat(17),
 			Status:       0,
 			Statuszusatz: 0,
 		},

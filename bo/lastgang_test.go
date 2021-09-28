@@ -10,6 +10,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -17,7 +18,7 @@ import (
 func (s *Suite) TestFailedLastgangValidation() {
 	var zeitreihenwert = com.Zeitreihenwert{
 		Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
-			Wert:         17.43,
+			Wert:         decimal.NewFromFloat(17.43),
 			Status:       messwertstatus.ENERGIEMENGESUMMIERT,
 			Statuszusatz: messwertstatuszusatz.Z81_MESSEINRICHTUNGGESTOERT_DEFEKT,
 		},
@@ -86,7 +87,7 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 		Enddatum:                 time.Now().Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validEnergiemengen := []interface{}{
