@@ -15,7 +15,7 @@ import (
 )
 
 // TestFailedLastgangValidation verifies that the validators of a Lastgang work
-func (s *Suite) TestFailedLastgangValidation() {
+func (s *Suite) Test_Failed_LastgangValidation() {
 	var zeitreihenwert = com.Zeitreihenwert{
 		Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 			Wert:         decimal.NewFromFloat(17.43),

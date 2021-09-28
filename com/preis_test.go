@@ -54,7 +54,7 @@ func (s *Suite) Test_Successful_Preis_Validation() {
 }
 
 //  TestPreisFailedValidation verifies that invalid Preis values are considered invalid
-func (s *Suite) TestPreisFailedValidation() {
+func (s *Suite) Test_Preis_FailedValidation() {
 	validate := validator.New()
 	invalidPrices := map[string][]interface{}{
 		"required": {

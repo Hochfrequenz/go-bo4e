@@ -12,7 +12,7 @@ import (
 )
 
 // TestFailedEnergiemengeValidation verifies that the validators of Energiemenge work
-func (s *Suite) TestFailedEnergiemengeValidation() {
+func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Now(),
 		Enddatum:                 time.Now().Add(time.Minute * 15),
@@ -64,7 +64,7 @@ func (s *Suite) TestFailedEnergiemengeValidation() {
 }
 
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
-func (s *Suite) TestSuccessfulEnergiemengeValidation() {
+func (s *Suite) Test_Successful_EnergiemengeValidation() {
 	validate := validator.New()
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Now(),

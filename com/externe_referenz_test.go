@@ -5,7 +5,7 @@ import (
 )
 
 // TestFailedExterneReferenzValidation asserts that the validation fails, if not both name and value are provided
-func (s *Suite) TestFailedExterneReferenzValidation() {
+func (s *Suite) Test_Failed_ExterneReferenzValidation() {
 	validate := validator.New()
 	invalidReferenzMap := map[string][]interface{}{
 		"required": {
@@ -27,7 +27,7 @@ func (s *Suite) TestFailedExterneReferenzValidation() {
 }
 
 // TestSuccessfulExterneReferenzValidation asserts that the validation does not fail for a valid ExterneReferenz
-func (s *Suite) TestSuccessfulExterneReferenzValidation() {
+func (s *Suite) Test_Successful_ExterneReferenzValidation() {
 	validate := validator.New()
 	validReferences := []interface{}{
 		ExterneReferenz{

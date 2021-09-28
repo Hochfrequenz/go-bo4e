@@ -12,7 +12,7 @@ import (
 )
 
 // Test_Deserialization deserializes a Zeitreihenwertkompakt json
-func (s *Suite) TestZeitreihenwertkompaktDeserialization() {
+func (s *Suite) Test_Zeitreihenwertkompakt_Deserialization() {
 	var zeitreihenwertkompakt = Zeitreihenwertkompakt{
 		Wert:         decimal.NewFromFloat(17.32),
 		Status:       messwertstatus.ERSATZWERT,

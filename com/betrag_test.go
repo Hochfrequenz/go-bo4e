@@ -7,7 +7,7 @@ import (
 )
 
 // TestFailedBetragValidation asserts that the validation fails, if not both Betrag.Wert and Betrag.Waehrung are provided
-func (s *Suite) TestFailedBetragValidation() {
+func (s *Suite) Test_Failed_BetragValidation() {
 	validate := validator.New()
 	invalidBetragMap := map[string][]interface{}{
 		"required": {
@@ -25,7 +25,7 @@ func (s *Suite) TestFailedBetragValidation() {
 }
 
 // TestSuccessfulBetragValidation asserts that the validation does not fail for a valid Betrag
-func (s *Suite) TestSuccessfulBetragValidation() {
+func (s *Suite) Test_Successful_BetragValidation() {
 	validate := validator.New()
 	validBetraege := []interface{}{
 		Betrag{

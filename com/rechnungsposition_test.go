@@ -65,7 +65,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 }
 
 // TestFailedRechnungspositionValidation asserts that the validation fails for invalid Rechnungsposition
-func (s *Suite) TestFailedRechnungspositionValidation() {
+func (s *Suite) Test_Failed_RechnungspositionValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungspositionStructLevelValidation, Rechnungsposition{})
 	invalidRechnungsposition := map[string][]interface{}{
@@ -137,7 +137,7 @@ func (s *Suite) TestFailedRechnungspositionValidation() {
 }
 
 // TestSuccessfulRechnungspositionValidation asserts that the validation does not fail for a valid Rechnungsposition
-func (s *Suite) TestSuccessfulRechnungspositionValidation() {
+func (s *Suite) Test_Successful_RechnungspositionValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungspositionStructLevelValidation, Rechnungsposition{})
 	validRechnungsposition := []interface{}{

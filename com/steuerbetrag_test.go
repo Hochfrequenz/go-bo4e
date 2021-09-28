@@ -8,7 +8,7 @@ import (
 )
 
 // TestFailedSteuerbetragValidation asserts that the validation fails for invalid Steuerbetrag
-func (s *Suite) TestFailedSteuerbetragValidation() {
+func (s *Suite) Test_Failed_SteuerbetragValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(SteuerbetragStructLevelValidation, Steuerbetrag{})
 	invalidSteuerbetrag := map[string][]interface{}{
@@ -33,7 +33,7 @@ func (s *Suite) TestFailedSteuerbetragValidation() {
 }
 
 // TestSuccessfulSteuerbetragValidation asserts that the validation does not fail for a valid Steuerbetrag
-func (s *Suite) TestSuccessfulSteuerbetragValidation() {
+func (s *Suite) Test_Successful_SteuerbetragValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(SteuerbetragStructLevelValidation, Steuerbetrag{})
 	validSteuerbetraege := []interface{}{

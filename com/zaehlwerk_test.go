@@ -12,7 +12,7 @@ import (
 )
 
 // TestZaehlwerkDeserialization deserializes a Zaehlwerk json
-func (s *Suite) TestZaehlwerkDeserialization() {
+func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	var zaehlwerk = Zaehlwerk{
 		ZaehlwerkId:    "1",
 		Bezeichnung:    "bestes Zählwerk",

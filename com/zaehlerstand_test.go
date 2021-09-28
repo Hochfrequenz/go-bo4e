@@ -13,7 +13,7 @@ import (
 )
 
 // TestZaehlerstandDeserialization deserializes a Zaehlerstand json
-func (s *Suite) TestZaehlerstandDeserialization() {
+func (s *Suite) Test_Zaehlerstand_Deserialization() {
 	var zaehlerstand = Zaehlerstand{
 		Ablesedatum:              time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,

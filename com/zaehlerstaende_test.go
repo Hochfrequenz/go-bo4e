@@ -10,7 +10,7 @@ import (
 )
 
 // TestZaehlerstaneLen tests the Zaehlerstaende.Len function
-func (s *Suite) TestZaehlerstandeLen() {
+func (s *Suite) Test_Zaehlerstande_Len() {
 	zaehlerstaende3 := Zaehlerstaende{
 		Zaehlerstand{},
 		Zaehlerstand{},

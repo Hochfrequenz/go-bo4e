@@ -10,7 +10,7 @@ import (
 )
 
 // Test_Deserialization deserializes an address json
-func (s *Suite) TestAddressDeserialization() {
+func (s *Suite) Test_Address_Deserialization() {
 	var adresse = Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
@@ -31,7 +31,7 @@ func (s *Suite) TestAddressDeserialization() {
 }
 
 //  Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
-func (s *Suite) TestStrasseXorPostfachValidation() {
+func (s *Suite) Test_Strasse_XorPostfachValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(AdresseStructLevelValidation, Adresse{})
 	invalidAdressMaps := map[string][]interface{}{

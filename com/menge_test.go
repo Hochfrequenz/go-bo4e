@@ -44,7 +44,7 @@ func (s *Suite) Test_Successful_Menge_Validation() {
 }
 
 //  TestMengeFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) TestMengeFailedValidation() {
+func (s *Suite) Test_Menge_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {

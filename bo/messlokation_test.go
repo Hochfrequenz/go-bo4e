@@ -81,7 +81,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 }
 
 // TestFailedMesslokationValidation verifies that the validators of Messlokation work
-func (s *Suite) TestFailedMesslokationValidation() {
+func (s *Suite) Test_Failed_MesslokationValidation() {
 	validate := validator.New()
 	invalidMesslokationMap := map[string][]interface{}{
 		"required": {
@@ -112,7 +112,7 @@ func (s *Suite) TestFailedMesslokationValidation() {
 }
 
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
-func (s *Suite) TestSuccessfulMesslokationValidation() {
+func (s *Suite) Test_Successful_MesslokationValidation() {
 	validate := validator.New()
 	validMelos := []interface{}{
 		Messlokation{

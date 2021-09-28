@@ -58,7 +58,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 }
 
 // TestFailedZaehlerValidation verifies that the validators of a Zaehler work
-func (s *Suite) TestFailedZaehlerValidation() {
+func (s *Suite) Test_Failed_ZaehlerValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {

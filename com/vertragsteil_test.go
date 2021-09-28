@@ -12,7 +12,7 @@ import (
 )
 
 // TestVertragsteilDeserialization deserializes a Vertragsteil json
-func (s *Suite) TestVertragsteilDeserialization() {
+func (s *Suite) Test_Vertragsteil_Deserialization() {
 	var vertraqsteil = Vertragsteil{
 		Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),

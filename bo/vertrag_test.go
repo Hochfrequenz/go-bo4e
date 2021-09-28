@@ -92,7 +92,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 }
 
 // TestFailedGVertragValidation verifies that the validators of a Vertrag work
-func (s *Suite) TestFailedVertragValidation() {
+func (s *Suite) Test_Failed_VertragValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {

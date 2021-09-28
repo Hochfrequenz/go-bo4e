@@ -13,7 +13,7 @@ import (
 )
 
 // Test_Deserialization deserializes an Verbrauch json
-func (s *Suite) TestVerbrauchDeserialization() {
+func (s *Suite) Test_Verbrauch_Deserialization() {
 	var verbrauch = Verbrauch{
 		Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
@@ -51,7 +51,7 @@ func (s *Suite) Test_Successful_Verbrauch_Validation() {
 }
 
 //  TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) TestVerbrauchFailedValidation() {
+func (s *Suite) Test_Verbrauch_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {

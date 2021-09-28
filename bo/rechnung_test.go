@@ -136,7 +136,7 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 }
 
 // TestFailedRechnungValidation verifies that the validators of a Rechnung work
-func (s *Suite) TestFailedRechnungValidation() {
+func (s *Suite) Test_Failed_RechnungValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
 	invalidRechnungs := map[string][]interface{}{

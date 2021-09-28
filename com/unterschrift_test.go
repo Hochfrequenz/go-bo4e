@@ -10,7 +10,7 @@ import (
 )
 
 // TestUnterschriftDeserialization deserializes an Unterschrift json
-func (s *Suite) TestUnterschriftDeserialization() {
+func (s *Suite) Test_Unterschrift_Deserialization() {
 	var unterschrift = Unterschrift{
 		Name:  "Max Mustermann",
 		Datum: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -46,7 +46,7 @@ func (s *Suite) Test_Successful_Unterschrift_Validation() {
 }
 
 //  TestUnterschriftFailedValidation verifies that invalid Unterschrift values are considered invalid
-func (s *Suite) TestUnterschriftFailedValidation() {
+func (s *Suite) Test_Unterschrift_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {

@@ -12,7 +12,7 @@ import (
 )
 
 // TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
-func (s *Suite) TestVertragskonditionenDeserialization() {
+func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	var vertragskonditionen = Vertragskonditionen{
 		Beschreibung:     "hallo",
 		AnzahlAbschlaege: 17,

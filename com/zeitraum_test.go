@@ -12,7 +12,7 @@ import (
 )
 
 // TestZeitraumDeserialization deserializes a Zeitraum json
-func (s *Suite) TestZeitraumDeserialization() {
+func (s *Suite) Test_Zeitraum_Deserialization() {
 	var zeitraum = Zeitraum{
 		Einheit: zeiteinheit.Minute,
 		Dauer: decimal.NullDecimal{
@@ -34,7 +34,7 @@ func (s *Suite) TestZeitraumDeserialization() {
 }
 
 // TestZeitraumDeserializationWithoutEinheit
-func (s *Suite) TestZeitraumDeserializationWithoutEinheit() {
+func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	var zeitraum = Zeitraum{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
