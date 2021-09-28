@@ -1,9 +1,11 @@
 package bo
 
 import (
+	"fmt"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -54,4 +56,15 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 			then.AssertThat(s.T(), tagFound, is.True())
 		}
 	}
+}
+
+// newDecimalFromString returns a new decimal for a given string. This allows to inline create new decimals without caring about the error. Anyways this function will panic if there is an error.
+// Background ist, that for decimal.NewFromString it is guaranteed, that the created decimal values are deep equatable (https://github.com/shopspring/decimal/blob/9ffd602a49ccb618af362e7a17f6a1e4bcb0afa8/decimal_test.go#L343 )
+// This is _not_ the case for decimal.New() or decimal.NewFromFloat()
+func newDecimalFromString(s string) decimal.Decimal {
+	result, err := decimal.NewFromString(s)
+	if err != nil {
+		panic(fmt.Errorf("Error while converting '%s'", s))
+	}
+	return result
 }
