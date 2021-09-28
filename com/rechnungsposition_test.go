@@ -28,27 +28,27 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		Artikelnummer:   bdewartikelnummer.Abgabekwkg,
 		LokationsId:     "54321012345",
 		PositionsMenge: Menge{
-			Wert:    decimal.NewFromFloat(20),
+			Wert:    decimal.New(20, 1),
 			Einheit: mengeneinheit.KWH,
 		},
 		ZeitbezogeneMenge: &Menge{
-			Wert:    decimal.NewFromFloat(23),
+			Wert:    decimal.New(23, 1),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
 		Einzelpreis: Preis{
-			Wert:       decimal.NewFromFloat(12),
+			Wert:       decimal.New(12, 1),
 			Einheit:    waehrungseinheit.EUR,
 			Bezugswert: mengeneinheit.Jahr,
 			Status:     preisstatus.Endgueltig,
 		},
 		TeilsummeNetto: Betrag{
-			Wert:     decimal.NewFromFloat(42),
+			Wert:     decimal.New(42, 1),
 			Waehrung: waehrungscode.AMD,
 		},
 		TeilsummeSteuer: Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust7,
-			Basiswert:         decimal.NewFromFloat(100),
-			Steuerwert:        decimal.NewFromFloat(7),
+			Basiswert:         decimal.New(100, 1),
+			Steuerwert:        decimal.New(7, 1),
 			Waehrung:          waehrungscode.EUR,
 		},
 		TeilrabattNetto: nil,
@@ -61,6 +61,13 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	var deserializedRechnungsposition Rechnungsposition
 	err = json.Unmarshal(serializedRechnungsposition, &deserializedRechnungsposition)
 	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedRechnungsposition.Einzelpreis, is.EqualTo(rechnungsposition.Einzelpreis))
+	then.AssertThat(s.T(), deserializedRechnungsposition.TeilrabattNetto, is.EqualTo(rechnungsposition.TeilrabattNetto))
+	then.AssertThat(s.T(), deserializedRechnungsposition.TeilsummeNetto, is.EqualTo(rechnungsposition.TeilsummeNetto))
+	then.AssertThat(s.T(), deserializedRechnungsposition.TeilsummeSteuer, is.EqualTo(rechnungsposition.TeilsummeSteuer))
+	then.AssertThat(s.T(), deserializedRechnungsposition.TeilsummeSteuer, is.EqualTo(rechnungsposition.TeilsummeSteuer))
+	then.AssertThat(s.T(), deserializedRechnungsposition.ZeitbezogeneMenge, is.EqualTo(rechnungsposition.ZeitbezogeneMenge))
+	then.AssertThat(s.T(), deserializedRechnungsposition.PositionsMenge, is.EqualTo(rechnungsposition.PositionsMenge))
 	then.AssertThat(s.T(), deserializedRechnungsposition, is.EqualTo(rechnungsposition))
 }
 
