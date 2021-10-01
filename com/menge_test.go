@@ -6,13 +6,14 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
 // Test_Menge_Deserialization deserializes an Menge json
 func (s *Suite) Test_Menge_Deserialization() {
 	var menge = Menge{
-		Wert:    42,
+		Wert:    decimal.NewFromFloat(42),
 		Einheit: mengeneinheit.KUBIKMETER,
 	}
 	serializedMenge, err := json.Marshal(menge)
@@ -31,11 +32,11 @@ func (s *Suite) Test_Successful_Menge_Validation() {
 	validate := validator.New()
 	validMenges := []interface{}{
 		Menge{
-			Wert:    42,
+			Wert:    decimal.NewFromFloat(42),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
 		Menge{
-			Wert:    0, // 0 is a valid value
+			Wert:    decimal.NewFromFloat(0), // 0 is a valid value
 			Einheit: mengeneinheit.W,
 		},
 	}
@@ -43,12 +44,12 @@ func (s *Suite) Test_Successful_Menge_Validation() {
 }
 
 //  TestMengeFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) TestMengeFailedValidation() {
+func (s *Suite) Test_Menge_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
 			Menge{
-				Wert: 42,
+				Wert: decimal.NewFromFloat(42),
 			},
 			Menge{},
 		},

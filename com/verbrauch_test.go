@@ -7,18 +7,19 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
 
 // Test_Deserialization deserializes an Verbrauch json
-func (s *Suite) TestVerbrauchDeserialization() {
+func (s *Suite) Test_Verbrauch_Deserialization() {
 	var verbrauch = Verbrauch{
 		Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	serializedVerbrauch, err := json.Marshal(verbrauch)
@@ -42,7 +43,7 @@ func (s *Suite) Test_Successful_Verbrauch_Validation() {
 			Enddatum:                 time.Now().Add(time.Minute * 15),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Obiskennzahl:             "1-0:1.8.1",
-			Wert:                     17,
+			Wert:                     decimal.NewFromFloat(17),
 			Einheit:                  mengeneinheit.KWH,
 		},
 	}
@@ -50,7 +51,7 @@ func (s *Suite) Test_Successful_Verbrauch_Validation() {
 }
 
 //  TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) TestVerbrauchFailedValidation() {
+func (s *Suite) Test_Verbrauch_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
@@ -59,7 +60,7 @@ func (s *Suite) TestVerbrauchFailedValidation() {
 				Enddatum:                 time.Now().Add(time.Minute * 15),
 				Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 				Obiskennzahl:             "1-0:1.8.1",
-				Wert:                     0,
+				Wert:                     decimal.NewFromFloat(0),
 				Einheit:                  0,
 			},
 		},
@@ -69,7 +70,7 @@ func (s *Suite) TestVerbrauchFailedValidation() {
 				Enddatum:                 time.Now().Add(time.Minute * -15),
 				Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 				Obiskennzahl:             "1-0:1.8.1",
-				Wert:                     17,
+				Wert:                     decimal.NewFromFloat(17),
 				Einheit:                  mengeneinheit.KWH,
 			},
 		},

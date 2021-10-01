@@ -3,6 +3,7 @@ package com
 import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -10,8 +11,8 @@ import (
 type Zaehlerstand struct {
 	Ablesedatum              time.Time                                         `json:"ablesedatum" validate:"required"`              // point in time
 	Wertermittlungsverfahren wertermittlungsverfahren.Wertermittlungsverfahren `json:"wertermittlungsverfahren" validate:"required"` // type of the consumption
-	Wert                     float32                                           `json:"wert" validate:"required" example:"17086"`     // value (of einheit)
+	Wert                     decimal.Decimal                                   `json:"wert" validate:"required" example:"17086"`     // value (of einheit)
 	Einheit                  mengeneinheit.Mengeneinheit                       `json:"einheit" validate:"required" example:"KWH"`    // unit (associated to the wert)
-	Brennwert                float32                                           `json:"brennwert,omitempty"`                          // used to calculate caloric Energy from gas volume
-	Zustandszahl             float32                                           `json:"zustandszahl,omitempty"`                       // used to calculate caloric Energy from gas volume
+	Brennwert                decimal.NullDecimal                               `json:"brennwert,omitempty"`                          // used to calculate caloric Energy from gas volume
+	Zustandszahl             decimal.NullDecimal                               `json:"zustandszahl,omitempty"`                       // used to calculate caloric Energy from gas volume
 }

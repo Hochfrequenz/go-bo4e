@@ -7,17 +7,18 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
 // TestZaehlwerkDeserialization deserializes a Zaehlwerk json
-func (s *Suite) TestZaehlwerkDeserialization() {
+func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	var zaehlwerk = Zaehlwerk{
 		ZaehlwerkId:    "1",
 		Bezeichnung:    "bestes Zählwerk",
 		Richtung:       energierichtung.Aussp,
 		ObisKennzahl:   "1-0:1.8.0",
-		Wandlerfaktor:  0,
+		Wandlerfaktor:  decimal.NewFromFloat(1),
 		Einheit:        mengeneinheit.KWH,
 		Zaehlerstaende: nil,
 	}
@@ -58,7 +59,7 @@ func (s *Suite) Test_Successful_Zaehlwerk_Validation() {
 			Bezeichnung:    "ZW, Juhee",
 			Richtung:       energierichtung.Aussp,
 			ObisKennzahl:   "1-0:1.8.0",
-			Wandlerfaktor:  1.0, // Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu kommen. => must not be empty
+			Wandlerfaktor:  decimal.NewFromFloat(1.0), // Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu kommen. => must not be empty
 			Einheit:        mengeneinheit.KWH,
 			Zaehlerstaende: nil,
 		},

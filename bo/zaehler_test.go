@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
@@ -31,7 +32,6 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 		Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 		Tarifart:           tarifart.Eintarif,
-		Zaehlerkonstante:   0,
 		//EichungBis:         time.Time{},
 		//LetzteEichung:      time.Time{},
 		Zaehlwerke: []com.Zaehlwerk{{
@@ -39,7 +39,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 			Bezeichnung:    "",
 			Richtung:       energierichtung.Aussp,
 			ObisKennzahl:   "1-0:1.8.0",
-			Wandlerfaktor:  0,
+			Wandlerfaktor:  newDecimalFromString("1"),
 			Einheit:        mengeneinheit.KWH,
 			Zaehlerstaende: nil,
 		}},
@@ -58,7 +58,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 }
 
 // TestFailedZaehlerValidation verifies that the validators of a Zaehler work
-func (s *Suite) TestFailedZaehlerValidation() {
+func (s *Suite) Test_Failed_ZaehlerValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
@@ -76,7 +76,7 @@ func (s *Suite) TestFailedZaehlerValidation() {
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
-				Zaehlerkonstante:   17,
+				Zaehlerkonstante:   decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(17)},
 				Zaehlwerke:         []com.Zaehlwerk{},
 				Zaehlerhersteller:  nil,
 			},
@@ -100,7 +100,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 			Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 			Zaehlertyp:         zaehlertyp.Wechselstromzaehler,
 			Tarifart:           tarifart.Eintarif,
-			Zaehlerkonstante:   0,
+			Zaehlerkonstante:   decimal.NullDecimal{Valid: false, Decimal: decimal.NewFromFloat(0)},
 			//EichungBis:         time.Time{},
 			//LetzteEichung:      time.Time{},
 			Zaehlwerke: []com.Zaehlwerk{{
@@ -108,7 +108,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 				Bezeichnung:    "",
 				Richtung:       energierichtung.Aussp,
 				ObisKennzahl:   "1-0:1.8.0",
-				Wandlerfaktor:  0,
+				Wandlerfaktor:  decimal.NewFromFloat(0),
 				Einheit:        mengeneinheit.KWH,
 				Zaehlerstaende: nil,
 			}},

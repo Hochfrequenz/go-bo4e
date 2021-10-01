@@ -33,7 +33,7 @@ func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 		sl.ReportError(rp.PositionsMenge.Einheit, "Einheit", "PositionsMenge", "PositionsMenge.Einheit==Einzelpreis.Bezugswert", "")
 	}
 	expectedTeilsummeNetto := Menge{
-		Wert:    rp.PositionsMenge.Wert * rp.Einzelpreis.Wert, // anzahl*preis
+		Wert:    rp.PositionsMenge.Wert.Mul(rp.Einzelpreis.Wert), // anzahl*preis
 		Einheit: rp.PositionsMenge.Einheit,
 	}
 	if rp.ZeitbezogeneMenge != nil {
@@ -42,7 +42,7 @@ func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 			// further checks are not meaningful at this point because there is no implicit conversion like: "1 year = 12 months"
 			return
 		}
-		expectedTeilsummeNetto.Wert = expectedTeilsummeNetto.Wert * rp.ZeitbezogeneMenge.Wert
+		expectedTeilsummeNetto.Wert = expectedTeilsummeNetto.Wert.Mul(rp.ZeitbezogeneMenge.Wert)
 	}
 	if rp.TeilsummeNetto.Waehrung != waehrungscode.EUR || rp.Einzelpreis.Einheit != waehrungseinheit.EUR {
 		// the bo4e standard is broken at this point.
@@ -51,7 +51,7 @@ func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 		// todo: write a bo4e modification proposal: https://github.com/Hochfrequenz/bo4e-modification-proposals/issues/7
 		return
 	}
-	if expectedTeilsummeNetto.Wert != rp.TeilsummeNetto.Wert {
+	if !expectedTeilsummeNetto.Wert.Equals(rp.TeilsummeNetto.Wert) {
 		sl.ReportError(rp.TeilsummeNetto.Wert, "Wert", "TeilsummeNetto", "TeilsummeNetto.Wert==Einzelpreis*Positionsmenge", "")
 	}
 }

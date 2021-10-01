@@ -12,6 +12,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
@@ -27,27 +28,27 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		Artikelnummer:   bdewartikelnummer.Abgabekwkg,
 		LokationsId:     "54321012345",
 		PositionsMenge: Menge{
-			Wert:    20,
+			Wert:    newDecimalFromString("20"),
 			Einheit: mengeneinheit.KWH,
 		},
 		ZeitbezogeneMenge: &Menge{
-			Wert:    23,
+			Wert:    newDecimalFromString("23"),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
 		Einzelpreis: Preis{
-			Wert:       12,
+			Wert:       newDecimalFromString("1"),
 			Einheit:    waehrungseinheit.EUR,
 			Bezugswert: mengeneinheit.Jahr,
 			Status:     preisstatus.Endgueltig,
 		},
 		TeilsummeNetto: Betrag{
-			Wert:     42,
+			Wert:     newDecimalFromString("42"),
 			Waehrung: waehrungscode.AMD,
 		},
 		TeilsummeSteuer: Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust7,
-			Basiswert:         100,
-			Steuerwert:        7,
+			Basiswert:         newDecimalFromString("100"),
+			Steuerwert:        newDecimalFromString("7"),
 			Waehrung:          waehrungscode.EUR,
 		},
 		TeilrabattNetto: nil,
@@ -64,7 +65,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 }
 
 // TestFailedRechnungspositionValidation asserts that the validation fails for invalid Rechnungsposition
-func (s *Suite) TestFailedRechnungspositionValidation() {
+func (s *Suite) Test_Failed_RechnungspositionValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungspositionStructLevelValidation, Rechnungsposition{})
 	invalidRechnungsposition := map[string][]interface{}{
@@ -113,20 +114,20 @@ func (s *Suite) TestFailedRechnungspositionValidation() {
 		"TeilsummeNetto.Wert==Einzelpreis*Positionsmenge": {
 			Rechnungsposition{
 				PositionsMenge: Menge{
-					Wert:    10,
+					Wert:    decimal.NewFromFloat(10),
 					Einheit: mengeneinheit.KWH,
 				},
 				Einzelpreis: Preis{
-					Wert:       1.5,
+					Wert:       decimal.NewFromFloat(1.5),
 					Bezugswert: mengeneinheit.KWH,
 					Einheit:    waehrungseinheit.EUR,
 				},
 				ZeitbezogeneMenge: &Menge{
-					Wert:    3,
+					Wert:    decimal.NewFromFloat(3),
 					Einheit: mengeneinheit.KWH,
 				},
 				TeilsummeNetto: Betrag{
-					Wert:     44, // expected 45 = 3*1.5*10 => validation error
+					Wert:     decimal.NewFromFloat(44), // expected 45 = 3*1.5*10 => validation error
 					Waehrung: waehrungscode.EUR,
 				},
 			},
@@ -136,7 +137,7 @@ func (s *Suite) TestFailedRechnungspositionValidation() {
 }
 
 // TestSuccessfulRechnungspositionValidation asserts that the validation does not fail for a valid Rechnungsposition
-func (s *Suite) TestSuccessfulRechnungspositionValidation() {
+func (s *Suite) Test_Successful_RechnungspositionValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungspositionStructLevelValidation, Rechnungsposition{})
 	validRechnungsposition := []interface{}{
@@ -149,23 +150,23 @@ func (s *Suite) TestSuccessfulRechnungspositionValidation() {
 			Artikelnummer:   bdewartikelnummer.Abgabekwkg,
 			LokationsId:     "54321012345",
 			PositionsMenge: Menge{
-				Wert:    20,
+				Wert:    decimal.NewFromFloat(20),
 				Einheit: mengeneinheit.KWH,
 			},
 			Einzelpreis: Preis{
-				Wert:       12,
+				Wert:       decimal.NewFromFloat(12),
 				Einheit:    waehrungseinheit.EUR,
 				Bezugswert: mengeneinheit.KWH,
 				Status:     preisstatus.Endgueltig,
 			},
 			TeilsummeNetto: Betrag{
-				Wert:     240,
+				Wert:     decimal.NewFromFloat(240),
 				Waehrung: waehrungscode.EUR,
 			},
 			TeilsummeSteuer: Steuerbetrag{
 				Steuerkennzeichen: steuerkennzeichen.Ust19,
-				Basiswert:         240,
-				Steuerwert:        0,
+				Basiswert:         decimal.NewFromFloat(240),
+				Steuerwert:        decimal.NewFromFloat(0),
 				Waehrung:          waehrungscode.EUR,
 			},
 			TeilrabattNetto: nil,

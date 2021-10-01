@@ -6,18 +6,22 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
 
 // TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
-func (s *Suite) TestVertragskonditionenDeserialization() {
+func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	var vertragskonditionen = Vertragskonditionen{
 		Beschreibung:     "hallo",
 		AnzahlAbschlaege: 17,
 		Vertragslaufzeit: Zeitraum{
 			Einheit: zeiteinheit.Minute,
-			Dauer:   15,
+			Dauer: decimal.NullDecimal{
+				Decimal: decimal.NewFromFloat(15),
+				Valid:   true,
+			},
 		},
 		Kuendigungsfrist: Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -29,7 +33,7 @@ func (s *Suite) TestVertragskonditionenDeserialization() {
 		},
 		Abschlagszyklus: Zeitraum{
 			Einheit: zeiteinheit.Jahr,
-			Dauer:   7,
+			Dauer:   decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(7)},
 		},
 	}
 	serializedVertragskonditionen, err := json.Marshal(vertragskonditionen)
@@ -68,7 +72,10 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 			AnzahlAbschlaege: 17,
 			Vertragslaufzeit: Zeitraum{
 				Einheit: zeiteinheit.Minute,
-				Dauer:   15,
+				Dauer: decimal.NullDecimal{
+					Decimal: decimal.NewFromFloat(15),
+					Valid:   true,
+				},
 			},
 			Kuendigungsfrist: Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -80,7 +87,10 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 			},
 			Abschlagszyklus: Zeitraum{
 				Einheit: zeiteinheit.Jahr,
-				Dauer:   7,
+				Dauer: decimal.NullDecimal{
+					Decimal: decimal.NewFromFloat(7),
+					Valid:   true,
+				},
 			},
 		},
 	}

@@ -57,7 +57,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 }
 
 // TestFailedGeschaeftspartnerValidation verifies that the validators of a Geschaeftspartner work
-func (s *Suite) TestFailedGeschaeftspartnerValidation() {
+func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",

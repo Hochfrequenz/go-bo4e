@@ -6,15 +6,19 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
 
 // TestZeitraumDeserialization deserializes a Zeitraum json
-func (s *Suite) TestZeitraumDeserialization() {
+func (s *Suite) Test_Zeitraum_Deserialization() {
 	var zeitraum = Zeitraum{
-		Einheit:        zeiteinheit.Minute,
-		Dauer:          15,
+		Einheit: zeiteinheit.Minute,
+		Dauer: decimal.NullDecimal{
+			Decimal: decimal.NewFromFloat(15),
+			Valid:   true,
+		},
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	}
@@ -30,7 +34,7 @@ func (s *Suite) TestZeitraumDeserialization() {
 }
 
 // TestZeitraumDeserializationWithoutEinheit
-func (s *Suite) TestZeitraumDeserializationWithoutEinheit() {
+func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	var zeitraum = Zeitraum{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
@@ -70,14 +74,20 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 	validate := validator.New()
 	validZeitraums := []interface{}{
 		Zeitraum{
-			Einheit:        zeiteinheit.Zeiteinheit(0),
-			Dauer:          0,
+			Einheit: zeiteinheit.Zeiteinheit(0),
+			Dauer: decimal.NullDecimal{
+				Decimal: decimal.NewFromFloat(15),
+				Valid:   true,
+			},
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 		Zeitraum{
 			Einheit: zeiteinheit.Minute,
-			Dauer:   0,
+			Dauer: decimal.NullDecimal{
+				Decimal: decimal.NewFromFloat(15),
+				Valid:   true,
+			},
 		},
 		Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),

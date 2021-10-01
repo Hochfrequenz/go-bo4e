@@ -7,25 +7,28 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
 
 // TestZaehlerstandDeserialization deserializes a Zaehlerstand json
-func (s *Suite) TestZaehlerstandDeserialization() {
+func (s *Suite) Test_Zaehlerstand_Deserialization() {
 	var zaehlerstand = Zaehlerstand{
 		Ablesedatum:              time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
-		Wert:                     847439,
+		Wert:                     decimal.NewFromFloat(847439),
 		Einheit:                  mengeneinheit.KWH,
-		Zustandszahl:             17.23,
+		Zustandszahl: decimal.NullDecimal{
+			Decimal: decimal.NewFromFloat(17.23),
+			Valid:   true,
+		},
 	}
 	serializedZaehlerstand, err := json.Marshal(zaehlerstand)
 	jsonString := string(serializedZaehlerstand)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "MESSUNG"), is.True())      // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())          // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zustandszahl"), is.True()) // is not omitted
-	then.AssertThat(s.T(), strings.Contains(jsonString, "brennwert"), is.False())   // is omitted
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.Nil()))
 	var deserializedZaehlerstand Zaehlerstand
@@ -54,7 +57,7 @@ func (s *Suite) Test_Successful_Zaehlerstand_Validation() {
 		Zaehlerstand{
 			Ablesedatum:              time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
-			Wert:                     484535,
+			Wert:                     decimal.NewFromFloat(484535),
 			Einheit:                  mengeneinheit.KWH,
 		},
 	}

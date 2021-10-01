@@ -7,17 +7,18 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
 // TestFailedEnergiemengeValidation verifies that the validators of Energiemenge work
-func (s *Suite) TestFailedEnergiemengeValidation() {
+func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Now(),
 		Enddatum:                 time.Now().Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validate := validator.New()
@@ -63,14 +64,14 @@ func (s *Suite) TestFailedEnergiemengeValidation() {
 }
 
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
-func (s *Suite) TestSuccessfulEnergiemengeValidation() {
+func (s *Suite) Test_Successful_EnergiemengeValidation() {
 	validate := validator.New()
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Now(),
 		Enddatum:                 time.Now().Add(time.Minute * 15),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Obiskennzahl:             "1-0:1.8.1",
-		Wert:                     17,
+		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validEnergiemengen := []interface{}{

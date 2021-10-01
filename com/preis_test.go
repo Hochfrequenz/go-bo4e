@@ -8,13 +8,14 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/preisstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
+	"github.com/shopspring/decimal"
 	"strings"
 )
 
 // Test_Preis_Deserialization deserializes an Preis json
 func (s *Suite) Test_Preis_Deserialization() {
 	var preis = Preis{
-		Wert:       17.89,
+		Wert:       decimal.NewFromFloat(17.89),
 		Einheit:    waehrungseinheit.EUR,
 		Bezugswert: mengeneinheit.Monat,
 		Status:     preisstatus.Endgueltig,
@@ -37,13 +38,13 @@ func (s *Suite) Test_Successful_Preis_Validation() {
 	validate := validator.New()
 	validPrices := []interface{}{
 		Preis{
-			Wert:       17.89,
+			Wert:       decimal.NewFromFloat(17.89),
 			Einheit:    waehrungseinheit.EUR,
 			Bezugswert: mengeneinheit.Monat,
 			Status:     preisstatus.Endgueltig,
 		},
 		Preis{
-			Wert:       17.89,
+			Wert:       decimal.NewFromFloat(17.89),
 			Einheit:    waehrungseinheit.EUR,
 			Bezugswert: mengeneinheit.Monat,
 			// status is not obligatory
@@ -53,13 +54,13 @@ func (s *Suite) Test_Successful_Preis_Validation() {
 }
 
 //  TestPreisFailedValidation verifies that invalid Preis values are considered invalid
-func (s *Suite) TestPreisFailedValidation() {
+func (s *Suite) Test_Preis_FailedValidation() {
 	validate := validator.New()
 	invalidPrices := map[string][]interface{}{
 		"required": {
 			Preis{},
 			Preis{
-				Wert:       1,
+				Wert:       decimal.NewFromFloat(1),
 				Einheit:    0,
 				Bezugswert: 0,
 				Status:     0,

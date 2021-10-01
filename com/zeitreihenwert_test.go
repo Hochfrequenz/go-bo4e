@@ -7,15 +7,16 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
+	"github.com/shopspring/decimal"
 	"strings"
 	"time"
 )
 
 // TestZeitreihenwertDeserialization deserializes a Zeitreihenwert json
-func (s *Suite) TestZeitreihenwertDeserialization() {
+func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 	var zeitreihenwert = Zeitreihenwert{
 		Zeitreihenwertkompakt: Zeitreihenwertkompakt{
-			Wert:         17.43,
+			Wert:         decimal.NewFromFloat(17.43),
 			Status:       messwertstatus.ENERGIEMENGESUMMIERT,
 			Statuszusatz: messwertstatuszusatz.Z81_MESSEINRICHTUNGGESTOERT_DEFEKT,
 		},
@@ -40,7 +41,7 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 		"required": {
 			Zeitreihenwert{
 				Zeitreihenwertkompakt: Zeitreihenwertkompakt{
-					Wert:         17,
+					Wert:         decimal.NewFromFloat(17),
 					Status:       0,
 					Statuszusatz: 0,
 				},
@@ -58,7 +59,7 @@ func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 	validAddresses := []interface{}{
 		Zeitreihenwert{
 			Zeitreihenwertkompakt: Zeitreihenwertkompakt{
-				Wert:         17.43,
+				Wert:         decimal.NewFromFloat(17.43),
 				Status:       messwertstatus.ENERGIEMENGESUMMIERT,
 				Statuszusatz: messwertstatuszusatz.Z81_MESSEINRICHTUNGGESTOERT_DEFEKT,
 			},

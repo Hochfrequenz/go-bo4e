@@ -6,6 +6,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -17,7 +18,7 @@ type Zaehler struct {
 	Zaehlerauspraegung zaehlerauspraegung.Zaehlerauspraegung `json:"zaehlerauspraegung" validate:"required"`    // Spezifikation die Richtung des Zählers betreffend
 	Zaehlertyp         zaehlertyp.Zaehlertyp                 `json:"zaehlertyp" validate:"required"`            // Typisierung des Zählers
 	Tarifart           tarifart.Tarifart                     `json:"tarifart" validate:"required"`              // Spezifikation bezüglich unterstützter Tarifarten
-	Zaehlerkonstante   float32                               `json:"zaehlerkonstante,omitempty"`                // Zählerkonstante auf dem Zähler
+	Zaehlerkonstante   decimal.NullDecimal                   `json:"zaehlerkonstante,omitempty"`                // Zählerkonstante auf dem Zähler
 	EichungBis         time.Time                             `json:"eichungBis,omitempty"`                      // Bis zu diesem Datum ist der Zähler geeicht
 	LetzteEichung      time.Time                             `json:"letzteEichung,omitempty"`                   // Zu diesem Datum fand die letzte Eichprüfung des Zählers statt
 	Zaehlwerke         []com.Zaehlwerk                       `json:"zaehlwerke" validate:"required,min=1"`      // Die Zählwerke des Zählers
