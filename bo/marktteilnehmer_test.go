@@ -17,7 +17,7 @@ import (
 
 // Test_Marktteilnehmer_Deserialization deserializes an Marktteilnehmer json
 func (s *Suite) Test_Marktteilnehmer_Deserialization() {
-	var gp = Marktteilnehmer{
+	var mt = Marktteilnehmer{
 		Marktrolle:       marktrolle.LF,
 		Makoadresse:      "edifact@my-favourite-marketpartner.de",
 		Rollencodetyp:    rollencodetyp.DVGW,
@@ -53,7 +53,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 			},
 		},
 	}
-	serializedMarktteilnehmer, err := json.Marshal(gp)
+	serializedMarktteilnehmer, err := json.Marshal(mt)
 	jsonString := string(serializedMarktteilnehmer)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "DVGW"), is.True()) // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "LF"), is.True())   // stringified enum
@@ -62,7 +62,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 	var deserializedMarktteilnehmer Marktteilnehmer
 	err = json.Unmarshal(serializedMarktteilnehmer, &deserializedMarktteilnehmer)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedMarktteilnehmer, is.EqualTo(gp))
+	then.AssertThat(s.T(), deserializedMarktteilnehmer, is.EqualTo(mt))
 }
 
 // Test_Failed_Marktteilnehmer_Validation verifies that the validators of a Marktteilnehmer work
