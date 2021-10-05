@@ -166,4 +166,5 @@ func (s *Suite) Test_Marktrechnung_Serialization_Contains_No_Geschaeftspartner_A
 	then.AssertThat(s.T(), jsonString, is.Not(is.Nil()))
 	then.AssertThat(s.T(), strings.Contains(jsonString, marktrechnung.Rechnungsempfaenger.Rollencodenummer), is.True())
 	then.AssertThat(s.T(), strings.Contains(jsonString, marktrechnung.Rechnung.Rechnungsempfaenger.Name1), is.False())
+	then.AssertThat(s.T(), strings.Contains(jsonString, "\"Rechnung\""), is.False())
 }
