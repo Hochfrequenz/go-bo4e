@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
+	"strings"
 	"time"
 )
 
@@ -139,8 +140,30 @@ func (s *Suite) Test_Marktrechnung_Deserialization() {
 	serializedMarktrechnung, err := json.Marshal(rechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMarktrechnung, is.Not(is.Nil()))
+	jsonString := string(serializedMarktrechnung)
+	then.AssertThat(s.T(), strings.Count(jsonString, "rechnungsempfaenger"), is.EqualTo(1))
 	var deserializedMarktrechnung Marktrechnung
 	err = json.Unmarshal(serializedMarktrechnung, &deserializedMarktrechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedMarktrechnung, is.EqualTo(rechnung))
+}
+
+func (s *Suite) Test_Marktrechnung_Serialization_Contains_No_Geschaeftspartner_As_Rechnungsempfaenger() {
+	var marktrechnung = Marktrechnung{
+		Rechnungsempfaenger: Marktteilnehmer{
+			Rollencodenummer: "9876543210987",
+		},
+		Rechnung: Rechnung{
+			Rechnungsempfaenger: Geschaeftspartner{
+				Name1: "not in json",
+			},
+		},
+	}
+	serializedMarktrechnung, err := json.Marshal(marktrechnung)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), serializedMarktrechnung, is.Not(is.Nil()))
+	jsonString := string(serializedMarktrechnung)
+	then.AssertThat(s.T(), jsonString, is.Not(is.Nil()))
+	then.AssertThat(s.T(), strings.Contains(jsonString, marktrechnung.Rechnungsempfaenger.Rollencodenummer), is.True())
+	then.AssertThat(s.T(), strings.Contains(jsonString, marktrechnung.Rechnung.Rechnungsempfaenger.Name1), is.False())
 }
