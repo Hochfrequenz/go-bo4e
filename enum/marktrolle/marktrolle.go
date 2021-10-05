@@ -9,7 +9,6 @@ const (
 	NB              Marktrolle = iota + 1 // NB is a Netzbetreiber
 	LF                                    // LF is a Lieferant
 	MSB                                   // MSB is a Messstellenbetreiber
-	MDL                                   // MDL is a Messdienstleister
 	DL                                    // DL is a Dienstleister
 	BKV                                   // BKV is a Bilanzkreisverantwortlicher
 	BKO                                   // BKO is a Bilanzkoordinator/Marktgebietsverantwortlicher
