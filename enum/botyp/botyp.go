@@ -16,6 +16,7 @@ const (
 	Marktlokation        // market location / "MaLo"
 	Messlokation         // metering location / "MeLo"
 	Marktteilnehmer      // market partner
+	Marktrechnung        // a Rechnung shared between Marktteilnehmer s
 	Netznutzungsrechnung //
 	Preisblatt           // price sheet
 	PreisblattDienstleistung
