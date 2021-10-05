@@ -29,7 +29,7 @@ func (s *Suite) Test_Marktrechnung_Deserialization() {
 			Rollencodenummer: "9903100000007",
 			Geschaeftspartner: Geschaeftspartner{
 				BusinessObject: BusinessObject{
-					BoTyp:             botyp.Geschaeftspartner,
+					BoTyp:             botyp.Marktteilnehmer,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -65,7 +65,7 @@ func (s *Suite) Test_Marktrechnung_Deserialization() {
 			Rollencodenummer: "9903100000006",
 			Geschaeftspartner: Geschaeftspartner{
 				BusinessObject: BusinessObject{
-					BoTyp:             botyp.Geschaeftspartner,
+					BoTyp:             botyp.Marktteilnehmer,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -96,7 +96,7 @@ func (s *Suite) Test_Marktrechnung_Deserialization() {
 		},
 		Rechnung: Rechnung{
 			BusinessObject: BusinessObject{
-				BoTyp:             botyp.Rechnung,
+				BoTyp:             botyp.Marktrechnung,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
