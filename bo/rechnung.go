@@ -12,25 +12,25 @@ import (
 // Rechnung ist ein Modell für die Abbildung von Rechnungen im Kontext der Energiewirtschaft. Ausgehend von diesem Basismodell werden weitere spezifische Formen abgeleitet.
 type Rechnung struct {
 	BusinessObject
-	Rechnungstitel          string                          `json:"rechnungstitel"`                                             // Bezeichnung für die vorliegende Rechnung.
-	Rechnungsstatus         rechnungsstatus.Rechnungsstatus `json:"rechnungsstatus"`                                            // Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes
-	Storno                  bool                            `json:"storno" validate:"required"`                                 // Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung
-	Rechnungsnummer         string                          `json:"rechnungsnummer" validate:"required"`                        // Eine im Verwendungskontext eindeutige Nummer für die Rechnung
-	Rechnungsdatum          time.Time                       `json:"rechnungsdatum" validate:"required"`                         // Ausstellungsdatum der Rechnung
-	Faelligkeitsdatum       time.Time                       `json:"faelligkeitsdatum" validate:"required"`                      // Zu diesem Datum ist die Zahlung fällig
-	Rechnungstyp            rechnungstyp.Rechnungstyp       `json:"rechnungstyp" validate:"required"`                           // Ein kontextbezogener Rechnungstyp
-	OriginalRechnungsnummer string                          `json:"originalRechnungsnummer" validate:"required_if=Storno true"` // Im Falle einer Stornorechnung (Storno = true) steht hier die Rechnungsnummer der stornierten Rechnung
-	Rechnungsperiode        com.Zeitraum                    `json:"rechnungsperiode" validate:"required"`                       // Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung
-	Rechnungsersteller      Geschaeftspartner               `json:"rechnungsersteller" validate:"required"`                     // Der Aussteller der Rechnung
-	Rechnungsempfaenger     Geschaeftspartner               `json:"rechnungsempfaenger" validate:"required"`                    // Der Empfänger der Rechnung
-	GesamtNetto             com.Betrag                      `json:"gesamtnetto" validate:"required"`                            // Die Summe der Nettobeträge der Rechnungsteile
-	GesamtSteuer            com.Betrag                      `json:"gesamtsteuer" validate:"required"`                           // Die Summe der Steuerbeträge der Rechnungsteile
-	GesamtBrutto            com.Betrag                      `json:"gesamtbrutto" validate:"required"`                           // Die Summe aus Netto- und Steuerbeträge
-	Vorausgezahlt           *com.Betrag                     `json:"vorausgezahlt"`                                              // Die Summe evtl. vorausbezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert.
-	RabattBrutto            *com.Betrag                     `json:"rabattBrutto"`                                               // Gesamtrabatt auf den Bruttobetrag
-	Zuzahlen                com.Betrag                      `json:"zuzahlen" validate:"required"`                               // Der zu zahlende Betrag, der sich aus (gesamtbrutto - vorausbezahlt - rabattBrutto) ergibt
-	Steuerbetraege          []com.Steuerbetrag              `json:"steuerbetraege"`                                             // Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für GesamtSteuer
-	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen" validate:"required,min=1"`              // Die Rechnungspositionen
+	Rechnungstitel          string                          `json:"rechnungstitel"`                                                       // Bezeichnung für die vorliegende Rechnung.
+	Rechnungsstatus         rechnungsstatus.Rechnungsstatus `json:"rechnungsstatus,omitempty"`                                            // Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes
+	Storno                  bool                            `json:"storno" validate:"required"`                                           // Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung
+	Rechnungsnummer         string                          `json:"rechnungsnummer,omitempty" validate:"required"`                        // Eine im Verwendungskontext eindeutige Nummer für die Rechnung
+	Rechnungsdatum          time.Time                       `json:"rechnungsdatum,omitempty" validate:"required"`                         // Ausstellungsdatum der Rechnung
+	Faelligkeitsdatum       time.Time                       `json:"faelligkeitsdatum,omitempty" validate:"required"`                      // Zu diesem Datum ist die Zahlung fällig
+	Rechnungstyp            rechnungstyp.Rechnungstyp       `json:"rechnungstyp,omitempty" validate:"required"`                           // Ein kontextbezogener Rechnungstyp
+	OriginalRechnungsnummer string                          `json:"originalRechnungsnummer,omitempty" validate:"required_if=Storno true"` // Im Falle einer Stornorechnung (Storno = true) steht hier die Rechnungsnummer der stornierten Rechnung
+	Rechnungsperiode        com.Zeitraum                    `json:"rechnungsperiode,omitempty" validate:"required"`                       // Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung
+	Rechnungsersteller      Geschaeftspartner               `json:"rechnungsersteller,omitempty" validate:"required"`                     // Der Aussteller der Rechnung
+	Rechnungsempfaenger     Geschaeftspartner               `json:"rechnungsempfaenger,omitempty" validate:"required"`                    // Der Empfänger der Rechnung
+	GesamtNetto             com.Betrag                      `json:"gesamtnetto,omitempty" validate:"required"`                            // Die Summe der Nettobeträge der Rechnungsteile
+	GesamtSteuer            com.Betrag                      `json:"gesamtsteuer,omitempty" validate:"required"`                           // Die Summe der Steuerbeträge der Rechnungsteile
+	GesamtBrutto            com.Betrag                      `json:"gesamtbrutto,omitempty" validate:"required"`                           // Die Summe aus Netto- und Steuerbeträge
+	Vorausgezahlt           *com.Betrag                     `json:"vorausgezahlt,omitempty"`                                              // Die Summe evtl. vorausbezahlter Beträge, z.B. Abschläge. Angabe als Bruttowert.
+	RabattBrutto            *com.Betrag                     `json:"rabattBrutto,omitempty"`                                               // Gesamtrabatt auf den Bruttobetrag
+	Zuzahlen                com.Betrag                      `json:"zuzahlen,omitempty" validate:"required"`                               // Der zu zahlende Betrag, der sich aus (gesamtbrutto - vorausbezahlt - rabattBrutto) ergibt
+	Steuerbetraege          []com.Steuerbetrag              `json:"steuerbetraege,omitempty"`                                             // Eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für GesamtSteuer
+	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen,omitempty" validate:"required,min=1"`              // Die Rechnungspositionen
 }
 
 // RechnungStructLevelValidation combines all the single validators

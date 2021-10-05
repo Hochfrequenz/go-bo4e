@@ -12,18 +12,18 @@ import (
 // Rechnungsposition en sind Teil von Rechnung en. In einem Rechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.
 type Rechnungsposition struct {
 	Positionsnummer   int                                 `json:"positionsnummer" validate:"required"`                              // Fortlaufende Nummer für die Rechnungsposition
-	LieferungVon      time.Time                           `json:"lieferungVon" validate:"required"`                                 // _inklusiver_ Start der Lieferung für die abgerechnete Leistung
-	LieferungBis      time.Time                           `json:"lieferungBis" validate:"required,gtfield=LieferungVon"`            // _exklusives_ Ende der Lieferung für die abgerechnete Leistung
+	LieferungVon      time.Time                           `json:"lieferungVon,omitempty" validate:"required"`                       // _inklusiver_ Start der Lieferung für die abgerechnete Leistung
+	LieferungBis      time.Time                           `json:"lieferungBis,omitempty" validate:"required,gtfield=LieferungVon"`  // _exklusives_ Ende der Lieferung für die abgerechnete Leistung
 	Positionstext     string                              `json:"positionstext" validate:"required"`                                // Bezeichung für die abgerechnete Position.
 	Zeiteinheit       zeiteinheit.Zeiteinheit             `json:"zeiteinheit,omitempty"`                                            //	Falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR
 	Artikelnummer     bdewartikelnummer.BDEWArtikelnummer `json:"bdewartikelnummer,omitempty"`                                      // Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW
 	LokationsId       string                              `json:"lokationsId,omitempty" validate:"omitempty,min=11,max=11,numeric"` // MarktlokationsId zu der diese Position gehört
-	PositionsMenge    Menge                               `json:"positionsMenge" validate:"required"`                               // Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh
-	ZeitbezogeneMenge *Menge                              `json:"zeitbezogeneMenge"`                                                // Optionale, auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend darauf wird der Preis aufgeteilt
-	Einzelpreis       Preis                               `json:"einzelpreis" validate:"required"`                                  // Der Preis für eine Einheit der energetischen Menge
-	TeilsummeNetto    Betrag                              `json:"teilsummeNetto" validate:"required"`                               // Das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€ * 120 kW * 3/12 (für 3 Monate).
-	TeilsummeSteuer   Steuerbetrag                        `json:"teilsummeSteuer" validate:"required"`                              // Auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag
-	TeilrabattNetto   *Betrag                             `json:"teilrabattNetto"`                                                  // für den Rabatt dieser Position
+	PositionsMenge    Menge                               `json:"positionsMenge,omitempty" validate:"required"`                     // Die abgerechnete Menge mit Einheit. Z.B. 4372 kWh
+	ZeitbezogeneMenge *Menge                              `json:"zeitbezogeneMenge,omitempty"`                                      // Optionale, auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend darauf wird der Preis aufgeteilt
+	Einzelpreis       Preis                               `json:"einzelpreis,omitempty" validate:"required"`                        // Der Preis für eine Einheit der energetischen Menge
+	TeilsummeNetto    Betrag                              `json:"teilsummeNetto,omitempty" validate:"required"`                     // Das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€ * 120 kW * 3/12 (für 3 Monate).
+	TeilsummeSteuer   Steuerbetrag                        `json:"teilsummeSteuer,omitempty" validate:"required"`                    // Auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag
+	TeilrabattNetto   *Betrag                             `json:"teilrabattNetto,omitempty"`                                        // für den Rabatt dieser Position
 }
 
 // RechnungspositionStructLevelValidation does a cross check on a Rechnungsposition object
