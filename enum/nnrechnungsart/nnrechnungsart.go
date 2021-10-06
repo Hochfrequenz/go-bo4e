@@ -1,6 +1,6 @@
 package nnrechnungsart
 
-// Nnrechnungsart ist die Art der bo.Netznutzungsrechnung (Abbildung verschiedener in der INVOIC angegebenen Rechnungsarten)
+// NNRechnungsart ist die Art der bo.Netznutzungsrechnung (Abbildung verschiedener in der INVOIC angegebenen Rechnungsarten)
 //go:generate stringer --type NNRechnungsart
 //go:generate jsonenums --type NNRechnungsart
 type NNRechnungsart int
