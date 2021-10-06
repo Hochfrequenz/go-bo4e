@@ -15,4 +15,5 @@ const (
 	INTEGRIERTE_13TE_RECHNUNG                            // INTEGRIERTE_13TE_RECHNUNG is a Integrierte 13. Rechnung
 	ZUSAETZLICHE_13TE_RECHNUNG                           // ZUSAETZLICHE_13TE_RECHNUNG is a Zusätzliche 13. Rechnung
 	MEHRMINDERMENGENRECHNUNG                             // MEHRMINDERMENGENRECHNUNG is a Mehr/Mindermengenabrechnung
+	MSBRECHNUNG                                          // MSBRECHNUNG is the invoice for the meter server operation (Messstellenbetrieb/MSB)
 )
