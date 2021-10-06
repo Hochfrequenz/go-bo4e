@@ -23,116 +23,117 @@ import (
 	"time"
 )
 
-// Test_Rechnung_Deserialization deserializes an Rechnung json
-func (s *Suite) Test_Rechnung_Deserialization() {
-	var rechnung = Rechnung{
+var serializableRechnung = Rechnung{
+	BusinessObject: BusinessObject{
+		BoTyp:             botyp.Rechnung,
+		VersionStruktur:   "1",
+		ExterneReferenzen: nil,
+	},
+	Rechnungstitel:          "De",
+	Rechnungsstatus:         rechnungsstatus.Bezahlt,
+	Storno:                  false,
+	Rechnungsnummer:         "123",
+	Rechnungsdatum:          time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
+	Faelligkeitsdatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+	Rechnungstyp:            rechnungstyp.Endkundenrechnung,
+	OriginalRechnungsnummer: "hallo",
+	Rechnungsperiode: com.Zeitraum{
+		Einheit:        zeiteinheit.Minute,
+		Dauer:          decimal.NullDecimal{},
+		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+	},
+	Rechnungsersteller: Geschaeftspartner{
 		BusinessObject: BusinessObject{
-			BoTyp:             botyp.Rechnung,
+			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
-		Rechnungstitel:          "De",
-		Rechnungsstatus:         rechnungsstatus.Bezahlt,
-		Storno:                  false,
-		Rechnungsnummer:         "123",
-		Rechnungsdatum:          time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-		Faelligkeitsdatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		Rechnungstyp:            rechnungstyp.Endkundenrechnung,
-		OriginalRechnungsnummer: "hallo",
-		Rechnungsperiode: com.Zeitraum{
-			Einheit:        zeiteinheit.Minute,
-			Dauer:          decimal.NullDecimal{},
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Anrede:               anrede.Divers,
+		Name1:                "Müller",
+		Name2:                "Lieschen",
+		Name3:                "",
+		Gewerbekennzeichnung: false,
+		HrNummer:             "handelsregister foo",
+		Amtsgericht:          "amtsgericht bar",
+		Kontaktweg:           0,
+		UmsatzsteuerId:       "umsatzsteuer foo",
+		GlaeubigerId:         "glauebiger bar",
+		EMailAdresse:         "email@lieschen-mueller.de",
+		Website:              "https://lieschen-mueller.de",
+		Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+			geschaeftspartnerrolle.Kunde,
+			geschaeftspartnerrolle.Marktpartner,
 		},
-		Rechnungsersteller: Geschaeftspartner{
-			BusinessObject: BusinessObject{
-				BoTyp:             botyp.Geschaeftspartner,
-				VersionStruktur:   "1",
-				ExterneReferenzen: nil,
-			},
-			Anrede:               anrede.Divers,
-			Name1:                "Müller",
-			Name2:                "Lieschen",
-			Name3:                "",
-			Gewerbekennzeichnung: false,
-			HrNummer:             "handelsregister foo",
-			Amtsgericht:          "amtsgericht bar",
-			Kontaktweg:           0,
-			UmsatzsteuerId:       "umsatzsteuer foo",
-			GlaeubigerId:         "glauebiger bar",
-			EMailAdresse:         "email@lieschen-mueller.de",
-			Website:              "https://lieschen-mueller.de",
-			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.Kunde,
-				geschaeftspartnerrolle.Marktpartner,
-			},
-			Partneradresse: com.Adresse{
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Strasse:      "Nördlicher Münchner Straße",
-				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
-			},
+		Partneradresse: com.Adresse{
+			Postleitzahl: "82031",
+			Ort:          "Grünwald",
+			Strasse:      "Nördlicher Münchner Straße",
+			Hausnummer:   "27A",
+			Landescode:   landescode.DE,
 		},
-		Rechnungsempfaenger: Geschaeftspartner{
-			BusinessObject: BusinessObject{
-				BoTyp:             botyp.Geschaeftspartner,
-				VersionStruktur:   "1",
-				ExterneReferenzen: nil,
-			},
-			Anrede:               anrede.Divers,
-			Name1:                "Müller",
-			Name2:                "Lieschen",
-			Name3:                "",
-			Gewerbekennzeichnung: false,
-			HrNummer:             "handelsregister foo",
-			Amtsgericht:          "amtsgericht bar",
-			Kontaktweg:           0,
-			UmsatzsteuerId:       "umsatzsteuer foo",
-			GlaeubigerId:         "glauebiger bar",
-			EMailAdresse:         "email@lieschen-mueller.de",
-			Website:              "https://lieschen-mueller.de",
-			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.Kunde,
-				geschaeftspartnerrolle.Marktpartner,
-			},
-			Partneradresse: com.Adresse{
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Strasse:      "Nördlicher Münchner Straße",
-				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
-			},
+	},
+	Rechnungsempfaenger: Geschaeftspartner{
+		BusinessObject: BusinessObject{
+			BoTyp:             botyp.Geschaeftspartner,
+			VersionStruktur:   "1",
+			ExterneReferenzen: nil,
 		},
-		GesamtNetto: com.Betrag{
-			Wert:     decimal.NewFromFloat(18.36),
-			Waehrung: waehrungscode.EUR,
+		Anrede:               anrede.Divers,
+		Name1:                "Müller",
+		Name2:                "Lieschen",
+		Name3:                "",
+		Gewerbekennzeichnung: false,
+		HrNummer:             "handelsregister foo",
+		Amtsgericht:          "amtsgericht bar",
+		Kontaktweg:           0,
+		UmsatzsteuerId:       "umsatzsteuer foo",
+		GlaeubigerId:         "glauebiger bar",
+		EMailAdresse:         "email@lieschen-mueller.de",
+		Website:              "https://lieschen-mueller.de",
+		Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+			geschaeftspartnerrolle.Kunde,
+			geschaeftspartnerrolle.Marktpartner,
 		},
-		GesamtSteuer: com.Betrag{
-			Wert:     decimal.NewFromFloat(18.36),
-			Waehrung: waehrungscode.EUR,
+		Partneradresse: com.Adresse{
+			Postleitzahl: "82031",
+			Ort:          "Grünwald",
+			Strasse:      "Nördlicher Münchner Straße",
+			Hausnummer:   "27A",
+			Landescode:   landescode.DE,
 		},
-		GesamtBrutto: com.Betrag{
-			Wert:     decimal.NewFromFloat(18.36),
-			Waehrung: waehrungscode.EUR,
-		},
-		Vorausgezahlt: nil,
-		RabattBrutto:  nil,
-		Zuzahlen: com.Betrag{
-			Wert:     decimal.NewFromFloat(18.36),
-			Waehrung: waehrungscode.EUR,
-		},
-		Steuerbetraege:      nil,
-		Rechnungspositionen: nil,
-	}
-	serializedRechnung, err := json.Marshal(rechnung)
+	},
+	GesamtNetto: com.Betrag{
+		Wert:     decimal.NewFromFloat(18.36),
+		Waehrung: waehrungscode.EUR,
+	},
+	GesamtSteuer: com.Betrag{
+		Wert:     decimal.NewFromFloat(18.36),
+		Waehrung: waehrungscode.EUR,
+	},
+	GesamtBrutto: com.Betrag{
+		Wert:     decimal.NewFromFloat(18.36),
+		Waehrung: waehrungscode.EUR,
+	},
+	Vorausgezahlt: nil,
+	RabattBrutto:  nil,
+	Zuzahlen: com.Betrag{
+		Wert:     decimal.NewFromFloat(18.36),
+		Waehrung: waehrungscode.EUR,
+	},
+	Steuerbetraege:      nil,
+	Rechnungspositionen: nil,
+}
+
+// Test_Rechnung_Deserialization deserializes an Rechnung json
+func (s *Suite) Test_Rechnung_Deserialization() {
+	serializedRechnung, err := json.Marshal(serializableRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedRechnung, is.Not(is.Nil()))
 	var deserializedRechnung Rechnung
 	err = json.Unmarshal(serializedRechnung, &deserializedRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(rechnung))
+	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(serializableRechnung))
 }
 
 // TestFailedRechnungValidation verifies that the validators of a Rechnung work
@@ -257,12 +258,12 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
 	validRechnung := []interface{}{
-		CompleteValidRechnung,
+		completeValidRechnung,
 	}
 	VerfiySuccessfulValidations(s, validate, validRechnung)
 }
 
-var CompleteValidRechnung = Rechnung{
+var completeValidRechnung = Rechnung{
 	BusinessObject: BusinessObject{
 		BoTyp:             botyp.Rechnung,
 		VersionStruktur:   "1",

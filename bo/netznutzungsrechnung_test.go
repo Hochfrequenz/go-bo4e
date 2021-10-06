@@ -13,7 +13,7 @@ import (
 // Test_Netznutzungsrechnung_Deserialization deserializes an Netznutzungsrechnung json
 func (s *Suite) Test_Netznutzungsrechnung_Deserialization() {
 	var nnrechnung = Netznutzungsrechnung{
-		Rechnung:             CompleteValidRechnung,
+		Rechnung:             serializableRechnung,
 		Sparte:               sparte.Gas,
 		Absendercodenummer:   "9876543210987",
 		Empfaengercodenummer: "0123456789012",
@@ -65,7 +65,7 @@ func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
 	validate := validator.New()
 	validNnrs := []interface{}{
 		Netznutzungsrechnung{
-			Rechnung:             CompleteValidRechnung,
+			Rechnung:             completeValidRechnung,
 			Sparte:               sparte.Gas,
 			Absendercodenummer:   "9876543210987",
 			Empfaengercodenummer: "0123456789012",
