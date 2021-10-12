@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -15,8 +16,8 @@ import (
 
 // Test_Geschaeftspartner_Deserialization deserializes an Geschaeftspartner json
 func (s *Suite) Test_Geschaeftspartner_Deserialization() {
-	var gp = Geschaeftspartner{
-		BusinessObject: BusinessObject{
+	var gp = bo.Geschaeftspartner{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -50,7 +51,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Divers"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedGp, is.Not(is.Nil()))
-	var deserializedGp Geschaeftspartner
+	var deserializedGp bo.Geschaeftspartner
 	err = json.Unmarshal(serializedGp, &deserializedGp)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedGp, is.EqualTo(gp))
@@ -68,8 +69,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
-			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -89,8 +90,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Geschaeftspartnerrollen: nil,
 				Partneradresse:          com.Adresse{},
 			},
-			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -112,8 +113,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 			},
 		},
 		"min": {
-			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -121,8 +122,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 			},
 		},
 		"email": {
-			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -130,8 +131,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 			},
 		},
 		"url": {
-			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -147,8 +148,8 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 
 	validate := validator.New()
 	validGeschaeftspartners := []interface{}{
-		Geschaeftspartner{
-			BusinessObject: BusinessObject{
+		bo.Geschaeftspartner{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

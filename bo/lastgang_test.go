@@ -1,7 +1,8 @@
-package bo
+package bo_test
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
@@ -28,8 +29,8 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 	validate := validator.New()
 	invalidLastgangMap := map[string][]interface{}{
 		"required": {
-			Lastgang{
-				BusinessObject: BusinessObject{
+			bo.Lastgang{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -44,8 +45,8 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 			},
 		},
 		"min": {
-			Lastgang{
-				BusinessObject: BusinessObject{
+			bo.Lastgang{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Lastgang,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -60,8 +61,8 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 			},
 		},
 		"alphanum": {
-			Lastgang{
-				BusinessObject: BusinessObject{
+			bo.Lastgang{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Lastgang,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -91,8 +92,8 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validEnergiemengen := []interface{}{
-		Energiemenge{
-			BusinessObject: BusinessObject{
+		bo.Energiemenge{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Energiemenge,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

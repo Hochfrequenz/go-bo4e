@@ -1,8 +1,9 @@
-package com
+package com_test
 
 import (
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
@@ -11,12 +12,12 @@ import (
 
 // TestZaehlerstaneLen tests the Zaehlerstaende.Len function
 func (s *Suite) Test_Zaehlerstande_Len() {
-	zaehlerstaende3 := Zaehlerstaende{
-		Zaehlerstand{},
-		Zaehlerstand{},
-		Zaehlerstand{},
+	zaehlerstaende3 := com.Zaehlerstaende{
+		com.Zaehlerstand{},
+		com.Zaehlerstand{},
+		com.Zaehlerstand{},
 	}
-	zaehlerstaende0 := Zaehlerstaende{}
+	zaehlerstaende0 := com.Zaehlerstaende{}
 	then.AssertThat(s.T(), zaehlerstaende3.Len(), is.EqualTo(3))
 	then.AssertThat(s.T(), zaehlerstaende0.Len(), is.EqualTo(0))
 	zaehlerstaende0 = nil
@@ -25,20 +26,20 @@ func (s *Suite) Test_Zaehlerstande_Len() {
 
 //  Test_Zaehlerstande_Swap tests the Zaehlerstaende.Swap function
 func (s *Suite) Test_Zaehlerstande_Swap() {
-	zaehlerstaende := Zaehlerstaende{
-		Zaehlerstand{
+	zaehlerstaende := com.Zaehlerstaende{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Time{},
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(17.0),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Time{},
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(42.1),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Time{},
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(123.2),
@@ -54,32 +55,32 @@ func (s *Suite) Test_Zaehlerstande_Swap() {
 
 //  Test_Zaehlerstaende_Less tests the Zaehlerstaende.Less function
 func (s *Suite) Test_Zaehlerstaende_Less() {
-	zaehlerstaende := Zaehlerstaende{
-		Zaehlerstand{
+	zaehlerstaende := com.Zaehlerstaende{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Date(2025, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(17),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Date(2045, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(123),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Date(2038, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(42),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Date(2025, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(18),
 			Einheit:                  mengeneinheit.KW,
 		},
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Time{},
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(18),

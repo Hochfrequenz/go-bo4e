@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungsart"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
@@ -12,7 +13,7 @@ import (
 
 // Test_Netznutzungsrechnung_Deserialization deserializes an Netznutzungsrechnung json
 func (s *Suite) Test_Netznutzungsrechnung_Deserialization() {
-	var nnrechnung = Netznutzungsrechnung{
+	var nnrechnung = bo.Netznutzungsrechnung{
 		Rechnung:             serializableRechnung,
 		Sparte:               sparte.Gas,
 		Absendercodenummer:   "9876543210987",
@@ -26,7 +27,7 @@ func (s *Suite) Test_Netznutzungsrechnung_Deserialization() {
 	serializedNnrechnung, err := json.Marshal(nnrechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedNnrechnung, is.Not(is.Nil()))
-	var deserializedRechnung Netznutzungsrechnung
+	var deserializedRechnung bo.Netznutzungsrechnung
 	err = json.Unmarshal(serializedNnrechnung, &deserializedRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(nnrechnung))
@@ -37,24 +38,24 @@ func (s *Suite) Test_Failed_Netznutzungsrechnung_Validation() {
 	validate := validator.New()
 	invalidNnrs := map[string][]interface{}{
 		"required": {
-			Netznutzungsrechnung{},
+			bo.Netznutzungsrechnung{},
 		},
 		"max": {
-			Netznutzungsrechnung{LokationsId: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
-			Netznutzungsrechnung{Absendercodenummer: "012345678901234"},
-			Netznutzungsrechnung{Empfaengercodenummer: "012345678901234"},
+			bo.Netznutzungsrechnung{LokationsId: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+			bo.Netznutzungsrechnung{Absendercodenummer: "012345678901234"},
+			bo.Netznutzungsrechnung{Empfaengercodenummer: "012345678901234"},
 		},
 		"min": {
-			Netznutzungsrechnung{LokationsId: "a"},
-			Netznutzungsrechnung{Absendercodenummer: "012345678901"},
-			Netznutzungsrechnung{Empfaengercodenummer: "012345678901"},
+			bo.Netznutzungsrechnung{LokationsId: "a"},
+			bo.Netznutzungsrechnung{Absendercodenummer: "012345678901"},
+			bo.Netznutzungsrechnung{Empfaengercodenummer: "012345678901"},
 		},
 		"alphanum": {
-			Netznutzungsrechnung{LokationsId: "%!23"},
+			bo.Netznutzungsrechnung{LokationsId: "%!23"},
 		},
 		"numeric": {
-			Netznutzungsrechnung{Absendercodenummer: "asd"},
-			Netznutzungsrechnung{Empfaengercodenummer: "asd"},
+			bo.Netznutzungsrechnung{Absendercodenummer: "asd"},
+			bo.Netznutzungsrechnung{Empfaengercodenummer: "asd"},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidNnrs)
@@ -64,7 +65,7 @@ func (s *Suite) Test_Failed_Netznutzungsrechnung_Validation() {
 func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
 	validate := validator.New()
 	validNnrs := []interface{}{
-		Netznutzungsrechnung{
+		bo.Netznutzungsrechnung{
 			Rechnung:             completeValidRechnung,
 			Sparte:               sparte.Gas,
 			Absendercodenummer:   "9876543210987",
