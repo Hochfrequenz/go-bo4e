@@ -12,7 +12,7 @@ import (
 
 // Zaehler ist ein Modell für die Abbildung der Informationen zu einem Zähler
 type Zaehler struct {
-	BusinessObject
+	Geschaeftsobjekt
 	Zaehlernummer      string                                `json:"zahlernummer" validate:"required,alphanum"` // Nummerierung des Zaehlers, vergeben durch den Messstellenbetreiber
 	Sparte             sparte.Sparte                         `json:"sparte" validate:"required"`                // Unterscheidungsmöglichkeiten für die Sparte
 	Zaehlerauspraegung zaehlerauspraegung.Zaehlerauspraegung `json:"zaehlerauspraegung" validate:"required"`    // Spezifikation die Richtung des Zählers betreffend

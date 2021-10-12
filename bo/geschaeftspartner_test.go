@@ -16,7 +16,7 @@ import (
 // Test_Geschaeftspartner_Deserialization deserializes an Geschaeftspartner json
 func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	var gp = Geschaeftspartner{
-		BusinessObject: BusinessObject{
+		Geschaeftsobjekt: Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -69,7 +69,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	invalidVertrags := map[string][]interface{}{
 		"required": {
 			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+				Geschaeftsobjekt: Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -90,7 +90,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Partneradresse:          com.Adresse{},
 			},
 			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+				Geschaeftsobjekt: Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -113,7 +113,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"min": {
 			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+				Geschaeftsobjekt: Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -122,7 +122,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"email": {
 			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+				Geschaeftsobjekt: Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -131,7 +131,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"url": {
 			Geschaeftspartner{
-				BusinessObject: BusinessObject{
+				Geschaeftsobjekt: Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -148,7 +148,7 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 	validate := validator.New()
 	validGeschaeftspartners := []interface{}{
 		Geschaeftspartner{
-			BusinessObject: BusinessObject{
+			Geschaeftsobjekt: Geschaeftsobjekt{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

@@ -10,7 +10,7 @@ import (
 
 // Vertrag ist ein Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
 type Vertrag struct {
-	BusinessObject
+	Geschaeftsobjekt
 	Vertragsnummer      string                        `json:"vertragsnummer" validate:"alphanum,required"`         // Eine im Verwendungskontext eindeutige Nummer für den Vertrag
 	Beschreibung        string                        `json:"beschreibung,omitempty"`                              // Beschreibung zum Vertrag
 	Vertragsstatus      vertragsstatus.Vertragsstatus `json:"vertragsstatus" validate:"required"`                  // Gibt den Status des Vertrags an
