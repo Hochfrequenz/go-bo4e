@@ -65,8 +65,7 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 		if err := json.Unmarshal(data, &base); err != nil {
 			return err
 		}
-		var elem BusinessObject
-		elem = GetNewBusinessObject(base.GetBoTyp())
+		elem := GetNewBusinessObject(base.GetBoTyp())
 		if elem == nil {
 			errorMessage := fmt.Sprintf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp())
 			return errors.New(errorMessage)
