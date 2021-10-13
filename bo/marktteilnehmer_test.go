@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -17,13 +18,13 @@ import (
 
 // Test_Marktteilnehmer_Deserialization deserializes an Marktteilnehmer json
 func (s *Suite) Test_Marktteilnehmer_Deserialization() {
-	var mt = Marktteilnehmer{
+	var mt = bo.Marktteilnehmer{
 		Marktrolle:       marktrolle.LF,
 		Makoadresse:      "edifact@my-favourite-marketpartner.de",
 		Rollencodetyp:    rollencodetyp.DVGW,
 		Rollencodenummer: "9903100000006",
-		Geschaeftspartner: Geschaeftspartner{
-			BusinessObject: BusinessObject{
+		Geschaeftspartner: bo.Geschaeftspartner{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -59,7 +60,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "LF"), is.True())   // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMarktteilnehmer, is.Not(is.Nil()))
-	var deserializedMarktteilnehmer Marktteilnehmer
+	var deserializedMarktteilnehmer bo.Marktteilnehmer
 	err = json.Unmarshal(serializedMarktteilnehmer, &deserializedMarktteilnehmer)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedMarktteilnehmer, is.EqualTo(mt))
@@ -70,16 +71,16 @@ func (s *Suite) Test_Failed_Marktteilnehmer_Validation() {
 	validate := validator.New()
 	invalidMarktteilnehmer := map[string][]interface{}{
 		"required": {
-			Marktteilnehmer{},
+			bo.Marktteilnehmer{},
 		},
 		"min": {
-			Marktteilnehmer{Rollencodenummer: "012345678901"},
+			bo.Marktteilnehmer{Rollencodenummer: "012345678901"},
 		},
 		"max": {
-			Marktteilnehmer{Rollencodenummer: "01234567890123"},
+			bo.Marktteilnehmer{Rollencodenummer: "01234567890123"},
 		},
 		"numeric": {
-			Marktteilnehmer{Rollencodenummer: "asd"},
+			bo.Marktteilnehmer{Rollencodenummer: "asd"},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidMarktteilnehmer)
@@ -89,13 +90,13 @@ func (s *Suite) Test_Failed_Marktteilnehmer_Validation() {
 func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 	validate := validator.New()
 	validMarktteilnehmers := []interface{}{
-		Marktteilnehmer{
+		bo.Marktteilnehmer{
 			Marktrolle: marktrolle.LF,
 			// mako adresse might be empty
 			Rollencodetyp:    rollencodetyp.DVGW,
 			Rollencodenummer: "9903100000006",
-			Geschaeftspartner: Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			Geschaeftspartner: bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
