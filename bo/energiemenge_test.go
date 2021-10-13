@@ -1,6 +1,8 @@
 package bo_test
 
 import (
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -9,6 +11,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"time"
 )
 
@@ -88,4 +91,16 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validEnergiemengen)
+}
+
+func (s *Suite) Test_Empty_Energiemenge_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Energiemenge)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Energiemenge{})))
+}
+
+func (s *Suite) Test_Empty_Something_Is_Creatable_Using_BoTyp() {
+	// remove this test as soon as the TarifPreisblatt is implemented. just to cover the nil case
+	object := bo.GetNewBusinessObject(botyp.TarifPreisblatt)
+	then.AssertThat(s.T(), object,is.Nil())
 }

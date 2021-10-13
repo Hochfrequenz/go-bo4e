@@ -1,6 +1,8 @@
 package bo_test
 
 import (
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -12,6 +14,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"time"
 )
 
@@ -104,4 +107,10 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validEnergiemengen)
+}
+
+func (s *Suite) Test_Empty_Lastgang_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Lastgang)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Lastgang{})))
 }

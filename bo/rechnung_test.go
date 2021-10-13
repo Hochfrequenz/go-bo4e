@@ -21,6 +21,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"time"
 )
 
@@ -398,4 +399,10 @@ var completeValidRechnung = bo.Rechnung{
 			TeilrabattNetto: nil,
 		},
 	},
+}
+
+func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Rechnung)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Rechnung{})))
 }

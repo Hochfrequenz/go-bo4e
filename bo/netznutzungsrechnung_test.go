@@ -6,9 +6,11 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungsart"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"reflect"
 )
 
 // Test_Netznutzungsrechnung_Deserialization deserializes an Netznutzungsrechnung json
@@ -78,4 +80,10 @@ func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validNnrs)
+}
+
+func (s *Suite) Test_Empty_NNR_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Netznutzungsrechnung)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Netznutzungsrechnung{})))
 }

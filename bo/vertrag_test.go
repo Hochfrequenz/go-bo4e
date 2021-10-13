@@ -14,6 +14,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
+	"reflect"
 	"time"
 )
 
@@ -178,4 +179,10 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validVertrag)
+}
+
+func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Vertrag)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Vertrag{})))
 }

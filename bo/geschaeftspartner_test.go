@@ -11,6 +11,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"reflect"
 	"strings"
 )
 
@@ -169,4 +170,10 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validGeschaeftspartners)
+}
+
+func (s *Suite) Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Geschaeftspartner)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Geschaeftspartner{})))
 }

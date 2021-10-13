@@ -17,6 +17,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"strings"
 )
 
@@ -140,4 +141,10 @@ func (s *Suite) Test_Successful_MesslokationValidation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validMelos)
+}
+
+func (s *Suite) Test_Empty_Messlokation_Is_Creatable_Using_BoTyp() {
+	object := bo.GetNewBusinessObject(botyp.Messlokation)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Messlokation{})))
 }
