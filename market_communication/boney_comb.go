@@ -8,7 +8,3 @@ type BOneyComb struct {
 	Stammdaten        bo.BusinessObjectSlice `json:"stammdaten" validate:"required"`        // Stammdaten is an array of business objects
 	Transaktionsdaten map[string]interface{} `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
 }
-
-type Transaktionsdaten interface {
-	GetPruefidentifikator() string // GetPruefidentifikator returns the Pruefidentifikator
-}
