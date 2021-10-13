@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
@@ -21,8 +22,8 @@ import (
 
 // Test_Zaehler_Deserialization deserializes an Zaehler json
 func (s *Suite) Test_Zaehler_Deserialization() {
-	var meter = Zaehler{
-		BusinessObject: BusinessObject{
+	var meter = bo.Zaehler{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Zaehler,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -51,7 +52,7 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Einrichtungszaehler"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
-	var deserializedMeter Zaehler
+	var deserializedMeter bo.Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedMeter, is.EqualTo(meter))
@@ -62,11 +63,11 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
-			Zaehler{},
+			bo.Zaehler{},
 		},
 		"min": { // min 1 zaehlwerk is required
-			Zaehler{
-				BusinessObject: BusinessObject{
+			bo.Zaehler{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Zaehler,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -89,8 +90,8 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 func (s *Suite) Test_Successful_Zaehler_Validation() {
 	validate := validator.New()
 	validZaehler := []interface{}{
-		Zaehler{
-			BusinessObject: BusinessObject{
+		bo.Zaehler{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Zaehler,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -112,8 +113,8 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 				Einheit:        mengeneinheit.KWH,
 				Zaehlerstaende: nil,
 			}},
-			Zaehlerhersteller: &Geschaeftspartner{
-				BusinessObject: BusinessObject{
+			Zaehlerhersteller: &bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,

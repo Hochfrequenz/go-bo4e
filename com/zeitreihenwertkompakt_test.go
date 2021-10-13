@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
 	"github.com/shopspring/decimal"
@@ -13,7 +14,7 @@ import (
 
 // Test_Deserialization deserializes a Zeitreihenwertkompakt json
 func (s *Suite) Test_Zeitreihenwertkompakt_Deserialization() {
-	var zeitreihenwertkompakt = Zeitreihenwertkompakt{
+	var zeitreihenwertkompakt = com.Zeitreihenwertkompakt{
 		Wert:         decimal.NewFromFloat(17.32),
 		Status:       messwertstatus.ERSATZWERT,
 		Statuszusatz: messwertstatuszusatz.Z77_SPANNUNGSAUSFALL,
@@ -24,7 +25,7 @@ func (s *Suite) Test_Zeitreihenwertkompakt_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Z77_SPANNUNGSAUSFALL"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitreihenwertkompakt
+	var deserializedZeitreihenwert com.Zeitreihenwertkompakt
 	err = json.Unmarshal(serializedZeitreihenwert, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitreihenwertkompakt))
@@ -46,7 +47,7 @@ func (s *Suite) Test_Zeitreihenwertkompakt_Failed_Validation() {
 func (s *Suite) Test_Successful_Zeitreihenwertkompakt_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{
-		Zeitreihenwertkompakt{
+		com.Zeitreihenwertkompakt{
 			Wert:         decimal.NewFromFloat(0),
 			Status:       0,
 			Statuszusatz: 0,

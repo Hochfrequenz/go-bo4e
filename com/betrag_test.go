@@ -1,7 +1,8 @@
-package com
+package com_test
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/shopspring/decimal"
 )
@@ -11,11 +12,11 @@ func (s *Suite) Test_Failed_BetragValidation() {
 	validate := validator.New()
 	invalidBetragMap := map[string][]interface{}{
 		"required": {
-			Betrag{
+			com.Betrag{
 				Wert:     decimal.NewFromFloat(0),
 				Waehrung: 0,
 			},
-			Betrag{
+			com.Betrag{
 				Wert:     decimal.NewFromFloat(1),
 				Waehrung: 0,
 			},
@@ -28,11 +29,11 @@ func (s *Suite) Test_Failed_BetragValidation() {
 func (s *Suite) Test_Successful_BetragValidation() {
 	validate := validator.New()
 	validBetraege := []interface{}{
-		Betrag{
+		com.Betrag{
 			Wert:     decimal.NewFromFloat(18.36),
 			Waehrung: waehrungscode.EUR,
 		},
-		Betrag{
+		com.Betrag{
 			Wert:     decimal.NewFromFloat(0), // wert 0 is allowed
 			Waehrung: waehrungscode.ANG,
 		},

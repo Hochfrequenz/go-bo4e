@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
 	"github.com/shopspring/decimal"
@@ -14,8 +15,8 @@ import (
 
 // TestZeitreihenwertDeserialization deserializes a Zeitreihenwert json
 func (s *Suite) Test_Zeitreihenwert_Deserialization() {
-	var zeitreihenwert = Zeitreihenwert{
-		Zeitreihenwertkompakt: Zeitreihenwertkompakt{
+	var zeitreihenwert = com.Zeitreihenwert{
+		Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 			Wert:         decimal.NewFromFloat(17.43),
 			Status:       messwertstatus.ENERGIEMENGESUMMIERT,
 			Statuszusatz: messwertstatuszusatz.Z81_MESSEINRICHTUNGGESTOERT_DEFEKT,
@@ -28,7 +29,7 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ENERGIEMENGESUMMIERT"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitreihenwert
+	var deserializedZeitreihenwert com.Zeitreihenwert
 	err = json.Unmarshal(serializedZeitreihenwert, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitreihenwert))
@@ -39,8 +40,8 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
 		"required": {
-			Zeitreihenwert{
-				Zeitreihenwertkompakt: Zeitreihenwertkompakt{
+			com.Zeitreihenwert{
+				Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 					Wert:         decimal.NewFromFloat(17),
 					Status:       0,
 					Statuszusatz: 0,
@@ -57,8 +58,8 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{
-		Zeitreihenwert{
-			Zeitreihenwertkompakt: Zeitreihenwertkompakt{
+		com.Zeitreihenwert{
+			Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 				Wert:         decimal.NewFromFloat(17.43),
 				Status:       messwertstatus.ENERGIEMENGESUMMIERT,
 				Statuszusatz: messwertstatuszusatz.Z81_MESSEINRICHTUNGGESTOERT_DEFEKT,

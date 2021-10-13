@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
@@ -14,7 +15,7 @@ import (
 
 // TestZaehlerstandDeserialization deserializes a Zaehlerstand json
 func (s *Suite) Test_Zaehlerstand_Deserialization() {
-	var zaehlerstand = Zaehlerstand{
+	var zaehlerstand = com.Zaehlerstand{
 		Ablesedatum:              time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Wert:                     decimal.NewFromFloat(847439),
@@ -31,7 +32,7 @@ func (s *Suite) Test_Zaehlerstand_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zustandszahl"), is.True()) // is not omitted
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.Nil()))
-	var deserializedZaehlerstand Zaehlerstand
+	var deserializedZaehlerstand com.Zaehlerstand
 	err = json.Unmarshal(serializedZaehlerstand, &deserializedZaehlerstand)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZaehlerstand, is.EqualTo(zaehlerstand))
@@ -42,7 +43,7 @@ func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 	validate := validator.New()
 	invalidZaehlerstand := map[string][]interface{}{
 		"required": {
-			Zaehlerstand{
+			com.Zaehlerstand{
 				Ablesedatum: time.Time{},
 			},
 		},
@@ -54,7 +55,7 @@ func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 func (s *Suite) Test_Successful_Zaehlerstand_Validation() {
 	validate := validator.New()
 	validZaehlerstaende := []interface{}{
-		Zaehlerstand{
+		com.Zaehlerstand{
 			Ablesedatum:              time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 			Wert:                     decimal.NewFromFloat(484535),
