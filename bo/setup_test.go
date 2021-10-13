@@ -1,4 +1,4 @@
-package bo
+package bo_test
 
 import (
 	"fmt"

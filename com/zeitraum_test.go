@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
 	"strings"
@@ -13,7 +14,7 @@ import (
 
 // TestZeitraumDeserialization deserializes a Zeitraum json
 func (s *Suite) Test_Zeitraum_Deserialization() {
-	var zeitraum = Zeitraum{
+	var zeitraum = com.Zeitraum{
 		Einheit: zeiteinheit.Minute,
 		Dauer: decimal.NullDecimal{
 			Decimal: decimal.NewFromFloat(15),
@@ -27,7 +28,7 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Minute"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitraum
+	var deserializedZeitreihenwert com.Zeitraum
 	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitraum))
@@ -35,7 +36,7 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 
 // TestZeitraumDeserializationWithoutEinheit
 func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
-	var zeitraum = Zeitraum{
+	var zeitraum = com.Zeitraum{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	}
@@ -44,7 +45,7 @@ func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zeiteinheit"), is.False())
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
-	var deserializedZeitreihenwert Zeitraum
+	var deserializedZeitreihenwert com.Zeitraum
 	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitraum))
@@ -55,12 +56,12 @@ func (s *Suite) Test_Zeitraum_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
 		"required_with": {
-			Zeitraum{
+			com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			},
 		},
 		"gtfield": {
-			Zeitraum{
+			com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2020, 8, 1, 0, 0, 0, 0, time.UTC),
 			},
@@ -73,7 +74,7 @@ func (s *Suite) Test_Zeitraum_Failed_Validation() {
 func (s *Suite) Test_Successful_Zeitraum_Validation() {
 	validate := validator.New()
 	validZeitraums := []interface{}{
-		Zeitraum{
+		com.Zeitraum{
 			Einheit: zeiteinheit.Zeiteinheit(0),
 			Dauer: decimal.NullDecimal{
 				Decimal: decimal.NewFromFloat(15),
@@ -82,14 +83,14 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
-		Zeitraum{
+		com.Zeitraum{
 			Einheit: zeiteinheit.Minute,
 			Dauer: decimal.NullDecimal{
 				Decimal: decimal.NewFromFloat(15),
 				Valid:   true,
 			},
 		},
-		Zeitraum{
+		com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},

@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/shopspring/decimal"
 	"strings"
@@ -13,19 +14,19 @@ import (
 
 // TestVertragsteilDeserialization deserializes a Vertragsteil json
 func (s *Suite) Test_Vertragsteil_Deserialization() {
-	var vertraqsteil = Vertragsteil{
+	var vertraqsteil = com.Vertragsteil{
 		Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		Lokation:           "DE0123456789012345678901234567890",
-		VertraglichFixierteMenge: &Menge{
+		VertraglichFixierteMenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(42),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
-		MinimaleAbnahmemenge: &Menge{
+		MinimaleAbnahmemenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(17),
 			Einheit: mengeneinheit.MW,
 		},
-		MaximaleAbnahmemenge: &Menge{
+		MaximaleAbnahmemenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(-3),
 			Einheit: mengeneinheit.Monat,
 		},
@@ -35,7 +36,7 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KUBIKMETER"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedVertragsteil, is.Not(is.Nil()))
-	var deserializedVertragsteil Vertragsteil
+	var deserializedVertragsteil com.Vertragsteil
 	err = json.Unmarshal(serializedVertragsteil, &deserializedVertragsteil)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedVertragsteil, is.EqualTo(vertraqsteil))
@@ -46,38 +47,38 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	validate := validator.New()
 	invalidVertragsteile := map[string][]interface{}{
 		"required": {
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilende:   time.Time{},
 			},
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilbeginn: time.Time{},
 			},
 		},
 		"min": {
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "tooshort",
 			},
 		},
 		"max": {
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "tooooooooooooooooooooooooooooooolong",
 			},
 		},
 		"alphanum": {
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "not!alpha&num",
 			},
 		},
 		"gtfield": {
-			Vertragsteil{
+			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2024, 8, 1, 0, 0, 0, 0, time.UTC),
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			},
@@ -90,28 +91,28 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	validate := validator.New()
 	validVertragsteile := []interface{}{
-		Vertragsteil{
+		com.Vertragsteil{
 			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			Lokation:           "DE0123456789012345678901234567890",
-			VertraglichFixierteMenge: &Menge{
+			VertraglichFixierteMenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(42),
 				Einheit: mengeneinheit.KUBIKMETER,
 			},
-			MinimaleAbnahmemenge: &Menge{
+			MinimaleAbnahmemenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(17),
 				Einheit: mengeneinheit.MW,
 			},
-			MaximaleAbnahmemenge: &Menge{
+			MaximaleAbnahmemenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(-3),
 				Einheit: mengeneinheit.Monat,
 			},
 		},
-		Vertragsteil{
+		com.Vertragsteil{
 			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		},
-		Vertragsteil{
+		com.Vertragsteil{
 			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			Lokation:           "543231012345",

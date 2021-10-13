@@ -1,4 +1,4 @@
-package com
+package com_test
 
 import (
 	"fmt"

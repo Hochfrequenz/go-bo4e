@@ -1,7 +1,8 @@
-package com
+package com_test
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 )
 
 // TestFailedExterneReferenzValidation asserts that the validation fails, if not both name and value are provided
@@ -9,15 +10,15 @@ func (s *Suite) Test_Failed_ExterneReferenzValidation() {
 	validate := validator.New()
 	invalidReferenzMap := map[string][]interface{}{
 		"required": {
-			ExterneReferenz{
+			com.ExterneReferenz{
 				ExRefName: "",
 				ExRefWert: "",
 			},
-			ExterneReferenz{
+			com.ExterneReferenz{
 				ExRefName: "foo",
 				ExRefWert: "",
 			},
-			ExterneReferenz{
+			com.ExterneReferenz{
 				ExRefName: "",
 				ExRefWert: "bar",
 			},
@@ -30,7 +31,7 @@ func (s *Suite) Test_Failed_ExterneReferenzValidation() {
 func (s *Suite) Test_Successful_ExterneReferenzValidation() {
 	validate := validator.New()
 	validReferences := []interface{}{
-		ExterneReferenz{
+		com.ExterneReferenz{
 			ExRefName: "foo",
 			ExRefWert: "bar",
 		},
