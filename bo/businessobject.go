@@ -2,7 +2,6 @@ package bo
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -67,7 +66,7 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 		}
 		elem := GetNewBusinessObject(base.GetBoTyp())
 		if elem == nil {
-			return errors.New(fmt.Sprintf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp()))
+			return fmt.Errorf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp())
 		}
 		if err := json.Unmarshal(data, elem); err != nil {
 			return err
