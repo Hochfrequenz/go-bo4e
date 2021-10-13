@@ -1,4 +1,4 @@
-package market_communication
+package market_communication_test
 
 import (
 	"encoding/json"
@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -38,7 +39,7 @@ func TestInit(t *testing.T) {
 }
 
 func (s *Suite) Test_BOneyComb_DeSerialization() {
-	boneyComb := BOneyComb{
+	boneyComb := market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
 			&bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -90,7 +91,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 	//jsonString := string(serializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.Nil()))
-	var deserializedBoneyComb BOneyComb
+	var deserializedBoneyComb market_communication.BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[0], is.EqualTo(boneyComb.Stammdaten[0]))
