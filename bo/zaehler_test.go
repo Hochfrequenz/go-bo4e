@@ -90,7 +90,7 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 //  Test_Successful_Zaehler_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Zaehler_Validation() {
 	validate := validator.New()
-	validZaehler := []interface{}{
+	validZaehler := []bo.BusinessObject{
 		bo.Zaehler{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Zaehler,

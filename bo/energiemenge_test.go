@@ -78,7 +78,7 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
-	validEnergiemengen := []interface{}{
+	validEnergiemengen := []bo.BusinessObject{
 		bo.Energiemenge{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Energiemenge,

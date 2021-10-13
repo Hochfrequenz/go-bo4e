@@ -116,7 +116,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_MesslokationValidation() {
 	validate := validator.New()
-	validMelos := []interface{}{
+	validMelos := []bo.BusinessObject{
 		bo.Messlokation{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Messlokation,

@@ -148,7 +148,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 
 	validate := validator.New()
-	validGeschaeftspartners := []interface{}{
+	validGeschaeftspartners := []bo.BusinessObject{
 		bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Geschaeftspartner,

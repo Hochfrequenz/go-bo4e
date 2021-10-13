@@ -259,7 +259,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 func (s *Suite) Test_Successful_Rechnung_Validation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})
-	validRechnung := []interface{}{
+	validRechnung := []bo.BusinessObject{
 		completeValidRechnung,
 	}
 	VerfiySuccessfulValidations(s, validate, validRechnung)

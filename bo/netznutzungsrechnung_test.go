@@ -66,7 +66,7 @@ func (s *Suite) Test_Failed_Netznutzungsrechnung_Validation() {
 // Test_Successful_Netznutzungsrechnung_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
 	validate := validator.New()
-	validNnrs := []interface{}{
+	validNnrs := []bo.BusinessObject{
 		bo.Netznutzungsrechnung{
 			Rechnung:             completeValidRechnung,
 			Sparte:               sparte.Gas,

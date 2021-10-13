@@ -114,7 +114,7 @@ func (s *Suite) Test_Failed_VertragValidation() {
 func (s *Suite) Test_Successful_Vertrag_Validation() {
 
 	validate := validator.New()
-	validVertrag := []interface{}{
+	validVertrag := []bo.BusinessObject{
 		bo.Vertrag{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Vertrag,
