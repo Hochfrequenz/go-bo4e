@@ -30,7 +30,7 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 	invalidLastgangMap := map[string][]interface{}{
 		"required": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -46,7 +46,7 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		},
 		"min": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Lastgang,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -62,7 +62,7 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		},
 		"alphanum": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Lastgang,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -93,7 +93,7 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 	}
 	validEnergiemengen := []interface{}{
 		bo.Energiemenge{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Energiemenge,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

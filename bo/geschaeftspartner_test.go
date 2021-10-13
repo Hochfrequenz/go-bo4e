@@ -17,7 +17,7 @@ import (
 // Test_Geschaeftspartner_Deserialization deserializes an Geschaeftspartner json
 func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	var gp = bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -70,7 +70,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	invalidVertrags := map[string][]interface{}{
 		"required": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -91,7 +91,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Partneradresse:          com.Adresse{},
 			},
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -114,7 +114,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"min": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -123,7 +123,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"email": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -132,7 +132,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"url": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
 				},
@@ -149,7 +149,7 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 	validate := validator.New()
 	validGeschaeftspartners := []interface{}{
 		bo.Geschaeftspartner{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

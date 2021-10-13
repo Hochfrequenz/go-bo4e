@@ -20,7 +20,7 @@ import (
 // Test_Vertragspartner_Deserialization deserializes an Vertrag json
 func (s *Suite) Test_Vertrag_Deserialization() {
 	var contract = bo.Vertrag{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Vertrag,
 			VersionStruktur:   "2",
 			ExterneReferenzen: nil,
@@ -33,7 +33,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragspartner1: bo.Geschaeftspartner{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -53,7 +53,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 			},
 		},
 		Vertragspartner2: bo.Geschaeftspartner{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -115,7 +115,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 	validate := validator.New()
 	validVertrag := []interface{}{
 		bo.Vertrag{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Vertrag,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -128,7 +128,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			Vertragsbeginn: time.Now(),
 			Vertragsende:   time.Now().Add(time.Hour * 24),
 			Vertragspartner1: bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -147,7 +147,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 				},
 			},
 			Vertragspartner2: bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,

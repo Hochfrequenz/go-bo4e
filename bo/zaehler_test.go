@@ -23,7 +23,7 @@ import (
 // Test_Zaehler_Deserialization deserializes an Zaehler json
 func (s *Suite) Test_Zaehler_Deserialization() {
 	var meter = bo.Zaehler{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Zaehler,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -67,7 +67,7 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 		},
 		"min": { // min 1 zaehlwerk is required
 			bo.Zaehler{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Zaehler,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -91,7 +91,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 	validate := validator.New()
 	validZaehler := []interface{}{
 		bo.Zaehler{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Zaehler,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -114,7 +114,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 				Zaehlerstaende: nil,
 			}},
 			Zaehlerhersteller: &bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,

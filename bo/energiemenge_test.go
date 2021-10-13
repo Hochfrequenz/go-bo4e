@@ -26,7 +26,7 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	invalidEnergiemengeMap := map[string][]interface{}{
 		"required": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -38,7 +38,7 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 		},
 		"min": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Energiemenge,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -50,7 +50,7 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 		},
 		"alphanum": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Energiemenge,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -77,7 +77,7 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 	}
 	validEnergiemengen := []interface{}{
 		bo.Energiemenge{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Energiemenge,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

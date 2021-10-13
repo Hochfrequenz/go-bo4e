@@ -25,7 +25,7 @@ import (
 )
 
 var serializableRechnung = bo.Rechnung{
-	BusinessObject: bo.BusinessObject{
+	Geschaeftsobjekt: bo.Geschaeftsobjekt{
 		BoTyp:             botyp.Rechnung,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
@@ -45,7 +45,7 @@ var serializableRechnung = bo.Rechnung{
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
 	Rechnungsersteller: bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -75,7 +75,7 @@ var serializableRechnung = bo.Rechnung{
 		},
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -265,7 +265,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 }
 
 var completeValidRechnung = bo.Rechnung{
-	BusinessObject: bo.BusinessObject{
+	Geschaeftsobjekt: bo.Geschaeftsobjekt{
 		BoTyp:             botyp.Rechnung,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
@@ -285,7 +285,7 @@ var completeValidRechnung = bo.Rechnung{
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
 	Rechnungsersteller: bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -315,7 +315,7 @@ var completeValidRechnung = bo.Rechnung{
 		},
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,

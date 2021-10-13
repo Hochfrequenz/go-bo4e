@@ -23,7 +23,7 @@ import (
 // Test_Messlokation_Deserialization tests serialization and deserialization of Messlokation
 func (s *Suite) Test_Messlokation_Deserialization() {
 	var melo = bo.Messlokation{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Messlokation,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -45,7 +45,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 		},
 		Messlokationszaehler: []bo.Zaehler{
 			{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.Zaehler,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -87,7 +87,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 	invalidMesslokationMap := map[string][]interface{}{
 		"required": {
 			bo.Messlokation{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -117,7 +117,7 @@ func (s *Suite) Test_Successful_MesslokationValidation() {
 	validate := validator.New()
 	validMelos := []interface{}{
 		bo.Messlokation{
-			BusinessObject: bo.BusinessObject{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.Messlokation,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
