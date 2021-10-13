@@ -102,5 +102,5 @@ func (s *Suite) Test_Empty_Energiemenge_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Empty_Something_Is_Creatable_Using_BoTyp() {
 	// remove this test as soon as the TarifPreisblatt is implemented. just to cover the nil case
 	object := bo.GetNewBusinessObject(botyp.TarifPreisblatt)
-	then.AssertThat(s.T(), object,is.Nil())
+	then.AssertThat(s.T(), object, is.Nil())
 }
