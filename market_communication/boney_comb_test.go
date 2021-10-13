@@ -39,8 +39,8 @@ func TestInit(t *testing.T) {
 
 func (s *Suite) Test_BOneyComb_DeSerialization() {
 	boneyComb := BOneyComb{
-		Stammdaten: bo.BusinessObjectSlice{
-			bo.Geschaeftspartner{
+		Stammdaten: []bo.BusinessObject{
+			&bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Geschaeftspartner,
 					VersionStruktur: "1",
@@ -49,7 +49,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				Name1:  "Musterfrau",
 				Name2:  "Erika",
 			},
-			bo.Zaehler{
+			&bo.Zaehler{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Zaehler,
 					VersionStruktur: "1",
@@ -60,7 +60,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				Zaehlertyp:         zaehlertyp.Drehkolbenzaehler,
 				Tarifart:           tarifart.Eintarif,
 			},
-			bo.Energiemenge{
+			&bo.Energiemenge{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:           botyp.Energiemenge,
 					VersionStruktur: "1",
@@ -69,8 +69,8 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				LokationsTyp: lokationstyp.MaLo,
 				Verbrauch: []com.Verbrauch{
 					{
-						Startdatum:               time.Now(),
-						Enddatum:                 time.Now().Add(time.Minute * 15),
+						Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+						Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 						Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 						Obiskennzahl:             "1-0:1.8.1",
 						Wert:                     decimal.NewFromFloat(17),
@@ -93,5 +93,8 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 	var deserializedBoneyComb BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[0], is.EqualTo(boneyComb.Stammdaten[0]))
+	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[1], is.EqualTo(boneyComb.Stammdaten[1]))
+	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[2], is.EqualTo(boneyComb.Stammdaten[2]))
 	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyComb))
 }
