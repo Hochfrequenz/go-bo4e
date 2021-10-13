@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -18,8 +19,8 @@ import (
 
 // Test_Vertragspartner_Deserialization deserializes an Vertrag json
 func (s *Suite) Test_Vertrag_Deserialization() {
-	var contract = Vertrag{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	var contract = bo.Vertrag{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Vertrag,
 			VersionStruktur:   "2",
 			ExterneReferenzen: nil,
@@ -31,8 +32,8 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		Sparte:         sparte.Strom,
 		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-		Vertragspartner1: Geschaeftspartner{
-			Geschaeftsobjekt: Geschaeftsobjekt{
+		Vertragspartner1: bo.Geschaeftspartner{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -51,8 +52,8 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				geschaeftspartnerrolle.Dienstleister,
 			},
 		},
-		Vertragspartner2: Geschaeftspartner{
-			Geschaeftsobjekt: Geschaeftsobjekt{
+		Vertragspartner2: bo.Geschaeftspartner{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Geschaeftspartner,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -85,7 +86,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 	serializedContract, err := json.Marshal(contract)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedContract, is.Not(is.Nil()))
-	var deserializedVertrag Vertrag
+	var deserializedVertrag bo.Vertrag
 	err = json.Unmarshal(serializedContract, &deserializedVertrag)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedVertrag, is.EqualTo(contract))
@@ -96,10 +97,10 @@ func (s *Suite) Test_Failed_VertragValidation() {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
-			Vertrag{},
+			bo.Vertrag{},
 		},
 		"gtfield": {
-			Vertrag{
+			bo.Vertrag{
 				Vertragsbeginn: time.Now(),
 				Vertragsende:   time.Now().Add(time.Hour * -12),
 			},
@@ -113,8 +114,8 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 
 	validate := validator.New()
 	validVertrag := []interface{}{
-		Vertrag{
-			Geschaeftsobjekt: Geschaeftsobjekt{
+		bo.Vertrag{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Vertrag,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
@@ -126,8 +127,8 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			Sparte:         sparte.Strom,
 			Vertragsbeginn: time.Now(),
 			Vertragsende:   time.Now().Add(time.Hour * 24),
-			Vertragspartner1: Geschaeftspartner{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			Vertragspartner1: bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -145,8 +146,8 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					geschaeftspartnerrolle.Dienstleister,
 				},
 			},
-			Vertragspartner2: Geschaeftspartner{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			Vertragspartner2: bo.Geschaeftspartner{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Geschaeftspartner,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,

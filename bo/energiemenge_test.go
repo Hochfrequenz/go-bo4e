@@ -1,7 +1,8 @@
-package bo
+package bo_test
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
@@ -24,8 +25,8 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	validate := validator.New()
 	invalidEnergiemengeMap := map[string][]interface{}{
 		"required": {
-			Energiemenge{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			bo.Energiemenge{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -36,8 +37,8 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 			},
 		},
 		"min": {
-			Energiemenge{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			bo.Energiemenge{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Energiemenge,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -48,8 +49,8 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 			},
 		},
 		"alphanum": {
-			Energiemenge{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			bo.Energiemenge{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Energiemenge,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -75,8 +76,8 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 		Einheit:                  mengeneinheit.KWH,
 	}
 	validEnergiemengen := []interface{}{
-		Energiemenge{
-			Geschaeftsobjekt: Geschaeftsobjekt{
+		bo.Energiemenge{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Energiemenge,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

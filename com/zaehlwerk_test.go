@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/shopspring/decimal"
@@ -13,7 +14,7 @@ import (
 
 // TestZaehlwerkDeserialization deserializes a Zaehlwerk json
 func (s *Suite) Test_Zaehlwerk_Deserialization() {
-	var zaehlwerk = Zaehlwerk{
+	var zaehlwerk = com.Zaehlwerk{
 		ZaehlwerkId:    "1",
 		Bezeichnung:    "bestes Zählwerk",
 		Richtung:       energierichtung.Aussp,
@@ -28,7 +29,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Aussp"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
-	var deserializedZaehlwerk Zaehlwerk
+	var deserializedZaehlwerk com.Zaehlwerk
 	err = json.Unmarshal(serializedZaehlwerk, &deserializedZaehlwerk)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZaehlwerk, is.EqualTo(zaehlwerk))
@@ -39,7 +40,7 @@ func (s *Suite) Test_Zaehlwerk_Failed_Validation() {
 	validate := validator.New()
 	invalidVertragsteile := map[string][]interface{}{
 		"required": {
-			Zaehlwerk{
+			com.Zaehlwerk{
 				ZaehlwerkId:    "",
 				Bezeichnung:    "unvollständiges Zaehlwerk",
 				ObisKennzahl:   "",
@@ -54,7 +55,7 @@ func (s *Suite) Test_Zaehlwerk_Failed_Validation() {
 func (s *Suite) Test_Successful_Zaehlwerk_Validation() {
 	validate := validator.New()
 	validZaehlwerke := []interface{}{
-		Zaehlwerk{
+		com.Zaehlwerk{
 			ZaehlwerkId:    "1",
 			Bezeichnung:    "ZW, Juhee",
 			Richtung:       energierichtung.Aussp,

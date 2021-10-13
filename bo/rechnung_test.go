@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
@@ -23,8 +24,8 @@ import (
 	"time"
 )
 
-var serializableRechnung = Rechnung{
-	Geschaeftsobjekt: Geschaeftsobjekt{
+var serializableRechnung = bo.Rechnung{
+	BusinessObject: bo.BusinessObject{
 		BoTyp:             botyp.Rechnung,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
@@ -43,8 +44,8 @@ var serializableRechnung = Rechnung{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
-	Rechnungsersteller: Geschaeftspartner{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	Rechnungsersteller: bo.Geschaeftspartner{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -73,8 +74,8 @@ var serializableRechnung = Rechnung{
 			Landescode:   landescode.DE,
 		},
 	},
-	Rechnungsempfaenger: Geschaeftspartner{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	Rechnungsempfaenger: bo.Geschaeftspartner{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -130,7 +131,7 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 	serializedRechnung, err := json.Marshal(serializableRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedRechnung, is.Not(is.Nil()))
-	var deserializedRechnung Rechnung
+	var deserializedRechnung bo.Rechnung
 	err = json.Unmarshal(serializedRechnung, &deserializedRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(serializableRechnung))
@@ -139,24 +140,24 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 // TestFailedRechnungValidation verifies that the validators of a Rechnung work
 func (s *Suite) Test_Failed_RechnungValidation() {
 	validate := validator.New()
-	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
+	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})
 	invalidRechnungs := map[string][]interface{}{
 		"required": {
-			Rechnung{},
+			bo.Rechnung{},
 		},
 		"required_if": {
-			Rechnung{
+			bo.Rechnung{
 				Storno: true,
 				// missing OriginalRechnungsnummer
 			},
 		},
 		"min": {
-			Rechnung{
+			bo.Rechnung{
 				Rechnungspositionen: []com.Rechnungsposition{}, // min 1 entry required
 			},
 		},
 		"Rechnungspositionen[0].Waehrung==Rechnungspositionen[j].Waehrung": {
-			Rechnung{
+			bo.Rechnung{
 				Rechnungspositionen: []com.Rechnungsposition{
 					{
 						TeilsummeNetto: com.Betrag{
@@ -172,7 +173,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 			},
 		},
 		"Steuerbetraege[0].Waehrung==Steuerbetraege[j].Waehrung": {
-			Rechnung{
+			bo.Rechnung{
 				Steuerbetraege: []com.Steuerbetrag{
 					{
 						Waehrung: waehrungscode.ALL,
@@ -184,7 +185,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 			},
 		},
 		"GesamtNetto==sum(TeilsummeNetto)": {
-			Rechnung{
+			bo.Rechnung{
 				GesamtNetto: com.Betrag{
 					Wert:     decimal.New(8, 1), // expected 7
 					Waehrung: waehrungscode.EUR,
@@ -206,7 +207,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 			},
 		},
 		"GesamtBrutto==sum(TeilsummeSteuer)": {
-			Rechnung{
+			bo.Rechnung{
 				GesamtBrutto: com.Betrag{
 					Wert:     decimal.New(9, 1), // expected 1+2+3+4 = 10
 					Waehrung: waehrungscode.EUR,
@@ -230,7 +231,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 			},
 		},
 		"Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto": {
-			Rechnung{
+			bo.Rechnung{
 				Zuzahlen: com.Betrag{
 					Wert:     decimal.NewFromFloat(4), // expected 10-2-3 = 5
 					Waehrung: waehrungscode.EUR,
@@ -256,15 +257,15 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 //  Test_Successful_Rechnung_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Rechnung_Validation() {
 	validate := validator.New()
-	validate.RegisterStructValidation(RechnungStructLevelValidation, Rechnung{})
+	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})
 	validRechnung := []interface{}{
 		completeValidRechnung,
 	}
 	VerfiySuccessfulValidations(s, validate, validRechnung)
 }
 
-var completeValidRechnung = Rechnung{
-	Geschaeftsobjekt: Geschaeftsobjekt{
+var completeValidRechnung = bo.Rechnung{
+	BusinessObject: bo.BusinessObject{
 		BoTyp:             botyp.Rechnung,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
@@ -283,8 +284,8 @@ var completeValidRechnung = Rechnung{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
-	Rechnungsersteller: Geschaeftspartner{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	Rechnungsersteller: bo.Geschaeftspartner{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -313,8 +314,8 @@ var completeValidRechnung = Rechnung{
 			Landescode:   landescode.DE,
 		},
 	},
-	Rechnungsempfaenger: Geschaeftspartner{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	Rechnungsempfaenger: bo.Geschaeftspartner{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Geschaeftspartner,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,

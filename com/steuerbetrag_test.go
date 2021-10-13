@@ -1,7 +1,8 @@
-package com
+package com_test
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkennzeichen"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/shopspring/decimal"
@@ -10,10 +11,10 @@ import (
 // TestFailedSteuerbetragValidation asserts that the validation fails for invalid Steuerbetrag
 func (s *Suite) Test_Failed_SteuerbetragValidation() {
 	validate := validator.New()
-	validate.RegisterStructValidation(SteuerbetragStructLevelValidation, Steuerbetrag{})
+	validate.RegisterStructValidation(com.SteuerbetragStructLevelValidation, com.Steuerbetrag{})
 	invalidSteuerbetrag := map[string][]interface{}{
 		"required": {
-			Steuerbetrag{
+			com.Steuerbetrag{
 				Steuerkennzeichen: 0,
 				Basiswert:         decimal.NewFromFloat(0),
 				Steuerwert:        decimal.NewFromFloat(0),
@@ -21,7 +22,7 @@ func (s *Suite) Test_Failed_SteuerbetragValidation() {
 			},
 		},
 		"Steuerwert=Basiswert*Steuerkennzeichen": {
-			Steuerbetrag{
+			com.Steuerbetrag{
 				Steuerkennzeichen: steuerkennzeichen.Ust19,
 				Basiswert:         decimal.NewFromFloat(100),
 				Steuerwert:        decimal.NewFromFloat(7), // expected 19
@@ -35,25 +36,25 @@ func (s *Suite) Test_Failed_SteuerbetragValidation() {
 // TestSuccessfulSteuerbetragValidation asserts that the validation does not fail for a valid Steuerbetrag
 func (s *Suite) Test_Successful_SteuerbetragValidation() {
 	validate := validator.New()
-	validate.RegisterStructValidation(SteuerbetragStructLevelValidation, Steuerbetrag{})
+	validate.RegisterStructValidation(com.SteuerbetragStructLevelValidation, com.Steuerbetrag{})
 	validSteuerbetraege := []interface{}{
-		Steuerbetrag{
+		com.Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust7,
 			Waehrung:          waehrungscode.ALL,
 		},
-		Steuerbetrag{
+		com.Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust7,
 			Basiswert:         decimal.NewFromFloat(100),
 			Steuerwert:        decimal.NewFromFloat(7),
 			Waehrung:          waehrungscode.ALL,
 		},
-		Steuerbetrag{
+		com.Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Ust19,
 			Basiswert:         decimal.NewFromFloat(50),
 			Steuerwert:        decimal.NewFromFloat(9.5),
 			Waehrung:          waehrungscode.EUR,
 		},
-		Steuerbetrag{
+		com.Steuerbetrag{
 			Steuerkennzeichen: steuerkennzeichen.Vst0,
 			Basiswert:         decimal.NewFromFloat(100),
 			Steuerwert:        decimal.NewFromFloat(0),

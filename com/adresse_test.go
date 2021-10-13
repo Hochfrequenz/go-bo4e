@@ -1,17 +1,18 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"strings"
 )
 
 // Test_Deserialization deserializes an address json
 func (s *Suite) Test_Address_Deserialization() {
-	var adresse = Adresse{
+	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",
@@ -24,7 +25,7 @@ func (s *Suite) Test_Address_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
-	var deserializedAdresse Adresse
+	var deserializedAdresse com.Adresse
 	err = json.Unmarshal(serializedAdresse, &deserializedAdresse)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedAdresse, is.EqualTo(adresse))
@@ -33,17 +34,17 @@ func (s *Suite) Test_Address_Deserialization() {
 //  Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
 func (s *Suite) Test_Strasse_XorPostfachValidation() {
 	validate := validator.New()
-	validate.RegisterStructValidation(AdresseStructLevelValidation, Adresse{})
+	validate.RegisterStructValidation(com.AdresseStructLevelValidation, com.Adresse{})
 	invalidAdressMaps := map[string][]interface{}{
 		"StrasseRequiresHausnummer": {
-			Adresse{
+			com.Adresse{
 				// no hausnummer given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Landescode:   landescode.DE,
 			},
-			Adresse{
+			com.Adresse{
 				// no strasse given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
@@ -52,7 +53,7 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 			},
 		},
 		"StrasseXORPostfach": {
-			Adresse{
+			com.Adresse{
 				// both postfach and strasse+hausnummer given
 				Postfach:     "Foo-Fach",
 				Postleitzahl: "82031",
@@ -61,13 +62,13 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 				Hausnummer:   "27A",
 				Landescode:   landescode.DE,
 			},
-			Adresse{
+			com.Adresse{
 				// neither postfach not strasse+hausnummer given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Landescode:   landescode.DE,
 			},
-			Adresse{
+			com.Adresse{
 				// no strasse given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
@@ -83,7 +84,7 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 func (s *Suite) Test_Successful_Adresse_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{
-		Adresse{
+		com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Hausnummer:   "27A",

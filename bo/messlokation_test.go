@@ -1,10 +1,11 @@
-package bo
+package bo_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
@@ -21,8 +22,8 @@ import (
 
 // Test_Messlokation_Deserialization tests serialization and deserialization of Messlokation
 func (s *Suite) Test_Messlokation_Deserialization() {
-	var melo = Messlokation{
-		Geschaeftsobjekt: Geschaeftsobjekt{
+	var melo = bo.Messlokation{
+		BusinessObject: bo.BusinessObject{
 			BoTyp:             botyp.Messlokation,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -42,9 +43,9 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			Hausnummer:   "27A",
 			Landescode:   landescode.DE,
 		},
-		Messlokationszaehler: []Zaehler{
+		Messlokationszaehler: []bo.Zaehler{
 			{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             botyp.Zaehler,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
@@ -74,7 +75,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Einrichtungszaehler"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
-	var deserializedMelo Messlokation
+	var deserializedMelo bo.Messlokation
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedMelo, is.EqualTo(melo))
@@ -85,8 +86,8 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 	validate := validator.New()
 	invalidMesslokationMap := map[string][]interface{}{
 		"required": {
-			Messlokation{
-				Geschaeftsobjekt: Geschaeftsobjekt{
+			bo.Messlokation{
+				BusinessObject: bo.BusinessObject{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -103,7 +104,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 			},
 		},
 		"len": {
-			Messlokation{
+			bo.Messlokation{
 				MesslokationsId: "not33",
 			},
 		},
@@ -115,8 +116,8 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 func (s *Suite) Test_Successful_MesslokationValidation() {
 	validate := validator.New()
 	validMelos := []interface{}{
-		Messlokation{
-			Geschaeftsobjekt: Geschaeftsobjekt{
+		bo.Messlokation{
+			BusinessObject: bo.BusinessObject{
 				BoTyp:             botyp.Messlokation,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,

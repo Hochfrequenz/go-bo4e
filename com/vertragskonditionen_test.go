@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
 	"strings"
@@ -13,25 +14,25 @@ import (
 
 // TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
 func (s *Suite) Test_Vertragskonditionen_Deserialization() {
-	var vertragskonditionen = Vertragskonditionen{
+	var vertragskonditionen = com.Vertragskonditionen{
 		Beschreibung:     "hallo",
 		AnzahlAbschlaege: 17,
-		Vertragslaufzeit: Zeitraum{
+		Vertragslaufzeit: com.Zeitraum{
 			Einheit: zeiteinheit.Minute,
 			Dauer: decimal.NullDecimal{
 				Decimal: decimal.NewFromFloat(15),
 				Valid:   true,
 			},
 		},
-		Kuendigungsfrist: Zeitraum{
+		Kuendigungsfrist: com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
-		Vertragsverlaengerung: Zeitraum{
+		Vertragsverlaengerung: com.Zeitraum{
 			Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
-		Abschlagszyklus: Zeitraum{
+		Abschlagszyklus: com.Zeitraum{
 			Einheit: zeiteinheit.Jahr,
 			Dauer:   decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(7)},
 		},
@@ -41,7 +42,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Minute"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.Nil()))
-	var deserializedVertragskonditionen Vertragskonditionen
+	var deserializedVertragskonditionen com.Vertragskonditionen
 	err = json.Unmarshal(serializedVertragskonditionen, &deserializedVertragskonditionen)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(vertragskonditionen))
@@ -52,9 +53,9 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
 		"required_with": {
-			Vertragskonditionen{
+			com.Vertragskonditionen{
 				// is only invalid if a zeitraum is invalid
-				Vertragslaufzeit: Zeitraum{
+				Vertragslaufzeit: com.Zeitraum{
 					Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
@@ -67,25 +68,25 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 	validate := validator.New()
 	validVertragskonditionens := []interface{}{
-		Vertragskonditionen{
+		com.Vertragskonditionen{
 			Beschreibung:     "hallo",
 			AnzahlAbschlaege: 17,
-			Vertragslaufzeit: Zeitraum{
+			Vertragslaufzeit: com.Zeitraum{
 				Einheit: zeiteinheit.Minute,
 				Dauer: decimal.NullDecimal{
 					Decimal: decimal.NewFromFloat(15),
 					Valid:   true,
 				},
 			},
-			Kuendigungsfrist: Zeitraum{
+			Kuendigungsfrist: com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
-			Vertragsverlaengerung: Zeitraum{
+			Vertragsverlaengerung: com.Zeitraum{
 				Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
-			Abschlagszyklus: Zeitraum{
+			Abschlagszyklus: com.Zeitraum{
 				Einheit: zeiteinheit.Jahr,
 				Dauer: decimal.NullDecimal{
 					Decimal: decimal.NewFromFloat(7),

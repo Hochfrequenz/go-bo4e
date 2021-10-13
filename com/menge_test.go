@@ -1,10 +1,11 @@
-package com
+package com_test
 
 import (
 	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/shopspring/decimal"
 	"strings"
@@ -12,7 +13,7 @@ import (
 
 // Test_Menge_Deserialization deserializes an Menge json
 func (s *Suite) Test_Menge_Deserialization() {
-	var menge = Menge{
+	var menge = com.Menge{
 		Wert:    decimal.NewFromFloat(42),
 		Einheit: mengeneinheit.KUBIKMETER,
 	}
@@ -21,7 +22,7 @@ func (s *Suite) Test_Menge_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KUBIKMETER"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMenge, is.Not(is.Nil()))
-	var deserializedVerbrauch Menge
+	var deserializedVerbrauch com.Menge
 	err = json.Unmarshal(serializedMenge, &deserializedVerbrauch)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(menge))
@@ -31,11 +32,11 @@ func (s *Suite) Test_Menge_Deserialization() {
 func (s *Suite) Test_Successful_Menge_Validation() {
 	validate := validator.New()
 	validMenges := []interface{}{
-		Menge{
+		com.Menge{
 			Wert:    decimal.NewFromFloat(42),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
-		Menge{
+		com.Menge{
 			Wert:    decimal.NewFromFloat(0), // 0 is a valid value
 			Einheit: mengeneinheit.W,
 		},
@@ -48,10 +49,10 @@ func (s *Suite) Test_Menge_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
-			Menge{
+			com.Menge{
 				Wert: decimal.NewFromFloat(42),
 			},
-			Menge{},
+			com.Menge{},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
