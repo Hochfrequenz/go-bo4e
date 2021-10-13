@@ -121,3 +121,19 @@ func (s *Suite) Test_Empty_BOneyComb_Is_Invalid() {
 	err := validate.Struct(emptyBoneyComb)
 	then.AssertThat(s.T(), err, is.Not(is.Nil()))
 }
+
+func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
+	var boneyCombWithEmptyStammdaten = market_communication.BOneyComb{
+		Stammdaten:        []bo.BusinessObject{},
+		Transaktionsdaten: map[string]interface{}{"foo": "bar"},
+	}
+	serializedBoneyComb, err := json.Marshal(boneyCombWithEmptyStammdaten)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.Nil()))
+	var deserializedBoneyComb market_communication.BOneyComb
+	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Stammdaten))
+	then.AssertThat(s.T(), deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Transaktionsdaten))
+	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyCombWithEmptyStammdaten))
+}
