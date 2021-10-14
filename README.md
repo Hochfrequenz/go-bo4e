@@ -48,7 +48,7 @@ import (
 
 func main() {
 	melo := bo.Messlokation{
-		BusinessObject: bo.BusinessObject{
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.Messlokation,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
@@ -74,7 +74,7 @@ func main() {
 }
 ```
 
-[Use this in the Go Playground](https://play.golang.org/p/sqiuCa9GQ8f).
+[Use this in the Go Playground](https://play.golang.org/p/xR7VQh9NHGS).
 
 ## Other Noteworthy BO4E Implementations
 
