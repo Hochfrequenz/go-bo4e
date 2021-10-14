@@ -80,7 +80,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				},
 			},
 		},
-		Transaktionsdaten: map[string]interface{}{
+		Transaktionsdaten: map[string]string{
 			"Foo": "Bar",
 		},
 	}
@@ -111,7 +111,7 @@ func (s *Suite) Test_Empty_BOneyComb_Is_Invalid() {
 func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
 	var boneyCombWithEmptyStammdaten = market_communication.BOneyComb{
 		Stammdaten:        []bo.BusinessObject{},
-		Transaktionsdaten: map[string]interface{}{"foo": "bar"},
+		Transaktionsdaten: map[string]string{"foo": "bar"},
 	}
 	serializedBoneyComb, err := json.Marshal(boneyCombWithEmptyStammdaten)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -122,4 +122,22 @@ func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
 	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Stammdaten))
 	then.AssertThat(s.T(), deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Transaktionsdaten))
 	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyCombWithEmptyStammdaten))
+}
+
+func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Nil_Transaktionsdaten() {
+	var emptyBoneyComb = market_communication.BOneyComb{}
+	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.Nil())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Nil())
+}
+
+func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Not_Found_Key_And_Value_Otherwise() {
+	var emptyBoneyComb = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"foo": "bar",
+		},
+	}
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("asd"), is.Nil())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData(""), is.Nil())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Not(is.Nil()))
+	then.AssertThat(s.T(), *emptyBoneyComb.GetTransactionData("foo"), is.EqualTo("bar"))
 }
