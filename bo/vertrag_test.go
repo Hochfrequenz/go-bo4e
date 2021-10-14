@@ -22,7 +22,7 @@ import (
 func (s *Suite) Test_Vertrag_Deserialization() {
 	var contract = bo.Vertrag{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Vertrag,
+			BoTyp:             botyp.VERTRAG,
 			VersionStruktur:   "2",
 			ExterneReferenzen: nil,
 		},
@@ -30,12 +30,12 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		Beschreibung:   "",
 		Vertragsstatus: vertragsstatus.Abgelehnt,
 		Vertragsart:    vertragsart.Buendelvertrag,
-		Sparte:         sparte.Strom,
+		Sparte:         sparte.STROM,
 		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragspartner1: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Geschaeftspartner,
+				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -55,7 +55,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		},
 		Vertragspartner2: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Geschaeftspartner,
+				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -117,7 +117,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 	validVertrag := []bo.BusinessObject{
 		bo.Vertrag{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Vertrag,
+				BoTyp:             botyp.VERTRAG,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -125,12 +125,12 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			Beschreibung:   "",
 			Vertragsstatus: vertragsstatus.Angenommen,
 			Vertragsart:    vertragsart.Buendelvertrag,
-			Sparte:         sparte.Strom,
+			Sparte:         sparte.STROM,
 			Vertragsbeginn: time.Now(),
 			Vertragsende:   time.Now().Add(time.Hour * 24),
 			Vertragspartner1: bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Geschaeftspartner,
+					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -149,7 +149,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			},
 			Vertragspartner2: bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Geschaeftspartner,
+					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -182,9 +182,9 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 }
 
 func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
-	object := bo.NewBusinessObject(botyp.Vertrag)
+	object := bo.NewBusinessObject(botyp.VERTRAG)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Vertrag{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Vertrag))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.VERTRAG))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

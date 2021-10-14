@@ -50,11 +50,11 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		"min": {
 			bo.Lastgang{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Lastgang,
+					BoTyp:             botyp.LASTGANG,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Sparte:       sparte.Strom,
+				Sparte:       sparte.STROM,
 				Version:      "1",
 				LokationsId:  "asd",
 				LokationsTyp: lokationstyp.MaLo,
@@ -66,11 +66,11 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		"alphanum": {
 			bo.Lastgang{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Lastgang,
+					BoTyp:             botyp.LASTGANG,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Sparte:       sparte.Strom,
+				Sparte:       sparte.STROM,
 				Version:      "1",
 				LokationsId:  "not alpha num",
 				LokationsTyp: lokationstyp.MaLo,
@@ -94,10 +94,10 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
-	validEnergiemengen := []bo.BusinessObject{
+	validLastgang := []bo.BusinessObject{
 		bo.Energiemenge{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Energiemenge,
+				BoTyp:             botyp.ENERGIEMENGE,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -106,13 +106,13 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 			Verbrauch:    []com.Verbrauch{verbrauch},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validEnergiemengen)
+	VerfiySuccessfulValidations(s, validate, validLastgang)
 }
 
 func (s *Suite) Test_Empty_Lastgang_Is_Creatable_Using_BoTyp() {
-	object := bo.NewBusinessObject(botyp.Lastgang)
+	object := bo.NewBusinessObject(botyp.LASTGANG)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Lastgang{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Lastgang))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.LASTGANG))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

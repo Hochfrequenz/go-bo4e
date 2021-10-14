@@ -23,7 +23,7 @@ import (
 var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 	&bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:           botyp.Geschaeftspartner,
+			BoTyp:           botyp.GESCHAEFTSPARTNER,
 			VersionStruktur: "1",
 		},
 		Anrede: anrede.Frau,
@@ -32,10 +32,10 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 	},
 	&bo.Zaehler{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:           botyp.Zaehler,
+			BoTyp:           botyp.ZAEHLER,
 			VersionStruktur: "1",
 		},
-		Sparte:             sparte.Strom,
+		Sparte:             sparte.STROM,
 		Zaehlernummer:      "1ASD23",
 		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 		Zaehlertyp:         zaehlertyp.Drehkolbenzaehler,
@@ -43,7 +43,7 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 	},
 	&bo.Energiemenge{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:           botyp.Energiemenge,
+			BoTyp:           botyp.ENERGIEMENGE,
 			VersionStruktur: "1",
 		},
 		LokationsId:  "54321012345",
@@ -80,7 +80,7 @@ func (s *Suite) Test_Slice_Deserialization_Fails_For_Invalid_BoTyps() {
 }
 
 func (s *Suite) Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps() {
-	jsonWithUnimplementedBoTyp := "[{\"boTyp\":\"PreisblattUmlagen\"}]" // PreisblattUmlagen is not (yet) an implemented boTyp => deserialization should fail
+	jsonWithUnimplementedBoTyp := "[{\"boTyp\":\"PREISBLATTUMLAGEN\"}]" // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Not(is.Nil()))

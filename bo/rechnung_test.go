@@ -27,7 +27,7 @@ import (
 
 var serializableRechnung = bo.Rechnung{
 	Geschaeftsobjekt: bo.Geschaeftsobjekt{
-		BoTyp:             botyp.Rechnung,
+		BoTyp:             botyp.RECHNUNG,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
 	},
@@ -47,7 +47,7 @@ var serializableRechnung = bo.Rechnung{
 	},
 	Rechnungsersteller: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Geschaeftspartner,
+			BoTyp:             botyp.GESCHAEFTSPARTNER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
@@ -77,7 +77,7 @@ var serializableRechnung = bo.Rechnung{
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Geschaeftspartner,
+			BoTyp:             botyp.GESCHAEFTSPARTNER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
@@ -267,7 +267,7 @@ func (s *Suite) Test_Successful_Rechnung_Validation() {
 
 var completeValidRechnung = bo.Rechnung{
 	Geschaeftsobjekt: bo.Geschaeftsobjekt{
-		BoTyp:             botyp.Rechnung,
+		BoTyp:             botyp.RECHNUNG,
 		VersionStruktur:   "1",
 		ExterneReferenzen: nil,
 	},
@@ -287,7 +287,7 @@ var completeValidRechnung = bo.Rechnung{
 	},
 	Rechnungsersteller: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Geschaeftspartner,
+			BoTyp:             botyp.GESCHAEFTSPARTNER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
@@ -317,7 +317,7 @@ var completeValidRechnung = bo.Rechnung{
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Geschaeftspartner,
+			BoTyp:             botyp.GESCHAEFTSPARTNER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
@@ -402,9 +402,9 @@ var completeValidRechnung = bo.Rechnung{
 }
 
 func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
-	object := bo.NewBusinessObject(botyp.Rechnung)
+	object := bo.NewBusinessObject(botyp.RECHNUNG)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Rechnung{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Rechnung))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.RECHNUNG))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

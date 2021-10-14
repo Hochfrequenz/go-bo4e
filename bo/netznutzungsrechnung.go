@@ -9,7 +9,7 @@ import (
 // Netznutzungsrechnung models grid usage invoices
 type Netznutzungsrechnung struct {
 	Rechnung
-	Sparte               sparte.Sparte                 `json:"sparte" validate:"required"`                                        // Sparte (Strom, Gas ...) für die die Rechnung ausgestellt ist
+	Sparte               sparte.Sparte                 `json:"sparte" validate:"required"`                                        // Sparte (STROM, GAS ...) für die die Rechnung ausgestellt ist
 	Absendercodenummer   string                        `json:"absendercodenummer" validate:"required,numeric,min=13,max=13"`      // Absendercodenummer ist die Rollencodenummer des Absenders (Rechnung.Rechnungsersteller). Über die Nummer können weitere Informationen zum Marktteilnehmer ermittelt werden.
 	Empfaengercodenummer string                        `json:"empfaengercodenummer" validate:"required,numeric,min=13,max=13"`    // Absendercodenummer ist die Rollencodenummer des Empfängers (Rechnung.Rechnungsempfaenger). Über die Nummer können weitere Informationen zum Marktteilnehmer ermittelt werden.
 	Nnrechnungsart       nnrechnungsart.NNRechnungsart `json:"nnrechnungsart" validate:"required"`                                // Aus der INVOIC entnommen

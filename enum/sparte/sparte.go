@@ -6,10 +6,10 @@ package sparte
 type Sparte int
 
 const (
-	Strom      Sparte = iota + 1 // power/electricity
-	Gas                          // gas
-	Fernwaerme                   // long-distance heat
-	Nahwaerme                    // local heat
-	Wasser                       // water
-	Abwasser                     // waste water
+	STROM      Sparte = iota + 1 // STROM means power/electricity
+	GAS                          // GAS means gas
+	FERNWAERME                   // FERNWAERME means long-distance heat
+	NAHWAERME                    // NAHWAERME means local heat
+	WASSER                       // WASSER means water
+	ABWASSER                     // ABWASSER means waste water
 )

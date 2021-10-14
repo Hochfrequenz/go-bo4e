@@ -19,6 +19,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
+	"io/ioutil"
 	"testing"
 	"time"
 )
@@ -43,7 +44,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 		Stammdaten: []bo.BusinessObject{
 			&bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:           botyp.Geschaeftspartner,
+					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
 				Anrede: anrede.Frau,
@@ -52,10 +53,10 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 			},
 			&bo.Zaehler{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:           botyp.Zaehler,
+					BoTyp:           botyp.ZAEHLER,
 					VersionStruktur: "1",
 				},
-				Sparte:             sparte.Strom,
+				Sparte:             sparte.STROM,
 				Zaehlernummer:      "1ASD23",
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehkolbenzaehler,
@@ -63,7 +64,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 			},
 			&bo.Energiemenge{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:           botyp.Energiemenge,
+					BoTyp:           botyp.ENERGIEMENGE,
 					VersionStruktur: "1",
 				},
 				LokationsId:  "54321012345",
@@ -140,4 +141,22 @@ func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Not_Found_Key_And_Value_
 	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData(""), is.Nil())
 	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Not(is.Nil()))
 	then.AssertThat(s.T(), *emptyBoneyComb.GetTransactionData("foo"), is.EqualTo("bar"))
+}
+
+// Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
+func (s *Suite) Test_BOneyComb_Deserialization() {
+	const dirName = "test_boney_combs"
+	jsonFiles, err := ioutil.ReadDir(dirName)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), len(jsonFiles), is.Not(is.EqualTo(0)))
+
+	for _, file := range jsonFiles {
+		fileContent, readErr := ioutil.ReadFile(dirName + "/" + file.Name())
+		then.AssertThat(s.T(), readErr, is.Nil())
+		then.AssertThat(s.T(), fileContent, is.Not(is.Nil()))
+		var boneyComb market_communication.BOneyComb
+		err = json.Unmarshal(fileContent, &boneyComb)
+		then.AssertThat(s.T(), err, is.Nil())
+		then.AssertThat(s.T(), boneyComb, is.Not(is.Nil()))
+	}
 }
