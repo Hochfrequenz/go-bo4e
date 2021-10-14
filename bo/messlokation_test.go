@@ -25,12 +25,12 @@ import (
 func (s *Suite) Test_Messlokation_Deserialization() {
 	var melo = bo.Messlokation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Messlokation,
+			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
-		Sparte:                       sparte.Strom,
+		Sparte:                       sparte.STROM,
 		NetzebeneMessung:             netzebene.MD,
 		MessgebietNr:                 "",
 		Gerate:                       nil,
@@ -47,12 +47,12 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 		Messlokationszaehler: []bo.Zaehler{
 			{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Zaehler,
+					BoTyp:             botyp.ZAEHLER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
 				Zaehlernummer:      "0815",
-				Sparte:             sparte.Strom,
+				Sparte:             sparte.STROM,
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
@@ -72,7 +72,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMelo, is.Not(is.Nil()))
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "MD"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Strom"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "STROM"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Einrichtungszaehler"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
@@ -119,12 +119,12 @@ func (s *Suite) Test_Successful_MesslokationValidation() {
 	validMelos := []bo.BusinessObject{
 		bo.Messlokation{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Messlokation,
+				BoTyp:             botyp.MESSLOKATION,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
 			MesslokationsId:              "DE0000011111222223333344444555556",
-			Sparte:                       sparte.Strom,
+			Sparte:                       sparte.STROM,
 			NetzebeneMessung:             netzebene.MD,
 			MessgebietNr:                 "",
 			Gerate:                       nil,
@@ -144,9 +144,9 @@ func (s *Suite) Test_Successful_MesslokationValidation() {
 }
 
 func (s *Suite) Test_Empty_Messlokation_Is_Creatable_Using_BoTyp() {
-	object := bo.NewBusinessObject(botyp.Messlokation)
+	object := bo.NewBusinessObject(botyp.MESSLOKATION)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Messlokation{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Messlokation))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.MESSLOKATION))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

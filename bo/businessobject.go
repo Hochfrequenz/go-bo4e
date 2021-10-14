@@ -38,35 +38,39 @@ const defaultVersionStruktur = "1.1" // because "externeReferenzen" not "externe
 func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 	var bo BusinessObject
 	switch typ {
-	case botyp.Energiemenge:
+	case botyp.ENERGIEMENGE:
 		bo = new(Energiemenge)
 		bo.(*Energiemenge).BoTyp = typ
 		bo.(*Energiemenge).VersionStruktur = defaultVersionStruktur
-	case botyp.Geschaeftspartner:
+	case botyp.GESCHAEFTSPARTNER:
 		bo = new(Geschaeftspartner)
 		bo.(*Geschaeftspartner).BoTyp = typ
 		bo.(*Geschaeftspartner).VersionStruktur = defaultVersionStruktur
-	case botyp.Lastgang:
+	case botyp.LASTGANG:
 		bo = new(Lastgang)
 		bo.(*Lastgang).BoTyp = typ
 		bo.(*Lastgang).VersionStruktur = defaultVersionStruktur
-	case botyp.Messlokation:
+	case botyp.MARKTTEILNEHMER:
+		bo = new(Marktteilnehmer)
+		bo.(*Marktteilnehmer).BoTyp = typ
+		bo.(*Marktteilnehmer).VersionStruktur = defaultVersionStruktur
+	case botyp.MESSLOKATION:
 		bo = new(Messlokation)
 		bo.(*Messlokation).BoTyp = typ
 		bo.(*Messlokation).VersionStruktur = defaultVersionStruktur
-	case botyp.Netznutzungsrechnung:
+	case botyp.NETZNUTZUNGSRECHNUNG:
 		bo = new(Netznutzungsrechnung)
 		bo.(*Netznutzungsrechnung).BoTyp = typ
 		bo.(*Netznutzungsrechnung).VersionStruktur = defaultVersionStruktur
-	case botyp.Rechnung:
+	case botyp.RECHNUNG:
 		bo = new(Rechnung)
 		bo.(*Rechnung).BoTyp = typ
 		bo.(*Rechnung).VersionStruktur = defaultVersionStruktur
-	case botyp.Vertrag:
+	case botyp.VERTRAG:
 		bo = new(Vertrag)
 		bo.(*Vertrag).BoTyp = typ
 		bo.(*Vertrag).VersionStruktur = defaultVersionStruktur
-	case botyp.Zaehler:
+	case botyp.ZAEHLER:
 		bo = new(Zaehler)
 		bo.(*Zaehler).BoTyp = typ
 		bo.(*Zaehler).VersionStruktur = defaultVersionStruktur

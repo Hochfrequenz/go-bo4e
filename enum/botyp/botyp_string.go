@@ -8,31 +8,31 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Angebot-1]
-	_ = x[Ansprechpartner-2]
-	_ = x[Ausschreibung-3]
-	_ = x[Energiemenge-4]
-	_ = x[Geschaeftspartner-5]
-	_ = x[Kosten-6]
-	_ = x[Lastgang-7]
-	_ = x[Marktlokation-8]
-	_ = x[Messlokation-9]
-	_ = x[Marktteilnehmer-10]
-	_ = x[Netznutzungsrechnung-11]
-	_ = x[Preisblatt-12]
-	_ = x[PreisblattDienstleistung-13]
-	_ = x[PreisblattKonzessionsabgabe-14]
-	_ = x[PreisblattMessung-15]
-	_ = x[PreisblattUmlagen-16]
-	_ = x[Rechnung-17]
-	_ = x[Tarifinfo-18]
-	_ = x[TarifPreisblatt-19]
-	_ = x[Vertrag-20]
-	_ = x[Zaehler-21]
-	_ = x[Zeitreihe-22]
+	_ = x[ANGEBOT-1]
+	_ = x[ANSPRECHPARTNER-2]
+	_ = x[AUSSCHREIBUNG-3]
+	_ = x[ENERGIEMENGE-4]
+	_ = x[GESCHAEFTSPARTNER-5]
+	_ = x[KOSTEN-6]
+	_ = x[LASTGANG-7]
+	_ = x[MARKTLOKATION-8]
+	_ = x[MESSLOKATION-9]
+	_ = x[MARKTTEILNEHMER-10]
+	_ = x[NETZNUTZUNGSRECHNUNG-11]
+	_ = x[PREISBLATT-12]
+	_ = x[PREISBLATTDIENSTLEISTUNG-13]
+	_ = x[PREISBLATTKONZESSIONSABGABE-14]
+	_ = x[PREISBLATTMESSUNG-15]
+	_ = x[PREISBLATTUMLAGEN-16]
+	_ = x[RECHNUNG-17]
+	_ = x[TARIFINFO-18]
+	_ = x[TARIFPREISBLATT-19]
+	_ = x[VERTRAG-20]
+	_ = x[ZAEHLER-21]
+	_ = x[ZEITREIHE-22]
 }
 
-const _BOTyp_name = "AngebotAnsprechpartnerAusschreibungEnergiemengeGeschaeftspartnerKostenLastgangMarktlokationMesslokationMarktteilnehmerNetznutzungsrechnungPreisblattPreisblattDienstleistungPreisblattKonzessionsabgabePreisblattMessungPreisblattUmlagenRechnungTarifinfoTarifPreisblattVertragZaehlerZeitreihe"
+const _BOTyp_name = "ANGEBOTANSPRECHPARTNERAUSSCHREIBUNGENERGIEMENGEGESCHAEFTSPARTNERKOSTENLASTGANGMARKTLOKATIONMESSLOKATIONMARKTTEILNEHMERNETZNUTZUNGSRECHNUNGPREISBLATTPREISBLATTDIENSTLEISTUNGPREISBLATTKONZESSIONSABGABEPREISBLATTMESSUNGPREISBLATTUMLAGENRECHNUNGTARIFINFOTARIFPREISBLATTVERTRAGZAEHLERZEITREIHE"
 
 var _BOTyp_index = [...]uint16{0, 7, 22, 35, 47, 64, 70, 78, 91, 103, 118, 138, 148, 172, 199, 216, 233, 241, 250, 265, 272, 279, 288}
 

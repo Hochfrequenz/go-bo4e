@@ -25,12 +25,12 @@ import (
 func (s *Suite) Test_Zaehler_Deserialization() {
 	var meter = bo.Zaehler{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Zaehler,
+			BoTyp:             botyp.ZAEHLER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
 		Zaehlernummer:      "0815",
-		Sparte:             sparte.Strom,
+		Sparte:             sparte.STROM,
 		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 		Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 		Tarifart:           tarifart.Eintarif,
@@ -69,12 +69,12 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 		"min": { // min 1 zaehlwerk is required
 			bo.Zaehler{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Zaehler,
+					BoTyp:             botyp.ZAEHLER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
 				Zaehlernummer:      "0815",
-				Sparte:             sparte.Strom,
+				Sparte:             sparte.STROM,
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
@@ -93,12 +93,12 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 	validZaehler := []bo.BusinessObject{
 		bo.Zaehler{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.Zaehler,
+				BoTyp:             botyp.ZAEHLER,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
 			Zaehlernummer:      "08150",
-			Sparte:             sparte.Strom,
+			Sparte:             sparte.STROM,
 			Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 			Zaehlertyp:         zaehlertyp.Wechselstromzaehler,
 			Tarifart:           tarifart.Eintarif,
@@ -116,7 +116,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 			}},
 			Zaehlerhersteller: &bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
-					BoTyp:             botyp.Geschaeftspartner,
+					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -139,9 +139,9 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 }
 
 func (s *Suite) Test_Empty_Zaehler_Is_Creatable_Using_BoTyp() {
-	object := bo.NewBusinessObject(botyp.Zaehler)
+	object := bo.NewBusinessObject(botyp.ZAEHLER)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Zaehler{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Zaehler))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.ZAEHLER))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
