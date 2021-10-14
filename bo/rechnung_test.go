@@ -280,7 +280,7 @@ var completeValidRechnung = bo.Rechnung{
 	OriginalRechnungsnummer: "hallo",
 	Rechnungsperiode: com.Zeitraum{
 		Einheit:        zeiteinheit.Minute,
-		Dauer:          decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(15)},
+		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
