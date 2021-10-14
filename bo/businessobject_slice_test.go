@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"time"
 )
@@ -60,13 +61,27 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 	},
 }
 
-func (s *Suite) Test_Deserialization_Of_Slice() {
+func (s *Suite) Test_Successful_Slice_Deserialization() {
 	boList := SliceWithThreeValidBos
 	jsonBytes, err := json.Marshal(boList)
 	then.AssertThat(s.T(), err, is.Nil())
-	var unmarshaledSlice bo.BusinessObjectSlice
-	err = json.Unmarshal(jsonBytes, &unmarshaledSlice)
+	var unmarshalledSlice bo.BusinessObjectSlice
+	err = json.Unmarshal(jsonBytes, &unmarshalledSlice)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), len(unmarshaledSlice), is.EqualTo(3))
-	then.AssertThat(s.T(), unmarshaledSlice, is.EqualTo(boList))
+	then.AssertThat(s.T(), len(unmarshalledSlice), is.EqualTo(3))
+	then.AssertThat(s.T(), unmarshalledSlice, is.EqualTo(boList))
+}
+
+func (s *Suite) Test_Slice_Deserialization_Fails_For_Invalid_BoTyps() {
+	jsonWithInvalidBoTyp := "[{\"boTyp\":\"foo\"}]" // foo is not a valid boTyp => deserialization should fail
+	var deserializedBoneyComb market_communication.BOneyComb
+	err := json.Unmarshal([]byte(jsonWithInvalidBoTyp), &deserializedBoneyComb)
+	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+}
+
+func (s *Suite) Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps() {
+	jsonWithUnimplementedBoTyp := "[{\"boTyp\":\"PreisblattUmlagen\"}]" // PreisblattUmlagen is not (yet) an implemented boTyp => deserialization should fail
+	var deserializedBoneyComb market_communication.BOneyComb
+	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
+	then.AssertThat(s.T(), err, is.Not(is.Nil()))
 }

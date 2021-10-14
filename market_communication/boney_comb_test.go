@@ -101,20 +101,6 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyComb))
 }
 
-func (s *Suite) Test_BOneyComb_DeSerialization_With_Invalid_BoTyp() {
-	jsonWithInvalidBoTyp := "{\"Stammdaten\":[{\"boTyp\":\"foo\"}], \"Transaktionsdaten\":{}}" // foo is not a valid boTyp => deserialization should fail
-	var deserializedBoneyComb market_communication.BOneyComb
-	err := json.Unmarshal([]byte(jsonWithInvalidBoTyp), &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
-}
-
-func (s *Suite) Test_BOneyComb_DeSerialization_With_Unimplemented_BoTyp() {
-	jsonWithUnimplementedBoTyp := "{\"Stammdaten\":[{\"boTyp\":\"PreisblattUmlagen\"}], \"Transaktionsdaten\":{}}" // PreisblattUmlagen is not (yet) an implemented boTyp => deserialization should fail
-	var deserializedBoneyComb market_communication.BOneyComb
-	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
-}
-
 func (s *Suite) Test_Empty_BOneyComb_Is_Invalid() {
 	validate := validator.New()
 	var emptyBoneyComb = market_communication.BOneyComb{}
