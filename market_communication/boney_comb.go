@@ -2,6 +2,7 @@ package market_communication
 
 import (
 	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"regexp"
 	"time"
 )
@@ -58,6 +59,16 @@ func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 	return boneyComb.getMpCode("Empfaenger")
 }
 
+// GetAbsenderCode returns the 13 digit ID of the sending Marktteilnehmer if present in the Transaktionsdaten
+func (boneyComb *BOneyComb) GetAbsender() *bo.Marktteilnehmer {
+	return boneyComb.getMarktteilnehmer(boneyComb.GetAbsenderCode())
+}
+
+// GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in the Transaktionsdaten
+func (boneyComb *BOneyComb) GetEmpfaenger() *bo.Marktteilnehmer {
+	return boneyComb.getMarktteilnehmer(boneyComb.GetEmpfaengerCode())
+}
+
 var bo4eUriRegex = regexp.MustCompile(`(bo4e://Marktteilnehmer/)?(?P<mpid>\d{13})`)
 
 // getMpCode returns the 13 digit ID of a Marktteilnehmer if present in the Transaktionsdaten
@@ -72,6 +83,25 @@ func (boneyComb *BOneyComb) getMpCode(transactionDataKey string) *string {
 			name := groupNames[groupIdx]
 			if name == "mpid" {
 				return &group
+			}
+		}
+	}
+	return nil
+}
+
+// getMarktteilnehmer returns the Marktteilnehmer from Stammdaten that has the 13 digit ID returned by getMpCode
+func (boneyComb *BOneyComb) getMarktteilnehmer(marktteilnehmerId *string) *bo.Marktteilnehmer {
+	if marktteilnehmerId == nil || *marktteilnehmerId == "" {
+		return nil
+	}
+	if boneyComb.Stammdaten == nil {
+		return nil
+	}
+	for _, businessObject := range boneyComb.Stammdaten {
+		if businessObject.GetBoTyp() == botyp.MARKTTEILNEHMER {
+			if businessObject.(bo.Marktteilnehmer).Rollencodenummer == *marktteilnehmerId {
+				mtn := businessObject.(bo.Marktteilnehmer)
+				return &mtn
 			}
 		}
 	}

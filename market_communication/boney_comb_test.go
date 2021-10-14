@@ -9,8 +9,12 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
+	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
+	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
@@ -182,16 +186,17 @@ func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetDokumentennummer(), is.EqualTo("asdasdasd"))
 }
 
-func (s *Suite) Test_GetAbsender_Returns_Correct_Value_Without_Uri() {
+func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_Without_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
 			"Absender": "9876543210987",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.Nil())
 }
 
-func (s *Suite) Test_GetAbsender_Returns_Correct_Value_With_Uri() {
+func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
 			"Absender": "bo4e://Marktteilnehmer/9876543210987",
@@ -200,22 +205,110 @@ func (s *Suite) Test_GetAbsender_Returns_Correct_Value_With_Uri() {
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
 }
 
-func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_With_Uri() {
+func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
 			"Empfaenger": "bo4e://Marktteilnehmer/9876543210987",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.Nil())
 }
 
-func (s *Suite) Test_GetAbsender_Returns_Nil_For_Malformed_Data() {
+func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{
+			bo.Marktteilnehmer{
+				Marktrolle:       marktrolle.LF,
+				Makoadresse:      "edifact@my-favourite-marketpartner.de",
+				Rollencodetyp:    rollencodetyp.DVGW,
+				Rollencodenummer: "9903100000006",
+				Geschaeftspartner: bo.Geschaeftspartner{
+					Geschaeftsobjekt: bo.Geschaeftsobjekt{
+						BoTyp:             botyp.MARKTTEILNEHMER,
+						VersionStruktur:   "1",
+						ExterneReferenzen: nil,
+					},
+					Anrede:               anrede.Divers,
+					Name1:                "Müller",
+					Name2:                "Lieschen",
+					Name3:                "",
+					Gewerbekennzeichnung: false,
+					HrNummer:             "handelsregister foo",
+					Amtsgericht:          "amtsgericht bar",
+					Kontaktweg:           0,
+					UmsatzsteuerId:       "umsatzsteuer foo",
+					GlaeubigerId:         "glauebiger bar",
+					EMailAdresse:         "email@lieschen-mueller.de",
+					Website:              "https://lieschen-mueller.de",
+					Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+						geschaeftspartnerrolle.Kunde,
+						geschaeftspartnerrolle.Marktpartner,
+					},
+					Partneradresse: com.Adresse{
+						Postleitzahl: "82031",
+						Ort:          "Grünwald",
+						Strasse:      "Nördlicher Münchner Straße",
+						Hausnummer:   "27A",
+						Landescode:   landescode.DE,
+					},
+				},
+			},
+			bo.Marktteilnehmer{
+				Marktrolle:       marktrolle.LF,
+				Makoadresse:      "edifact@my-favourite-marketpartner.de",
+				Rollencodetyp:    rollencodetyp.DVGW,
+				Rollencodenummer: "9903100000007",
+				Geschaeftspartner: bo.Geschaeftspartner{
+					Geschaeftsobjekt: bo.Geschaeftsobjekt{
+						BoTyp:             botyp.MARKTTEILNEHMER,
+						VersionStruktur:   "1",
+						ExterneReferenzen: nil,
+					},
+					Anrede:               anrede.Divers,
+					Name1:                "Müller",
+					Name2:                "Lieschen",
+					Name3:                "",
+					Gewerbekennzeichnung: false,
+					HrNummer:             "handelsregister foo",
+					Amtsgericht:          "amtsgericht bar",
+					Kontaktweg:           0,
+					UmsatzsteuerId:       "umsatzsteuer foo",
+					GlaeubigerId:         "glauebiger bar",
+					EMailAdresse:         "email@lieschen-mueller.de",
+					Website:              "https://lieschen-mueller.de",
+					Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+						geschaeftspartnerrolle.Kunde,
+						geschaeftspartnerrolle.Marktpartner,
+					},
+					Partneradresse: com.Adresse{
+						Postleitzahl: "82031",
+						Ort:          "Grünwald",
+						Strasse:      "Nördlicher Münchner Straße",
+						Hausnummer:   "27A",
+						Landescode:   landescode.DE,
+					},
+				},
+			},
+		},
+
+		Transaktionsdaten: map[string]string{
+			"Empfaenger": "bo4e://Marktteilnehmer/9903100000006",
+			"Absender":   "9903100000007",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaenger(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[0]))
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsender(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[1]))
+}
+
+func (s *Suite) Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
 			"Absender": "asdasd",
 		},
 	}
 	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsenderCode(), is.Nil())
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.Nil())
 }
 
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
