@@ -18,23 +18,24 @@ func _() {
 	_ = x[Marktlokation-8]
 	_ = x[Messlokation-9]
 	_ = x[Marktteilnehmer-10]
-	_ = x[Netznutzungsrechnung-11]
-	_ = x[Preisblatt-12]
-	_ = x[PreisblattDienstleistung-13]
-	_ = x[PreisblattKonzessionsabgabe-14]
-	_ = x[PreisblattMessung-15]
-	_ = x[PreisblattUmlagen-16]
-	_ = x[Rechnung-17]
-	_ = x[Tarifinfo-18]
-	_ = x[TarifPreisblatt-19]
-	_ = x[Vertrag-20]
-	_ = x[Zaehler-21]
-	_ = x[Zeitreihe-22]
+	_ = x[Marktrechnung-11]
+	_ = x[Netznutzungsrechnung-12]
+	_ = x[Preisblatt-13]
+	_ = x[PreisblattDienstleistung-14]
+	_ = x[PreisblattKonzessionsabgabe-15]
+	_ = x[PreisblattMessung-16]
+	_ = x[PreisblattUmlagen-17]
+	_ = x[Rechnung-18]
+	_ = x[Tarifinfo-19]
+	_ = x[TarifPreisblatt-20]
+	_ = x[Vertrag-21]
+	_ = x[Zaehler-22]
+	_ = x[Zeitreihe-23]
 }
 
-const _BOTyp_name = "AngebotAnsprechpartnerAusschreibungEnergiemengeGeschaeftspartnerKostenLastgangMarktlokationMesslokationMarktteilnehmerNetznutzungsrechnungPreisblattPreisblattDienstleistungPreisblattKonzessionsabgabePreisblattMessungPreisblattUmlagenRechnungTarifinfoTarifPreisblattVertragZaehlerZeitreihe"
+const _BOTyp_name = "AngebotAnsprechpartnerAusschreibungEnergiemengeGeschaeftspartnerKostenLastgangMarktlokationMesslokationMarktteilnehmerMarktrechnungNetznutzungsrechnungPreisblattPreisblattDienstleistungPreisblattKonzessionsabgabePreisblattMessungPreisblattUmlagenRechnungTarifinfoTarifPreisblattVertragZaehlerZeitreihe"
 
-var _BOTyp_index = [...]uint16{0, 7, 22, 35, 47, 64, 70, 78, 91, 103, 118, 138, 148, 172, 199, 216, 233, 241, 250, 265, 272, 279, 288}
+var _BOTyp_index = [...]uint16{0, 7, 22, 35, 47, 64, 70, 78, 91, 103, 118, 131, 151, 161, 185, 212, 229, 246, 254, 263, 278, 285, 292, 301}
 
 func (i BOTyp) String() string {
 	i -= 1
