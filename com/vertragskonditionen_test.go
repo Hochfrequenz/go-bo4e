@@ -19,10 +19,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 		AnzahlAbschlaege: 17,
 		Vertragslaufzeit: com.Zeitraum{
 			Einheit: zeiteinheit.Minute,
-			Dauer: decimal.NullDecimal{
-				Decimal: decimal.NewFromFloat(15),
-				Valid:   true,
-			},
+			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
 		Kuendigungsfrist: com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -34,7 +31,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 		},
 		Abschlagszyklus: com.Zeitraum{
 			Einheit: zeiteinheit.Jahr,
-			Dauer:   decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(7)},
+			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 		},
 	}
 	serializedVertragskonditionen, err := json.Marshal(vertragskonditionen)
@@ -73,10 +70,7 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 			AnzahlAbschlaege: 17,
 			Vertragslaufzeit: com.Zeitraum{
 				Einheit: zeiteinheit.Minute,
-				Dauer: decimal.NullDecimal{
-					Decimal: decimal.NewFromFloat(15),
-					Valid:   true,
-				},
+				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 			},
 			Kuendigungsfrist: com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -88,10 +82,7 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 			},
 			Abschlagszyklus: com.Zeitraum{
 				Einheit: zeiteinheit.Jahr,
-				Dauer: decimal.NullDecimal{
-					Decimal: decimal.NewFromFloat(7),
-					Valid:   true,
-				},
+				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 			},
 		},
 	}
