@@ -77,7 +77,7 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
 				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
 				Tarifart:           tarifart.Eintarif,
-				Zaehlerkonstante:   decimal.NullDecimal{Valid: true, Decimal: decimal.NewFromFloat(17)},
+				Zaehlerkonstante:   decimal.NewNullDecimal(decimal.NewFromFloat(17)),
 				Zaehlwerke:         []com.Zaehlwerk{},
 				Zaehlerhersteller:  nil,
 			},

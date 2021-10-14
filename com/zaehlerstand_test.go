@@ -20,10 +20,7 @@ func (s *Suite) Test_Zaehlerstand_Deserialization() {
 		Wertermittlungsverfahren: wertermittlungsverfahren.MESSUNG,
 		Wert:                     decimal.NewFromFloat(847439),
 		Einheit:                  mengeneinheit.KWH,
-		Zustandszahl: decimal.NullDecimal{
-			Decimal: decimal.NewFromFloat(17.23),
-			Valid:   true,
-		},
+		Zustandszahl:             decimal.NewNullDecimal(decimal.NewFromFloat(17.23)),
 	}
 	serializedZaehlerstand, err := json.Marshal(zaehlerstand)
 	jsonString := string(serializedZaehlerstand)
