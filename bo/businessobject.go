@@ -7,7 +7,10 @@ import (
 
 // BusinessObject is the interface that all Business Objects implement.
 type BusinessObject interface {
+	// GetBoTyp returns the Geschaeftsobjekt.BoTyp
 	GetBoTyp() botyp.BOTyp
+	// GetVersionStruktur returns the Geschaeftsobjekt.VersionStruktur
+	GetVersionStruktur() string
 }
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
@@ -21,26 +24,54 @@ func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
 	return gob.BoTyp
 }
 
-// GetNewBusinessObject creates an empty BusinessObject based on the provided type; Returns nil if the type is not implemented.
-func GetNewBusinessObject(typ botyp.BOTyp) BusinessObject {
+func (gob Geschaeftsobjekt) GetVersionStruktur() string {
+	if gob.VersionStruktur == "" {
+		return defaultVersionStruktur
+	}
+	return gob.VersionStruktur
+}
+
+// defaultVersionStruktur is the Geschaeftsobjekt.VersionStruktur that a NewBusinessObject has by default
+const defaultVersionStruktur = "1.1" // because "externeReferenzen" not "externeReferenz"
+
+// NewBusinessObject creates an empty BusinessObject based on the provided type; Returns nil if the type is not implemented.
+func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
+	var bo BusinessObject
 	switch typ {
 	case botyp.Energiemenge:
-		return new(Energiemenge)
+		bo = new(Energiemenge)
+		bo.(*Energiemenge).BoTyp = typ
+		bo.(*Energiemenge).VersionStruktur = defaultVersionStruktur
 	case botyp.Geschaeftspartner:
-		return new(Geschaeftspartner)
+		bo = new(Geschaeftspartner)
+		bo.(*Geschaeftspartner).BoTyp = typ
+		bo.(*Geschaeftspartner).VersionStruktur = defaultVersionStruktur
 	case botyp.Lastgang:
-		return new(Lastgang)
+		bo = new(Lastgang)
+		bo.(*Lastgang).BoTyp = typ
+		bo.(*Lastgang).VersionStruktur = defaultVersionStruktur
 	case botyp.Messlokation:
-		return new(Messlokation)
+		bo = new(Messlokation)
+		bo.(*Messlokation).BoTyp = typ
+		bo.(*Messlokation).VersionStruktur = defaultVersionStruktur
 	case botyp.Netznutzungsrechnung:
-		return new(Netznutzungsrechnung)
+		bo = new(Netznutzungsrechnung)
+		bo.(*Netznutzungsrechnung).BoTyp = typ
+		bo.(*Netznutzungsrechnung).VersionStruktur = defaultVersionStruktur
 	case botyp.Rechnung:
-		return new(Rechnung)
+		bo = new(Rechnung)
+		bo.(*Rechnung).BoTyp = typ
+		bo.(*Rechnung).VersionStruktur = defaultVersionStruktur
 	case botyp.Vertrag:
-		return new(Vertrag)
+		bo = new(Vertrag)
+		bo.(*Vertrag).BoTyp = typ
+		bo.(*Vertrag).VersionStruktur = defaultVersionStruktur
 	case botyp.Zaehler:
-		return new(Zaehler)
+		bo = new(Zaehler)
+		bo.(*Zaehler).BoTyp = typ
+		bo.(*Zaehler).VersionStruktur = defaultVersionStruktur
 	default:
 		return nil
 	}
+	return bo
 }

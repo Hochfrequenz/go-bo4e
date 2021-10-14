@@ -402,7 +402,9 @@ var completeValidRechnung = bo.Rechnung{
 }
 
 func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
-	object := bo.GetNewBusinessObject(botyp.Rechnung)
+	object := bo.NewBusinessObject(botyp.Rechnung)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Rechnung{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Rechnung))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

@@ -173,7 +173,9 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 }
 
 func (s *Suite) Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp() {
-	object := bo.GetNewBusinessObject(botyp.Geschaeftspartner)
+	object := bo.NewBusinessObject(botyp.Geschaeftspartner)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Geschaeftspartner{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.Geschaeftspartner))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
