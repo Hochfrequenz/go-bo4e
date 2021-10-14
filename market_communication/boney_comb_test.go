@@ -143,6 +143,81 @@ func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Not_Found_Key_And_Value_
 	then.AssertThat(s.T(), *emptyBoneyComb.GetTransactionData("foo"), is.EqualTo("bar"))
 }
 
+func (s *Suite) Test_GetNachrichtendatum_Returns_Nil_For_Nil_Transaktionsdaten() {
+	var emptyBoneyComb = market_communication.BOneyComb{}
+	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.Nil())
+	nachrichtendatum, err := emptyBoneyComb.GetNachrichtendatum()
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), nachrichtendatum, is.Nil())
+}
+
+func (s *Suite) Test_GetNachrichtendatum_Returns_Error_For_Unparsable_Date() {
+	var boneyCombWithMalformedDate = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Nachrichtendatum": "adasdasd",
+		},
+	}
+	nachrichtendatum, err := boneyCombWithMalformedDate.GetNachrichtendatum()
+	then.AssertThat(s.T(), nachrichtendatum, is.Nil())
+	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+}
+
+func (s *Suite) Test_GetNachrichtendatum_Returns_Correct_Value() {
+	var boneyCombWithMalformedDate = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Nachrichtendatum": "2021-10-14T15:35:00Z",
+		},
+	}
+	nachrichtendatum, err := boneyCombWithMalformedDate.GetNachrichtendatum()
+	then.AssertThat(s.T(), *nachrichtendatum, is.EqualTo(time.Date(2021, 10, 14, 15, 35, 0, 0, time.UTC)))
+	then.AssertThat(s.T(), err, is.Nil())
+}
+
+func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Dokumentennummer": "asdasdasd",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetDokumentennummer(), is.EqualTo("asdasdasd"))
+}
+
+func (s *Suite) Test_GetAbsender_Returns_Correct_Value_Without_Uri() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Absender": "9876543210987",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+}
+
+func (s *Suite) Test_GetAbsender_Returns_Correct_Value_With_Uri() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Absender": "bo4e://Marktteilnehmer/9876543210987",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+}
+
+func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_With_Uri() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Empfaenger": "bo4e://Marktteilnehmer/9876543210987",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
+}
+
+func (s *Suite) Test_GetAbsender_Returns_Nil_For_Malformed_Data() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"Absender": "asdasd",
+		},
+	}
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsenderCode(), is.Nil())
+}
+
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
 func (s *Suite) Test_BOneyComb_Deserialization() {
 	const dirName = "test_boney_combs"
