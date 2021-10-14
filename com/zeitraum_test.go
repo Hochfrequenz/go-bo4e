@@ -15,11 +15,8 @@ import (
 // TestZeitraumDeserialization deserializes a Zeitraum json
 func (s *Suite) Test_Zeitraum_Deserialization() {
 	var zeitraum = com.Zeitraum{
-		Einheit: zeiteinheit.Minute,
-		Dauer: decimal.NullDecimal{
-			Decimal: decimal.NewFromFloat(15),
-			Valid:   true,
-		},
+		Einheit:        zeiteinheit.Minute,
+		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	}
@@ -75,20 +72,14 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 	validate := validator.New()
 	validZeitraums := []interface{}{
 		com.Zeitraum{
-			Einheit: zeiteinheit.Zeiteinheit(0),
-			Dauer: decimal.NullDecimal{
-				Decimal: decimal.NewFromFloat(15),
-				Valid:   true,
-			},
+			Einheit:        zeiteinheit.Zeiteinheit(0),
+			Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 		com.Zeitraum{
 			Einheit: zeiteinheit.Minute,
-			Dauer: decimal.NullDecimal{
-				Decimal: decimal.NewFromFloat(15),
-				Valid:   true,
-			},
+			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
 		com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
