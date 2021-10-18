@@ -54,7 +54,7 @@ func (boneyComb *BOneyComb) GetAbsenderCode() *string {
 	return boneyComb.getMpCode("Absender")
 }
 
-// GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in the Transaktionsdaten
+// GetEmpfaenger returns receiving Marktteilnehmer if present in both Transaktionsdaten and Stammdaten; nil otherwise
 func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 	return boneyComb.getMpCode("Empfaenger")
 }
