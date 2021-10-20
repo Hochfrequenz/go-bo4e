@@ -24,6 +24,7 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
 	"io/ioutil"
+	"path/filepath"
 	"testing"
 	"time"
 )
@@ -319,7 +320,7 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 	then.AssertThat(s.T(), len(jsonFiles), is.Not(is.EqualTo(0)))
 
 	for _, file := range jsonFiles {
-		fileContent, readErr := ioutil.ReadFile(dirName + "/" + file.Name())
+		fileContent, readErr := ioutil.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
 		then.AssertThat(s.T(), readErr, is.Nil())
 		then.AssertThat(s.T(), fileContent, is.Not(is.Nil()))
 		var boneyComb market_communication.BOneyComb
