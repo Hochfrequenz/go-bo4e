@@ -32,7 +32,7 @@ func (gob Geschaeftsobjekt) GetVersionStruktur() string {
 }
 
 // defaultVersionStruktur is the Geschaeftsobjekt.VersionStruktur that a NewBusinessObject has by default
-const defaultVersionStruktur = "1.1" // because "externeReferenzen" not "externeReferenz"
+const defaultVersionStruktur = "1.1" // because Geschaeftsobjekt.ExterneReferenzen (plural) was introduced in v1.1. In v1.0 the name was "externeReferenz" (singular)
 
 // NewBusinessObject creates an empty BusinessObject based on the provided type; Returns nil if the type is not implemented.
 func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
