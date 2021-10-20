@@ -26,7 +26,7 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 			BoTyp:           botyp.GESCHAEFTSPARTNER,
 			VersionStruktur: "1",
 		},
-		Anrede: anrede.Frau,
+		Anrede: anrede.FRAU,
 		Name1:  "Musterfrau",
 		Name2:  "Erika",
 	},

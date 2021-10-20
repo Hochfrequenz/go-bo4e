@@ -30,7 +30,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Anrede:               anrede.Divers,
+			Anrede:               anrede.DIVERS,
 			Name1:                "Müller",
 			Name2:                "Lieschen",
 			Name3:                "",

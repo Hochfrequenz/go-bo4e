@@ -6,11 +6,11 @@ package anrede
 type Anrede int
 
 const (
-	Herr             Anrede = iota + 1 // Herr
-	Frau                               // Frau
-	Divers                             // divers
-	Eheleute                           // Eheleute
-	Firma                              // Firma
-	Wohngemeinschaft                   // WG
-	Individuell                        // Individuell festgelegt
+	HERR             Anrede = iota + 1 // HERR (male)
+	FRAU                               // FRAU (female)
+	DIVERS                             // DIVERS (non-binary)
+	EHELEUTE                           // EHELEUTE (married couple)
+	FIRMA                              // FIRMA (company)
+	WOHNGEMEINSCHAFT                   // WOHNGEMEINSCHAFT is a share flat/WG
+	INDIVIDUELL                        // INDIVIDUELL festgelegt
 )

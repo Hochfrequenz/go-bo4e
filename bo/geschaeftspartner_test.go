@@ -23,7 +23,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
-		Anrede:               anrede.Divers,
+		Anrede:               anrede.DIVERS,
 		Name1:                "Müller",
 		Name2:                "Lieschen",
 		Name3:                "",
@@ -49,7 +49,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	}
 	serializedGp, err := json.Marshal(gp)
 	jsonString := string(serializedGp)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Divers"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DIVERS"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedGp, is.Not(is.Nil()))
 	var deserializedGp bo.Geschaeftspartner

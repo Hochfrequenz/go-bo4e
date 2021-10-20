@@ -40,7 +40,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				ExterneReferenzen: nil,
 			},
 			Name1:                "Mustermann",
-			Anrede:               anrede.Herr,
+			Anrede:               anrede.HERR,
 			Gewerbekennzeichnung: false,
 			Partneradresse: com.Adresse{
 				Postleitzahl: "82031",
@@ -59,7 +59,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Anrede:               anrede.Frau,
+			Anrede:               anrede.FRAU,
 			Name1:                "Musterfrau",
 			Gewerbekennzeichnung: false,
 			Partneradresse: com.Adresse{

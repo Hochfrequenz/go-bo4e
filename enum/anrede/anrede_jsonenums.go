@@ -9,23 +9,23 @@ import (
 
 var (
 	_AnredeNameToValue = map[string]Anrede{
-		"Herr":             Herr,
-		"Frau":             Frau,
-		"Divers":           Divers,
-		"Eheleute":         Eheleute,
-		"Firma":            Firma,
-		"Wohngemeinschaft": Wohngemeinschaft,
-		"Individuell":      Individuell,
+		"HERR":             HERR,
+		"FRAU":             FRAU,
+		"DIVERS":           DIVERS,
+		"EHELEUTE":         EHELEUTE,
+		"FIRMA":            FIRMA,
+		"WOHNGEMEINSCHAFT": WOHNGEMEINSCHAFT,
+		"INDIVIDUELL":      INDIVIDUELL,
 	}
 
 	_AnredeValueToName = map[Anrede]string{
-		Herr:             "Herr",
-		Frau:             "Frau",
-		Divers:           "Divers",
-		Eheleute:         "Eheleute",
-		Firma:            "Firma",
-		Wohngemeinschaft: "Wohngemeinschaft",
-		Individuell:      "Individuell",
+		HERR:             "HERR",
+		FRAU:             "FRAU",
+		DIVERS:           "DIVERS",
+		EHELEUTE:         "EHELEUTE",
+		FIRMA:            "FIRMA",
+		WOHNGEMEINSCHAFT: "WOHNGEMEINSCHAFT",
+		INDIVIDUELL:      "INDIVIDUELL",
 	}
 )
 
@@ -33,13 +33,13 @@ func init() {
 	var v Anrede
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_AnredeNameToValue = map[string]Anrede{
-			interface{}(Herr).(fmt.Stringer).String():             Herr,
-			interface{}(Frau).(fmt.Stringer).String():             Frau,
-			interface{}(Divers).(fmt.Stringer).String():           Divers,
-			interface{}(Eheleute).(fmt.Stringer).String():         Eheleute,
-			interface{}(Firma).(fmt.Stringer).String():            Firma,
-			interface{}(Wohngemeinschaft).(fmt.Stringer).String(): Wohngemeinschaft,
-			interface{}(Individuell).(fmt.Stringer).String():      Individuell,
+			interface{}(HERR).(fmt.Stringer).String():             HERR,
+			interface{}(FRAU).(fmt.Stringer).String():             FRAU,
+			interface{}(DIVERS).(fmt.Stringer).String():           DIVERS,
+			interface{}(EHELEUTE).(fmt.Stringer).String():         EHELEUTE,
+			interface{}(FIRMA).(fmt.Stringer).String():            FIRMA,
+			interface{}(WOHNGEMEINSCHAFT).(fmt.Stringer).String(): WOHNGEMEINSCHAFT,
+			interface{}(INDIVIDUELL).(fmt.Stringer).String():      INDIVIDUELL,
 		}
 	}
 }
