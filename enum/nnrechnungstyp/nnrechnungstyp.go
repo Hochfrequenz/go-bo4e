@@ -6,14 +6,15 @@ package nnrechnungstyp
 type NNRechnungstyp int
 
 const (
-	ABSCHLUSSRECHNUNG          NNRechnungstyp = iota + 1 // ABSCHLUSSRECHNUNG is a Abschlussrechnung
-	ABSCHLAGSRECHNUNG                                    // ABSCHLAGSRECHNUNG is a Abschlagsrechnung
-	TURNUSRECHNUNG                                       // TURNUSRECHNUNG is a Turnusrechnung
-	MONATSRECHNUNG                                       // MONATSRECHNUNG is a Monatsrechnung
-	WIMRECHNUNG                                          // WIMRECHNUNG is a Rechnung für WiM
-	ZWISCHENRECHNUNG                                     // ZWISCHENRECHNUNG is a Zwischenrechnung
-	INTEGRIERTE_13TE_RECHNUNG                            // INTEGRIERTE_13TE_RECHNUNG is a Integrierte 13. Rechnung
-	ZUSAETZLICHE_13TE_RECHNUNG                           // ZUSAETZLICHE_13TE_RECHNUNG is a Zusätzliche 13. Rechnung
-	MEHRMINDERMENGENRECHNUNG                             // MEHRMINDERMENGENRECHNUNG is a Mehr/Mindermengenabrechnung
-	MSBRECHNUNG                                          // MSBRECHNUNG is the invoice for the meter server operation (Messstellenbetrieb/MSB)
+	// ABSCHLUSSRECHNUNG is a Abschlussrechnung
+	ABSCHLUSSRECHNUNG          NNRechnungstyp = iota + 1
+	ABSCHLAGSRECHNUNG                         // ABSCHLAGSRECHNUNG is a Abschlagsrechnung
+	TURNUSRECHNUNG                            // TURNUSRECHNUNG is a Turnusrechnung
+	MONATSRECHNUNG                            // MONATSRECHNUNG is a Monatsrechnung
+	WIMRECHNUNG                               // WIMRECHNUNG is a Rechnung für WiM
+	ZWISCHENRECHNUNG                          // ZWISCHENRECHNUNG is a Zwischenrechnung
+	INTEGRIERTE_13TE_RECHNUNG                 // INTEGRIERTE_13TE_RECHNUNG is a Integrierte 13. Rechnung
+	ZUSAETZLICHE_13TE_RECHNUNG                // ZUSAETZLICHE_13TE_RECHNUNG is a Zusätzliche 13. Rechnung
+	MEHRMINDERMENGENRECHNUNG                  // MEHRMINDERMENGENRECHNUNG is a Mehr/Mindermengenabrechnung
+	MSBRECHNUNG                               // MSBRECHNUNG is the invoice for the meter server operation (Messstellenbetrieb/MSB)
 )

@@ -6,6 +6,7 @@ package energierichtung
 type Energierichtung int
 
 const (
-	AUSSP Energierichtung = iota + 1 // AUSSP is short for "Ausspeisung" / supply
-	EINSP                            // EINSP is short for "Einspeisung" / feeding
+	// AUSSP is short for "Ausspeisung" / supply
+	AUSSP Energierichtung = iota + 1
+	EINSP                 // EINSP is short for "Einspeisung" / feeding
 )
