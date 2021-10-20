@@ -37,9 +37,9 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 		},
 		Sparte:             sparte.STROM,
 		Zaehlernummer:      "1ASD23",
-		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-		Zaehlertyp:         zaehlertyp.Drehkolbenzaehler,
-		Tarifart:           tarifart.Eintarif,
+		Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+		Zaehlertyp:         zaehlertyp.DREHKOLBENZAEHLER,
+		Tarifart:           tarifart.EINTARIF,
 	},
 	&bo.Energiemenge{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -47,7 +47,7 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 			VersionStruktur: "1",
 		},
 		LokationsId:  "54321012345",
-		LokationsTyp: lokationstyp.MaLo,
+		LokationsTyp: lokationstyp.MALO,
 		Verbrauch: []com.Verbrauch{
 			{
 				Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),

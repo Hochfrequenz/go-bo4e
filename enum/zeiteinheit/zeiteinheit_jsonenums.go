@@ -9,29 +9,29 @@ import (
 
 var (
 	_ZeiteinheitNameToValue = map[string]Zeiteinheit{
-		"Sekunde":       Sekunde,
-		"Minute":        Minute,
-		"Stunde":        Stunde,
-		"ViertelStunde": ViertelStunde,
-		"Tag":           Tag,
-		"Woche":         Woche,
-		"Monat":         Monat,
-		"Quartal":       Quartal,
-		"Halbjahr":      Halbjahr,
-		"Jahr":          Jahr,
+		"SEKUNDE":       SEKUNDE,
+		"MINUTE":        MINUTE,
+		"STUNDE":        STUNDE,
+		"VIERTELSTUNDE": VIERTELSTUNDE,
+		"TAG":           TAG,
+		"WOCHE":         WOCHE,
+		"MONAT":         MONAT,
+		"QUARTAL":       QUARTAL,
+		"HALBJAHR":      HALBJAHR,
+		"JAHR":          JAHR,
 	}
 
 	_ZeiteinheitValueToName = map[Zeiteinheit]string{
-		Sekunde:       "Sekunde",
-		Minute:        "Minute",
-		Stunde:        "Stunde",
-		ViertelStunde: "ViertelStunde",
-		Tag:           "Tag",
-		Woche:         "Woche",
-		Monat:         "Monat",
-		Quartal:       "Quartal",
-		Halbjahr:      "Halbjahr",
-		Jahr:          "Jahr",
+		SEKUNDE:       "SEKUNDE",
+		MINUTE:        "MINUTE",
+		STUNDE:        "STUNDE",
+		VIERTELSTUNDE: "VIERTELSTUNDE",
+		TAG:           "TAG",
+		WOCHE:         "WOCHE",
+		MONAT:         "MONAT",
+		QUARTAL:       "QUARTAL",
+		HALBJAHR:      "HALBJAHR",
+		JAHR:          "JAHR",
 	}
 )
 
@@ -39,16 +39,16 @@ func init() {
 	var v Zeiteinheit
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_ZeiteinheitNameToValue = map[string]Zeiteinheit{
-			interface{}(Sekunde).(fmt.Stringer).String():       Sekunde,
-			interface{}(Minute).(fmt.Stringer).String():        Minute,
-			interface{}(Stunde).(fmt.Stringer).String():        Stunde,
-			interface{}(ViertelStunde).(fmt.Stringer).String(): ViertelStunde,
-			interface{}(Tag).(fmt.Stringer).String():           Tag,
-			interface{}(Woche).(fmt.Stringer).String():         Woche,
-			interface{}(Monat).(fmt.Stringer).String():         Monat,
-			interface{}(Quartal).(fmt.Stringer).String():       Quartal,
-			interface{}(Halbjahr).(fmt.Stringer).String():      Halbjahr,
-			interface{}(Jahr).(fmt.Stringer).String():          Jahr,
+			interface{}(SEKUNDE).(fmt.Stringer).String():       SEKUNDE,
+			interface{}(MINUTE).(fmt.Stringer).String():        MINUTE,
+			interface{}(STUNDE).(fmt.Stringer).String():        STUNDE,
+			interface{}(VIERTELSTUNDE).(fmt.Stringer).String(): VIERTELSTUNDE,
+			interface{}(TAG).(fmt.Stringer).String():           TAG,
+			interface{}(WOCHE).(fmt.Stringer).String():         WOCHE,
+			interface{}(MONAT).(fmt.Stringer).String():         MONAT,
+			interface{}(QUARTAL).(fmt.Stringer).String():       QUARTAL,
+			interface{}(HALBJAHR).(fmt.Stringer).String():      HALBJAHR,
+			interface{}(JAHR).(fmt.Stringer).String():          JAHR,
 		}
 	}
 }

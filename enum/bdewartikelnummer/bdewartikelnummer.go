@@ -6,49 +6,49 @@ package bdewartikelnummer
 type BDEWArtikelnummer int
 
 const (
-	Leistung                               BDEWArtikelnummer = iota + 1 // 9990001000053
-	Leistungpauschal                                                    // 9990001000079
-	Grundpreis                                                          // 9990001000087
-	Regelenergiearbeit                                                  // 9990001000128
-	Regelenergieleistung                                                // 9990001000136
-	Notstromlieferungarbeit                                             // 9990001000144
-	Notstromlieferungleistung                                           // 9990001000152
-	Reservenetzkapazitaet                                               // 9990001000160
-	Reserveleistung                                                     // 9990001000178
-	Zusaetzlicheablesung                                                // 9990001000186
-	Pruefgebuehrenausserplanmaessig                                     // 9990001000219
-	Wirkarbeit                                                          // 9990001000269
-	Singulaergenutztebetriebsmittel                                     // 9990001000285
-	Abgabekwkg                                                          // 9990001000334
-	Abschlag                                                            // 9990001000376
-	Konzessionsabgabe                                                   // 9990001000417
-	Entgelt_fernauslesung                                               // 9990001000433
-	Untermessung                                                        // 9990001000475
-	Blindmehrarbeit                                                     // 9990001000508
-	Entgelt_abrechnung                                                  // 9990001000532
-	Sperrkosten                                                         // 9990001000540
-	Entsperrkosten                                                      // 9990001000558
-	Mahnkosten                                                          // 9990001000566
-	MehrMmindermengen                                                   // 9990001000574
-	Inkassokosten                                                       // 9990001000582
-	Blindmehrleistung                                                   // 9990001000590
-	EntgeltmessungAblesung                                              // 9990001000615
-	EntgelteinbauBetriebWartungMesstechnik                              // 9990001000623
-	Ausgleichsenergie                                                   // 9990001000631
-	Zaehleinrichtung                                                    // 9990001000649
-	WandlerMengenumwerter                                               // 9990001000657
-	Kommunikationseinrichtung                                           // 9990001000665
-	TechnischeSteuereinrichtung                                         // 9990001000673
-	Paragraf19StromNevUmlage                                            // 9990001000681
-	Befestigungseinrichtung                                             // 9990001000699
-	OffshoreHaftungsumlage                                              // 9990001000706
-	FixeArbeitsentgeltkomponente                                        // 9990001000714
-	FixeLeistungsentgeltkomponente                                      // 9990001000722
-	UmlageAbschaltbareLasten                                            // 9990001000730
-	Mehrmenge                                                           // 9990001000748
-	Mindermenge                                                         // 9990001000756
-	Energiesteuer                                                       // 9990001000764
-	SmartmeterGateway                                                   // 9990001000772
-	Steuerbox                                                           // 9990001000780
-	MsbInklMessung                                                      // 9990001000798
+	LEISTUNG                               BDEWArtikelnummer = iota + 1 // LEISTUNG has the BDEW article number 9990001000053
+	LEISTUNGPAUSCHAL                                                    // LEISTUNGPAUSCHAL has the BDEW article number 9990001000079
+	GRUNDPREIS                                                          // GRUNDPREIS has the BDEW article number 9990001000087
+	REGELENERGIEPREIS                                                   // REGELENERGIEPREIS has the BDEW article number 9990001000128
+	REGELENERGIELEISTUNG                                                // REGELENERGIELEISTUNG has the BDEW article number 9990001000136
+	NOTSTROMLIEFERUNGARBEIT                                             // NOTSTROMLIEFERUNGARBEIT has the BDEW article number 9990001000144
+	NOTSTROMLIEFERUNGLEISTUNG                                           // NOTSTROMLIEFERUNGLEISTUNG has the BDEW article number 9990001000152
+	RESERVENETZKAPAZITAET                                               // RESERVENETZKAPAZITAET has the BDEW article number 9990001000160
+	RESERVELEISTUNG                                                     // RESERVELEISTUNG has the BDEW article number 9990001000178
+	ZUSAETZLICHEABLESUNG                                                // ZUSAETZLICHEABLESUNG has the BDEW article number 9990001000186
+	PRUEFGEBUEHRENAUSSERPLANMAESSIG                                     // PRUEFGEBUEHRENAUSSERPLANMAESSIG has the BDEW article number 9990001000219
+	WIRKARBEIT                                                          // WIRKARBEIT has the BDEW article number 9990001000269
+	SINGULAERGENUTZTEBETRIEBSMITTEL                                     // SINGULAERGENUTZTEBETRIEBSMITTEL has the BDEW article number 9990001000285
+	ABGABEKWKG                                                          // ABGABEKWKG has the BDEW article number 9990001000334
+	ABSCHLAG                                                            // ABSCHLAG has the BDEW article number 9990001000376
+	KONZESSIONSABGABE                                                   // KONZESSIONSABGABE has the BDEW article number 9990001000417
+	ENTGELT_FERNAUSLESUNG                                               // ENTGELT_FERNAUSLESUNG has the BDEW article number 9990001000433
+	UNTERMESSUNG                                                        // UNTERMESSUNG has the BDEW article number 9990001000475
+	BLINDMEHRARBEIT                                                     // BLINDMEHRARBEIT has the BDEW article number 9990001000508
+	ENTGELT_ABRECHNUNG                                                  // ENTGELT_ABRECHNUNG has the BDEW article number 9990001000532
+	SPERRKOSTEN                                                         // SPERRKOSTEN has the BDEW article number 9990001000540
+	ENTSPERRKOSTEN                                                      // ENTSPERRKOSTEN has the BDEW article number 9990001000558
+	MAHNKOSTEN                                                          // MAHNKOSTEN has the BDEW article number 9990001000566
+	MEHRMMINDERMENGEN                                                   // MEHRMMINDERMENGEN has the BDEW article number 9990001000574
+	INKASSOKOSTEN                                                       // INKASSOKOSTEN has the BDEW article number 9990001000582
+	BLINDMEHRLEISTUNG                                                   // BLINDMEHRLEISTUNG has the BDEW article number 9990001000590
+	ENTGELTMESSUNGABLESUNG                                              // ENTGELTMESSUNGABLESUNG has the BDEW article number 9990001000615
+	ENTGELTEINBAUBETRIEBWARTUNGMESSTECHNIK                              // ENTGELTEINBAUBETRIEBWARTUNGMESSTECHNIK has the BDEW article number 9990001000623
+	AUSGLEICHSENERGIE                                                   // AUSGLEICHSENERGIE has the BDEW article number 9990001000631
+	ZAEHLEINRICHTUNG                                                    // ZAEHLEINRICHTUNG has the BDEW article number 9990001000649
+	WANDLERMENGENUMWERTER                                               // WANDLERMENGENUMWERTER has the BDEW article number 9990001000657
+	KOMMUNIKATIONSEINRICHTUNG                                           // KOMMUNIKATIONSEINRICHTUNG has the BDEW article number 9990001000665
+	TECHNISCHESTEUEREINRICHTUNG                                         // TECHNISCHESTEUEREINRICHTUNG has the BDEW article number 9990001000673
+	PARAGRAF19STROMNEVUMLAGE                                            // PARAGRAF19STROMNEVUMLAGE has the BDEW article number 9990001000681
+	BEFESTIGUNGSEINRICHTUNG                                             // BEFESTIGUNGSEINRICHTUNG has the BDEW article number 9990001000699
+	OFFSHOREHAFTUNGSUMLAGE                                              // OFFSHOREHAFTUNGSUMLAGE has the BDEW article number 9990001000706
+	FIXEARBEITSENTGELTKOMPONENTE                                        // FIXEARBEITSENTGELTKOMPONENTE has the BDEW article number 9990001000714
+	FIXELEISTUNGSENTGELTKOMPONENTE                                      // FIXELEISTUNGSENTGELTKOMPONENTE has the BDEW article number 9990001000722
+	UMLAGEABSCHALTBARELASTEN                                            // UMLAGEABSCHALTBARELASTEN has the BDEW article number 9990001000730
+	MEHRMENGE                                                           // MEHRMENGE has the BDEW article number 9990001000748
+	MINDERMENGE                                                         // MINDERMENGE has the BDEW article number 9990001000756
+	ENERGIESTEUER                                                       // ENERGIESTEUER has the BDEW article number 9990001000764
+	SMARTMETERGATEWAY                                                   // SMARTMETERGATEWAY has the BDEW article number 9990001000772
+	STEUERBOX                                                           // STEUERBOX has the BDEW article number 9990001000780
+	MSBINKLMESSUNG                                                      // MSBINKLMESSUNG has the BDEW article number 9990001000798
 )

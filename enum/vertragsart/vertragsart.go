@@ -6,9 +6,9 @@ package vertragsart
 type Vertragsart int
 
 const (
-	Energieliefervertrag       Vertragsart = iota + 1 // Energieliefervertrag
-	Netznutzung                                       // Netznutzungsvertrag
-	Bilanzierungsvertrag                              // Bilanzierungsvertrag
-	Messstellenbetriebsvertrag                        // Messstellenabetriebsvertrag
-	Buendelvertrag                                    // Bündelvertrag
+	ENERGIELIEFERVERTRAG       Vertragsart = iota + 1 // ENERGIELIEFERVERTRAG
+	NETZNUTZUNG                                       // Netznutzungsvertrag
+	BILANZIERUNGSVERTRAG                              // BILANZIERUNGSVERTRAG
+	MESSSTELLENBETRIEBSVERTRAG                        // Messstellenabetriebsvertrag
+	BUENDELVERTRAG                                    // Bündelvertrag
 )

@@ -53,14 +53,14 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 				},
 				Zaehlernummer:      "0815",
 				Sparte:             sparte.STROM,
-				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
-				Tarifart:           tarifart.Eintarif,
+				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
+				Tarifart:           tarifart.EINTARIF,
 				Zaehlerkonstante:   decimal.NullDecimal{},
 				Zaehlwerke: []com.Zaehlwerk{{
 					ZaehlwerkId:   "1",
 					Bezeichnung:   "",
-					Richtung:      energierichtung.Aussp,
+					Richtung:      energierichtung.AUSSP,
 					ObisKennzahl:  "1-0:1.8.0",
 					Wandlerfaktor: decimal.NewFromFloat(1),
 					Einheit:       mengeneinheit.KWH,
@@ -73,9 +73,9 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	then.AssertThat(s.T(), serializedMelo, is.Not(is.Nil()))
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "MD"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "STROM"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Einrichtungszaehler"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "Eintarif"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "EINTARIF"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "EINRICHTUNGSZAEHLER"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMelo), "EINTARIF"), is.True())
 	var deserializedMelo bo.Messlokation
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -113,8 +113,8 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 	VerfiyFailedValidations(s, validate, invalidMesslokationMap)
 }
 
-//  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_MesslokationValidation() {
+//  Test_Successful_Messlokation_Validation verifies that a valid BO is validated without errors
+func (s *Suite) Test_Successful_Messlokation_Validation() {
 	validate := validator.New()
 	validMelos := []bo.BusinessObject{
 		bo.Messlokation{

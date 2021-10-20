@@ -6,11 +6,11 @@ package steuerkennzeichen
 type Steuerkennzeichen int
 
 const (
-	Ust0  Steuerkennzeichen = iota + 1 // Keine Umsatzsteuer, bzw. nicht steuerbar.
-	Ust19                              // Umsatzsteuer 19%
-	Ust7                               // Umsatzsteuer 7%
-	Vst0                               // Keine Vorsteuer, bzw. nicht steuerbar.
-	Vst19                              // Vorsteuer 19%
-	Vst7                               // Vorsteuer 7%
-	RCV                                // Reverse Charge Verfahren (Umkehrung der Steuerpflicht)
+	UST0  Steuerkennzeichen = iota + 1 // UST0 means Keine Umsatzsteuer, bzw. nicht steuerbar.
+	UST19                              // UST19 means Umsatzsteuer 19%
+	UST7                               // UST7 means Umsatzsteuer 7%
+	VST0                               // VST0 means Keine Vorsteuer, bzw. nicht steuerbar.
+	VST19                              // VST19 means Vorsteuer 19%
+	VST7                               // VST7 means Vorsteuer 7%
+	RCV                                // RCV means Reverse Charge Verfahren (Umkehrung der Steuerpflicht)
 )

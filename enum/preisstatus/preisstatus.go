@@ -6,8 +6,8 @@ package preisstatus
 type Preisstatus int
 
 const (
-	// Vorlaufig means preliminary
-	Vorlaufig Preisstatus = iota + 1
-	// Endgueltig means final
-	Endgueltig
+	// VORLAUEFIG means preliminary
+	VORLAUEFIG Preisstatus = iota + 1
+	// ENDGUELTIG means final
+	ENDGUELTIG
 )

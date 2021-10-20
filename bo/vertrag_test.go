@@ -28,8 +28,8 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		},
 		Vertragsnummer: "",
 		Beschreibung:   "",
-		Vertragsstatus: vertragsstatus.Abgelehnt,
-		Vertragsart:    vertragsart.Buendelvertrag,
+		Vertragsstatus: vertragsstatus.ABGELEHNT,
+		Vertragsart:    vertragsart.BUENDELVERTRAG,
 		Sparte:         sparte.STROM,
 		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -50,7 +50,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				Landescode:   landescode.DE,
 			},
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.Dienstleister,
+				geschaeftspartnerrolle.DIENSTLEISTER,
 			},
 		},
 		Vertragspartner2: bo.Geschaeftspartner{
@@ -70,7 +70,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				Landescode:   landescode.DE,
 			},
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.Dienstleister,
+				geschaeftspartnerrolle.DIENSTLEISTER,
 			},
 		},
 		UnterzeichnerVp1:    nil,
@@ -123,8 +123,8 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			},
 			Vertragsnummer: "asd",
 			Beschreibung:   "",
-			Vertragsstatus: vertragsstatus.Angenommen,
-			Vertragsart:    vertragsart.Buendelvertrag,
+			Vertragsstatus: vertragsstatus.ANGENOMMEN,
+			Vertragsart:    vertragsart.BUENDELVERTRAG,
 			Sparte:         sparte.STROM,
 			Vertragsbeginn: time.Now(),
 			Vertragsende:   time.Now().Add(time.Hour * 24),
@@ -144,7 +144,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					Landescode:   landescode.DE,
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-					geschaeftspartnerrolle.Dienstleister,
+					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
 			},
 			Vertragspartner2: bo.Geschaeftspartner{
@@ -163,7 +163,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					Landescode:   landescode.DE,
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-					geschaeftspartnerrolle.Dienstleister,
+					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
 			},
 			UnterzeichnerVp1:    nil,

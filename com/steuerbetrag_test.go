@@ -23,7 +23,7 @@ func (s *Suite) Test_Failed_SteuerbetragValidation() {
 		},
 		"Steuerwert=Basiswert*Steuerkennzeichen": {
 			com.Steuerbetrag{
-				Steuerkennzeichen: steuerkennzeichen.Ust19,
+				Steuerkennzeichen: steuerkennzeichen.UST19,
 				Basiswert:         decimal.NewFromFloat(100),
 				Steuerwert:        decimal.NewFromFloat(7), // expected 19
 				Waehrung:          0,
@@ -39,23 +39,23 @@ func (s *Suite) Test_Successful_SteuerbetragValidation() {
 	validate.RegisterStructValidation(com.SteuerbetragStructLevelValidation, com.Steuerbetrag{})
 	validSteuerbetraege := []interface{}{
 		com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.Ust7,
+			Steuerkennzeichen: steuerkennzeichen.UST7,
 			Waehrung:          waehrungscode.ALL,
 		},
 		com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.Ust7,
+			Steuerkennzeichen: steuerkennzeichen.UST7,
 			Basiswert:         decimal.NewFromFloat(100),
 			Steuerwert:        decimal.NewFromFloat(7),
 			Waehrung:          waehrungscode.ALL,
 		},
 		com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.Ust19,
+			Steuerkennzeichen: steuerkennzeichen.UST19,
 			Basiswert:         decimal.NewFromFloat(50),
 			Steuerwert:        decimal.NewFromFloat(9.5),
 			Waehrung:          waehrungscode.EUR,
 		},
 		com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.Vst0,
+			Steuerkennzeichen: steuerkennzeichen.VST0,
 			Basiswert:         decimal.NewFromFloat(100),
 			Steuerwert:        decimal.NewFromFloat(0),
 			Waehrung:          waehrungscode.EUR,

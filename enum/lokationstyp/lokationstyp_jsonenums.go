@@ -9,13 +9,13 @@ import (
 
 var (
 	_LokationstypNameToValue = map[string]Lokationstyp{
-		"MaLo": MaLo,
-		"MeLo": MeLo,
+		"MALO": MALO,
+		"MELO": MELO,
 	}
 
 	_LokationstypValueToName = map[Lokationstyp]string{
-		MaLo: "MaLo",
-		MeLo: "MeLo",
+		MALO: "MALO",
+		MELO: "MELO",
 	}
 )
 
@@ -23,8 +23,8 @@ func init() {
 	var v Lokationstyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_LokationstypNameToValue = map[string]Lokationstyp{
-			interface{}(MaLo).(fmt.Stringer).String(): MaLo,
-			interface{}(MeLo).(fmt.Stringer).String(): MeLo,
+			interface{}(MALO).(fmt.Stringer).String(): MALO,
+			interface{}(MELO).(fmt.Stringer).String(): MELO,
 		}
 	}
 }

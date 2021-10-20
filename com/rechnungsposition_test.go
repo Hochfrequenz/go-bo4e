@@ -25,8 +25,8 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		LieferungVon:    time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Positionstext:   "foo",
-		Zeiteinheit:     zeiteinheit.Jahr,
-		Artikelnummer:   bdewartikelnummer.Abgabekwkg,
+		Zeiteinheit:     zeiteinheit.JAHR,
+		Artikelnummer:   bdewartikelnummer.ABGABEKWKG,
 		LokationsId:     "54321012345",
 		PositionsMenge: com.Menge{
 			Wert:    newDecimalFromString("20"),
@@ -39,15 +39,15 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		Einzelpreis: com.Preis{
 			Wert:       newDecimalFromString("1"),
 			Einheit:    waehrungseinheit.EUR,
-			Bezugswert: mengeneinheit.Jahr,
-			Status:     preisstatus.Endgueltig,
+			Bezugswert: mengeneinheit.JAHR,
+			Status:     preisstatus.ENDGUELTIG,
 		},
 		TeilsummeNetto: com.Betrag{
 			Wert:     newDecimalFromString("42"),
 			Waehrung: waehrungscode.AMD,
 		},
 		TeilsummeSteuer: com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.Ust7,
+			Steuerkennzeichen: steuerkennzeichen.UST7,
 			Basiswert:         newDecimalFromString("100"),
 			Steuerwert:        newDecimalFromString("7"),
 			Waehrung:          waehrungscode.EUR,
@@ -56,7 +56,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
 	jsonString := string(serializedRechnungsposition)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Abgabekwkg"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "ABGABEKWKG"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedRechnungsposition, is.Not(is.Nil()))
 	var deserializedRechnungsposition com.Rechnungsposition
@@ -147,8 +147,8 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 			LieferungVon:    time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Positionstext:   "foo",
-			Zeiteinheit:     zeiteinheit.Jahr,
-			Artikelnummer:   bdewartikelnummer.Abgabekwkg,
+			Zeiteinheit:     zeiteinheit.JAHR,
+			Artikelnummer:   bdewartikelnummer.ABGABEKWKG,
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
@@ -158,14 +158,14 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 				Wert:       decimal.NewFromFloat(12),
 				Einheit:    waehrungseinheit.EUR,
 				Bezugswert: mengeneinheit.KWH,
-				Status:     preisstatus.Endgueltig,
+				Status:     preisstatus.ENDGUELTIG,
 			},
 			TeilsummeNetto: com.Betrag{
 				Wert:     decimal.NewFromFloat(240),
 				Waehrung: waehrungscode.EUR,
 			},
 			TeilsummeSteuer: com.Steuerbetrag{
-				Steuerkennzeichen: steuerkennzeichen.Ust19,
+				Steuerkennzeichen: steuerkennzeichen.UST19,
 				Basiswert:         decimal.NewFromFloat(240),
 				Steuerwert:        decimal.NewFromFloat(0),
 				Waehrung:          waehrungscode.EUR,

@@ -6,14 +6,14 @@ package zeiteinheit
 type Zeiteinheit int
 
 const (
-	Sekunde       Zeiteinheit = iota + 1 // second
-	Minute                               // minute
-	Stunde                               // hour
-	ViertelStunde                        // quarter-hour
-	Tag                                  // day
-	Woche                                // week
-	Monat                                // month
-	Quartal                              // 1/4 year
-	Halbjahr                             // 1/2 half year
-	Jahr                                 // year
+	SEKUNDE       Zeiteinheit = iota + 1 // SEKUNDE is 1 second
+	MINUTE                               // MINUTE is 1 minute
+	STUNDE                               // STUNDE is 1 hour
+	VIERTELSTUNDE                        // VIERTELSTUNDE is quarter-hour (15 MINUTE)
+	TAG                                  // TAG is 1 day
+	WOCHE                                // WOCHE is 1 week
+	MONAT                                // MONAT is 1 month
+	QUARTAL                              // QUARTAL is 1/4 year
+	HALBJAHR                             // HALBJAHR is 1/2 half year
+	JAHR                                 // JAHR is 1 year
 )

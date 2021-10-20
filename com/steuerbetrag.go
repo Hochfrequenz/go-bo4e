@@ -10,7 +10,7 @@ import (
 
 // Steuerbetrag ist ein besteuerter Betrag
 type Steuerbetrag struct {
-	Steuerkennzeichen steuerkennzeichen.Steuerkennzeichen `json:"steuerkennzeichen" validate:"required" example:"Ust19"` // Kennzeichnung des Steuersatzes, bzw. Verfahrens
+	Steuerkennzeichen steuerkennzeichen.Steuerkennzeichen `json:"steuerkennzeichen" validate:"required" example:"UST19"` // Kennzeichnung des Steuersatzes, bzw. Verfahrens
 	// Basiswert and Steuerwert are _not_ marked as required because the steuerwert 0 is actually valid
 	Basiswert  decimal.Decimal             `json:"basiswert" example:"100"`                    // Nettobetrag für den die Steuer berechnet wurde
 	Steuerwert decimal.Decimal             `json:"steuerwert" example:"19"`                    // Aus dem Basiswert berechnete Steuer
@@ -27,11 +27,11 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 	switch sk := steuerbetrag.Steuerkennzeichen; sk {
 	case 0:
 		return // already the field level validation should fail on this, we don't need struct level validation
-	case steuerkennzeichen.Vst7, steuerkennzeichen.Ust7:
+	case steuerkennzeichen.VST7, steuerkennzeichen.UST7:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.NewFromFloat(0.07))
-	case steuerkennzeichen.Vst19, steuerkennzeichen.Ust19:
+	case steuerkennzeichen.VST19, steuerkennzeichen.UST19:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.NewFromFloat(0.19))
-	case steuerkennzeichen.Vst0, steuerkennzeichen.Ust0:
+	case steuerkennzeichen.VST0, steuerkennzeichen.UST0:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.Zero)
 	default:
 		err := fmt.Errorf("Validation of Steuerkennzeichen %v is not implemented", steuerbetrag.Steuerkennzeichen)

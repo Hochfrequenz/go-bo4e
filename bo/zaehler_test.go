@@ -31,15 +31,15 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 		},
 		Zaehlernummer:      "0815",
 		Sparte:             sparte.STROM,
-		Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-		Zaehlertyp:         zaehlertyp.Drehstromzaehler,
-		Tarifart:           tarifart.Eintarif,
+		Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+		Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
+		Tarifart:           tarifart.EINTARIF,
 		//EichungBis:         time.Time{},
 		//LetzteEichung:      time.Time{},
 		Zaehlwerke: []com.Zaehlwerk{{
 			ZaehlwerkId:    "1",
 			Bezeichnung:    "",
-			Richtung:       energierichtung.Aussp,
+			Richtung:       energierichtung.AUSSP,
 			ObisKennzahl:   "1-0:1.8.0",
 			Wandlerfaktor:  newDecimalFromString("1"),
 			Einheit:        mengeneinheit.KWH,
@@ -50,9 +50,9 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 	serializedMeter, err := json.Marshal(meter)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedMeter, is.Not(is.Nil()))
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Einrichtungszaehler"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "Eintarif"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINRICHTUNGSZAEHLER"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
 	var deserializedMeter bo.Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -75,9 +75,9 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 				},
 				Zaehlernummer:      "0815",
 				Sparte:             sparte.STROM,
-				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-				Zaehlertyp:         zaehlertyp.Drehstromzaehler,
-				Tarifart:           tarifart.Eintarif,
+				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
+				Tarifart:           tarifart.EINTARIF,
 				Zaehlerkonstante:   decimal.NewNullDecimal(decimal.NewFromFloat(17)),
 				Zaehlwerke:         []com.Zaehlwerk{},
 				Zaehlerhersteller:  nil,
@@ -99,16 +99,16 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 			},
 			Zaehlernummer:      "08150",
 			Sparte:             sparte.STROM,
-			Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-			Zaehlertyp:         zaehlertyp.Wechselstromzaehler,
-			Tarifart:           tarifart.Eintarif,
+			Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+			Zaehlertyp:         zaehlertyp.WECHSELSTROMZAEHLER,
+			Tarifart:           tarifart.EINTARIF,
 			Zaehlerkonstante:   decimal.NullDecimal{Valid: false, Decimal: decimal.NewFromFloat(0)},
 			//EichungBis:         time.Time{},
 			//LetzteEichung:      time.Time{},
 			Zaehlwerke: []com.Zaehlwerk{{
 				ZaehlwerkId:    "1",
 				Bezeichnung:    "",
-				Richtung:       energierichtung.Aussp,
+				Richtung:       energierichtung.AUSSP,
 				ObisKennzahl:   "1-0:1.8.0",
 				Wandlerfaktor:  decimal.NewFromFloat(0),
 				Einheit:        mengeneinheit.KWH,
@@ -130,7 +130,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 					Landescode:   landescode.DE,
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-					geschaeftspartnerrolle.Dienstleister,
+					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
 			},
 		},

@@ -9,19 +9,19 @@ import (
 
 var (
 	_RechnungsstatusNameToValue = map[string]Rechnungsstatus{
-		"Ungeprueft":         Ungeprueft,
-		"GeprueftOk":         GeprueftOk,
-		"GeprueftFehlerhaft": GeprueftFehlerhaft,
-		"Gebucht":            Gebucht,
-		"Bezahlt":            Bezahlt,
+		"UNGEPRUEFT":          UNGEPRUEFT,
+		"GEPRUEFT_OK":         GEPRUEFT_OK,
+		"GEPRUEFT_FEHLERHAFT": GEPRUEFT_FEHLERHAFT,
+		"GEBUCHT":             GEBUCHT,
+		"BEZAHLT":             BEZAHLT,
 	}
 
 	_RechnungsstatusValueToName = map[Rechnungsstatus]string{
-		Ungeprueft:         "Ungeprueft",
-		GeprueftOk:         "GeprueftOk",
-		GeprueftFehlerhaft: "GeprueftFehlerhaft",
-		Gebucht:            "Gebucht",
-		Bezahlt:            "Bezahlt",
+		UNGEPRUEFT:          "UNGEPRUEFT",
+		GEPRUEFT_OK:         "GEPRUEFT_OK",
+		GEPRUEFT_FEHLERHAFT: "GEPRUEFT_FEHLERHAFT",
+		GEBUCHT:             "GEBUCHT",
+		BEZAHLT:             "BEZAHLT",
 	}
 )
 
@@ -29,11 +29,11 @@ func init() {
 	var v Rechnungsstatus
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_RechnungsstatusNameToValue = map[string]Rechnungsstatus{
-			interface{}(Ungeprueft).(fmt.Stringer).String():         Ungeprueft,
-			interface{}(GeprueftOk).(fmt.Stringer).String():         GeprueftOk,
-			interface{}(GeprueftFehlerhaft).(fmt.Stringer).String(): GeprueftFehlerhaft,
-			interface{}(Gebucht).(fmt.Stringer).String():            Gebucht,
-			interface{}(Bezahlt).(fmt.Stringer).String():            Bezahlt,
+			interface{}(UNGEPRUEFT).(fmt.Stringer).String():          UNGEPRUEFT,
+			interface{}(GEPRUEFT_OK).(fmt.Stringer).String():         GEPRUEFT_OK,
+			interface{}(GEPRUEFT_FEHLERHAFT).(fmt.Stringer).String(): GEPRUEFT_FEHLERHAFT,
+			interface{}(GEBUCHT).(fmt.Stringer).String():             GEBUCHT,
+			interface{}(BEZAHLT).(fmt.Stringer).String():             BEZAHLT,
 		}
 	}
 }

@@ -6,11 +6,11 @@ package messwertstatus
 type Messwertstatus int
 
 const (
-	ABGELESEN            Messwertstatus = iota + 1 // Abgelesener Wert (abrechnungsrelevant)
-	ERSATZWERT                                     // Ersatzwert - geschätzt, veranschlagt (abrechnungsrelevant)
-	VORSCHLAGSWERT                                 // Vorschlagswert (nicht abrechnungsrelevant)
-	PROGNOSEWERT                                   // Ein prognostizierter Wert
-	VORLAUFIGERWERT                                // Ein vorläufiger Wert, dieser kann später angepasst werden.
-	ENERGIEMENGESUMMIERT                           // Summenwert, Bilanzsumme
-	FEHLT                                          // Explizite Kennzeichnung eines fehlendes Wertes
+	ABGELESEN            Messwertstatus = iota + 1 // ABGELESEN ist ein Abgelesener Wert (abrechnungsrelevant)
+	ERSATZWERT                                     // ERSATZWERT ist ein Ersatzwert - geschätzt, veranschlagt (abrechnungsrelevant)
+	VORSCHLAGSWERT                                 // VORSCHLAGSWERT ist ein Vorschlagswert (nicht abrechnungsrelevant)
+	PROGNOSEWERT                                   // PROGNOSEWERT ist ein prognostizierter Wert
+	VORLAUFIGERWERT                                // VORLAUFIGERWERT ist ein vorläufiger Wert, dieser kann später angepasst werden.
+	ENERGIEMENGESUMMIERT                           // ENERGIEMENGESUMMIERT ist ein Summenwert, Bilanzsumme
+	FEHLT                                          // FEHLT ist eine explizite Kennzeichnung eines fehlendn Wertes
 )

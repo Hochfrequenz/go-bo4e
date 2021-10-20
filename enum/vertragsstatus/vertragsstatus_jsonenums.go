@@ -9,27 +9,27 @@ import (
 
 var (
 	_VertragsstatusNameToValue = map[string]Vertragsstatus{
-		"InArbeit":     InArbeit,
-		"Uebermittelt": Uebermittelt,
-		"Angenommen":   Angenommen,
-		"Aktiv":        Aktiv,
-		"Abgelehnt":    Abgelehnt,
-		"Widerrufen":   Widerrufen,
-		"Storniert":    Storniert,
-		"Gekuendigt":   Gekuendigt,
-		"Beendet":      Beendet,
+		"INARBEIT":     INARBEIT,
+		"UEBERMITTELT": UEBERMITTELT,
+		"ANGENOMMEN":   ANGENOMMEN,
+		"AKTIV":        AKTIV,
+		"ABGELEHNT":    ABGELEHNT,
+		"WIDERRUFEN":   WIDERRUFEN,
+		"STORNIERT":    STORNIERT,
+		"GEKUENDIGT":   GEKUENDIGT,
+		"BEENDET":      BEENDET,
 	}
 
 	_VertragsstatusValueToName = map[Vertragsstatus]string{
-		InArbeit:     "InArbeit",
-		Uebermittelt: "Uebermittelt",
-		Angenommen:   "Angenommen",
-		Aktiv:        "Aktiv",
-		Abgelehnt:    "Abgelehnt",
-		Widerrufen:   "Widerrufen",
-		Storniert:    "Storniert",
-		Gekuendigt:   "Gekuendigt",
-		Beendet:      "Beendet",
+		INARBEIT:     "INARBEIT",
+		UEBERMITTELT: "UEBERMITTELT",
+		ANGENOMMEN:   "ANGENOMMEN",
+		AKTIV:        "AKTIV",
+		ABGELEHNT:    "ABGELEHNT",
+		WIDERRUFEN:   "WIDERRUFEN",
+		STORNIERT:    "STORNIERT",
+		GEKUENDIGT:   "GEKUENDIGT",
+		BEENDET:      "BEENDET",
 	}
 )
 
@@ -37,15 +37,15 @@ func init() {
 	var v Vertragsstatus
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_VertragsstatusNameToValue = map[string]Vertragsstatus{
-			interface{}(InArbeit).(fmt.Stringer).String():     InArbeit,
-			interface{}(Uebermittelt).(fmt.Stringer).String(): Uebermittelt,
-			interface{}(Angenommen).(fmt.Stringer).String():   Angenommen,
-			interface{}(Aktiv).(fmt.Stringer).String():        Aktiv,
-			interface{}(Abgelehnt).(fmt.Stringer).String():    Abgelehnt,
-			interface{}(Widerrufen).(fmt.Stringer).String():   Widerrufen,
-			interface{}(Storniert).(fmt.Stringer).String():    Storniert,
-			interface{}(Gekuendigt).(fmt.Stringer).String():   Gekuendigt,
-			interface{}(Beendet).(fmt.Stringer).String():      Beendet,
+			interface{}(INARBEIT).(fmt.Stringer).String():     INARBEIT,
+			interface{}(UEBERMITTELT).(fmt.Stringer).String(): UEBERMITTELT,
+			interface{}(ANGENOMMEN).(fmt.Stringer).String():   ANGENOMMEN,
+			interface{}(AKTIV).(fmt.Stringer).String():        AKTIV,
+			interface{}(ABGELEHNT).(fmt.Stringer).String():    ABGELEHNT,
+			interface{}(WIDERRUFEN).(fmt.Stringer).String():   WIDERRUFEN,
+			interface{}(STORNIERT).(fmt.Stringer).String():    STORNIERT,
+			interface{}(GEKUENDIGT).(fmt.Stringer).String():   GEKUENDIGT,
+			interface{}(BEENDET).(fmt.Stringer).String():      BEENDET,
 		}
 	}
 }

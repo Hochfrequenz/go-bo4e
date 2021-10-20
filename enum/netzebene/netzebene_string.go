@@ -17,12 +17,12 @@ func _() {
 	_ = x[HSS_HSP_UMSP-7]
 	_ = x[HD-8]
 	_ = x[MD-9]
-	_ = x[N-10]
+	_ = x[ND-10]
 }
 
-const _Netzebene_name = "NSPMSPHSPHSSMSP_NSP_UMSPHSP_MSP_UMSPHSS_HSP_UMSPHDMDN"
+const _Netzebene_name = "NSPMSPHSPHSSMSP_NSP_UMSPHSP_MSP_UMSPHSS_HSP_UMSPHDMDND"
 
-var _Netzebene_index = [...]uint8{0, 3, 6, 9, 12, 24, 36, 48, 50, 52, 53}
+var _Netzebene_index = [...]uint8{0, 3, 6, 9, 12, 24, 36, 48, 50, 52, 54}
 
 func (i Netzebene) String() string {
 	i -= 1

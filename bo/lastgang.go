@@ -12,8 +12,8 @@ type Lastgang struct {
 	Geschaeftsobjekt
 	Sparte       sparte.Sparte               `json:"sparte" example:"STROM" validate:"required"`                                                         // Angabe, ob es sich um einen GAS- oder STROM-Lastgang handelt
 	Version      string                      `json:"version,omitempty" validate:"alphanum"`                                                              // Versionsnummer des Lastgangs
-	LokationsId  string                      `json:"lokationsId" example:"DE0123456789012345678901234567890" validate:"alphanum,required,min=11,max=33"` // ID of the location (either a LokationsTyp MaLo ID (11 digits) or a LokationsTyp MeLo ID (33 alphanum))
-	LokationsTyp lokationstyp.Lokationstyp   `json:"lokationsTyp" example:"MeLo" validate:"required"`                                                    // type of the location in LokationsId
+	LokationsId  string                      `json:"lokationsId" example:"DE0123456789012345678901234567890" validate:"alphanum,required,min=11,max=33"` // ID of the location (either a LokationsTyp MALO ID (11 digits) or a LokationsTyp MELO ID (33 alphanum))
+	LokationsTyp lokationstyp.Lokationstyp   `json:"lokationsTyp" example:"MELO" validate:"required"`                                                    // type of the location in LokationsId
 	Messgroesse  mengeneinheit.Mengeneinheit `json:"einheit,omitempty" validate:"required" example:"KWH"`                                                // Definition der gemessenen Größe anhand ihrer Einheit.
 	Obiskennzahl string                      `json:"obiskennzahl,omitempty" example:"1-0:1.8.1"`                                                         // Genormte OBIS-Kennzahl zur Kennzeichnung der Messgröße
 	Werte        []com.Zeitreihenwert        `json:"energieverbrauch" validate:"required,min=1"`                                                         // Die im Lastgang enthaltenen Messwerte.

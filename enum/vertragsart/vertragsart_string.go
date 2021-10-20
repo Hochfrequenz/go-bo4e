@@ -8,11 +8,11 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Energieliefervertrag-1]
-	_ = x[Netznutzung-2]
-	_ = x[Bilanzierungsvertrag-3]
-	_ = x[Messstellenbetriebsvertrag-4]
-	_ = x[Buendelvertrag-5]
+	_ = x[ENERGIELIEFERVERTRAG-1]
+	_ = x[NETZNUTZUNG-2]
+	_ = x[BILANZIERUNGSVERTRAG-3]
+	_ = x[MESSSTELLENBETRIEBSVERTRAG-4]
+	_ = x[BUENDELVERTRAG-5]
 }
 
 const _Vertragsart_name = "EnergieliefervertragNetznutzungBilanzierungsvertragMessstellenbetriebsvertragBuendelvertrag"

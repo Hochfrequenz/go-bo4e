@@ -9,18 +9,18 @@ import (
 
 var (
 	_KontaktartNameToValue = map[string]Kontaktart{
-		"Anschreiben": Anschreiben,
-		"Telefonat":   Telefonat,
-		"Fax":         Fax,
-		"Email":       Email,
+		"ANSCHREIBEN": ANSCHREIBEN,
+		"TELEFONAT":   TELEFONAT,
+		"FAX":         FAX,
+		"EMAIL":       EMAIL,
 		"SMS":         SMS,
 	}
 
 	_KontaktartValueToName = map[Kontaktart]string{
-		Anschreiben: "Anschreiben",
-		Telefonat:   "Telefonat",
-		Fax:         "Fax",
-		Email:       "Email",
+		ANSCHREIBEN: "ANSCHREIBEN",
+		TELEFONAT:   "TELEFONAT",
+		FAX:         "FAX",
+		EMAIL:       "EMAIL",
 		SMS:         "SMS",
 	}
 )
@@ -29,10 +29,10 @@ func init() {
 	var v Kontaktart
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_KontaktartNameToValue = map[string]Kontaktart{
-			interface{}(Anschreiben).(fmt.Stringer).String(): Anschreiben,
-			interface{}(Telefonat).(fmt.Stringer).String():   Telefonat,
-			interface{}(Fax).(fmt.Stringer).String():         Fax,
-			interface{}(Email).(fmt.Stringer).String():       Email,
+			interface{}(ANSCHREIBEN).(fmt.Stringer).String(): ANSCHREIBEN,
+			interface{}(TELEFONAT).(fmt.Stringer).String():   TELEFONAT,
+			interface{}(FAX).(fmt.Stringer).String():         FAX,
+			interface{}(EMAIL).(fmt.Stringer).String():       EMAIL,
 			interface{}(SMS).(fmt.Stringer).String():         SMS,
 		}
 	}
