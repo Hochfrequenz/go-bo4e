@@ -31,7 +31,7 @@ func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObject
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
 		err := vali.Struct(validObject)
-		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo(0)))
+		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo(0))) // 0 would be iota/uninitialized botyp.BOTyp
 		then.AssertThat(s.T(), err, is.Nil())
 	}
 }
