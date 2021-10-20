@@ -8,6 +8,8 @@ package waehrungseinheit
 type Waehrungseinheit int
 
 const (
-	EUR Waehrungseinheit = iota + 1 // Euro
-	CT                              // Eurocent
+	// EUR is for Euro
+	EUR Waehrungseinheit = iota + 1
+	// CT is for Eurocent
+	CT
 )

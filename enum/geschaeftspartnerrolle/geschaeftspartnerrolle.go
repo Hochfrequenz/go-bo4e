@@ -6,9 +6,10 @@ package geschaeftspartnerrolle
 type Geschaeftspartnerrolle int
 
 const (
-	LIEFERANT     Geschaeftspartnerrolle = iota + 1 // LIEFERANT
-	DIENSTLEISTER                                   // DIENSTLEISTER
-	KUNDE                                           //	KUNDE
-	INTERESSENT                                     //	INTERESSENT
-	MARKTPARTNER                                    //	MARKTPARTNER
+	// LIEFERANT
+	LIEFERANT     Geschaeftspartnerrolle = iota + 1
+	DIENSTLEISTER                        // DIENSTLEISTER
+	KUNDE                                //	KUNDE
+	INTERESSENT                          //	INTERESSENT
+	MARKTPARTNER                         //	MARKTPARTNER
 )

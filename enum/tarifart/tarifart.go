@@ -6,9 +6,10 @@ package tarifart
 type Tarifart int
 
 const (
-	EINTARIF          Tarifart = iota + 1 // EINTARIF = single tariff
-	ZWEITARIF                             // ZWEITARIF = two tariffs
-	MEHRTARIF                             // MEHRTARIF = multiple (>2) tariffs
-	SMARTMETER                            // SMARTMETER means Smart Meter Tariff
-	LEISTUNGSGEMESSEN                     // LEISTUNGSGEMESSEN means Leistungsgemessener Tarif
+	// EINTARIF = single tariff
+	EINTARIF          Tarifart = iota + 1
+	ZWEITARIF                  // ZWEITARIF = two tariffs
+	MEHRTARIF                  // MEHRTARIF = multiple (>2) tariffs
+	SMARTMETER                 // SMARTMETER means Smart Meter Tariff
+	LEISTUNGSGEMESSEN          // LEISTUNGSGEMESSEN means Leistungsgemessener Tarif
 )

@@ -6,9 +6,10 @@ package kontaktart
 type Kontaktart int
 
 const (
-	ANSCHREIBEN Kontaktart = iota + 1 // ANSCHREIBEN means mail (on paper)
-	TELEFONAT                         // TELEFONAT means phone
-	FAX                               // FAX means Fax
-	EMAIL                             // EMAIL means E-Mail
-	SMS                               // SMS means text message
+	// ANSCHREIBEN means mail (on paper)
+	ANSCHREIBEN Kontaktart = iota + 1
+	TELEFONAT              // TELEFONAT means phone
+	FAX                    // FAX means Fax
+	EMAIL                  // EMAIL means E-Mail
+	SMS                    // SMS means text message
 )

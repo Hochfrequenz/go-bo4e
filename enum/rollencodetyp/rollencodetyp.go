@@ -6,7 +6,8 @@ package rollencodetyp
 type Rollencodetyp int
 
 const (
-	BDEW Rollencodetyp = iota + 1 // BDEW is Bundesverband der Energie- u. Wasserwirtschaft (293)
-	DVGW                          // DVGW is Deutscher Verein des Gas- und Wasserfaches (332)
-	GLN                           // GLN is Global Location Number (9)
+	// BDEW is Bundesverband der Energie- u. Wasserwirtschaft (293)
+	BDEW Rollencodetyp = iota + 1
+	DVGW               // DVGW is Deutscher Verein des Gas- und Wasserfaches (332)
+	GLN                // GLN is Global Location Number (9)
 )
