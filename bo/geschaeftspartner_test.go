@@ -11,14 +11,15 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"reflect"
 	"strings"
 )
 
 // Test_Geschaeftspartner_Deserialization deserializes an Geschaeftspartner json
 func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	var gp = bo.Geschaeftspartner{
-		BusinessObject: bo.BusinessObject{
-			BoTyp:             botyp.Geschaeftspartner,
+		Geschaeftsobjekt: bo.Geschaeftsobjekt{
+			BoTyp:             botyp.GESCHAEFTSPARTNER,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
@@ -70,7 +71,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	invalidVertrags := map[string][]interface{}{
 		"required": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -91,7 +92,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Partneradresse:          com.Adresse{},
 			},
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -114,8 +115,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"min": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:           botyp.Geschaeftspartner,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{},
@@ -123,8 +124,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"email": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:           botyp.Geschaeftspartner,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
 				EMailAdresse: "notanemail",
@@ -132,8 +133,8 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		},
 		"url": {
 			bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:           botyp.Geschaeftspartner,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
 				Website: "not a website",
@@ -147,10 +148,10 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 
 	validate := validator.New()
-	validGeschaeftspartners := []interface{}{
+	validGeschaeftspartners := []bo.BusinessObject{
 		bo.Geschaeftspartner{
-			BusinessObject: bo.BusinessObject{
-				BoTyp:             botyp.Geschaeftspartner,
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -169,4 +170,12 @@ func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validGeschaeftspartners)
+}
+
+func (s *Suite) Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp() {
+	object := bo.NewBusinessObject(botyp.GESCHAEFTSPARTNER)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Geschaeftspartner{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.GESCHAEFTSPARTNER))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

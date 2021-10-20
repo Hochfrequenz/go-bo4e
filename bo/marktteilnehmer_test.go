@@ -13,6 +13,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
+	"reflect"
 	"strings"
 )
 
@@ -24,8 +25,8 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 		Rollencodetyp:    rollencodetyp.DVGW,
 		Rollencodenummer: "9903100000006",
 		Geschaeftspartner: bo.Geschaeftspartner{
-			BusinessObject: bo.BusinessObject{
-				BoTyp:             botyp.Geschaeftspartner,
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -89,15 +90,15 @@ func (s *Suite) Test_Failed_Marktteilnehmer_Validation() {
 //  Test_Successful_Marktteilnehmer_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 	validate := validator.New()
-	validMarktteilnehmers := []interface{}{
+	validMarktteilnehmers := []bo.BusinessObject{
 		bo.Marktteilnehmer{
 			Marktrolle: marktrolle.LF,
 			// mako adresse might be empty
 			Rollencodetyp:    rollencodetyp.DVGW,
 			Rollencodenummer: "9903100000006",
 			Geschaeftspartner: bo.Geschaeftspartner{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:             botyp.Geschaeftspartner,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -117,4 +118,12 @@ func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validMarktteilnehmers)
+}
+
+func (s *Suite) Test_Empty_Markteilnehmer_Is_Creatable_Using_BoTyp() {
+	object := bo.NewBusinessObject(botyp.MARKTTEILNEHMER)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Marktteilnehmer{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.MARKTTEILNEHMER))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

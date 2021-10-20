@@ -1,6 +1,8 @@
 package bo_test
 
 import (
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -12,6 +14,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"time"
 )
 
@@ -30,7 +33,7 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 	invalidLastgangMap := map[string][]interface{}{
 		"required": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -46,12 +49,12 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		},
 		"min": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:             botyp.Lastgang,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.LASTGANG,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Sparte:       sparte.Strom,
+				Sparte:       sparte.STROM,
 				Version:      "1",
 				LokationsId:  "asd",
 				LokationsTyp: lokationstyp.MaLo,
@@ -62,12 +65,12 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 		},
 		"alphanum": {
 			bo.Lastgang{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:             botyp.Lastgang,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.LASTGANG,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Sparte:       sparte.Strom,
+				Sparte:       sparte.STROM,
 				Version:      "1",
 				LokationsId:  "not alpha num",
 				LokationsTyp: lokationstyp.MaLo,
@@ -91,10 +94,10 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
-	validEnergiemengen := []interface{}{
+	validLastgang := []bo.BusinessObject{
 		bo.Energiemenge{
-			BusinessObject: bo.BusinessObject{
-				BoTyp:             botyp.Energiemenge,
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:             botyp.ENERGIEMENGE,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -103,5 +106,13 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 			Verbrauch:    []com.Verbrauch{verbrauch},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validEnergiemengen)
+	VerfiySuccessfulValidations(s, validate, validLastgang)
+}
+
+func (s *Suite) Test_Empty_Lastgang_Is_Creatable_Using_BoTyp() {
+	object := bo.NewBusinessObject(botyp.LASTGANG)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Lastgang{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.LASTGANG))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }

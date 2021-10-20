@@ -5,6 +5,7 @@ import (
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -26,10 +27,11 @@ func TestInit(t *testing.T) {
 }
 
 // VerfiySuccessfulValidations asserts that the vali validator does not fail for all objects provided
-func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObjects []interface{}) {
+func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
 		err := vali.Struct(validObject)
+		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo(0))) // 0 would be iota/uninitialized botyp.BOTyp
 		then.AssertThat(s.T(), err, is.Nil())
 	}
 }

@@ -9,8 +9,8 @@ import (
 
 // Lastgang ist ein Modell zur Abbildung eines Lastganges. In diesem Modell werden die Messwerte mit einem vollständigen Zeitintervall angegeben und es bietet daher eine hohe Flexibilität in der Übertragung jeglicher zeitlich veränderlicher Messgrössen.
 type Lastgang struct {
-	BusinessObject
-	Sparte       sparte.Sparte               `json:"sparte" example:"STROM" validate:"required"`                                                         // Angabe, ob es sich um einen Gas- oder Stromlastgang handelt
+	Geschaeftsobjekt
+	Sparte       sparte.Sparte               `json:"sparte" example:"STROM" validate:"required"`                                                         // Angabe, ob es sich um einen GAS- oder STROM-Lastgang handelt
 	Version      string                      `json:"version,omitempty" validate:"alphanum"`                                                              // Versionsnummer des Lastgangs
 	LokationsId  string                      `json:"lokationsId" example:"DE0123456789012345678901234567890" validate:"alphanum,required,min=11,max=33"` // ID of the location (either a LokationsTyp MaLo ID (11 digits) or a LokationsTyp MeLo ID (33 alphanum))
 	LokationsTyp lokationstyp.Lokationstyp   `json:"lokationsTyp" example:"MeLo" validate:"required"`                                                    // type of the location in LokationsId

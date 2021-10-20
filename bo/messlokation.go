@@ -8,7 +8,7 @@ import (
 
 // Messlokation contains information about a metering location aka "MeLo"
 type Messlokation struct {
-	BusinessObject
+	Geschaeftsobjekt
 	MesslokationsId              string              `json:"messlokationsId" example:"DE0123456789012345678901234567890" validate:"alphanum,required,len=33"` // ID of the metering location
 	Sparte                       sparte.Sparte       `json:"sparte" validate:"required"`                                                                      // division
 	NetzebeneMessung             netzebene.Netzebene `json:"netzebeneMessung,omitempty"`                                                                      // grid level of measurement

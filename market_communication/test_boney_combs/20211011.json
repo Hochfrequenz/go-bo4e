@@ -1,0 +1,56 @@
+{
+  "Stammdaten": [
+    {
+      "zaehlernummer": "987654",
+      "sparte": "STROM",
+      "boTyp": "ZAEHLER"
+    },
+    {
+      "name1": "Musterfrau",
+      "name2": "Erika",
+      "adresse": {
+        "postleitzahl": "47809",
+        "ort": "Krefeld",
+        "strasse": "Hauptstr.",
+        "hausnummer": "123"
+      },
+      "boTyp": "GESCHAEFTSPARTNER",
+      "versionStruktur": "1"
+    },
+    {
+      "ansprechpartner": {
+        "nachname": "Herr Kunz",
+        "eMailAdresse": "marktpartner@ngn-mbh.de",
+        "boTyp": "ANSPRECHPARTNER",
+        "versionStruktur": "1"
+      },
+      "marktrolle": "NB",
+      "rollencodenummer": "9900360000008",
+      "rollencodetyp": "BDEW",
+      "gewerbekennzeichnung": true,
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1"
+    },
+    {
+      "marktrolle": "NB",
+      "rollencodenummer": "9905048000007",
+      "rollencodetyp": "BDEW",
+      "gewerbekennzeichnung": true,
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1"
+    }
+  ],
+  "Transaktionsdaten": {
+    "Vorgangsnummer": "123456789",
+    "Transaktionsgrund": "ZD2",
+    "Prozessdatum": "2021-01-31T23:00:00Z",
+    "Pruefidentifikator": "11001",
+    "Absender": "bo4e://Marktteilnehmer/9900360000008",
+    "Empfaenger": "bo4e://Marktteilnehmer/9905048000007",
+    "Dokumentennummer": "81f40295a40fc3e5",
+    "Kategorie": "E35",
+    "Nachrichtendatum": "2021-01-15T15:27:00Z",
+    "NachrichtenReferenznummer": "e400a1a6fd3688851",
+    "Sende_Kuendigung": "true"
+  }
+}

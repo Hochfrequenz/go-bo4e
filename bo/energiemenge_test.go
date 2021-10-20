@@ -1,6 +1,8 @@
 package bo_test
 
 import (
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -9,6 +11,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
+	"reflect"
 	"time"
 )
 
@@ -26,7 +29,7 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	invalidEnergiemengeMap := map[string][]interface{}{
 		"required": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             0,
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
@@ -38,8 +41,8 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 		},
 		"min": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:             botyp.Energiemenge,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.ENERGIEMENGE,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -50,8 +53,8 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 		},
 		"alphanum": {
 			bo.Energiemenge{
-				BusinessObject: bo.BusinessObject{
-					BoTyp:             botyp.Energiemenge,
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.ENERGIEMENGE,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
@@ -75,10 +78,10 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 	}
-	validEnergiemengen := []interface{}{
+	validEnergiemengen := []bo.BusinessObject{
 		bo.Energiemenge{
-			BusinessObject: bo.BusinessObject{
-				BoTyp:             botyp.Energiemenge,
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:             botyp.ENERGIEMENGE,
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
@@ -88,4 +91,18 @@ func (s *Suite) Test_Successful_EnergiemengeValidation() {
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validEnergiemengen)
+}
+
+func (s *Suite) Test_Empty_Energiemenge_Is_Creatable_Using_BoTyp() {
+	object := bo.NewBusinessObject(botyp.ENERGIEMENGE)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Energiemenge{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.ENERGIEMENGE))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+}
+
+func (s *Suite) Test_Empty_Something_Is_Creatable_Using_BoTyp() {
+	// remove this test as soon as the TARIFPREISBLATT is implemented. just to cover the nil case
+	object := bo.NewBusinessObject(botyp.TARIFPREISBLATT)
+	then.AssertThat(s.T(), object, is.Nil())
 }

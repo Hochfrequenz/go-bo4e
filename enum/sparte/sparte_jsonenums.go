@@ -9,21 +9,21 @@ import (
 
 var (
 	_SparteNameToValue = map[string]Sparte{
-		"Strom":      Strom,
-		"Gas":        Gas,
-		"Fernwaerme": Fernwaerme,
-		"Nahwaerme":  Nahwaerme,
-		"Wasser":     Wasser,
-		"Abwasser":   Abwasser,
+		"STROM":      STROM,
+		"GAS":        GAS,
+		"FERNWAERME": FERNWAERME,
+		"NAHWAERME":  NAHWAERME,
+		"WASSER":     WASSER,
+		"ABWASSER":   ABWASSER,
 	}
 
 	_SparteValueToName = map[Sparte]string{
-		Strom:      "Strom",
-		Gas:        "Gas",
-		Fernwaerme: "Fernwaerme",
-		Nahwaerme:  "Nahwaerme",
-		Wasser:     "Wasser",
-		Abwasser:   "Abwasser",
+		STROM:      "STROM",
+		GAS:        "GAS",
+		FERNWAERME: "FERNWAERME",
+		NAHWAERME:  "NAHWAERME",
+		WASSER:     "WASSER",
+		ABWASSER:   "ABWASSER",
 	}
 )
 
@@ -31,12 +31,12 @@ func init() {
 	var v Sparte
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SparteNameToValue = map[string]Sparte{
-			interface{}(Strom).(fmt.Stringer).String():      Strom,
-			interface{}(Gas).(fmt.Stringer).String():        Gas,
-			interface{}(Fernwaerme).(fmt.Stringer).String(): Fernwaerme,
-			interface{}(Nahwaerme).(fmt.Stringer).String():  Nahwaerme,
-			interface{}(Wasser).(fmt.Stringer).String():     Wasser,
-			interface{}(Abwasser).(fmt.Stringer).String():   Abwasser,
+			interface{}(STROM).(fmt.Stringer).String():      STROM,
+			interface{}(GAS).(fmt.Stringer).String():        GAS,
+			interface{}(FERNWAERME).(fmt.Stringer).String(): FERNWAERME,
+			interface{}(NAHWAERME).(fmt.Stringer).String():  NAHWAERME,
+			interface{}(WASSER).(fmt.Stringer).String():     WASSER,
+			interface{}(ABWASSER).(fmt.Stringer).String():   ABWASSER,
 		}
 	}
 }

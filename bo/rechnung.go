@@ -11,7 +11,7 @@ import (
 
 // Rechnung ist ein Modell für die Abbildung von Rechnungen im Kontext der Energiewirtschaft. Ausgehend von diesem Basismodell werden weitere spezifische Formen abgeleitet.
 type Rechnung struct {
-	BusinessObject
+	Geschaeftsobjekt
 	Rechnungstitel          string                          `json:"rechnungstitel"`                                             // Bezeichnung für die vorliegende Rechnung.
 	Rechnungsstatus         rechnungsstatus.Rechnungsstatus `json:"rechnungsstatus"`                                            // Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes
 	Storno                  bool                            `json:"storno" validate:"required"`                                 // Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung
