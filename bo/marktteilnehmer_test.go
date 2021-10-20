@@ -30,7 +30,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Anrede:               anrede.Divers,
+			Anrede:               anrede.DIVERS,
 			Name1:                "Müller",
 			Name2:                "Lieschen",
 			Name3:                "",
@@ -43,8 +43,8 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 			EMailAdresse:         "email@lieschen-mueller.de",
 			Website:              "https://lieschen-mueller.de",
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.Kunde,
-				geschaeftspartnerrolle.Marktpartner,
+				geschaeftspartnerrolle.KUNDE,
+				geschaeftspartnerrolle.MARKTPARTNER,
 			},
 			Partneradresse: com.Adresse{
 				Postleitzahl: "82031",
@@ -112,7 +112,7 @@ func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 					Landescode:   landescode.DE,
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-					geschaeftspartnerrolle.Dienstleister,
+					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
 			},
 		},

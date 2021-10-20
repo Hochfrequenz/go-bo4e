@@ -16,13 +16,13 @@ var (
 		"KVARH":      KVARH,
 		"MW":         MW,
 		"MWH":        MWH,
-		"Stueck":     Stueck,
+		"STUECK":     STUECK,
 		"KUBIKMETER": KUBIKMETER,
-		"Stunde":     Stunde,
-		"Tag":        Tag,
-		"Monat":      Monat,
-		"Jahr":       Jahr,
-		"Prozent":    Prozent,
+		"STUNDE":     STUNDE,
+		"TAG":        TAG,
+		"MONAT":      MONAT,
+		"JAHR":       JAHR,
+		"PROZENT":    PROZENT,
 	}
 
 	_MengeneinheitValueToName = map[Mengeneinheit]string{
@@ -33,13 +33,13 @@ var (
 		KVARH:      "KVARH",
 		MW:         "MW",
 		MWH:        "MWH",
-		Stueck:     "Stueck",
+		STUECK:     "STUECK",
 		KUBIKMETER: "KUBIKMETER",
-		Stunde:     "Stunde",
-		Tag:        "Tag",
-		Monat:      "Monat",
-		Jahr:       "Jahr",
-		Prozent:    "Prozent",
+		STUNDE:     "STUNDE",
+		TAG:        "TAG",
+		MONAT:      "MONAT",
+		JAHR:       "JAHR",
+		PROZENT:    "PROZENT",
 	}
 )
 
@@ -54,13 +54,13 @@ func init() {
 			interface{}(KVARH).(fmt.Stringer).String():      KVARH,
 			interface{}(MW).(fmt.Stringer).String():         MW,
 			interface{}(MWH).(fmt.Stringer).String():        MWH,
-			interface{}(Stueck).(fmt.Stringer).String():     Stueck,
+			interface{}(STUECK).(fmt.Stringer).String():     STUECK,
 			interface{}(KUBIKMETER).(fmt.Stringer).String(): KUBIKMETER,
-			interface{}(Stunde).(fmt.Stringer).String():     Stunde,
-			interface{}(Tag).(fmt.Stringer).String():        Tag,
-			interface{}(Monat).(fmt.Stringer).String():      Monat,
-			interface{}(Jahr).(fmt.Stringer).String():       Jahr,
-			interface{}(Prozent).(fmt.Stringer).String():    Prozent,
+			interface{}(STUNDE).(fmt.Stringer).String():     STUNDE,
+			interface{}(TAG).(fmt.Stringer).String():        TAG,
+			interface{}(MONAT).(fmt.Stringer).String():      MONAT,
+			interface{}(JAHR).(fmt.Stringer).String():       JAHR,
+			interface{}(PROZENT).(fmt.Stringer).String():    PROZENT,
 		}
 	}
 }

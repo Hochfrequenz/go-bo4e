@@ -8,13 +8,13 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Vorlaufig-1]
-	_ = x[Endgueltig-2]
+	_ = x[VORLAUEFIG-1]
+	_ = x[ENDGUELTIG-2]
 }
 
-const _Preisstatus_name = "VorlaufigEndgueltig"
+const _Preisstatus_name = "VORLAUEFIGENDGUELTIG"
 
-var _Preisstatus_index = [...]uint8{0, 9, 19}
+var _Preisstatus_index = [...]uint8{0, 10, 20}
 
 func (i Preisstatus) String() string {
 	i -= 1

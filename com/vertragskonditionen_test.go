@@ -18,7 +18,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 		Beschreibung:     "hallo",
 		AnzahlAbschlaege: 17,
 		Vertragslaufzeit: com.Zeitraum{
-			Einheit: zeiteinheit.Minute,
+			Einheit: zeiteinheit.MINUTE,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
 		Kuendigungsfrist: com.Zeitraum{
@@ -30,13 +30,13 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 			Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 		Abschlagszyklus: com.Zeitraum{
-			Einheit: zeiteinheit.Jahr,
+			Einheit: zeiteinheit.JAHR,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 		},
 	}
 	serializedVertragskonditionen, err := json.Marshal(vertragskonditionen)
 	jsonString := string(serializedVertragskonditionen)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Minute"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.Nil()))
 	var deserializedVertragskonditionen com.Vertragskonditionen
@@ -69,7 +69,7 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 			Beschreibung:     "hallo",
 			AnzahlAbschlaege: 17,
 			Vertragslaufzeit: com.Zeitraum{
-				Einheit: zeiteinheit.Minute,
+				Einheit: zeiteinheit.MINUTE,
 				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 			},
 			Kuendigungsfrist: com.Zeitraum{
@@ -81,7 +81,7 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 				Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
 			Abschlagszyklus: com.Zeitraum{
-				Einheit: zeiteinheit.Jahr,
+				Einheit: zeiteinheit.JAHR,
 				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 			},
 		},

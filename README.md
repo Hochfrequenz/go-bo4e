@@ -30,10 +30,12 @@ so far.
 ```
 go get github.com/hochfrequenz/go-bo4e
 ```
-### Breaking Changes introduced in v0.0.13:
+
+### Breaking Changes introduced in v0.0.13 and v0.0.14:
+
 - The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
 - `BusinessObject` is now the name of the interface that all structs with embedded `Geschaeftsobjekt` implement
-- Enums are consistently written in upper case
+- Enums are consistently written in upper case ([PR 32](https://github.com/Hochfrequenz/go-bo4e/pull/32))
 
 ## Minimal Working Example
 

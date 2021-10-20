@@ -9,13 +9,13 @@ import (
 
 var (
 	_ZaehlerauspraegungNameToValue = map[string]Zaehlerauspraegung{
-		"Einrichtungszaehler":  Einrichtungszaehler,
-		"Zweirichtungszaehler": Zweirichtungszaehler,
+		"EINRICHTUNGSZAEHLER":  EINRICHTUNGSZAEHLER,
+		"ZWEIRICHTUNGSZAEHLER": ZWEIRICHTUNGSZAEHLER,
 	}
 
 	_ZaehlerauspraegungValueToName = map[Zaehlerauspraegung]string{
-		Einrichtungszaehler:  "Einrichtungszaehler",
-		Zweirichtungszaehler: "Zweirichtungszaehler",
+		EINRICHTUNGSZAEHLER:  "EINRICHTUNGSZAEHLER",
+		ZWEIRICHTUNGSZAEHLER: "ZWEIRICHTUNGSZAEHLER",
 	}
 )
 
@@ -23,8 +23,8 @@ func init() {
 	var v Zaehlerauspraegung
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_ZaehlerauspraegungNameToValue = map[string]Zaehlerauspraegung{
-			interface{}(Einrichtungszaehler).(fmt.Stringer).String():  Einrichtungszaehler,
-			interface{}(Zweirichtungszaehler).(fmt.Stringer).String(): Zweirichtungszaehler,
+			interface{}(EINRICHTUNGSZAEHLER).(fmt.Stringer).String():  EINRICHTUNGSZAEHLER,
+			interface{}(ZWEIRICHTUNGSZAEHLER).(fmt.Stringer).String(): ZWEIRICHTUNGSZAEHLER,
 		}
 	}
 }

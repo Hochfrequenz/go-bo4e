@@ -9,19 +9,19 @@ import (
 
 var (
 	_GeschaeftspartnerrolleNameToValue = map[string]Geschaeftspartnerrolle{
-		"Lieferant":     Lieferant,
-		"Dienstleister": Dienstleister,
-		"Kunde":         Kunde,
-		"Interessent":   Interessent,
-		"Marktpartner":  Marktpartner,
+		"LIEFERANT":     LIEFERANT,
+		"DIENSTLEISTER": DIENSTLEISTER,
+		"KUNDE":         KUNDE,
+		"INTERESSENT":   INTERESSENT,
+		"MARKTPARTNER":  MARKTPARTNER,
 	}
 
 	_GeschaeftspartnerrolleValueToName = map[Geschaeftspartnerrolle]string{
-		Lieferant:     "Lieferant",
-		Dienstleister: "Dienstleister",
-		Kunde:         "Kunde",
-		Interessent:   "Interessent",
-		Marktpartner:  "Marktpartner",
+		LIEFERANT:     "LIEFERANT",
+		DIENSTLEISTER: "DIENSTLEISTER",
+		KUNDE:         "KUNDE",
+		INTERESSENT:   "INTERESSENT",
+		MARKTPARTNER:  "MARKTPARTNER",
 	}
 )
 
@@ -29,11 +29,11 @@ func init() {
 	var v Geschaeftspartnerrolle
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_GeschaeftspartnerrolleNameToValue = map[string]Geschaeftspartnerrolle{
-			interface{}(Lieferant).(fmt.Stringer).String():     Lieferant,
-			interface{}(Dienstleister).(fmt.Stringer).String(): Dienstleister,
-			interface{}(Kunde).(fmt.Stringer).String():         Kunde,
-			interface{}(Interessent).(fmt.Stringer).String():   Interessent,
-			interface{}(Marktpartner).(fmt.Stringer).String():  Marktpartner,
+			interface{}(LIEFERANT).(fmt.Stringer).String():     LIEFERANT,
+			interface{}(DIENSTLEISTER).(fmt.Stringer).String(): DIENSTLEISTER,
+			interface{}(KUNDE).(fmt.Stringer).String():         KUNDE,
+			interface{}(INTERESSENT).(fmt.Stringer).String():   INTERESSENT,
+			interface{}(MARKTPARTNER).(fmt.Stringer).String():  MARKTPARTNER,
 		}
 	}
 }

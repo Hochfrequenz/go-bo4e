@@ -9,13 +9,13 @@ import (
 
 var (
 	_EnergierichtungNameToValue = map[string]Energierichtung{
-		"Aussp": Aussp,
-		"Einsp": Einsp,
+		"AUSSP": AUSSP,
+		"EINSP": EINSP,
 	}
 
 	_EnergierichtungValueToName = map[Energierichtung]string{
-		Aussp: "Aussp",
-		Einsp: "Einsp",
+		AUSSP: "AUSSP",
+		EINSP: "EINSP",
 	}
 )
 
@@ -23,8 +23,8 @@ func init() {
 	var v Energierichtung
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_EnergierichtungNameToValue = map[string]Energierichtung{
-			interface{}(Aussp).(fmt.Stringer).String(): Aussp,
-			interface{}(Einsp).(fmt.Stringer).String(): Einsp,
+			interface{}(AUSSP).(fmt.Stringer).String(): AUSSP,
+			interface{}(EINSP).(fmt.Stringer).String(): EINSP,
 		}
 	}
 }

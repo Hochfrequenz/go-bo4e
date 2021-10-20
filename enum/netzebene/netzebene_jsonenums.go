@@ -18,7 +18,7 @@ var (
 		"HSS_HSP_UMSP": HSS_HSP_UMSP,
 		"HD":           HD,
 		"MD":           MD,
-		"N":            N,
+		"ND":           ND,
 	}
 
 	_NetzebeneValueToName = map[Netzebene]string{
@@ -31,7 +31,7 @@ var (
 		HSS_HSP_UMSP: "HSS_HSP_UMSP",
 		HD:           "HD",
 		MD:           "MD",
-		N:            "N",
+		ND:           "ND",
 	}
 )
 
@@ -48,7 +48,7 @@ func init() {
 			interface{}(HSS_HSP_UMSP).(fmt.Stringer).String(): HSS_HSP_UMSP,
 			interface{}(HD).(fmt.Stringer).String():           HD,
 			interface{}(MD).(fmt.Stringer).String():           MD,
-			interface{}(N).(fmt.Stringer).String():            N,
+			interface{}(ND).(fmt.Stringer).String():           ND,
 		}
 	}
 }

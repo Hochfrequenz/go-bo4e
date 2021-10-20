@@ -17,7 +17,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	var zaehlwerk = com.Zaehlwerk{
 		ZaehlwerkId:    "1",
 		Bezeichnung:    "bestes Zählwerk",
-		Richtung:       energierichtung.Aussp,
+		Richtung:       energierichtung.AUSSP,
 		ObisKennzahl:   "1-0:1.8.0",
 		Wandlerfaktor:  decimal.NewFromFloat(1),
 		Einheit:        mengeneinheit.KWH,
@@ -26,7 +26,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
 	jsonString := string(serializedZaehlwerk)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())   // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Aussp"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "AUSSP"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
 	var deserializedZaehlwerk com.Zaehlwerk
@@ -58,7 +58,7 @@ func (s *Suite) Test_Successful_Zaehlwerk_Validation() {
 		com.Zaehlwerk{
 			ZaehlwerkId:    "1",
 			Bezeichnung:    "ZW, Juhee",
-			Richtung:       energierichtung.Aussp,
+			Richtung:       energierichtung.AUSSP,
 			ObisKennzahl:   "1-0:1.8.0",
 			Wandlerfaktor:  decimal.NewFromFloat(1.0), // Mit diesem Faktor wird eine Zählerstandsdifferenz multipliziert, um zum eigentlichen Verbrauch im Zeitraum zu kommen. => must not be empty
 			Einheit:        mengeneinheit.KWH,

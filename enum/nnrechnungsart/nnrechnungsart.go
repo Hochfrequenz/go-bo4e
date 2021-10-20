@@ -6,6 +6,6 @@ package nnrechnungsart
 type NNRechnungsart int
 
 const (
-	HANDELSRECHNUNG   NNRechnungsart = iota + 1 // Handelsrechnung
-	SELBSTAUSGESTELLT                           // Selbst ausgestellte Rechnung, z.B. für Einspeiserechnungen.
+	HANDELSRECHNUNG   NNRechnungsart = iota + 1 // HANDELSRECHNUNG is a commercial invoid / Handelsrechnung
+	SELBSTAUSGESTELLT                           // SELBSTAUSGESTELLT means selbst ausgestellte Rechnung, z.B. für Einspeiserechnungen.
 )

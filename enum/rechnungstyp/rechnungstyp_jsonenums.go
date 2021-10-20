@@ -9,27 +9,27 @@ import (
 
 var (
 	_RechnungstypNameToValue = map[string]Rechnungstyp{
-		"Endkundenrechnung":              Endkundenrechnung,
-		"Netznutzungsrechnung":           Netznutzungsrechnung,
-		"Mehrmindermengenrechnung":       Mehrmindermengenrechnung,
-		"Messstellenbetriebsrechnung":    Messstellenbetriebsrechnung,
-		"Beschaffungsrechnung":           Beschaffungsrechnung,
-		"Ausgleichsenergierechnung":      Ausgleichsenergierechnung,
-		"Abschlagsrechnung":              Abschlagsrechnung,
-		"WiMRechnung":                    WiMRechnung,
-		"SelbstAusgestellteRechnungMeMi": SelbstAusgestellteRechnungMeMi,
+		"ENDKUNDENRECHNUNG":              ENDKUNDENRECHNUNG,
+		"NETZNUTZUNGSRECHNUNG":           NETZNUTZUNGSRECHNUNG,
+		"MEHRMINDERMENGENRECHNUNG":       MEHRMINDERMENGENRECHNUNG,
+		"MESSSTELLENBETRIEBSRECHNUNG":    MESSSTELLENBETRIEBSRECHNUNG,
+		"BESCHAFFUNGSRECHNUNG":           BESCHAFFUNGSRECHNUNG,
+		"AUSGLEICHSENERGIERECHNUNG":      AUSGLEICHSENERGIERECHNUNG,
+		"ABSCHLAGSRECHNUNG":              ABSCHLAGSRECHNUNG,
+		"WIMRECHNUNG":                    WIMRECHNUNG,
+		"SELBSTAUSGESTELLTERECHNUNGMEMI": SELBSTAUSGESTELLTERECHNUNGMEMI,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
-		Endkundenrechnung:              "Endkundenrechnung",
-		Netznutzungsrechnung:           "Netznutzungsrechnung",
-		Mehrmindermengenrechnung:       "Mehrmindermengenrechnung",
-		Messstellenbetriebsrechnung:    "Messstellenbetriebsrechnung",
-		Beschaffungsrechnung:           "Beschaffungsrechnung",
-		Ausgleichsenergierechnung:      "Ausgleichsenergierechnung",
-		Abschlagsrechnung:              "Abschlagsrechnung",
-		WiMRechnung:                    "WiMRechnung",
-		SelbstAusgestellteRechnungMeMi: "SelbstAusgestellteRechnungMeMi",
+		ENDKUNDENRECHNUNG:              "ENDKUNDENRECHNUNG",
+		NETZNUTZUNGSRECHNUNG:           "NETZNUTZUNGSRECHNUNG",
+		MEHRMINDERMENGENRECHNUNG:       "MEHRMINDERMENGENRECHNUNG",
+		MESSSTELLENBETRIEBSRECHNUNG:    "MESSSTELLENBETRIEBSRECHNUNG",
+		BESCHAFFUNGSRECHNUNG:           "BESCHAFFUNGSRECHNUNG",
+		AUSGLEICHSENERGIERECHNUNG:      "AUSGLEICHSENERGIERECHNUNG",
+		ABSCHLAGSRECHNUNG:              "ABSCHLAGSRECHNUNG",
+		WIMRECHNUNG:                    "WIMRECHNUNG",
+		SELBSTAUSGESTELLTERECHNUNGMEMI: "SELBSTAUSGESTELLTERECHNUNGMEMI",
 	}
 )
 
@@ -37,15 +37,15 @@ func init() {
 	var v Rechnungstyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_RechnungstypNameToValue = map[string]Rechnungstyp{
-			interface{}(Endkundenrechnung).(fmt.Stringer).String():              Endkundenrechnung,
-			interface{}(Netznutzungsrechnung).(fmt.Stringer).String():           Netznutzungsrechnung,
-			interface{}(Mehrmindermengenrechnung).(fmt.Stringer).String():       Mehrmindermengenrechnung,
-			interface{}(Messstellenbetriebsrechnung).(fmt.Stringer).String():    Messstellenbetriebsrechnung,
-			interface{}(Beschaffungsrechnung).(fmt.Stringer).String():           Beschaffungsrechnung,
-			interface{}(Ausgleichsenergierechnung).(fmt.Stringer).String():      Ausgleichsenergierechnung,
-			interface{}(Abschlagsrechnung).(fmt.Stringer).String():              Abschlagsrechnung,
-			interface{}(WiMRechnung).(fmt.Stringer).String():                    WiMRechnung,
-			interface{}(SelbstAusgestellteRechnungMeMi).(fmt.Stringer).String(): SelbstAusgestellteRechnungMeMi,
+			interface{}(ENDKUNDENRECHNUNG).(fmt.Stringer).String():              ENDKUNDENRECHNUNG,
+			interface{}(NETZNUTZUNGSRECHNUNG).(fmt.Stringer).String():           NETZNUTZUNGSRECHNUNG,
+			interface{}(MEHRMINDERMENGENRECHNUNG).(fmt.Stringer).String():       MEHRMINDERMENGENRECHNUNG,
+			interface{}(MESSSTELLENBETRIEBSRECHNUNG).(fmt.Stringer).String():    MESSSTELLENBETRIEBSRECHNUNG,
+			interface{}(BESCHAFFUNGSRECHNUNG).(fmt.Stringer).String():           BESCHAFFUNGSRECHNUNG,
+			interface{}(AUSGLEICHSENERGIERECHNUNG).(fmt.Stringer).String():      AUSGLEICHSENERGIERECHNUNG,
+			interface{}(ABSCHLAGSRECHNUNG).(fmt.Stringer).String():              ABSCHLAGSRECHNUNG,
+			interface{}(WIMRECHNUNG).(fmt.Stringer).String():                    WIMRECHNUNG,
+			interface{}(SELBSTAUSGESTELLTERECHNUNGMEMI).(fmt.Stringer).String(): SELBSTAUSGESTELLTERECHNUNGMEMI,
 		}
 	}
 }

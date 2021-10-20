@@ -6,13 +6,13 @@ package vertragsstatus
 type Vertragsstatus int
 
 const (
-	InArbeit     Vertragsstatus = iota + 1 // in Arbeit
-	Uebermittelt                           // übermittelt
-	Angenommen                             // angenommen
-	Aktiv                                  // aktiv
-	Abgelehnt                              // abgelehnt
-	Widerrufen                             // widerrufen
-	Storniert                              // storniert
-	Gekuendigt                             // gekündigt
-	Beendet                                // beendet
+	INARBEIT     Vertragsstatus = iota + 1 // INARBEIT means work in progress
+	UEBERMITTELT                           // UEBERMITTELT means sent
+	ANGENOMMEN                             // ANGENOMMEN means accepted
+	AKTIV                                  // AKTIV means aktive
+	ABGELEHNT                              // ABGELEHNT means rejected
+	WIDERRUFEN                             // WIDERRUFEN means revoked
+	STORNIERT                              // STORNIERT means cancelled
+	GEKUENDIGT                             // GEKUENDIGT means resigned
+	BEENDET                                // BEENDET means stopped
 )

@@ -9,27 +9,27 @@ import (
 
 var (
 	_ZaehlertypNameToValue = map[string]Zaehlertyp{
-		"Drehstromzaehler":      Drehstromzaehler,
-		"Balgengaszaehler":      Balgengaszaehler,
-		"Drehkolbenzaehler":     Drehkolbenzaehler,
-		"SmartMeter":            SmartMeter,
-		"Leistungszaehler":      Leistungszaehler,
-		"Maximumgaehler":        Maximumgaehler,
-		"Turbinenradgaszaehler": Turbinenradgaszaehler,
-		"Ultraschallgaszaehler": Ultraschallgaszaehler,
-		"Wechselstromzaehler":   Wechselstromzaehler,
+		"DREHSTROMZAEHLER":      DREHSTROMZAEHLER,
+		"BALGENGASZAEHLER":      BALGENGASZAEHLER,
+		"DREHKOLBENZAEHLER":     DREHKOLBENZAEHLER,
+		"SMARTMETER":            SMARTMETER,
+		"LEISTUNGSZAEHLER":      LEISTUNGSZAEHLER,
+		"MAXIMUMZAEHLER":        MAXIMUMZAEHLER,
+		"TURBINENRADGASZAEHLER": TURBINENRADGASZAEHLER,
+		"ULTRASCHALLGASZAEHLER": ULTRASCHALLGASZAEHLER,
+		"WECHSELSTROMZAEHLER":   WECHSELSTROMZAEHLER,
 	}
 
 	_ZaehlertypValueToName = map[Zaehlertyp]string{
-		Drehstromzaehler:      "Drehstromzaehler",
-		Balgengaszaehler:      "Balgengaszaehler",
-		Drehkolbenzaehler:     "Drehkolbenzaehler",
-		SmartMeter:            "SmartMeter",
-		Leistungszaehler:      "Leistungszaehler",
-		Maximumgaehler:        "Maximumgaehler",
-		Turbinenradgaszaehler: "Turbinenradgaszaehler",
-		Ultraschallgaszaehler: "Ultraschallgaszaehler",
-		Wechselstromzaehler:   "Wechselstromzaehler",
+		DREHSTROMZAEHLER:      "DREHSTROMZAEHLER",
+		BALGENGASZAEHLER:      "BALGENGASZAEHLER",
+		DREHKOLBENZAEHLER:     "DREHKOLBENZAEHLER",
+		SMARTMETER:            "SMARTMETER",
+		LEISTUNGSZAEHLER:      "LEISTUNGSZAEHLER",
+		MAXIMUMZAEHLER:        "MAXIMUMZAEHLER",
+		TURBINENRADGASZAEHLER: "TURBINENRADGASZAEHLER",
+		ULTRASCHALLGASZAEHLER: "ULTRASCHALLGASZAEHLER",
+		WECHSELSTROMZAEHLER:   "WECHSELSTROMZAEHLER",
 	}
 )
 
@@ -37,15 +37,15 @@ func init() {
 	var v Zaehlertyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_ZaehlertypNameToValue = map[string]Zaehlertyp{
-			interface{}(Drehstromzaehler).(fmt.Stringer).String():      Drehstromzaehler,
-			interface{}(Balgengaszaehler).(fmt.Stringer).String():      Balgengaszaehler,
-			interface{}(Drehkolbenzaehler).(fmt.Stringer).String():     Drehkolbenzaehler,
-			interface{}(SmartMeter).(fmt.Stringer).String():            SmartMeter,
-			interface{}(Leistungszaehler).(fmt.Stringer).String():      Leistungszaehler,
-			interface{}(Maximumgaehler).(fmt.Stringer).String():        Maximumgaehler,
-			interface{}(Turbinenradgaszaehler).(fmt.Stringer).String(): Turbinenradgaszaehler,
-			interface{}(Ultraschallgaszaehler).(fmt.Stringer).String(): Ultraschallgaszaehler,
-			interface{}(Wechselstromzaehler).(fmt.Stringer).String():   Wechselstromzaehler,
+			interface{}(DREHSTROMZAEHLER).(fmt.Stringer).String():      DREHSTROMZAEHLER,
+			interface{}(BALGENGASZAEHLER).(fmt.Stringer).String():      BALGENGASZAEHLER,
+			interface{}(DREHKOLBENZAEHLER).(fmt.Stringer).String():     DREHKOLBENZAEHLER,
+			interface{}(SMARTMETER).(fmt.Stringer).String():            SMARTMETER,
+			interface{}(LEISTUNGSZAEHLER).(fmt.Stringer).String():      LEISTUNGSZAEHLER,
+			interface{}(MAXIMUMZAEHLER).(fmt.Stringer).String():        MAXIMUMZAEHLER,
+			interface{}(TURBINENRADGASZAEHLER).(fmt.Stringer).String(): TURBINENRADGASZAEHLER,
+			interface{}(ULTRASCHALLGASZAEHLER).(fmt.Stringer).String(): ULTRASCHALLGASZAEHLER,
+			interface{}(WECHSELSTROMZAEHLER).(fmt.Stringer).String():   WECHSELSTROMZAEHLER,
 		}
 	}
 }

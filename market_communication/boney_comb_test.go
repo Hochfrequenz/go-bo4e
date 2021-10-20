@@ -52,7 +52,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
-				Anrede: anrede.Frau,
+				Anrede: anrede.FRAU,
 				Name1:  "Musterfrau",
 				Name2:  "Erika",
 			},
@@ -63,9 +63,9 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				},
 				Sparte:             sparte.STROM,
 				Zaehlernummer:      "1ASD23",
-				Zaehlerauspraegung: zaehlerauspraegung.Einrichtungszaehler,
-				Zaehlertyp:         zaehlertyp.Drehkolbenzaehler,
-				Tarifart:           tarifart.Eintarif,
+				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlertyp:         zaehlertyp.DREHKOLBENZAEHLER,
+				Tarifart:           tarifart.EINTARIF,
 			},
 			&bo.Energiemenge{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -73,7 +73,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 					VersionStruktur: "1",
 				},
 				LokationsId:  "54321012345",
-				LokationsTyp: lokationstyp.MaLo,
+				LokationsTyp: lokationstyp.MALO,
 				Verbrauch: []com.Verbrauch{
 					{
 						Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -230,7 +230,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						VersionStruktur:   "1",
 						ExterneReferenzen: nil,
 					},
-					Anrede:               anrede.Divers,
+					Anrede:               anrede.DIVERS,
 					Name1:                "Müller",
 					Name2:                "Lieschen",
 					Name3:                "",
@@ -243,8 +243,8 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 					EMailAdresse:         "email@lieschen-mueller.de",
 					Website:              "https://lieschen-mueller.de",
 					Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-						geschaeftspartnerrolle.Kunde,
-						geschaeftspartnerrolle.Marktpartner,
+						geschaeftspartnerrolle.KUNDE,
+						geschaeftspartnerrolle.MARKTPARTNER,
 					},
 					Partneradresse: com.Adresse{
 						Postleitzahl: "82031",
@@ -266,7 +266,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						VersionStruktur:   "1",
 						ExterneReferenzen: nil,
 					},
-					Anrede:               anrede.Divers,
+					Anrede:               anrede.DIVERS,
 					Name1:                "Müller",
 					Name2:                "Lieschen",
 					Name3:                "",
@@ -279,8 +279,8 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 					EMailAdresse:         "email@lieschen-mueller.de",
 					Website:              "https://lieschen-mueller.de",
 					Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-						geschaeftspartnerrolle.Kunde,
-						geschaeftspartnerrolle.Marktpartner,
+						geschaeftspartnerrolle.KUNDE,
+						geschaeftspartnerrolle.MARKTPARTNER,
 					},
 					Partneradresse: com.Adresse{
 						Postleitzahl: "82031",

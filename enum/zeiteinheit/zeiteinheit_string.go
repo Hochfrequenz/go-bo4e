@@ -8,19 +8,19 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Sekunde-1]
-	_ = x[Minute-2]
-	_ = x[Stunde-3]
-	_ = x[ViertelStunde-4]
-	_ = x[Tag-5]
-	_ = x[Woche-6]
-	_ = x[Monat-7]
-	_ = x[Quartal-8]
-	_ = x[Halbjahr-9]
-	_ = x[Jahr-10]
+	_ = x[SEKUNDE-1]
+	_ = x[MINUTE-2]
+	_ = x[STUNDE-3]
+	_ = x[VIERTELSTUNDE-4]
+	_ = x[TAG-5]
+	_ = x[WOCHE-6]
+	_ = x[MONAT-7]
+	_ = x[QUARTAL-8]
+	_ = x[HALBJAHR-9]
+	_ = x[JAHR-10]
 }
 
-const _Zeiteinheit_name = "SekundeMinuteStundeViertelStundeTagWocheMonatQuartalHalbjahrJahr"
+const _Zeiteinheit_name = "SEKUNDEMINUTESTUNDEVIERTELSTUNDETAGWOCHEMONATQUARTALHALBJAHRJAHR"
 
 var _Zeiteinheit_index = [...]uint8{0, 7, 13, 19, 32, 35, 40, 45, 52, 60, 64}
 

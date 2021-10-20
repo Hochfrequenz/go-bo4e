@@ -9,11 +9,11 @@ import (
 	"time"
 )
 
-// Rechnungsposition en sind Teil von Rechnung en. In einem Rechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.
+// Rechnungsposition en sind Teil von Rechnung en. In einem Rechnungsteil wird jeweils eine in sich geschlossene LEISTUNG abgerechnet.
 type Rechnungsposition struct {
 	Positionsnummer   int                                 `json:"positionsnummer" validate:"required"`                              // Fortlaufende Nummer für die Rechnungsposition
-	LieferungVon      time.Time                           `json:"lieferungVon" validate:"required"`                                 // _inklusiver_ Start der Lieferung für die abgerechnete Leistung
-	LieferungBis      time.Time                           `json:"lieferungBis" validate:"required,gtfield=LieferungVon"`            // _exklusives_ Ende der Lieferung für die abgerechnete Leistung
+	LieferungVon      time.Time                           `json:"lieferungVon" validate:"required"`                                 // _inklusiver_ Start der Lieferung für die abgerechnete LEISTUNG
+	LieferungBis      time.Time                           `json:"lieferungBis" validate:"required,gtfield=LieferungVon"`            // _exklusives_ Ende der Lieferung für die abgerechnete LEISTUNG
 	Positionstext     string                              `json:"positionstext" validate:"required"`                                // Bezeichung für die abgerechnete Position.
 	Zeiteinheit       zeiteinheit.Zeiteinheit             `json:"zeiteinheit,omitempty"`                                            //	Falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR
 	Artikelnummer     bdewartikelnummer.BDEWArtikelnummer `json:"bdewartikelnummer,omitempty"`                                      // Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW

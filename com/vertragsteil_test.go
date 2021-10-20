@@ -28,7 +28,7 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 		},
 		MaximaleAbnahmemenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(-3),
-			Einheit: mengeneinheit.Monat,
+			Einheit: mengeneinheit.MONAT,
 		},
 	}
 	serializedVertragsteil, err := json.Marshal(vertraqsteil)
@@ -105,7 +105,7 @@ func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 			},
 			MaximaleAbnahmemenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(-3),
-				Einheit: mengeneinheit.Monat,
+				Einheit: mengeneinheit.MONAT,
 			},
 		},
 		com.Vertragsteil{

@@ -1,11 +1,11 @@
 package energierichtung
 
-// Energierichtung describes if the energy is supplied out of or feeded into the grid
+// Energierichtung describes if the energy is supplied out of or fed into the grid
 //go:generate stringer --type Energierichtung
 //go:generate jsonenums --type Energierichtung
 type Energierichtung int
 
 const (
-	Aussp Energierichtung = iota + 1 // supply
-	Einsp                            // feeding
+	AUSSP Energierichtung = iota + 1 // AUSSP is short for "Ausspeisung" / supply
+	EINSP                            // EINSP is short for "Einspeisung" / feeding
 )

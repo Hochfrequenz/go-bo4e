@@ -6,8 +6,8 @@ package zaehlerauspraegung
 type Zaehlerauspraegung int
 
 const (
-	// Einrichtungszaehler is a single direction meter
-	Einrichtungszaehler Zaehlerauspraegung = iota + 1
-	// Zweirichtungszaehler is a bidirectional meter
-	Zweirichtungszaehler
+	// EINRICHTUNGSZAEHLER is a single direction meter
+	EINRICHTUNGSZAEHLER Zaehlerauspraegung = iota + 1
+	// ZWEIRICHTUNGSZAEHLER is a bidirectional meter
+	ZWEIRICHTUNGSZAEHLER
 )

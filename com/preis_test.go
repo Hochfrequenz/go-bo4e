@@ -18,13 +18,13 @@ func (s *Suite) Test_Preis_Deserialization() {
 	var preis = com.Preis{
 		Wert:       decimal.NewFromFloat(17.89),
 		Einheit:    waehrungseinheit.EUR,
-		Bezugswert: mengeneinheit.Monat,
-		Status:     preisstatus.Endgueltig,
+		Bezugswert: mengeneinheit.MONAT,
+		Status:     preisstatus.ENDGUELTIG,
 	}
 	serializedPreis, err := json.Marshal(preis)
 	jsonString := string(serializedPreis)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Monat"), is.True())      // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Endgueltig"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "MONAT"), is.True())      // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "ENDGUELTIG"), is.True()) // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "EUR"), is.True())        // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedPreis, is.Not(is.Nil()))
@@ -41,13 +41,13 @@ func (s *Suite) Test_Successful_Preis_Validation() {
 		com.Preis{
 			Wert:       decimal.NewFromFloat(17.89),
 			Einheit:    waehrungseinheit.EUR,
-			Bezugswert: mengeneinheit.Monat,
-			Status:     preisstatus.Endgueltig,
+			Bezugswert: mengeneinheit.MONAT,
+			Status:     preisstatus.ENDGUELTIG,
 		},
 		com.Preis{
 			Wert:       decimal.NewFromFloat(17.89),
 			Einheit:    waehrungseinheit.EUR,
-			Bezugswert: mengeneinheit.Monat,
+			Bezugswert: mengeneinheit.MONAT,
 			// status is not obligatory
 		},
 	}

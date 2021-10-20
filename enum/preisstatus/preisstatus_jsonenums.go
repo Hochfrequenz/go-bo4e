@@ -9,13 +9,13 @@ import (
 
 var (
 	_PreisstatusNameToValue = map[string]Preisstatus{
-		"Vorlaufig":  Vorlaufig,
-		"Endgueltig": Endgueltig,
+		"VORLAUEFIG": VORLAUEFIG,
+		"ENDGUELTIG": ENDGUELTIG,
 	}
 
 	_PreisstatusValueToName = map[Preisstatus]string{
-		Vorlaufig:  "Vorlaufig",
-		Endgueltig: "Endgueltig",
+		VORLAUEFIG: "VORLAUEFIG",
+		ENDGUELTIG: "ENDGUELTIG",
 	}
 )
 
@@ -23,8 +23,8 @@ func init() {
 	var v Preisstatus
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_PreisstatusNameToValue = map[string]Preisstatus{
-			interface{}(Vorlaufig).(fmt.Stringer).String():  Vorlaufig,
-			interface{}(Endgueltig).(fmt.Stringer).String(): Endgueltig,
+			interface{}(VORLAUEFIG).(fmt.Stringer).String(): VORLAUEFIG,
+			interface{}(ENDGUELTIG).(fmt.Stringer).String(): ENDGUELTIG,
 		}
 	}
 }

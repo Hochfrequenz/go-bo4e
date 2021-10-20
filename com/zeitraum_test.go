@@ -15,14 +15,14 @@ import (
 // TestZeitraumDeserialization deserializes a Zeitraum json
 func (s *Suite) Test_Zeitraum_Deserialization() {
 	var zeitraum = com.Zeitraum{
-		Einheit:        zeiteinheit.Minute,
+		Einheit:        zeiteinheit.MINUTE,
 		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	}
 	serializedZeitraum, err := json.Marshal(zeitraum)
 	jsonString := string(serializedZeitraum)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Minute"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
 	var deserializedZeitreihenwert com.Zeitraum
@@ -78,7 +78,7 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 		com.Zeitraum{
-			Einheit: zeiteinheit.Minute,
+			Einheit: zeiteinheit.MINUTE,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
 		com.Zeitraum{

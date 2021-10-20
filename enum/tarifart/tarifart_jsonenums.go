@@ -9,19 +9,19 @@ import (
 
 var (
 	_TarifartNameToValue = map[string]Tarifart{
-		"Eintarif":          Eintarif,
-		"Zweitarif":         Zweitarif,
-		"Mehrtarif":         Mehrtarif,
-		"SmartMeter":        SmartMeter,
-		"Leistungsgemessen": Leistungsgemessen,
+		"EINTARIF":          EINTARIF,
+		"ZWEITARIF":         ZWEITARIF,
+		"MEHRTARIF":         MEHRTARIF,
+		"SMARTMETER":        SMARTMETER,
+		"LEISTUNGSGEMESSEN": LEISTUNGSGEMESSEN,
 	}
 
 	_TarifartValueToName = map[Tarifart]string{
-		Eintarif:          "Eintarif",
-		Zweitarif:         "Zweitarif",
-		Mehrtarif:         "Mehrtarif",
-		SmartMeter:        "SmartMeter",
-		Leistungsgemessen: "Leistungsgemessen",
+		EINTARIF:          "EINTARIF",
+		ZWEITARIF:         "ZWEITARIF",
+		MEHRTARIF:         "MEHRTARIF",
+		SMARTMETER:        "SMARTMETER",
+		LEISTUNGSGEMESSEN: "LEISTUNGSGEMESSEN",
 	}
 )
 
@@ -29,11 +29,11 @@ func init() {
 	var v Tarifart
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_TarifartNameToValue = map[string]Tarifart{
-			interface{}(Eintarif).(fmt.Stringer).String():          Eintarif,
-			interface{}(Zweitarif).(fmt.Stringer).String():         Zweitarif,
-			interface{}(Mehrtarif).(fmt.Stringer).String():         Mehrtarif,
-			interface{}(SmartMeter).(fmt.Stringer).String():        SmartMeter,
-			interface{}(Leistungsgemessen).(fmt.Stringer).String(): Leistungsgemessen,
+			interface{}(EINTARIF).(fmt.Stringer).String():          EINTARIF,
+			interface{}(ZWEITARIF).(fmt.Stringer).String():         ZWEITARIF,
+			interface{}(MEHRTARIF).(fmt.Stringer).String():         MEHRTARIF,
+			interface{}(SMARTMETER).(fmt.Stringer).String():        SMARTMETER,
+			interface{}(LEISTUNGSGEMESSEN).(fmt.Stringer).String(): LEISTUNGSGEMESSEN,
 		}
 	}
 }

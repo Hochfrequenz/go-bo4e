@@ -8,14 +8,14 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[Anschreiben-1]
-	_ = x[Telefonat-2]
-	_ = x[Fax-3]
-	_ = x[Email-4]
+	_ = x[ANSCHREIBEN-1]
+	_ = x[TELEFONAT-2]
+	_ = x[FAX-3]
+	_ = x[EMAIL-4]
 	_ = x[SMS-5]
 }
 
-const _Kontaktart_name = "AnschreibenTelefonatFaxEmailSMS"
+const _Kontaktart_name = "ANSCHREIBENTELEFONATFAXEMAILSMS"
 
 var _Kontaktart_index = [...]uint8{0, 11, 20, 23, 28, 31}
 
