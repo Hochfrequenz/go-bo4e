@@ -30,6 +30,10 @@ so far.
 ```
 go get github.com/hochfrequenz/go-bo4e
 ```
+### Breaking Changes introduced in v0.0.13:
+- The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
+- `BusinessObject` is now the name of the interface that all structs with embedded `Geschaeftsobjekt` implement
+- Enums are consistently written in upper case
 
 ## Minimal Working Example
 
@@ -50,12 +54,12 @@ import (
 func main() {
 	melo := bo.Messlokation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
-			BoTyp:             botyp.Messlokation,
+			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
 		MesslokationsId: "DE0000011111222223333344444555556",
-		Sparte:          sparte.Strom,
+		Sparte:          sparte.STROM,
 		Messadresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
@@ -75,7 +79,7 @@ func main() {
 }
 ```
 
-[Use this in the Go Playground](https://play.golang.org/p/xR7VQh9NHGS).
+[Use this in the Go Playground](https://play.golang.org/p/wq8B_31Odni).
 
 ## Other Noteworthy BO4E Implementations
 
