@@ -49,22 +49,22 @@ func (boneyComb *BOneyComb) GetNachrichtendatum() (*time.Time, error) {
 	return &nachrichtendatum, nil
 }
 
-// GetAbsenderCode returns the 13 digit ID of the sending Marktteilnehmer if present in the Transaktionsdaten
+// GetAbsenderCode returns the 13 digit ID of the sending Marktteilnehmer if present in the Transaktionsdaten; nil otherwise
 func (boneyComb *BOneyComb) GetAbsenderCode() *string {
 	return boneyComb.getMpCode("Absender")
 }
 
-// GetEmpfaenger returns receiving Marktteilnehmer if present in both Transaktionsdaten and Stammdaten; nil otherwise
+// GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in both Transaktionsdaten; nil otherwise
 func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 	return boneyComb.getMpCode("Empfaenger")
 }
 
-// GetAbsenderCode returns the sending Marktteilnehmer if present in the Transaktionsdaten; nil otherwise
+// GetAbsender returns the sending bo.Marktteilnehmer if present in the Transaktionsdaten _and_ Stammdaten; nil otherwise
 func (boneyComb *BOneyComb) GetAbsender() *bo.Marktteilnehmer {
 	return boneyComb.getMarktteilnehmer(boneyComb.GetAbsenderCode())
 }
 
-// GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in the Transaktionsdaten
+// GetEmpfaenger returns the receiving bo.Marktteilnehmer if present in the Transaktionsdaten _and_ Stammdaten; nil otherwise
 func (boneyComb *BOneyComb) GetEmpfaenger() *bo.Marktteilnehmer {
 	return boneyComb.getMarktteilnehmer(boneyComb.GetEmpfaengerCode())
 }
