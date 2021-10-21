@@ -206,6 +206,12 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
 }
 
+func (s *Suite) Test_SetAbsenderCode() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
+	boneyCombWithDokumentennummer.SetAbsenderCode("9876543210987")
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+}
+
 func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
@@ -214,6 +220,12 @@ func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
 	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.Nil())
+}
+
+func (s *Suite) Test_SetEmpfaengerCode() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
+	boneyCombWithDokumentennummer.SetEmpfaengerCode("9876543210987")
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
 }
 
 func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
@@ -310,6 +322,38 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data() {
 	}
 	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsenderCode(), is.Nil())
 	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.Nil())
+}
+
+func (s *Suite) Test_SetAbsender() {
+	mt := bo.Marktteilnehmer{
+		Rollencodenummer: "9903100000006",
+		Geschaeftspartner: bo.Geschaeftspartner{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:           botyp.MARKTTEILNEHMER,
+				VersionStruktur: "1.1",
+			},
+		},
+	}
+	bc := market_communication.BOneyComb{}
+	bc.SetAbsender(mt)
+	then.AssertThat(s.T(), *bc.GetAbsenderCode(), is.EqualTo("9903100000006"))
+	then.AssertThat(s.T(), bc.GetAbsender(), is.EqualTo(&mt))
+}
+
+func (s *Suite) Test_SetEmpfaenger() {
+	mt := bo.Marktteilnehmer{
+		Rollencodenummer: "9903100000006",
+		Geschaeftspartner: bo.Geschaeftspartner{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:           botyp.MARKTTEILNEHMER,
+				VersionStruktur: "1.1",
+			},
+		},
+	}
+	bc := market_communication.BOneyComb{}
+	bc.SetEmpfaenger(mt)
+	then.AssertThat(s.T(), *bc.GetEmpfaengerCode(), is.EqualTo("9903100000006"))
+	then.AssertThat(s.T(), bc.GetEmpfaenger(), is.EqualTo(&mt))
 }
 
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
