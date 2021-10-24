@@ -63,3 +63,9 @@ func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetDokumentennummer(), is.EqualTo("asdasdasd"))
 }
+
+func (s *Suite) Test_SetDokumentennummer() {
+	boneyComb := market_communication.BOneyComb{}
+	boneyComb.SetDokumentennummer("1234567ASDFGH")
+	then.AssertThat(s.T(), *boneyComb.GetDokumentennummer(), is.EqualTo("1234567ASDFGH"))
+}
