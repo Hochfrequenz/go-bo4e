@@ -19,9 +19,7 @@ func (boneyComb *BOneyComb) GetAbsenderCode() *string {
 
 // SetAbsenderCode sets the 13 digit ID of the sending Marktteilnehmer in the Transaktionsdaten
 func (boneyComb *BOneyComb) SetAbsenderCode(mpId string) {
-	if boneyComb.Transaktionsdaten == nil {
-		boneyComb.Transaktionsdaten = map[string]string{}
-	}
+	boneyComb.initializeTransaktionsdaten()
 	boneyComb.Transaktionsdaten[senderKey] = mpId
 }
 
@@ -32,9 +30,7 @@ func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 
 // SetEmpfaengerCode sets the 13 digit ID of the receiving Marktteilnehmer in the Transaktionsdaten
 func (boneyComb *BOneyComb) SetEmpfaengerCode(mpId string) {
-	if boneyComb.Transaktionsdaten == nil {
-		boneyComb.Transaktionsdaten = map[string]string{}
-	}
+	boneyComb.initializeTransaktionsdaten()
 	boneyComb.Transaktionsdaten[receiverKey] = mpId
 }
 

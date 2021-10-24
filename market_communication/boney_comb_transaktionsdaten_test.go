@@ -55,6 +55,15 @@ func (s *Suite) Test_GetNachrichtendatum_Returns_Correct_Value() {
 	then.AssertThat(s.T(), err, is.Nil())
 }
 
+func (s *Suite) Test_SetNachrichtendatum() {
+	boneyComb := market_communication.BOneyComb{}
+	arbitraryDate := time.Date(2021, 10, 24, 16, 32, 0, 0, time.UTC)
+	boneyComb.SetNachrichtendatum(arbitraryDate)
+	setDate, err := boneyComb.GetNachrichtendatum()
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), *setDate, is.EqualTo(arbitraryDate))
+}
+
 func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
@@ -62,4 +71,10 @@ func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetDokumentennummer(), is.EqualTo("asdasdasd"))
+}
+
+func (s *Suite) Test_SetDokumentennummer() {
+	boneyComb := market_communication.BOneyComb{}
+	boneyComb.SetDokumentennummer("1234567ASDFGH")
+	then.AssertThat(s.T(), *boneyComb.GetDokumentennummer(), is.EqualTo("1234567ASDFGH"))
 }
