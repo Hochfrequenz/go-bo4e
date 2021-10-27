@@ -96,6 +96,16 @@ unit tests if you contribute logic beyond bare bare business object definitions.
 to the official BO4E standard in a separate
 repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
+### Adding Enums
+Wenn adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), [jsonenums](https://github.com/campoy/jsonenums)) needed to generate additional files.
+Since they are just needed for the generation, but not for running the program we don't want them in the go.mod file.
+One way to install them is outside of your directory with:
+```
+go install github.com/campoy/jsonenums@latest
+go install golang.org/x/tools/cmd/stringer@latest
+```
+
+
 ## Hochfrequenz
 
 [Hochfrequenz Unternehmensberatung GmbH](https://www.hochfrequenz.de) is a Grünwald (near Munich) based consulting
