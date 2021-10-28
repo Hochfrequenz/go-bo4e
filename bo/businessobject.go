@@ -50,6 +50,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Lastgang)
 		bo.(*Lastgang).BoTyp = typ
 		bo.(*Lastgang).VersionStruktur = defaultVersionStruktur
+	case botyp.MARKTLOKATION:
+		bo = new(Marktlokation)
+		bo.(*Marktlokation).BoTyp = typ
+		bo.(*Marktlokation).VersionStruktur = defaultVersionStruktur
 	case botyp.MARKTTEILNEHMER:
 		bo = new(Marktteilnehmer)
 		bo.(*Marktteilnehmer).BoTyp = typ
