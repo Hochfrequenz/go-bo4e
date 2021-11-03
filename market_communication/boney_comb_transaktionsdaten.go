@@ -32,6 +32,20 @@ const dokumentnummerKey = "Dokumentennummer"
 // nachrichtendatumKey is the key under which the Nachrichtendatum is stored in the BOneyComb.Transaktionsdaten
 const nachrichtendatumKey = "Nachrichtendatum"
 
+// nachrichtendatumKey is the key under which the Nachrichtendatum is stored in the BOneyComb.Transaktionsdaten
+const pruefidentifikatorKey = "Pruefidentifikator"
+
+// GetPruefidentifikator returns the Pruefidentifikator from BOneyComb.Transaktionsdaten if it's present and nil otherwise
+func (boneyComb *BOneyComb) GetPruefidentifikator() *string {
+	return boneyComb.GetTransactionData(pruefidentifikatorKey)
+}
+
+// SetPruefidentifikator sets the Pruefidentifikator in the BOneyComb.Transaktionsdaten
+func (boneyComb *BOneyComb) SetPruefidentifikator(pruefi string) {
+	boneyComb.initializeTransaktionsdaten()
+	boneyComb.Transaktionsdaten[pruefidentifikatorKey] = pruefi
+}
+
 // GetDokumentennummer returns the Dokumentennummer from BOneyComb.Transaktionsdaten if it's present and nil otherwise
 func (boneyComb *BOneyComb) GetDokumentennummer() *string {
 	return boneyComb.GetTransactionData(dokumentnummerKey)
