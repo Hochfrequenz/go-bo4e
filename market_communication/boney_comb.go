@@ -13,7 +13,7 @@ type BOneyComb struct {
 	Transaktionsdaten map[string]string      `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
 }
 
-var pruefiPattern = regexp.MustCompile("^[1-9]\\d{4}$")
+var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
 
 // PruefidentifikatorInTransaktionsdatenValidation returns true iff a valid Pruefidentifikator (see GetPruefidentifikator) is present
 func PruefidentifikatorInTransaktionsdatenValidation(sl validator.StructLevel) {
