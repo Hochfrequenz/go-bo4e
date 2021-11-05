@@ -110,6 +110,33 @@ func (s *Suite) Test_Empty_BOneyComb_Is_Invalid() {
 	then.AssertThat(s.T(), err, is.Not(is.Nil()))
 }
 
+func (s *Suite) Test_BOneyComb_Without_Pruefi_Is_Invalid() {
+	validate := validator.New()
+	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
+	var emptyBoneyComb = market_communication.BOneyComb{}
+	err := validate.Struct(emptyBoneyComb)
+	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+}
+
+func (s *Suite) Test_BOneyComb_With_Wrong_Pruefi_Is_Invalid() {
+	validate := validator.New()
+	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
+	var boneyComb = market_communication.BOneyComb{}
+	boneyComb.SetPruefidentifikator("asdfg")
+	err := validate.Struct(boneyComb)
+	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+}
+
+func (s *Suite) Test_BOneyComb_With_Correct_Pruefi_Is_Valid() {
+	validate := validator.New()
+	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
+	var boneyComb = market_communication.BOneyComb{}
+	boneyComb.SetPruefidentifikator("11042")
+	boneyComb.Stammdaten = []bo.BusinessObject{} // empty slice because nil is invalid
+	err := validate.Struct(boneyComb)
+	then.AssertThat(s.T(), err, is.Nil())
+}
+
 func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
 	var boneyCombWithEmptyStammdaten = market_communication.BOneyComb{
 		Stammdaten:        []bo.BusinessObject{},
