@@ -102,6 +102,37 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 				GrundzustaendigerMsbCodeNr:   "",
 				GrundzustaendigerMsbImCodeNr: "",
 				Messadresse:                  nil,
+				Geoadresse: nil,
+				Katasterinformation: nil,
+			},
+		},
+		"required_without_all": {
+			bo.Messlokation{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             0,
+					VersionStruktur:   "",
+					ExterneReferenzen: nil,
+				},
+				MesslokationsId:              "",
+				Sparte:                       0,
+				NetzebeneMessung:             0,
+				MessgebietNr:                 "",
+				Gerate:                       nil,
+				Messdienstleistung:           nil,
+				GrundzustaendigerMsbCodeNr:   "",
+				GrundzustaendigerMsbImCodeNr: "",
+				Messadresse:                  &com.Adresse{
+					Postleitzahl: "44056",
+					Ort:          "Neustadt",
+					Strasse:      "Neue Straße",
+					Hausnummer:   "17",
+					Landescode:   landescode.DE,
+				},
+				Geoadresse: &com.Geokoordinaten{
+					Breitengrad: newDecimalFromString("12.34"),
+					Laengengrad: newDecimalFromString("45.67"),
+				},
+				Katasterinformation: nil,
 			},
 		},
 		"len": {

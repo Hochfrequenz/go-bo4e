@@ -19,7 +19,7 @@ type Messlokation struct {
 	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric"`                             // Code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
 	Messlokationszaehler         []Zaehler           `json:"messlokationszaehler,omitempty"`                                                                  // meters associated to this Messlokation
 	// only one of the following three optional address attributes can be set
-	Messadresse         *com.Adresse         `json:"messadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // address of the melo
-	Geoadresse          *com.Geokoordinaten  `json:"geoadresse" validate:"required_without_all=Messadresse KatasterInformation"` // gps coordinates
+	Messadresse         *com.Adresse         `json:"messadresse" validate:"required_without_all=Geoadresse Katasterinformation"` // address of the melo
+	Geoadresse          *com.Geokoordinaten  `json:"geoadresse" validate:"required_without_all=Messadresse Katasterinformation"` // gps coordinates
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation" validate:"required_without_all=Messadresse Geoadresse"` // cadastre address
 }
