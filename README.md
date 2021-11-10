@@ -17,6 +17,7 @@
 - BO Energiemenge
 - BO Geschaeftspartner
 - BO Lastgang
+- BO Marktlokation
 - BO Marktteilnehmer
 - BO Messlokation
 - BO Rechnung
