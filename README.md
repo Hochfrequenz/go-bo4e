@@ -12,7 +12,7 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package (as of September 2021) implements**
+**This package (as of November 2021) implements**
 
 - BO Energiemenge
 - BO Geschaeftspartner
