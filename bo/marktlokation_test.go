@@ -23,6 +23,7 @@ import (
 
 // Test_Marktlokation_Deserialization tests serialization and deserialization of Marktlokation
 func (s *Suite) Test_Marktlokation_Deserialization() {
+	f := false
 	var malo = bo.Marktlokation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.MARKTLOKATION,
@@ -34,7 +35,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 		Energierichtung:      energierichtung.AUSSP,
 		Bilanzierungsmethode: bilanzierungsmethode.RLM,
 		Verbrauchsart:        verbrauchsart.KL,
-		Unterbrechbar:        true,
+		Unterbrechbar:        &f,
 		Netzebene:            netzebene.MSP,
 		Netzbetreibercodenr:  "0815",
 		Gebiettyp:            gebiettyp.GRUNDVERSORGUNGSGEBIET,
@@ -85,6 +86,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(string(serializedMalo), "GRUNDVERSORGUNGSGEBIET"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMalo), "DE"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedMalo), "ADDITION"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedMalo), "\"unterbrechbar\":false"), is.True())
 	var deserializedMalo bo.Marktlokation
 	err = json.Unmarshal(serializedMalo, &deserializedMalo)
 	then.AssertThat(s.T(), err, is.Nil())
