@@ -38,6 +38,7 @@ type Marktlokation struct {
 }
 
 // MaloIdFieldLevelValidation validates the Marktlokationsid as specified by the BDEW
+// https://bdew-codes.de/Content/Files/MaLo/2017-04-28-BDEW-Anwendungshilfe-MaLo-ID_Version1.0_FINAL.PDF
 func MaloIdFieldLevelValidation(fl validator.FieldLevel) bool {
 	maloId := fl.Field().String()
 	matched, err := regexp.MatchString("[1-9][\\d]{10}$", maloId)
