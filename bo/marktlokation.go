@@ -31,8 +31,8 @@ type Marktlokation struct {
 	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                           // Gasqualitaet is the gas quality
 	Endkunde             *Geschaeftspartner                        `json:"endkunde,omitempty" validate:"-"`                                                  // Endkunde is the Geschaeftspartner who owns this market location
 	// only one of the following three optional address attributes can be set
-	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
-	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse KatasterInformation"` // Geoadresse are the gps coordinates
+	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse Katasterinformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
+	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
 	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
 	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                             // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
 }
