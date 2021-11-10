@@ -16,25 +16,25 @@ import (
 // Marktlokation contains information about a market location aka "MaLo"
 type Marktlokation struct {
 	Geschaeftsobjekt
-	MarktlokationsId     string                                    `json:"marktlokationsId" example:"12345678913" validate:"required,numeric,len=11,maloid"` // ID of the market location
-	Sparte               sparte.Sparte                             `json:"sparte" validate:"required"`                                                       // Division
-	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung" validate:"required"`                                              // Identification of whether energy is supplied out of or fed into the grid.
-	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode" validate:"required"`                                         // Accounting method
-	Verbrauchsart        verbrauchsart.Verbrauchsart               `json:"verbrauchsart,omitempty"`                                                          // Consumption type
-	Unterbrechbar        bool                                      `json:"unterbrechbar,omitempty"`                                                          // Identification whether the supply is interruptible
+	MarktlokationsId     string                                    `json:"marktlokationsId" example:"12345678913" validate:"required,numeric,len=11,maloid"` // MarktlokationsId is the ID of the market location
+	Sparte               sparte.Sparte                             `json:"sparte" validate:"required"`                                                       // Sparte describes the Division
+	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung" validate:"required"`                                              // Energierichtung describes whether energy is supplied out of or fed into the grid.
+	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode" validate:"required"`                                         // Bilanzierungsmethode is the accounting method
+	Verbrauchsart        verbrauchsart.Verbrauchsart               `json:"verbrauchsart,omitempty"`                                                          // Verbrauchsart is the consumption type
+	Unterbrechbar        bool                                      `json:"unterbrechbar,omitempty"`                                                          // Unterbrechbar describes whether the supply is interruptible
 	Netzebene            netzebene.Netzebene                       `json:"netzebene" validate:"required"`                                                    // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
-	Netzbetreibercodenr  string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitempty,numeric"`                       // Code number of the "Netzbetreiber"
-	Gebiettyp            gebiettyp.Gebiettyp                       `json:"gebiettyp,omitempty"`                                                              // Type of the "Netzgebiet"
-	Netzgebietnr         string                                    `json:"netzgebietnr,omitempty"`                                                           // Number of the "Netzgebiet" in the enet database
+	Netzbetreibercodenr  string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitempty,numeric"`                       // Netzbetreibercodenr is the code number of the "Netzbetreiber"
+	Gebiettyp            gebiettyp.Gebiettyp                       `json:"gebiettyp,omitempty"`                                                              // Gebiettyp is the type of the "Netzgebiet"
+	Netzgebietnr         string                                    `json:"netzgebietnr,omitempty"`                                                           // Netzgebietnr is the number of the "Netzgebiet" in the enet database
 	Bilanzierungsgebiet  string                                    `json:"bilanzierungsgebiet,omitempty"`                                                    // Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.
-	Grundversorgercodenr string                                    `json:"grundversorgercodenr,omitempty"`                                                   // Code number of the "Grundversorger" responsible for this market location
-	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                           // Gas Quality
-	Endkunde             Geschaeftspartner                         `json:"endkunde,omitempty" validate:"-"`                                                  // Link to the Geschaeftspartner who owns this market location
+	Grundversorgercodenr string                                    `json:"grundversorgercodenr,omitempty"`                                                   // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
+	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                           // Gasqualitaet is the gas quality
+	Endkunde             Geschaeftspartner                         `json:"endkunde,omitempty" validate:"-"`                                                  // Endkunde is the Geschaeftspartner who owns this market location
 	// only one of the following three optional address attributes can be set
-	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // Address at which the energy supply or feed-in takes place
-	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse KatasterInformation"` // Gps coordinates
-	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation" validate:"required_without_all=Lokationsadresse Geoadresse"` // Cadastre address
-	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                             // List of MeLos belonging to this market location
+	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
+	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse KatasterInformation"` // Geoadresse are the gps coordinates
+	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
+	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                             // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
 }
 
 // MaloIdFieldLevelValidation validates the Marktlokationsid as specified by the BDEW
