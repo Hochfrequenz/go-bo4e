@@ -29,7 +29,7 @@ type Marktlokation struct {
 	Bilanzierungsgebiet  string                                    `json:"bilanzierungsgebiet,omitempty"`                                                    // Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.
 	Grundversorgercodenr string                                    `json:"grundversorgercodenr,omitempty" validate:"omitempty,numeric,len=13"`               // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
 	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                           // Gasqualitaet is the gas quality
-	Endkunde             Geschaeftspartner                         `json:"endkunde,omitempty" validate:"-"`                                                  // Endkunde is the Geschaeftspartner who owns this market location
+	Endkunde             *Geschaeftspartner                        `json:"endkunde,omitempty" validate:"-"`                                                  // Endkunde is the Geschaeftspartner who owns this market location
 	// only one of the following three optional address attributes can be set
 	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse KatasterInformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
 	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse KatasterInformation"` // Geoadresse are the gps coordinates

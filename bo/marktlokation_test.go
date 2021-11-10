@@ -42,7 +42,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 		Netzgebietnr:         "1234",
 		Bilanzierungsgebiet:  "Foo",
 		Grundversorgercodenr: "5678",
-		Endkunde: bo.Geschaeftspartner{
+		Endkunde: &bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
