@@ -97,7 +97,7 @@ to the official BO4E standard in a separate
 repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ### Adding Enums
-Wenn adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), [jsonenums](https://github.com/campoy/jsonenums)) needed to generate additional files.
+Whnn adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), [jsonenums](https://github.com/campoy/jsonenums)) needed to go-generate additional files, which contain an implementation of the `fmt.Stringer` and `json.Marshaler` interface for the respective enum.
 Since they are just needed for the generation, but not for running the program we don't want them in the go.mod file.
 One way to install them is outside of your directory with:
 ```
