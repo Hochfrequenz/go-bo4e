@@ -46,6 +46,16 @@ func (s *Suite) Test_Failed_MesslokationszuordnungValidation() {
 				MesslokationsId: "not33",
 			},
 		},
+		"ltefield": {
+			com.Messlokationszuordnung{
+				GueltigSeit: time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
+				GueltigBis:  time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)},
+		},
+		"gtefield": {
+			com.Messlokationszuordnung{
+				GueltigSeit: time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
+				GueltigBis:  time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidMesslokationszuordnung)
 }
