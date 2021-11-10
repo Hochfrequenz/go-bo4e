@@ -33,7 +33,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 		Sparte:                       sparte.STROM,
 		NetzebeneMessung:             netzebene.MD,
 		MessgebietNr:                 "",
-		Gerate:                       nil,
+		Geraete:                      nil,
 		Messdienstleistung:           nil,
 		GrundzustaendigerMsbCodeNr:   "",
 		GrundzustaendigerMsbImCodeNr: "",
@@ -82,9 +82,10 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	then.AssertThat(s.T(), deserializedMelo, is.EqualTo(melo))
 }
 
-// TestFailedMesslokationValidation verifies that the validators of Messlokation work
+// Test_Failed_MesslokationValidation verifies that the validators of Messlokation work
 func (s *Suite) Test_Failed_MesslokationValidation() {
 	validate := validator.New()
+	validate.RegisterStructValidation(bo.XorStructLevelMesslokationValidation, bo.Messlokation{})
 	invalidMesslokationMap := map[string][]interface{}{
 		"required": {
 			bo.Messlokation{
@@ -97,11 +98,45 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 				Sparte:                       0,
 				NetzebeneMessung:             0,
 				MessgebietNr:                 "",
-				Gerate:                       nil,
+				Geraete:                      nil,
 				Messdienstleistung:           nil,
 				GrundzustaendigerMsbCodeNr:   "",
 				GrundzustaendigerMsbImCodeNr: "",
 				Messadresse:                  nil,
+				Geoadresse:                   nil,
+				Katasterinformation:          nil,
+			},
+		},
+		"required_without_all": {
+			bo.Messlokation{},
+		},
+		"onlyOneAddressType": {
+			bo.Messlokation{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             0,
+					VersionStruktur:   "",
+					ExterneReferenzen: nil,
+				},
+				MesslokationsId:              "",
+				Sparte:                       0,
+				NetzebeneMessung:             0,
+				MessgebietNr:                 "",
+				Geraete:                      nil,
+				Messdienstleistung:           nil,
+				GrundzustaendigerMsbCodeNr:   "",
+				GrundzustaendigerMsbImCodeNr: "",
+				Messadresse: &com.Adresse{
+					Postleitzahl: "44056",
+					Ort:          "Neustadt",
+					Strasse:      "Neue Straße",
+					Hausnummer:   "17",
+					Landescode:   landescode.DE,
+				},
+				Geoadresse: &com.Geokoordinaten{
+					Breitengrad: newDecimalFromString("12.34"),
+					Laengengrad: newDecimalFromString("45.67"),
+				},
+				Katasterinformation: nil,
 			},
 		},
 		"len": {
@@ -127,7 +162,7 @@ func (s *Suite) Test_Successful_Messlokation_Validation() {
 			Sparte:                       sparte.STROM,
 			NetzebeneMessung:             netzebene.MD,
 			MessgebietNr:                 "",
-			Gerate:                       nil,
+			Geraete:                      nil,
 			Messdienstleistung:           nil,
 			GrundzustaendigerMsbCodeNr:   "",
 			GrundzustaendigerMsbImCodeNr: "",
