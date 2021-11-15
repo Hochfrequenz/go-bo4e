@@ -120,3 +120,7 @@ func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	}
 	VerfiySuccessfulValidations(s, validate, validVertragsteile)
 }
+
+func (s *Suite) Test_Serialized_Empty_Vertragsteil_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Vertragsteil{})
+}

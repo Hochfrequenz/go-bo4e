@@ -70,3 +70,7 @@ func (s *Suite) Test_Preis_FailedValidation() {
 	}
 	VerfiyFailedValidations(s, validate, invalidPrices)
 }
+
+func (s *Suite) Test_Serialized_Empty_Preis_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Preis{})
+}

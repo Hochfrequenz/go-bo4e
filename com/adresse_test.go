@@ -94,3 +94,14 @@ func (s *Suite) Test_Successful_Adresse_Validation() {
 	}
 	VerfiySuccessfulValidations(s, validate, validAddresses)
 }
+
+func (s *Suite) Test_Serialized_Empty_Adresse_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Adresse{})
+}
+
+func (s *Suite) assert_Does_Not_Serialize_Default_Enums(com interface{}) {
+	jsonBytes, err := json.Marshal(com)
+	then.AssertThat(s.T(), err, is.Nil())
+	jsonString := string(jsonBytes)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "(0)"), is.False())
+}

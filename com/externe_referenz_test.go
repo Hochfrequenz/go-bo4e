@@ -38,3 +38,7 @@ func (s *Suite) Test_Successful_ExterneReferenzValidation() {
 	}
 	VerfiySuccessfulValidations(s, validate, validReferences)
 }
+
+func (s *Suite) Test_Serialized_Empty_Externe_Referenz_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.ExterneReferenz{})
+}

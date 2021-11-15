@@ -40,3 +40,7 @@ func (s *Suite) Test_Successful_BetragValidation() {
 	}
 	VerfiySuccessfulValidations(s, validate, validBetraege)
 }
+
+func (s *Suite) Test_Serialized_Empty_Betrag_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Betrag{})
+}
