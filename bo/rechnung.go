@@ -13,12 +13,12 @@ import (
 type Rechnung struct {
 	Geschaeftsobjekt
 	Rechnungstitel          string                          `json:"rechnungstitel"`                                             // Bezeichnung für die vorliegende Rechnung.
-	Rechnungsstatus         rechnungsstatus.Rechnungsstatus `json:"rechnungsstatus"`                                            // Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes
+	Rechnungsstatus         rechnungsstatus.Rechnungsstatus `json:"rechnungsstatus,omitempty"`                                  // Status der Rechnung zur Kennzeichnung des Bearbeitungsstandes
 	Storno                  bool                            `json:"storno" validate:"required"`                                 // Kennzeichnung, ob es sich um eine Stornorechnung handelt. Im Falle "true" findet sich im Attribut "originalrechnungsnummer" die Nummer der Originalrechnung
 	Rechnungsnummer         string                          `json:"rechnungsnummer" validate:"required"`                        // Eine im Verwendungskontext eindeutige Nummer für die Rechnung
 	Rechnungsdatum          time.Time                       `json:"rechnungsdatum" validate:"required"`                         // Ausstellungsdatum der Rechnung
 	Faelligkeitsdatum       time.Time                       `json:"faelligkeitsdatum" validate:"required"`                      // Zu diesem Datum ist die Zahlung fällig
-	Rechnungstyp            rechnungstyp.Rechnungstyp       `json:"rechnungstyp" validate:"required"`                           // Ein kontextbezogener Rechnungstyp
+	Rechnungstyp            rechnungstyp.Rechnungstyp       `json:"rechnungstyp,omitempty" validate:"required"`                 // Ein kontextbezogener Rechnungstyp
 	OriginalRechnungsnummer string                          `json:"originalRechnungsnummer" validate:"required_if=Storno true"` // Im Falle einer Stornorechnung (Storno = true) steht hier die Rechnungsnummer der stornierten Rechnung
 	Rechnungsperiode        com.Zeitraum                    `json:"rechnungsperiode" validate:"required"`                       // Der Zeitraum der zugrunde liegenden Lieferung zur Rechnung
 	Rechnungsersteller      Geschaeftspartner               `json:"rechnungsersteller" validate:"required"`                     // Der Aussteller der Rechnung

@@ -1,6 +1,7 @@
 package bo_test
 
 import (
+	"encoding/json"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -12,6 +13,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -105,4 +107,15 @@ func (s *Suite) Test_Empty_Something_Is_Creatable_Using_BoTyp() {
 	// remove this test as soon as the TARIFPREISBLATT is implemented. just to cover the nil case
 	object := bo.NewBusinessObject(botyp.TARIFPREISBLATT)
 	then.AssertThat(s.T(), object, is.Nil())
+}
+
+func (s *Suite) Test_Serialized_Empty_Energiemenge_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ENERGIEMENGE))
+}
+
+func (s *Suite) assert_Does_Not_Serialize_Default_Enums(bo bo.BusinessObject) {
+	jsonBytes, err := json.Marshal(bo)
+	then.AssertThat(s.T(), err, is.Nil())
+	jsonString := string(jsonBytes)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "(0)"), is.False())
 }
