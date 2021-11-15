@@ -78,3 +78,7 @@ func (s *Suite) Test_Verbrauch_FailedValidation() {
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
 }
+
+func (s *Suite) Test_Serialized_Empty_Verbrauch_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Verbrauch{})
+}

@@ -11,17 +11,17 @@ import (
 // Vertrag ist ein Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
 type Vertrag struct {
 	Geschaeftsobjekt
-	Vertragsnummer      string                        `json:"vertragsnummer" validate:"alphanum,required"`         // Eine im Verwendungskontext eindeutige Nummer für den Vertrag
+	Vertragsnummer      string                        `json:"vertragsnummer" validate:"alphanum,required"`         // Vertragsnummer ist eine im Verwendungskontext eindeutige Nummer für den Vertrag
 	Beschreibung        string                        `json:"beschreibung,omitempty"`                              // Beschreibung zum Vertrag
-	Vertragsstatus      vertragsstatus.Vertragsstatus `json:"vertragsstatus" validate:"required"`                  // Gibt den Status des Vertrags an
-	Vertragsart         vertragsart.Vertragsart       `json:"vertragsart" validate:"required"`                     // Hier ist festgelegt, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag.
-	Sparte              sparte.Sparte                 `json:"sparte" validate:"required"`                          // Unterscheidungsmöglichkeiten für die Sparte
-	Vertragsbeginn      time.Time                     `json:"startdatum" validate:"required"`                      // inclusive start
-	Vertragsende        time.Time                     `json:"enddatum" validate:"required,gtfield=Vertragsbeginn"` // exclusive end
-	Vertragspartner1    Geschaeftspartner             `json:"vertragspartner1" validate:"required"`                // Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..."
-	Vertragspartner2    Geschaeftspartner             `json:"vertragspartner2" validate:"required"`                // Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2"
-	UnterzeichnerVp1    []com.Unterschrift            `json:"unterzeichnervp1,omitempty"`                          // Unterzeichner des Vertragspartner1
-	UnterzeichnerVp2    []com.Unterschrift            `json:"unterzeichnervp2,omitempty"`                          // Unterzeichner des Vertragspartner2
-	Vertragskonditionen *com.Vertragskonditionen      `json:"vertragskonditionen,omitempty"`                       // Festlegungen zu Laufzeiten und Kündigungsfristen
-	Vertragsteile       []com.Vertragsteil            `json:"vertragsteile" validate:"required,min=1"`             // Der Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
+	Vertragsstatus      vertragsstatus.Vertragsstatus `json:"vertragsstatus,omitempty" validate:"required"`        // Vertragsstatus ist der Status des Vertrags
+	Vertragsart         vertragsart.Vertragsart       `json:"vertragsart,omitempty" validate:"required"`           // Vertragsart legt fest, um welche Art von Vertrag es sich handelt. Z.B. Netznutzungvertrag.
+	Sparte              sparte.Sparte                 `json:"sparte,omitempty" validate:"required"`                // Sparte sind Unterscheidungsmöglichkeiten für die Sparte
+	Vertragsbeginn      time.Time                     `json:"startdatum" validate:"required"`                      // Vertragsbeginn is the inclusive start
+	Vertragsende        time.Time                     `json:"enddatum" validate:"required,gtfield=Vertragsbeginn"` // Vertragsende is the exclusive end
+	Vertragspartner1    Geschaeftspartner             `json:"vertragspartner1" validate:"required"`                // Vertragspartner1 ist der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..."
+	Vertragspartner2    Geschaeftspartner             `json:"vertragspartner2" validate:"required"`                // Vertragspartner2 ist der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2"
+	UnterzeichnerVp1    []com.Unterschrift            `json:"unterzeichnervp1,omitempty"`                          // UnterzeichnerVp1 ist der Unterzeichner des Vertragspartner1
+	UnterzeichnerVp2    []com.Unterschrift            `json:"unterzeichnervp2,omitempty"`                          // UnterzeichnerVp2 ist der Unterzeichner des Vertragspartner2
+	Vertragskonditionen *com.Vertragskonditionen      `json:"vertragskonditionen,omitempty"`                       // Vertragskonditionen ist eine Festlegungen zu Laufzeiten und Kündigungsfristen
+	Vertragsteile       []com.Vertragsteil            `json:"vertragsteile" validate:"required,min=1"`             // Vertragsteile sind die Vertragsteile, die dazu verwendet werden, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
 }

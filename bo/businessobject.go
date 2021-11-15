@@ -15,9 +15,9 @@ type BusinessObject interface {
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
 type Geschaeftsobjekt struct {
-	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // type of business object, may be used as discriminator
-	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // version of BO4E used
-	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen"`                   // external references of this object in various systems
+	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
+	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
+	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen"`                   // ExterneReferenzen are external references of this object in various systems
 }
 
 func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
@@ -66,14 +66,20 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Netznutzungsrechnung)
 		bo.(*Netznutzungsrechnung).BoTyp = typ
 		bo.(*Netznutzungsrechnung).VersionStruktur = defaultVersionStruktur
+		bo.(*Netznutzungsrechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
+		bo.(*Netznutzungsrechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
 	case botyp.RECHNUNG:
 		bo = new(Rechnung)
 		bo.(*Rechnung).BoTyp = typ
 		bo.(*Rechnung).VersionStruktur = defaultVersionStruktur
+		bo.(*Rechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
+		bo.(*Rechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
 	case botyp.VERTRAG:
 		bo = new(Vertrag)
 		bo.(*Vertrag).BoTyp = typ
 		bo.(*Vertrag).VersionStruktur = defaultVersionStruktur
+		bo.(*Vertrag).Vertragspartner1.BoTyp = botyp.GESCHAEFTSPARTNER
+		bo.(*Vertrag).Vertragspartner2.BoTyp = botyp.GESCHAEFTSPARTNER
 	case botyp.ZAEHLER:
 		bo = new(Zaehler)
 		bo.(*Zaehler).BoTyp = typ

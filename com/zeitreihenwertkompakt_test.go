@@ -55,3 +55,7 @@ func (s *Suite) Test_Successful_Zeitreihenwertkompakt_Validation() {
 	}
 	VerfiySuccessfulValidations(s, validate, validAddresses)
 }
+
+func (s *Suite) Test_Serialized_Empty_Zeitreihenwertkompakt_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Zeitreihenwertkompakt{})
+}

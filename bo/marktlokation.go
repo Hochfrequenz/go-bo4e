@@ -17,12 +17,12 @@ import (
 type Marktlokation struct {
 	Geschaeftsobjekt
 	MarktlokationsId     string                                    `json:"marktlokationsId" example:"12345678913" validate:"required,numeric,len=11,maloid"` // MarktlokationsId is the ID of the market location
-	Sparte               sparte.Sparte                             `json:"sparte" validate:"required"`                                                       // Sparte describes the Division
-	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung" validate:"required"`                                              // Energierichtung describes whether energy is supplied out of or fed into the grid.
-	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode" validate:"required"`                                         // Bilanzierungsmethode is the accounting method
+	Sparte               sparte.Sparte                             `json:"sparte,omitempty" validate:"required"`                                             // Sparte describes the Division
+	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung,omitempty" validate:"required"`                                    // Energierichtung describes whether energy is supplied out of or fed into the grid.
+	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode,omitempty" validate:"required"`                               // Bilanzierungsmethode is the accounting method
 	Verbrauchsart        verbrauchsart.Verbrauchsart               `json:"verbrauchsart,omitempty"`                                                          // Verbrauchsart is the consumption type
 	Unterbrechbar        *bool                                     `json:"unterbrechbar,omitempty"`                                                          // Unterbrechbar describes whether the supply is interruptible
-	Netzebene            netzebene.Netzebene                       `json:"netzebene" validate:"required"`                                                    // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
+	Netzebene            netzebene.Netzebene                       `json:"netzebene,omitempty" validate:"required"`                                          // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
 	Netzbetreibercodenr  string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitempty,numeric,len=13"`                // Netzbetreibercodenr is the code number of the "Netzbetreiber"
 	Gebiettyp            gebiettyp.Gebiettyp                       `json:"gebiettyp,omitempty"`                                                              // Gebiettyp is the type of the "Netzgebiet"
 	Netzgebietnr         string                                    `json:"netzgebietnr,omitempty"`                                                           // Netzgebietnr is the number of the "Netzgebiet" in the enet database
