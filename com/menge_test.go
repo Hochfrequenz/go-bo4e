@@ -57,3 +57,7 @@ func (s *Suite) Test_Menge_FailedValidation() {
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
 }
+
+func (s *Suite) Test_Serialized_Empty_Menge_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Menge{})
+}

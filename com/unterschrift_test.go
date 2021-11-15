@@ -60,3 +60,7 @@ func (s *Suite) Test_Unterschrift_FailedValidation() {
 	}
 	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
 }
+
+func (s *Suite) Test_Serialized_Empty_Unterschrift_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(com.Unterschrift{})
+}
