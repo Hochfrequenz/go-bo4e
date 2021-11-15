@@ -1,7 +1,7 @@
 package com
 
 import (
-	"github.com/hochfrequenz/go-bo4e/enum/arithmetischeoperation"
+	"arithmetischeoperation"
 	"time"
 )
 
