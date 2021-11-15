@@ -32,6 +32,14 @@ so far.
 go get github.com/hochfrequenz/go-bo4e
 ```
 
+## Version Notes
+
+### Default Enum Marshalling Behaviour since v0.0.19
+
+Since version v0.0.19 default enum values are no longer serialized/marshalled.
+Prior to v0.0.19 fields with an enum type that are required but were uninitialized had been serialized as `NameOfEnum(0)`.
+This change leads to a complete decoupling of serialization and validation.
+
 ### Breaking Changes introduced in v0.0.13 and v0.0.14:
 
 - The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
@@ -98,14 +106,15 @@ to the official BO4E standard in a separate
 repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
 ### Adding Enums
+
 When adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), [jsonenums](https://github.com/campoy/jsonenums)) needed to go-generate additional files, which contain an implementation of the `fmt.Stringer` and `json.Marshaler` interface for the respective enum.
 Since they are just needed for the code generation, but not a real dependency we don't want them in the go.mod file.
 One way to install them is outside of your directory with:
+
 ```
 go install github.com/campoy/jsonenums@latest
 go install golang.org/x/tools/cmd/stringer@latest
 ```
-
 
 ## Hochfrequenz
 
