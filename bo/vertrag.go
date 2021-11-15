@@ -18,8 +18,8 @@ type Vertrag struct {
 	Sparte              sparte.Sparte                 `json:"sparte,omitempty" validate:"required"`                // Sparte sind Unterscheidungsmöglichkeiten für die Sparte
 	Vertragsbeginn      time.Time                     `json:"startdatum" validate:"required"`                      // Vertragsbeginn is the inclusive start
 	Vertragsende        time.Time                     `json:"enddatum" validate:"required,gtfield=Vertragsbeginn"` // Vertragsende is the exclusive end
-	Vertragspartner1    Geschaeftspartner             `json:"vertragspartner1" validate:"required"`                // Der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..."
-	Vertragspartner2    Geschaeftspartner             `json:"vertragspartner2" validate:"required"`                // Der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2"
+	Vertragspartner1    Geschaeftspartner             `json:"vertragspartner1" validate:"required"`                // Vertragspartner1 ist der "erstgenannte" Vertragspartner. In der Regel der Aussteller des Vertrags. Beispiel: "Vertrag zwischen Vertragspartner 1 ..."
+	Vertragspartner2    Geschaeftspartner             `json:"vertragspartner2" validate:"required"`                // Vertragspartner2 ist der "zweitgenannte" Vertragspartner. In der Regel der Empfänger des Vertrags. Beispiel "Vertrag zwischen Vertragspartner 1 und Vertragspartner 2"
 	UnterzeichnerVp1    []com.Unterschrift            `json:"unterzeichnervp1,omitempty"`                          // UnterzeichnerVp1 ist der Unterzeichner des Vertragspartner1
 	UnterzeichnerVp2    []com.Unterschrift            `json:"unterzeichnervp2,omitempty"`                          // UnterzeichnerVp2 ist der Unterzeichner des Vertragspartner2
 	Vertragskonditionen *com.Vertragskonditionen      `json:"vertragskonditionen,omitempty"`                       // Vertragskonditionen ist eine Festlegungen zu Laufzeiten und Kündigungsfristen
