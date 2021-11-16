@@ -144,30 +144,32 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 	VerfiyFailedValidations(s, validate, invalidVertrags)
 }
 
+var validGp = bo.Geschaeftspartner{
+	Geschaeftsobjekt: bo.Geschaeftsobjekt{
+		BoTyp:             botyp.GESCHAEFTSPARTNER,
+		VersionStruktur:   "1",
+		ExterneReferenzen: nil,
+	},
+	Name1:                "Musterfrau",
+	Gewerbekennzeichnung: false,
+	Partneradresse: com.Adresse{
+		Postleitzahl: "82031",
+		Ort:          "Grünwald",
+		Strasse:      "Nördlicher Münchner Straße",
+		Hausnummer:   "27A",
+		Landescode:   landescode.DE,
+	},
+	Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
+		geschaeftspartnerrolle.DIENSTLEISTER,
+	},
+}
+
 //  Test_Successful_Geschaeftspartner_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 
 	validate := validator.New()
 	validGeschaeftspartners := []bo.BusinessObject{
-		bo.Geschaeftspartner{
-			Geschaeftsobjekt: bo.Geschaeftsobjekt{
-				BoTyp:             botyp.GESCHAEFTSPARTNER,
-				VersionStruktur:   "1",
-				ExterneReferenzen: nil,
-			},
-			Name1:                "Musterfrau",
-			Gewerbekennzeichnung: false,
-			Partneradresse: com.Adresse{
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Strasse:      "Nördlicher Münchner Straße",
-				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
-			},
-			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
-				geschaeftspartnerrolle.DIENSTLEISTER,
-			},
-		},
+		validGp,
 	}
 	VerfiySuccessfulValidations(s, validate, validGeschaeftspartners)
 }
