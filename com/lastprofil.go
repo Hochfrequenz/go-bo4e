@@ -1,5 +1,7 @@
 package com
-import
+
+import "github.com/hochfrequenz/go-bo4e/enum/profilverfahren"
+
 // Lastprofil defines a Lastprofil (no shit, sherlock)
 // Note that this component is not official BO4E standard (yet)!
 type Lastprofil struct {
