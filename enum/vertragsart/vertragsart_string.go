@@ -15,7 +15,7 @@ func _() {
 	_ = x[BUENDELVERTRAG-5]
 }
 
-const _Vertragsart_name = "EnergieliefervertragNetznutzungBilanzierungsvertragMessstellenbetriebsvertragBuendelvertrag"
+const _Vertragsart_name = "ENERGIELIEFERVERTRAGNETZNUTZUNGBILANZIERUNGSVERTRAGMESSSTELLENBETRIEBSVERTRAGBUENDELVERTRAG"
 
 var _Vertragsart_index = [...]uint8{0, 20, 31, 51, 77, 91}
 
