@@ -29,13 +29,14 @@ type Bilanzierung struct {
 	// 2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für Schwachlast]
 	// 3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht Schwachlast]
 	Verbrauchsaufteilung       decimal.NullDecimal                                 `json:"verbrauchsaufteilung,omitempty"`
-	Zeitreihentyp              zeitreihentyp.Zeitreihentyp                         `json:"zeitreihentyp,omitempty"`              // Zeitreihentyp beschreibt den verwendeten Zeitreihentyp (SLS, TLS...)
-	Aggregationsverantwortung  aggregationsverantwortung.Aggregationsverantwortung `json:"aggregationsverantwortung,omitempty"`  // Aggregationsverantwortung benennt, bei wem die Aggregationsverantwortung liegt
-	Prognosegrundlage          prognosegrundlage.Prognosegrundlage                 `json:"prognosegrundlage,omitempty"`          // Die Prognosegrundlage beschreibt die Prognosegrundlage
-	DetailsPrognosegrundlage   []profiltyp.Profiltyp                               `json:"detailsPrognosegrundlage,omitempty"`   // ?
-	WahlrechtPrognosegrundlage *bool                                               `json:"wahlrechtPrognosegrundlage,omitempty"` // WahlrechtPrognosegrundlage ist true, falls der Lieferant das Wahlrecht hat
-	Fallgruppenzuordnung       fallgruppenzuordnung.Fallgruppenzuordnung           `json:"fallgruppenzuordnung,omitempty"`       // Fallgruppenzuordnung (für Gas RLM)
-	Prioritaet                 *int                                                `json:"prioritaet,omitempty"`                 // Prioritaet ist die Priorität des Bilanzkreises für Gas
+	Zeitreihentyp              zeitreihentyp.Zeitreihentyp                         `json:"zeitreihentyp,omitempty"`                                // Zeitreihentyp beschreibt den verwendeten Zeitreihentyp (SLS, TLS...)
+	Aggregationsverantwortung  aggregationsverantwortung.Aggregationsverantwortung `json:"aggregationsverantwortung,omitempty"`                    // Aggregationsverantwortung benennt, bei wem die Aggregationsverantwortung liegt
+	Prognosegrundlage          prognosegrundlage.Prognosegrundlage                 `json:"prognosegrundlage,omitempty"`                            // Die Prognosegrundlage beschreibt die Prognosegrundlage
+	DetailsPrognosegrundlage   []profiltyp.Profiltyp                               `json:"detailsPrognosegrundlage,omitempty"`                     // ?
+	WahlrechtPrognosegrundlage *bool                                               `json:"wahlrechtPrognosegrundlage,omitempty"`                   // WahlrechtPrognosegrundlage ist true, falls der Lieferant das Wahlrecht hat
+	Fallgruppenzuordnung       fallgruppenzuordnung.Fallgruppenzuordnung           `json:"fallgruppenzuordnung,omitempty"`                         // Fallgruppenzuordnung (für Gas RLM)
+	Prioritaet                 *int                                                `json:"prioritaet,omitempty"`                                   // Prioritaet ist die Priorität des Bilanzkreises für Gas
+	MarktlokationsId           string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 }
 
 var eicRegex = regexp.MustCompile(`(?P<vergabestelle>\d{2})(?P<typ>A|T|V|W|X|Y|Z)([-A-Z\d]{12})(?P<pruefziffer>[A-Z0-9])`)

@@ -60,6 +60,7 @@ var validBilanzierung = bo.Bilanzierung{
 	WahlrechtPrognosegrundlage: &aFalse,
 	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
 	Prioritaet:                 &seventeen,
+	MarktlokationsId:           "51238696781",
 }
 
 // Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
@@ -79,6 +80,8 @@ func (s *Suite) Test_Bilanzierung_Deserialization() {
 func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 	validate := validator.New()
 	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
+	then.AssertThat(s.T(), err, is.Nil())
+	err = validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
 	then.AssertThat(s.T(), err, is.Nil())
 	invalidBilanzierungs := map[string][]interface{}{
 		"required": {
@@ -104,6 +107,14 @@ func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 				Bilanzierungsende:   time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC),
 			},
 		},
+		"maloid": { // on beginn
+			bo.Bilanzierung{
+				MarktlokationsId: "asdasd", // not numeric, not len 11
+			},
+			bo.Bilanzierung{
+				MarktlokationsId: "12345678901", // wrong checksum
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidBilanzierungs)
 }
@@ -112,6 +123,8 @@ func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 func (s *Suite) Test_Successful_Bilanzierung_Validation() {
 	validate := validator.New()
 	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
+	then.AssertThat(s.T(), err, is.Nil())
+	err = validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
 	then.AssertThat(s.T(), err, is.Nil())
 	validMarktteilnehmers := []bo.BusinessObject{
 		validBilanzierung,
