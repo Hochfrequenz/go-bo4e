@@ -10,6 +10,7 @@ const (
 	ANGEBOT                     BOTyp = iota + 1
 	ANSPRECHPARTNER                   // ANSPRECHPARTNER is the type of a contact person, see bo.ANSPRECHPARTNER
 	AUSSCHREIBUNG                     // AUSSCHREIBUNG is a tender offer
+	BILANZIERUNG                      // BILANZIERUNG contains balancing information (this is not BO4E standard, yet)
 	ENERGIEMENGE                      // ENERGIEMENGE is the tpye of an energy amount, see bo.ENERGIEMENGE
 	GESCHAEFTSPARTNER                 // GESCHAEFTSPARTNER is a business partner
 	KOSTEN                            // KOSTEN are costs
