@@ -15,6 +15,7 @@
 **This package (as of November 2021) implements**
 
 - BO Ansprechpartner
+- BO Bilanzierung (not official BO4E Standard yet)
 - BO Energiemenge
 - BO Geschaeftspartner
 - BO Lastgang
