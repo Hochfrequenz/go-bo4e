@@ -38,6 +38,10 @@ const defaultVersionStruktur = "1.1" // because Geschaeftsobjekt.ExterneReferenz
 func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 	var bo BusinessObject
 	switch typ {
+	case botyp.BILANZIERUNG:
+		bo = new(Bilanzierung)
+		bo.(*Bilanzierung).BoTyp = typ
+		bo.(*Bilanzierung).VersionStruktur = defaultVersionStruktur
 	case botyp.ENERGIEMENGE:
 		bo = new(Energiemenge)
 		bo.(*Energiemenge).BoTyp = typ
