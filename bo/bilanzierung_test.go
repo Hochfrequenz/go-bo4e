@@ -1,0 +1,132 @@
+package bo_test
+
+import (
+	"encoding/json"
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gocrest/then"
+	"github.com/go-playground/validator/v10"
+	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/com"
+	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverwantwortung"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
+	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
+	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
+	"github.com/hochfrequenz/go-bo4e/enum/profilverfahren"
+	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
+	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
+	"github.com/shopspring/decimal"
+	"reflect"
+	"strings"
+	"time"
+)
+
+var aFalse = false
+var aTrue = true
+var seventeen = 17
+var validBilanzierung = bo.Bilanzierung{
+	Geschaeftsobjekt: bo.Geschaeftsobjekt{
+		BoTyp:           botyp.BILANZIERUNG,
+		VersionStruktur: "1.1",
+	},
+	Lastprofile: []com.Lastprofil{{
+		Bezeichnung: "mein lieblingslastprofil",
+		Verfahren:   profilverfahren.SYNTHETISCH,
+		Tagesparameter: &com.Tagesparameter{
+			Klimazone:            "ASD",
+			Temperaturmessstelle: "Neustadt OST",
+			Dienstanbieter:       "DWD",
+		},
+		Einspeisung: &aTrue,
+	}},
+	Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
+	Bilanzierungsende:   time.Date(2021, 2, 1, 0, 0, 0, 0, time.UTC),
+	Bilanzkreis:         "11XVE-N-GHM----Q",
+	Jahresverbrauchsprognose: &com.Menge{
+		Wert:    newDecimalFromString("1500"),
+		Einheit: mengeneinheit.KWH,
+	},
+	Kundenwert: &com.Menge{
+		Wert:    newDecimalFromString("0.17"),
+		Einheit: mengeneinheit.MWH,
+	},
+	Verbrauchsaufteilung:      decimal.NewNullDecimal(newDecimalFromString("0.17")),
+	Zeitreihentyp:             zeitreihentyp.LGS,
+	Aggregationsverantwortung: aggregationsverantwortung.VNB,
+	Prognosegrundlage:         prognosegrundlage.WERTE,
+	DetailsPrognosegrundlage: []profiltyp.Profiltyp{
+		profiltyp.SLP_SEP,
+	},
+	WahlrechtPrognosegrundlage: &aFalse,
+	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
+	Prioritaet:                 &seventeen,
+}
+
+// Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
+func (s *Suite) Test_Bilanzierung_Deserialization() {
+	serializedBilanzierung, err := json.Marshal(validBilanzierung)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), serializedBilanzierung, is.Not(is.Nil()))
+	jsonString := string(serializedBilanzierung)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "SLP_SEP"), is.True()) // stringified enum
+	var deserializedBilanzierung bo.Bilanzierung
+	err = json.Unmarshal(serializedBilanzierung, &deserializedBilanzierung)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedBilanzierung, is.EqualTo(validBilanzierung))
+}
+
+// Test_Failed_Bilanzierung_Validation verifies that the validators of a Bilanzierung BO work
+func (s *Suite) Test_Failed_Bilanzierung_Validation() {
+	validate := validator.New()
+	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
+	then.AssertThat(s.T(), err, is.Nil())
+	invalidBilanzierungs := map[string][]interface{}{
+		"required": {
+			bo.Bilanzierung{},
+		},
+		"len": {
+			bo.Bilanzierung{Bilanzkreis: "not 16 chars"},
+		},
+		"eic": {
+			bo.Bilanzierung{Bilanzkreis: "FOO BAR XYZ ASD "}, // 16 chars but does not match regex
+			bo.Bilanzierung{Bilanzkreis: "1234567890123456"}, // 16 chars but does not match regex
+			bo.Bilanzierung{Bilanzkreis: "11XVE-N-GHM----R"}, // wrong check sum
+		},
+		"gtefield": { // on ende
+			bo.Bilanzierung{
+				Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
+				Bilanzierungsende:   time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC),
+			},
+		},
+		"ltefield": { // on beginn
+			bo.Bilanzierung{
+				Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
+				Bilanzierungsende:   time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC),
+			},
+		},
+	}
+	VerfiyFailedValidations(s, validate, invalidBilanzierungs)
+}
+
+//  Test_Successful_Bilanzierung_Validation verifies that a valid BO is validated without errors
+func (s *Suite) Test_Successful_Bilanzierung_Validation() {
+	validate := validator.New()
+	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
+	then.AssertThat(s.T(), err, is.Nil())
+	validMarktteilnehmers := []bo.BusinessObject{
+		validBilanzierung,
+	}
+	VerfiySuccessfulValidations(s, validate, validMarktteilnehmers)
+}
+
+func (s *Suite) Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp() {
+	object := bo.NewBusinessObject(botyp.BILANZIERUNG)
+	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Bilanzierung{})))
+	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.BILANZIERUNG))
+	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+}
+
+func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
+	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.BILANZIERUNG))
+}
