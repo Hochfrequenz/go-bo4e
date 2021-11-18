@@ -17,7 +17,7 @@ type BusinessObject interface {
 type Geschaeftsobjekt struct {
 	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
 	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
-	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen"`                   // ExterneReferenzen are external references of this object in various systems
+	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems
 }
 
 func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
