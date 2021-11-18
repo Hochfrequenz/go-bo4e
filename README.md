@@ -36,11 +36,18 @@ go get github.com/hochfrequenz/go-bo4e
 
 ## Version Notes
 
+### General Default Value Marshalling Behaviour since v0.0.22
+
+Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents.
+Before v0.0.22 default values of required fields serialized as f.e. empty string, `null` or empty slice.
+For enums this behaviour had already been introduced in v0.0.19 (see below).
+This is a step towards decoupling of serialization and validation.
+
 ### Default Enum Marshalling Behaviour since v0.0.19
 
 Since version v0.0.19 default enum values are no longer serialized/marshalled.
 Prior to v0.0.19 fields with an enum type that are required but were uninitialized had been serialized as `NameOfEnum(0)`.
-This change leads to a complete decoupling of serialization and validation.
+This change is a step towards decoupling of serialization and validation.
 
 ### Breaking Changes introduced in v0.0.13 and v0.0.14:
 
