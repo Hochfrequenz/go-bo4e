@@ -16,25 +16,25 @@ import (
 // Marktlokation contains information about a market location aka "MaLo"
 type Marktlokation struct {
 	Geschaeftsobjekt
-	MarktlokationsId     string                                    `json:"marktlokationsId" example:"12345678913" validate:"required,numeric,len=11,maloid"` // MarktlokationsId is the ID of the market location
-	Sparte               sparte.Sparte                             `json:"sparte,omitempty" validate:"required"`                                             // Sparte describes the Division
-	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung,omitempty" validate:"required"`                                    // Energierichtung describes whether energy is supplied out of or fed into the grid.
-	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode,omitempty" validate:"required"`                               // Bilanzierungsmethode is the accounting method
-	Verbrauchsart        verbrauchsart.Verbrauchsart               `json:"verbrauchsart,omitempty"`                                                          // Verbrauchsart is the consumption type
-	Unterbrechbar        *bool                                     `json:"unterbrechbar,omitempty"`                                                          // Unterbrechbar describes whether the supply is interruptible
-	Netzebene            netzebene.Netzebene                       `json:"netzebene,omitempty" validate:"required"`                                          // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
-	Netzbetreibercodenr  string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitempty,numeric,len=13"`                // Netzbetreibercodenr is the code number of the "Netzbetreiber"
-	Gebiettyp            gebiettyp.Gebiettyp                       `json:"gebiettyp,omitempty"`                                                              // Gebiettyp is the type of the "Netzgebiet"
-	Netzgebietnr         string                                    `json:"netzgebietnr,omitempty"`                                                           // Netzgebietnr is the number of the "Netzgebiet" in the enet database
-	Bilanzierungsgebiet  string                                    `json:"bilanzierungsgebiet,omitempty"`                                                    // Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.
-	Grundversorgercodenr string                                    `json:"grundversorgercodenr,omitempty" validate:"omitempty,numeric,len=13"`               // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
-	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                           // Gasqualitaet is the gas quality
-	Endkunde             *Geschaeftspartner                        `json:"endkunde,omitempty" validate:"-"`                                                  // Endkunde is the Geschaeftspartner who owns this market location
+	MarktlokationsId     string                                    `json:"marktlokationsId,omitempty" example:"12345678913" validate:"required,numeric,len=11,maloid"` // MarktlokationsId is the ID of the market location
+	Sparte               sparte.Sparte                             `json:"sparte,omitempty" validate:"required"`                                                       // Sparte describes the Division
+	Energierichtung      energierichtung.Energierichtung           `json:"energierichtung,omitempty" validate:"required"`                                              // Energierichtung describes whether energy is supplied out of or fed into the grid.
+	Bilanzierungsmethode bilanzierungsmethode.Bilanzierungsmethode `json:"bilanzierungsmethode,omitempty" validate:"required"`                                         // Bilanzierungsmethode is the accounting method
+	Verbrauchsart        verbrauchsart.Verbrauchsart               `json:"verbrauchsart,omitempty"`                                                                    // Verbrauchsart is the consumption type
+	Unterbrechbar        *bool                                     `json:"unterbrechbar,omitempty"`                                                                    // Unterbrechbar describes whether the supply is interruptible
+	Netzebene            netzebene.Netzebene                       `json:"netzebene,omitempty" validate:"required"`                                                    // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
+	Netzbetreibercodenr  string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitempty,numeric,len=13"`                          // Netzbetreibercodenr is the code number of the "Netzbetreiber"
+	Gebiettyp            gebiettyp.Gebiettyp                       `json:"gebiettyp,omitempty"`                                                                        // Gebiettyp is the type of the "Netzgebiet"
+	Netzgebietnr         string                                    `json:"netzgebietnr,omitempty"`                                                                     // Netzgebietnr is the number of the "Netzgebiet" in the enet database
+	Bilanzierungsgebiet  string                                    `json:"bilanzierungsgebiet,omitempty"`                                                              // Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.
+	Grundversorgercodenr string                                    `json:"grundversorgercodenr,omitempty" validate:"omitempty,numeric,len=13"`                         // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
+	Gasqualitaet         gasqualitaet.Gasqualitaet                 `json:"gasqualitaet,omitempty"`                                                                     // Gasqualitaet is the gas quality
+	Endkunde             *Geschaeftspartner                        `json:"endkunde,omitempty" validate:"-"`                                                            // Endkunde is the Geschaeftspartner who owns this market location
 	// only one of the following three optional address attributes can be set
-	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse" validate:"required_without_all=Geoadresse Katasterinformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
-	Geoadresse                *com.Geokoordinaten          `json:"geoadresse" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
-	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
-	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                             // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
+	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse,omitempty" validate:"required_without_all=Geoadresse Katasterinformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
+	Geoadresse                *com.Geokoordinaten          `json:"geoadresse,omitempty" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
+	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation,omitempty" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
+	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
 }
 
 var elevenDigitsRegex = regexp.MustCompile(`^[1-9]\d{10}$`)
