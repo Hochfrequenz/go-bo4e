@@ -20,9 +20,9 @@ type Messlokation struct {
 	GrundzustaendigerMsbImCodeNr string              `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric,len=13"`                                // GrundzustaendigerMsbImCodeNr si the code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
 	Messlokationszaehler         []Zaehler           `json:"messlokationszaehler,omitempty"`                                                                            // Messlokationszaehler meters associated to this Messlokation
 	// only one of the following three optional address attributes can be set
-	Messadresse         *com.Adresse         `json:"messadresse" validate:"required_without_all=Geoadresse Katasterinformation"` // Messadresse is a street address of the Messlokation
-	Geoadresse          *com.Geokoordinaten  `json:"geoadresse" validate:"required_without_all=Messadresse Katasterinformation"` // Geoadresse are gps coordinates of the Messlokation
-	Katasterinformation *com.Katasteradresse `json:"katasterinformation" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
+	Messadresse         *com.Adresse         `json:"messadresse,omitempty" validate:"required_without_all=Geoadresse Katasterinformation"` // Messadresse is a street address of the Messlokation
+	Geoadresse          *com.Geokoordinaten  `json:"geoadresse,omitempty" validate:"required_without_all=Messadresse Katasterinformation"` // Geoadresse are gps coordinates of the Messlokation
+	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
 }
 
 // XorStructLevelMesslokationValidation ensures that only one of the possible address types is given
