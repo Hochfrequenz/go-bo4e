@@ -18,9 +18,15 @@ func (boneyComb *BOneyComb) GetAbsenderCode() *string {
 }
 
 // SetAbsenderCode sets the 13 digit ID of the sending Marktteilnehmer in the Transaktionsdaten
-func (boneyComb *BOneyComb) SetAbsenderCode(mpId string) {
+func (boneyComb *BOneyComb) SetAbsenderCode(mpId string, useBo4eUri bool) {
 	boneyComb.initializeTransaktionsdaten()
-	boneyComb.Transaktionsdaten[senderKey] = mpId
+	var actualValue string
+	if useBo4eUri {
+		actualValue = "bo4e://Markteilnehmer/" + mpId
+	} else {
+		actualValue = mpId
+	}
+	boneyComb.Transaktionsdaten[senderKey] = actualValue
 }
 
 // GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in both Transaktionsdaten; nil otherwise
@@ -29,9 +35,16 @@ func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 }
 
 // SetEmpfaengerCode sets the 13 digit ID of the receiving Marktteilnehmer in the Transaktionsdaten
-func (boneyComb *BOneyComb) SetEmpfaengerCode(mpId string) {
+func (boneyComb *BOneyComb) SetEmpfaengerCode(mpId string, useBo4eUri bool) {
 	boneyComb.initializeTransaktionsdaten()
-	boneyComb.Transaktionsdaten[receiverKey] = mpId
+	var actualValue string
+	if useBo4eUri {
+		actualValue = "bo4e://Markteilnehmer/" + mpId
+	} else {
+		actualValue = mpId
+	}
+	boneyComb.Transaktionsdaten[receiverKey] = actualValue
+
 }
 
 // GetAbsender returns the sending bo.Marktteilnehmer if present in the Transaktionsdaten _and_ Stammdaten; nil otherwise
@@ -40,8 +53,8 @@ func (boneyComb *BOneyComb) GetAbsender() *bo.Marktteilnehmer {
 }
 
 // SetAbsender sets sending bo.Marktteilnehmer in both the Transaktionsdaten _and_ Stammdaten
-func (boneyComb *BOneyComb) SetAbsender(mt bo.Marktteilnehmer) {
-	boneyComb.SetAbsenderCode(mt.Rollencodenummer)
+func (boneyComb *BOneyComb) SetAbsender(mt bo.Marktteilnehmer, useBo4eUri bool) {
+	boneyComb.SetAbsenderCode(mt.Rollencodenummer, useBo4eUri)
 	boneyComb.setMarktteilnehmer(mt)
 }
 
@@ -51,8 +64,8 @@ func (boneyComb *BOneyComb) GetEmpfaenger() *bo.Marktteilnehmer {
 }
 
 // SetEmpfaenger sets receiving bo.Marktteilnehmer in both the Transaktionsdaten _and_ Stammdaten
-func (boneyComb *BOneyComb) SetEmpfaenger(mt bo.Marktteilnehmer) {
-	boneyComb.SetEmpfaengerCode(mt.Rollencodenummer)
+func (boneyComb *BOneyComb) SetEmpfaenger(mt bo.Marktteilnehmer, useBo4eUri bool) {
+	boneyComb.SetEmpfaengerCode(mt.Rollencodenummer, useBo4eUri)
 	boneyComb.setMarktteilnehmer(mt)
 }
 

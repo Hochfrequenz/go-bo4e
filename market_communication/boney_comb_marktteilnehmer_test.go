@@ -35,7 +35,13 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
 
 func (s *Suite) Test_SetAbsenderCode() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
-	boneyCombWithDokumentennummer.SetAbsenderCode("9876543210987")
+	boneyCombWithDokumentennummer.SetAbsenderCode("9876543210987", false)
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+}
+
+func (s *Suite) Test_SetAbsenderCode_With_Uri() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
+	boneyCombWithDokumentennummer.SetAbsenderCode("9876543210987", true)
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
 }
 
@@ -51,7 +57,13 @@ func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 
 func (s *Suite) Test_SetEmpfaengerCode() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
-	boneyCombWithDokumentennummer.SetEmpfaengerCode("9876543210987")
+	boneyCombWithDokumentennummer.SetEmpfaengerCode("9876543210987", false)
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
+}
+
+func (s *Suite) Test_SetEmpfaengerCode_With_Uri() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{}
+	boneyCombWithDokumentennummer.SetEmpfaengerCode("9876543210987", true)
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
 }
 
@@ -162,7 +174,7 @@ func (s *Suite) Test_SetAbsender() {
 		},
 	}
 	bc := market_communication.BOneyComb{}
-	bc.SetAbsender(mt)
+	bc.SetAbsender(mt, false)
 	then.AssertThat(s.T(), *bc.GetAbsenderCode(), is.EqualTo("9903100000006"))
 	then.AssertThat(s.T(), bc.GetAbsender(), is.EqualTo(&mt))
 }
@@ -178,7 +190,7 @@ func (s *Suite) Test_SetEmpfaenger() {
 		},
 	}
 	bc := market_communication.BOneyComb{}
-	bc.SetEmpfaenger(mt)
+	bc.SetEmpfaenger(mt, true)
 	then.AssertThat(s.T(), *bc.GetEmpfaengerCode(), is.EqualTo("9903100000006"))
 	then.AssertThat(s.T(), bc.GetEmpfaenger(), is.EqualTo(&mt))
 }
