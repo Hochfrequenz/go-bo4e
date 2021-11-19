@@ -85,7 +85,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						geschaeftspartnerrolle.KUNDE,
 						geschaeftspartnerrolle.MARKTPARTNER,
 					},
-					Partneradresse: com.Adresse{
+					Partneradresse: &com.Adresse{
 						Postleitzahl: "82031",
 						Ort:          "Grünwald",
 						Strasse:      "Nördlicher Münchner Straße",
@@ -121,7 +121,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						geschaeftspartnerrolle.KUNDE,
 						geschaeftspartnerrolle.MARKTPARTNER,
 					},
-					Partneradresse: com.Adresse{
+					Partneradresse: &com.Adresse{
 						Postleitzahl: "82031",
 						Ort:          "Grünwald",
 						Strasse:      "Nördlicher Münchner Straße",

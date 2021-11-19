@@ -67,7 +67,7 @@ var serializableRechnung = bo.Rechnung{
 			geschaeftspartnerrolle.KUNDE,
 			geschaeftspartnerrolle.MARKTPARTNER,
 		},
-		Partneradresse: com.Adresse{
+		Partneradresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
@@ -97,7 +97,7 @@ var serializableRechnung = bo.Rechnung{
 			geschaeftspartnerrolle.KUNDE,
 			geschaeftspartnerrolle.MARKTPARTNER,
 		},
-		Partneradresse: com.Adresse{
+		Partneradresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
@@ -307,7 +307,7 @@ var completeValidRechnung = bo.Rechnung{
 			geschaeftspartnerrolle.KUNDE,
 			geschaeftspartnerrolle.MARKTPARTNER,
 		},
-		Partneradresse: com.Adresse{
+		Partneradresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
@@ -337,7 +337,7 @@ var completeValidRechnung = bo.Rechnung{
 			geschaeftspartnerrolle.KUNDE,
 			geschaeftspartnerrolle.MARKTPARTNER,
 		},
-		Partneradresse: com.Adresse{
+		Partneradresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",

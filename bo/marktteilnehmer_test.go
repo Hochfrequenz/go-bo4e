@@ -46,7 +46,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				geschaeftspartnerrolle.KUNDE,
 				geschaeftspartnerrolle.MARKTPARTNER,
 			},
-			Partneradresse: com.Adresse{
+			Partneradresse: &com.Adresse{
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
@@ -104,7 +104,7 @@ func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 				},
 				Name1:                "Musterfrau",
 				Gewerbekennzeichnung: false,
-				Partneradresse: com.Adresse{
+				Partneradresse: &com.Adresse{
 					Postleitzahl: "82031",
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",

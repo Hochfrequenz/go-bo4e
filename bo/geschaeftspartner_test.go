@@ -39,7 +39,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 			geschaeftspartnerrolle.KUNDE,
 			geschaeftspartnerrolle.MARKTPARTNER,
 		},
-		Partneradresse: com.Adresse{
+		Partneradresse: &com.Adresse{
 			Postleitzahl: "82031",
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
@@ -89,7 +89,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				EMailAdresse:            "",
 				Website:                 "",
 				Geschaeftspartnerrollen: nil,
-				Partneradresse:          com.Adresse{},
+				Partneradresse:          nil,
 			},
 			bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -110,7 +110,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				EMailAdresse:            "",
 				Website:                 "",
 				Geschaeftspartnerrollen: nil,
-				Partneradresse:          adresse,
+				Partneradresse:          &adresse,
 			},
 		},
 		"min": {
@@ -152,7 +152,7 @@ var validGp = bo.Geschaeftspartner{
 	},
 	Name1:                "Musterfrau",
 	Gewerbekennzeichnung: false,
-	Partneradresse: com.Adresse{
+	Partneradresse: &com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",

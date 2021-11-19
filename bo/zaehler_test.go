@@ -122,7 +122,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 				},
 				Name1:                "Musterfrau",
 				Gewerbekennzeichnung: false,
-				Partneradresse: com.Adresse{
+				Partneradresse: &com.Adresse{
 					Postleitzahl: "82031",
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
