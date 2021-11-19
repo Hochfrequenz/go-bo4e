@@ -9,6 +9,6 @@ type Messwerterfassung int
 const (
 	// FERN_AUSLESBAR describes automatic meter readings (EDIFACT AMR)
 	FERN_AUSLESBAR Messwerterfassung = iota + 1
-	// MANUELL_AUSGELESEN describes manual meter readings (EDIFACT MMR)
-	MANUELL_AUSGELESEN
+	// MANUELL_AUSGELESENE describes manual meter readings (EDIFACT MMR)
+	MANUELL_AUSGELESENE
 )
