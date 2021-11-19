@@ -42,6 +42,7 @@ func (s *Suite) Test_Zaehlwerk_Decimal_As_Number_Serialization() {
 		Wandlerfaktor: decimal.NewFromFloat(1.2),
 	}
 	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
+	then.AssertThat(s.T(), err, is.Nil())
 	jsonString := string(serializedZaehlwerk)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":\"1.2\""), is.True()) // decimal as string by default: https://github.com/shopspring/decimal/issues/21
 
