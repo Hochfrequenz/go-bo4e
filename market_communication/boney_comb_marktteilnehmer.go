@@ -20,13 +20,7 @@ func (boneyComb *BOneyComb) GetAbsenderCode() *string {
 // SetAbsenderCode sets the 13 digit ID of the sending Marktteilnehmer in the Transaktionsdaten
 func (boneyComb *BOneyComb) SetAbsenderCode(mpId string, useBo4eUri bool) {
 	boneyComb.initializeTransaktionsdaten()
-	var actualValue string
-	if useBo4eUri {
-		actualValue = "bo4e://Markteilnehmer/" + mpId
-	} else {
-		actualValue = mpId
-	}
-	boneyComb.Transaktionsdaten[senderKey] = actualValue
+	boneyComb.Transaktionsdaten[senderKey] = addBo4eMarktteilnehmerPrefixIfNecessary(mpId, useBo4eUri)
 }
 
 // GetEmpfaengerCode returns the 13 digit ID of the receiving Marktteilnehmer if present in both Transaktionsdaten; nil otherwise
@@ -37,14 +31,15 @@ func (boneyComb *BOneyComb) GetEmpfaengerCode() *string {
 // SetEmpfaengerCode sets the 13 digit ID of the receiving Marktteilnehmer in the Transaktionsdaten
 func (boneyComb *BOneyComb) SetEmpfaengerCode(mpId string, useBo4eUri bool) {
 	boneyComb.initializeTransaktionsdaten()
-	var actualValue string
-	if useBo4eUri {
-		actualValue = "bo4e://Markteilnehmer/" + mpId
-	} else {
-		actualValue = mpId
-	}
-	boneyComb.Transaktionsdaten[receiverKey] = actualValue
+	boneyComb.Transaktionsdaten[receiverKey] = addBo4eMarktteilnehmerPrefixIfNecessary(mpId, useBo4eUri)
+}
 
+func addBo4eMarktteilnehmerPrefixIfNecessary(mpId string, useBo4eUri bool) string {
+	if useBo4eUri {
+		return "bo4e://Marktteilnehmer/" + mpId
+	} else {
+		return mpId
+	}
 }
 
 // GetAbsender returns the sending bo.Marktteilnehmer if present in the Transaktionsdaten _and_ Stammdaten; nil otherwise
