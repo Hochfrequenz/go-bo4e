@@ -34,27 +34,6 @@ so far.
 go get github.com/hochfrequenz/go-bo4e
 ```
 
-## Version Notes
-
-### General Default Value Marshalling Behaviour since v0.0.22
-
-Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents.
-Prior to v0.0.22 default values of required fields serialized as f.e. empty string, `null` or empty slice.
-For enums this behaviour had already been introduced in v0.0.19 (see below).
-This is a step towards decoupling of serialization and validation.
-
-### Default Enum Marshalling Behaviour since v0.0.19
-
-Since version v0.0.19 default enum values are no longer serialized/marshalled.
-Prior to v0.0.19 fields with an enum type that are required but were uninitialized had been serialized as `NameOfEnum(0)`.
-This change is a step towards decoupling of serialization and validation.
-
-### Breaking Changes introduced in v0.0.13 and v0.0.14:
-
-- The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
-- `BusinessObject` is now the name of the interface that all structs with embedded `Geschaeftsobjekt` implement
-- Enums are consistently written in upper case ([PR 32](https://github.com/Hochfrequenz/go-bo4e/pull/32))
-
 ## Minimal Working Example
 
 ```go
@@ -100,6 +79,50 @@ func main() {
 ```
 
 [Use this in the Go Playground](https://play.golang.org/p/wq8B_31Odni).
+
+## Caveats
+
+When serializing decimals (e.g. `Zaehlwerk.Wandlerfaktor`) you'll notice that the decimals are by default serialized as strings
+
+```json
+{ "wandlerfaktor": "0.8" }
+```
+
+instead of a number like
+
+```json
+{ "wandlerfaktor": 0.8 }
+```
+
+This is the default behaviour defined in the [decimal package](https://github.com/shopspring/decimal/blob/fa3b22f4d484d626ee81919285cf3d22ad3a4000/decimal.go#L47).
+You can change the behaviour by setting
+
+```go
+decimal.MarshalJSONWithoutQuotes = true
+```
+
+as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issues/21).
+
+## Version Notes
+
+### General Default Value Marshalling Behaviour since v0.0.22
+
+Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents.
+Prior to v0.0.22 default values of required fields serialized as f.e. empty string, `null` or empty slice.
+For enums this behaviour had already been introduced in v0.0.19 (see below).
+This is a step towards decoupling of serialization and validation.
+
+### Default Enum Marshalling Behaviour since v0.0.19
+
+Since version v0.0.19 default enum values are no longer serialized/marshalled.
+Prior to v0.0.19 fields with an enum type that are required but were uninitialized had been serialized as `NameOfEnum(0)`.
+This change is a step towards decoupling of serialization and validation.
+
+### Breaking Changes introduced in v0.0.13 and v0.0.14:
+
+- The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
+- `BusinessObject` is now the name of the interface that all structs with embedded `Geschaeftsobjekt` implement
+- Enums are consistently written in upper case ([PR 32](https://github.com/Hochfrequenz/go-bo4e/pull/32))
 
 ## Other Noteworthy BO4E Implementations
 

@@ -19,20 +19,39 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 		Bezeichnung:    "bestes Zählwerk",
 		Richtung:       energierichtung.AUSSP,
 		ObisKennzahl:   "1-0:1.8.0",
-		Wandlerfaktor:  decimal.NewFromFloat(1),
+		Wandlerfaktor:  decimal.NewFromFloat(1.2),
 		Einheit:        mengeneinheit.KWH,
 		Zaehlerstaende: nil,
 	}
 	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
 	jsonString := string(serializedZaehlwerk)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())   // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "AUSSP"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())                 // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "AUSSP"), is.True())               // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":1.2"), is.True()) // no quotes around die decimal
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
 	var deserializedZaehlwerk com.Zaehlwerk
 	err = json.Unmarshal(serializedZaehlwerk, &deserializedZaehlwerk)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedZaehlwerk, is.EqualTo(zaehlwerk))
+}
+
+// Test_Zaehlwerk_Decimal_As_Number_Serialization serializes a Zaehlwerk, once with the wandlerfaktor as string (default), once as number
+func (s *Suite) Test_Zaehlwerk_Decimal_As_Number_Serialization() {
+	var zaehlwerk = com.Zaehlwerk{
+		Wandlerfaktor: decimal.NewFromFloat(1.2),
+	}
+	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
+	then.AssertThat(s.T(), err, is.Nil())
+	jsonString := string(serializedZaehlwerk)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":\"1.2\""), is.True()) // decimal as string by default: https://github.com/shopspring/decimal/issues/21
+
+	decimal.MarshalJSONWithoutQuotes = true // https://github.com/shopspring/decimal/blob/fa3b22f4d484d626ee81919285cf3d22ad3a4000/decimal.go#L47
+
+	serializedZaehlwerk, err = json.Marshal(zaehlwerk)
+	then.AssertThat(s.T(), err, is.Nil())
+	jsonString = string(serializedZaehlwerk)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":1.2"), is.True()) // decimal as number
 }
 
 // Test_Zaehlwerk_Failed_Validation verifies that the validation fails for invalid Zaehlwerk
