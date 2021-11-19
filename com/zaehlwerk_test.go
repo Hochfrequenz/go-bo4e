@@ -19,7 +19,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 		Bezeichnung:    "bestes Zählwerk",
 		Richtung:       energierichtung.AUSSP,
 		ObisKennzahl:   "1-0:1.8.0",
-		Wandlerfaktor:  decimal.NewFromFloat(1),
+		Wandlerfaktor:  decimal.NewFromFloat(1.2),
 		Einheit:        mengeneinheit.KWH,
 		Zaehlerstaende: nil,
 	}
@@ -27,6 +27,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	jsonString := string(serializedZaehlwerk)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())   // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "AUSSP"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":1.2"), is.True()) // no quotes around die decimal
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
 	var deserializedZaehlwerk com.Zaehlwerk
