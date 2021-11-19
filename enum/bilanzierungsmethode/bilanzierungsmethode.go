@@ -1,6 +1,7 @@
 package bilanzierungsmethode
 
 // Bilanzierungsmethode describes the different accounting methods and basics
+// Note that this enum is not official BO4E standard (yet)!
 //go:generate stringer --type Bilanzierungsmethode
 //go:generate jsonenums --type Bilanzierungsmethode
 type Bilanzierungsmethode int
