@@ -9,7 +9,7 @@ import (
 
 var (
 	_VertragsstatusNameToValue = map[string]Vertragsstatus{
-		"INARBEIT":     INARBEIT,
+		"IN_ARBEIT":    IN_ARBEIT,
 		"UEBERMITTELT": UEBERMITTELT,
 		"ANGENOMMEN":   ANGENOMMEN,
 		"AKTIV":        AKTIV,
@@ -21,7 +21,7 @@ var (
 	}
 
 	_VertragsstatusValueToName = map[Vertragsstatus]string{
-		INARBEIT:     "INARBEIT",
+		IN_ARBEIT:    "IN_ARBEIT",
 		UEBERMITTELT: "UEBERMITTELT",
 		ANGENOMMEN:   "ANGENOMMEN",
 		AKTIV:        "AKTIV",
@@ -37,7 +37,7 @@ func init() {
 	var v Vertragsstatus
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_VertragsstatusNameToValue = map[string]Vertragsstatus{
-			interface{}(INARBEIT).(fmt.Stringer).String():     INARBEIT,
+			interface{}(IN_ARBEIT).(fmt.Stringer).String():    IN_ARBEIT,
 			interface{}(UEBERMITTELT).(fmt.Stringer).String(): UEBERMITTELT,
 			interface{}(ANGENOMMEN).(fmt.Stringer).String():   ANGENOMMEN,
 			interface{}(AKTIV).(fmt.Stringer).String():        AKTIV,
