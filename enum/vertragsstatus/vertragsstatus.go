@@ -6,8 +6,8 @@ package vertragsstatus
 type Vertragsstatus int
 
 const (
-	// INARBEIT means work in progress
-	INARBEIT     Vertragsstatus = iota + 1
+	// IN_ARBEIT means work in progress
+	IN_ARBEIT    Vertragsstatus = iota + 1
 	UEBERMITTELT                // UEBERMITTELT means sent
 	ANGENOMMEN                  // ANGENOMMEN means accepted
 	AKTIV                       // AKTIV means aktive
