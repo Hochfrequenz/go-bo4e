@@ -42,7 +42,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 			Name1:                "Mustermann",
 			Anrede:               anrede.HERR,
 			Gewerbekennzeichnung: false,
-			Partneradresse: com.Adresse{
+			Partneradresse: &com.Adresse{
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
@@ -62,7 +62,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 			Anrede:               anrede.FRAU,
 			Name1:                "Musterfrau",
 			Gewerbekennzeichnung: false,
-			Partneradresse: com.Adresse{
+			Partneradresse: &com.Adresse{
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
@@ -136,7 +136,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 				},
 				Name1:                "Musterfrau",
 				Gewerbekennzeichnung: false,
-				Partneradresse: com.Adresse{
+				Partneradresse: &com.Adresse{
 					Postleitzahl: "82031",
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
@@ -155,7 +155,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 				},
 				Name1:                "Musterfrau",
 				Gewerbekennzeichnung: false,
-				Partneradresse: com.Adresse{
+				Partneradresse: &com.Adresse{
 					Postleitzahl: "82031",
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",

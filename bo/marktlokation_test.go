@@ -50,7 +50,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			},
 			Name1:                "Kruemel",
 			Gewerbekennzeichnung: false,
-			Partneradresse: com.Adresse{
+			Partneradresse: &com.Adresse{
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",

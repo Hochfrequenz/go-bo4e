@@ -23,5 +23,5 @@ type Geschaeftspartner struct {
 	EMailAdresse            string                                          `json:"eMailAdresse,omitempty" validate:"omitempty,email" example:"info@mp-energie.de"` // EMailAdresse ist die E-Mail-Adresse des Ansprechpartners
 	Website                 string                                          `json:"website,omitempty" validate:"omitempty,url" example:"https://www.mp-energie.de"` // Website ist die Internetseite des Marktpartners
 	Geschaeftspartnerrollen []geschaeftspartnerrolle.Geschaeftspartnerrolle `json:"geschaeftspartnerrollen,omitempty" validate:"required,min=1"`                    // Geschaeftspartnerrollen sind die Rollen, die der Geschäftspartner hat
-	Partneradresse          com.Adresse                                     `json:"partneradresse,omitempty" validate:"required"`                                   // Partneradresse ist die Adresse des Geschäftspartners, an der sich der Hauptsitz befindet.
+	Partneradresse          *com.Adresse                                    `json:"partneradresse,omitempty" validate:"required"`                                   // Partneradresse ist die Adresse des Geschäftspartners, an der sich der Hauptsitz befindet.
 }
