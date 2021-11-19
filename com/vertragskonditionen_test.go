@@ -17,19 +17,19 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	var vertragskonditionen = com.Vertragskonditionen{
 		Beschreibung:     "hallo",
 		AnzahlAbschlaege: 17,
-		Vertragslaufzeit: com.Zeitraum{
+		Vertragslaufzeit: &com.Zeitraum{
 			Einheit: zeiteinheit.MINUTE,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
-		Kuendigungsfrist: com.Zeitraum{
+		Kuendigungsfrist: &com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
-		Vertragsverlaengerung: com.Zeitraum{
+		Vertragsverlaengerung: &com.Zeitraum{
 			Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
-		Abschlagszyklus: com.Zeitraum{
+		Abschlagszyklus: &com.Zeitraum{
 			Einheit: zeiteinheit.JAHR,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 		},
@@ -52,7 +52,7 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 		"required_with": {
 			com.Vertragskonditionen{
 				// is only invalid if a zeitraum is invalid
-				Vertragslaufzeit: com.Zeitraum{
+				Vertragslaufzeit: &com.Zeitraum{
 					Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
@@ -68,19 +68,19 @@ func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 		com.Vertragskonditionen{
 			Beschreibung:     "hallo",
 			AnzahlAbschlaege: 17,
-			Vertragslaufzeit: com.Zeitraum{
+			Vertragslaufzeit: &com.Zeitraum{
 				Einheit: zeiteinheit.MINUTE,
 				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 			},
-			Kuendigungsfrist: com.Zeitraum{
+			Kuendigungsfrist: &com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
-			Vertragsverlaengerung: com.Zeitraum{
+			Vertragsverlaengerung: &com.Zeitraum{
 				Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			},
-			Abschlagszyklus: com.Zeitraum{
+			Abschlagszyklus: &com.Zeitraum{
 				Einheit: zeiteinheit.JAHR,
 				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
 			},
