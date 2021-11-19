@@ -9,12 +9,12 @@ func _() {
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
 	_ = x[FERN_AUSLESBAR-1]
-	_ = x[MANUELL_AUSGELESEN-2]
+	_ = x[MANUELL_AUSGELESENE-2]
 }
 
-const _Messwerterfassung_name = "FERN_AUSLESBARMANUELL_AUSGELESEN"
+const _Messwerterfassung_name = "FERN_AUSLESBARMANUELL_AUSGELESENE"
 
-var _Messwerterfassung_index = [...]uint8{0, 14, 32}
+var _Messwerterfassung_index = [...]uint8{0, 14, 33}
 
 func (i Messwerterfassung) String() string {
 	i -= 1
