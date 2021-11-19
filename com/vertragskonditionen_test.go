@@ -12,29 +12,30 @@ import (
 	"time"
 )
 
+var validVertragskonditionen = com.Vertragskonditionen{
+	Beschreibung:     "hallo",
+	AnzahlAbschlaege: 17,
+	Vertragslaufzeit: &com.Zeitraum{
+		Einheit: zeiteinheit.MINUTE,
+		Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
+	},
+	Kuendigungsfrist: &com.Zeitraum{
+		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+	},
+	Vertragsverlaengerung: &com.Zeitraum{
+		Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+		Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+	},
+	Abschlagszyklus: &com.Zeitraum{
+		Einheit: zeiteinheit.JAHR,
+		Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
+	},
+}
+
 // TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
 func (s *Suite) Test_Vertragskonditionen_Deserialization() {
-	var vertragskonditionen = com.Vertragskonditionen{
-		Beschreibung:     "hallo",
-		AnzahlAbschlaege: 17,
-		Vertragslaufzeit: &com.Zeitraum{
-			Einheit: zeiteinheit.MINUTE,
-			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
-		},
-		Kuendigungsfrist: &com.Zeitraum{
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		},
-		Vertragsverlaengerung: &com.Zeitraum{
-			Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		},
-		Abschlagszyklus: &com.Zeitraum{
-			Einheit: zeiteinheit.JAHR,
-			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
-		},
-	}
-	serializedVertragskonditionen, err := json.Marshal(vertragskonditionen)
+	serializedVertragskonditionen, err := json.Marshal(validVertragskonditionen)
 	jsonString := string(serializedVertragskonditionen)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
@@ -42,7 +43,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	var deserializedVertragskonditionen com.Vertragskonditionen
 	err = json.Unmarshal(serializedVertragskonditionen, &deserializedVertragskonditionen)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(vertragskonditionen))
+	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(validVertragskonditionen))
 }
 
 //  Test_Vertragskonditionen_Failed_Validation verifies that the validation fails for invalid Vertragskonditionen s
@@ -65,26 +66,7 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 	validate := validator.New()
 	validVertragskonditionens := []interface{}{
-		com.Vertragskonditionen{
-			Beschreibung:     "hallo",
-			AnzahlAbschlaege: 17,
-			Vertragslaufzeit: &com.Zeitraum{
-				Einheit: zeiteinheit.MINUTE,
-				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
-			},
-			Kuendigungsfrist: &com.Zeitraum{
-				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-				Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-			},
-			Vertragsverlaengerung: &com.Zeitraum{
-				Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-			},
-			Abschlagszyklus: &com.Zeitraum{
-				Einheit: zeiteinheit.JAHR,
-				Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(7)),
-			},
-		},
+		validVertragskonditionen,
 	}
 	VerfiySuccessfulValidations(s, validate, validVertragskonditionens)
 }
