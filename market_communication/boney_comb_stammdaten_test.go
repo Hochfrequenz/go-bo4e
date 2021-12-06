@@ -31,13 +31,14 @@ func (s *Suite) Test_GetMasterDataCount() {
 			bo.NewBusinessObject(botyp.LASTGANG),
 		},
 	}
-	then.AssertThat(s.T(), boneyComb.GetMasterDataCounts(), is.EqualTo(map[botyp.BOTyp]uint{
+	expectedResult := map[botyp.BOTyp]uint{
 		botyp.MARKTTEILNEHMER: 2,
 		botyp.MESSLOKATION:    2,
 		botyp.ZAEHLER:         1,
 		botyp.RECHNUNG:        1,
 		botyp.LASTGANG:        1,
-	}))
+	}
+	then.AssertThat(s.T(), boneyComb.GetMasterDataCounts(), is.EqualTo(expectedResult))
 	var expectedMarktteilnehmerCount uint = 2
 	var expectedPreisblattCount uint = 0
 	then.AssertThat(s.T(), boneyComb.GetMasterDataCount(botyp.MARKTTEILNEHMER), is.EqualTo(expectedMarktteilnehmerCount))
