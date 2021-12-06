@@ -84,7 +84,7 @@ func (boneyComb *BOneyComb) SetNachrichtendatum(nachrichtendatum time.Time) {
 func (boneyComb *BOneyComb) GetTransaktionsdatenKeys() []string {
 	var result []string
 	if boneyComb.Transaktionsdaten != nil {
-		for transaktionsdatenKey, _ := range boneyComb.Transaktionsdaten {
+		for transaktionsdatenKey := range boneyComb.Transaktionsdaten {
 			result = append(result, transaktionsdatenKey)
 		}
 		sort.Strings(result)
