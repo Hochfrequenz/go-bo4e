@@ -1,7 +1,6 @@
 package market_communication
 
 import (
-	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 )
 
@@ -21,11 +20,4 @@ func (boneyComb *BOneyComb) GetMasterDataCounts() map[botyp.BOTyp]uint {
 func (boneyComb *BOneyComb) GetMasterDataCount(typ botyp.BOTyp) uint {
 	result := boneyComb.GetMasterDataCounts()
 	return result[typ]
-}
-
-// initializeMasterData sets BOneyComb.Stammdaten to an empty slice iff it is nil
-func (boneyComb *BOneyComb) initializeMasterData() {
-	if boneyComb.Stammdaten == nil {
-		boneyComb.Stammdaten = bo.BusinessObjectSlice{}
-	}
 }
