@@ -1,6 +1,9 @@
 package market_communication
 
-import "time"
+import (
+	"sort"
+	"time"
+)
 
 // GetTransactionData checks if the key is present in BOneyComb.Transaktionsdaten, returns its value if it is present and nil otherwise
 func (boneyComb *BOneyComb) GetTransactionData(key string) *string {
@@ -74,4 +77,19 @@ func (boneyComb *BOneyComb) GetNachrichtendatum() (*time.Time, error) {
 func (boneyComb *BOneyComb) SetNachrichtendatum(nachrichtendatum time.Time) {
 	boneyComb.initializeTransaktionsdaten()
 	boneyComb.Transaktionsdaten[nachrichtendatumKey] = nachrichtendatum.Format(time.RFC3339)
+}
+
+// GetTransaktionsdatenKeys returns a sorted array of keys used in the Transaktionsdaten
+// This function is useful for unit testing purposes
+func (boneyComb *BOneyComb) GetTransaktionsdatenKeys() []string {
+	var result []string
+	if boneyComb.Transaktionsdaten != nil {
+		for transaktionsdatenKey := range boneyComb.Transaktionsdaten {
+			result = append(result, transaktionsdatenKey)
+		}
+		sort.Strings(result)
+	} else {
+		result = []string{}
+	}
+	return result
 }

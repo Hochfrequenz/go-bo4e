@@ -93,3 +93,20 @@ func (s *Suite) Test_GetDokumentennummer() {
 	boneyComb.SetPruefidentifikator("11042")
 	then.AssertThat(s.T(), *boneyComb.GetPruefidentifikator(), is.EqualTo("11042"))
 }
+
+func (s *Suite) Test_GetTransaktionsdatenKeys() {
+	var boneyComb = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"ZZZ":              "z",
+			"Nachrichtendatum": "2021-10-14T15:35:00Z",
+			"Foo":              "Bar",
+			"Asd":              "xyz",
+		},
+	}
+	then.AssertThat(s.T(), boneyComb.GetTransaktionsdatenKeys(), is.EqualTo([]string{"Asd", "Foo", "Nachrichtendatum", "ZZZ"}))
+}
+
+func (s *Suite) Test_GetTransaktionsdatenKeys_Works_For_Nil() {
+	var emptyBoneyComb = market_communication.BOneyComb{}
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransaktionsdatenKeys(), is.EqualTo([]string{}))
+}
