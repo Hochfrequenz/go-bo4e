@@ -21,7 +21,7 @@ func (s *Suite) Test_GenerationRandomNachrichtenReferenznummer() {
 	then.AssertThat(s.T(), expectedUnhPattern.MatchString(actual), is.True())
 }
 
-const numberOfTries = 10000 // <-- the higher the more "random" the functions return values are
+const numberOfTries = 1000 // <-- the higher the more "random" the functions return values are
 
 func funcGeneratesDuplicates(stringGenerator func() string) bool {
 	set := map[string]struct{}{} // in native go, a set is a map with empty values - oh wow!
