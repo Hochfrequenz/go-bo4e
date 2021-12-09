@@ -5,6 +5,7 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"regexp"
+	"time"
 )
 
 var expectedBgmPattern = regexp.MustCompile(`[A-Z\d]{35}`)
@@ -25,6 +26,7 @@ const numberOfTries = 10000 // <-- the higher the more "random" the functions re
 func funcGeneratesDuplicates(stringGenerator func() string) bool {
 	set := map[string]struct{}{} // in native go, a set is a map with empty values - oh wow!
 	for i := 0; i < numberOfTries; i++ {
+		time.Sleep(1)
 		set[stringGenerator()] = struct{}{}
 	}
 	return len(set) == numberOfTries
