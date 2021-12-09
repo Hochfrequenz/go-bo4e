@@ -22,18 +22,18 @@ func (s *Suite) Test_GenerationRandomNachrichtenReferenznummer() {
 
 const numberOfTries = 10000 // <-- the higher the more "random" the functions return values are
 
-func funcGeneratesDuplicates(stringGenerator func() string)bool{
+func funcGeneratesDuplicates(stringGenerator func() string) bool {
 	set := map[string]struct{}{} // in native go, a set is a map with empty values - oh wow!
 	for i := 0; i < numberOfTries; i++ {
 		set[stringGenerator()] = struct{}{}
 	}
-	return len(set)==numberOfTries
+	return len(set) == numberOfTries
 }
 
-func (s *Suite) Test_RandomDokumentennummer_Is_Random_Enough(){
+func (s *Suite) Test_RandomDokumentennummer_Is_Random_Enough() {
 	then.AssertThat(s.T(), funcGeneratesDuplicates(market_communication.GenerateRandomDokumentennummer), is.False())
 }
 
-func (s *Suite) Test_RandomNachrichtenReferenznummer_Is_Random_Enough(){
+func (s *Suite) Test_RandomNachrichtenReferenznummer_Is_Random_Enough() {
 	then.AssertThat(s.T(), funcGeneratesDuplicates(market_communication.GenerateRandomNachrichtenReferenznummer), is.False())
 }
