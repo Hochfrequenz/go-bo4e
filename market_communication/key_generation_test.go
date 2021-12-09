@@ -5,7 +5,6 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"regexp"
-	"time"
 )
 
 var expectedBgmPattern = regexp.MustCompile(`[A-Z\d]{35}`)
@@ -23,13 +22,13 @@ func (s *Suite) Test_GenerationRandomNachrichtenReferenznummer() {
 
 const numberOfTries = 1000 // <-- the higher the more "random" the functions return values are
 
+// funcGeneratesDuplicates returns true iff the function returned duplicates within numberOfTries invocations
 func funcGeneratesDuplicates(stringGenerator func() string) bool {
 	set := map[string]struct{}{} // in native go, a set is a map with empty values - oh wow!
 	for i := 0; i < numberOfTries; i++ {
-		time.Sleep(1)
 		set[stringGenerator()] = struct{}{}
 	}
-	return len(set) == numberOfTries
+	return len(set) != numberOfTries
 }
 
 func (s *Suite) Test_RandomDokumentennummer_Is_Random_Enough() {

@@ -25,6 +25,7 @@ func generateRandomString(allowedCharacters []rune, length uint) string {
 	for i := range b {
 		b[i] = allowedCharacters[rand.Intn(len(unhAllowedCharacters))]
 	}
+	time.Sleep(1 * time.Nanosecond)
 	return string(b)
 }
 
