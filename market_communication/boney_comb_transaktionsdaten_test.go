@@ -79,6 +79,21 @@ func (s *Suite) Test_SetDokumentennummer() {
 	then.AssertThat(s.T(), *boneyComb.GetDokumentennummer(), is.EqualTo("1234567ASDFGH"))
 }
 
+func (s *Suite) Test_GtNachrichtenReferenznummer_Returns_Correct_Value() {
+	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+		Transaktionsdaten: map[string]string{
+			"NachrichtenReferenznummer": "asdasdasd",
+		},
+	}
+	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetNachrichtenReferenznummer(), is.EqualTo("asdasdasd"))
+}
+
+func (s *Suite) Test_SetNachrichtenReferenznummer() {
+	boneyComb := market_communication.BOneyComb{}
+	boneyComb.SetNachrichtenReferenznummer("1234567ASDFGH")
+	then.AssertThat(s.T(), *boneyComb.GetNachrichtenReferenznummer(), is.EqualTo("1234567ASDFGH"))
+}
+
 func (s *Suite) Test_GetPruefidentifikator_Returns_Correct_Value() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
