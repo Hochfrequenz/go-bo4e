@@ -129,6 +129,7 @@ This change is a step towards decoupling of serialization and validation.
 - [C# / .NET](https://github.com/Hochfrequenz/BO4E-dotnet/)
 - [Python](https://github.com/Hochfrequenz/BO4E-python/)
 - [Kotlin](https://github.com/openEnWi/ktBO4E-lib)
+- [TypeScript](https://github.com/openEnWi/tsBO4E-lib)
 
 ## Contributing
 
