@@ -171,6 +171,11 @@ func (s *Suite) Test_Successful_Marktlokation_Validation() {
 	VerfiySuccessfulValidations(s, validate, validMalos)
 }
 
+func (s *Suite) Test_Get_MaloId_Checksum() {
+	actual := bo.GetMaLoIdCheckSum("5123869678")
+	then.AssertThat(s.T(), actual, is.EqualTo(1))
+}
+
 func (s *Suite) Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.MARKTLOKATION)
 	then.AssertThat(s.T(), object, is.Not(is.Nil()))
