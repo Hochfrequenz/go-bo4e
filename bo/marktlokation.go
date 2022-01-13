@@ -45,22 +45,27 @@ func MaloIdFieldLevelValidation(fl validator.FieldLevel) bool {
 	maloId := fl.Field().String()
 	matched := elevenDigitsRegex.MatchString(maloId)
 	if matched {
-		evenSum := 0
-		oddSum := 0
-		for index, digitRune := range maloId[0:10] {
-			digit := int(digitRune - '0')
-			if index%2 == 0 {
-				oddSum = oddSum + digit
-			} else {
-				evenSum = evenSum + digit
-			}
-		}
-		stepC := oddSum + (evenSum * 2)
-		checkDigit := (10 - (stepC % 10)) % 10
+		checkDigit := GetMaLoIdCheckSum(maloId)
 		checkDigitIsCorrect := int(maloId[10]-'0') == checkDigit
 		return checkDigitIsCorrect
 	}
 	return false
+}
+
+// GetMaLoIdCheckSum returns the checksum (11th character of the malo ID) that matches the first ten characters long provided in maloIdWithoutCheckSum. This is going to crash if the length of the maloIdWithoutCheckSum is <10
+func GetMaLoIdCheckSum(maloIdWithoutCheckSum string) int {
+	evenSum := 0
+	oddSum := 0
+	for index, digitRune := range maloIdWithoutCheckSum[0:10] {
+		digit := int(digitRune - '0')
+		if index%2 == 0 {
+			oddSum = oddSum + digit
+		} else {
+			evenSum = evenSum + digit
+		}
+	}
+	stepC := oddSum + (evenSum * 2)
+	return (10 - (stepC % 10)) % 10
 }
 
 // XorStructLevelValidation ensures that only one of the possible address types is given
