@@ -31,23 +31,23 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
-		Bezeichnung:     "Preisblatt",
-		Sparte:          sparte.STROM,
-		Preisstatus:     preisstatus.ENDGUELTIG,
-		Herausgeber:     bo.Marktteilnehmer{
+		Bezeichnung: "Preisblatt",
+		Sparte:      sparte.STROM,
+		Preisstatus: preisstatus.ENDGUELTIG,
+		Herausgeber: bo.Marktteilnehmer{
 			Geschaeftspartner: bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.MARKTTEILNEHMER,
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				}},
-			Marktrolle:        marktrolle.NB,
-			Rollencodenummer:  "0815",
-			Rollencodetyp:     rollencodetyp.BDEW,
-			Makoadresse:       "test@test.com",
+			Marktrolle:       marktrolle.NB,
+			Rollencodenummer: "0815",
+			Rollencodetyp:    rollencodetyp.BDEW,
+			Makoadresse:      "test@test.com",
 		},
-		Gueltigkeit:     com.Zeitraum{
-			Startzeitpunkt: time.Date(2021,12,31,22,0,0,0,time.UTC),
+		Gueltigkeit: com.Zeitraum{
+			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 		},
 		Preispositionen: []com.Preisposition{
 			{
@@ -62,9 +62,9 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 				Zonungsgroesse:           nil,
 				FreimengeBlindarbeit:     decimal.NullDecimal{Valid: false},
 				FreimengeLeistungsfaktor: decimal.NullDecimal{Valid: false},
-				Preisstaffeln:            []com.Preisstaffel{
+				Preisstaffeln: []com.Preisstaffel{
 					{
-						Einheitspreis:    decimal.NewFromFloat(1.0),
+						Einheitspreis: decimal.NewFromFloat(1.0),
 					},
 				},
 			},
@@ -83,7 +83,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 
 	// The following lines prepare the deserialized pricat for the equality; The capacity of the slices is different, so the slice has to be created manually
 	// Also somehow the Preisstaffel raises the assertion, therefore it is replaced with the original
-	deserializedPricat.Preispositionen = []com.Preisposition{ deserializedPricat.Preispositionen[0] }
+	deserializedPricat.Preispositionen = []com.Preisposition{deserializedPricat.Preispositionen[0]}
 	//deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{deserializedPricat.Preispositionen[0].Preisstaffeln[0]}
 	deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{pricat.Preispositionen[0].Preisstaffeln[0]}
 	then.AssertThat(s.T(), deserializedPricat, is.EqualTo(pricat))
@@ -117,7 +117,7 @@ func (s *Suite) Test_Failed_PreisblattValidation() {
 
 //  Test_Successful_Preisblatt_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Preisblatt_Validation() {
-	ad := func(adresse com.Adresse) *com.Adresse {return &adresse}
+	ad := func(adresse com.Adresse) *com.Adresse { return &adresse }
 	validate := validator.New()
 	validPricat := []bo.BusinessObject{
 		bo.Preisblatt{
@@ -126,34 +126,34 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Bezeichnung:     "Preisblatt",
-			Sparte:          sparte.STROM,
-			Preisstatus:     preisstatus.ENDGUELTIG,
-			Herausgeber:     bo.Marktteilnehmer{
+			Bezeichnung: "Preisblatt",
+			Sparte:      sparte.STROM,
+			Preisstatus: preisstatus.ENDGUELTIG,
+			Herausgeber: bo.Marktteilnehmer{
 				Geschaeftspartner: bo.Geschaeftspartner{
 					Geschaeftsobjekt: bo.Geschaeftsobjekt{
 						BoTyp:             botyp.MARKTTEILNEHMER,
 						VersionStruktur:   "1",
 						ExterneReferenzen: nil,
 					},
-				Name1: "Testor von Test",
-				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{ geschaeftspartnerrolle.MARKTPARTNER },
-				Partneradresse: ad(com.Adresse{
-					Postleitzahl: "12345",
-					Ort:          "Testhausen",
-					Strasse:      "Testallee",
-					Hausnummer:   "12",
-					Landescode:   landescode.DE,
-				}),
+					Name1:                   "Testor von Test",
+					Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{geschaeftspartnerrolle.MARKTPARTNER},
+					Partneradresse: ad(com.Adresse{
+						Postleitzahl: "12345",
+						Ort:          "Testhausen",
+						Strasse:      "Testallee",
+						Hausnummer:   "12",
+						Landescode:   landescode.DE,
+					}),
 				},
-				Marktrolle:        marktrolle.NB,
-				Rollencodenummer:  "0815081508151",
-				Rollencodetyp:     rollencodetyp.BDEW,
-				Makoadresse:       "test@test.com",
+				Marktrolle:       marktrolle.NB,
+				Rollencodenummer: "0815081508151",
+				Rollencodetyp:    rollencodetyp.BDEW,
+				Makoadresse:      "test@test.com",
 			},
-			Gueltigkeit:     com.Zeitraum{
-				Startzeitpunkt: time.Date(2021,12,31,22,00,00,00, time.UTC),
-				Endzeitpunkt: time.Date(9999,12,31,23,59,59,00, time.UTC),
+			Gueltigkeit: com.Zeitraum{
+				Startzeitpunkt: time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC),
+				Endzeitpunkt:   time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC),
 			},
 			Preispositionen: []com.Preisposition{},
 		},
