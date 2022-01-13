@@ -21,3 +21,8 @@ func (boneyComb *BOneyComb) GetMasterDataCount(typ botyp.BOTyp) uint {
 	result := boneyComb.GetMasterDataCounts()
 	return result[typ]
 }
+
+// ContainsAny returns true if any business object of the given type is present in BOneyComb.Stammdaten
+func (boneyComb *BOneyComb) ContainsAny(typ botyp.BOTyp) bool {
+	return boneyComb.GetMasterDataCount(typ) > 0
+}
