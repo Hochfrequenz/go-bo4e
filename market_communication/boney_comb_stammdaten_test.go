@@ -47,3 +47,45 @@ func (s *Suite) Test_GetMasterDataCount() {
 	then.AssertThat(s.T(), boneyComb.ContainsAny(botyp.PREISBLATT), is.False())
 	then.AssertThat(s.T(), boneyComb.ContainsAny(botyp.RECHNUNG), is.True())
 }
+
+func (s *Suite) Test_GetAll() {
+	var boneyComb = market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.ZAEHLER),
+			bo.NewBusinessObject(botyp.RECHNUNG),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.LASTGANG),
+		},
+	}
+	then.AssertThat(s.T(), len(boneyComb.GetAll(botyp.PREISBLATT)), is.EqualTo(0))
+	then.AssertThat(s.T(), len(boneyComb.GetAll(botyp.MARKTTEILNEHMER)), is.EqualTo(2))
+	then.AssertThat(s.T(), len(boneyComb.GetAll(botyp.LASTGANG)), is.EqualTo(1))
+}
+
+func (s *Suite) Test_GetSingle() {
+	var boneyComb = market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.ZAEHLER),
+			bo.NewBusinessObject(botyp.RECHNUNG),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.LASTGANG),
+		},
+	}
+	marktteilnehmer, marktteilnehmerErr := boneyComb.GetSingle(botyp.MARKTTEILNEHMER) // there are 2 marktteilnehmers
+	then.AssertThat(s.T(), marktteilnehmer, is.Nil())
+	then.AssertThat(s.T(), marktteilnehmerErr, is.Not(is.Nil()))
+
+	preisblatt, preisblattErr := boneyComb.GetSingle(botyp.PREISBLATT) // there are 0 preisblatts
+	then.AssertThat(s.T(), preisblatt, is.Nil())
+	then.AssertThat(s.T(), preisblattErr, is.Not(is.Nil()))
+
+	lastgang, lastgangErr := boneyComb.GetSingle(botyp.LASTGANG) // there is 1 lastgang
+	then.AssertThat(s.T(), lastgang, is.Not(is.Nil()))
+	then.AssertThat(s.T(), lastgangErr, is.Nil())
+}
