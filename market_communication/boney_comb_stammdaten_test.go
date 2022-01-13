@@ -42,5 +42,8 @@ func (s *Suite) Test_GetMasterDataCount() {
 	var expectedMarktteilnehmerCount uint = 2
 	var expectedPreisblattCount uint = 0
 	then.AssertThat(s.T(), boneyComb.GetMasterDataCount(botyp.MARKTTEILNEHMER), is.EqualTo(expectedMarktteilnehmerCount))
+	then.AssertThat(s.T(), boneyComb.ContainsAny(botyp.MESSLOKATION), is.True())
 	then.AssertThat(s.T(), boneyComb.GetMasterDataCount(botyp.PREISBLATT), is.EqualTo(expectedPreisblattCount))
+	then.AssertThat(s.T(), boneyComb.ContainsAny(botyp.PREISBLATT), is.False())
+	then.AssertThat(s.T(), boneyComb.ContainsAny(botyp.RECHNUNG), is.True())
 }
