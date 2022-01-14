@@ -78,6 +78,11 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo.(*Netznutzungsrechnung).VersionStruktur = defaultVersionStruktur
 		bo.(*Netznutzungsrechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
 		bo.(*Netznutzungsrechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
+	case botyp.PREISBLATT:
+		bo = new(Preisblatt)
+		bo.(*Preisblatt).BoTyp = typ
+		bo.(*Preisblatt).VersionStruktur = defaultVersionStruktur
+		bo.(*Preisblatt).Herausgeber.BoTyp = botyp.MARKTTEILNEHMER
 	case botyp.RECHNUNG:
 		bo = new(Rechnung)
 		bo.(*Rechnung).BoTyp = typ
