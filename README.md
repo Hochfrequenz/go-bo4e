@@ -22,6 +22,7 @@
 - BO Marktlokation
 - BO Marktteilnehmer
 - BO Messlokation
+- BO Preisblatt
 - BO Rechnung
 - BO Vertrag
 - BO Zaehler
