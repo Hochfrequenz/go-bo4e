@@ -1,4 +1,4 @@
-module github.com/hochfrequenz/go-bo4e
+module github.com/Hochfrequenz/go-bo4e
 
 go 1.16
 
