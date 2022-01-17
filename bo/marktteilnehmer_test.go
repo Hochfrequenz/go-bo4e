@@ -10,6 +10,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
@@ -37,11 +38,13 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 			Gewerbekennzeichnung: false,
 			HrNummer:             "handelsregister foo",
 			Amtsgericht:          "amtsgericht bar",
-			Kontaktweg:           0,
-			UmsatzsteuerId:       "umsatzsteuer foo",
-			GlaeubigerId:         "glauebiger bar",
-			EMailAdresse:         "email@lieschen-mueller.de",
-			Website:              "https://lieschen-mueller.de",
+			Kontaktwege: []kontaktart.Kontaktart{
+				kontaktart.E_MAIL,
+			},
+			UmsatzsteuerId: "umsatzsteuer foo",
+			GlaeubigerId:   "glauebiger bar",
+			EMailAdresse:   "email@lieschen-mueller.de",
+			Website:        "https://lieschen-mueller.de",
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.KUNDE,
 				geschaeftspartnerrolle.MARKTPARTNER,
