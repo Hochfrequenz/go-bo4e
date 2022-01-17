@@ -66,6 +66,10 @@ func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
 type marktlokationForMarshal Marktlokation
 
 func (malo Marktlokation) MarshalJSON() ([]byte, error) {
+	if malo.ExtensionData == nil || len(malo.ExtensionData) == 0 {
+		// no special handling needed
+		return json.Marshal(marktlokationForMarshal(malo)) // just marshal but use a helper type to not run into an endless recursino
+	}
 	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded malo-like type and f.e. a map or
 	// we first convert the Marktlokation into a map[string]interface{}
 	// we serialize the malo via our helper type
@@ -88,6 +92,7 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 		result[key] = value
 	}
 	return json.Marshal(result)
+
 }
 
 // marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
