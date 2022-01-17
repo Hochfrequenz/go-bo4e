@@ -78,7 +78,7 @@ func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
 	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
 	if err = json.Unmarshal(bytes, &_melo); err == nil {
 		*melo = Messlokation(_melo)
-		// the malo contains only those fields that are defined in the Marktlokation struct by now
+		// the malo contains only those fields that are defined in the Messlokation struct by now
 	} else {
 		return err
 	}
@@ -87,7 +87,7 @@ func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &melo.ExtensionData); err != nil {
 		return nil
 	}
-	// But now the extension data also contain those fields that in fact have a representation in the Marktlokation struct
+	// But now the extension data also contain those fields that in fact have a representation in the Messlokation struct
 	melo.RemoveStronglyTypedFieldsFromExtensionData(melo.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Marktlokation struct
 	return nil
 }
