@@ -42,28 +42,38 @@ type Marktlokation struct {
 type marktlokationForUnmarshal Marktlokation
 
 func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
+	// the approach we use here is often referred to as "unmarshal twice"
+	// it's a workaround for the not-so-mature/feature rich encoding/json framework in go
 	_malo := marktlokationForUnmarshal{}
+	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
 	if err = json.Unmarshal(bytes, &_malo); err == nil {
 		*malo = Marktlokation(_malo)
+		// the malo contains only those fields that are defined in the Marktlokation struct by now
 	} else {
 		return err
 	}
+
+	// now we unmarshal the same bytes into the extension data
 	if err = json.Unmarshal(bytes, &malo.ExtensionData); err != nil {
 		return nil
 	}
-	malo.RemoveStronglyTypedFieldsFromExtensionData(marktlokationJsonKeys)
+	// But now the extension data also contain those fields that in fact have a representation in the Marktlokation struct
+	malo.RemoveStronglyTypedFieldsFromExtensionData(marktlokationJsonKeys) // remove those fields from the extension data that have a representation in the Marktlokation struct
 	return nil
 }
 
-// marktlokationForMarshal is a struct similar to the original Messlokation. It just changes the json tag/marshalling behaviour of the Geschaeftsobjekt.ExtensionData so that the data are part of the serialized malo
+// marktlokationForMarshal is a struct similar to the original Marktlokation but uses a different Marshaller so that we don't run into an endless recursion
 type marktlokationForMarshal Marktlokation
 
 func (malo Marktlokation) MarshalJSON() ([]byte, error) {
+	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded malo-like type and f.e. a map or
 	// we first convert the Marktlokation into a map[string]interface{}
+	// we serialize the malo via our helper type
 	maloDictBytes, maloMarhsalErr := json.Marshal(marktlokationForMarshal(malo)) // we must use a different type here to not run into an endless recursion
 	if maloMarhsalErr != nil {
 		return []byte{}, maloMarhsalErr
 	}
+	// now we deserialize the malo again but we use a generic dictionary as target type
 	maloAsMap := map[string]interface{}{}
 	extensionUnmarshalErr := json.Unmarshal(maloDictBytes, &maloAsMap)
 	if extensionUnmarshalErr != nil {
@@ -80,9 +90,11 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(result)
 }
 
-// marktlokationJsonKeys is a list of all keys in the standard bo4e json marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
+// marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
 var marktlokationJsonKeys = []string{
 	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
+	// there has to be a better way than this.
+	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
 	"boTyp",
 	"versionStruktur",
 	"marktlokationsId",
