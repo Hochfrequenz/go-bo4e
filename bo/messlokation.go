@@ -122,5 +122,4 @@ func (melo Messlokation) MarshalJSON() ([]byte, error) {
 		result[key] = value
 	}
 	return json.Marshal(result)
-
 }
