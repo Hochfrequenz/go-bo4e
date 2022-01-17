@@ -26,3 +26,7 @@ type Vertrag struct {
 	Vertragskonditionen *com.Vertragskonditionen `json:"vertragskonditionen,omitempty"`                                     // Vertragskonditionen ist eine Festlegungen zu Laufzeiten und Kündigungsfristen
 	Vertragsteile       []com.Vertragsteil       `json:"vertragsteile,omitempty" validate:"required,min=1"`                 // Vertragsteile sind die Vertragsteile, die dazu verwendet werden, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
 }
+
+func (_ Vertrag) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

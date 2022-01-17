@@ -23,3 +23,7 @@ type Ansprechpartner struct {
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
 }
+
+func (_ Ansprechpartner) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

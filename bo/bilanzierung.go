@@ -39,6 +39,10 @@ type Bilanzierung struct {
 	MarktlokationsId           string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 }
 
+func (_ Bilanzierung) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+
 var eicRegex = regexp.MustCompile(`(?P<vergabestelle>\d{2})(?P<typ>A|T|V|W|X|Y|Z)([-A-Z\d]{12})(?P<pruefziffer>[A-Z0-9])`)
 
 // EICFieldLevelValidation ensures that the string stored in the annotated/tagged field is a valid EIC code

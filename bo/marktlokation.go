@@ -58,13 +58,14 @@ func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
 		return nil
 	}
 	// But now the extension data also contain those fields that in fact have a representation in the Marktlokation struct
-	malo.RemoveStronglyTypedFieldsFromExtensionData(marktlokationJsonKeys) // remove those fields from the extension data that have a representation in the Marktlokation struct
+	malo.RemoveStronglyTypedFieldsFromExtensionData(malo.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Marktlokation struct
 	return nil
 }
 
 // marktlokationForMarshal is a struct similar to the original Marktlokation but uses a different Marshaller so that we don't run into an endless recursion
 type marktlokationForMarshal Marktlokation
 
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
 func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 	if malo.ExtensionData == nil || len(malo.ExtensionData) == 0 {
 		// no special handling needed
@@ -95,11 +96,15 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 
 }
 
+func (_ Marktlokation) GetDefaultJsonTags() []string {
+	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
+	return marktlokationJsonKeys
+}
+
 // marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
 var marktlokationJsonKeys = []string{
 	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
 	// there has to be a better way than this.
-	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
 	"boTyp",
 	"versionStruktur",
 	"marktlokationsId",

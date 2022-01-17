@@ -25,3 +25,7 @@ type Geschaeftspartner struct {
 	Geschaeftspartnerrollen []geschaeftspartnerrolle.Geschaeftspartnerrolle `json:"geschaeftspartnerrollen,omitempty" validate:"required,min=1"`                    // Geschaeftspartnerrollen sind die Rollen, die der Geschäftspartner hat
 	Partneradresse          *com.Adresse                                    `json:"partneradresse,omitempty" validate:"required"`                                   // Partneradresse ist die Adresse des Geschäftspartners, an der sich der Hauptsitz befindet.
 }
+
+func (_ Geschaeftspartner) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

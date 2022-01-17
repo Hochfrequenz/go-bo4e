@@ -13,3 +13,7 @@ type Marktteilnehmer struct {
 	Rollencodetyp    rollencodetyp.Rollencodetyp `json:"rollencodetyp,omitempty" validate:"required"`                          // Rollencodetyp gibt den Typ des Codes an/Vergabestelle. Details siehe ENUM Rollencodetyp
 	Makoadresse      string                      `json:"makoadresse,omitempty" validate:"omitempty"`                           // Makoadresse ist die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der Marktkommunikation verwendet.
 }
+
+func (_ Marktteilnehmer) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

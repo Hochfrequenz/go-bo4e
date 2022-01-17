@@ -33,6 +33,10 @@ type Rechnung struct {
 	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen,omitempty" validate:"required,min=1"`              // Rechnungspositionen sind die einzelnen Rechnungsposition en.
 }
 
+func (_ Rechnung) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+
 // RechnungStructLevelValidation combines all the single validators
 func RechnungStructLevelValidation(sl validator.StructLevel) {
 	RechnungStructLevelValidationGesamtNetto(sl)

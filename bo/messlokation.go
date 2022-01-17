@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"encoding/json"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
@@ -25,6 +26,26 @@ type Messlokation struct {
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
 }
 
+// messlokationJsonKeys is a list of all keys in the standard bo4e json Messlokation. It is used to distinguish fields that can be mapped to the Messlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
+var messlokationJsonKeys = []string{
+	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
+	// there has to be a better way than this.
+	"boTyp",
+	"versionStruktur",
+	"messlokationsId",
+	"sparte",
+	"netzebeneMessung",
+	"messgebietNr",
+	"geraete",
+	"messdienstleistung",
+	"grundzustaendigerMSBCodeNr",
+	"GrundzustaendigerMsbImCodeNr",
+	"messlokationszaehler",
+	"messadresse",
+	"geoadresse",
+	"katasterinformation",
+}
+
 // XorStructLevelMesslokationValidation ensures that only one of the possible address types is given
 func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 	melo := sl.Current().Interface().(Messlokation)
@@ -38,4 +59,68 @@ func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 	if numberOfAdresses > 1 {
 		sl.ReportError(Messlokation{}.Messadresse, "", "", "onlyOneAddressType", "")
 	}
+}
+
+func (melo Messlokation) GetDefaultJsonTags() []string {
+	return messlokationJsonKeys
+}
+
+// the below code is just copy pasted from the malo
+// so sorry
+
+// the messlokationForUnmarshal type is derived from Messlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
+type messlokationForUnmarshal Messlokation
+
+func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
+	// the approach we use here is often referred to as "unmarshal twice"
+	// it's a workaround for the not-so-mature/feature rich encoding/json framework in go
+	_melo := messlokationForUnmarshal{}
+	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
+	if err = json.Unmarshal(bytes, &_melo); err == nil {
+		*melo = Messlokation(_melo)
+		// the malo contains only those fields that are defined in the Messlokation struct by now
+	} else {
+		return err
+	}
+
+	// now we unmarshal the same bytes into the extension data
+	if err = json.Unmarshal(bytes, &melo.ExtensionData); err != nil {
+		return nil
+	}
+	// But now the extension data also contain those fields that in fact have a representation in the Messlokation struct
+	melo.RemoveStronglyTypedFieldsFromExtensionData(melo.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Marktlokation struct
+	return nil
+}
+
+// marktlokationForMarshal is a struct similar to the original Messlokation but uses a different Marshaller so that we don't run into an endless recursion
+type messlokationForMarshal Messlokation
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
+func (melo Messlokation) MarshalJSON() ([]byte, error) {
+	if melo.ExtensionData == nil || len(melo.ExtensionData) == 0 {
+		// no special handling needed
+		return json.Marshal(messlokationForMarshal(melo)) // just marshal but use a helper type to not run into an endless recursino
+	}
+	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded malo-like type and f.e. a map or
+	// we first convert the Marktlokation into a map[string]interface{}
+	// we serialize the malo via our helper type
+	maloDictBytes, maloMarhsalErr := json.Marshal(messlokationForMarshal(melo)) // we must use a different type here to not run into an endless recursion
+	if maloMarhsalErr != nil {
+		return []byte{}, maloMarhsalErr
+	}
+	// now we deserialize the malo again but we use a generic dictionary as target type
+	meloAsMap := map[string]interface{}{}
+	extensionUnmarshalErr := json.Unmarshal(maloDictBytes, &meloAsMap)
+	if extensionUnmarshalErr != nil {
+		return []byte{}, extensionUnmarshalErr
+	}
+	// now we join/merge the original malo and its extension data (which is already a map[string]interface{} into a single result
+	result := map[string]interface{}{}
+	for key, value := range meloAsMap {
+		result[key] = value
+	}
+	for key, value := range melo.ExtensionData {
+		result[key] = value
+	}
+	return json.Marshal(result)
 }

@@ -28,6 +28,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
+			ExtensionData:     map[string]interface{}{},
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
 		Sparte:                       sparte.STROM,
@@ -146,6 +147,44 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidMesslokationMap)
+}
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
+func (s *Suite) Test_Messlokation_DeSerialization_With_Unkonwn_Fields() {
+	// this is a json that contains fields/keys that are not part of the official bo4e standard.
+	// our expectation is that they are deserialized into the "ExtensionData" field.
+	// They should also be serialized from there / not be lost during a marshalling/unmarshalling round trip
+	meloJsonWithUnknownFields := `{
+      "messlokationsId": "DE00026930926E0000000000100763575",
+      "sparte": "STROM",
+      "netzebeneMessung": "NSP",
+      "abrechnungmessstellenbetriebnna": true,
+      "marktrollen": [
+        {
+          "code": "9906214000003",
+          "marktrolle": "MSB"
+        }
+      ],
+      "boTyp": "MESSLOKATION",
+      "versionStruktur": "1"
+    }`
+	melo := bo.Messlokation{}
+
+	// unmarshalling tests
+	err := json.Unmarshal([]byte(meloJsonWithUnknownFields), &melo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), melo.Geschaeftsobjekt.ExtensionData, is.Not(is.Nil()))
+	then.AssertThat(s.T(), melo.ExtensionData["marktrollen"], is.Not(is.Nil()))                   // messlokation->marktrollen is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(s.T(), melo.ExtensionData["messlokationsId"], is.Nil())                       // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), melo.MesslokationsId, is.EqualTo("DE00026930926E0000000000100763575")) // but where it should be
+	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
+
+	// marshaling tests
+	serializedMeLoBytes, errSerializing := json.Marshal(melo)
+	then.AssertThat(s.T(), errSerializing, is.Nil())
+	serializedMeLo := string(serializedMeLoBytes)
+	then.AssertThat(s.T(), strings.Contains(serializedMeLo, "marktrollen"), is.True())     // unmapped fields should be part of the serialized melo
+	then.AssertThat(s.T(), strings.Contains(serializedMeLo, "messlokationsId"), is.True()) // mapped fields should be part of the serialized melo
 }
 
 //  Test_Successful_Messlokation_Validation verifies that a valid BO is validated without errors

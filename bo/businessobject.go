@@ -11,6 +11,8 @@ type BusinessObject interface {
 	GetBoTyp() botyp.BOTyp
 	// GetVersionStruktur returns the Geschaeftsobjekt.VersionStruktur
 	GetVersionStruktur() string
+	// GetDefaultJsonTags returns an array of string that represent the json tags that are (by default) used by this business object
+	GetDefaultJsonTags() []string
 }
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
