@@ -148,6 +148,8 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 	}
 	VerfiyFailedValidations(s, validate, invalidMesslokationMap)
 }
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
 func (s *Suite) Test_Messlokation_DeSerialization_With_Unkonwn_Fields() {
 	// this is a json that contains fields/keys that are not part of the official bo4e standard.
 	// our expectation is that they are deserialized into the "ExtensionData" field.

@@ -95,6 +95,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 	then.AssertThat(s.T(), deserializedMalo, is.EqualTo(malo))
 }
 
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
 func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
 	// this is a json that contains fields/keys that are not part of the official bo4e standard.
 	// our expectation is that they are deserialized into the "ExtensionData" field.
