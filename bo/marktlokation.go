@@ -65,6 +65,7 @@ func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
 // marktlokationForMarshal is a struct similar to the original Marktlokation but uses a different Marshaller so that we don't run into an endless recursion
 type marktlokationForMarshal Marktlokation
 
+//nolint:go-dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
 func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 	if malo.ExtensionData == nil || len(malo.ExtensionData) == 0 {
 		// no special handling needed
