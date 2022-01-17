@@ -168,5 +168,9 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 		err = json.Unmarshal(fileContent, &boneyComb)
 		then.AssertThat(s.T(), err, is.Nil())
 		then.AssertThat(s.T(), boneyComb, is.Not(is.Nil()))
+		if file.Name() == "20211011.json" {
+			firstMaLo, _ := boneyComb.GetSingle(botyp.MARKTLOKATION)
+			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo("hello world"))
+		}
 	}
 }
