@@ -6,6 +6,24 @@
       "boTyp": "ZAEHLER"
     },
     {
+      "marktlokationsId": "91928347857",
+      "sparte": "STROM",
+      "energierichtung": "AUSSP",
+      "bilanzierungsmethode": "RLM",
+      "netzebene": "NSP",
+      "bilanzierungsgebiet": "11YN10000762-01E",
+      "lokationsadresse": {
+        "postleitzahl": "30926",
+        "ort": "Seelze",
+        "strasse": "Im Sande",
+        "hausnummer": "33",
+        "landescode": "DE",
+        "ortsteil": "Letter"
+      },
+      "boTyp": "MARKTLOKATION",
+      "some untyped prop": "hello world"
+    },
+    {
       "name1": "Musterfrau",
       "name2": "Erika",
       "adresse": {

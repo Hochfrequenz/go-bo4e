@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"encoding/json"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/bilanzierungsmethode"
@@ -35,6 +36,90 @@ type Marktlokation struct {
 	Geoadresse                *com.Geokoordinaten          `json:"geoadresse,omitempty" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
 	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation,omitempty" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
 	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
+}
+
+// the marktlokationForUnmarshal type is derived from Marktlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
+type marktlokationForUnmarshal Marktlokation
+
+func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
+	// the approach we use here is often referred to as "unmarshal twice"
+	// it's a workaround for the not-so-mature/feature rich encoding/json framework in go
+	_malo := marktlokationForUnmarshal{}
+	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
+	if err = json.Unmarshal(bytes, &_malo); err == nil {
+		*malo = Marktlokation(_malo)
+		// the malo contains only those fields that are defined in the Marktlokation struct by now
+	} else {
+		return err
+	}
+
+	// now we unmarshal the same bytes into the extension data
+	if err = json.Unmarshal(bytes, &malo.ExtensionData); err != nil {
+		return nil
+	}
+	// But now the extension data also contain those fields that in fact have a representation in the Marktlokation struct
+	malo.RemoveStronglyTypedFieldsFromExtensionData(marktlokationJsonKeys) // remove those fields from the extension data that have a representation in the Marktlokation struct
+	return nil
+}
+
+// marktlokationForMarshal is a struct similar to the original Marktlokation but uses a different Marshaller so that we don't run into an endless recursion
+type marktlokationForMarshal Marktlokation
+
+func (malo Marktlokation) MarshalJSON() ([]byte, error) {
+	if malo.ExtensionData == nil || len(malo.ExtensionData) == 0 {
+		// no special handling needed
+		return json.Marshal(marktlokationForMarshal(malo)) // just marshal but use a helper type to not run into an endless recursino
+	}
+	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded malo-like type and f.e. a map or
+	// we first convert the Marktlokation into a map[string]interface{}
+	// we serialize the malo via our helper type
+	maloDictBytes, maloMarhsalErr := json.Marshal(marktlokationForMarshal(malo)) // we must use a different type here to not run into an endless recursion
+	if maloMarhsalErr != nil {
+		return []byte{}, maloMarhsalErr
+	}
+	// now we deserialize the malo again but we use a generic dictionary as target type
+	maloAsMap := map[string]interface{}{}
+	extensionUnmarshalErr := json.Unmarshal(maloDictBytes, &maloAsMap)
+	if extensionUnmarshalErr != nil {
+		return []byte{}, extensionUnmarshalErr
+	}
+	// now we join/merge the original malo and its extension data (which is already a map[string]interface{} into a single result
+	result := map[string]interface{}{}
+	for key, value := range maloAsMap {
+		result[key] = value
+	}
+	for key, value := range malo.ExtensionData {
+		result[key] = value
+	}
+	return json.Marshal(result)
+
+}
+
+// marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
+var marktlokationJsonKeys = []string{
+	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
+	// there has to be a better way than this.
+	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
+	"boTyp",
+	"versionStruktur",
+	"marktlokationsId",
+	"sparte",
+	"energierichtung",
+	"bilanzierungsmethode",
+	"verbrauchsart",
+	"unterbrechbar",
+	"netzebene",
+	"netzbetreibercodenr",
+	"gebiettyp",
+	"netzgebietnr",
+	"bilanzierungsgebiet",
+	"grundversorgercodenr",
+	"gasqualitaet",
+	"endkunde",
+	"lokationsadresse",
+	"geoadresse",
+	"katasterinformation",
+	"zugehoerigemesslokationen",
 }
 
 var elevenDigitsRegex = regexp.MustCompile(`^[1-9]\d{10}$`)

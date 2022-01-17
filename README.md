@@ -106,6 +106,13 @@ as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issu
 
 ## Version Notes
 
+### Handling Unknown Fields in (Un)Marshaling since v0.0.36
+If you're unmarshaling a Business Object that contains fields which are not defined in the BO structs, they'll be deserialized into the `Geschaeftsobjekt.ExtensionData` map.
+This behaviour is achieved by implementing a custom `UnmarshalJSON` func.
+The `ExtensionData`, if not empty, will also be marshalled on root level by default.
+
+⚠ This feature is experimental and for now only works for the **Marktlokation**.
+
 ### General Default Value Marshalling Behaviour since v0.0.22
 
 Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents.

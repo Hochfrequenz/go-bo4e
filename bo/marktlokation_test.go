@@ -29,6 +29,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			BoTyp:             botyp.MARKTLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
+			ExtensionData:     map[string]interface{}{},
 		},
 		MarktlokationsId:     "51238696781",
 		Sparte:               sparte.STROM,
@@ -92,6 +93,77 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 	err = json.Unmarshal(serializedMalo, &deserializedMalo)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedMalo, is.EqualTo(malo))
+}
+
+func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
+	// this is a json that contains fields/keys that are not part of the official bo4e standard.
+	// our expectation is that they are deserialized into the "ExtensionData" field.
+	// They should also be serialized from there / not be lost during a marshalling/unmarshalling round trip
+	maloJsonWithUnknownFields := `{
+      "marktlokationsId": "10024073272",
+      "sparte": "STROM",
+      "energierichtung": "AUSSP",
+      "bilanzierungsmethode": "RLM",
+      "netzebene": "NSP",
+      "bilanzierungsgebiet": "11YN10000762-01E",
+      "lokationsadresse": {
+        "postleitzahl": "30926",
+        "ort": "Seelze",
+        "strasse": "Im Sande",
+        "hausnummer": "33",
+        "landescode": "DE",
+        "ortsteil": "Letter"
+      },
+      "marktrollen": [
+        {
+          "marktrolle": "LF"
+        },
+        {
+          "code": "4033872000058",
+          "marktrolle": "UENB"
+        }
+      ],
+      "regelzone": "10YDE-EON------1",
+      "zeitreihentyp": "SLS",
+      "zaehlwerke": [
+        {
+          "verwendungszwecke": [
+            {
+              "marktrolle": "LF",
+              "zweck": null
+            }
+          ],
+          "richtung": "AUSSP",
+          "obisKennzahl": "1-1:1.9.0",
+          "wandlerfaktor": 0,
+          "schwachlastfaehig": "NICHT_SCHWACHLASTFAEHIG",
+          "konzessionsabgabe": {
+            "satz": "TA",
+            "kosten": 0
+          }
+        }
+      ],
+      "messtechnischeEinordnung": "KME_MME",
+      "boTyp": "MARKTLOKATION",
+      "versionStruktur": "1"
+    }`
+	malo := bo.Marktlokation{}
+
+	// unmarshalling tests
+	err := json.Unmarshal([]byte(maloJsonWithUnknownFields), &malo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), malo.Geschaeftsobjekt.ExtensionData, is.Not(is.Nil()))
+	then.AssertThat(s.T(), malo.ExtensionData["zaehlwerke"], is.Not(is.Nil())) // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.Nil())   // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272"))   // but where it should be
+	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
+
+	// marshaling tests
+	serializedMaloBytes, errSerializing := json.Marshal(malo)
+	then.AssertThat(s.T(), errSerializing, is.Nil())
+	serializedMaLo := string(serializedMaloBytes)
+	then.AssertThat(s.T(), strings.Contains(serializedMaLo, "zaehlwerke"), is.True())       // unmapped fields should be part of the serialized malo
+	then.AssertThat(s.T(), strings.Contains(serializedMaLo, "marktlokationsId"), is.True()) // mapped fields should be part of the serialized malo
 }
 
 // TestFailedMarktlokationValidation verifies that the validators of Marktlokation work

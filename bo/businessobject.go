@@ -15,9 +15,27 @@ type BusinessObject interface {
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
 type Geschaeftsobjekt struct {
-	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
-	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
-	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems
+	BoTyp             botyp.BOTyp            `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
+	VersionStruktur   string                 `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
+	ExterneReferenzen []com.ExterneReferenz  `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems
+	ExtensionData     map[string]interface{} `json:"-"`                                   // ExtensionData contain those values that are included in a Geschaeftsobjekt but not part of the BO4E standard/this implementation
+	// ExtensionData is derived from the .NET naming (JsonExtensionData). It may also be called "MissingMemberHandling"
+}
+
+// RemoveStronglyTypedFieldsFromExtensionData removes the keys of the given key set from the Geschaeftsobjekt.ExtensionData
+func (gob *Geschaeftsobjekt) RemoveStronglyTypedFieldsFromExtensionData(keys []string) {
+	// https://stackoverflow.com/a/33437853/10009545
+	// Maybe I'm not a perfect go expert; But if this frickeling and hardcoding is the way to go, then the typical go programmers pain threshold is admirable high.
+	for _, key := range keys {
+		gob.DeleteExtensionData(key)
+	}
+}
+
+// DeleteExtensionData removes the given jsonKey from the Geschaeftsobjekt.ExtensionData
+func (gob *Geschaeftsobjekt) DeleteExtensionData(jsonKey string) {
+	if gob.ExtensionData != nil {
+		delete(gob.ExtensionData, jsonKey)
+	}
 }
 
 func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
