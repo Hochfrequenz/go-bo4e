@@ -29,7 +29,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			BoTyp:             botyp.MARKTLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData: map[string]interface{}{},
+			ExtensionData:     map[string]interface{}{},
 		},
 		MarktlokationsId:     "51238696781",
 		Sparte:               sparte.STROM,
