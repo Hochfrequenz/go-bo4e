@@ -58,7 +58,7 @@ func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
 		return nil
 	}
 	// But now the extension data also contain those fields that in fact have a representation in the Marktlokation struct
-	malo.RemoveStronglyTypedFieldsFromExtensionData(marktlokationJsonKeys) // remove those fields from the extension data that have a representation in the Marktlokation struct
+	malo.RemoveStronglyTypedFieldsFromExtensionData(malo.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Marktlokation struct
 	return nil
 }
 
@@ -93,6 +93,10 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(result)
 
+}
+
+func (_ Marktlokation) GetDefaultJsonTags() []string {
+	return marktlokationJsonKeys
 }
 
 // marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData

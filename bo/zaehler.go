@@ -31,3 +31,7 @@ type Zaehler struct {
 	Fernschaltung     fernschaltung.Fernschaltung         `json:"fernschaltung,omitempty"`     // Fernschaltung is set to VORHANDEN if there is a fernschaltung
 	Messwerterfassung messwerterfassung.Messwerterfassung `json:"messwerterfassung,omitempty"` // Messwerterfassung describes if meter readings have to happen manually
 }
+
+func (_ Zaehler) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

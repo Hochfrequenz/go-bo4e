@@ -18,3 +18,7 @@ type Lastgang struct {
 	Obiskennzahl string                      `json:"obiskennzahl,omitempty" example:"1-0:1.8.1"`                                                                   // Obiskennzahl ist die genormte OBIS-Kennzahl zur Kennzeichnung der Messgröße
 	Werte        []com.Zeitreihenwert        `json:"energieverbrauch,omitempty" validate:"required,min=1"`                                                         // Werte sind die im Lastgang enthaltenen Messwerte.
 }
+
+func (_ Lastgang) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}

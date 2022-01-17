@@ -39,3 +39,7 @@ func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 		sl.ReportError(Messlokation{}.Messadresse, "", "", "onlyOneAddressType", "")
 	}
 }
+
+func (melo Messlokation) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
