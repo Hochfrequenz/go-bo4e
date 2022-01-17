@@ -38,11 +38,13 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 			Gewerbekennzeichnung: false,
 			HrNummer:             "handelsregister foo",
 			Amtsgericht:          "amtsgericht bar",
-			Kontaktwege:           []kontaktart.Kontaktart{},
-			UmsatzsteuerId:       "umsatzsteuer foo",
-			GlaeubigerId:         "glauebiger bar",
-			EMailAdresse:         "email@lieschen-mueller.de",
-			Website:              "https://lieschen-mueller.de",
+			Kontaktwege: []kontaktart.Kontaktart{
+				kontaktart.E_MAIL,
+			},
+			UmsatzsteuerId: "umsatzsteuer foo",
+			GlaeubigerId:   "glauebiger bar",
+			EMailAdresse:   "email@lieschen-mueller.de",
+			Website:        "https://lieschen-mueller.de",
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.KUNDE,
 				geschaeftspartnerrolle.MARKTPARTNER,
