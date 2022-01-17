@@ -22,11 +22,10 @@ type Geschaeftsobjekt struct {
 	// ExtensionData is derived from the .NET naming (JsonExtensionData). It may also be called "MissingMemberHandling"
 }
 
-// RemoveStronglyTypedFieldsFromExtensionData removes the keys of the given keySet from the Geschaeftsobjekt.ExtensionData
+// RemoveStronglyTypedFieldsFromExtensionData removes the keys of the given key set from the Geschaeftsobjekt.ExtensionData
 func (gob *Geschaeftsobjekt) RemoveStronglyTypedFieldsFromExtensionData(keys []string) {
 	// https://stackoverflow.com/a/33437853/10009545
-	// Maybe I'm not a perfect go expert; But if this is the frickeling and hardcoding is the way to go,
-	// then the typical go programmers pain threshold is admirable high.
+	// Maybe I'm not a perfect go expert; But if this frickeling and hardcoding is the way to go, then the typical go programmers pain threshold is admirable high.
 	for _, key := range keys {
 		gob.DeleteExtensionData(key)
 	}
