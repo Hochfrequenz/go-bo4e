@@ -28,6 +28,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
+			ExtensionData:     map[string]interface{}{},
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
 		Sparte:                       sparte.STROM,
