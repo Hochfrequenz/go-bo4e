@@ -96,6 +96,7 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 }
 
 func (_ Marktlokation) GetDefaultJsonTags() []string {
+	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
 	return marktlokationJsonKeys
 }
 
@@ -103,7 +104,6 @@ func (_ Marktlokation) GetDefaultJsonTags() []string {
 var marktlokationJsonKeys = []string{
 	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
 	// there has to be a better way than this.
-	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
 	"boTyp",
 	"versionStruktur",
 	"marktlokationsId",
