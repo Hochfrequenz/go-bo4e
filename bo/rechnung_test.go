@@ -11,6 +11,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/preisstatus"
@@ -58,7 +59,7 @@ var serializableRechnung = bo.Rechnung{
 		Gewerbekennzeichnung: false,
 		HrNummer:             "handelsregister foo",
 		Amtsgericht:          "amtsgericht bar",
-		Kontaktweg:           0,
+		Kontaktwege:          []kontaktart.Kontaktart{},
 		UmsatzsteuerId:       "umsatzsteuer foo",
 		GlaeubigerId:         "glauebiger bar",
 		EMailAdresse:         "email@lieschen-mueller.de",
@@ -88,7 +89,7 @@ var serializableRechnung = bo.Rechnung{
 		Gewerbekennzeichnung: false,
 		HrNummer:             "handelsregister foo",
 		Amtsgericht:          "amtsgericht bar",
-		Kontaktweg:           0,
+		Kontaktwege:          []kontaktart.Kontaktart{},
 		UmsatzsteuerId:       "umsatzsteuer foo",
 		GlaeubigerId:         "glauebiger bar",
 		EMailAdresse:         "email@lieschen-mueller.de",
@@ -298,7 +299,7 @@ var completeValidRechnung = bo.Rechnung{
 		Gewerbekennzeichnung: false,
 		HrNummer:             "handelsregister foo",
 		Amtsgericht:          "amtsgericht bar",
-		Kontaktweg:           0,
+		Kontaktwege:          []kontaktart.Kontaktart{},
 		UmsatzsteuerId:       "umsatzsteuer foo",
 		GlaeubigerId:         "glauebiger bar",
 		EMailAdresse:         "email@lieschen-mueller.de",
@@ -328,7 +329,7 @@ var completeValidRechnung = bo.Rechnung{
 		Gewerbekennzeichnung: false,
 		HrNummer:             "handelsregister foo",
 		Amtsgericht:          "amtsgericht bar",
-		Kontaktweg:           0,
+		Kontaktwege:          []kontaktart.Kontaktart{},
 		UmsatzsteuerId:       "umsatzsteuer foo",
 		GlaeubigerId:         "glauebiger bar",
 		EMailAdresse:         "email@lieschen-mueller.de",

@@ -11,13 +11,13 @@ func _() {
 	_ = x[ANSCHREIBEN-1]
 	_ = x[TELEFONAT-2]
 	_ = x[FAX-3]
-	_ = x[EMAIL-4]
+	_ = x[E_MAIL-4]
 	_ = x[SMS-5]
 }
 
-const _Kontaktart_name = "ANSCHREIBENTELEFONATFAXEMAILSMS"
+const _Kontaktart_name = "ANSCHREIBENTELEFONATFAXE_MAILSMS"
 
-var _Kontaktart_index = [...]uint8{0, 11, 20, 23, 28, 31}
+var _Kontaktart_index = [...]uint8{0, 11, 20, 23, 29, 32}
 
 func (i Kontaktart) String() string {
 	i -= 1

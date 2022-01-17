@@ -12,7 +12,7 @@ var (
 		"ANSCHREIBEN": ANSCHREIBEN,
 		"TELEFONAT":   TELEFONAT,
 		"FAX":         FAX,
-		"EMAIL":       EMAIL,
+		"E_MAIL":      E_MAIL,
 		"SMS":         SMS,
 	}
 
@@ -20,7 +20,7 @@ var (
 		ANSCHREIBEN: "ANSCHREIBEN",
 		TELEFONAT:   "TELEFONAT",
 		FAX:         "FAX",
-		EMAIL:       "EMAIL",
+		E_MAIL:      "E_MAIL",
 		SMS:         "SMS",
 	}
 )
@@ -32,7 +32,7 @@ func init() {
 			interface{}(ANSCHREIBEN).(fmt.Stringer).String(): ANSCHREIBEN,
 			interface{}(TELEFONAT).(fmt.Stringer).String():   TELEFONAT,
 			interface{}(FAX).(fmt.Stringer).String():         FAX,
-			interface{}(EMAIL).(fmt.Stringer).String():       EMAIL,
+			interface{}(E_MAIL).(fmt.Stringer).String():      E_MAIL,
 			interface{}(SMS).(fmt.Stringer).String():         SMS,
 		}
 	}

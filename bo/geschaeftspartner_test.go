@@ -10,6 +10,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"reflect"
 	"strings"
@@ -30,7 +31,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 		Gewerbekennzeichnung: false,
 		HrNummer:             "handelsregister foo",
 		Amtsgericht:          "amtsgericht bar",
-		Kontaktweg:           0,
+		Kontaktwege:           []kontaktart.Kontaktart{},
 		UmsatzsteuerId:       "umsatzsteuer foo",
 		GlaeubigerId:         "glauebiger bar",
 		EMailAdresse:         "email@lieschen-mueller.de",
@@ -83,7 +84,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Gewerbekennzeichnung:    false,
 				HrNummer:                "",
 				Amtsgericht:             "",
-				Kontaktweg:              0,
+				Kontaktwege:           []kontaktart.Kontaktart{},
 				UmsatzsteuerId:          "",
 				GlaeubigerId:            "",
 				EMailAdresse:            "",
@@ -104,7 +105,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 				Gewerbekennzeichnung:    false,
 				HrNummer:                "",
 				Amtsgericht:             "",
-				Kontaktweg:              0,
+				Kontaktwege:           []kontaktart.Kontaktart{},
 				UmsatzsteuerId:          "",
 				GlaeubigerId:            "",
 				EMailAdresse:            "",

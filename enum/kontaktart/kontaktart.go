@@ -10,6 +10,6 @@ const (
 	ANSCHREIBEN Kontaktart = iota + 1
 	TELEFONAT              // TELEFONAT means phone
 	FAX                    // FAX means Fax
-	EMAIL                  // EMAIL means E-Mail
+	E_MAIL                  // E_MAIL means E-Mail
 	SMS                    // SMS means text message
 )

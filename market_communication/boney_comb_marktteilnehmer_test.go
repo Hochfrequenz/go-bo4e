@@ -8,6 +8,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
@@ -88,7 +89,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 					Gewerbekennzeichnung: false,
 					HrNummer:             "handelsregister foo",
 					Amtsgericht:          "amtsgericht bar",
-					Kontaktweg:           0,
+					Kontaktwege:           []kontaktart.Kontaktart{},
 					UmsatzsteuerId:       "umsatzsteuer foo",
 					GlaeubigerId:         "glauebiger bar",
 					EMailAdresse:         "email@lieschen-mueller.de",
@@ -124,7 +125,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 					Gewerbekennzeichnung: false,
 					HrNummer:             "handelsregister foo",
 					Amtsgericht:          "amtsgericht bar",
-					Kontaktweg:           0,
+					Kontaktwege:           []kontaktart.Kontaktart{},
 					UmsatzsteuerId:       "umsatzsteuer foo",
 					GlaeubigerId:         "glauebiger bar",
 					EMailAdresse:         "email@lieschen-mueller.de",
