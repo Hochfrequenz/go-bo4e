@@ -1,5 +1,5 @@
 {
-  "Stammdaten": [
+  "stammdaten": [
     {
       "zaehlernummer": "987654",
       "sparte": "STROM",
@@ -58,7 +58,7 @@
       "versionStruktur": "1"
     }
   ],
-  "Transaktionsdaten": {
+  "transaktionsdaten": {
     "vorgangsnummer": "123456789",
     "transaktionsgrund": "ZD2",
     "prozessdatum": "2021-01-31T23:00:00Z",
