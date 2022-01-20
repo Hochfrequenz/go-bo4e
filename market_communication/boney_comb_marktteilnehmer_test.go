@@ -18,7 +18,7 @@ import (
 func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_Without_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Absender": "9876543210987",
+			"absender": "9876543210987",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
@@ -28,7 +28,7 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_Without_Uri() {
 func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Absender": "bo4e://Marktteilnehmer/9876543210987",
+			"absender": "bo4e://Marktteilnehmer/9876543210987",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
@@ -49,7 +49,7 @@ func (s *Suite) Test_SetAbsenderCode_With_Uri() {
 func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Empfaenger": "bo4e://Marktteilnehmer/9876543210987",
+			"empfaenger": "bo4e://Marktteilnehmer/9876543210987",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
@@ -146,8 +146,8 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 		},
 
 		Transaktionsdaten: map[string]string{
-			"Empfaenger": "bo4e://Marktteilnehmer/9903100000006",
-			"Absender":   "9903100000007",
+			"empfaenger": "bo4e://Marktteilnehmer/9903100000006",
+			"absender":   "9903100000007",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaenger(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[0]))
