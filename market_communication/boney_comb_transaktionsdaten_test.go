@@ -36,7 +36,7 @@ func (s *Suite) Test_GetNachrichtendatum_Returns_Nil_For_Nil_Transaktionsdaten()
 func (s *Suite) Test_GetNachrichtendatum_Returns_Error_For_Unparsable_Date() {
 	var boneyCombWithMalformedDate = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Nachrichtendatum": "adasdasd",
+			"nachrichtendatum": "adasdasd",
 		},
 	}
 	nachrichtendatum, err := boneyCombWithMalformedDate.GetNachrichtendatum()
@@ -47,7 +47,7 @@ func (s *Suite) Test_GetNachrichtendatum_Returns_Error_For_Unparsable_Date() {
 func (s *Suite) Test_GetNachrichtendatum_Returns_Correct_Value() {
 	var boneyCombWithMalformedDate = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Nachrichtendatum": "2021-10-14T15:35:00Z",
+			"nachrichtendatum": "2021-10-14T15:35:00Z",
 		},
 	}
 	nachrichtendatum, err := boneyCombWithMalformedDate.GetNachrichtendatum()
@@ -67,7 +67,7 @@ func (s *Suite) Test_SetNachrichtendatum() {
 func (s *Suite) Test_GetDokumentennummer_Returns_Correct_Value() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Dokumentennummer": "asdasdasd",
+			"dokumentennummer": "asdasdasd",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetDokumentennummer(), is.EqualTo("asdasdasd"))
@@ -82,7 +82,7 @@ func (s *Suite) Test_SetDokumentennummer() {
 func (s *Suite) Test_GtNachrichtenReferenznummer_Returns_Correct_Value() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"NachrichtenReferenznummer": "asdasdasd",
+			"nachrichtenReferenznummer": "asdasdasd",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetNachrichtenReferenznummer(), is.EqualTo("asdasdasd"))
@@ -97,7 +97,7 @@ func (s *Suite) Test_SetNachrichtenReferenznummer() {
 func (s *Suite) Test_GetPruefidentifikator_Returns_Correct_Value() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
-			"Pruefidentifikator": "13002",
+			"pruefidentifikator": "13002",
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetPruefidentifikator(), is.EqualTo("13002"))
@@ -113,12 +113,12 @@ func (s *Suite) Test_GetTransaktionsdatenKeys() {
 	var boneyComb = market_communication.BOneyComb{
 		Transaktionsdaten: map[string]string{
 			"ZZZ":              "z",
-			"Nachrichtendatum": "2021-10-14T15:35:00Z",
+			"nachrichtendatum": "2021-10-14T15:35:00Z",
 			"Foo":              "Bar",
 			"Asd":              "xyz",
 		},
 	}
-	then.AssertThat(s.T(), boneyComb.GetTransaktionsdatenKeys(), is.EqualTo([]string{"Asd", "Foo", "Nachrichtendatum", "ZZZ"}))
+	then.AssertThat(s.T(), boneyComb.GetTransaktionsdatenKeys(), is.EqualTo([]string{"Asd", "Foo", "ZZZ", "nachrichtendatum"}))
 }
 
 func (s *Suite) Test_GetTransaktionsdatenKeys_Works_For_Nil() {

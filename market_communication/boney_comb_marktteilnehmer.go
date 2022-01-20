@@ -7,10 +7,10 @@ import (
 )
 
 // receiverKey is the key for BOneyComb.Transaktionsdaten under which the 13 digit ID of the receiving Marktteilnehmer can be found
-const receiverKey = "Empfaenger"
+const receiverKey = "empfaenger"
 
 // senderKey is the key for BOneyComb.Transaktionsdaten under which the 13 digit ID of the sending Marktteilnehmer can be found
-const senderKey = "Absender"
+const senderKey = "absender"
 
 // GetAbsenderCode returns the 13 digit ID of the sending Marktteilnehmer if present in the Transaktionsdaten; nil otherwise
 func (boneyComb *BOneyComb) GetAbsenderCode() *string {

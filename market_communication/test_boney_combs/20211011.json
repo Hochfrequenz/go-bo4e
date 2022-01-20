@@ -1,5 +1,5 @@
 {
-  "Stammdaten": [
+  "stammdaten": [
     {
       "zaehlernummer": "987654",
       "sparte": "STROM",
@@ -58,17 +58,17 @@
       "versionStruktur": "1"
     }
   ],
-  "Transaktionsdaten": {
-    "Vorgangsnummer": "123456789",
-    "Transaktionsgrund": "ZD2",
-    "Prozessdatum": "2021-01-31T23:00:00Z",
-    "Pruefidentifikator": "11001",
-    "Absender": "bo4e://Marktteilnehmer/9900360000008",
-    "Empfaenger": "bo4e://Marktteilnehmer/9905048000007",
-    "Dokumentennummer": "81f40295a40fc3e5",
-    "Kategorie": "E35",
-    "Nachrichtendatum": "2021-01-15T15:27:00Z",
-    "NachrichtenReferenznummer": "e400a1a6fd3688851",
-    "Sende_Kuendigung": "true"
+  "transaktionsdaten": {
+    "vorgangsnummer": "123456789",
+    "transaktionsgrund": "ZD2",
+    "prozessdatum": "2021-01-31T23:00:00Z",
+    "pruefidentifikator": "11001",
+    "absender": "bo4e://Marktteilnehmer/9900360000008",
+    "empfaenger": "bo4e://Marktteilnehmer/9905048000007",
+    "dokumentennummer": "81f40295a40fc3e5",
+    "kategorie": "E35",
+    "nachrichtendatum": "2021-01-15T15:27:00Z",
+    "nachrichtenReferenznummer": "e400a1a6fd3688851",
+    "sendeKuendigung": "true"
   }
 }
