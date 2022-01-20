@@ -30,16 +30,16 @@ func (boneyComb *BOneyComb) initializeTransaktionsdaten() {
 }
 
 // dokumentnummerKey is the key under which the Dokumentennummer (BGM) is stored in the BOneyComb.Transaktionsdaten
-const dokumentnummerKey = "Dokumentennummer"
+const dokumentnummerKey = "dokumentennummer"
 
 // nachrichtenReferenzNummerKey is the key under which the NachrichtenReferenznummer (UNH) is stored in the BOneyComb.Transaktionsdaten
-const nachrichtenReferenzNummerKey = "NachrichtenReferenznummer"
+const nachrichtenReferenzNummerKey = "nachrichtenReferenznummer"
 
 // nachrichtendatumKey is the key under which the Nachrichtendatum is stored in the BOneyComb.Transaktionsdaten
-const nachrichtendatumKey = "Nachrichtendatum"
+const nachrichtendatumKey = "nachrichtendatum"
 
 // nachrichtendatumKey is the key under which the Prüfidentifikator (RFF+Z13+.....) is stored in the BOneyComb.Transaktionsdaten
-const pruefidentifikatorKey = "Pruefidentifikator"
+const pruefidentifikatorKey = "pruefidentifikator"
 
 // GetPruefidentifikator returns the Pruefidentifikator from BOneyComb.Transaktionsdaten if it's present and nil otherwise
 func (boneyComb *BOneyComb) GetPruefidentifikator() *string {
