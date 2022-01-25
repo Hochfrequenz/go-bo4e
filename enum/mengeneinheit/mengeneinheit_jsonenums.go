@@ -61,6 +61,7 @@ func init() {
 			interface{}(MONAT).(fmt.Stringer).String():      MONAT,
 			interface{}(JAHR).(fmt.Stringer).String():       JAHR,
 			interface{}(PROZENT).(fmt.Stringer).String():    PROZENT,
+			"ANZAHL": STUECK, // I manually added this fallback: Whenever one tries to unmarshal "ANZAHL" from a json it will return the enum value STUECK
 		}
 	}
 }
