@@ -10,6 +10,7 @@ import (
 var (
 	_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
 		"UST_0":  UST_0,
+		"UST_16": UST_16,
 		"UST_19": UST_19,
 		"US_T7":  US_T7,
 		"VST_0":  VST_0,
@@ -20,6 +21,7 @@ var (
 
 	_SteuerkennzeichenValueToName = map[Steuerkennzeichen]string{
 		UST_0:  "UST_0",
+		UST_16: "UST_16",
 		UST_19: "UST_19",
 		US_T7:  "US_T7",
 		VST_0:  "VST_0",
@@ -34,6 +36,7 @@ func init() {
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
 			interface{}(UST_0).(fmt.Stringer).String():  UST_0,
+			interface{}(UST_16).(fmt.Stringer).String(): UST_16,
 			interface{}(UST_19).(fmt.Stringer).String(): UST_19,
 			interface{}(US_T7).(fmt.Stringer).String():  US_T7,
 			interface{}(VST_0).(fmt.Stringer).String():  VST_0,

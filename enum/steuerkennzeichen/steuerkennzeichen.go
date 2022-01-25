@@ -8,6 +8,7 @@ type Steuerkennzeichen int
 const (
 	// UST0 means Keine Umsatzsteuer, bzw. nicht steuerbar.
 	UST_0  Steuerkennzeichen = iota + 1
+	UST_16                   // UST 16 is 16% Umsatzsteuer
 	UST_19                   // UST19 means Umsatzsteuer 19%
 	US_T7                    // UST7 means Umsatzsteuer 7%
 	VST_0                    // VST0 means Keine Vorsteuer, bzw. nicht steuerbar.
