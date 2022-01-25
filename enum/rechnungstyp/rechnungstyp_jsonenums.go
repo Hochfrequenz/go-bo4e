@@ -18,6 +18,8 @@ var (
 		"ABSCHLAGSRECHNUNG":              ABSCHLAGSRECHNUNG,
 		"WIMRECHNUNG":                    WIMRECHNUNG,
 		"SELBSTAUSGESTELLTERECHNUNGMEMI": SELBSTAUSGESTELLTERECHNUNGMEMI,
+		"MSBRECHNUNG":                    MSBRECHNUNG,
+		"TURNUSRECHNUNG":                 TURNUSRECHNUNG,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
@@ -30,6 +32,8 @@ var (
 		ABSCHLAGSRECHNUNG:              "ABSCHLAGSRECHNUNG",
 		WIMRECHNUNG:                    "WIMRECHNUNG",
 		SELBSTAUSGESTELLTERECHNUNGMEMI: "SELBSTAUSGESTELLTERECHNUNGMEMI",
+		MSBRECHNUNG:                    "MSBRECHNUNG",
+		TURNUSRECHNUNG:                 "TURNUSRECHNUNG",
 	}
 )
 
@@ -46,6 +50,8 @@ func init() {
 			interface{}(ABSCHLAGSRECHNUNG).(fmt.Stringer).String():              ABSCHLAGSRECHNUNG,
 			interface{}(WIMRECHNUNG).(fmt.Stringer).String():                    WIMRECHNUNG,
 			interface{}(SELBSTAUSGESTELLTERECHNUNGMEMI).(fmt.Stringer).String(): SELBSTAUSGESTELLTERECHNUNGMEMI,
+			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                    MSBRECHNUNG,
+			interface{}(TURNUSRECHNUNG).(fmt.Stringer).String():                 TURNUSRECHNUNG,
 		}
 	}
 }
