@@ -70,5 +70,11 @@
     "nachrichtendatum": "2021-01-15T15:27:00Z",
     "nachrichtenReferenznummer": "e400a1a6fd3688851",
     "sendeKuendigung": "true"
+  },
+  "links": {
+    "foo": [
+      "bar",
+      "baz"
+    ]
   }
 }
