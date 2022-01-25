@@ -47,7 +47,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 			Waehrung: waehrungscode.AMD,
 		},
 		TeilsummeSteuer: com.Steuerbetrag{
-			Steuerkennzeichen: steuerkennzeichen.UST7,
+			Steuerkennzeichen: steuerkennzeichen.UST_7,
 			Basiswert:         newDecimalFromString("100"),
 			Steuerwert:        newDecimalFromString("7"),
 			Waehrung:          waehrungscode.EUR,
@@ -165,7 +165,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 				Waehrung: waehrungscode.EUR,
 			},
 			TeilsummeSteuer: com.Steuerbetrag{
-				Steuerkennzeichen: steuerkennzeichen.UST19,
+				Steuerkennzeichen: steuerkennzeichen.UST_19,
 				Basiswert:         decimal.NewFromFloat(240),
 				Steuerwert:        decimal.NewFromFloat(0),
 				Waehrung:          waehrungscode.EUR,

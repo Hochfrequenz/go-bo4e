@@ -9,23 +9,25 @@ import (
 
 var (
 	_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
-		"UST0":  UST0,
-		"UST19": UST19,
-		"UST7":  UST7,
-		"VST0":  VST0,
-		"VST19": VST19,
-		"VST7":  VST7,
-		"RCV":   RCV,
+		"UST_0":  UST_0,
+		"UST_16": UST_16,
+		"UST_19": UST_19,
+		"UST_7":  UST_7,
+		"VST_0":  VST_0,
+		"VST_19": VST_19,
+		"VST_7":  VST_7,
+		"RCV":    RCV,
 	}
 
 	_SteuerkennzeichenValueToName = map[Steuerkennzeichen]string{
-		UST0:  "UST0",
-		UST19: "UST19",
-		UST7:  "UST7",
-		VST0:  "VST0",
-		VST19: "VST19",
-		VST7:  "VST7",
-		RCV:   "RCV",
+		UST_0:  "UST_0",
+		UST_16: "UST_16",
+		UST_19: "UST_19",
+		UST_7:  "UST_7",
+		VST_0:  "VST_0",
+		VST_19: "VST_19",
+		VST_7:  "VST_7",
+		RCV:    "RCV",
 	}
 )
 
@@ -33,13 +35,14 @@ func init() {
 	var v Steuerkennzeichen
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
-			interface{}(UST0).(fmt.Stringer).String():  UST0,
-			interface{}(UST19).(fmt.Stringer).String(): UST19,
-			interface{}(UST7).(fmt.Stringer).String():  UST7,
-			interface{}(VST0).(fmt.Stringer).String():  VST0,
-			interface{}(VST19).(fmt.Stringer).String(): VST19,
-			interface{}(VST7).(fmt.Stringer).String():  VST7,
-			interface{}(RCV).(fmt.Stringer).String():   RCV,
+			interface{}(UST_0).(fmt.Stringer).String():  UST_0,
+			interface{}(UST_16).(fmt.Stringer).String(): UST_16,
+			interface{}(UST_19).(fmt.Stringer).String(): UST_19,
+			interface{}(UST_7).(fmt.Stringer).String():  UST_7,
+			interface{}(VST_0).(fmt.Stringer).String():  VST_0,
+			interface{}(VST_19).(fmt.Stringer).String(): VST_19,
+			interface{}(VST_7).(fmt.Stringer).String():  VST_7,
+			interface{}(RCV).(fmt.Stringer).String():    RCV,
 		}
 	}
 }

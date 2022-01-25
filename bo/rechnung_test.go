@@ -392,7 +392,7 @@ var completeValidRechnung = bo.Rechnung{
 				Waehrung: waehrungscode.EUR,
 			},
 			TeilsummeSteuer: com.Steuerbetrag{
-				Steuerkennzeichen: steuerkennzeichen.UST19,
+				Steuerkennzeichen: steuerkennzeichen.UST_19,
 				Basiswert:         decimal.NewFromFloat(240),
 				Steuerwert:        decimal.NewFromFloat(45.6),
 				Waehrung:          waehrungscode.EUR,
