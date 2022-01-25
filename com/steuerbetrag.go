@@ -27,11 +27,11 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 	switch sk := steuerbetrag.Steuerkennzeichen; sk {
 	case 0:
 		return // already the field level validation should fail on this, we don't need struct level validation
-	case steuerkennzeichen.VST7, steuerkennzeichen.UST7:
+	case steuerkennzeichen.VST_7, steuerkennzeichen.UST_7:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.NewFromFloat(0.07))
-	case steuerkennzeichen.VST19, steuerkennzeichen.UST19:
+	case steuerkennzeichen.VST_19, steuerkennzeichen.UST_19:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.NewFromFloat(0.19))
-	case steuerkennzeichen.VST0, steuerkennzeichen.UST0:
+	case steuerkennzeichen.VST_0, steuerkennzeichen.UST_0:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.Zero)
 	default:
 		err := fmt.Errorf("Validation of Steuerkennzeichen %v is not implemented", steuerbetrag.Steuerkennzeichen)

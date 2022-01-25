@@ -11,14 +11,14 @@ func _() {
 	_ = x[UST_0-1]
 	_ = x[UST_16-2]
 	_ = x[UST_19-3]
-	_ = x[US_T7-4]
+	_ = x[UST_7-4]
 	_ = x[VST_0-5]
 	_ = x[VST_19-6]
 	_ = x[VST_7-7]
 	_ = x[RCV-8]
 }
 
-const _Steuerkennzeichen_name = "UST_0UST_16UST_19US_T7VST_0VST_19VST_7RCV"
+const _Steuerkennzeichen_name = "UST_0UST_16UST_19UST_7VST_0VST_19VST_7RCV"
 
 var _Steuerkennzeichen_index = [...]uint8{0, 5, 11, 17, 22, 27, 33, 38, 41}
 
