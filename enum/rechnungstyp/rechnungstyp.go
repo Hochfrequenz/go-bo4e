@@ -16,4 +16,8 @@ const (
 	ABSCHLAGSRECHNUNG                           // Rechnung über einen Abschlag (non-standard)
 	WIMRECHNUNG                                 // Rechnung im Rahmen der Wechselprozesse im Messwesen (non-standard)
 	SELBSTAUSGESTELLTERECHNUNGMEMI              // Rechnung für eine Mehrmenge vom VNB an den Lieferanten (non-standard)
+	MSBRECHNUNG                                 // MSBRECHNUNG ist die Rechnung für den Messstellenbetrieb
+	// not standard yet: https://github.com/Hochfrequenz/BO4E-python/issues/358
+	TURNUSRECHNUNG // TURNUSRECHNUNG ist eine turnusmäßige Rechnung
+	// not standard anymore: https://github.com/Hochfrequenz/BO4E-python/issues/357
 )
