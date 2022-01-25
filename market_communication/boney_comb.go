@@ -11,6 +11,7 @@ import (
 type BOneyComb struct {
 	Stammdaten        bo.BusinessObjectSlice `json:"stammdaten" validate:"required"`        // Stammdaten is an array of business objects
 	Transaktionsdaten map[string]string      `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
+	Links             map[string][]string    `json:"links"`                                 // Links describes relations between different BusinessObjects in Stammdaten
 }
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
