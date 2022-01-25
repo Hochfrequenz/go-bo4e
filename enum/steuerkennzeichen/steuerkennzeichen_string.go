@@ -8,18 +8,19 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[UST0-1]
-	_ = x[UST19-2]
-	_ = x[UST7-3]
-	_ = x[VST0-4]
-	_ = x[VST19-5]
-	_ = x[VST7-6]
-	_ = x[RCV-7]
+	_ = x[UST_0-1]
+	_ = x[UST_16-2]
+	_ = x[UST_19-3]
+	_ = x[UST_7-4]
+	_ = x[VST_0-5]
+	_ = x[VST_19-6]
+	_ = x[VST_7-7]
+	_ = x[RCV-8]
 }
 
-const _Steuerkennzeichen_name = "UST0UST19UST7VST0VST19VST7RCV"
+const _Steuerkennzeichen_name = "UST_0UST_16UST_19UST_7VST_0VST_19VST_7RCV"
 
-var _Steuerkennzeichen_index = [...]uint8{0, 4, 9, 13, 17, 22, 26, 29}
+var _Steuerkennzeichen_index = [...]uint8{0, 5, 11, 17, 22, 27, 33, 38, 41}
 
 func (i Steuerkennzeichen) String() string {
 	i -= 1
