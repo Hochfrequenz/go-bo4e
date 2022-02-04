@@ -60,9 +60,6 @@ func (s *Suite) Test_Failed_ReklamationValidation() {
 				Zeitraum:     nil,
 			},
 		},
-		"required_without_all": {
-			bo.Reklamation{},
-		},
 	}
 	VerfiyFailedValidations(s, validate, invalidReklamationMap)
 }
