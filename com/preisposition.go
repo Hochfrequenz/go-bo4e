@@ -27,5 +27,5 @@ type Preisposition struct {
 	Zonungsgroesse           *bemessungsgroesse.Bemessungsgroesse `json:"zonungsgroesse,omitempty" validate:"required"`           // Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden
 	FreimengeBlindarbeit     decimal.NullDecimal                  `json:"freimengeBlindarbeit,omitempty" validate:"required"`     // Der Anteil der Menge der Blindarbeit in Prozent von der Wirkarbeit, für die keine Abrechnung erfolgt
 	FreimengeLeistungsfaktor decimal.NullDecimal                  `json:"freimengeLeistungsfaktor,omitempty" validate:"required"` // Der cos phi (Verhältnis Wirkleistung/Scheinleistung) aus dem die Freimenge für die Blindarbeit berechnet wird als tan phi (Verhältnis Blindleistung/Wirkleistung)
-	Preisstaffeln            []Preisstaffel                       `json:"preisstaffel" validate:"required"`                       // Preisstaffeln, die zu dieser Preisposition gehören
+	Preisstaffeln            []Preisstaffel                       `json:"preisstaffeln" validate:"required"`                       // Preisstaffeln, die zu dieser Preisposition gehören
 }
