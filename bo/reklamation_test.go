@@ -27,10 +27,10 @@ func (s *Suite) Test_Reklamation_Deserialization() {
 		LokationsId:  "12345678910",
 		LokationsTyp: lokationstyp.MALO,
 		ObisKennzahl: obis("1-0:1.8.0"),
-		Zeitraum: com.Zeitraum{
+		ZeitraumMesswertanfrage: com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 		}.AsPointer(),
-		Grund: reklamationsgrund.WERTE_FEHLEN,
+		Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 	}
 	serializedReklamation, err := json.Marshal(reklamation)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -53,11 +53,11 @@ func (s *Suite) Test_Failed_ReklamationValidation() {
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				LokationsId:  "",
-				LokationsTyp: 0,
-				Grund:        0,
-				ObisKennzahl: nil,
-				Zeitraum:     nil,
+				LokationsId:             "",
+				LokationsTyp:            0,
+				Reklamationsgrund:       0,
+				ObisKennzahl:            nil,
+				ZeitraumMesswertanfrage: nil,
 			},
 		},
 	}
@@ -78,11 +78,11 @@ func (s *Suite) Test_Successful_Reklamation_Validation() {
 			LokationsId:  "12345678910",
 			LokationsTyp: lokationstyp.MALO,
 			ObisKennzahl: obis("1-0:1.8.0"),
-			Zeitraum: com.Zeitraum{
+			ZeitraumMesswertanfrage: com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 			}.AsPointer(),
-			Grund: reklamationsgrund.WERTE_FEHLEN,
+			Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validPricat)
