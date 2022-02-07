@@ -3,18 +3,13 @@ package com
 import (
 	"time"
 
-	"github.com/hochfrequenz/go-bo4e/enum/tarif"
-
 	"github.com/hochfrequenz/go-bo4e/enum/ersatzwertbildungsverfahren"
-
-	"github.com/hochfrequenz/go-bo4e/enum/korrekturgrund"
-
-	"github.com/hochfrequenz/go-bo4e/enum/grundlageenergiemenge"
-
-	"github.com/hochfrequenz/go-bo4e/enum/plausibilisierungshinweis"
-
 	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
+	"github.com/hochfrequenz/go-bo4e/enum/grundlageenergiemenge"
+	"github.com/hochfrequenz/go-bo4e/enum/korrekturgrund"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/enum/plausibilisierungshinweis"
+	"github.com/hochfrequenz/go-bo4e/enum/tarif"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
 )
