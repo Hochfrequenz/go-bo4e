@@ -30,7 +30,7 @@ func (s *Suite) Test_Reklamation_Deserialization() {
 		Zeitraum: com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 		}.AsPointer(),
-		Grund: reklamationsgrund.FEHLT,
+		Grund: reklamationsgrund.WERTE_FEHLEN,
 	}
 	serializedReklamation, err := json.Marshal(reklamation)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -82,7 +82,7 @@ func (s *Suite) Test_Successful_Reklamation_Validation() {
 				Startzeitpunkt: time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 			}.AsPointer(),
-			Grund: reklamationsgrund.FEHLT,
+			Grund: reklamationsgrund.WERTE_FEHLEN,
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validPricat)

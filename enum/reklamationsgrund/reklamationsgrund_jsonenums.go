@@ -9,15 +9,15 @@ import (
 
 var (
 	_ReklamationsgrundNameToValue = map[string]Reklamationsgrund{
-		"FEHLT":      FEHLT,
-		"ZU_NIEDRIG": ZU_NIEDRIG,
-		"ZU_HOCH":    ZU_HOCH,
+		"WERTE_ZU_HOCH":    WERTE_ZU_HOCH,
+		"WERTE_ZU_NIEDRIG": WERTE_ZU_NIEDRIG,
+		"WERTE_FEHLEN":     WERTE_FEHLEN,
 	}
 
 	_ReklamationsgrundValueToName = map[Reklamationsgrund]string{
-		FEHLT:      "FEHLT",
-		ZU_NIEDRIG: "ZU_NIEDRIG",
-		ZU_HOCH:    "ZU_HOCH",
+		WERTE_ZU_HOCH:    "WERTE_ZU_HOCH",
+		WERTE_ZU_NIEDRIG: "WERTE_ZU_NIEDRIG",
+		WERTE_FEHLEN:     "WERTE_FEHLEN",
 	}
 )
 
@@ -25,9 +25,9 @@ func init() {
 	var v Reklamationsgrund
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_ReklamationsgrundNameToValue = map[string]Reklamationsgrund{
-			interface{}(FEHLT).(fmt.Stringer).String():      FEHLT,
-			interface{}(ZU_NIEDRIG).(fmt.Stringer).String(): ZU_NIEDRIG,
-			interface{}(ZU_HOCH).(fmt.Stringer).String():    ZU_HOCH,
+			interface{}(WERTE_ZU_HOCH).(fmt.Stringer).String():    WERTE_ZU_HOCH,
+			interface{}(WERTE_ZU_NIEDRIG).(fmt.Stringer).String(): WERTE_ZU_NIEDRIG,
+			interface{}(WERTE_FEHLEN).(fmt.Stringer).String():     WERTE_FEHLEN,
 		}
 	}
 }

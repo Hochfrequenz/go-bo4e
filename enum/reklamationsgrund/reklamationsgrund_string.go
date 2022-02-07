@@ -8,14 +8,14 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[FEHLT-1]
-	_ = x[ZU_NIEDRIG-2]
-	_ = x[ZU_HOCH-3]
+	_ = x[WERTE_ZU_HOCH-1]
+	_ = x[WERTE_ZU_NIEDRIG-2]
+	_ = x[WERTE_FEHLEN-3]
 }
 
-const _Reklamationsgrund_name = "FEHLTZU_NIEDRIGZU_HOCH"
+const _Reklamationsgrund_name = "WERTE_ZU_HOCHWERTE_ZU_NIEDRIGWERTE_FEHLEN"
 
-var _Reklamationsgrund_index = [...]uint8{0, 5, 15, 22}
+var _Reklamationsgrund_index = [...]uint8{0, 13, 29, 41}
 
 func (i Reklamationsgrund) String() string {
 	i -= 1
