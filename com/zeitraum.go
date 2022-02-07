@@ -13,3 +13,7 @@ type Zeitraum struct {
 	Startzeitpunkt time.Time               `json:"startzeitpunkt,omitempty" validate:"required_without_all=Einheit Dauer" example:"2018-01-28T10:15:00+01"`                          // Startzeitpunkt is the inclusive begin
 	Endzeitpunkt   time.Time               `json:"endzeitpunkt,omitempty" validate:"required_with=Startzeitpunkt,omitempty,gtfield=Startzeitpunkt" example:"2018-01-28T10:30:00+01"` // Endzeitpunkt is the exclusive end
 }
+
+func (zeitraum Zeitraum) AsPointer() *Zeitraum {
+	return &zeitraum
+}

@@ -22,7 +22,7 @@ import (
 	"time"
 )
 
-// Test_Messlokation_Deserialization tests serialization and deserialization of Messlokation
+// Test_Preisblatt_Deserialization tests serialization and deserialization of Preisblatt
 func (s *Suite) Test_Preisblatt_Deserialization() {
 	artikel := func(i bdewartikelnummer.BDEWArtikelnummer) *bdewartikelnummer.BDEWArtikelnummer { return &i }
 	var pricat = bo.Preisblatt{

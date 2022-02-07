@@ -25,6 +25,7 @@ const (
 	PREISBLATTMESSUNG                 // PREISBLATTMESSUNG is a PREISBLATT for metering
 	PREISBLATTUMLAGEN                 // PREISBLATTUMLAGEN is a PREISBLATT for allocations
 	RECHNUNG                          // RECHNUNG is a Invoice
+	REKLAMATION                       // REKLAMATION is the complaint, that an ENERGIEMENGE is missing or unplausible
 	TARIFINFO                         // TARIFINFO Are information about tariffs
 	TARIFPREISBLATT                   // TARIFPREISBLATT is a PREISBLATT about Tariffs
 	VERTRAG                           // VERTRAG is contract

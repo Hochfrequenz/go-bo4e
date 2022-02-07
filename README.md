@@ -24,6 +24,7 @@
 - BO Messlokation
 - BO Preisblatt
 - BO Rechnung
+- BO Reklamation (not official BO4E Standard yet)
 - BO Vertrag
 - BO Zaehler
 
@@ -83,20 +84,26 @@ func main() {
 
 ## Caveats
 
-When serializing decimals (e.g. `Zaehlwerk.Wandlerfaktor`) you'll notice that the decimals are by default serialized as strings
+When serializing decimals (e.g. `Zaehlwerk.Wandlerfaktor`) you'll notice that the decimals are by default serialized as
+strings
 
 ```json
-{ "wandlerfaktor": "0.8" }
+{
+  "wandlerfaktor": "0.8"
+}
 ```
 
 instead of a number like
 
 ```json
-{ "wandlerfaktor": 0.8 }
+{
+  "wandlerfaktor": 0.8
+}
 ```
 
-This is the default behaviour defined in the [decimal package](https://github.com/shopspring/decimal/blob/fa3b22f4d484d626ee81919285cf3d22ad3a4000/decimal.go#L47).
-You can change the behaviour by setting
+This is the default behaviour defined in
+the [decimal package](https://github.com/shopspring/decimal/blob/fa3b22f4d484d626ee81919285cf3d22ad3a4000/decimal.go#L47)
+. You can change the behaviour by setting
 
 ```go
 decimal.MarshalJSONWithoutQuotes = true
@@ -107,28 +114,30 @@ as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issu
 ## Version Notes
 
 ### Handling Unknown Fields in (Un)Marshaling since v0.0.36
-If you're unmarshaling a Business Object that contains fields which are not defined in the BO structs, they'll be deserialized into the `Geschaeftsobjekt.ExtensionData` map.
-This behaviour is achieved by implementing a custom `UnmarshalJSON` func.
-The `ExtensionData`, if not empty, will also be marshalled on root level by default.
+
+If you're unmarshaling a Business Object that contains fields which are not defined in the BO structs, they'll be
+deserialized into the `Geschaeftsobjekt.ExtensionData` map. This behaviour is achieved by implementing a
+custom `UnmarshalJSON` func. The `ExtensionData`, if not empty, will also be marshalled on root level by default.
 
 ⚠ This feature is experimental and for now only works for the **Marktlokation**.
 
 ### General Default Value Marshalling Behaviour since v0.0.22
 
-Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents.
-Prior to v0.0.22 default values of required fields serialized as f.e. empty string, `null` or empty slice.
-For enums this behaviour had already been introduced in v0.0.19 (see below).
-This is a step towards decoupling of serialization and validation.
+Since v0.0.22 default values are no longer marshalled/included in serialized Business Objects or COMponents. Prior to
+v0.0.22 default values of required fields serialized as f.e. empty string, `null` or empty slice. For enums this
+behaviour had already been introduced in v0.0.19 (see below). This is a step towards decoupling of serialization and
+validation.
 
 ### Default Enum Marshalling Behaviour since v0.0.19
 
-Since version v0.0.19 default enum values are no longer serialized/marshalled.
-Prior to v0.0.19 fields with an enum type that are required but were uninitialized had been serialized as `NameOfEnum(0)`.
-This change is a step towards decoupling of serialization and validation.
+Since version v0.0.19 default enum values are no longer serialized/marshalled. Prior to v0.0.19 fields with an enum type
+that are required but were uninitialized had been serialized as `NameOfEnum(0)`. This change is a step towards
+decoupling of serialization and validation.
 
 ### Breaking Changes introduced in v0.0.13 and v0.0.14:
 
-- The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12) to be consistent with the official documentation
+- The struct that is embedded in all BusinessObjects is now called `Geschaeftsobjekt` (was `BusinessObject` <=v0.0.12)to
+  be consistent with the official documentation
 - `BusinessObject` is now the name of the interface that all structs with embedded `Geschaeftsobjekt` implement
 - Enums are consistently written in upper case ([PR 32](https://github.com/Hochfrequenz/go-bo4e/pull/32))
 
@@ -148,9 +157,11 @@ repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-m
 
 ### Adding Enums
 
-When adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), [jsonenums](https://github.com/campoy/jsonenums)) needed to go-generate additional files, which contain an implementation of the `fmt.Stringer` and `json.Marshaler` interface for the respective enum.
-Since they are just needed for the code generation, but not a real dependency we don't want them in the go.mod file.
-One way to install them is outside of your directory with:
+When adding Enums there are two packages ([stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer)
+, [jsonenums](https://github.com/campoy/jsonenums)) needed to go-generate additional files, which contain an
+implementation of the `fmt.Stringer` and `json.Marshaler` interface for the respective enum. Since they are just needed
+for the code generation, but not a real dependency we don't want them in the go.mod file. One way to install them is
+outside of your directory with:
 
 ```
 go install github.com/campoy/jsonenums@latest

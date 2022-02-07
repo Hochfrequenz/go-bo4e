@@ -109,6 +109,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo.(*Rechnung).VersionStruktur = defaultVersionStruktur
 		bo.(*Rechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
 		bo.(*Rechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
+	case botyp.REKLAMATION:
+		bo = new(Reklamation)
+		bo.(*Reklamation).BoTyp = typ
+		bo.(*Reklamation).VersionStruktur = defaultVersionStruktur
 	case botyp.VERTRAG:
 		bo = new(Vertrag)
 		bo.(*Vertrag).BoTyp = typ
