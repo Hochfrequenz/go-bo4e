@@ -6,10 +6,10 @@ package grundlageenergiemenge
 type GrundlageEnergiemenge int
 
 const (
-	// ZAEHLERSTAND_ZUM_BEGIN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT
+	// ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT
 	// corresponds to edi@energy qualifier Z36 "Zählerstand zum Beginn der angegebenen Energiemenge
 	// vorhanden und kommuniziert"
-	ZAEHLERSTAND_ZUM_BEGIN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT GrundlageEnergiemenge = iota + 1
+	ZAEHLERSTAND_ZUM_BEGINN_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT GrundlageEnergiemenge = iota + 1
 
 	// ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT
 	// corresponds to edi@energy qualifier Z37 "Zählerstand zum Ende der angegebenen Energiemenge

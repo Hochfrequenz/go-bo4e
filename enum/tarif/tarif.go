@@ -1,6 +1,6 @@
 package tarif
 
-// Tarif describes the tarif
+// Tarif describes the tariff
 //go:generate stringer --type Tarif
 //go:generate jsonenums --type Tarif
 type Tarif int
