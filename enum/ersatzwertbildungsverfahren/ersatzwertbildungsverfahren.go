@@ -6,41 +6,42 @@ package ersatzwertbildungsverfahren
 type Ersatzwertbildungsverfahren int
 
 const (
-	// Z88_VERGLEICHSMESSUNGGEEICHT is "Vergleichsmessung (geeicht)"
-	Z88_VERGLEICHSMESSUNGGEEICHT Ersatzwertbildungsverfahren = iota + 1
+	// VERGLEICHSMESSUNG_GEEICHT corresponds to edi@energy qualifier Z88 "Vergleichsmessung (geeicht)"
+	VERGLEICHSMESSUNG_GEEICHT Ersatzwertbildungsverfahren = iota + 1
 
-	// Z89_VERGLEICHSMESSUNGNICHTGEEICHT is "Vergleichmessung (nicht geeicht)
-	Z89_VERGLEICHSMESSUNGNICHTGEEICHT
+	// VERGLEICHSMESSUNG_NICHT_GEEICHT corresponds to edi@energy qualifier Z89 "Vergleichmessung (nicht geeicht)
+	VERGLEICHSMESSUNG_NICHT_GEEICHT
 
-	// Z90_MESSWERTNACHBILDUNGAUSGEEICHTENWERTEN is
-	// "Messwertnachbildung aus geeichten Werten"
-	Z90_MESSWERTNACHBILDUNGAUSGEEICHTENWERTEN
+	// MESSWERTNACHBILDUNG_AUS_GEEICHTE_NWERTEN corresponds to edi@energy qualifier
+	// Z90 "Messwertnachbildung aus geeichten Werten"
+	MESSWERTNACHBILDUNG_AUS_GEEICHTE_NWERTEN
 
-	// Z91_MESSWERTNACHBILDUNGAUSNICHTGEEICHTENWERTEN is
-	// "Messwertnachbildung aus nicht geeichten Werten"
-	Z91_MESSWERTNACHBILDUNGAUSNICHTGEEICHTENWERTEN
+	// MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN corresponds to edi@energy qualifier
+	// Z91 "Messwertnachbildung aus nicht geeichten Werten"
+	MESSWERTNACHBILDUNG_AUS_NICHT_GEEICHTEN_WERTEN
 
-	// Z92_INTERPOLATION is "Interpolation"
-	Z92_INTERPOLATION
+	// INTERPOLATION corresponds to edi@energy qualifier Z92 "Interpolation"
+	INTERPOLATION
 
-	// Z93_HALTEWERT is "Haltewert"
-	Z93_HALTEWERT
+	// HALTEWERT corresponds to edi@energy qualifier Z93 "Haltewert"
+	HALTEWERT
 
-	// Z94_BILANZIERUNGNETZABSCHNITT is "Bilanzierungsabschnitt"
-	Z94_BILANZIERUNGNETZABSCHNITT
+	// BILANZIERUNGNETZABSCHNITT corresponds to edi@energy qualifier Z94 "Bilanzierungsabschnitt"
+	BILANZIERUNGNETZABSCHNITT
 
-	// Z95_HISTORISCHEMESSWERTE is "Historische Messwerte"
-	Z95_HISTORISCHEMESSWERTE
+	// HISTORISCHE_MESSWERTE corresponds to edi@energy qualifier Z95 "Historische Messwerte"
+	HISTORISCHE_MESSWERTE
 
-	// ZQ8_AUFTEILUNG is "Aufteilung"
-	ZQ8_AUFTEILUNG
+	// AUFTEILUNG corresponds to edi@energy qualifier ZQ8 "Aufteilung"
+	AUFTEILUNG
 
-	// ZQ9_VERWENDUNGVONWERTENDESSTOERMENGENZAEHLWERKS is "Verwendung von Werten des Störmengenzählwerks"
-	ZQ9_VERWENDUNGVONWERTENDESSTOERMENGENZAEHLWERKS
+	// VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS corresponds to edi@energy qualifier
+	// ZQ9 "Verwendung von Werten des Störmengenzählwerks"
+	VERWENDUNG_VON_WERTEN_DES_STOERMENGENZAEHLWERKS
 
-	// ZR0_UMGANGSUNDKORREKTURMENGEN is "Umgangs- und Korrekturmengen"
-	ZR0_UMGANGSUNDKORREKTURMENGEN
+	// UMGANGS_UND_KORREKTURMENGEN corresponds to edi@energy qualifier ZR0 "Umgangs- und Korrekturmengen"
+	UMGANGS_UND_KORREKTURMENGEN
 
-	// ZJ2_STATISCHEMETHODE is "Statische Methode"
-	ZJ2_STATISCHEMETHODE
+	// STATISCHE_METHODE corresponds to edi@energy qualifier ZJ2 "Statische Methode"
+	STATISCHE_METHODE
 )

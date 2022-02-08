@@ -6,93 +6,99 @@ package korrekturgrund
 type Korrekturgrund int
 
 const (
-	// Z74_KEINZUGANG is "kein Zugang"
-	Z74_KEINZUGANG Korrekturgrund = iota + 1
+	// KEIN_ZUGANG corresponds to edi@energy qualifier Z74 "kein Zugang"
+	KEIN_ZUGANG Korrekturgrund = iota + 1
 
-	// Z75_KOMMUNIKATIONSSTOERUNG is "Kommunikationsstörung"
-	Z75_KOMMUNIKATIONSSTOERUNG
+	// KOMMUNIKATIONSSTOERUNG corresponds to edi@energy qualifier Z75 "Kommunikationsstörung"
+	KOMMUNIKATIONSSTOERUNG
 
-	// Z76_NETZAUSFALL is "Netzausfall"
-	Z76_NETZAUSFALL
+	// NETZAUSFALL corresponds to edi@energy qualifier Z76 "Netzausfall"
+	NETZAUSFALL
 
-	//Z77_SPANNUNGSAUSFALL is "Spannungsausfall"
-	Z77_SPANNUNGSAUSFALL
+	// SPANNUNGSAUSFALL corresponds to edi@energy qualifier Z77 "Spannungsausfall"
+	SPANNUNGSAUSFALL
 
-	// Z78_GERAETEWECHSEL is "Gerätewechsel"
-	Z78_GERAETEWECHSEL
+	// GERAETEWECHSEL corresponds to edi@energy qualifier Z78 "Gerätewechsel"
+	GERAETEWECHSEL
 
-	//Z79_KALIBRIERUNG is "Kalibrierung"
-	Z79_KALIBRIERUNG
+	// KALIBRIERUNG corresponds to edi@energy qualifier Z79 "Kalibrierung"
+	KALIBRIERUNG
 
-	//Z80_GERAETARBEITETAUSSERHALBDERBETRIEBSBEDINGUNG is "Gerät arbeitet außerhalb der Betriebsbedingungen"
-	Z80_GERAETARBEITETAUSSERHALBDERBETRIEBSBEDINGUNG
+	// GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNG corresponds to edi@energy qualifier
+	// Z80 "Gerät arbeitet außerhalb der Betriebsbedingungen"
+	GERAET_ARBEITET_AUSSERHALB_DER_BETRIEBSBEDINGUNG
 
-	// Z81_MESSEINRICHTUNGGESTOERTDEFEKT is "Messeinrichtung gestört/defekt"
-	Z81_MESSEINRICHTUNGGESTOERTDEFEKT
+	// MESSEINRICHTUNG_GESTOERT_DEFEKT corresponds to edi@energy qualifier Z81 "Messeinrichtung gestört/defekt"
+	MESSEINRICHTUNG_GESTOERT_DEFEKT
 
-	// Z82_UNSICHERHEITMESSUNG is "Unsicherheit Messung"
-	Z82_UNSICHERHEITMESSUNG
+	// UNSICHERHEIT_MESSUNG corresponds to edi@energy qualifier Z82 "Unsicherheit Messung"
+	UNSICHERHEIT_MESSUNG
 
-	// Z98_BERUECKSICHTIGUNGSTOERMENGENZAEHLWERK is "Berücksichtigung Störmengenzählwerk"
-	Z98_BERUECKSICHTIGUNGSTOERMENGENZAEHLWERK
+	// BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK corresponds to edi@energy qualifier
+	// Z98 "Berücksichtigung Störmengenzählwerk"
+	BERUECKSICHTIGUNG_STOERMENGENZAEHLWERK
 
-	// Z99_MENGENUMWERTUNGUNVOLLSTAENDIG is "Mengenumwertung unvollständig"
-	Z99_MENGENUMWERTUNGUNVOLLSTAENDIG
+	// MENGENUMWERTUNG_UNVOLLSTAENDIG corresponds to edi@energy qualifier Z99 "Mengenumwertung unvollständig"
+	MENGENUMWERTUNG_UNVOLLSTAENDIG
 
-	//ZA0_UHRZEITGESTELLTSYNCHRONISATION is "Uhrzeit gestellt / Synchronisation"
-	ZA0_UHRZEITGESTELLTSYNCHRONISATION
+	// UHRZEITGESTELLT_SYNCHRONISATION corresponds to edi@energy qualifier ZA0 "Uhrzeit gestellt / Synchronisation"
+	UHRZEITGESTELLT_SYNCHRONISATION
 
-	// ZA1_MESSWERTUNPLAUSIBEL is "Messwert unplausibel"
-	ZA1_MESSWERTUNPLAUSIBEL
+	// MESSWERT_UNPLAUSIBEL corresponds to edi@energy qualifier ZA1 "Messwert unplausibel"
+	MESSWERT_UNPLAUSIBEL
 
-	// ZA3_FALSCHERWANDLERFAKTOR is "Falscher Wandlerfaktor"
-	ZA3_FALSCHERWANDLERFAKTOR
+	// FALSCHER_WANDLERFAKTOR corresponds to edi@energy qualifier ZA3 "Falscher Wandlerfaktor"
+	FALSCHER_WANDLERFAKTOR
 
-	// ZA4_FEHLERHAFTEABLESUNG is "Fehlerhafte Ablesung"
-	ZA4_FEHLERHAFTEABLESUNG
+	// FEHLERHAFTE_ABLESUNG corresponds to edi@energy qualifier ZA4 "Fehlerhafte Ablesung"
+	FEHLERHAFTE_ABLESUNG
 
-	// ZA5_AENDERUNGDERBERECHNUNG is "Änderung der Berechnung"
-	ZA5_AENDERUNGDERBERECHNUNG
+	// AENDERUNG_DER_BERECHNUNG corresponds to edi@energy qualifier ZA5 "Änderung der Berechnung"
+	AENDERUNG_DER_BERECHNUNG
 
-	// ZA6_UMBAUDERMESSLOKATION is "Umbau der Messlokation"
-	ZA6_UMBAUDERMESSLOKATION
+	// UMBAU_DER_MESSLOKATION corresponds to edi@energy qualifier ZA6 "Umbau der Messlokation"
+	UMBAU_DER_MESSLOKATION
 
-	// ZA7_DATENBEARBEITUNGSFEHLER is "Datenbearbeitungsfehler"
-	ZA7_DATENBEARBEITUNGSFEHLER
+	// DATENBEARBEITUNGSFEHLER corresponds to edi@energy qualifier ZA7 "Datenbearbeitungsfehler"
+	DATENBEARBEITUNGSFEHLER
 
-	//ZA8_BRENNWERTKORREKTUR is "Brennwertkorrektur"
-	ZA8_BRENNWERTKORREKTUR
+	// BRENNWERTKORREKTUR corresponds to edi@energy qualifier ZA8 "Brennwertkorrektur"
+	BRENNWERTKORREKTUR
 
-	// ZA9_ZZAHLKORREKTUR is "Z-Zahl-Korrektur"
-	ZA9_ZZAHLKORREKTUR
+	// Z_ZAHL_KORREKTUR corresponds to edi@energy qualifier ZA9 "Z-Zahl-Korrektur"
+	Z_ZAHL_KORREKTUR
 
-	// ZB0_STOERUNGDEFEKTMESSEINRICHTUNG is "Störung / Defekt Messeinrichtung"
-	ZB0_STOERUNGDEFEKTMESSEINRICHTUNG
+	// STOERUNG_DEFEKT_MESSEINRICHTUNG corresponds to edi@energy qualifier ZB0 "Störung / Defekt Messeinrichtung"
+	STOERUNG_DEFEKT_MESSEINRICHTUNG
 
-	// ZB9_AENDERUNGTARIFSCHALTZEITEN is "Änderung Tarifschaltzeiten"
-	ZB9_AENDERUNGTARIFSCHALTZEITEN
+	// AENDERUNG_TARIFSCHALTZEITEN corresponds to edi@energy qualifier ZB9 "Änderung Tarifschaltzeiten"
+	AENDERUNG_TARIFSCHALTZEITEN
 
-	// ZC2_TARIFSCHALTGERAETDEFEKT is "Tarifschaltgerät defekt"
-	ZC2_TARIFSCHALTGERAETDEFEKT
+	// TARIFSCHALTGERAET_DEFEKT corresponds to edi@energy qualifier ZC2 "Tarifschaltgerät defekt"
+	TARIFSCHALTGERAET_DEFEKT
 
-	// ZC4_IMPULSWERTIGKEITNICHTAUSREICHEND is "Impulswertigkeit nicht ausreichend"
-	ZC4_IMPULSWERTIGKEITNICHTAUSREICHEND
+	// IMPULSWERTIGKEIT_NICHT_AUSREICHEND corresponds to edi@energy qualifier ZC4 "Impulswertigkeit nicht ausreichend"
+	IMPULSWERTIGKEIT_NICHT_AUSREICHEND
 
-	//ZJ8_ENERGIEMENGEINUNGEMESSENEMZEITINTERVALL is "Energiemenge in ungemessenem Zeitintervall"
-	ZJ8_ENERGIEMENGEINUNGEMESSENEMZEITINTERVALL
+	// ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL corresponds to edi@energy qualifier
+	// ZJ8 "Energiemenge in ungemessenem Zeitintervall"
+	ENERGIEMENGE_IN_UNGEMESSENEM_ZEITINTERVALL
 
-	// ZJ9_ENERGIEAUSDEMUNGEPAIRTENZEITINTERVALL is "Energie aus dem ungepairten Zeitintervall"
-	ZJ9_ENERGIEAUSDEMUNGEPAIRTENZEITINTERVALL
+	// ENERGIE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL corresponds to edi@energy qualifier
+	// ZJ9 "Energie aus dem ungepairten Zeitintervall"
+	ENERGIE_AUS_DEM_UNGEPAIRTEN_ZEITINTERVALL
 
-	// ZR1_WARTUNGSARBEITENANGEEICHTEMMESSGERAET is "Wartungsarbeiten an geeichtem Messgerät"
-	ZR1_WARTUNGSARBEITENANGEEICHTEMMESSGERAET
+	// WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET corresponds to edi@energy qualifier
+	// ZR1 "Wartungsarbeiten an geeichtem Messgerät"
+	WARTUNGSARBEITEN_AN_GEEICHTEM_MESSGERAET
 
-	// ZR2_GESTOERTEWERTE is "Gestörte Werte"
-	ZR2_GESTOERTEWERTE
+	// GESTOERTE_WERTE corresponds to edi@energy qualifier ZR2 "Gestörte Werte"
+	GESTOERTE_WERTE
 
-	// ZR3_WARTUNGSARBEITENANEICHRECHTSKONFORMENMESSGERAETEN is "Wartungsarbeiten an eichrechtskonformen Messgeräten"
-	ZR3_WARTUNGSARBEITENANEICHRECHTSKONFORMENMESSGERAETEN
+	// WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN corresponds to edi@energy qualifier
+	// ZR3 "Wartungsarbeiten an eichrechtskonformen Messgeräten"
+	WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN
 
-	// ZR4_KONSISTENZUNDSYNCHRONPRUEFUNG is "Konsistenz- und Synchronprüfung"
-	ZR4_KONSISTENZUNDSYNCHRONPRUEFUNG
+	// KONSISTENZ_UND_SYNCHRONPRUEFUNG corresponds to edi@energy qualifier ZR4 "Konsistenz- und Synchronprüfung"
+	KONSISTENZ_UND_SYNCHRONPRUEFUNG
 )

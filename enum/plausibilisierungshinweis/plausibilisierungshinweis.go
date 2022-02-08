@@ -6,24 +6,24 @@ package plausibilisierungshinweis
 type Plausibilisierungshinweis int
 
 const (
-	// Z83_KUNDENSELBSTABLESUNG ist Kundenselbstablesung
-	Z83_KUNDENSELBSTABLESUNG Plausibilisierungshinweis = iota + 1
+	// KUNDENSELBSTABLESUNG corresponds to edi@energy qualifier Z83 "Kundenselbstablesung"
+	KUNDENSELBSTABLESUNG Plausibilisierungshinweis = iota + 1
 
-	// Z84_LEERSTAND ist Leerstand
-	Z84_LEERSTAND
+	// LEERSTAND corresponds to edi@energy qualifier Z84 "Leerstand"
+	LEERSTAND
 
-	// Z85_REALERZAEHLERUEBERLAUFGEPRUEFT ist Realer Zaehlerüberlauf geprueft
-	Z85_REALERZAEHLERUEBERLAUFGEPRUEFT
+	// REALER_ZAEHLERUEBERLAUF_GEPRUEFT corresponds to edi@energy qualifier Z85 "Realer Zaehlerüberlauf geprueft"
+	REALER_ZAEHLERUEBERLAUF_GEPRUEFT
 
-	// Z86_PLAUSIBELWGKONTROLLABLESUNG ist Plausibel wg. Kontrollablesung
-	Z86_PLAUSIBELWGKONTROLLABLESUNG
+	// PLAUSIBEL_WG_KONTROLLABLESUNG corresponds to edi@energy qualifier Z86 "Plausibel wg. Kontrollablesung"
+	PLAUSIBEL_WG_KONTROLLABLESUNG
 
-	// Z87_PLAUSIBELWGKUNDENHINWEIS ist Plausibel wg. Kundenhinweis
-	Z87_PLAUSIBELWGKUNDENHINWEIS
+	// PLAUSIBEL_WG_KUNDENHINWEIS corresponds to edi@energy qualifier Z87 "Plausibel wg. Kundenhinweis"
+	PLAUSIBEL_WG_KUNDENHINWEIS
 
-	// ZC3_AUSTAUSCHDESERSATZWERTES ist Austausch des Ersatzwertes
-	ZC3_AUSTAUSCHDESERSATZWERTES
+	// AUSTAUSCH_DES_ERSATZWERTES corresponds to edi@energy qualifier ZC3 "Austausch des Ersatzwertes"
+	AUSTAUSCH_DES_ERSATZWERTES
 
-	// ZR5_RECHENWERT is "Rechenwert"
-	ZR5_RECHENWERT
+	// RECHENWERT corresponds to edi@energy qualifier ZR5 "Rechenwert"
+	RECHENWERT
 )

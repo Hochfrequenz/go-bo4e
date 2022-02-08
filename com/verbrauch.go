@@ -42,10 +42,10 @@ type Verbrauch struct {
 	Plausibilisierungshinweis *plausibilisierungshinweis.Plausibilisierungshinweis `json:"plausibilisierungshinweis,omitempty" example:"Z83_KUNDENSELBSTABLESUNG"`
 
 	// GrundlageEnergiemenge optionally describes hints to the foundation of a consumption
-	GrundlageEnergiemenge *grundlageenergiemenge.GrundlageEnergiemenge `json:"grundlageenergiemenge,omitempty" example:"Z36_ZAEHLERSTANDZUMBEGINDERANGEGEBENENENERGIEMENGEVORHANDENUNDKOMMUNIZIERT"`
+	GrundlageEnergiemenge *grundlageenergiemenge.GrundlageEnergiemenge `json:"grundlageenergiemenge,omitempty" example:"ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT"`
 
 	// Korrekturgrund optionally describes reasons on why a correction has to be made
-	Korrekturgrund *korrekturgrund.Korrekturgrund `json:"korrekturgrund,omitempty" example:"Z74_KEINZUGANG"`
+	Korrekturgrund *korrekturgrund.Korrekturgrund `json:"korrekturgrund,omitempty" example:"KEIN_ZUGANG"`
 
 	// ErsatzwertBildungsverfahren optionally describes the method used to generate replacement values
 	ErsatzwertBildungsverfahren *ersatzwertbildungsverfahren.Ersatzwertbildungsverfahren `json:"ersatzwertbildungsverfahren,omitempty" example:"Z88_VERGLEICHSMESSUNGGEEICHT"`
