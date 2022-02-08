@@ -3,13 +3,7 @@ package com
 import (
 	"time"
 
-	"github.com/hochfrequenz/go-bo4e/enum/ersatzwertbildungsverfahren"
-	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
-	"github.com/hochfrequenz/go-bo4e/enum/grundlageenergiemenge"
-	"github.com/hochfrequenz/go-bo4e/enum/korrekturgrund"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
-	"github.com/hochfrequenz/go-bo4e/enum/plausibilisierungshinweis"
-	"github.com/hochfrequenz/go-bo4e/enum/tarif"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
 )
@@ -35,21 +29,6 @@ type Verbrauch struct {
 	// Einheit is the unit (associated to the wert)
 	Einheit mengeneinheit.Mengeneinheit `json:"einheit,omitempty" validate:"required" example:"KWH"`
 
-	// Gasqualitaet optionally describes the gas quality in case of gas rearrangements
-	Gasqualitaet *gasqualitaet.Gasqualitaet `json:"gasqualitaet,omitempty" example:"H_GAS"`
-
-	// Plausibilisierungshinweis optionally describes the plausibility of a consumption
-	Plausibilisierungshinweis *plausibilisierungshinweis.Plausibilisierungshinweis `json:"plausibilisierungshinweis,omitempty" example:"Z83_KUNDENSELBSTABLESUNG"`
-
-	// GrundlageEnergiemenge optionally describes hints to the foundation of a consumption
-	GrundlageEnergiemenge *grundlageenergiemenge.GrundlageEnergiemenge `json:"grundlageenergiemenge,omitempty" example:"ZAEHLERSTAND_ZUM_ENDE_DER_ANGEGEBENEN_ENERGIEMENGE_VORHANDEN_UND_KOMMUNIZIERT"`
-
-	// Korrekturgrund optionally describes reasons on why a correction has to be made
-	Korrekturgrund *korrekturgrund.Korrekturgrund `json:"korrekturgrund,omitempty" example:"KEIN_ZUGANG"`
-
-	// ErsatzwertBildungsverfahren optionally describes the method used to generate replacement values
-	ErsatzwertBildungsverfahren *ersatzwertbildungsverfahren.Ersatzwertbildungsverfahren `json:"ersatzwertbildungsverfahren,omitempty" example:"Z88_VERGLEICHSMESSUNGGEEICHT"`
-
-	// Tarif optionally describes the tarif used, if there is any
-	Tarif *tarif.Tarif `json:"tarif,omitempty" example:"T1_TARIF1"`
+	// Statuszusatz optionally adds more contextual information to a Verbrauch
+	Statuszusatz *Statuszusatz `json:"statuszusatz,omitempty"`
 }
