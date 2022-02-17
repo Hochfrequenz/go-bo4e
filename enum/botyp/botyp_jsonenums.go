@@ -33,6 +33,7 @@ var (
 		"VERTRAG":                     VERTRAG,
 		"ZAEHLER":                     ZAEHLER,
 		"ZEITREIHE":                   ZEITREIHE,
+		"HANDELSUNSTIMMIGKEIT":        HANDELSUNSTIMMIGKEIT,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -60,6 +61,7 @@ var (
 		VERTRAG:                     "VERTRAG",
 		ZAEHLER:                     "ZAEHLER",
 		ZEITREIHE:                   "ZEITREIHE",
+		HANDELSUNSTIMMIGKEIT:        "HANDELSUNSTIMMIGKEIT",
 	}
 )
 
@@ -91,6 +93,7 @@ func init() {
 			interface{}(VERTRAG).(fmt.Stringer).String():                     VERTRAG,
 			interface{}(ZAEHLER).(fmt.Stringer).String():                     ZAEHLER,
 			interface{}(ZEITREIHE).(fmt.Stringer).String():                   ZEITREIHE,
+			interface{}(HANDELSUNSTIMMIGKEIT).(fmt.Stringer).String():        HANDELSUNSTIMMIGKEIT,
 		}
 	}
 }
