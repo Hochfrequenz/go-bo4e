@@ -27,6 +27,7 @@
 - BO Reklamation (not official BO4E Standard yet)
 - BO Vertrag
 - BO Zaehler
+- BO Handelsunstimmigkeit (not official BO4E Standard yet)
 
 so far.
 

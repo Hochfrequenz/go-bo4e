@@ -123,6 +123,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Zaehler)
 		bo.(*Zaehler).BoTyp = typ
 		bo.(*Zaehler).VersionStruktur = defaultVersionStruktur
+	case botyp.HANDELSUNSTIMMIGKEIT:
+		bo = new(Handelsunstimmigkeit)
+		bo.(*Handelsunstimmigkeit).BoTyp = typ
+		bo.(*Handelsunstimmigkeit).VersionStruktur = defaultVersionStruktur
 	default:
 		return nil
 	}
