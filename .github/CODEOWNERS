@@ -1,0 +1,5 @@
+# For a documentation on the CODEOWNERS file in general see:
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
+
+# enforce a review by the documentation team for all changes unless specified differently in a rule further below
+* @Hochfrequenz/go-review-team
