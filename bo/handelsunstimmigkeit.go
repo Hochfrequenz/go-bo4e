@@ -5,7 +5,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/handelsunstimmigkeitstyp"
 )
 
-// Handelsunstimmigkeit contains information about descrepancies in market communication.
+// Handelsunstimmigkeit contains information about discrepancies in market communication.
 type Handelsunstimmigkeit struct {
 	Geschaeftsobjekt
 
@@ -15,7 +15,7 @@ type Handelsunstimmigkeit struct {
 	// Typ specifies the type of discrepancy.
 	Typ handelsunstimmigkeitstyp.Handelsunstimmigkeitstyp `json:"typ,omitempty" validate:"required"`
 
-	// Begruendung contains the reason of descrepancy.
+	// Begruendung contains the reason of discrepancy.
 	Begruendung com.Handelsunstimmigkeitsbegruendung `json:"begruendung" validate:"required"`
 
 	// Betrag is the requested sum amount (optional).
