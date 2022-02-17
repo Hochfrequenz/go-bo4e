@@ -18,6 +18,7 @@
 - BO Bilanzierung (not official BO4E Standard yet)
 - BO Energiemenge
 - BO Geschaeftspartner
+- BO Handelsunstimmigkeit (not official BO4E Standard yet)
 - BO Lastgang
 - BO Marktlokation
 - BO Marktteilnehmer
@@ -27,7 +28,6 @@
 - BO Reklamation (not official BO4E Standard yet)
 - BO Vertrag
 - BO Zaehler
-- BO Handelsunstimmigkeit (not official BO4E Standard yet)
 
 so far.
 
