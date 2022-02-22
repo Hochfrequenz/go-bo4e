@@ -64,7 +64,6 @@ var bilanzierungJsonKeys = []string{
 	"marktlokationsId",
 }
 
-
 func (_ Bilanzierung) GetDefaultJsonTags() []string {
 	return bilanzierungJsonKeys
 }
