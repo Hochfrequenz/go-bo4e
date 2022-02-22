@@ -28,6 +28,8 @@ var validBilanzierung = bo.Bilanzierung{
 	Geschaeftsobjekt: bo.Geschaeftsobjekt{
 		BoTyp:           botyp.BILANZIERUNG,
 		VersionStruktur: "1.1",
+		ExterneReferenzen: nil,
+		ExtensionData:     map[string]interface{}{},
 	},
 	Lastprofile: []com.Lastprofil{{
 		Bezeichnung: "mein lieblingslastprofil",

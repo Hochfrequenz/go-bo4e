@@ -40,6 +40,31 @@ type Bilanzierung struct {
 	MarktlokationsId           string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 }
 
+// bilanzierungJsonKeys is a list of all keys in the standard bo4e json Bilanzierung.
+// It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
+var bilanzierungJsonKeys = []string{
+	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
+	// there has to be a better way than this.
+	"boTyp",
+	"versionStruktur",
+	"lastprofile",
+	"bilanzierungsbeginn",
+	"bilanzierungsende",
+	"bilanzkreis",
+	"jahresverbrauchsprognose",
+	"kundenwert",
+	"verbrauchsaufteilung",
+	"zeitreihentyp",
+	"aggregationsverantwortung",
+	"prognosegrundlage",
+	"detailsPrognosegrundlage",
+	"wahlrechtPrognosegrundlage",
+	"fallgruppenzuordnung",
+	"prioritaet",
+	"marktlokationsId",
+}
+
+
 func (_ Bilanzierung) GetDefaultJsonTags() []string {
 	return bilanzierungJsonKeys
 }
@@ -99,29 +124,6 @@ func (bila Bilanzierung) MarshalJSON() ([]byte, error) {
 		result[key] = value
 	}
 	return json.Marshal(result)
-}
-
-// bilanzierungJsonKeys is a list of all keys in the standard bo4e json Bilanzierung.
-// It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
-var bilanzierungJsonKeys = []string{
-	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
-	// there has to be a better way than this.
-	"boTyp",
-	"versionStruktur",
-	"lastprofile",
-	"bilanzierungsbeginn",
-	"bilanzierungsende",
-	"bilanzkreis",
-	"jahresverbrauchsprognose",
-	"kundenwert",
-	"verbrauchsaufteilung",
-	"aggregationsverantwortung",
-	"prognosegrundlage",
-	"detailsPrognosegrundlage",
-	"wahlrechtPrognosegrundlage",
-	"fallgruppenzuordnung",
-	"prioritaet",
-	"marktlokationsId",
 }
 
 var eicRegex = regexp.MustCompile(`(?P<vergabestelle>\d{2})(?P<typ>A|T|V|W|X|Y|Z)([-A-Z\d]{12})(?P<pruefziffer>[A-Z0-9])`)

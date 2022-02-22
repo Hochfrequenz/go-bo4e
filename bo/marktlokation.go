@@ -93,7 +93,6 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 		result[key] = value
 	}
 	return json.Marshal(result)
-
 }
 
 func (_ Marktlokation) GetDefaultJsonTags() []string {
