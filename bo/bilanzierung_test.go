@@ -85,6 +85,10 @@ func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields(){
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004")) // a "normal" property/field of Bilanzierung
 	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
+	jsonStringBytes, serializationErr := json.Marshal(deserializedBilanzierung)
+	then.AssertThat(s.T(), serializationErr, is.Nil())
+	jsonString = string(jsonStringBytes)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "\"Lastprofil_Codeliste\""), is.True())
 }
 
 // Test_Failed_Bilanzierung_Validation verifies that the validators of a Bilanzierung BO work
