@@ -26,8 +26,10 @@ var aTrue = true
 var seventeen = 17
 var validBilanzierung = bo.Bilanzierung{
 	Geschaeftsobjekt: bo.Geschaeftsobjekt{
-		BoTyp:           botyp.BILANZIERUNG,
-		VersionStruktur: "1.1",
+		BoTyp:             botyp.BILANZIERUNG,
+		VersionStruktur:   "1.1",
+		ExterneReferenzen: nil,
+		ExtensionData:     map[string]interface{}{},
 	},
 	Lastprofile: []com.Lastprofil{{
 		Bezeichnung: "mein lieblingslastprofil",
@@ -74,6 +76,19 @@ func (s *Suite) Test_Bilanzierung_Deserialization() {
 	err = json.Unmarshal(serializedBilanzierung, &deserializedBilanzierung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedBilanzierung, is.EqualTo(validBilanzierung))
+}
+
+func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields() {
+	jsonString := `{"jahresverbrauchsprognose":{"wert":2345},"kundenwert":{"wert":38},"bilanzierungsbeginn":"2021-12-31T23:00:00+00:00","bilanzkreis":"THE0BFL002410004","prognosegrundlage":"PROFILE","detailsPrognosegrundlage":["SLP_SEP"],"boTyp":"BILANZIERUNG","versionStruktur":"1","Klassentyp":"Z12","Verfahren":"SYNTHETISCH","Profil":"D13","Lastprofil_Codeliste":"293","Temperaturmessstelle_Klassentyp":"Z99","Temperaturmessstelle_ID":"107290","Temperaturmessstelle_Anbieter":"ZT3","Temperaturmessstelle_Codeliste":"293"}`
+	var deserializedBilanzierung bo.Bilanzierung
+	err := json.Unmarshal([]byte(jsonString), &deserializedBilanzierung)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))              // a "normal" property/field of Bilanzierung
+	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
+	jsonStringBytes, serializationErr := json.Marshal(deserializedBilanzierung)
+	then.AssertThat(s.T(), serializationErr, is.Nil())
+	jsonString = string(jsonStringBytes)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "\"Lastprofil_Codeliste\""), is.True())
 }
 
 // Test_Failed_Bilanzierung_Validation verifies that the validators of a Bilanzierung BO work
