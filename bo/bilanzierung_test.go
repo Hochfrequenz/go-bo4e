@@ -76,6 +76,15 @@ func (s *Suite) Test_Bilanzierung_Deserialization() {
 	then.AssertThat(s.T(), deserializedBilanzierung, is.EqualTo(validBilanzierung))
 }
 
+func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields(){
+	jsonString := `{"jahresverbrauchsprognose":{"wert":2345},"kundenwert":{"wert":38},"bilanzierungsbeginn":"2021-12-31T23:00:00+00:00","bilanzkreis":"THE0BFL002410004","prognosegrundlage":"PROFILE","detailsPrognosegrundlage":["SLP_SEP"],"boTyp":"BILANZIERUNG","versionStruktur":"1","Klassentyp":"Z12","Verfahren":"SYNTHETISCH","Profil":"D13","Lastprofil_Codeliste":"293","Temperaturmessstelle_Klassentyp":"Z99","Temperaturmessstelle_ID":"107290","Temperaturmessstelle_Anbieter":"ZT3","Temperaturmessstelle_Codeliste":"293"}`
+	var deserializedBilanzierung bo.Bilanzierung
+	err := json.Unmarshal([]byte(jsonString), &deserializedBilanzierung)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004")) // a "normal" property/field of Bilanzierung
+	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
+}
+
 // Test_Failed_Bilanzierung_Validation verifies that the validators of a Bilanzierung BO work
 func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 	validate := validator.New()
