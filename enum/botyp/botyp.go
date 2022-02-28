@@ -32,4 +32,5 @@ const (
 	ZAEHLER                           // ZAEHLER is a power, gas, heat or water meter
 	ZEITREIHE                         // ZEITREIHE is data over time (e.g. consumption, prognosis etc.)
 	HANDELSUNSTIMMIGKEIT              // HANDELSUNSTIMMIGKEIT contains information about discrepancies in market communication.
+	AVIS                              // AVIS is a REMADV
 )
