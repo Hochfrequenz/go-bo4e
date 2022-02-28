@@ -2,12 +2,13 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
-	"strings"
 )
 
 // Test_Deserialization deserializes an address json
