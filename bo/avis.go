@@ -71,7 +71,8 @@ func AvisStructLevelValidationAbweichung(sl validator.StructLevel) {
 		if avisPosition.Abweichung.AbweichungsGrund == 0 && declineAvis {
 			sl.ReportError(avisPosition.Abweichung, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->AbgelehnteForderungRequired", "")
 			return
-		} else if avisPosition.Abweichung.AbweichungsGrund != 0 && !declineAvis {
+		}
+		if avisPosition.Abweichung.AbweichungsGrund != 0 && !declineAvis {
 			sl.ReportError(avisPosition.Abweichung, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->ZahlungsavisRequired", "")
 			return
 		}
