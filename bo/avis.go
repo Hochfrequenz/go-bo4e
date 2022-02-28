@@ -9,8 +9,8 @@ import (
 
 type Avis struct {
 	Geschaeftsobjekt
-	AvisNummer     string             `json:"avisNummer,omitempty" validate:"required"`       // Eine im Verwendungskontext eindeutige Nummer für das Avis.
-	AvisTyp        avistyp.AvisTyp    `json:"avisTyp,omitempty" validate:"required"`          // Gibt den Typ des Avis an.
+	AvisNummer     string             `json:"avisNummer,omitempty" validate:"required"`       // Eine im Verwendungskontext eindeutige Nummer für das Avis
+	AvisTyp        avistyp.AvisTyp    `json:"avisTyp,omitempty" validate:"required"`          // Gibt den Typ des Avis an
 	AvisPositionen []com.AvisPosition `json:"positionen,omitempty" validate:"required,min=1"` // Avispositionen
 	ZuZahlen       com.Betrag         `json:"zuZahlen,omitempty" validate:"required"`         // Summenbetrag
 }
