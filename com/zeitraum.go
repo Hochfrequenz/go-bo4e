@@ -14,6 +14,7 @@ type Zeitraum struct {
 	Endzeitpunkt   time.Time               `json:"endzeitpunkt,omitempty" validate:"required_with=Startzeitpunkt,omitempty,gtfield=Startzeitpunkt" example:"2018-01-28T10:30:00+01"` // Endzeitpunkt is the exclusive end
 }
 
+// AsPointer returns the given zeitraum as `*Zeitraum` pointer
 func (zeitraum Zeitraum) AsPointer() *Zeitraum {
 	return &zeitraum
 }
