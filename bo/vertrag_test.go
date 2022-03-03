@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -189,6 +190,11 @@ func (s *Suite) Test_Unmarshalling_of_Unknown_Fields() {
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedVertrag.ExtensionData, is.Not(is.Nil()))
 	then.AssertThat(s.T(), deserializedVertrag.ExtensionData["VertragskonditionenGeplanteTurnusablesungFormat"], is.EqualTo("104"))
+	// now marshal it again and assert that the extension data are still part of the produced json string
+	jsonBytes, err := json.Marshal(deserializedVertrag)
+	then.AssertThat(s.T(), err, is.Nil())
+	jsonString := string(jsonBytes)
+	then.AssertThat(s.T(), strings.Contains(jsonString, "VertragskonditionenGeplanteTurnusablesungFormat"), is.True())
 }
 
 func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
