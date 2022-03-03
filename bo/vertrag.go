@@ -41,7 +41,7 @@ var vertragJsonKeys = []string{
 	"versionStruktur",
 	"vertragsnummer",
 	"beschreibung",
-	"vertragsstatus",
+	"vertragstatus", // watch out: not "ss"
 	"vertragsart",
 	"sparte",
 	"vertragsbeginn",
