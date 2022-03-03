@@ -25,7 +25,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 			BoTyp:             botyp.VERTRAG,
 			VersionStruktur:   "2",
 			ExterneReferenzen: nil,
-			ExtensionData: map[string]interface{}{},
+			ExtensionData:     map[string]interface{}{},
 		},
 		Vertragsnummer: "",
 		Beschreibung:   "",
