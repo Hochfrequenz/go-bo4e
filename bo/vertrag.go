@@ -28,7 +28,6 @@ type Vertrag struct {
 	Vertragsteile       []com.Vertragsteil       `json:"vertragsteile,omitempty" validate:"required,min=1"`                 // Vertragsteile sind die Vertragsteile, die dazu verwendet werden, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
 }
 
-
 func (_ Vertrag) GetDefaultJsonTags() []string {
 	return vertragJsonKeys // this is needed for (un)marshaling of non-default/unknown json fields
 }
@@ -54,7 +53,6 @@ var vertragJsonKeys = []string{
 	"vertragskonditionen",
 	"vertragsteile",
 }
-
 
 // the vertragForUnmarshal type is derived from Vertrag but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
 type vertragForUnmarshal Vertrag

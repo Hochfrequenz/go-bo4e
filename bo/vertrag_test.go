@@ -181,7 +181,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 	VerfiySuccessfulValidations(s, validate, validVertrag)
 }
 
-func (s *Suite) Test_Unmarshalling_of_Unknown_Fields(){
+func (s *Suite) Test_Unmarshalling_of_Unknown_Fields() {
 	vertragJsonString := `{"vertragskonditionen":{"anzahlAbschlaege":12,"geplanteTurnusablesung":{"startdatum":"2022-02-21T23:00:00+00:00","enddatum":"2022-03-14T23:00:00+00:00"},"turnusablesungIntervall":12,"haushaltskunde":false,"netznutzungsvertrag":"LIEFERANTEN_NB","netznutzungszahler":"LIEFERANT","netznutzungsabrechnungsvariante":"ARBEITSPREIS_GRUNDPREIS"},"vertragsnummer":"098765432","vertragsart":"ENERGIELIEFERVERTRAG","vertragstatus":"IN_ARBEIT","sparte":"GAS","vertragsbeginn":"2022-01-14T23:00:00+00:00","vertragsende":"0001-01-01T00:00:00+00:00","vertragspartner2":{"name1":"Plankton","name2":"Sheldon-Justin","gewerbekennzeichnung":false,"partneradresse":{"postleitzahl":"12345","ort":"Entenhausen","strasse":"Am Geldspeicher.","hausnummer":"1","landescode":"DE","ortsteil":"Entenhausen"},"boTyp":"GESCHAEFTSPARTNER","versionStruktur":"1"},"vertragsteile":[{"vertragsteilbeginn":"2022-01-31T23:00:00+00:00","vertragsteilende":"0001-01-01T00:00:00+00:00","lokation":"ASDASDASD"}],"gemeinderabatt":0,"boTyp":"VERTRAG","versionStruktur":"1","VertragskonditionenGeplanteTurnusablesungFormat":"104"}`
 	var deserializedVertrag bo.Vertrag
 	err := json.Unmarshal([]byte(vertragJsonString), &deserializedVertrag)
