@@ -1,0 +1,58 @@
+{
+  "stammdaten": [
+    {
+      "lokationsId": "DE0123456789012345678901234567890",
+      "lokationsTyp": "MELO",
+      "energieverbrauch": [
+        {
+          "startdatum": "2020-12-31T23:00:00Z",
+          "enddatum": "2021-01-30T23:00:00Z",
+          "wertermittlungsverfahren": "MESSUNG",
+          "obiskennzahl": "1-1:1.9.0",
+          "wert": "326.53",
+          "einheit": "KWH"
+        }
+      ],
+      "boTyp": "ENERGIEMENGE",
+      "versionStruktur": "1.1"
+    },
+    {
+      "messlokationsId": "91612195748",
+      "sparte": "STROM",
+      "boTyp": "MESSLOKATION",
+      "versionStruktur": "1"
+    },
+    {
+      "rollencodenummer": "9900080000007",
+      "rollencodetyp": "BDEW",
+      "gewerbekennzeichnung": true,
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1",
+      "rolle": "absender"
+    },
+    {
+      "rollencodenummer": "9903111000003",
+      "rollencodetyp": "BDEW",
+      "gewerbekennzeichnung": true,
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1",
+      "rolle": "empfaenger"
+    }
+  ],
+  "links": {},
+  "transaktionsdaten": {
+    "dokumentendatum": "2022-03-06T23:00:00Z",
+    "erfassungszeitpunkt": "2022-03-06T23:00:00Z",
+    "datenaustauschreferenz": "EJEMPOW3DTST01",
+    "pruefidentifikator": "13019",
+    "absender": "bo4e://Marktteilnehmer/9900080000007",
+    "empfaenger": "bo4e://Marktteilnehmer/9903111000003",
+    "dokumentennummer": "EJEMGAS3DTST01",
+    "kategorie": "7",
+    "nachrichtenfunktion": "9",
+    "nachrichtendatum": "2022-03-03T14:27:00Z",
+    "nachrichtenReferenznummer": "EJEMPOW3DTST01",
+    "typ": "EM",
+    "datumsformat": "102"
+  }
+}

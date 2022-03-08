@@ -113,15 +113,6 @@ func (s *Suite) Test_Serialized_Empty_Energiemenge_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ENERGIEMENGE))
 }
 
-func (s *Suite) Test_Energiemenge_Deserialization() {
-	jsonString := `{"lokationsId":"DE0123456789012345678901234567890","lokationsTyp":"MELO","energieverbrauch":[{"startdatum":"2020-12-31T23:00:00Z","enddatum":"2021-01-30T23:00:00Z","wertermittlungsverfahren":"MESSUNG","obiskennzahl":"1-1:1.9.0","wert":"326.53","einheit":"KWH"}],"boTyp":"ENERGIEMENGE","versionStruktur":"1.1"}`
-	jsonBytes := []byte(jsonString)
-	var em bo.Bilanzierung
-	err := json.Unmarshal(jsonBytes, &em)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), em.BoTyp, is.EqualTo(botyp.ENERGIEMENGE))
-}
-
 func (s *Suite) assert_Does_Not_Serialize_Default_Enums(bo bo.BusinessObject) {
 	jsonBytes, err := json.Marshal(bo)
 	then.AssertThat(s.T(), err, is.Nil())
