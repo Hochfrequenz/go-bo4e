@@ -2,10 +2,12 @@ package bo
 
 import (
 	"encoding/json"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 )
 
 // Messlokation contains information about a metering location aka "MeLo"
@@ -26,26 +28,6 @@ type Messlokation struct {
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
 }
 
-// messlokationJsonKeys is a list of all keys in the standard bo4e json Messlokation. It is used to distinguish fields that can be mapped to the Messlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
-var messlokationJsonKeys = []string{
-	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
-	// there has to be a better way than this.
-	"boTyp",
-	"versionStruktur",
-	"messlokationsId",
-	"sparte",
-	"netzebeneMessung",
-	"messgebietNr",
-	"geraete",
-	"messdienstleistung",
-	"grundzustaendigerMSBCodeNr",
-	"GrundzustaendigerMsbImCodeNr",
-	"messlokationszaehler",
-	"messadresse",
-	"geoadresse",
-	"katasterinformation",
-}
-
 // XorStructLevelMesslokationValidation ensures that only one of the possible address types is given
 func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 	melo := sl.Current().Interface().(Messlokation)
@@ -62,7 +44,9 @@ func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 }
 
 func (melo Messlokation) GetDefaultJsonTags() []string {
-	return messlokationJsonKeys
+	// We know we pass a struct here so ignore the error.
+	fields, _ := jsonfieldnames.Extract(melo)
+	return fields
 }
 
 // the below code is just copy pasted from the malo
