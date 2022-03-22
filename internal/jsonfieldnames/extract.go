@@ -83,7 +83,7 @@ func extractFromField(field reflect.StructField) []string {
 	}
 }
 
-// jsonFieldNameFromTag extracts the desired json field name from a "json" struct tag. The form of these struct tags is "[<name>][,<options>]".
+// jsonFieldNameFromTag extracts the desired json field name from a "json" struct tag. The form of these struct tags is "[<name>][,<options>]". The name part never contains a ",".
 // This function returns the name part if it is present, else an empty string.
 func jsonFieldNameFromTag(tag string) string {
 	commaPosition := strings.Index(tag, ",")
