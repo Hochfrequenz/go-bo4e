@@ -13,8 +13,8 @@ import (
 	"strings"
 )
 
-// Extract extracts JSON field names from a struct value or a pointer to a struct value. If the value passed to Extract is nil,
-// is not a struct value or a pointer to a struct value, an error is returned instead.
+// Extract extracts JSON field names from a struct value or a pointer to a struct value. If the value passed to Extract is either nil
+// or is not a struct value or a pointer to a struct value, an error is returned instead.
 func Extract(value interface{}) ([]string, error) {
 	typ := reflect.TypeOf(value)
 	if typ == nil {
