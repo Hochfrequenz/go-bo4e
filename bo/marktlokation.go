@@ -2,6 +2,8 @@ package bo
 
 import (
 	"encoding/json"
+	"regexp"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/bilanzierungsmethode"
@@ -11,7 +13,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
-	"regexp"
+	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 )
 
 // Marktlokation contains information about a market location aka "MaLo"
@@ -95,35 +97,10 @@ func (malo Marktlokation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(result)
 }
 
-func (_ Marktlokation) GetDefaultJsonTags() []string {
-	// As soon as we try to generalize this to not only cover Marktlokation, we need a better solution like applying reflection and then looping over the fields and reading the json tags.
-	return marktlokationJsonKeys
-}
-
-// marktlokationJsonKeys is a list of all keys in the standard bo4e json Marklokation. It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
-var marktlokationJsonKeys = []string{
-	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
-	// there has to be a better way than this.
-	"boTyp",
-	"versionStruktur",
-	"marktlokationsId",
-	"sparte",
-	"energierichtung",
-	"bilanzierungsmethode",
-	"verbrauchsart",
-	"unterbrechbar",
-	"netzebene",
-	"netzbetreibercodenr",
-	"gebiettyp",
-	"netzgebietnr",
-	"bilanzierungsgebiet",
-	"grundversorgercodenr",
-	"gasqualitaet",
-	"endkunde",
-	"lokationsadresse",
-	"geoadresse",
-	"katasterinformation",
-	"zugehoerigemesslokationen",
+func (malo Marktlokation) GetDefaultJsonTags() []string {
+	// We know we pass a struct here so ignore the error.
+	fields, _ := jsonfieldnames.Extract(malo)
+	return fields
 }
 
 var elevenDigitsRegex = regexp.MustCompile(`^[1-9]\d{10}$`)

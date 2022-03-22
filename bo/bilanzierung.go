@@ -3,6 +3,9 @@ package bo
 import (
 	"encoding/json"
 	"fmt"
+	"regexp"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverwantwortung"
@@ -10,9 +13,8 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
+	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 	"github.com/shopspring/decimal"
-	"regexp"
-	"time"
 )
 
 // Bilanzierung is a business object used for balancing.
@@ -40,32 +42,10 @@ type Bilanzierung struct {
 	MarktlokationsId           string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 }
 
-// bilanzierungJsonKeys is a list of all keys in the standard bo4e json Bilanzierung.
-// It is used to distinguish fields that can be mapped to the Marktlokation struct and those that are moved to Geschaeftsobjekt.ExtensionData
-var bilanzierungJsonKeys = []string{
-	// https://c.tenor.com/71HGq_GX1pMAAAAC/kill-me-simpsons.gif
-	// there has to be a better way than this.
-	"boTyp",
-	"versionStruktur",
-	"lastprofile",
-	"bilanzierungsbeginn",
-	"bilanzierungsende",
-	"bilanzkreis",
-	"jahresverbrauchsprognose",
-	"kundenwert",
-	"verbrauchsaufteilung",
-	"zeitreihentyp",
-	"aggregationsverantwortung",
-	"prognosegrundlage",
-	"detailsPrognosegrundlage",
-	"wahlrechtPrognosegrundlage",
-	"fallgruppenzuordnung",
-	"prioritaet",
-	"marktlokationsId",
-}
-
-func (_ Bilanzierung) GetDefaultJsonTags() []string {
-	return bilanzierungJsonKeys
+func (bila Bilanzierung) GetDefaultJsonTags() []string {
+	// We know we pass a struct here so ignore the error.
+	fields, _ := jsonfieldnames.Extract(bila)
+	return fields
 }
 
 // the bilanzierungForMarshal type is derived from Bilanzierung but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
