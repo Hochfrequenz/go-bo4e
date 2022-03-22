@@ -18,7 +18,7 @@ import (
 func Extract(value interface{}) ([]string, error) {
 	typ := reflect.TypeOf(value)
 	if typ == nil {
-		return nil, fmt.Errorf("cannot extract field names: value is nil")
+		return nil, fmt.Errorf("cannot extract field names: typ is nil")
 	}
 
 	// When value is a pointer, dereference the type, but keep the original type to be used in the error message
