@@ -34,7 +34,7 @@ func (s *Suite) Test_Failed_Tagesparameter_Validation() {
 func (s *Suite) Test_Successful_Tagesparameter_Validation() {
 	validate := validator.New()
 	validTagesparameter := []interface{}{
-		com.Tagesparameter{},// by default nothing is required
+		com.Tagesparameter{}, // by default nothing is required
 		com.Tagesparameter{
 			Klimazone:            "asd",
 			Temperaturmessstelle: "foo",

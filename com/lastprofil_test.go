@@ -14,7 +14,7 @@ func (s *Suite) Test_Failed_Lastprofil_Validation() {
 				Bezeichnung: "-*ö",
 			},
 		},
-		"oneof":{
+		"oneof": {
 			com.Lastprofil{
 				Herausgeber: "weder BDEW noch haendler",
 			},
@@ -27,7 +27,7 @@ func (s *Suite) Test_Failed_Lastprofil_Validation() {
 func (s *Suite) Test_Successful_Lastprofil_Validation() {
 	validate := validator.New()
 	validLastprofile := []interface{}{
-		com.Lastprofil{},// by default nothing is required
+		com.Lastprofil{}, // by default nothing is required
 		com.Lastprofil{
 			Bezeichnung: "Foo",
 			Herausgeber: "BDEW",
