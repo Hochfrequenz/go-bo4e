@@ -16,6 +16,16 @@ func (s *Suite) Test_Failed_Tagesparameter_Validation() {
 				Dienstanbieter:       "", // <-- required if temperaturmessstelle is provided
 			},
 		},
+		"oneof": {
+			com.Tagesparameter{
+				Herausgeber: "Foo",
+			},
+		},
+		"alphanum": {
+			com.Tagesparameter{
+				Klimazone: "😍",
+			},
+		},
 	}
 	VerfiyFailedValidations(s, validate, invalidTagesparameters)
 }
