@@ -17,6 +17,6 @@ func TestStringifySparteForDB(t *testing.T) {
 	rs.Scan(&sb)
 
 	assert.NoError(t, err)
-	assert.Equal(t,"STROM",sb )
-	assert.Equal(t, STROM,rs)
+	assert.Equal(t, "STROM", sb)
+	assert.Equal(t, STROM, rs)
 }
