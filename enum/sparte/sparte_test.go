@@ -12,13 +12,13 @@ import (
 func TestStringifySparteForDB(t *testing.T) {
 	s := STROM
 	v, err := s.Value()
-
+	then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
 	sb := v.(string)
 
 	var rs Sparte
 	err = rs.Scan(&sb)
 	then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-	then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
+
 	then.AssertThat(t, sb, is.EqualTo("STROM").Reason("Value() should return the string representation"))
 	then.AssertThat(t, rs, is.EqualTo(STROM).Reason("Scan() result is original Sparte Enum"))
 }
