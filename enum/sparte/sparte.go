@@ -40,7 +40,7 @@ func (r *Sparte) Scan(value interface{}) error {
 	}
 	s := *value.(*string)
 	if v, ok := _SparteNameToValue[s]; ok {
-		r = &v
+		*r = v
 		return nil
 	}
 	return fmt.Errorf("could not read %s", s)

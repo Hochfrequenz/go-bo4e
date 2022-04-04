@@ -1,8 +1,11 @@
 package sparte
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/corbym/gocrest/then"
+
+	"github.com/corbym/gocrest/is"
 )
 
 // TestStringifySparteForDB checks if the Value method converts the Sparte to its String representaion and if the Scan reads it
@@ -16,7 +19,7 @@ func TestStringifySparteForDB(t *testing.T) {
 	var rs Sparte
 	rs.Scan(&sb)
 
-	assert.NoError(t, err)
-	assert.Equal(t, "STROM", sb)
-	assert.Equal(t, STROM, rs)
+	then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
+	then.AssertThat(t, sb, is.EqualTo("STROM").Reason("Value() should return the string representation"))
+	then.AssertThat(t, rs, is.EqualTo(STROM).Reason("Scan() result is original Sparte Enum"))
 }
