@@ -22,7 +22,6 @@ const (
 
 // Value sets the value that is written to a database, for that we just use the json representation
 func (r Sparte) Value() (driver.Value, error) {
-
 	s, ok := _SparteValueToName[r]
 	if ok {
 		return s, nil
@@ -35,8 +34,7 @@ func (r *Sparte) Scan(value interface{}) error {
 	// if value is nil, false
 	if value == nil || value.(*string) == nil {
 		// set the value of the pointer to 0 as default
-		var null Sparte = 0
-		*r = null
+		*r = 0
 		return nil
 	}
 	s := *value.(*string)
