@@ -31,12 +31,21 @@ func TestScanSparte_With_Malformed_Value(t *testing.T) {
 }
 
 func TestScanSparte_With_Nil_Value_Should_Be_Ok(t *testing.T) {
-	var rs Sparte
+	rs := STROM
 	var nullString *string = nil
+	var expectedSparte Sparte = 0
 
 	err := rs.Scan(nullString)
 	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, rs, is.EqualTo(expectedSparte))
 
 	err = rs.Scan(nil)
 	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, rs, is.EqualTo(expectedSparte))
+}
+func TestValueSparte_With_Nonexistent_Value(t *testing.T) {
+	var rs Sparte = 99
+
+	_, err := rs.Value()
+	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
 }

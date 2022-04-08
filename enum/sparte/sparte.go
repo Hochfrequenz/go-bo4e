@@ -23,8 +23,9 @@ const (
 // Value sets the value that is written to a database, for that we just use the json representation
 func (r Sparte) Value() (driver.Value, error) {
 
-	if s, ok := interface{}(r).(fmt.Stringer); ok {
-		return s.String(), nil
+	s, ok := _SparteValueToName[r]
+	if ok {
+		return s, nil
 	}
 	return nil, fmt.Errorf("could not stringify %s", r)
 }
@@ -35,7 +36,7 @@ func (r *Sparte) Scan(value interface{}) error {
 	if value == nil || value.(*string) == nil {
 		// set the value of the pointer to 0 as default
 		var null Sparte = 0
-		r = &null
+		*r = null
 		return nil
 	}
 	s := *value.(*string)
