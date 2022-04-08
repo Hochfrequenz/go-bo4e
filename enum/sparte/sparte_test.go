@@ -8,7 +8,7 @@ import (
 	"github.com/corbym/gocrest/is"
 )
 
-// TestStringifySparteForDB checks if the Value method converts the Sparte to its String representaion and if the Scan reads it
+// TestStringifySparteForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
 func TestStringifySparteForDB(t *testing.T) {
 	s := STROM
 	v, err := s.Value()
