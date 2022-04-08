@@ -33,6 +33,10 @@ func TestScanSparte_With_Malformed_Value(t *testing.T) {
 func TestScanSparte_With_Nil_Value_Should_Be_Ok(t *testing.T) {
 	var rs Sparte
 	var nullString *string = nil
+
 	err := rs.Scan(nullString)
+	then.AssertThat(t, err, is.Nil())
+
+	err = rs.Scan(nil)
 	then.AssertThat(t, err, is.Nil())
 }

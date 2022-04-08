@@ -32,7 +32,7 @@ func (r Sparte) Value() (driver.Value, error) {
 // Scan - Implement sql scanner interface to read the json representation from the DB
 func (r *Sparte) Scan(value interface{}) error {
 	// if value is nil, false
-	if value == nil {
+	if value == nil || value.(*string) == nil {
 		// set the value of the pointer to 0 as default
 		var null Sparte = 0
 		r = &null
