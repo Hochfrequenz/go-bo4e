@@ -22,3 +22,21 @@ func TestStringifySparteForDB(t *testing.T) {
 	then.AssertThat(t, sb, is.EqualTo("STROM").Reason("Value() should return the string representation"))
 	then.AssertThat(t, rs, is.EqualTo(STROM).Reason("Scan() result is original Sparte Enum"))
 }
+
+func TestScanSparte_With_Malformed_Value(t *testing.T) {
+	var rs Sparte
+	var invalidSpartenString = "foobar"
+	err := rs.Scan(&invalidSpartenString)
+	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
+}
+
+func TestScanSparte_With_Nil_Value_Should_Be_Ok(t *testing.T) {
+	var rs Sparte
+	var nullString *string = nil
+
+	err := rs.Scan(nullString)
+	then.AssertThat(t, err, is.Nil())
+
+	err = rs.Scan(nil)
+	then.AssertThat(t, err, is.Nil())
+}
