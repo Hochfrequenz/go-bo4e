@@ -8,7 +8,7 @@ import (
 	"github.com/corbym/gocrest/is"
 )
 
-// TestStringifySparteForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+// TestStringifyAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
 func TestStringifyAbweichungsgrundForDB(t *testing.T) {
 	for key, grund := range _AbweichungsGrundNameToValue {
 
@@ -21,7 +21,17 @@ func TestStringifyAbweichungsgrundForDB(t *testing.T) {
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
 
 		then.AssertThat(t, sb, is.EqualTo(key).Reason("Value() should return the string representation"))
-		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is original Sparte Enum"))
+		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is original Abweichungsgrund Enum"))
+	}
+}
+
+// TestScanEdiCodeAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+func TestScanEdiCodeAbweichungsgrundForDB(t *testing.T) {
+	for key, grund := range _AbweichungsGrundEdiToValue {
+		var rs AbweichungsGrund
+		err := rs.Scan(&key)
+		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
+		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is expected Abweichungsgrund Enum"))
 	}
 }
 
