@@ -1,6 +1,8 @@
 package abweichungsgrund
 
 import (
+	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/corbym/gocrest/then"
@@ -22,6 +24,22 @@ func TestStringifyAbweichungsgrundForDB(t *testing.T) {
 
 		then.AssertThat(t, sb, is.EqualTo(key).Reason("Value() should return the string representation"))
 		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is original Abweichungsgrund Enum"))
+	}
+}
+
+// TestStringifyAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+func TestAbweichungsgrundMarshalling(t *testing.T) {
+	for key, grund := range _AbweichungsGrundNameToValue {
+
+		j, err := json.Marshal(grund)
+		expectedString := fmt.Sprintf("\"%s\"", key)
+		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
+		then.AssertThat(t, string(j), is.EqualTo(expectedString).Reason("Marshal() should return the string representation"))
+
+		var rs AbweichungsGrund
+		err = json.Unmarshal(j, &rs)
+		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
+		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Unmarshal() result is original Abweichungsgrund Enum"))
 	}
 }
 
