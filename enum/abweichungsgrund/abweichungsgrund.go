@@ -63,5 +63,9 @@ func (r *AbweichungsGrund) Scan(value interface{}) error {
 		*r = v
 		return nil
 	}
+	if v, ok := _AbweichungsGrundEdiToValue[s]; ok {
+		*r = v
+		return nil
+	}
 	return fmt.Errorf("could not read %s", s)
 }
