@@ -1,5 +1,5 @@
 // This maps the EDIFACT Values to the AbweichungsGrund and vice versa
-
+// nolint:dupl // linter thinks the mapping is a duplicate to jsonenums
 package abweichungsgrund
 
 import (
