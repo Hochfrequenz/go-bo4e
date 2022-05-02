@@ -22,4 +22,5 @@ const (
 	MONAT                    // MONAT is 1 month
 	JAHR                     // JAHR is year
 	PROZENT                  // PROZENT is percent
+	ZERO                     // ZERO is undefined unit
 )
