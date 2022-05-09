@@ -1,23 +1,21 @@
 package rechnungstyp
 
 // Rechnungstyp ist eine Abbildung verschiedener Rechnungstypen zur Kennzeichnung von bo.Rechnung en
+// Rechnungstyp entspricht dem Rechnungstypen einer INVOIC und weicht damit ebenso wie die BO4E-dotnet Implementierung
+// aktuell vom Standard ab
 //go:generate stringer --type Rechnungstyp
 //go:generate jsonenums --type Rechnungstyp
 type Rechnungstyp int
 
 const (
-	// Eine Rechnung vom Lieferanten an einen Endkunden über die Lieferung von Energie
-	ENDKUNDENRECHNUNG              Rechnungstyp = iota + 1
-	NETZNUTZUNGSRECHNUNG                        // Eine Rechnung vom Netzbetreiber an den Netznutzer. (i.d.R. der Lieferant) über die Netznutzung
-	MEHRMINDERMENGENRECHNUNG                    // Eine Rechnung vom Netzbetreiber an den Netznutzer. (i.d.R. der Lieferant) zur Abrechnung von Mengen-Differenzen zwischen Bilanzierung und Messung
-	MESSSTELLENBETRIEBSRECHNUNG                 // Rechnung eines Messstellenbetreibers an den Messkunden
-	BESCHAFFUNGSRECHNUNG                        // Rechnungen zwischen einem Händler und Einkäufer von Energie
-	AUSGLEICHSENERGIERECHNUNG                   // Rechnung an den Verursacher von Ausgleichsenergie
-	ABSCHLAGSRECHNUNG                           // Rechnung über einen Abschlag (non-standard)
-	WIMRECHNUNG                                 // Rechnung im Rahmen der Wechselprozesse im Messwesen (non-standard)
-	SELBSTAUSGESTELLTERECHNUNGMEMI              // Rechnung für eine Mehrmenge vom VNB an den Lieferanten (non-standard)
-	MSBRECHNUNG                                 // MSBRECHNUNG ist die Rechnung für den Messstellenbetrieb
-	// not standard yet: https://github.com/Hochfrequenz/BO4E-python/issues/358
-	TURNUSRECHNUNG // TURNUSRECHNUNG ist eine turnusmäßige Rechnung
-	// not standard anymore: https://github.com/Hochfrequenz/BO4E-python/issues/357
+	ABSCHLAGSRECHNUNG Rechnungstyp = iota + 1
+	TURNUSRECHNUNG
+	MONATSRECHNUNG
+	WIMRECHNUNG
+	ZWISCHENRECHNUNG
+	INTEGRIERTE_13TE_RECHNUNG
+	ZUSAETZLICHE_13TE_RECHNUNG
+	MEHRMINDERMENGENRECHNUNG
+	ABSCHLUSSRECHNUNG
+	MSBRECHNUNG
 )
