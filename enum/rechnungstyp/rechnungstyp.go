@@ -48,9 +48,5 @@ func (r *Rechnungstyp) Scan(value interface{}) error {
 		*r = v
 		return nil
 	}
-	if v, ok := _RechnungstypEdiToValue[s]; ok {
-		*r = v
-		return nil
-	}
 	return fmt.Errorf("could not read %s", s)
 }

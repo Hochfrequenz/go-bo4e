@@ -43,16 +43,6 @@ func TestRechnungstypMarshalling(t *testing.T) {
 	}
 }
 
-// TestScanEdiCodeRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
-func TestScanEdiCodeRechnungstypForDB(t *testing.T) {
-	for key, grund := range _RechnungstypEdiToValue {
-		var rs Rechnungstyp
-		err := rs.Scan(&key)
-		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is expected Rechnungstyp Enum"))
-	}
-}
-
 func TestScanRechnungstyp_With_Malformed_Value(t *testing.T) {
 	var rs Rechnungstyp
 	var invalidGrundString = "foobar"
@@ -77,34 +67,5 @@ func TestValueRechnungstyp_With_Nonexistent_Value(t *testing.T) {
 	var rs Rechnungstyp = 99
 
 	_, err := rs.Value()
-	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
-}
-
-func TestEnumToEdifactCodeMapping(t *testing.T) {
-	for expectedCode, grund := range _RechnungstypEdiToValue {
-		code, err := grund.EdiValue()
-		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-		then.AssertThat(t, code, is.EqualTo(expectedCode).Reason("EDIFACT codes are misaligned between the two mapping tables"))
-	}
-}
-
-func TestEdifactCodeToEnumMapping(t *testing.T) {
-	for expectedRechnungstyp, code := range _RechnungstypValueToEdi {
-		var rechnungstyp Rechnungstyp
-		err := rechnungstyp.FromEdi(code)
-		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-		then.AssertThat(t, rechnungstyp, is.EqualTo(expectedRechnungstyp).Reason("EDIFACT codes are misaligned between the two mapping tables"))
-	}
-}
-
-func TestNonexistentCode(t *testing.T) {
-	var rechnungstyp Rechnungstyp
-	err := rechnungstyp.FromEdi("LOL")
-	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
-}
-
-func TestNonexistentGrund(t *testing.T) {
-	var rechnungstyp Rechnungstyp = 99
-	_, err := rechnungstyp.EdiValue()
 	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
 }
