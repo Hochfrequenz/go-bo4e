@@ -13,7 +13,6 @@ import (
 // TestStringifyRechnungstypForDB checks if the Value method converts the Rechnungstyp to its string representation and if the Scan reads it
 func TestStringifyRechnungstypForDB(t *testing.T) {
 	for key, rechnungstyp := range _RechnungstypNameToValue {
-
 		v, err := rechnungstyp.Value()
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
 		sb := v.(string)
