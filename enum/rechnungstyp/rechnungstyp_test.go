@@ -10,8 +10,8 @@ import (
 	"github.com/corbym/gocrest/is"
 )
 
-// TestStringifyAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
-func TestStringifyAbweichungsgrundForDB(t *testing.T) {
+// TestStringifyRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+func TestStringifyRechnungstypForDB(t *testing.T) {
 	for key, rechnungstyp := range _RechnungstypNameToValue {
 
 		v, err := rechnungstyp.Value()
@@ -23,12 +23,12 @@ func TestStringifyAbweichungsgrundForDB(t *testing.T) {
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
 
 		then.AssertThat(t, sb, is.EqualTo(key).Reason("Value() should return the string representation"))
-		then.AssertThat(t, rs, is.EqualTo(rechnungstyp).Reason("Scan() result is original Abweichungsgrund Enum"))
+		then.AssertThat(t, rs, is.EqualTo(rechnungstyp).Reason("Scan() result is original Rechnungstyp Enum"))
 	}
 }
 
-// TestStringifyAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
-func TestAbweichungsgrundMarshalling(t *testing.T) {
+// TestStringifyRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+func TestRechnungstypMarshalling(t *testing.T) {
 	for key, grund := range _RechnungstypNameToValue {
 
 		j, err := json.Marshal(grund)
@@ -39,28 +39,28 @@ func TestAbweichungsgrundMarshalling(t *testing.T) {
 		var rs Rechnungstyp
 		err = json.Unmarshal(j, &rs)
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Unmarshal() result is original Abweichungsgrund Enum"))
+		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Unmarshal() result is original Rechnungstyp Enum"))
 	}
 }
 
-// TestScanEdiCodeAbweichungsgrundForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
-func TestScanEdiCodeAbweichungsgrundForDB(t *testing.T) {
+// TestScanEdiCodeRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+func TestScanEdiCodeRechnungstypForDB(t *testing.T) {
 	for key, grund := range _RechnungstypEdiToValue {
 		var rs Rechnungstyp
 		err := rs.Scan(&key)
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
-		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is expected Abweichungsgrund Enum"))
+		then.AssertThat(t, rs, is.EqualTo(grund).Reason("Scan() result is expected Rechnungstyp Enum"))
 	}
 }
 
-func TestScanAbweichungsgrund_With_Malformed_Value(t *testing.T) {
+func TestScanRechnungstyp_With_Malformed_Value(t *testing.T) {
 	var rs Rechnungstyp
 	var invalidGrundString = "foobar"
 	err := rs.Scan(&invalidGrundString)
 	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
 }
 
-func TestScanAbweichungsgrund_With_Nil_Value_Should_Be_Ok(t *testing.T) {
+func TestScanRechnungstyp_With_Nil_Value_Should_Be_Ok(t *testing.T) {
 	rs := ABSCHLUSSRECHNUNG
 	var nullString *string = nil
 	var expectedGrund Rechnungstyp = 0
@@ -73,7 +73,7 @@ func TestScanAbweichungsgrund_With_Nil_Value_Should_Be_Ok(t *testing.T) {
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, rs, is.EqualTo(expectedGrund))
 }
-func TestValueAbweichungsgrund_With_Nonexistent_Value(t *testing.T) {
+func TestValueRechnungstyp_With_Nonexistent_Value(t *testing.T) {
 	var rs Rechnungstyp = 99
 
 	_, err := rs.Value()
