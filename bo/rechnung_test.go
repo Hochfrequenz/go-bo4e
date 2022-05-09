@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -22,8 +25,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"time"
 )
 
 var serializableRechnung = bo.Rechnung{
@@ -38,7 +39,7 @@ var serializableRechnung = bo.Rechnung{
 	Rechnungsnummer:         "123",
 	Rechnungsdatum:          time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 	Faelligkeitsdatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-	Rechnungstyp:            rechnungstyp.ENDKUNDENRECHNUNG,
+	Rechnungstyp:            rechnungstyp.TURNUSRECHNUNG,
 	OriginalRechnungsnummer: "hallo",
 	Rechnungsperiode: com.Zeitraum{
 		Einheit:        zeiteinheit.MINUTE,
@@ -278,7 +279,7 @@ var completeValidRechnung = bo.Rechnung{
 	Rechnungsnummer:         "123",
 	Rechnungsdatum:          time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 	Faelligkeitsdatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-	Rechnungstyp:            rechnungstyp.ENDKUNDENRECHNUNG,
+	Rechnungstyp:            rechnungstyp.TURNUSRECHNUNG,
 	OriginalRechnungsnummer: "hallo",
 	Rechnungsperiode: com.Zeitraum{
 		Einheit:        zeiteinheit.MINUTE,
