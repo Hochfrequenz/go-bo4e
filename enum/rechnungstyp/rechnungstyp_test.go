@@ -26,7 +26,7 @@ func TestStringifyRechnungstypForDB(t *testing.T) {
 	}
 }
 
-// TestStringifyRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+// TestStringifyRechnungstypForDB checks if the Value method converts the Rechnungstyp to its string representation and if the Scan reads it
 func TestRechnungstypMarshalling(t *testing.T) {
 	for key, grund := range _RechnungstypNameToValue {
 
