@@ -10,7 +10,7 @@ import (
 	"github.com/corbym/gocrest/is"
 )
 
-// TestStringifyRechnungstypForDB checks if the Value method converts the Sparte to its string representation and if the Scan reads it
+// TestStringifyRechnungstypForDB checks if the Value method converts the Rechnungstyp to its string representation and if the Scan reads it
 func TestStringifyRechnungstypForDB(t *testing.T) {
 	for key, rechnungstyp := range _RechnungstypNameToValue {
 
