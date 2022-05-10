@@ -1,12 +1,13 @@
 package com
 
 import (
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
-	"time"
 )
 
 // Rechnungsposition en sind Teil von Rechnung en. In einem Rechnungsteil wird jeweils eine in sich geschlossene LEISTUNG abgerechnet.
@@ -16,7 +17,7 @@ type Rechnungsposition struct {
 	LieferungBis      time.Time                           `json:"lieferungBis,omitempty" validate:"required,gtfield=LieferungVon"`  // LieferungBis ist ein _exklusives_ Ende der Lieferung für die abgerechnete LEISTUNG
 	Positionstext     string                              `json:"positionstext,omitempty" validate:"required"`                      // Positionstext ist eine Bezeichung für die abgerechnete Position.
 	Zeiteinheit       zeiteinheit.Zeiteinheit             `json:"zeiteinheit,omitempty"`                                            // Zeiteinheit wird angegeben, falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR
-	Artikelnummer     bdewartikelnummer.BDEWArtikelnummer `json:"bdewartikelnummer,omitempty"`                                      // Artikelnummer ist eine Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW
+	Artikelnummer     bdewartikelnummer.BDEWArtikelnummer `json:"artikelnummer,omitempty"`                                          // Artikelnummer ist eine Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW
 	LokationsId       string                              `json:"lokationsId,omitempty" validate:"omitempty,min=11,max=11,numeric"` // LokationsId ist die MarktlokationsId zu der diese Position gehört
 	PositionsMenge    Menge                               `json:"positionsMenge,omitempty" validate:"required"`                     // PositionsMenge ist die abgerechnete Menge mit Einheit. Z.B. 4372 kWh
 	ZeitbezogeneMenge *Menge                              `json:"zeitbezogeneMenge,omitempty"`                                      // ZeitbezogeneMenge ist eine optionale, auf die Zeiteinheit bezogene Untermenge. Z.B. bei einem Jahrespreis, 3 Monate oder 146 Tage. Basierend darauf wird der Preis aufgeteilt
