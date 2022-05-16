@@ -376,7 +376,7 @@ var completeValidRechnung = bo.Rechnung{
 			LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Positionstext:   "foo",
 			Zeiteinheit:     zeiteinheit.JAHR,
-			Artikelnummer:   bdewartikelnummer.ABGABEKWKG,
+			Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
