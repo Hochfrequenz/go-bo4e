@@ -10,8 +10,8 @@ import (
 	"github.com/corbym/gocrest/is"
 )
 
-// TestStringifyartikelnummerForDB checks if the Value method converts the artikelnummer to its string representation and if the Scan reads it
-func TestStringifyartikelnummerForDB(t *testing.T) {
+// TestStringifyArtikelnummerForDB checks if the Value method converts the artikelnummer to its string representation and if the Scan reads it
+func TestStringifyArtikelnummerForDB(t *testing.T) {
 	for key, artikelnummer := range _BDEWArtikelnummerNameToValue {
 		v, err := artikelnummer.Value()
 		then.AssertThat(t, err, is.Nil().Reason("No error should occur in this test case"))
@@ -26,8 +26,8 @@ func TestStringifyartikelnummerForDB(t *testing.T) {
 	}
 }
 
-// TestStringifyartikelnummerForDB checks if the Value method converts the artikelnummer to its string representation and if the Scan reads it
-func TestartikelnummerMarshalling(t *testing.T) {
+// TestArtikelnummerMarshalling checks if the Value method converts the artikelnummer to its string representation and if the Scan reads it
+func TestArtikelnummerMarshalling(t *testing.T) {
 	for key, grund := range _BDEWArtikelnummerNameToValue {
 
 		j, err := json.Marshal(grund)
@@ -42,14 +42,14 @@ func TestartikelnummerMarshalling(t *testing.T) {
 	}
 }
 
-func TestScanartikelnummer_With_Malformed_Value(t *testing.T) {
+func TestScanArtikelnummer_With_Malformed_Value(t *testing.T) {
 	var rs BDEWArtikelnummer
 	var invalidGrundString = "foobar"
 	err := rs.Scan(&invalidGrundString)
 	then.AssertThat(t, err, is.Not(is.Nil()).Reason("An error should occur in this test case"))
 }
 
-func TestScanartikelnummer_With_Nil_Value_Should_Be_Ok(t *testing.T) {
+func TestScanArtikelnummer_With_Nil_Value_Should_Be_Ok(t *testing.T) {
 	rs := WIRKARBEIT
 	var nullString *string = nil
 	var expectedArtikel BDEWArtikelnummer = 0
@@ -62,7 +62,7 @@ func TestScanartikelnummer_With_Nil_Value_Should_Be_Ok(t *testing.T) {
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, rs, is.EqualTo(expectedArtikel))
 }
-func TestValueartikelnummer_With_Nonexistent_Value(t *testing.T) {
+func TestValueArtikelnummer_With_Nonexistent_Value(t *testing.T) {
 	var rs BDEWArtikelnummer = 99
 
 	_, err := rs.Value()
