@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -17,9 +21,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
-	"time"
 )
 
 // Test_Preisblatt_Deserialization tests serialization and deserialization of Preisblatt
@@ -57,7 +58,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 				Bezugsgroesse:            0,
 				Zeitbasis:                nil,
 				Tarifzeit:                nil,
-				BDEWArtikelnummer:        artikel(bdewartikelnummer.MSBINKLMESSUNG),
+				BDEWArtikelnummer:        artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
 				ArtikelId:                nil,
 				Zonungsgroesse:           nil,
 				FreimengeBlindarbeit:     decimal.NullDecimal{Valid: false},
@@ -74,7 +75,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedPricat, is.Not(is.Nil()))
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "STROM"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "MSBINKLMESSUNG"), is.True())
+	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "MSB_INKL_MESSUNG"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "EUR"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "BDEW"), is.True())
 	var deserializedPricat bo.Preisblatt
