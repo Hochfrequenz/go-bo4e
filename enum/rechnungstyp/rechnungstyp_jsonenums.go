@@ -19,6 +19,7 @@ var (
 		"MEHRMINDERMENGENRECHNUNG":   MEHRMINDERMENGENRECHNUNG,
 		"ABSCHLUSSRECHNUNG":          ABSCHLUSSRECHNUNG,
 		"MSBRECHNUNG":                MSBRECHNUNG,
+		"KAPAZITAETSRECHNUNG":        KAPAZITAETSRECHNUNG,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
@@ -32,6 +33,7 @@ var (
 		MEHRMINDERMENGENRECHNUNG:   "MEHRMINDERMENGENRECHNUNG",
 		ABSCHLUSSRECHNUNG:          "ABSCHLUSSRECHNUNG",
 		MSBRECHNUNG:                "MSBRECHNUNG",
+		KAPAZITAETSRECHNUNG:        "KAPAZITAETSRECHNUNG",
 	}
 )
 
@@ -49,6 +51,7 @@ func init() {
 			interface{}(MEHRMINDERMENGENRECHNUNG).(fmt.Stringer).String():   MEHRMINDERMENGENRECHNUNG,
 			interface{}(ABSCHLUSSRECHNUNG).(fmt.Stringer).String():          ABSCHLUSSRECHNUNG,
 			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                MSBRECHNUNG,
+			interface{}(KAPAZITAETSRECHNUNG).(fmt.Stringer).String():        KAPAZITAETSRECHNUNG,
 		}
 	}
 }
