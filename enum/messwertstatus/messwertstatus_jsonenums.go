@@ -9,23 +9,27 @@ import (
 
 var (
 	_MesswertstatusNameToValue = map[string]Messwertstatus{
-		"ABGELESEN":            ABGELESEN,
-		"ERSATZWERT":           ERSATZWERT,
-		"VORSCHLAGSWERT":       VORSCHLAGSWERT,
-		"PROGNOSEWERT":         PROGNOSEWERT,
-		"VORLAUFIGERWERT":      VORLAUFIGERWERT,
-		"ENERGIEMENGESUMMIERT": ENERGIEMENGESUMMIERT,
-		"FEHLT":                FEHLT,
+		"ABGELESEN":                ABGELESEN,
+		"ERSATZWERT":               ERSATZWERT,
+		"VOLAEUFIGERWERT":          VOLAEUFIGERWERT,
+		"ANGABE_FUER_LIEFERSCHEIN": ANGABE_FUER_LIEFERSCHEIN,
+		"VORSCHLAGSWERT":           VORSCHLAGSWERT,
+		"NICHT_VERWENDBAR":         NICHT_VERWENDBAR,
+		"PROGNOSEWERT":             PROGNOSEWERT,
+		"ENERGIEMENGESUMMIERT":     ENERGIEMENGESUMMIERT,
+		"FEHLT":                    FEHLT,
 	}
 
 	_MesswertstatusValueToName = map[Messwertstatus]string{
-		ABGELESEN:            "ABGELESEN",
-		ERSATZWERT:           "ERSATZWERT",
-		VORSCHLAGSWERT:       "VORSCHLAGSWERT",
-		PROGNOSEWERT:         "PROGNOSEWERT",
-		VORLAUFIGERWERT:      "VORLAUFIGERWERT",
-		ENERGIEMENGESUMMIERT: "ENERGIEMENGESUMMIERT",
-		FEHLT:                "FEHLT",
+		ABGELESEN:                "ABGELESEN",
+		ERSATZWERT:               "ERSATZWERT",
+		VOLAEUFIGERWERT:          "VOLAEUFIGERWERT",
+		ANGABE_FUER_LIEFERSCHEIN: "ANGABE_FUER_LIEFERSCHEIN",
+		VORSCHLAGSWERT:           "VORSCHLAGSWERT",
+		NICHT_VERWENDBAR:         "NICHT_VERWENDBAR",
+		PROGNOSEWERT:             "PROGNOSEWERT",
+		ENERGIEMENGESUMMIERT:     "ENERGIEMENGESUMMIERT",
+		FEHLT:                    "FEHLT",
 	}
 )
 
@@ -33,13 +37,15 @@ func init() {
 	var v Messwertstatus
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_MesswertstatusNameToValue = map[string]Messwertstatus{
-			interface{}(ABGELESEN).(fmt.Stringer).String():            ABGELESEN,
-			interface{}(ERSATZWERT).(fmt.Stringer).String():           ERSATZWERT,
-			interface{}(VORSCHLAGSWERT).(fmt.Stringer).String():       VORSCHLAGSWERT,
-			interface{}(PROGNOSEWERT).(fmt.Stringer).String():         PROGNOSEWERT,
-			interface{}(VORLAUFIGERWERT).(fmt.Stringer).String():      VORLAUFIGERWERT,
-			interface{}(ENERGIEMENGESUMMIERT).(fmt.Stringer).String(): ENERGIEMENGESUMMIERT,
-			interface{}(FEHLT).(fmt.Stringer).String():                FEHLT,
+			interface{}(ABGELESEN).(fmt.Stringer).String():                ABGELESEN,
+			interface{}(ERSATZWERT).(fmt.Stringer).String():               ERSATZWERT,
+			interface{}(VOLAEUFIGERWERT).(fmt.Stringer).String():          VOLAEUFIGERWERT,
+			interface{}(ANGABE_FUER_LIEFERSCHEIN).(fmt.Stringer).String(): ANGABE_FUER_LIEFERSCHEIN,
+			interface{}(VORSCHLAGSWERT).(fmt.Stringer).String():           VORSCHLAGSWERT,
+			interface{}(NICHT_VERWENDBAR).(fmt.Stringer).String():         NICHT_VERWENDBAR,
+			interface{}(PROGNOSEWERT).(fmt.Stringer).String():             PROGNOSEWERT,
+			interface{}(ENERGIEMENGESUMMIERT).(fmt.Stringer).String():     ENERGIEMENGESUMMIERT,
+			interface{}(FEHLT).(fmt.Stringer).String():                    FEHLT,
 		}
 	}
 }

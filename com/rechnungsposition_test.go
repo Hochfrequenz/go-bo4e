@@ -2,6 +2,9 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -14,8 +17,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 // Test_Rechnungsposition_Deserialization deserializes an Rechnungsposition json
@@ -26,7 +27,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Positionstext:   "foo",
 		Zeiteinheit:     zeiteinheit.JAHR,
-		Artikelnummer:   bdewartikelnummer.ABGABEKWKG,
+		Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
 		LokationsId:     "54321012345",
 		PositionsMenge: com.Menge{
 			Wert:    newDecimalFromString("20"),
@@ -56,7 +57,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
 	jsonString := string(serializedRechnungsposition)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ABGABEKWKG"), is.True()) // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, "ABGABE_KWKG"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedRechnungsposition, is.Not(is.Nil()))
 	var deserializedRechnungsposition com.Rechnungsposition
@@ -148,7 +149,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 			LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Positionstext:   "foo",
 			Zeiteinheit:     zeiteinheit.JAHR,
-			Artikelnummer:   bdewartikelnummer.ABGABEKWKG,
+			Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
