@@ -1,5 +1,10 @@
 package abweichungsgrund
 
+import (
+	"database/sql/driver"
+	"fmt"
+)
+
 // Gibt einen Abweichungsgrund bei Ablehung einer COMDIS an. (REMADV SG7 AJT 4465)
 //go:generate stringer --type AbweichungsGrund
 //go:generate jsonenums --type AbweichungsGrund
@@ -35,3 +40,28 @@ const (
 	RECHNUNGSABWICKLUNG_NICHT_VEREINBART                                                                                   // Z53
 	COMDIS_WIRD_ABGELEHNT                                                                                                  // Z63
 )
+
+// Value sets the value that is written to a database, for that we just use the json representation
+func (r AbweichungsGrund) Value() (driver.Value, error) {
+	s, ok := _AbweichungsGrundValueToName[r]
+	if ok {
+		return s, nil
+	}
+	return nil, fmt.Errorf("could not stringify %s", r)
+}
+
+// Scan - Implement sql scanner interface to read the json representation from the DB
+func (r *AbweichungsGrund) Scan(value interface{}) error {
+	// if value is nil, false
+	if value == nil || value.(*string) == nil {
+		// set the value of the pointer to 0 as default
+		*r = 0
+		return nil
+	}
+	s := *value.(*string)
+	if v, ok := _AbweichungsGrundNameToValue[s]; ok {
+		*r = v
+		return nil
+	}
+	return fmt.Errorf("could not read %s", s)
+}
