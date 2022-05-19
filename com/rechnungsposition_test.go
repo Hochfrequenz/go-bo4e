@@ -37,7 +37,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 			Wert:    newDecimalFromString("23"),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
-		Korrekturfaktor: -1,
+		Korrekturfaktor: intAsPointer(-1),
 		Einzelpreis: com.Preis{
 			Wert:       newDecimalFromString("1"),
 			Einheit:    waehrungseinheit.EUR,
@@ -180,4 +180,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 
 func (s *Suite) Test_Serialized_Empty_Rechnungspositionen_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(com.Rechnungsposition{})
+}
+func intAsPointer(i int) *int {
+	return &i
 }
