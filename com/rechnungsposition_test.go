@@ -37,6 +37,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 			Wert:    newDecimalFromString("23"),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
+		Korrekturfaktor: -1,
 		Einzelpreis: com.Preis{
 			Wert:       newDecimalFromString("1"),
 			Einheit:    waehrungseinheit.EUR,
