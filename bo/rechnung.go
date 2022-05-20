@@ -1,12 +1,13 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/rechnungsstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/rechnungstyp"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 // Rechnung ist ein Modell für die Abbildung von Rechnungen im Kontext der Energiewirtschaft. Ausgehend von diesem Basismodell werden weitere spezifische Formen abgeleitet.
@@ -30,7 +31,9 @@ type Rechnung struct {
 	RabattBrutto            *com.Betrag                     `json:"rabattBrutto,omitempty"`                                               // RabattBrutto ist der Gesamtrabatt auf den Bruttobetrag
 	Zuzahlen                com.Betrag                      `json:"zuzahlen,omitempty" validate:"required"`                               // Zuzahlen ist der zu zahlende Betrag, der sich aus (gesamtbrutto - vorausbezahlt - rabattBrutto) ergibt
 	Steuerbetraege          []com.Steuerbetrag              `json:"steuerbetraege,omitempty"`                                             // Steuerbetraege ist eine Liste mit Steuerbeträgen pro Steuerkennzeichen/Steuersatz. Die Summe dieser Beträge ergibt den Wert für GesamtSteuer
-	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen,omitempty" validate:"required,min=1"`              // Rechnungspositionen sind die einzelnen Rechnungsposition en.
+	IstReverseCharge        *bool                           `json:"istReverseCharge,omitempty"`
+	IstSelbstausgestellt    *bool                           `json:"istSelbstausgestellt,omitempty"`
+	Rechnungspositionen     []com.Rechnungsposition         `json:"rechnungspositionen,omitempty" validate:"required,min=1"` // Rechnungspositionen sind die einzelnen Rechnungsposition en.
 }
 
 func (_ Rechnung) GetDefaultJsonTags() []string {

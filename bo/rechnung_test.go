@@ -368,7 +368,9 @@ var completeValidRechnung = bo.Rechnung{
 		Wert:     decimal.NewFromFloat(200.),
 		Waehrung: waehrungscode.EUR,
 	},
-	Steuerbetraege: nil,
+	Steuerbetraege:       nil,
+	IstSelbstausgestellt: boolPointer(false),
+	IstReverseCharge:     boolPointer(false),
 	Rechnungspositionen: []com.Rechnungsposition{
 		{
 			Positionsnummer: 17,
@@ -413,4 +415,8 @@ func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
 
 func (s *Suite) Test_Serialized_Empty_Rechnung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.RECHNUNG))
+}
+
+func boolPointer(b bool) *bool {
+	return &b
 }

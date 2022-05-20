@@ -19,6 +19,8 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+var korrekturfaktor float32 = -1
+
 // Test_Rechnungsposition_Deserialization deserializes an Rechnungsposition json
 func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	var rechnungsposition = com.Rechnungsposition{
@@ -37,6 +39,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 			Wert:    newDecimalFromString("23"),
 			Einheit: mengeneinheit.KUBIKMETER,
 		},
+		Korrekturfaktor: &korrekturfaktor,
 		Einzelpreis: com.Preis{
 			Wert:       newDecimalFromString("1"),
 			Einheit:    waehrungseinheit.EUR,
