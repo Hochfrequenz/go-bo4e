@@ -109,5 +109,5 @@ func (boneyComb *BOneyComb) setMarktteilnehmer(mt bo.Marktteilnehmer) {
 	if boneyComb.Stammdaten == nil {
 		boneyComb.Stammdaten = bo.BusinessObjectSlice{}
 	}
-	boneyComb.Stammdaten = append(boneyComb.Stammdaten, mt)
+	boneyComb.Stammdaten = append(boneyComb.Stammdaten, &mt)
 }
