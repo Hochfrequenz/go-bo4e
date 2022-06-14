@@ -1,9 +1,10 @@
 package market_communication
 
 import (
+	"regexp"
+
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
-	"regexp"
 )
 
 // receiverKey is the key for BOneyComb.Transaktionsdaten under which the 13 digit ID of the receiving Marktteilnehmer can be found
@@ -94,9 +95,9 @@ func (boneyComb *BOneyComb) getMarktteilnehmer(marktteilnehmerId *string) *bo.Ma
 	}
 	for _, businessObject := range boneyComb.Stammdaten {
 		if businessObject.GetBoTyp() == botyp.MARKTTEILNEHMER {
-			if businessObject.(bo.Marktteilnehmer).Rollencodenummer == *marktteilnehmerId {
-				mtn := businessObject.(bo.Marktteilnehmer)
-				return &mtn
+			if businessObject.(*bo.Marktteilnehmer).Rollencodenummer == *marktteilnehmerId {
+				mtn := businessObject.(*bo.Marktteilnehmer)
+				return mtn
 			}
 		}
 	}
@@ -108,5 +109,5 @@ func (boneyComb *BOneyComb) setMarktteilnehmer(mt bo.Marktteilnehmer) {
 	if boneyComb.Stammdaten == nil {
 		boneyComb.Stammdaten = bo.BusinessObjectSlice{}
 	}
-	boneyComb.Stammdaten = append(boneyComb.Stammdaten, mt)
+	boneyComb.Stammdaten = append(boneyComb.Stammdaten, &mt)
 }

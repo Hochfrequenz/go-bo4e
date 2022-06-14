@@ -71,7 +71,7 @@ func (s *Suite) Test_SetEmpfaengerCode_With_Uri() {
 func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
-			bo.Marktteilnehmer{
+			&bo.Marktteilnehmer{
 				Marktrolle:       marktrolle.LF,
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
 				Rollencodetyp:    rollencodetyp.DVGW,
@@ -107,7 +107,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 					},
 				},
 			},
-			bo.Marktteilnehmer{
+			&bo.Marktteilnehmer{
 				Marktrolle:       marktrolle.LF,
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
 				Rollencodetyp:    rollencodetyp.DVGW,
@@ -150,8 +150,8 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 			"absender":   "9903100000007",
 		},
 	}
-	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaenger(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[0]))
-	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsender(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[1]))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[0]))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[1]))
 }
 
 func (s *Suite) Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data() {
