@@ -15,7 +15,7 @@ type Ansprechpartner struct {
 	Titel              titel.Titel          `json:"titel,omitempty"`                                    // Titel ist ein möglicher Titel des Ansprechpartners
 	Vorname            string               `json:"vorname,omitempty"`                                  // Vorname ist der Vorname des Ansprechpartners
 	Nachname           string               `json:"nachname,omitempty" validate:"required"`             // Nachname ist der Familienname des Ansprechpartners
-	EMailAdresse       string               `json:"eMailAdresse,omitempty" validate:"omitempty,empty"`  // EMailAdresse-Adresse des Ansprechpartners
+	EMailAdresse       string               `json:"eMailAdresse,omitempty" validate:"omitempty,email"`  // EMailAdresse-Adresse des Ansprechpartners
 	Kommentar          string               `json:"kommentar,omitempty"`                                // Kommentar sind zusätzlich Freitextinformationen zum Ansprechpartner
 	Geschaeftspartner  *Geschaeftspartner   `json:"geschaeftspartner,omitempty" validate:"required"`    // Geschaeftspartner ist der Geschäftspartner für den der Ansprechpartner modelliert wird
 	Adresse            *com.Adresse         `json:"adresse,omitempty"`                                  // Adresse des Ansprechpartners, falls diese von der Adresse des Geschaeftspartner s abweicht
