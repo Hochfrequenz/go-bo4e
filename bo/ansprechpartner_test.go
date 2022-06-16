@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -13,8 +16,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/rufnummernart"
 	"github.com/hochfrequenz/go-bo4e/enum/themengebiet"
 	"github.com/hochfrequenz/go-bo4e/enum/titel"
-	"reflect"
-	"strings"
 )
 
 var validAp = bo.Ansprechpartner{
@@ -28,7 +29,7 @@ var validAp = bo.Ansprechpartner{
 	Vorname:            "Winfried",
 	Nachname:           "Müller",
 	Kommentar:          "liest seinen Kindern QTY-Segmente zum Einschlafen vor",
-	Geschaeftspartner:  validGp,
+	Geschaeftspartner:  &validGp,
 	Adresse: &com.Adresse{
 		Postleitzahl: "10289",
 		Ort:          "Berlin",
