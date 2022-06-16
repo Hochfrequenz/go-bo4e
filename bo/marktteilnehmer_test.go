@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -14,8 +17,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
-	"reflect"
-	"strings"
+	"github.com/hochfrequenz/go-bo4e/enum/titel"
 )
 
 // Test_Marktteilnehmer_Deserialization deserializes an Marktteilnehmer json
@@ -56,6 +58,17 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				Hausnummer:   "27A",
 				Landescode:   landescode.DE,
 			},
+		},
+		Ansprechpartner: &bo.Ansprechpartner{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp: botyp.ANSPRECHPARTNER,
+			},
+			Anrede:             anrede.INDIVIDUELL,
+			IndividuelleAnrede: "Eure Herzoglichkeit",
+			Titel:              titel.PROF_DR,
+			Vorname:            "Testor",
+			Nachname:           "von Test",
+			Kommentar:          "beste",
 		},
 	}
 	serializedMarktteilnehmer, err := json.Marshal(mt)
