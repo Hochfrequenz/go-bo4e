@@ -15,6 +15,7 @@ type Ansprechpartner struct {
 	Titel              titel.Titel          `json:"titel,omitempty"`                                    // Titel ist ein möglicher Titel des Ansprechpartners
 	Vorname            string               `json:"vorname,omitempty"`                                  // Vorname ist der Vorname des Ansprechpartners
 	Nachname           string               `json:"nachname,omitempty" validate:"required"`             // Nachname ist der Familienname des Ansprechpartners
+	Email              string               `json:"eMailAdresse,omitempty"`                             // Email-Adresse des Ansprechpartners
 	Kommentar          string               `json:"kommentar,omitempty"`                                // Kommentar sind zusätzlich Freitextinformationen zum Ansprechpartner
 	Geschaeftspartner  *Geschaeftspartner   `json:"geschaeftspartner,omitempty" validate:"required"`    // Geschaeftspartner ist der Geschäftspartner für den der Ansprechpartner modelliert wird
 	Adresse            *com.Adresse         `json:"adresse,omitempty"`                                  // Adresse des Ansprechpartners, falls diese von der Adresse des Geschaeftspartner s abweicht
@@ -22,6 +23,7 @@ type Ansprechpartner struct {
 	Zustaendigkeiten   []com.Zustaendigkeit `json:"zustaendigkeit,omitempty" validate:"omitempty,dive"` // Zustaendigkeiten ist eine Liste der Abteilungen und Zuständigkeiten des Ansprechpartner
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
+
 }
 
 func (_ Ansprechpartner) GetDefaultJsonTags() []string {
