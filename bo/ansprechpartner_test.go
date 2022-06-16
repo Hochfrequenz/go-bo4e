@@ -28,7 +28,7 @@ var validAp = bo.Ansprechpartner{
 	Titel:              titel.PROF,
 	Vorname:            "Winfried",
 	Nachname:           "Müller",
-	Email:              "send_mails@test.com",
+	EMailAdresse:       "send_mails@test.com",
 	Kommentar:          "liest seinen Kindern QTY-Segmente zum Einschlafen vor",
 	Geschaeftspartner:  &validGp,
 	Adresse: &com.Adresse{
