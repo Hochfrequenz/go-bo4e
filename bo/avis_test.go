@@ -76,10 +76,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.EUR,
 						},
-						Abweichung: com.Abweichung{
-							Referenz:         "A",
-							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
-						},
+						Abweichung: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -110,10 +107,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: com.Abweichung{
-							Referenz:         "A",
-							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
-						},
+						Abweichung: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -144,7 +138,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: com.Abweichung{
+						Abweichung: &com.Abweichung{
 							Referenz:         "A",
 							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
 						},
@@ -178,7 +172,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.New(1, 0),
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: com.Abweichung{
+						Abweichung: &com.Abweichung{
 							Referenz:         "A",
 							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
 						},
@@ -204,7 +198,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						RechnungsNummer: "2",
 						RechnungsDatum:  time.Now(),
 						Storno:          false,
-						Abweichung: com.Abweichung{
+						Abweichung: &com.Abweichung{
 							Referenz:                  "A",
 							AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
 							AbweichungsGrundBemerkung: "B",
@@ -287,7 +281,7 @@ func (s *Suite) Test_Successful_AvisValidation() {
 			Wert:     decimal.New(15, 0),
 			Waehrung: waehrungscode.EUR,
 		},
-		Abweichung: com.Abweichung{
+		Abweichung: &com.Abweichung{
 			Referenz:                  "B",
 			AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
 			AbweichungsGrundBemerkung: "C",
