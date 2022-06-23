@@ -23,7 +23,7 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 	if steuerbetrag.Steuerkennzeichen == steuerkennzeichen.RCV {
 		return
 	}
-	expectedSteuerwert := decimal.NewFromFloat(0)
+	var expectedSteuerwert decimal.Decimal
 	switch sk := steuerbetrag.Steuerkennzeichen; sk {
 	case 0:
 		return // already the field level validation should fail on this, we don't need struct level validation
