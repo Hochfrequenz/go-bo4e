@@ -3,6 +3,8 @@ package bdewartikelnummer
 import (
 	"database/sql/driver"
 	"fmt"
+
+	"github.com/hochfrequenz/go-bo4e/internal/dbScanValue"
 )
 
 // BDEWArtikelnummer is a readable representation of the article numbers of BDEW
@@ -71,16 +73,20 @@ func (r BDEWArtikelnummer) Value() (driver.Value, error) {
 
 // Scan - Implement sql scanner interface to read the json representation from the DB
 func (r *BDEWArtikelnummer) Scan(value interface{}) error {
-	// if value is nil, false
-	if value == nil || value.(*string) == nil {
-		// set the value of the pointer to 0 as default
-		*r = 0
+	if s, ok := dbScanValue.GetStringFromDB(value); ok {
+		if v, ok := _BDEWArtikelnummerNameToValue[s]; ok {
+			*r = v
+			return nil
+		}
+		return fmt.Errorf("could not read %s", s)
+	}
+	if i, ok := dbScanValue.GetIntFromDB(value); ok {
+		*r = BDEWArtikelnummer(i)
 		return nil
 	}
-	s := *value.(*string)
-	if v, ok := _BDEWArtikelnummerNameToValue[s]; ok {
-		*r = v
-		return nil
+	if r != nil {
+		// We could not read a value, if there is already a value it would not be set to nil
+		return fmt.Errorf("could not convert %v to string", value)
 	}
-	return fmt.Errorf("could not read %s", s)
+	return nil
 }
