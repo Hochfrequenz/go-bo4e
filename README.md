@@ -114,6 +114,14 @@ as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issu
 
 ## Version Notes
 
+### Go 1.18 since v0.2.0
+
+Since [version 0.2.0](https://github.com/Hochfrequenz/go-bo4e/releases/tag/v0.2.0) this library is based on Go 1.18, because we want to make use of Generics.
+
+### Go 1.17 since v0.1.0
+
+Since [version 0.1.0](https://github.com/Hochfrequenz/go-bo4e/releases/tag/v0.1.0) this library is based on Go 1.17, because Go 1.16 has reached end of life.
+
 ### Handling Unknown Fields in (Un)Marshaling since v0.0.36
 
 If you're unmarshaling a Business Object that contains fields which are not defined in the BO structs, they'll be
