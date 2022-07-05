@@ -2,6 +2,7 @@ package market_communication_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -172,6 +173,31 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 			firstMaLo, _ := boneyComb.GetSingle(botyp.MARKTLOKATION)
 			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo("hello world"))
 			then.AssertThat(s.T(), boneyComb.Links["foo"][1], is.EqualTo("baz"))
+			continue
+		}
+		if file.Name() == "20220308.json" {
+			firstEnergiemenge, _ := boneyComb.GetSingle(botyp.ENERGIEMENGE)
+			then.AssertThat(s.T(), firstEnergiemenge.(*bo.Energiemenge).BoTyp, is.EqualTo(botyp.ENERGIEMENGE))
+			then.AssertThat(s.T(), firstEnergiemenge.(*bo.Energiemenge).Verbrauch[0].Wert, is.EqualTo(newDecimalFromString("326.53")))
+			then.AssertThat(s.T(), *boneyComb.GetNachrichtenReferenznummer(), is.EqualTo("EJEMPOW3DTST01"))
+			then.AssertThat(s.T(), *boneyComb.GetPruefidentifikator(), is.EqualTo("13019"))
+			then.AssertThat(s.T(), *boneyComb.GetAbsenderCode(), is.EqualTo("9900080000007"))
+			then.AssertThat(s.T(), *boneyComb.GetEmpfaengerCode(), is.EqualTo("9903111000003"))
+
+			firstMeLo, _ := boneyComb.GetSingle(botyp.MESSLOKATION)
+			then.AssertThat(s.T(), firstMeLo.(*bo.Messlokation).MesslokationsId, is.EqualTo("91612195748")) // <-- this does not look like a melo but that's not the point of the test
+			continue
 		}
 	}
+}
+
+// newDecimalFromString returns a new decimal for a given string. This allows to inline create new decimals without caring about the error. Anyways this function will panic if there is an error.
+// Background ist, that for decimal.NewFromString it is guaranteed, that the created decimal values are deep equatable (https://github.com/shopspring/decimal/blob/9ffd602a49ccb618af362e7a17f6a1e4bcb0afa8/decimal_test.go#L343 )
+// This is _not_ the case for decimal.New() or decimal.NewFromFloat()
+func newDecimalFromString(s string) decimal.Decimal {
+	result, err := decimal.NewFromString(s)
+	if err != nil {
+		panic(fmt.Errorf("Error while converting '%s'", s))
+	}
+	return result
 }
