@@ -8,7 +8,6 @@ import (
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
@@ -58,7 +57,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 				Bezugsgroesse:            0,
 				Zeitbasis:                nil,
 				Tarifzeit:                nil,
-				BDEWArtikelnummer:        artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
+				BdewArtikelnummer:        artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
 				ArtikelId:                nil,
 				Zonungsgroesse:           nil,
 				FreimengeBlindarbeit:     decimal.NullDecimal{Valid: false},
