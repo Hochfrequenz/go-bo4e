@@ -35,6 +35,7 @@ var (
 		"ZEITREIHE":                   ZEITREIHE,
 		"HANDELSUNSTIMMIGKEIT":        HANDELSUNSTIMMIGKEIT,
 		"AVIS":                        AVIS,
+		"STATUSBERICHT":               STATUSBERICHT,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -64,6 +65,7 @@ var (
 		ZEITREIHE:                   "ZEITREIHE",
 		HANDELSUNSTIMMIGKEIT:        "HANDELSUNSTIMMIGKEIT",
 		AVIS:                        "AVIS",
+		STATUSBERICHT:               "STATUSBERICHT",
 	}
 )
 
@@ -97,6 +99,7 @@ func init() {
 			interface{}(ZEITREIHE).(fmt.Stringer).String():                   ZEITREIHE,
 			interface{}(HANDELSUNSTIMMIGKEIT).(fmt.Stringer).String():        HANDELSUNSTIMMIGKEIT,
 			interface{}(AVIS).(fmt.Stringer).String():                        AVIS,
+			interface{}(STATUSBERICHT).(fmt.Stringer).String():               STATUSBERICHT,
 		}
 	}
 }
