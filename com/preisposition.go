@@ -30,9 +30,9 @@ type Preisposition struct {
 	FreimengeBlindarbeit     decimal.NullDecimal                     `json:"freimengeBlindarbeit,omitempty" validate:"required"`     // Der Anteil der Menge der Blindarbeit in Prozent von der Wirkarbeit, für die keine Abrechnung erfolgt
 	FreimengeLeistungsfaktor decimal.NullDecimal                     `json:"freimengeLeistungsfaktor,omitempty" validate:"required"` // Der cos phi (Verhältnis Wirkleistung/Scheinleistung) aus dem die Freimenge für die Blindarbeit berechnet wird als tan phi (Verhältnis Blindleistung/Wirkleistung)
 	Preisstaffeln            []Preisstaffel                          `json:"preisstaffel" validate:"required"`                       // Preisstaffeln, die zu dieser Preisposition gehören
-	Preisschluesselstamm     string                                  `json:"preisschluesselstamm,omitempty"`                         // Preisschlüsselstamm
-	Positionsnummer          int                                     `json:"positionsnummer,omitempty"`                              // Fortlaufende Nummer für die Preisposition
-	Messebene                netzebene.Netzebene                     `json:"messebene,omitempty"`                                    // Vgl. PRICAT IMD 7009
-	Beschreibung             string                                  `json:"beschreibung,omitempty"`                                 // Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
-	Verarbeitungszeitraum    Zeitraum                                `json:"verarbeitungszeitraum,omitempty"`                        // Verarbeitungszeitraum
+	Preisschluesselstamm     string                                  `json:"preisschluesselstamm,omitempty" validate:"omitempty"`    // Preisschlüsselstamm
+	Positionsnummer          int                                     `json:"positionsnummer,omitempty" validate:"omitempty"`         // Fortlaufende Nummer für die Preisposition
+	Messebene                netzebene.Netzebene                     `json:"messebene,omitempty" validate:"omitempty"`               // Vgl. PRICAT IMD 7009
+	Beschreibung             string                                  `json:"beschreibung,omitempty" validate:"omitempty"`            // Produkt-/Leistungsbeschreibung, wenn IMD+X vorhanden Vgl. PRICAT IMD 7008
+	Verarbeitungszeitraum    Zeitraum                                `json:"verarbeitungszeitraum,omitempty" validate:"omitempty"`   // Verarbeitungszeitraum
 }
