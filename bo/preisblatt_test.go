@@ -2,12 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
-	"reflect"
-	"strings"
-	"time"
-
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
+	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
@@ -20,6 +17,9 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/shopspring/decimal"
+	"reflect"
+	"strings"
+	"time"
 )
 
 // Test_Preisblatt_Deserialization tests serialization and deserialization of Preisblatt
