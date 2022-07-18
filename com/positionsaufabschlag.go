@@ -10,9 +10,9 @@ import (
 // (Abschlag) Zusatzvereinbarungen, die individuell zu einem neuen oder bestehenden Liefervertrag abgeschlossen werden
 // können. Es können mehrere Auf-/Abschläge gleichzeitig ausgewählt werden.
 type PositionsAufAbschlag struct {
-	Bezeichnung          string                            `json:"bezeichnung,omitempty" validate:"required"`          // Bezeichnung des Auf-/Abschlags
-	Beschreibung         string                            `json:"beschreibung,omitempty" validate:"required"`         // Beschreibung zum Auf-/Abschlags
-	AufAbschlagstyp      aufabschlagstyp.AufAbschlagstyp   `json:"aufabschlagstyp,omitempty" validate:"required"`      // Typ des AufAbschlages
-	AufAbschlagswert     decimal.NullDecimal               `json:"aufabschlagswert,omitempty" validate:"required"`     // Höhe des AufAbschlages
-	AufAbschlagswaehrung waehrungseinheit.Waehrungseinheit `json:"aufabschlagswaehrung,omitempty" validate:"required"` //  Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh)
+	Bezeichnung          string                            `json:"bezeichnung" validate:"required"`          // Bezeichnung des Auf-/Abschlags
+	Beschreibung         string                            `json:"beschreibung" validate:"required"`         // Beschreibung zum Auf-/Abschlags
+	AufAbschlagstyp      aufabschlagstyp.AufAbschlagstyp   `json:"aufabschlagstyp" validate:"required"`      // Typ des AufAbschlages
+	AufAbschlagswert     decimal.NullDecimal               `json:"aufabschlagswert" validate:"required"`     // Höhe des AufAbschlages
+	AufAbschlagswaehrung waehrungseinheit.Waehrungseinheit `json:"aufabschlagswaehrung" validate:"required"` //  Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh)
 }
