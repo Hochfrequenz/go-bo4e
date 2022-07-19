@@ -33,4 +33,5 @@ const (
 	ZEITREIHE                         // ZEITREIHE is data over time (e.g. consumption, prognosis etc.)
 	HANDELSUNSTIMMIGKEIT              // HANDELSUNSTIMMIGKEIT contains information about discrepancies in market communication.
 	AVIS                              // AVIS is a REMADV
+	STATUSBERICHT                     // Statusbericht states the status of a process and can be used for APERAK or IFTSTA
 )
