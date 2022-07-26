@@ -1,17 +1,24 @@
 name: golangci-lint
 on:
-  push:
   pull_request:
 jobs:
   golangci:
+    strategy:
+      matrix:
+        go-version: ["1.18.x"] # linting in 1 go version is enough
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     name: lint
-    runs-on: ubuntu-latest
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@v2
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.29
+          version: v1.45.0
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir
