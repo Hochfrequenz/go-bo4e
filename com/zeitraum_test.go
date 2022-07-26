@@ -18,6 +18,8 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 		Einheit:        zeiteinheit.MINUTE,
 		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	}
 	serializedZeitraum, err := json.Marshal(zeitraum)
@@ -75,6 +77,8 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 			Einheit:        zeiteinheit.Zeiteinheit(0),
 			Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+			Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+			Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 		com.Zeitraum{
@@ -84,6 +88,8 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 		com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+			Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+			Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validZeitraums)
