@@ -3,6 +3,8 @@ package rechnungstyp
 import (
 	"database/sql/driver"
 	"fmt"
+
+	"github.com/hochfrequenz/go-bo4e/internal/dbScanValue"
 )
 
 // Rechnungstyp ist eine Abbildung verschiedener Rechnungstypen zur Kennzeichnung von bo.Rechnung en
@@ -37,16 +39,10 @@ func (r Rechnungstyp) Value() (driver.Value, error) {
 
 // Scan - Implement sql scanner interface to read the json representation from the DB
 func (r *Rechnungstyp) Scan(value interface{}) error {
-	// if value is nil, false
-	if value == nil || value.(*string) == nil {
-		// set the value of the pointer to 0 as default
-		*r = 0
-		return nil
+	v, err := dbScanValue.GetValueFromDB[Rechnungstyp](value, _RechnungstypNameToValue)
+	if err != nil {
+		return err
 	}
-	s := *value.(*string)
-	if v, ok := _RechnungstypNameToValue[s]; ok {
-		*r = v
-		return nil
-	}
-	return fmt.Errorf("could not read %s", s)
+	*r = v
+	return nil
 }
