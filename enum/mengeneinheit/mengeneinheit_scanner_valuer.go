@@ -1,4 +1,4 @@
-package rechnungstyp
+package mengeneinheit
 
 import (
 	"database/sql/driver"
@@ -8,8 +8,8 @@ import (
 
 // Value returns the string representation of r or an error, if no string representation exists.
 // It implements the sql.Valuer interface to be useable by sql drivers when storing enums.
-func (r Rechnungstyp) Value() (driver.Value, error) {
-	s, ok := _RechnungstypValueToName[r]
+func (r Mengeneinheit) Value() (driver.Value, error) {
+	s, ok := _MengeneinheitValueToName[r]
 	if ok {
 		return s, nil
 	}
@@ -17,9 +17,9 @@ func (r Rechnungstyp) Value() (driver.Value, error) {
 }
 
 // Scan sets r to the enum value represented by string
-func (r *Rechnungstyp) Scan(src interface{}) error {
-	f := typemapper.TypeFromValue[Rechnungstyp]
-	v, err := f(src, _RechnungstypNameToValue)
+func (r *Mengeneinheit) Scan(src interface{}) error {
+	f := typemapper.TypeFromValue[Mengeneinheit]
+	v, err := f(src, _MengeneinheitNameToValue)
 	if err != nil {
 		return err
 	}

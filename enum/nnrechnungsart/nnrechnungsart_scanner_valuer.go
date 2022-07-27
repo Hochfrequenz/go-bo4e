@@ -1,4 +1,4 @@
-package rechnungstyp
+package nnrechnungsart
 
 import (
 	"database/sql/driver"
@@ -8,8 +8,8 @@ import (
 
 // Value returns the string representation of r or an error, if no string representation exists.
 // It implements the sql.Valuer interface to be useable by sql drivers when storing enums.
-func (r Rechnungstyp) Value() (driver.Value, error) {
-	s, ok := _RechnungstypValueToName[r]
+func (r NNRechnungsart) Value() (driver.Value, error) {
+	s, ok := _NNRechnungsartValueToName[r]
 	if ok {
 		return s, nil
 	}
@@ -17,9 +17,9 @@ func (r Rechnungstyp) Value() (driver.Value, error) {
 }
 
 // Scan sets r to the enum value represented by string
-func (r *Rechnungstyp) Scan(src interface{}) error {
-	f := typemapper.TypeFromValue[Rechnungstyp]
-	v, err := f(src, _RechnungstypNameToValue)
+func (r *NNRechnungsart) Scan(src interface{}) error {
+	f := typemapper.TypeFromValue[NNRechnungsart]
+	v, err := f(src, _NNRechnungsartNameToValue)
 	if err != nil {
 		return err
 	}
