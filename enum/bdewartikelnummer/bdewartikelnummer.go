@@ -1,10 +1,5 @@
 package bdewartikelnummer
 
-import (
-	"database/sql/driver"
-	"fmt"
-)
-
 // BDEWArtikelnummer is a readable representation of the article numbers of BDEW
 //go:generate stringer --type BDEWArtikelnummer
 //go:generate jsonenums --type BDEWArtikelnummer
@@ -59,28 +54,3 @@ const (
 	MSB_INKL_MESSUNG                                             // MSB_INKL_MESSUNG has the BDEW article number 9990001000798
 	AUSGLEICHSENERGIE_UNTERDECKUNG                               // AUSGLEICHSENERGIE_UNTERDECKUNG has the BDEW article number 9990001000805
 )
-
-// Value sets the value that is written to a database, for that we just use the json representation
-func (r BDEWArtikelnummer) Value() (driver.Value, error) {
-	s, ok := _BDEWArtikelnummerValueToName[r]
-	if ok {
-		return s, nil
-	}
-	return nil, fmt.Errorf("could not stringify %s", r)
-}
-
-// Scan - Implement sql scanner interface to read the json representation from the DB
-func (r *BDEWArtikelnummer) Scan(value interface{}) error {
-	// if value is nil, false
-	if value == nil || value.(*string) == nil {
-		// set the value of the pointer to 0 as default
-		*r = 0
-		return nil
-	}
-	s := *value.(*string)
-	if v, ok := _BDEWArtikelnummerNameToValue[s]; ok {
-		*r = v
-		return nil
-	}
-	return fmt.Errorf("could not read %s", s)
-}
