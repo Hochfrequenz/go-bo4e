@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
-	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverwantwortung"
+	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
