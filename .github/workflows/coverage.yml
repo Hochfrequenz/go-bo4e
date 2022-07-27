@@ -16,8 +16,12 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Calc coverage
-        run: go test ./... -v -covermode=count -coverprofile=coverage.out
+      - name: Calc coverage BO
+        run: go test ./bo -v -covermode=count -coverprofile=coverage.bo.out
+      - name: Calc coverage COM
+        run: go test ./com -v -covermode=count -coverprofile=coverage.com.out
+      - name: Merge cover results
+        run: cat coverage.bo.out > coverage.out && cat coverage.com.out >> coverage.out
       - name: Convert coverage to lcov
         uses: jandelgado/gcov2lcov-action@v1.0.9
       - name: Enforce Min Coverage
