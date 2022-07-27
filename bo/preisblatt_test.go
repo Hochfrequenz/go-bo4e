@@ -2,10 +2,6 @@ package bo_test
 
 import (
 	"encoding/json"
-	"reflect"
-	"strings"
-	"time"
-
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -21,6 +17,9 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/shopspring/decimal"
+	"reflect"
+	"strings"
+	"time"
 )
 
 // Test_Preisblatt_Deserialization tests serialization and deserialization of Preisblatt
@@ -49,18 +48,21 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 		},
 		Gueltigkeit: com.Zeitraum{
 			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
+			Startdatum:     time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 		},
 		Preispositionen: []com.Preisposition{
 			{
-				Berechnungsmethode:       0,
-				Leistungstyp:             0,
-				Preiseinheit:             waehrungseinheit.EUR,
-				Bezugsgroesse:            0,
-				Zeitbasis:                nil,
-				Tarifzeit:                nil,
-				BDEWArtikelnummer:        artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
-				ArtikelId:                nil,
-				Zonungsgroesse:           nil,
+				Berechnungsmethode:  0,
+				Leistungstyp:        0,
+				Leistungsbezeichung: "Preisblatt MSB",
+				Preiseinheit:        waehrungseinheit.EUR,
+				Bezugsgroesse:       0,
+				Zeitbasis:           nil,
+				Tarifzeit:           nil,
+				BdewArtikelnummer:   artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
+				ArtikelId:           nil,
+				Zonungsgroesse:      nil,
+
 				FreimengeBlindarbeit:     decimal.NullDecimal{Valid: false},
 				FreimengeLeistungsfaktor: decimal.NullDecimal{Valid: false},
 				Preisstaffeln: []com.Preisstaffel{
@@ -154,6 +156,8 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 			},
 			Gueltigkeit: com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC),
+				Startdatum:     time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC),
+				Enddatum:       time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC),
 				Endzeitpunkt:   time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC),
 			},
 			Preispositionen: []com.Preisposition{},

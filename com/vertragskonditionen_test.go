@@ -22,10 +22,14 @@ var validVertragskonditionen = com.Vertragskonditionen{
 	Kuendigungsfrist: &com.Zeitraum{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+		Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
 	Vertragsverlaengerung: &com.Zeitraum{
 		Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startdatum:     time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+		Enddatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
 	Abschlagszyklus: &com.Zeitraum{
 		Einheit: zeiteinheit.JAHR,

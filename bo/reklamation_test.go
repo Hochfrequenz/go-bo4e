@@ -80,7 +80,9 @@ func (s *Suite) Test_Successful_Reklamation_Validation() {
 			ObisKennzahl: obis("1-0:1.8.0"),
 			ZeitraumMesswertanfrage: com.Zeitraum{
 				Startzeitpunkt: time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
+				Startdatum:     time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
 				Endzeitpunkt:   time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
+				Enddatum:       time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
 			}.AsPointer(),
 			Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 		},

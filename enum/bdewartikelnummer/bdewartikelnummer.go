@@ -53,4 +53,10 @@ const (
 	STEUERBOX                                                    // STEUERBOX has the BDEW article number 9990001000780
 	MSB_INKL_MESSUNG                                             // MSB_INKL_MESSUNG has the BDEW article number 9990001000798
 	AUSGLEICHSENERGIE_UNTERDECKUNG                               // AUSGLEICHSENERGIE_UNTERDECKUNG has the BDEW article number 9990001000805
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_1_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 1 MsbG with article number 9990001000813
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_2_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 2 MsbG with article number 9990001000821
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_3_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 3 MsbG with article number 9990001000839
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 4 MsbG with article number 9990001000847
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG with article number 9990001000855
+	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG                     // Zusatzdienstleistung nach § 35 Abs. 3 MsbG with article number 9990001000863
 )
