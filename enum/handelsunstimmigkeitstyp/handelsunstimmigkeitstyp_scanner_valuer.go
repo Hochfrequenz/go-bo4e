@@ -1,3 +1,4 @@
+// Code auto-generated; DO NOT EDIT.
 package handelsunstimmigkeitstyp
 
 import (
@@ -16,7 +17,8 @@ func (r Handelsunstimmigkeitstyp) Value() (driver.Value, error) {
 	return nil, fmt.Errorf("could not stringify %s", r)
 }
 
-// Scan sets r to the enum value represented by string
+// Scan sets r to the enum value represented by src.
+// It implements the sql.Scanner interface to be useable by sql drivers when reading from database.
 func (r *Handelsunstimmigkeitstyp) Scan(src interface{}) error {
 	f := typemapper.TypeFromValue[Handelsunstimmigkeitstyp]
 	v, err := f(src, _HandelsunstimmigkeitstypNameToValue)

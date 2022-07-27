@@ -1,3 +1,4 @@
+// Code auto-generated; DO NOT EDIT.
 package reklamationsgrund
 
 import (
@@ -16,7 +17,8 @@ func (r Reklamationsgrund) Value() (driver.Value, error) {
 	return nil, fmt.Errorf("could not stringify %s", r)
 }
 
-// Scan sets r to the enum value represented by string
+// Scan sets r to the enum value represented by src.
+// It implements the sql.Scanner interface to be useable by sql drivers when reading from database.
 func (r *Reklamationsgrund) Scan(src interface{}) error {
 	f := typemapper.TypeFromValue[Reklamationsgrund]
 	v, err := f(src, _ReklamationsgrundNameToValue)
