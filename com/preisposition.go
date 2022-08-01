@@ -29,7 +29,7 @@ type Preisposition struct {
 	ZuAbschlaege             *PositionsAufAbschlag                   `json:"zuabschlaege,omitempty" validate:"omitempty"`            // Zuschläge oder Abschläge auf die Position
 	FreimengeBlindarbeit     decimal.NullDecimal                     `json:"freimengeBlindarbeit,omitempty" validate:"required"`     // Der Anteil der Menge der Blindarbeit in Prozent von der Wirkarbeit, für die keine Abrechnung erfolgt
 	FreimengeLeistungsfaktor decimal.NullDecimal                     `json:"freimengeLeistungsfaktor,omitempty" validate:"required"` // Der cos phi (Verhältnis Wirkleistung/Scheinleistung) aus dem die Freimenge für die Blindarbeit berechnet wird als tan phi (Verhältnis Blindleistung/Wirkleistung)
-	Preisstaffeln            []Preisstaffel                          `json:"preisstaffel" validate:"required"`                       // Preisstaffeln, die zu dieser Preisposition gehören
+	Preisstaffeln            []Preisstaffel                          `json:"preisstaffeln" validate:"required"`                      // Preisstaffeln, die zu dieser Preisposition gehören
 	Preisschluesselstamm     string                                  `json:"preisschluesselstamm,omitempty" validate:"omitempty"`    // Preisschlüsselstamm
 	Positionsnummer          int                                     `json:"positionsnummer,omitempty" validate:"omitempty"`         // Fortlaufende Nummer für die Preisposition
 	Messebene                netzebene.Netzebene                     `json:"messebene,omitempty" validate:"omitempty"`               // Vgl. PRICAT IMD 7009

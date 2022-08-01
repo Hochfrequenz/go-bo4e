@@ -7,7 +7,8 @@ type Kalkulationsmethode int
 
 const (
 	// Stufenmodell, d.h. die Gesamtmenge wird in eine Stufe eingeordnet und für die gesamte Menge gilt der so ermittelte Preis
-	STUFEN                                                                 Kalkulationsmethode = iota + 1
+	KEINE                                                                  Kalkulationsmethode = iota + 1
+	STAFFELN                                                                                   // Staffelmodell, d.h. die Gesamtmenge wird in eine Staffel eingeordnet und für die gesamte Menge gilt der so ermittelte Preis
 	ZONEN                                                                                      //	Zonenmodell, d.h. die Gesamtmenge wird auf die Zonen aufgeteilt und für die Teilmengen gilt der jeweilige Preis der Zone.
 	VORZONEN_GP                                                                                //	Vorzonengrundpreis
 	SIGMOID                                                                                    // Sigmoidfunktion

@@ -9,7 +9,8 @@ import (
 
 var (
 	_KalkulationsmethodeNameToValue = map[string]Kalkulationsmethode{
-		"STUFEN":                        STUFEN,
+		"KEINE": 						 KEINE,
+		"STAFFELN":                      STAFFELN,
 		"ZONEN":                         ZONEN,
 		"VORZONEN_GP":                   VORZONEN_GP,
 		"SIGMOID":                       SIGMOID,
@@ -28,7 +29,8 @@ var (
 	}
 
 	_KalkulationsmethodeValueToName = map[Kalkulationsmethode]string{
-		STUFEN:                        "STUFEN",
+		KEINE:						   "KEINE",
+		STAFFELN:                      "STAFFELN",
 		ZONEN:                         "ZONEN",
 		VORZONEN_GP:                   "VORZONEN_GP",
 		SIGMOID:                       "SIGMOID",
@@ -51,7 +53,8 @@ func init() {
 	var v Kalkulationsmethode
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_KalkulationsmethodeNameToValue = map[string]Kalkulationsmethode{
-			interface{}(STUFEN).(fmt.Stringer).String():                                                                 STUFEN,
+			interface{}(KEINE).(fmt.Stringer).String():                                                                  KEINE,
+			interface{}(STAFFELN).(fmt.Stringer).String():                                                               STAFFELN,
 			interface{}(ZONEN).(fmt.Stringer).String():                                                                  ZONEN,
 			interface{}(VORZONEN_GP).(fmt.Stringer).String():                                                            VORZONEN_GP,
 			interface{}(SIGMOID).(fmt.Stringer).String():                                                                SIGMOID,
