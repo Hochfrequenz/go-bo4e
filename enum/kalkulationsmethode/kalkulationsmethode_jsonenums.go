@@ -9,7 +9,7 @@ import (
 
 var (
 	_KalkulationsmethodeNameToValue = map[string]Kalkulationsmethode{
-		"KEINE": 						 KEINE,
+		"KEINE":                         KEINE,
 		"STAFFELN":                      STAFFELN,
 		"ZONEN":                         ZONEN,
 		"VORZONEN_GP":                   VORZONEN_GP,
@@ -29,7 +29,7 @@ var (
 	}
 
 	_KalkulationsmethodeValueToName = map[Kalkulationsmethode]string{
-		KEINE:						   "KEINE",
+		KEINE:                         "KEINE",
 		STAFFELN:                      "STAFFELN",
 		ZONEN:                         "ZONEN",
 		VORZONEN_GP:                   "VORZONEN_GP",
