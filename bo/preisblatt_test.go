@@ -60,7 +60,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 				Zeitbasis:           nil,
 				Tarifzeit:           nil,
 				BdewArtikelnummer:   artikel(bdewartikelnummer.MSB_INKL_MESSUNG),
-				ArtikelId:           nil,
+				ArtikelId:           "ArtikelID",
 				Zonungsgroesse:      nil,
 
 				FreimengeBlindarbeit:     decimal.NullDecimal{Valid: false},

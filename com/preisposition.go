@@ -1,7 +1,6 @@
 package com
 
 import (
-	"github.com/hochfrequenz/go-bo4e/enum/artikelid"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
 	"github.com/hochfrequenz/go-bo4e/enum/bemessungsgroesse"
 	"github.com/hochfrequenz/go-bo4e/enum/kalkulationsmethode"
@@ -24,7 +23,7 @@ type Preisposition struct {
 	Zeitbasis                *zeiteinheit.Zeiteinheit                `json:"zeitbasis,omitempty" validate:"required"`                // Die Zeit(dauer) auf die sich der Preis bezieht. Z.B. ein Jahr für einen Leistungspreis der in €/kW/Jahr ausgegeben wird
 	Tarifzeit                *tarifzeit.Tarifzeit                    `json:"tarifzeit,omitempty" validate:"required"`                // Festlegung, für welche Tarifzeit der Preis hier festgelegt ist
 	BdewArtikelnummer        *bdewartikelnummer.BDEWArtikelnummer    `json:"bdewartikelnummer,omitempty" validate:"required"`        // Eine vom BDEW standardisierte Bezeichnug für die abgerechnete Leistungserbringung. Diese Artikelnummer wird auch im Rechnungsteil der INVOIC verwendet
-	ArtikelId                *artikelid.ArtikelId                    `json:"artikelid,omitempty" validate:"required"`                // Standardisierte vom BDEW herausgegebene Liste, welche im Strommarkt die BDEW-Artikelnummer ablöst
+	ArtikelId                string                                  `json:"artikelid,omitempty" validate:"required"`                // Standardisierte vom BDEW herausgegebene Liste, welche im Strommarkt die BDEW-Artikelnummer ablöst
 	Zonungsgroesse           *bemessungsgroesse.Bemessungsgroesse    `json:"zonungsgroesse,omitempty" validate:"required"`           // Mit der Menge der hier angegebenen Größe wird die Staffelung/Zonung durchgeführt. Z.B. Vollbenutzungsstunden
 	ZuAbschlaege             *PositionsAufAbschlag                   `json:"zuabschlaege,omitempty" validate:"omitempty"`            // Zuschläge oder Abschläge auf die Position
 	FreimengeBlindarbeit     decimal.NullDecimal                     `json:"freimengeBlindarbeit,omitempty" validate:"required"`     // Der Anteil der Menge der Blindarbeit in Prozent von der Wirkarbeit, für die keine Abrechnung erfolgt
