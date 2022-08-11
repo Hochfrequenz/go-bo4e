@@ -20,6 +20,7 @@ var (
 		"ABSCHLUSSRECHNUNG":          ABSCHLUSSRECHNUNG,
 		"MSBRECHNUNG":                MSBRECHNUNG,
 		"KAPAZITAETSRECHNUNG":        KAPAZITAETSRECHNUNG,
+		"SONDERRECHNUNG":             SONDERRECHNUNG,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
@@ -34,6 +35,7 @@ var (
 		ABSCHLUSSRECHNUNG:          "ABSCHLUSSRECHNUNG",
 		MSBRECHNUNG:                "MSBRECHNUNG",
 		KAPAZITAETSRECHNUNG:        "KAPAZITAETSRECHNUNG",
+		SONDERRECHNUNG:             "SONDERRECHNUNG",
 	}
 )
 
@@ -52,6 +54,7 @@ func init() {
 			interface{}(ABSCHLUSSRECHNUNG).(fmt.Stringer).String():          ABSCHLUSSRECHNUNG,
 			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                MSBRECHNUNG,
 			interface{}(KAPAZITAETSRECHNUNG).(fmt.Stringer).String():        KAPAZITAETSRECHNUNG,
+			interface{}(SONDERRECHNUNG).(fmt.Stringer).String():             SONDERRECHNUNG,
 		}
 	}
 }
