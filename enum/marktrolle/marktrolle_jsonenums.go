@@ -22,6 +22,7 @@ var (
 		"RB":              RB,
 		"KUNDE":           KUNDE,
 		"INTERESSENT":     INTERESSENT,
+		"GMSB":            GMSB,
 	}
 
 	_MarktrolleValueToName = map[Marktrolle]string{
@@ -38,6 +39,7 @@ var (
 		RB:              "RB",
 		KUNDE:           "KUNDE",
 		INTERESSENT:     "INTERESSENT",
+		GMSB:            "GMSB",
 	}
 )
 
@@ -58,6 +60,7 @@ func init() {
 			interface{}(RB).(fmt.Stringer).String():              RB,
 			interface{}(KUNDE).(fmt.Stringer).String():           KUNDE,
 			interface{}(INTERESSENT).(fmt.Stringer).String():     INTERESSENT,
+			interface{}(GMSB).(fmt.Stringer).String():            GMSB,
 		}
 	}
 }
