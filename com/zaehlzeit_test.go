@@ -2,11 +2,9 @@ package com_test
 
 import (
 	"encoding/json"
-	"github.com/go-playground/validator/v10"
-	"strings"
-
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
+	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 )
 
@@ -19,10 +17,7 @@ func (s *Suite) Test_Zaehlzeit_Deserialization() {
 	}
 	serializedZaehlzeit, err := json.Marshal(zaehlzeit)
 	then.AssertThat(s.T(), serializedZaehlzeit, is.Not(is.Nil()))
-	jsonString := string(serializedZaehlzeit)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "AAAA"), is.True())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ZZZZ"), is.False())
 	deserializedZaehlzeit := com.Zaehlzeit{}
 	err = json.Unmarshal(serializedZaehlzeit, &deserializedZaehlzeit)
 	then.AssertThat(s.T(), err, is.Nil())
