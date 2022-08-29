@@ -20,4 +20,7 @@ const (
 	MSBRECHNUNG
 	KAPAZITAETSRECHNUNG
 	SONDERRECHNUNG
+	SPERRUNG_INBETRIEBNAHME // Rechnung für Sperren und Wiederinbetriebnahme
+	VERZUGSKOSTEN // Verzugskostenrechnung
+	BLINDARBEIT //  Blindarbeitsrechnung
 )
