@@ -14,8 +14,9 @@ import (
 
 // TestVertragsteilDeserialization deserializes a Vertragsteil json
 func (s *Suite) Test_Vertragsteil_Deserialization() {
+	randomStartDate := time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)
 	var vertraqsteil = com.Vertragsteil{
-		Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+		Vertragsteilbeginn: &randomStartDate,
 		Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		Lokation:           "DE0123456789012345678901234567890",
 		VertraglichFixierteMenge: &com.Menge{
@@ -45,41 +46,39 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 //  Test_Vertragsteil_Failed_Validation verifies that the validation fails for invalid Vertragsteil
 func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	validate := validator.New()
+	randomStartDate := time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)
+	randomStartDate2024 := time.Date(2024, 8, 1, 0, 0, 0, 0, time.UTC)
 	invalidVertragsteile := map[string][]interface{}{
 		"required": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate,
 				Vertragsteilende:   time.Time{},
-			},
-			com.Vertragsteil{
-				Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilbeginn: time.Time{},
 			},
 		},
 		"min": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate,
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "tooshort",
 			},
 		},
 		"max": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate,
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "tooooooooooooooooooooooooooooooolong",
 			},
 		},
 		"alphanum": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate,
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "not!alpha&num",
 			},
 		},
 		"gtfield": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2024, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate2024,
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			},
 		},
@@ -90,9 +89,11 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 //  Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
 func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	validate := validator.New()
+	randomStartDate := time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)
+	emptyDate := time.Time{}
 	validVertragsteile := []interface{}{
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragsteilbeginn: &randomStartDate,
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			Lokation:           "DE0123456789012345678901234567890",
 			VertraglichFixierteMenge: &com.Menge{
@@ -109,13 +110,17 @@ func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 			},
 		},
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragsteilbeginn: &randomStartDate,
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 		},
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragsteilbeginn: &randomStartDate,
 			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 			Lokation:           "543231012345",
+		},
+		com.Vertragsteil{
+			Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragsteilbeginn: &emptyDate, // empty start date is supported now (was not prior to https://github.com/Hochfrequenz/BO4E-dotnet/commit/88b974e7e30f8d7c9d23aa4284278c5e344142ef )
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validVertragsteile)
