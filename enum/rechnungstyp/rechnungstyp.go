@@ -21,6 +21,6 @@ const (
 	KAPAZITAETSRECHNUNG
 	SONDERRECHNUNG
 	SPERRUNG_INBETRIEBNAHME // Rechnung für Sperren und Wiederinbetriebnahme
-	VERZUGSKOSTEN // Verzugskostenrechnung
-	BLINDARBEIT //  Blindarbeitsrechnung
+	VERZUGSKOSTEN           // Verzugskostenrechnung
+	BLINDARBEIT             //  Blindarbeitsrechnung
 )
