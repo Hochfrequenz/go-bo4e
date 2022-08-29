@@ -13,9 +13,10 @@ import (
 
 // Test_Deserialization deserializes an abweichung json
 func (s *Suite) Test_Abweichung_Deserialization() {
+	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	abweichung := com.Abweichung{
 		Referenz:                  "AAAA",
-		AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+		AbweichungsGrund:          &ungleichVertragsbeginn,
 		AbweichungsGrundBemerkung: "BBBB",
 	}
 	serializedAbweichung, err := json.Marshal(abweichung)
@@ -33,10 +34,11 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 //  Test_Successful_Validation asserts that the validation does not fail for a valid Abweichung
 func (s *Suite) Test_Successful_Abweichung_Validation() {
 	validate := validator.New()
+	bilanzierteMengeFehlt := abweichungsgrund.BILANZIERTE_MENGE_FEHLT
 	validAbweichung := []interface{}{
 		com.Abweichung{
 			Referenz:                  "",
-			AbweichungsGrund:          abweichungsgrund.BILANZIERTE_MENGE_FEHLT,
+			AbweichungsGrund:          &bilanzierteMengeFehlt,
 			AbweichungsGrundBemerkung: "",
 		},
 	}
