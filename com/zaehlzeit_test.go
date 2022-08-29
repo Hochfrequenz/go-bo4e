@@ -8,12 +8,15 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 )
 
+const foo = "foo"
+const bar = "bar"
+
 func (s *Suite) Test_Zaehlzeit_Deserialization() {
-	foo := "foo"
-	bar := "bar"
+	_foo := foo
+	_bar := bar
 	zaehlzeit := com.Zaehlzeit{
-		Zaehlzeitdefinition: &foo,
-		Zaehlzeitregister:   &bar,
+		Zaehlzeitdefinition: &_foo,
+		Zaehlzeitregister:   &_bar,
 	}
 	serializedZaehlzeit, err := json.Marshal(zaehlzeit)
 	then.AssertThat(s.T(), serializedZaehlzeit, is.Not(is.Nil()))
@@ -26,18 +29,18 @@ func (s *Suite) Test_Zaehlzeit_Deserialization() {
 
 func (s *Suite) Test_Successful_Zaehlzeit_Validation() {
 	validate := validator.New()
-	foo := "foo"
-	bar := "bar"
+	_foo := foo
+	_bar := bar
 	validAbweichung := []interface{}{
 		com.Zaehlzeit{
-			Zaehlzeitdefinition: &foo,
-			Zaehlzeitregister:   &bar,
+			Zaehlzeitdefinition: &_foo,
+			Zaehlzeitregister:   &_bar,
 		},
 		com.Zaehlzeit{
-			Zaehlzeitregister: &bar,
+			Zaehlzeitregister: &_bar,
 		},
 		com.Zaehlzeit{
-			Zaehlzeitdefinition: &foo,
+			Zaehlzeitdefinition: &_foo,
 		},
 		com.Zaehlzeit{},
 	}
