@@ -6,6 +6,6 @@ package artikelidtyp
 type ArtikelIdTyp int
 
 const (
-	ARTIKELID                                                                   ArtikelIdTyp = iota + 1 // Übertragungsnetzbetreiber
-	GRUPPENARTIKELID // Verteilnetzbetreiber
+	ARTIKELID        ArtikelIdTyp = iota + 1 // Übertragungsnetzbetreiber
+	GRUPPENARTIKELID                         // Verteilnetzbetreiber
 )
