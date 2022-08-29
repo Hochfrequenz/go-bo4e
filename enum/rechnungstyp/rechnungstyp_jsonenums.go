@@ -21,6 +21,9 @@ var (
 		"MSBRECHNUNG":                MSBRECHNUNG,
 		"KAPAZITAETSRECHNUNG":        KAPAZITAETSRECHNUNG,
 		"SONDERRECHNUNG":             SONDERRECHNUNG,
+		"SPERRUNG_INBETRIEBNAHME":    SPERRUNG_INBETRIEBNAHME,
+		"VERZUGSKOSTEN":              VERZUGSKOSTEN,
+		"BLINDARBEIT":                BLINDARBEIT,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
@@ -36,6 +39,9 @@ var (
 		MSBRECHNUNG:                "MSBRECHNUNG",
 		KAPAZITAETSRECHNUNG:        "KAPAZITAETSRECHNUNG",
 		SONDERRECHNUNG:             "SONDERRECHNUNG",
+		SPERRUNG_INBETRIEBNAHME:    "SPERRUNG_INBETRIEBNAHME",
+		VERZUGSKOSTEN:              "VERZUGSKOSTEN",
+		BLINDARBEIT:                "BLINDARBEIT",
 	}
 )
 
@@ -55,6 +61,9 @@ func init() {
 			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                MSBRECHNUNG,
 			interface{}(KAPAZITAETSRECHNUNG).(fmt.Stringer).String():        KAPAZITAETSRECHNUNG,
 			interface{}(SONDERRECHNUNG).(fmt.Stringer).String():             SONDERRECHNUNG,
+			interface{}(SPERRUNG_INBETRIEBNAHME).(fmt.Stringer).String():    SPERRUNG_INBETRIEBNAHME,
+			interface{}(VERZUGSKOSTEN).(fmt.Stringer).String():              VERZUGSKOSTEN,
+			interface{}(BLINDARBEIT).(fmt.Stringer).String():                BLINDARBEIT,
 		}
 	}
 }
