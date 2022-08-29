@@ -44,6 +44,7 @@ func (s *Suite) Test_AvisPosition_Deserialization() {
 //  Test_Successful_Validation asserts that the validation does not fail for a valid AvisPosition
 func (s *Suite) Test_Successful_AvisPosition_Validation() {
 	validate := validator.New()
+	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	validAvisPosition := []interface{}{
 		com.AvisPosition{
 			RechnungsNummer: "AAAA",
@@ -59,7 +60,7 @@ func (s *Suite) Test_Successful_AvisPosition_Validation() {
 			},
 			Abweichung: &com.Abweichung{
 				Referenz:                  "BBBB",
-				AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+				AbweichungsGrund:          &ungleichVertragsbeginn,
 				AbweichungsGrundBemerkung: "CCCC",
 			},
 		},

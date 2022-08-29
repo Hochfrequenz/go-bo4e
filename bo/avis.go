@@ -68,7 +68,7 @@ func AvisStructLevelValidationAbweichung(sl validator.StructLevel) {
 	avis := sl.Current().Interface().(Avis)
 	declineAvis := avis.AvisTyp == avistyp.ABGELEHNTE_FORDERUNG
 	for _, avisPosition := range avis.AvisPositionen {
-		if declineAvis && (avisPosition.Abweichung == nil || avisPosition.Abweichung.AbweichungsGrund == 0) {
+		if declineAvis && (avisPosition.Abweichung == nil || avisPosition.Abweichung.AbweichungsGrund == nil || *avisPosition.Abweichung.AbweichungsGrund == 0) {
 			sl.ReportError(avisPosition.Abweichung, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->AbgelehnteForderungRequired", "")
 			return
 		}
