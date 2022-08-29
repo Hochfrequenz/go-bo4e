@@ -20,7 +20,7 @@ import (
 func (s *Suite) Test_Failed_AvisValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.AvisStructLevelValidation, bo.Avis{})
-
+	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	invalidAvisMap := map[string][]interface{}{
 		"required": {
 			bo.Avis{
@@ -140,7 +140,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						},
 						Abweichung: &com.Abweichung{
 							Referenz:         "A",
-							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+							AbweichungsGrund: &ungleichVertragsbeginn,
 						},
 					},
 				},
@@ -174,7 +174,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						},
 						Abweichung: &com.Abweichung{
 							Referenz:         "A",
-							AbweichungsGrund: abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+							AbweichungsGrund: &ungleichVertragsbeginn,
 						},
 					},
 				},
@@ -200,7 +200,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						Storno:          false,
 						Abweichung: &com.Abweichung{
 							Referenz:                  "A",
-							AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+							AbweichungsGrund:          &ungleichVertragsbeginn,
 							AbweichungsGrundBemerkung: "B",
 						},
 						GesamtBrutto: com.Betrag{
@@ -256,6 +256,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 //  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_AvisValidation() {
 	validate := validator.New()
+	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	avisPositive := com.AvisPosition{
 		RechnungsNummer: "P",
 		RechnungsDatum:  time.Now(),
@@ -283,7 +284,7 @@ func (s *Suite) Test_Successful_AvisValidation() {
 		},
 		Abweichung: &com.Abweichung{
 			Referenz:                  "B",
-			AbweichungsGrund:          abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN,
+			AbweichungsGrund:          &ungleichVertragsbeginn,
 			AbweichungsGrundBemerkung: "C",
 		},
 	}
