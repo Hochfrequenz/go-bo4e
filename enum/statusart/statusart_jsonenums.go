@@ -9,23 +9,25 @@ import (
 
 var (
 	_StatusArtNameToValue = map[string]StatusArt{
-		"VERTRAG":                     VERTRAG,
-		"MESSWERTQUALITAET":           MESSWERTQUALITAET,
-		"MESSKLASSIFIZIERUNG":         MESSKLASSIFIZIERUNG,
-		"PLAUSIBILISIERUNGSHINWEIS":   PLAUSIBILISIERUNGSHINWEIS,
-		"ERSATZWERTBILDUNGSVERFAHREN": ERSATZWERTBILDUNGSVERFAHREN,
-		"KORREKTURGRUND":              KORREKTURGRUND,
-		"GASQUALITAET":                GASQUALITAET,
+		"VERTRAG":                           VERTRAG,
+		"MESSWERTQUALITAET":                 MESSWERTQUALITAET,
+		"MESSKLASSIFIZIERUNG":               MESSKLASSIFIZIERUNG,
+		"PLAUSIBILISIERUNGSHINWEIS":         PLAUSIBILISIERUNGSHINWEIS,
+		"ERSATZWERTBILDUNGSVERFAHREN":       ERSATZWERTBILDUNGSVERFAHREN,
+		"KORREKTURGRUND":                    KORREKTURGRUND,
+		"GASQUALITAET":                      GASQUALITAET,
+		"GRUND_ERSATZWERTBILDUNGSVERFAHREN": GRUND_ERSATZWERTBILDUNGSVERFAHREN,
 	}
 
 	_StatusArtValueToName = map[StatusArt]string{
-		VERTRAG:                     "VERTRAG",
-		MESSWERTQUALITAET:           "MESSWERTQUALITAET",
-		MESSKLASSIFIZIERUNG:         "MESSKLASSIFIZIERUNG",
-		PLAUSIBILISIERUNGSHINWEIS:   "PLAUSIBILISIERUNGSHINWEIS",
-		ERSATZWERTBILDUNGSVERFAHREN: "ERSATZWERTBILDUNGSVERFAHREN",
-		KORREKTURGRUND:              "KORREKTURGRUND",
-		GASQUALITAET:                "GASQUALITAET",
+		VERTRAG:                           "VERTRAG",
+		MESSWERTQUALITAET:                 "MESSWERTQUALITAET",
+		MESSKLASSIFIZIERUNG:               "MESSKLASSIFIZIERUNG",
+		PLAUSIBILISIERUNGSHINWEIS:         "PLAUSIBILISIERUNGSHINWEIS",
+		ERSATZWERTBILDUNGSVERFAHREN:       "ERSATZWERTBILDUNGSVERFAHREN",
+		KORREKTURGRUND:                    "KORREKTURGRUND",
+		GASQUALITAET:                      "GASQUALITAET",
+		GRUND_ERSATZWERTBILDUNGSVERFAHREN: "GRUND_ERSATZWERTBILDUNGSVERFAHREN",
 	}
 )
 
@@ -33,13 +35,14 @@ func init() {
 	var v StatusArt
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_StatusArtNameToValue = map[string]StatusArt{
-			interface{}(VERTRAG).(fmt.Stringer).String():                     VERTRAG,
-			interface{}(MESSWERTQUALITAET).(fmt.Stringer).String():           MESSWERTQUALITAET,
-			interface{}(MESSKLASSIFIZIERUNG).(fmt.Stringer).String():         MESSKLASSIFIZIERUNG,
-			interface{}(PLAUSIBILISIERUNGSHINWEIS).(fmt.Stringer).String():   PLAUSIBILISIERUNGSHINWEIS,
-			interface{}(ERSATZWERTBILDUNGSVERFAHREN).(fmt.Stringer).String(): ERSATZWERTBILDUNGSVERFAHREN,
-			interface{}(KORREKTURGRUND).(fmt.Stringer).String():              KORREKTURGRUND,
-			interface{}(GASQUALITAET).(fmt.Stringer).String():                GASQUALITAET,
+			interface{}(VERTRAG).(fmt.Stringer).String():                           VERTRAG,
+			interface{}(MESSWERTQUALITAET).(fmt.Stringer).String():                 MESSWERTQUALITAET,
+			interface{}(MESSKLASSIFIZIERUNG).(fmt.Stringer).String():               MESSKLASSIFIZIERUNG,
+			interface{}(PLAUSIBILISIERUNGSHINWEIS).(fmt.Stringer).String():         PLAUSIBILISIERUNGSHINWEIS,
+			interface{}(ERSATZWERTBILDUNGSVERFAHREN).(fmt.Stringer).String():       ERSATZWERTBILDUNGSVERFAHREN,
+			interface{}(KORREKTURGRUND).(fmt.Stringer).String():                    KORREKTURGRUND,
+			interface{}(GASQUALITAET).(fmt.Stringer).String():                      GASQUALITAET,
+			interface{}(GRUND_ERSATZWERTBILDUNGSVERFAHREN).(fmt.Stringer).String(): GRUND_ERSATZWERTBILDUNGSVERFAHREN,
 		}
 	}
 }
