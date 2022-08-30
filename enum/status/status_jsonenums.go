@@ -72,6 +72,9 @@ var (
 		"WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN": WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN,
 		"KONSISTENZ_UND_SYNCHRONPRUEFUNG":                      KONSISTENZ_UND_SYNCHRONPRUEFUNG,
 		"RECHENWERT":                                           RECHENWERT,
+		"ANGABEN_MESSLOKATION":                                 ANGABEN_MESSLOKATION,
+		"BASIS_MME":                                            BASIS_MME,
+		"GRUND_ANGABEN_MESSLOKATION":                           GRUND_ANGABEN_MESSLOKATION,
 	}
 
 	_StatusValueToName = map[Status]string{
@@ -138,6 +141,9 @@ var (
 		WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN: "WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN",
 		KONSISTENZ_UND_SYNCHRONPRUEFUNG:                      "KONSISTENZ_UND_SYNCHRONPRUEFUNG",
 		RECHENWERT:                                           "RECHENWERT",
+		ANGABEN_MESSLOKATION:                                 "ANGABEN_MESSLOKATION",
+		BASIS_MME:                                            "BASIS_MME",
+		GRUND_ANGABEN_MESSLOKATION:                           "GRUND_ANGABEN_MESSLOKATION",
 	}
 )
 
@@ -208,6 +214,9 @@ func init() {
 			interface{}(WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN).(fmt.Stringer).String():                                     WARTUNGSARBEITEN_AN_EICHRECHTSKONFORMEN_MESSGERAETEN,
 			interface{}(KONSISTENZ_UND_SYNCHRONPRUEFUNG).(fmt.Stringer).String():                                                          KONSISTENZ_UND_SYNCHRONPRUEFUNG,
 			interface{}(RECHENWERT).(fmt.Stringer).String():                                                                               RECHENWERT,
+			interface{}(ANGABEN_MESSLOKATION).(fmt.Stringer).String():                                                                     ANGABEN_MESSLOKATION,
+			interface{}(BASIS_MME).(fmt.Stringer).String():                                                                                BASIS_MME,
+			interface{}(GRUND_ANGABEN_MESSLOKATION).(fmt.Stringer).String():                                                               GRUND_ANGABEN_MESSLOKATION,
 		}
 	}
 }
