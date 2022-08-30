@@ -37,6 +37,7 @@ func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
 	then.AssertThat(s.T(), netznutzungsabrechnungsdaten, is.Not(is.Nil()))
 
 	serializedNnad, err := json.Marshal(netznutzungsabrechnungsdaten)
+	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedNnad, is.Not(is.Nil()))
 
 	var deserializedNnad com.Netznutzungsabrechnungsdaten
