@@ -114,6 +114,10 @@ as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issu
 
 ## Version Notes
 
+### Go 1.19 since v0.3.0
+
+Since [version 0.3.0](https://github.com/Hochfrequenz/go-bo4e/releases/tag/v0.3.0) this library is based on Go 1.19.
+
 ### Go 1.18 since v0.2.0
 
 Since [version 0.2.0](https://github.com/Hochfrequenz/go-bo4e/releases/tag/v0.2.0) this library is based on Go 1.18, because we want to make use of Generics.
