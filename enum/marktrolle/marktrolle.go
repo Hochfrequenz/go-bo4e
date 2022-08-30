@@ -20,4 +20,5 @@ const (
 	RB                         // RB is a Registerbetreiber Beispielsweise Herkunftsnachweisregister
 	KUNDE                      // KUNDE is a Kunde
 	INTERESSENT                // INTERESSENT is a Interessent
+	GMSB                       // GMSB stands for "Grundzuständiger MSB"
 )
