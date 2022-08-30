@@ -2,6 +2,7 @@ package fernschaltung
 
 // Fernschaltung describes whether a meter has a remote control
 // Note that this enum is not official BO4E standard (yet)!
+//
 //go:generate stringer --type Fernschaltung
 //go:generate jsonenums --type Fernschaltung
 type Fernschaltung int

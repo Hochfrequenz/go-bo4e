@@ -1,6 +1,7 @@
 package dienstleistungstyp
 
 // Dienstleistungstyp ist eine Auflistung möglicher abzurechnender Dienstleistungen.
+//
 //go:generate stringer --type Dienstleistungstyp
 //go:generate jsonenums --type Dienstleistungstyp
 type Dienstleistungstyp int

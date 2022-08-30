@@ -42,7 +42,7 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 	then.AssertThat(s.T(), deserializedVertragsteil, is.EqualTo(vertraqsteil))
 }
 
-//  Test_Vertragsteil_Failed_Validation verifies that the validation fails for invalid Vertragsteil
+// Test_Vertragsteil_Failed_Validation verifies that the validation fails for invalid Vertragsteil
 func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	validate := validator.New()
 	invalidVertragsteile := map[string][]interface{}{
@@ -87,7 +87,7 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidVertragsteile)
 }
 
-//  Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
+// Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
 func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	validate := validator.New()
 	validVertragsteile := []interface{}{

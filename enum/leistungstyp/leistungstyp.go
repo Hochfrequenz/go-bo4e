@@ -1,6 +1,7 @@
 package leistungstyp
 
 // Leistungstyp describes the product or service for a price sheet
+//
 //go:generate stringer --type Leistungstyp
 //go:generate jsonenums --type Leistungstyp
 type Leistungstyp int

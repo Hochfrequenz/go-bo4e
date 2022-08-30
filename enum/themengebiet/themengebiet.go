@@ -1,6 +1,7 @@
 package themengebiet
 
 // Themengebiet erlaubt eine thematische Zuordnung, beispielsweise eines bo.Ansprechpartner
+//
 //go:generate stringer --type Themengebiet
 //go:generate jsonenums --type Themengebiet
 type Themengebiet int

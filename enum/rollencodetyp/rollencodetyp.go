@@ -1,6 +1,7 @@
 package rollencodetyp
 
 // Rollencodetyp describes the "vergebende Stelle" / Code Number Registry.
+//
 //go:generate stringer --type Rollencodetyp
 //go:generate jsonenums --type Rollencodetyp
 type Rollencodetyp int

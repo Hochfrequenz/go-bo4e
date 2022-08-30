@@ -60,7 +60,7 @@ func (s *Suite) Test_Failed_MesslokationszuordnungValidation() {
 	VerfiyFailedValidations(s, validate, invalidMesslokationszuordnung)
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid Messlokationszuordnung
+// Test_Successful_Validation asserts that the validation does not fail for a valid Messlokationszuordnung
 func (s *Suite) Test_Successful_Messlokationszuordnung_Validation() {
 	validate := validator.New()
 	validMesslokationszuordnung := []interface{}{

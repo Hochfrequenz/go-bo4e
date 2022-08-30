@@ -1,6 +1,7 @@
 package nnrechnungstyp
 
 // NNRechnungstyp ist der Typ der bo.Netznutzungsrechnung (Abbildung verschiedener in der INVOIC angegebenen Rechnungstypen)
+//
 //go:generate stringer --type NNRechnungstyp
 //go:generate jsonenums --type NNRechnungstyp
 type NNRechnungstyp int

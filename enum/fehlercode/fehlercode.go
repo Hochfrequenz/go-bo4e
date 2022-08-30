@@ -1,6 +1,7 @@
 package fehlercode
 
 // Gibt den FehlerCode eines Fehlers an
+//
 //go:generate stringer --type FehlerCode
 //go:generate jsonenums --type FehlerCode
 type FehlerCode int

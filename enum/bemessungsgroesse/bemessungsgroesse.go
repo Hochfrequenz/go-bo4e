@@ -1,6 +1,7 @@
 package bemessungsgroesse
 
 // Bemessungsgroesse
+//
 //go:generate stringer --type Bemessungsgroesse
 //go:generate jsonenums --type Bemessungsgroesse
 type Bemessungsgroesse int

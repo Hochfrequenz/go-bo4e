@@ -50,7 +50,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(validVertragskonditionen))
 }
 
-//  Test_Vertragskonditionen_Failed_Validation verifies that the validation fails for invalid Vertragskonditionen s
+// Test_Vertragskonditionen_Failed_Validation verifies that the validation fails for invalid Vertragskonditionen s
 func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
@@ -66,7 +66,7 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidZeitraums)
 }
 
-//  Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
+// Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
 func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
 	validate := validator.New()
 	validVertragskonditionens := []interface{}{

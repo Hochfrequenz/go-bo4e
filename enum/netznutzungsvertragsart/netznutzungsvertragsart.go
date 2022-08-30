@@ -2,6 +2,7 @@ package netznutzungsvertragsart
 
 // Netznutzungsvertragsart bildet ab, zwischen wem ein Netznutzungsvertrag besteht
 // Note that this is not official BO4E standard (yet).
+//
 //go:generate stringer --type Netznutzungsvertragsart
 //go:generate jsonenums --type Netznutzungsvertragsart
 type Netznutzungsvertragsart int

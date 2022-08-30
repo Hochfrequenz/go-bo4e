@@ -46,7 +46,7 @@ func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
 	then.AssertThat(s.T(), deserializedNnad, is.EqualTo(netznutzungsabrechnungsdaten))
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid Netznutzungsabrechnungsdaten
+// Test_Successful_Validation asserts that the validation does not fail for a valid Netznutzungsabrechnungsdaten
 func (s *Suite) Test_Successful_Netznutzungsabrechnungsdaten_Validation() {
 	validate := validator.New()
 	validNetznutzungsabrechnungsdaten := []interface{}{

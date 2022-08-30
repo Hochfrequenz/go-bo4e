@@ -1,6 +1,7 @@
 package waehrungscode
 
 // Waehrungscode is an enum for currencies
+//
 //go:generate stringer --type Waehrungscode
 //go:generate jsonenums --type Waehrungscode
 type Waehrungscode int

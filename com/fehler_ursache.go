@@ -1,6 +1,6 @@
 package com
 
-//  Die Komponente wird dazu verwendet die Ursache bzw. Herkunft von Fehlern genauer zu spezifizieren
+// Die Komponente wird dazu verwendet die Ursache bzw. Herkunft von Fehlern genauer zu spezifizieren
 type FehlerUrsache struct {
 	Dokument     *string `json:"dokument,omitempty"`     //
 	Nachricht    *string `json:"nachricht,omitempty"`    //

@@ -1,6 +1,7 @@
 package zaehlertyp
 
 // Zaehlertyp contains different types of meters for power and gas
+//
 //go:generate stringer --type Zaehlertyp
 //go:generate jsonenums --type Zaehlertyp
 type Zaehlertyp int

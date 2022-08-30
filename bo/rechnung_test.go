@@ -257,7 +257,7 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 	VerfiyFailedValidations(s, validate, invalidRechnungs)
 }
 
-//  Test_Successful_Rechnung_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Rechnung_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Rechnung_Validation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})

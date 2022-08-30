@@ -32,7 +32,7 @@ func (s *Suite) Test_Address_Deserialization() {
 	then.AssertThat(s.T(), deserializedAdresse, is.EqualTo(adresse))
 }
 
-//  Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
+// Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
 func (s *Suite) Test_Strasse_XorPostfachValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.AdresseStructLevelValidation, com.Adresse{})
@@ -81,7 +81,7 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 	VerfiyFailedValidations(s, validate, invalidAdressMaps)
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid Adresse
+// Test_Successful_Validation asserts that the validation does not fail for a valid Adresse
 func (s *Suite) Test_Successful_Adresse_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{

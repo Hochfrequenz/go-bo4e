@@ -2,6 +2,7 @@ package netznutzungsabrechnungsvariante
 
 // Netznutzungsabrechnungsvariante beschreibt, wie die Netznutzung abgerechnet wird
 // Note that this is not official BO4E standard (yet).
+//
 //go:generate stringer --type Netznutzungsabrechnungsvariante
 //go:generate jsonenums --type Netznutzungsabrechnungsvariante
 type Netznutzungsabrechnungsvariante int

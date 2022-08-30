@@ -1,6 +1,7 @@
 package kontaktart
 
 // Kontaktart ist die Art des Kontaktes zwischen bo.Geschaeftspartner n.
+//
 //go:generate stringer --type Kontaktart
 //go:generate jsonenums --type Kontaktart
 type Kontaktart int

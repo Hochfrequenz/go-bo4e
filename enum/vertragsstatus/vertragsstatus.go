@@ -1,6 +1,7 @@
 package vertragsstatus
 
 // Vertragsstatus describes different status of contracts
+//
 //go:generate stringer --type Vertragsstatus
 //go:generate jsonenums --type Vertragsstatus
 type Vertragsstatus int

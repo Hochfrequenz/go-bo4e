@@ -1,6 +1,7 @@
 package marktrolle
 
 // The Marktrolle describes the roles of a bo.Marktteilnehmer
+//
 //go:generate stringer --type Marktrolle
 //go:generate jsonenums --type Marktrolle
 type Marktrolle int

@@ -2,6 +2,7 @@ package netznutzungszahler
 
 // Netznutzungszahler bildet ab, wer für die Netznutzung zahlt
 // Note that this is not official BO4E standard (yet).
+//
 //go:generate stringer --type Netznutzungszahler
 //go:generate jsonenums --type Netznutzungszahler
 type Netznutzungszahler int

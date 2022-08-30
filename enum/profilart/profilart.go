@@ -1,6 +1,7 @@
 package profilart
 
 // Profilart describes whether the profile is temperaturabhängig or a Standardlastprofil (SLP)
+//
 //go:generate stringer --type Profilart
 //go:generate jsonenums --type Profilart
 type Profilart int

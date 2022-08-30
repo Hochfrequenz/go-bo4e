@@ -224,7 +224,7 @@ func (s *Suite) Test_Failed_MarktlokationValidation() {
 	VerfiyFailedValidations(s, validate, invalidMarktlokationMap)
 }
 
-//  Test_Successful_Marktlokation_Validation verifies that a valid Marktlokation is validated without errors
+// Test_Successful_Marktlokation_Validation verifies that a valid Marktlokation is validated without errors
 func (s *Suite) Test_Successful_Marktlokation_Validation() {
 	validate := validator.New()
 	registerError := validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)

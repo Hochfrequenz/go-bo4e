@@ -24,7 +24,7 @@ func (s *Suite) Test_Zaehlerstande_Len() {
 	then.AssertThat(s.T(), zaehlerstaende0.Len(), is.EqualTo(0))
 }
 
-//  Test_Zaehlerstande_Swap tests the Zaehlerstaende.Swap function
+// Test_Zaehlerstande_Swap tests the Zaehlerstaende.Swap function
 func (s *Suite) Test_Zaehlerstande_Swap() {
 	zaehlerstaende := com.Zaehlerstaende{
 		com.Zaehlerstand{
@@ -53,7 +53,7 @@ func (s *Suite) Test_Zaehlerstande_Swap() {
 	then.AssertThat(s.T(), zaehlerstaende[2].Wert, is.EqualTo(decimal.NewFromFloat(42.1)))
 }
 
-//  Test_Zaehlerstaende_Less tests the Zaehlerstaende.Less function
+// Test_Zaehlerstaende_Less tests the Zaehlerstaende.Less function
 func (s *Suite) Test_Zaehlerstaende_Less() {
 	zaehlerstaende := com.Zaehlerstaende{
 		com.Zaehlerstand{

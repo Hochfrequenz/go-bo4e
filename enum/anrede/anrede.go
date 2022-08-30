@@ -1,6 +1,7 @@
 package anrede
 
 // Anrede ist eine Auflistung möglicher abzurechnender Dienstleistungen.
+//
 //go:generate stringer --type Anrede
 //go:generate jsonenums --type Anrede
 type Anrede int

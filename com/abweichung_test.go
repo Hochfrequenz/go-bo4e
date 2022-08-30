@@ -31,7 +31,7 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 	then.AssertThat(s.T(), deserializedAbweichung, is.EqualTo(abweichung))
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid Abweichung
+// Test_Successful_Validation asserts that the validation does not fail for a valid Abweichung
 func (s *Suite) Test_Successful_Abweichung_Validation() {
 	validate := validator.New()
 	bilanzierteMengeFehlt := abweichungsgrund.BILANZIERTE_MENGE_FEHLT

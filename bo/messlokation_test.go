@@ -187,7 +187,7 @@ func (s *Suite) Test_Messlokation_DeSerialization_With_Unkonwn_Fields() {
 	then.AssertThat(s.T(), strings.Contains(serializedMeLo, "messlokationsId"), is.True()) // mapped fields should be part of the serialized melo
 }
 
-//  Test_Successful_Messlokation_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Messlokation_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Messlokation_Validation() {
 	validate := validator.New()
 	validMelos := []bo.BusinessObject{

@@ -1,6 +1,7 @@
 package vertragsart
 
 // Vertragsart describes different kinds of contracts
+//
 //go:generate stringer --type Vertragsart
 //go:generate jsonenums --type Vertragsart
 type Vertragsart int

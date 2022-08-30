@@ -1,6 +1,7 @@
 package bdewartikelnummer
 
 // BDEWArtikelnummer is a readable representation of the article numbers of BDEW
+//
 //go:generate stringer --type BDEWArtikelnummer
 //go:generate jsonenums --type BDEWArtikelnummer
 type BDEWArtikelnummer int

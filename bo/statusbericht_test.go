@@ -59,7 +59,7 @@ func (s *Suite) Test_Statusbericht_Deserialization() {
 	then.AssertThat(s.T(), deserializedBericht, is.EqualTo(bericht))
 }
 
-//  Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Statusbericht_Validation() {
 	object := bo.NewBusinessObject(botyp.STATUSBERICHT).(*bo.Statusbericht)
 	object.Status = berichtstatus.ERFOLGREICH

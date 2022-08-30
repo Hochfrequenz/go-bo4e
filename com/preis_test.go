@@ -34,7 +34,7 @@ func (s *Suite) Test_Preis_Deserialization() {
 	then.AssertThat(s.T(), deserializedPreis, is.EqualTo(preis))
 }
 
-//  Test_Successful_Preis_Validation asserts that the validation does not fail for a valid Preis
+// Test_Successful_Preis_Validation asserts that the validation does not fail for a valid Preis
 func (s *Suite) Test_Successful_Preis_Validation() {
 	validate := validator.New()
 	validPrices := []interface{}{
@@ -54,7 +54,7 @@ func (s *Suite) Test_Successful_Preis_Validation() {
 	VerfiySuccessfulValidations(s, validate, validPrices)
 }
 
-//  TestPreisFailedValidation verifies that invalid Preis values are considered invalid
+// TestPreisFailedValidation verifies that invalid Preis values are considered invalid
 func (s *Suite) Test_Preis_FailedValidation() {
 	validate := validator.New()
 	invalidPrices := map[string][]interface{}{

@@ -1,6 +1,7 @@
 package aufabschlagstyp
 
 // AufAbschlagstyp defines , if the Auf- or Abschlag is relative or absolute
+//
 //go:generate stringer --type AufAbschlagstyp
 //go:generate jsonenums --type AufAbschlagstyp
 type AufAbschlagstyp int

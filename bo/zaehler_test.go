@@ -87,7 +87,7 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 	VerfiyFailedValidations(s, validate, invalidVertrags)
 }
 
-//  Test_Successful_Zaehler_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Zaehler_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Zaehler_Validation() {
 	validate := validator.New()
 	validZaehler := []bo.BusinessObject{

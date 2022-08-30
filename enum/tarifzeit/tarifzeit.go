@@ -1,6 +1,7 @@
 package tarifzeit
 
 // Tarifzeit wird zur Kennzeichnung verschiedener Tarifzeiten, beispielsweise zur Bepreisung oder zur Verbrauchsermittlung verwendet.
+//
 //go:generate stringer --type Tarifzeit
 //go:generate jsonenums --type Tarifzeit
 type Tarifzeit int

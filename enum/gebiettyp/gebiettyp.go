@@ -1,6 +1,7 @@
 package gebiettyp
 
 // Gebiettyp is a list of all possible types of domains (Gebiete)
+//
 //go:generate stringer --type Gebiettyp
 //go:generate jsonenums --type Gebiettyp
 type Gebiettyp int

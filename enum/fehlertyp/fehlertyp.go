@@ -1,6 +1,7 @@
 package fehlertyp
 
 // Typen von com.Fehler n
+//
 //go:generate stringer --type FehlerTyp
 //go:generate jsonenums --type FehlerTyp
 type FehlerTyp int

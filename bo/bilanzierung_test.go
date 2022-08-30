@@ -134,7 +134,7 @@ func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 	VerfiyFailedValidations(s, validate, invalidBilanzierungs)
 }
 
-//  Test_Successful_Bilanzierung_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Bilanzierung_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Bilanzierung_Validation() {
 	validate := validator.New()
 	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)

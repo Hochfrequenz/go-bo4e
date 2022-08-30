@@ -167,7 +167,7 @@ var validGp = bo.Geschaeftspartner{
 	},
 }
 
-//  Test_Successful_Geschaeftspartner_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Geschaeftspartner_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
 
 	validate := validator.New()
