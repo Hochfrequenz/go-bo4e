@@ -16,7 +16,9 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
+	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
 )
@@ -24,6 +26,7 @@ import (
 // Test_Marktlokation_Deserialization tests serialization and deserialization of Marktlokation
 func (s *Suite) Test_Marktlokation_Deserialization() {
 	f := false
+	gesperrt := sperrstatus.GESPERRT
 	var malo = bo.Marktlokation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.MARKTLOKATION,
@@ -75,6 +78,14 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 				Arithmetik:      arithmetischeoperation.ADDITION,
 			},
 		},
+		Netznutzungsabrechnungsdaten: []com.Netznutzungsabrechnungsdaten{
+			{
+				Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromFloat(12.34)),
+				Zuschlag:       decimal.NewNullDecimal(decimal.NewFromFloat(56.78)),
+				Abschlag:       decimal.NewNullDecimal(decimal.NewFromFloat(9.10)),
+			},
+		},
+		Sperrstatus: &gesperrt,
 	}
 	serializedMalo, err := json.Marshal(malo)
 	then.AssertThat(s.T(), err, is.Nil())
