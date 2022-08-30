@@ -38,6 +38,9 @@ type Marktlokation struct {
 	Geoadresse                *com.Geokoordinaten          `json:"geoadresse,omitempty" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
 	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation,omitempty" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
 	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
+
+	Netznutzungsabrechnungsdaten []com.Netznutzungsabrechnungsdaten `json:"netznutzungsabrechnungsdaten,omitempty"` // Netznutzungsabrechnungsdaten sind Daten für die Prüfung der Netznutzungsabrechnung
+	Sperrstatus                  sperrstatus.Sperrstatus            `json:"sperrstatus,omitempty"`
 }
 
 // the marktlokationForUnmarshal type is derived from Marktlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
