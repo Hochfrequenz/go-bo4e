@@ -2,8 +2,9 @@ package com_test
 
 import (
 	"encoding/json"
-	"github.com/go-playground/validator/v10"
 	"strings"
+
+	"github.com/go-playground/validator/v10"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -14,10 +15,15 @@ import (
 // Test_Deserialization deserializes an abweichung json
 func (s *Suite) Test_Abweichung_Deserialization() {
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
+	bemerkung := "BBBB"
+	code := "A99"
+	codeliste := "E_0459"
 	abweichung := com.Abweichung{
 		Referenz:                  "AAAA",
 		AbweichungsGrund:          &ungleichVertragsbeginn,
-		AbweichungsGrundBemerkung: "BBBB",
+		AbweichungsGrundBemerkung: &bemerkung,
+		AbweichungsgrundCode:      &code,
+		AbweichungsgrundCodeliste: &codeliste,
 	}
 	serializedAbweichung, err := json.Marshal(abweichung)
 	then.AssertThat(s.T(), serializedAbweichung, is.Not(is.Nil()))
@@ -37,12 +43,25 @@ func (s *Suite) Test_Successful_Abweichung_Validation() {
 	bilanzierteMengeFehlt := abweichungsgrund.BILANZIERTE_MENGE_FEHLT
 	validAbweichung := []interface{}{
 		com.Abweichung{
-			Referenz:                  "",
-			AbweichungsGrund:          &bilanzierteMengeFehlt,
-			AbweichungsGrundBemerkung: "",
+			Referenz:         "",
+			AbweichungsGrund: &bilanzierteMengeFehlt,
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validAbweichung)
+}
+
+func (s *Suite) Test_UnSuccessful_Abweichung_Validation() {
+	validate := validator.New()
+	validate.RegisterStructValidation(com.AbweichungStructLevelValidation, com.Abweichung{})
+	code := "A99"
+
+	invalidAbweichung := map[string][]interface{}{
+		"AbweichungsgrundCodeComplete": {com.Abweichung{
+			Referenz:             "",
+			AbweichungsgrundCode: &code,
+		}},
+	}
+	VerfiyFailedValidations(s, validate, invalidAbweichung)
 }
 
 func (s *Suite) Test_Serialized_Empty_Abweichung_Contains_No_Enum_Defaults() {
