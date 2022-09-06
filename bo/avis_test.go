@@ -21,6 +21,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.AvisStructLevelValidation, bo.Avis{})
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
+	bemerkung := "Bemerkung"
 	invalidAvisMap := map[string][]interface{}{
 		"required": {
 			bo.Avis{
@@ -201,7 +202,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						Abweichung: &com.Abweichung{
 							Referenz:                  "A",
 							AbweichungsGrund:          &ungleichVertragsbeginn,
-							AbweichungsGrundBemerkung: "B",
+							AbweichungsGrundBemerkung: &bemerkung,
 						},
 						GesamtBrutto: com.Betrag{
 							Wert:     decimal.Zero,
@@ -257,6 +258,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 func (s *Suite) Test_Successful_AvisValidation() {
 	validate := validator.New()
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
+	bemerkung := "C"
 	avisPositive := com.AvisPosition{
 		RechnungsNummer: "P",
 		RechnungsDatum:  time.Now(),
@@ -285,7 +287,7 @@ func (s *Suite) Test_Successful_AvisValidation() {
 		Abweichung: &com.Abweichung{
 			Referenz:                  "B",
 			AbweichungsGrund:          &ungleichVertragsbeginn,
-			AbweichungsGrundBemerkung: "C",
+			AbweichungsGrundBemerkung: &bemerkung,
 		},
 	}
 	validAvises := []bo.BusinessObject{
