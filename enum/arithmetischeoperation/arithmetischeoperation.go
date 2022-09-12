@@ -1,6 +1,7 @@
 package arithmetischeoperation
 
 // ArithmetischeOperation describes different arithmetic operations
+//
 //go:generate stringer --type ArithmetischeOperation
 //go:generate jsonenums --type ArithmetischeOperation
 type ArithmetischeOperation int

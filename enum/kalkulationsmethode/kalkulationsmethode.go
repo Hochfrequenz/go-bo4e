@@ -1,6 +1,7 @@
 package kalkulationsmethode
 
 // Kalkulationsmethode are the possible methods for a com.preisposition
+//
 //go:generate stringer --type Kalkulationsmethode
 //go:generate jsonenums --type Kalkulationsmethode
 type Kalkulationsmethode int

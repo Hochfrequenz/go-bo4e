@@ -2,6 +2,7 @@ package schwachlastfaehigkeit
 
 // Schwachlastfaehigkeit ist de facto ein boolean der die Schwachlastfaehigkeit beschreibt
 // Note that this is not official BO4E standard (yet).
+//
 //go:generate stringer --type Schwachlastfaehigkeit
 //go:generate jsonenums --type Schwachlastfaehigkeit
 type Schwachlastfaehigkeit int

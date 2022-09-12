@@ -69,7 +69,7 @@ func (s *Suite) Test_Failed_EnergiemengeValidation() {
 	VerfiyFailedValidations(s, validate, invalidEnergiemengeMap)
 }
 
-//  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
+// TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_EnergiemengeValidation() {
 	validate := validator.New()
 	var verbrauch = com.Verbrauch{

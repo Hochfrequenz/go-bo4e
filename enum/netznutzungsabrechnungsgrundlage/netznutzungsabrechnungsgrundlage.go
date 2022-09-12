@@ -2,6 +2,7 @@ package netznutzungsabrechnungsgrundlage
 
 // Netznutzungsabrechnungsgrundlage beschreibt, auf welcher Grundlage die Netznutzungsabrechnung basiert
 // Note that this is not official BO4E standard (yet).
+//
 //go:generate stringer --type Netznutzungsabrechnungsgrundlage
 //go:generate jsonenums --type Netznutzungsabrechnungsgrundlage
 type Netznutzungsabrechnungsgrundlage int

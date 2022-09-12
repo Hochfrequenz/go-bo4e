@@ -1,6 +1,7 @@
 package gasqualitaet
 
 // Gasqualitaet differentiates between high and low caloric gas
+//
 //go:generate stringer --type Gasqualitaet
 //go:generate jsonenums --type Gasqualitaet
 type Gasqualitaet int

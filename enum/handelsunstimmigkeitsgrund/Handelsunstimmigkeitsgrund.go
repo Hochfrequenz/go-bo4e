@@ -2,6 +2,7 @@ package handelsunstimmigkeitsgrund
 
 // Handelsunstimmigkeitsgrund are the possible types of reasons for the correctness of "Rechnung" or "Lieferschein"
 // (COMDIS SG3 AJT 4465)
+//
 //go:generate stringer --type Handelsunstimmigkeitsgrund
 //go:generate jsonenums --type Handelsunstimmigkeitsgrund
 type Handelsunstimmigkeitsgrund int

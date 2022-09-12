@@ -1,6 +1,7 @@
 package mengeneinheit
 
 // Mengeneinheit is a unit used for measurements
+//
 //go:generate stringer --type Mengeneinheit
 //go:generate jsonenums --type Mengeneinheit
 type Mengeneinheit int

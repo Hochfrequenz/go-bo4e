@@ -50,7 +50,7 @@ func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitraum))
 }
 
-//  Test_Zeitraum_Failed_Validation verifies that the validation fails for invalid Zeitraum s
+// Test_Zeitraum_Failed_Validation verifies that the validation fails for invalid Zeitraum s
 func (s *Suite) Test_Zeitraum_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
@@ -69,7 +69,7 @@ func (s *Suite) Test_Zeitraum_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidZeitraums)
 }
 
-//  Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
+// Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
 func (s *Suite) Test_Successful_Zeitraum_Validation() {
 	validate := validator.New()
 	validZeitraums := []interface{}{

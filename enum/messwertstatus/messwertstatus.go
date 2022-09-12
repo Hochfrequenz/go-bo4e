@@ -1,6 +1,7 @@
 package messwertstatus
 
 // The Messwertstatus is the status of a meter reading
+//
 //go:generate stringer --type Messwertstatus
 //go:generate jsonenums --type Messwertstatus
 type Messwertstatus int

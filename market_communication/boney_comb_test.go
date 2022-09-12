@@ -19,7 +19,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
@@ -156,12 +156,12 @@ func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
 func (s *Suite) Test_BOneyComb_Deserialization() {
 	const dirName = "test_boney_combs"
-	jsonFiles, err := ioutil.ReadDir(dirName)
+	jsonFiles, err := os.ReadDir(dirName)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), len(jsonFiles), is.Not(is.EqualTo(0)))
 
 	for _, file := range jsonFiles {
-		fileContent, readErr := ioutil.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
+		fileContent, readErr := os.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
 		then.AssertThat(s.T(), readErr, is.Nil())
 		then.AssertThat(s.T(), fileContent, is.Not(is.Nil()))
 		var boneyComb market_communication.BOneyComb

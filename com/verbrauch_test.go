@@ -38,7 +38,7 @@ func (s *Suite) Test_Verbrauch_Deserialization() {
 	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(verbrauch))
 }
 
-//  Test_Successful_Verbrauch_Validation asserts that the validation does not fail for a valid Verbrauch
+// Test_Successful_Verbrauch_Validation asserts that the validation does not fail for a valid Verbrauch
 func (s *Suite) Test_Successful_Verbrauch_Validation() {
 	validate := validator.New()
 	validVerbrauch := []interface{}{
@@ -56,7 +56,7 @@ func (s *Suite) Test_Successful_Verbrauch_Validation() {
 	VerfiySuccessfulValidations(s, validate, validVerbrauch)
 }
 
-//  TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
+// TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
 func (s *Suite) Test_Verbrauch_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{

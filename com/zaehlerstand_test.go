@@ -35,7 +35,7 @@ func (s *Suite) Test_Zaehlerstand_Deserialization() {
 	then.AssertThat(s.T(), deserializedZaehlerstand, is.EqualTo(zaehlerstand))
 }
 
-//  Test_Zaehlerstand_Failed_Validation verifies that the validation fails for invalid Zaehlerstand s
+// Test_Zaehlerstand_Failed_Validation verifies that the validation fails for invalid Zaehlerstand s
 func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 	validate := validator.New()
 	invalidZaehlerstand := map[string][]interface{}{
@@ -48,7 +48,7 @@ func (s *Suite) Test_Zaehlerstand_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidZaehlerstand)
 }
 
-//  Test_Successful_Zaehlerstand_Validation asserts that the validation does not fail for a valid Zaehlerstand
+// Test_Successful_Zaehlerstand_Validation asserts that the validation does not fail for a valid Zaehlerstand
 func (s *Suite) Test_Successful_Zaehlerstand_Validation() {
 	validate := validator.New()
 	validZaehlerstaende := []interface{}{

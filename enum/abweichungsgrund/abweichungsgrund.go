@@ -1,6 +1,7 @@
 package abweichungsgrund
 
 // Gibt einen Abweichungsgrund bei Ablehung einer COMDIS an. (REMADV SG7 AJT 4465)
+//
 //go:generate stringer --type AbweichungsGrund
 //go:generate jsonenums --type AbweichungsGrund
 type AbweichungsGrund int

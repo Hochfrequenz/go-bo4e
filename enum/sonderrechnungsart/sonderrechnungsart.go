@@ -1,6 +1,7 @@
 package sonderrechnungsart
 
 // Sonderrechnungsart beschreibt die Art einer enum Rechnungstyp.SONDERRECHNUNG
+//
 //go:generate stringer --type Sonderrechnungsart
 //go:generate jsonenums --type Sonderrechnungsart
 type Sonderrechnungsart int

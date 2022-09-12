@@ -41,7 +41,7 @@ func (s *Suite) Test_AvisPosition_Deserialization() {
 	then.AssertThat(s.T(), deserializedAvisPosition, is.EqualTo(avisPosition))
 }
 
-//  Test_Successful_Validation asserts that the validation does not fail for a valid AvisPosition
+// Test_Successful_Validation asserts that the validation does not fail for a valid AvisPosition
 func (s *Suite) Test_Successful_AvisPosition_Validation() {
 	bemerkung := "CCCC"
 	validate := validator.New()

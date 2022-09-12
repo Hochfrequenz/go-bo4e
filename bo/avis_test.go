@@ -254,7 +254,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 	VerfiyFailedValidations(s, validate, invalidAvisMap)
 }
 
-//  TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
+// TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_AvisValidation() {
 	validate := validator.New()
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN

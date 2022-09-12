@@ -1,6 +1,7 @@
 package titel
 
 // Titel is a title
+//
 //go:generate stringer --type Titel
 //go:generate jsonenums --type Titel
 type Titel int

@@ -1,6 +1,7 @@
 package rufnummernart
 
 // Rufnummernart bildet verschiedene Rufnummerntypen ab
+//
 //go:generate stringer --type Rufnummernart
 //go:generate jsonenums --type Rufnummernart
 type Rufnummernart int

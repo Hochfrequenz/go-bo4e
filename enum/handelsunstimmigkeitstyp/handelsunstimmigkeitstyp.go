@@ -1,6 +1,7 @@
 package handelsunstimmigkeitstyp
 
 // Handelsunstimmigkeitstyp are the possible types of a bo.Handelsunstimmigkeit
+//
 //go:generate stringer --type Handelsunstimmigkeitstyp
 //go:generate jsonenums --type Handelsunstimmigkeitstyp
 type Handelsunstimmigkeitstyp int

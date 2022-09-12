@@ -79,7 +79,7 @@ func (s *Suite) Test_Failed_Ansprechpartner_Validation() {
 	VerfiyFailedValidations(s, validate, invalidAps)
 }
 
-//  Test_Successful_Ansprechpartner_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Ansprechpartner_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Ansprechpartner_Validation() {
 	validate := validator.New()
 	validAnsprechpartners := []bo.BusinessObject{

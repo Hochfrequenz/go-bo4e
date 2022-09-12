@@ -83,7 +83,7 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 	VerfiyFailedValidations(s, validate, invalidLastgangMap)
 }
 
-//  Test_Successful_Lastgang_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Lastgang_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Lastgang_Validation() {
 	validate := validator.New()
 	var verbrauch = com.Verbrauch{

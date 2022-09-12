@@ -30,7 +30,7 @@ func (s *Suite) Test_Unterschrift_Deserialization() {
 	then.AssertThat(s.T(), deserializedUnterschrift, is.EqualTo(unterschrift))
 }
 
-//  Test_Successful_Unterschrift_Validation asserts that the validation does not fail for a valid Unterschrift
+// Test_Successful_Unterschrift_Validation asserts that the validation does not fail for a valid Unterschrift
 func (s *Suite) Test_Successful_Unterschrift_Validation() {
 	validate := validator.New()
 	validUnterschrift := []interface{}{
@@ -46,7 +46,7 @@ func (s *Suite) Test_Successful_Unterschrift_Validation() {
 	VerfiySuccessfulValidations(s, validate, validUnterschrift)
 }
 
-//  TestUnterschriftFailedValidation verifies that invalid Unterschrift values are considered invalid
+// TestUnterschriftFailedValidation verifies that invalid Unterschrift values are considered invalid
 func (s *Suite) Test_Unterschrift_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{

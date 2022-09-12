@@ -1,6 +1,7 @@
 package sparte
 
 // Sparte contains different divisions of typical utilities.
+//
 //go:generate stringer --type Sparte
 //go:generate jsonenums --type Sparte
 type Sparte int

@@ -118,7 +118,7 @@ func (s *Suite) Test_Failed_PreisblattValidation() {
 	VerfiyFailedValidations(s, validate, invalidPreisblattMap)
 }
 
-//  Test_Successful_Preisblatt_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Preisblatt_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Preisblatt_Validation() {
 	ad := func(adresse com.Adresse) *com.Adresse { return &adresse }
 	validate := validator.New()

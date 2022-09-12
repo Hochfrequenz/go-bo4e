@@ -2,6 +2,7 @@ package fallgruppenzuordnung
 
 // Fallgruppenzuordnung as described by edi@energy
 // Note that this enum is not official BO4E standard (yet)!
+//
 //go:generate stringer --type Fallgruppenzuordnung
 //go:generate jsonenums --type Fallgruppenzuordnung
 type Fallgruppenzuordnung int

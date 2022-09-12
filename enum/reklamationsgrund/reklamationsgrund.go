@@ -1,6 +1,7 @@
 package reklamationsgrund
 
 // Reklamationsgrund gibt den Grund einer bo.Energiemenge n- bo.Reklamation
+//
 //go:generate stringer --type Reklamationsgrund
 //go:generate jsonenums --type Reklamationsgrund
 type Reklamationsgrund int

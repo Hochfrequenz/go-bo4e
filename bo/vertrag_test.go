@@ -110,7 +110,7 @@ func (s *Suite) Test_Failed_VertragValidation() {
 	VerfiyFailedValidations(s, validate, invalidVertrags)
 }
 
-//  Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Vertrag_Validation() {
 
 	validate := validator.New()

@@ -1,6 +1,7 @@
 package steuerkennzeichen
 
 // Steuerkennzeichen dient der Kennzeichnung verschiedener Steuersätze und Verfahren.
+//
 //go:generate stringer --type Steuerkennzeichen
 //go:generate jsonenums --type Steuerkennzeichen
 type Steuerkennzeichen int

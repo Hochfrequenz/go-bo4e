@@ -28,7 +28,7 @@ func (s *Suite) Test_Menge_Deserialization() {
 	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(menge))
 }
 
-//  Test_Successful_Menge_Validation asserts that the validation does not fail for a valid Menge
+// Test_Successful_Menge_Validation asserts that the validation does not fail for a valid Menge
 func (s *Suite) Test_Successful_Menge_Validation() {
 	validate := validator.New()
 	validMenges := []interface{}{
@@ -44,7 +44,7 @@ func (s *Suite) Test_Successful_Menge_Validation() {
 	VerfiySuccessfulValidations(s, validate, validMenges)
 }
 
-//  TestMengeFailedValidation verifies that invalid verbrauch values are considered invalid
+// TestMengeFailedValidation verifies that invalid verbrauch values are considered invalid
 func (s *Suite) Test_Menge_FailedValidation() {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{

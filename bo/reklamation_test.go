@@ -64,7 +64,7 @@ func (s *Suite) Test_Failed_ReklamationValidation() {
 	VerfiyFailedValidations(s, validate, invalidReklamationMap)
 }
 
-//  Test_Successful_Reklamation_Validation verifies that a valid BO is validated without errors
+// Test_Successful_Reklamation_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Reklamation_Validation() {
 	obis := func(s string) *string { return &s }
 	validate := validator.New()

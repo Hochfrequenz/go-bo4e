@@ -1,6 +1,7 @@
 package rechnungsstatus
 
 // Rechnungsstatus ist eine Abbildung verschiedener Zustände, die im Rahmen der Rechnungsbearbeitung durchlaufen werden
+//
 //go:generate stringer --type Rechnungsstatus
 //go:generate jsonenums --type Rechnungsstatus
 type Rechnungsstatus int

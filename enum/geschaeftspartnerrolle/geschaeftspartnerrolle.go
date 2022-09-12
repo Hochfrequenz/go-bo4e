@@ -1,6 +1,7 @@
 package geschaeftspartnerrolle
 
 // Geschaeftspartnerrolle are the possible roles of a bo.Geschaeftspartner
+//
 //go:generate stringer --type Geschaeftspartnerrolle
 //go:generate jsonenums --type Geschaeftspartnerrolle
 type Geschaeftspartnerrolle int

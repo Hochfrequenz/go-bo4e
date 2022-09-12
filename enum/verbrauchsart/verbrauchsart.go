@@ -1,6 +1,7 @@
 package verbrauchsart
 
 // Verbrauchsart describes the consumption type of a market location.
+//
 //go:generate stringer --type Verbrauchsart
 //go:generate jsonenums --type Verbrauchsart
 type Verbrauchsart int

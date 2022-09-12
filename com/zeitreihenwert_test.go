@@ -35,7 +35,7 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitreihenwert))
 }
 
-//  Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
+// Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
 func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 	validate := validator.New()
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
@@ -54,7 +54,7 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 	VerfiyFailedValidations(s, validate, invalidZeitreihenwertkompakts)
 }
 
-//  Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
+// Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
 func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 	validate := validator.New()
 	validAddresses := []interface{}{
