@@ -189,4 +189,4 @@ according to [Kununu ratings](https://www.kununu.com/de/hochfrequenz-unternehmen
 attractive employers within the German energy market. Applications of talented developers are welcome at any time!
 Please consider visiting
 our [career page](https://www.hochfrequenz.de/index.php/karriere/aktuelle-stellenausschreibungen/full-stack-entwickler) (
-German only).
+German only). 
