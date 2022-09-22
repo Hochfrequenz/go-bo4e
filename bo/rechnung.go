@@ -37,6 +37,7 @@ type Rechnung struct {
 	Rechnungspositionen     []com.Rechnungsposition                `json:"rechnungspositionen,omitempty" validate:"required,min=1"` // Rechnungspositionen sind die einzelnen Rechnungsposition en.
 	Vorauszahlungen         []com.Vorauszahlung                    `json:"vorauszahlungen,omitempty"`                               // Vorauszahlungen sind evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert
 	Sonderrechnungsart      *sonderrechnungsart.Sonderrechnungsart `json:"sonderrechnungsart,omitempty"`
+	Buchungsdatum           time.Time                              `json:"buchungsdatum,omitempty"` // Buchungsdatum ist das Datum, zu dem die Rechnung fällig ist
 }
 
 func (_ Rechnung) GetDefaultJsonTags() []string {
