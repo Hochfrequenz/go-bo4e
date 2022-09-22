@@ -47,6 +47,7 @@ var serializableRechnung = bo.Rechnung{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
+	Buchungsdatum: time.Date(2022, 9, 22, 0, 0, 0, 0, time.UTC),
 	Rechnungsersteller: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.GESCHAEFTSPARTNER,
