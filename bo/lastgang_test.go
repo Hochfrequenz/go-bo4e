@@ -120,3 +120,8 @@ func (s *Suite) Test_Empty_Lastgang_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Lastgang_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.LASTGANG))
 }
+
+func (s *Suite) Test_Lastgang_Implements_GetBoTyp() {
+	lg := bo.Lastgang{}
+	then.AssertThat(s.T(), lg.GetBoTyp(), is.EqualTo(botyp.LASTGANG))
+}

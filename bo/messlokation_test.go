@@ -228,3 +228,8 @@ func (s *Suite) Test_Empty_Messlokation_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Messlokation_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.MESSLOKATION))
 }
+
+func (s *Suite) Test_Messlokation_Implements_GetBoTyp() {
+	melo := bo.Messlokation{}
+	then.AssertThat(s.T(), melo.GetBoTyp(), is.EqualTo(botyp.MESSLOKATION))
+}

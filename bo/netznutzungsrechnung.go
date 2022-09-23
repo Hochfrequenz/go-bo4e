@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungsart"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
@@ -21,4 +22,8 @@ type Netznutzungsrechnung struct {
 
 func (_ Netznutzungsrechnung) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Netznutzungsrechnung) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.NETZNUTZUNGSRECHNUNG
 }

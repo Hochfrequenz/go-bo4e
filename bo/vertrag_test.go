@@ -192,3 +192,7 @@ func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Vertrag_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.VERTRAG))
 }
+func (s *Suite) Test_Vertrag_Implements_GetBoTyp() {
+	vertrag := bo.Vertrag{}
+	then.AssertThat(s.T(), vertrag.GetBoTyp(), is.EqualTo(botyp.VERTRAG))
+}

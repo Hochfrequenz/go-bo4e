@@ -158,3 +158,7 @@ func (s *Suite) Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.BILANZIERUNG))
 }
+func (s *Suite) Test_Bilanzierung_Implements_GetBoTyp() {
+	bilanzierung := bo.Bilanzierung{}
+	then.AssertThat(s.T(), bilanzierung.GetBoTyp(), is.EqualTo(botyp.BILANZIERUNG))
+}

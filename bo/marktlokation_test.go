@@ -271,3 +271,8 @@ func (s *Suite) Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Marktlokation_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.MARKTLOKATION))
 }
+
+func (s *Suite) Test_Malo_Implements_GetBoTyp() {
+	malo := bo.Marktlokation{}
+	then.AssertThat(s.T(), malo.GetBoTyp(), is.EqualTo(botyp.MARKTLOKATION))
+}

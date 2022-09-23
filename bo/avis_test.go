@@ -328,3 +328,8 @@ func (s *Suite) Test_Empty_Avis_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Avis_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.AVIS))
 }
+
+func (s *Suite) Test_Avis_Implements_GetBoTyp() {
+	avis := bo.Avis{}
+	then.AssertThat(s.T(), avis.GetBoTyp(), is.EqualTo(botyp.AVIS))
+}

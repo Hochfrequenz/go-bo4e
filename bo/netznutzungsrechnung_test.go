@@ -93,3 +93,8 @@ func (s *Suite) Test_Empty_NNR_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Netznutzungsrechnung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.NETZNUTZUNGSRECHNUNG))
 }
+
+func (s *Suite) Test_Netznutzungsabrechnung_Implements_GetBoTyp() {
+	nnr := bo.Netznutzungsrechnung{}
+	then.AssertThat(s.T(), nnr.GetBoTyp(), is.EqualTo(botyp.NETZNUTZUNGSRECHNUNG))
+}

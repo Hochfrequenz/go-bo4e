@@ -3,6 +3,7 @@ package bo
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 )
@@ -28,4 +29,9 @@ type Geschaeftspartner struct {
 
 func (_ Geschaeftspartner) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+
+func (_ Geschaeftspartner) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.GESCHAEFTSPARTNER
 }

@@ -85,3 +85,7 @@ func (s *Suite) Test_Serialized_Empty_Statusbericht_Contains_No_Enum_Defaults() 
 func stringAsPointer(s string) *string {
 	return &s
 }
+func (s *Suite) Test_Statusbericht_Implements_GetBoTyp() {
+	sb := bo.Statusbericht{}
+	then.AssertThat(s.T(), sb.GetBoTyp(), is.EqualTo(botyp.STATUSBERICHT))
+}

@@ -42,6 +42,29 @@ func (boneyComb *BOneyComb) GetAll(typ botyp.BOTyp) bo.BusinessObjectSlice {
 	return result
 }
 
+// GetAll is a generic version of BOneyComb.GetAll. It returns all business objects of a given type in the boneycomb
+func GetAll[T bo.BusinessObject](boneyComb *BOneyComb) []*T {
+	var result []*T
+	var emptyInstance = new(T)
+	expectedType := (*emptyInstance).GetBoTyp()
+	if boneyComb.Stammdaten != nil {
+		for _, businessObject := range boneyComb.Stammdaten {
+			if HasType(businessObject, expectedType) {
+				// typ
+				var x *T
+				x = businessObject
+				result = append(result, x)
+			}
+		}
+	}
+	return result
+}
+
+func HasType(businessObject bo.BusinessObject, typ botyp.BOTyp) bool {
+	actualType := businessObject.GetBoTyp()
+	return actualType == typ
+}
+
 // GetSingle returns the single present business object of the given type if it is present in BOneyComb.Stammdaten. It returns an error if there is none or more than one
 func (boneyComb *BOneyComb) GetSingle(typ botyp.BOTyp) (bo.BusinessObject, error) {
 	allBOsOfType := boneyComb.GetAll(typ)
@@ -52,4 +75,19 @@ func (boneyComb *BOneyComb) GetSingle(typ botyp.BOTyp) (bo.BusinessObject, error
 		return nil, fmt.Errorf("There is more than one (%d) business object with type {%v}", len(allBOsOfType), typ)
 	}
 	return allBOsOfType[0], nil
+}
+
+// GetSingle is a generic function that writes the single present business object of the specified type into target if it is present in the given boneyComb.
+// It returns an error if there is none or more than one.
+// This is a generic version of BOneyComb.GetSingle but methods are not allowed to have type parameters.
+func GetSingle[T bo.BusinessObject](boneyComb *BOneyComb) (*T, error) {
+	allBOsOfType := GetAll[T](boneyComb)
+	if len(allBOsOfType) == 0 {
+		return nil, fmt.Errorf("There is no business object with the given type")
+	}
+	if len(allBOsOfType) > 1 {
+		return nil, fmt.Errorf("There is more than one (%d) business object with the given type", len(allBOsOfType))
+	}
+	singleResult := allBOsOfType[0]
+	return singleResult, nil
 }

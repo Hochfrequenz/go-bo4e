@@ -41,6 +41,7 @@ func (gob *Geschaeftsobjekt) DeleteExtensionData(jsonKey string) {
 }
 
 func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
+	// this method is most likely overriden for any BO such that it works on empty structs, too
 	return gob.BoTyp
 }
 

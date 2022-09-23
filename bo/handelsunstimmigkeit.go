@@ -2,6 +2,7 @@ package bo
 
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/handelsunstimmigkeitstyp"
 )
 
@@ -24,4 +25,8 @@ type Handelsunstimmigkeit struct {
 
 func (_ Handelsunstimmigkeit) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Handelsunstimmigkeit) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.HANDELSUNSTIMMIGKEIT
 }

@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sonderrechnungsart"
 	"time"
 
@@ -151,4 +152,9 @@ func RechnungStructLevelValidationGesamtSteuer(sl validator.StructLevel) {
 			sl.ReportError(rechnung.GesamtSteuer, "Wert", "GesamtSteuer", "GesamtSteuer==sum(Steuerbetraege)", "")
 		}
 	}
+}
+
+func (_ Rechnung) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.RECHNUNG
 }

@@ -3,6 +3,7 @@ package bo
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"regexp"
 	"time"
 
@@ -195,4 +196,9 @@ func numberToEicCharacter(r rune) (string, error) {
 		return "-", nil
 	}
 	return string(r + 55), nil
+}
+
+func (_ Bilanzierung) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.BILANZIERUNG
 }

@@ -188,3 +188,7 @@ func (s *Suite) Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Geschaeftspartner_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.GESCHAEFTSPARTNER))
 }
+func (s *Suite) Test_Geschaeftspartner_Implements_GetBoTyp() {
+	gp := bo.Geschaeftspartner{}
+	then.AssertThat(s.T(), gp.GetBoTyp(), is.EqualTo(botyp.GESCHAEFTSPARTNER))
+}

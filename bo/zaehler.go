@@ -2,6 +2,7 @@ package bo
 
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/fernschaltung"
 	"github.com/hochfrequenz/go-bo4e/enum/messwerterfassung"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
@@ -34,4 +35,8 @@ type Zaehler struct {
 
 func (_ Zaehler) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Zaehler) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.ZAEHLER
 }

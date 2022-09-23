@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"time"
 
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -19,4 +20,8 @@ type Statusbericht struct {
 
 func (s Statusbericht) GetDefaultJsonTags() []string {
 	panic("implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Statusbericht) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.STATUSBERICHT
 }

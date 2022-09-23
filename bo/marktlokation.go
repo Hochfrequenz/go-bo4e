@@ -2,6 +2,7 @@ package bo
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"regexp"
 
@@ -151,4 +152,9 @@ func XorStructLevelValidation(sl validator.StructLevel) {
 	if numberOfAdresses > 1 {
 		sl.ReportError(Marktlokation{}.Lokationsadresse, "", "", "onlyOneAddressType", "")
 	}
+}
+
+func (_ Marktlokation) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.MARKTLOKATION
 }

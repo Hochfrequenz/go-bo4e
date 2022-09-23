@@ -149,3 +149,7 @@ func (s *Suite) Test_Empty_Zaehler_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Zaehler_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ZAEHLER))
 }
+func (s *Suite) Test_Zaehler_Implements_GetBoTyp() {
+	zaehler := bo.Zaehler{}
+	then.AssertThat(s.T(), zaehler.GetBoTyp(), is.EqualTo(botyp.ZAEHLER))
+}

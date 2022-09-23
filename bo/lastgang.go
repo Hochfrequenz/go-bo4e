@@ -2,6 +2,7 @@ package bo
 
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
@@ -21,4 +22,8 @@ type Lastgang struct {
 
 func (_ Lastgang) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Lastgang) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.LASTGANG
 }

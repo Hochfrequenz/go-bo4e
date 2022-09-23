@@ -177,3 +177,8 @@ func (s *Suite) Test_Empty_Preisblatt_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Preisblatt_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.PREISBLATT))
 }
+
+func (s *Suite) Test_Preisblatt_Implements_GetBoTyp() {
+	preisblatt := bo.Preisblatt{}
+	then.AssertThat(s.T(), preisblatt.GetBoTyp(), is.EqualTo(botyp.PREISBLATT))
+}

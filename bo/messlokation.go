@@ -2,6 +2,7 @@ package bo
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -107,4 +108,9 @@ func (melo Messlokation) MarshalJSON() ([]byte, error) {
 		result[key] = value
 	}
 	return json.Marshal(result)
+}
+
+func (_ Messlokation) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.MESSLOKATION
 }

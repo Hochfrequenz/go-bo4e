@@ -99,3 +99,8 @@ func (s *Suite) Test_Empty_Ansprechpartner_Is_Creatable_Using_BoTyp() {
 func (s *Suite) Test_Serialized_Empty_Ansprechpartner_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ANSPRECHPARTNER))
 }
+
+func (s *Suite) Test_Ansprechpartner_Implements_GetBoTyp() {
+	ansprechpartner := bo.Ansprechpartner{}
+	then.AssertThat(s.T(), ansprechpartner.GetBoTyp(), is.EqualTo(botyp.ANSPRECHPARTNER))
+}

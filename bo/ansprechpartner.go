@@ -3,6 +3,7 @@ package bo
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/titel"
 )
 
@@ -23,9 +24,13 @@ type Ansprechpartner struct {
 	Zustaendigkeiten   []com.Zustaendigkeit `json:"zustaendigkeit,omitempty" validate:"omitempty,dive"` // Zustaendigkeiten ist eine Liste der Abteilungen und Zuständigkeiten des Ansprechpartner
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
-
 }
 
 func (_ Ansprechpartner) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+
+func (_ Ansprechpartner) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.ANSPRECHPARTNER
 }

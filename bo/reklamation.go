@@ -2,6 +2,7 @@ package bo
 
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/reklamationsgrund"
 )
@@ -19,4 +20,8 @@ type Reklamation struct {
 
 func (_ Reklamation) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Reklamation) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.REKLAMATION
 }

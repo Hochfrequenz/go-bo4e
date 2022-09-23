@@ -2,6 +2,7 @@ package bo
 
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/preisstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 )
@@ -22,4 +23,8 @@ type Preisblatt struct {
 
 func (_ Preisblatt) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Preisblatt) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.PREISBLATT
 }

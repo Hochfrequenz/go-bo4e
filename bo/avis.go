@@ -4,6 +4,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/avistyp"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/shopspring/decimal"
 )
 
@@ -77,4 +78,9 @@ func AvisStructLevelValidationAbweichung(sl validator.StructLevel) {
 			return
 		}
 	}
+}
+
+func (_ Avis) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.AVIS
 }

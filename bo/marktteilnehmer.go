@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
 )
@@ -17,4 +18,8 @@ type Marktteilnehmer struct {
 
 func (_ Marktteilnehmer) GetDefaultJsonTags() []string {
 	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
+func (_ Marktteilnehmer) GetBoTyp() botyp.BOTyp {
+	// this is useful for generics to work
+	return botyp.MARKTTEILNEHMER
 }

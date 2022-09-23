@@ -119,3 +119,8 @@ func (s *Suite) assert_Does_Not_Serialize_Default_Enums(bo bo.BusinessObject) {
 	jsonString := string(jsonBytes)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "(0)"), is.False())
 }
+
+func (s *Suite) Test_Energiemenge_Implements_GetBoTyp() {
+	em := bo.Energiemenge{}
+	then.AssertThat(s.T(), em.GetBoTyp(), is.EqualTo(botyp.ENERGIEMENGE))
+}

@@ -65,6 +65,23 @@ func (s *Suite) Test_GetAll() {
 	then.AssertThat(s.T(), len(boneyComb.GetAll(botyp.LASTGANG)), is.EqualTo(1))
 }
 
+func (s *Suite) Test_Generic_GetAll() {
+	var boneyComb = market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.ZAEHLER),
+			bo.NewBusinessObject(botyp.RECHNUNG),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.LASTGANG),
+		},
+	}
+	then.AssertThat(s.T(), len(market_communication.GetAll[bo.Preisblatt](&boneyComb)), is.EqualTo(0))
+	then.AssertThat(s.T(), len(market_communication.GetAll[bo.Marktteilnehmer](&boneyComb)), is.EqualTo(2))
+	then.AssertThat(s.T(), len(market_communication.GetAll[bo.Lastgang](&boneyComb)), is.EqualTo(1))
+}
+
 func (s *Suite) Test_GetSingle() {
 	var boneyComb = market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
@@ -88,4 +105,32 @@ func (s *Suite) Test_GetSingle() {
 	lastgang, lastgangErr := boneyComb.GetSingle(botyp.LASTGANG) // there is 1 lastgang
 	then.AssertThat(s.T(), lastgang, is.Not(is.Nil()))
 	then.AssertThat(s.T(), lastgangErr, is.Nil())
+}
+
+func (s *Suite) Test_Generic_GetSingle() {
+	var untypedLastgang = bo.NewBusinessObject(botyp.LASTGANG)
+	existingLastgang := untypedLastgang.(*bo.Lastgang)
+	existingLastgang.LokationsId = "54321012345"
+	var boneyComb = market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MARKTTEILNEHMER),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			bo.NewBusinessObject(botyp.ZAEHLER),
+			bo.NewBusinessObject(botyp.RECHNUNG),
+			bo.NewBusinessObject(botyp.MESSLOKATION),
+			existingLastgang,
+		},
+	}
+	marktteilnehmer, marktteilnehmerErr := market_communication.GetSingle[bo.Marktteilnehmer](&boneyComb) // there are 2 marktteilnehmers
+	then.AssertThat(s.T(), marktteilnehmerErr, is.Not(is.Nil()))
+	then.AssertThat(s.T(), marktteilnehmer, is.Nil())
+
+	preisblatt, preisblattErr := market_communication.GetSingle[bo.Preisblatt](&boneyComb)
+	then.AssertThat(s.T(), preisblattErr, is.Not(is.Nil()))
+	then.AssertThat(s.T(), preisblatt, is.Nil())
+
+	resultLastgang, lastgangErr := market_communication.GetSingle[bo.Lastgang](&boneyComb) // there is 1 lastgang
+	then.AssertThat(s.T(), lastgangErr, is.Nil())
+	then.AssertThat(s.T(), resultLastgang.LokationsId, is.EqualTo("54321012345"))
 }
