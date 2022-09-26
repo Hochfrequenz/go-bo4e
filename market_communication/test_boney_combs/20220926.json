@@ -1,0 +1,372 @@
+{
+  "stammdaten": [
+    {
+      "boTyp": "MARKTLOKATION",
+      "versionStruktur": "1",
+      "marktlokationsId": "21131278279",
+      "sparte": "GAS",
+      "lokationsadresse": {
+        "postleitzahl": "94032",
+        "ort": "Passau",
+        "strasse": "Schwabenkreisel 23",
+        "landescode": "DE"
+      }
+    },
+    {
+      "istSelbstausgestellt": false,
+      "rechnungspositionen": [
+        {
+          "positionsnummer": 1,
+          "lieferungVon": "2021-04-30T04:00:00+00:00",
+          "lieferungBis": "2021-12-30T05:00:00+00:00",
+          "artikelnummer": "GRUNDPREIS",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 49.2,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 2222,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 2,
+          "lieferungVon": "2021-04-30T04:00:00+00:00",
+          "lieferungBis": "2021-12-30T05:00:00+00:00",
+          "artikelnummer": "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 23.68,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 2.22,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 3,
+          "lieferungVon": "2021-04-30T04:00:00+00:00",
+          "lieferungBis": "2021-12-30T05:00:00+00:00",
+          "artikelnummer": "ENTGELT_MESSUNG_ABLESUNG",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 0,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 3.15,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 4,
+          "lieferungVon": "2021-04-30T04:00:00+00:00",
+          "lieferungBis": "2021-12-30T05:00:00+00:00",
+          "artikelnummer": "WIRKARBEIT",
+          "positionsMenge": {
+            "wert": 46,
+            "einheit": "KWH"
+          },
+          "einzelpreis": {
+            "wert": 0.01608,
+            "einheit": "EUR"
+          },
+          "teilsummeNetto": {
+            "wert": 4.76,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 5,
+          "lieferungVon": "2021-04-30T04:00:00+00:00",
+          "lieferungBis": "2021-12-30T05:00:00+00:00",
+          "artikelnummer": "KONZESSIONSABGABE",
+          "positionsMenge": {
+            "wert": 46,
+            "einheit": "KWH"
+          },
+          "einzelpreis": {
+            "wert": 0.0003,
+            "einheit": "EUR"
+          },
+          "teilsummeNetto": {
+            "wert": 5.42,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 6,
+          "lieferungVon": "2021-12-31T05:00:00+00:00",
+          "lieferungBis": "2022-05-31T04:00:00+00:00",
+          "artikelnummer": "GRUNDPREIS",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 49.2,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 6.53,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 7,
+          "lieferungVon": "2021-12-31T05:00:00+00:00",
+          "lieferungBis": "2022-05-31T04:00:00+00:00",
+          "artikelnummer": "ENTGELT_EINBAU_BETRIEB_WARTUNG_MESSTECHNIK",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 23.68,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 7.54,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 8,
+          "lieferungVon": "2021-12-31T05:00:00+00:00",
+          "lieferungBis": "2022-05-31T04:00:00+00:00",
+          "artikelnummer": "ENTGELT_MESSUNG_ABLESUNG",
+          "positionsMenge": {
+            "wert": 1,
+            "einheit": "ANZAHL"
+          },
+          "zeitbezogeneMenge": {
+            "wert": 31,
+            "einheit": "TAG"
+          },
+          "einzelpreis": {
+            "wert": 0,
+            "einheit": "EUR",
+            "bezugswert": "JAHR"
+          },
+          "teilsummeNetto": {
+            "wert": 8.95,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 9,
+          "lieferungVon": "2021-12-31T05:00:00+00:00",
+          "lieferungBis": "2022-05-31T04:00:00+00:00",
+          "artikelnummer": "WIRKARBEIT",
+          "positionsMenge": {
+            "wert": 46,
+            "einheit": "KWH"
+          },
+          "einzelpreis": {
+            "wert": 0.01608,
+            "einheit": "EUR"
+          },
+          "teilsummeNetto": {
+            "wert": 9.99,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        },
+        {
+          "positionsnummer": 10,
+          "lieferungVon": "2021-12-31T05:00:00+00:00",
+          "lieferungBis": "2022-05-31T04:00:00+00:00",
+          "artikelnummer": "KONZESSIONSABGABE",
+          "positionsMenge": {
+            "wert": 46,
+            "einheit": "KWH"
+          },
+          "einzelpreis": {
+            "wert": 0.0003,
+            "einheit": "EUR"
+          },
+          "teilsummeNetto": {
+            "wert": 10.56,
+            "waehrung": "EUR"
+          },
+          "teilsummeSteuer": {
+            "steuerkennzeichen": "UST_19",
+            "basiswert": 0,
+            "steuerwert": 0,
+            "waehrung": "EUR"
+          }
+        }
+      ],
+      "steuerbetraege": [
+        {
+          "steuerkennzeichen": "UST_19",
+          "basiswert": 2281.12,
+          "steuerwert": 433.41,
+          "waehrung": "EUR",
+          "basiswertVorausgezahlt": 50,
+          "steuerwertVorausgezahlt": 9.52
+        }
+      ],
+      "zuzahlen": {
+        "wert": 2664.53,
+        "waehrung": "EUR"
+      },
+      "gesamtbrutto": {
+        "wert": 2714.53,
+        "waehrung": "EUR"
+      },
+      "rechnungsnummer": "Netznuzungsrechnung1234",
+      "rechnungsdatum": "2022-06-01T13:37:00+00:00",
+      "storno": false,
+      "rechnungstyp": "TURNUSRECHNUNG",
+      "rechnungsperiode": {
+        "startdatum": "2021-04-30T04:00:00+00:00",
+        "enddatum": "2022-05-31T04:00:00+00:00",
+        "startzeitpunkt": "2021-04-30T04:00:00+00:00",
+        "endzeitpunkt": "2022-05-31T04:00:00+00:00"
+      },
+      "faelligkeitsdatum": "2022-08-22T22:00:00+00:00",
+      "boTyp": "RECHNUNG",
+      "versionStruktur": "1",
+      "vorauszahlungen": [
+        {
+          "betrag": {
+            "wert": 50,
+            "waehrung": "EUR"
+          },
+          "referenzDatum": "0001-01-01T00:00:00+00:00"
+        }
+      ],
+      "buchungsdatum": "2022-06-01T13:37:00+00:00"
+    },
+    {
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1",
+      "name1": "Musterstadtwerk Netz GmbH",
+      "gewerbekennzeichnung": true,
+      "umsatzsteuerId": "DE999554444",
+      "partneradresse": {
+        "postleitzahl": "90401",
+        "ort": "Passau",
+        "strasse": "Blastraße 2",
+        "landescode": "DE"
+      },
+      "rollencodenummer": "1234567890123",
+      "rollencodetyp": "DVGW"
+    },
+    {
+      "boTyp": "MARKTTEILNEHMER",
+      "versionStruktur": "1",
+      "name1": "Musterstadtwerk AG",
+      "gewerbekennzeichnung": true,
+      "partneradresse": {
+        "postleitzahl": "90401",
+        "ort": "Passau",
+        "strasse": "Musterstraße 37",
+        "landescode": "DE"
+      },
+      "rollencodenummer": "9876543210987",
+      "rollencodetyp": "DVGW"
+    }
+  ],
+  "links": {},
+  "transaktionsdaten": {
+    "sparte": "GAS",
+    "pruefidentifikator": "31002",
+    "duplikat": "false",
+    "datenaustauschreferenz": "Netznuzungsrechnung1234",
+    "absender": "bo4e://Marktteilnehmer/1234567890123",
+    "empfaenger": "bo4e://Marktteilnehmer/9876543210987",
+    "nachrichtendatum": "2022-06-01T13:37:00Z",
+    "nachrichtenReferenznummer": "Netznuzungsrechnung1234"
+  }
+}
