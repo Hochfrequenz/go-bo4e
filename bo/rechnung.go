@@ -1,8 +1,9 @@
 package bo
 
 import (
-	"github.com/hochfrequenz/go-bo4e/enum/sonderrechnungsart"
 	"time"
+
+	"github.com/hochfrequenz/go-bo4e/enum/sonderrechnungsart"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -37,7 +38,7 @@ type Rechnung struct {
 	Rechnungspositionen     []com.Rechnungsposition                `json:"rechnungspositionen,omitempty" validate:"required,min=1"` // Rechnungspositionen sind die einzelnen Rechnungsposition en.
 	Vorauszahlungen         []com.Vorauszahlung                    `json:"vorauszahlungen,omitempty"`                               // Vorauszahlungen sind evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert
 	Sonderrechnungsart      *sonderrechnungsart.Sonderrechnungsart `json:"sonderrechnungsart,omitempty"`
-	Buchungsdatum           time.Time                              `json:"buchungsdatum,omitempty"` // Buchungsdatum ist das Datum, zu dem die Zahlung fällig ist
+	//	Buchungsdatum           time.Time                              `json:"buchungsdatum,omitempty"` // Buchungsdatum ist das Datum, zu dem die Zahlung fällig ist
 }
 
 func (_ Rechnung) GetDefaultJsonTags() []string {
