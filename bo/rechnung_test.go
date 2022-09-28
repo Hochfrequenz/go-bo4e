@@ -3,6 +3,7 @@ package bo_test
 import (
 	"encoding/json"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/corbym/gocrest/is"
@@ -47,6 +48,7 @@ var serializableRechnung = bo.Rechnung{
 		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 	},
+	Buchungsdatum: time.Date(2022, 9, 22, 0, 0, 0, 0, time.UTC),
 	Rechnungsersteller: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.GESCHAEFTSPARTNER,
@@ -134,6 +136,8 @@ func (s *Suite) Test_Rechnung_Deserialization() {
 	serializedRechnung, err := json.Marshal(serializableRechnung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedRechnung, is.Not(is.Nil()))
+	rechnungJsonString := string(serializedRechnung)
+	then.AssertThat(s.T(), strings.Contains(rechnungJsonString, "\"buchungsdatum\":\"2022-09-22T00:00:00Z\""), is.True())
 	var deserializedRechnung bo.Rechnung
 	err = json.Unmarshal(serializedRechnung, &deserializedRechnung)
 	then.AssertThat(s.T(), err, is.Nil())

@@ -173,5 +173,11 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo("hello world"))
 			then.AssertThat(s.T(), boneyComb.Links["foo"][1], is.EqualTo("baz"))
 		}
+		if file.Name() == "20220926.json" {
+			firstRechnung, _ := boneyComb.GetSingle(botyp.RECHNUNG)
+			expectedBuchungsdatum := time.Date(2022, 6, 01, 13, 37, 0, 0, time.UTC)
+			actualBuchungsdatum := firstRechnung.(*bo.Rechnung).Buchungsdatum
+			then.AssertThat(s.T(), actualBuchungsdatum.Unix(), is.EqualTo(expectedBuchungsdatum.Unix()))
+		}
 	}
 }

@@ -2,6 +2,7 @@ package com
 
 import (
 	"fmt"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkennzeichen"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
@@ -12,9 +13,11 @@ import (
 type Steuerbetrag struct {
 	Steuerkennzeichen steuerkennzeichen.Steuerkennzeichen `json:"steuerkennzeichen,omitempty" validate:"required" example:"UST19"` // Kennzeichnung des Steuersatzes, bzw. Verfahrens
 	// Basiswert and Steuerwert are _not_ marked as required because the steuerwert 0 is actually valid
-	Basiswert  decimal.Decimal             `json:"basiswert" example:"100"`                              // Basiswert ist der Nettobetrag für den die Steuer berechnet wurde
-	Steuerwert decimal.Decimal             `json:"steuerwert" example:"19"`                              // Steuerwert ist die aus dem Basiswert berechnete Steuer
-	Waehrung   waehrungscode.Waehrungscode `json:"waehrung,omitempty" example:"EUR" validate:"required"` // Waehrung is the currency
+	Basiswert               decimal.Decimal             `json:"basiswert" example:"100"`                              // Basiswert ist der Nettobetrag für den die Steuer berechnet wurde
+	Steuerwert              decimal.Decimal             `json:"steuerwert" example:"19"`                              // Steuerwert ist die aus dem Basiswert berechnete Steuer
+	Waehrung                waehrungscode.Waehrungscode `json:"waehrung,omitempty" example:"EUR" validate:"required"` // Waehrung is the currency
+	BasiswertVorausgezahlt  *decimal.Decimal            `json:"basiswertVorausgezahlt,omitempty"`                     // BasiswertVorausgezahlt ist die Brutto-Summe der vorausbezahlten Beträge
+	SteuerwertVorausgezahlt *decimal.Decimal            `json:"steuerwertVorausgezahlt,omitempty"`                    // SteuerwertVorausgezahlt ist die Steuer-Summe der vorausbezahlten Beträge
 }
 
 // SteuerbetragStructLevelValidation does a cross check on a Steuerbetrag object and checks if Steuerbetrag.Steuerkennzeichen, Steuerbetrag.Basiswert and Steuerbetrag.Steuerbetrag are consistent
