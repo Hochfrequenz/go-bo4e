@@ -11,3 +11,8 @@ updates:
       interval: "daily"
     reviewers:
       - "@Hochfrequenz/go-review-team"
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
