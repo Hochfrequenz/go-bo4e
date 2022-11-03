@@ -77,7 +77,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.EUR,
 						},
-						Abweichung: nil,
+						Abweichungen: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -108,7 +108,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: nil,
+						Abweichungen: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -139,9 +139,9 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: &com.Abweichung{
+						Abweichungen: []com.Abweichung{{
 							Referenz:         "A",
-							AbweichungsGrund: &ungleichVertragsbeginn,
+							AbweichungsGrund: &ungleichVertragsbeginn},
 						},
 					},
 				},
@@ -173,10 +173,10 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.New(1, 0),
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: &com.Abweichung{
+						Abweichungen: []com.Abweichung{{
 							Referenz:         "A",
 							AbweichungsGrund: &ungleichVertragsbeginn,
-						},
+						}},
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -199,10 +199,10 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						RechnungsNummer: "2",
 						RechnungsDatum:  time.Now(),
 						Storno:          false,
-						Abweichung: &com.Abweichung{
+						Abweichungen: []com.Abweichung{{
 							Referenz:                  "A",
 							AbweichungsGrund:          &ungleichVertragsbeginn,
-							AbweichungsGrundBemerkung: &bemerkung,
+							AbweichungsGrundBemerkung: &bemerkung},
 						},
 						GesamtBrutto: com.Betrag{
 							Wert:     decimal.Zero,
@@ -284,10 +284,10 @@ func (s *Suite) Test_Successful_AvisValidation() {
 			Wert:     decimal.New(15, 0),
 			Waehrung: waehrungscode.EUR,
 		},
-		Abweichung: &com.Abweichung{
+		Abweichungen: []com.Abweichung{{
 			Referenz:                  "B",
 			AbweichungsGrund:          &ungleichVertragsbeginn,
-			AbweichungsGrundBemerkung: &bemerkung,
+			AbweichungsGrundBemerkung: &bemerkung},
 		},
 	}
 	validAvises := []bo.BusinessObject{
