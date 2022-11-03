@@ -1,7 +1,6 @@
 package com
 
 import (
-	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/abweichungsgrund"
 )
 
@@ -9,7 +8,6 @@ type Abweichung struct {
 	Referenz                  string                             `json:"referenz,omitempty"`
 	AbweichungsGrund          *abweichungsgrund.AbweichungsGrund `json:"abweichungsgrund,omitempty" validate:"omitempty"`
 	AbweichungsGrundBemerkung *string                            `json:"abweichungsgrundBemerkung,omitempty"`
-	Positionen                []Rueckmeldungsposition            `json:"positionen,omitempty"`
 	AbweichungsgrundCode      *string                            `json:"abweichungsgrundCode,omitempty" validate:"omitempty"`
 	AbweichungsgrundCodeliste *string                            `json:"abweichungsgrundCodeliste,omitempty" validate:"omitempty"`
 }
