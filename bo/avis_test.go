@@ -249,6 +249,35 @@ func (s *Suite) Test_Failed_AvisValidation() {
 					Waehrung: waehrungscode.EUR,
 				},
 			},
+			bo.Avis{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.AVIS,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				AvisNummer: "1",
+				AvisTyp:    avistyp.ABGELEHNTE_FORDERUNG,
+				AvisPositionen: []com.AvisPosition{
+					{
+						RechnungsNummer: "3",
+						RechnungsDatum:  time.Now(),
+						Storno:          false,
+						GesamtBrutto: com.Betrag{
+							Wert:     decimal.Zero,
+							Waehrung: waehrungscode.EUR,
+						},
+						ZuZahlen: com.Betrag{
+							Wert:     decimal.New(1, 0),
+							Waehrung: waehrungscode.AFN,
+						},
+						Abweichungen: []com.Abweichung{}, // len 0
+					},
+				},
+				ZuZahlen: com.Betrag{
+					Wert:     decimal.New(1, 0),
+					Waehrung: waehrungscode.EUR,
+				},
+			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidAvisMap)
