@@ -6,7 +6,6 @@ import (
 )
 
 type Abweichung struct {
-	Referenz                  string                             `json:"referenz,omitempty"`
 	AbweichungsGrund          *abweichungsgrund.AbweichungsGrund `json:"abweichungsgrund,omitempty" validate:"omitempty"`
 	AbweichungsGrundBemerkung *string                            `json:"abweichungsgrundBemerkung,omitempty"`
 	AbweichungsgrundCode      *string                            `json:"abweichungsgrundCode,omitempty" validate:"omitempty"`
