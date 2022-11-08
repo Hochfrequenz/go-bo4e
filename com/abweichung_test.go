@@ -19,7 +19,6 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 	code := "A99"
 	codeliste := "E_0459"
 	abweichung := com.Abweichung{
-		Referenz:                  "AAAA",
 		AbweichungsGrund:          &ungleichVertragsbeginn,
 		AbweichungsGrundBemerkung: &bemerkung,
 		AbweichungsgrundCode:      &code,
@@ -29,7 +28,6 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 	then.AssertThat(s.T(), serializedAbweichung, is.Not(is.Nil()))
 	jsonString := string(serializedAbweichung)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "AAAA"), is.True())
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ZZZZ"), is.False())
 	deserializedAbweichung := com.Abweichung{}
 	err = json.Unmarshal(serializedAbweichung, &deserializedAbweichung)
@@ -43,7 +41,6 @@ func (s *Suite) Test_Successful_Abweichung_Validation() {
 	bilanzierteMengeFehlt := abweichungsgrund.BILANZIERTE_MENGE_FEHLT
 	validAbweichung := []interface{}{
 		com.Abweichung{
-			Referenz:         "",
 			AbweichungsGrund: &bilanzierteMengeFehlt,
 		},
 	}
@@ -57,7 +54,6 @@ func (s *Suite) Test_UnSuccessful_Abweichung_Validation() {
 
 	invalidAbweichung := map[string][]interface{}{
 		"AbweichungsgrundCodeComplete": {com.Abweichung{
-			Referenz:             "",
 			AbweichungsgrundCode: &code,
 		}},
 	}

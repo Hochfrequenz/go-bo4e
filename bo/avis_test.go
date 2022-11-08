@@ -139,8 +139,8 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
+						Referenz: "A",
 						Abweichungen: []com.Abweichung{{
-							Referenz:         "A",
 							AbweichungsGrund: &ungleichVertragsbeginn},
 						},
 					},
@@ -173,8 +173,8 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.New(1, 0),
 							Waehrung: waehrungscode.AFN,
 						},
+						Referenz: "A",
 						Abweichungen: []com.Abweichung{{
-							Referenz:         "A",
 							AbweichungsGrund: &ungleichVertragsbeginn,
 						}},
 					},
@@ -199,8 +199,8 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						RechnungsNummer: "2",
 						RechnungsDatum:  time.Now(),
 						Storno:          false,
+						Referenz:        "A",
 						Abweichungen: []com.Abweichung{{
-							Referenz:                  "A",
 							AbweichungsGrund:          &ungleichVertragsbeginn,
 							AbweichungsGrundBemerkung: &bemerkung},
 						},
@@ -313,8 +313,8 @@ func (s *Suite) Test_Successful_AvisValidation() {
 			Wert:     decimal.New(15, 0),
 			Waehrung: waehrungscode.EUR,
 		},
+		Referenz: "B",
 		Abweichungen: []com.Abweichung{{
-			Referenz:                  "B",
 			AbweichungsGrund:          &ungleichVertragsbeginn,
 			AbweichungsGrundBemerkung: &bemerkung},
 		},
