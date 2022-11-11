@@ -13,8 +13,8 @@ import (
 // Rechnungsposition en sind Teil von Rechnung en. In einem Rechnungsteil wird jeweils eine in sich geschlossene LEISTUNG abgerechnet.
 type Rechnungsposition struct {
 	Positionsnummer   int                                 `json:"positionsnummer,omitempty" validate:"required"`                        // Positionsnummer ist eine fortlaufende Nummer für die Rechnungsposition
-	LieferungVon      time.Time                           `json:"lieferungVon,omitempty" validate:"required"`                           // LieferungVon ist ein _inklusiver_ Start der Lieferung für die abgerechnete LEISTUNG
-	LieferungBis      time.Time                           `json:"lieferungBis,omitempty" validate:"required,gtfield=LieferungVon"`      // LieferungBis ist ein _exklusives_ Ende der Lieferung für die abgerechnete LEISTUNG
+	LieferungVon      time.Time                           `json:"lieferungVon,omitempty"`                           // LieferungVon ist ein _inklusiver_ Start der Lieferung für die abgerechnete LEISTUNG
+	LieferungBis      time.Time                           `json:"lieferungBis,omitempty"`      // LieferungBis ist ein _exklusives_ Ende der Lieferung für die abgerechnete LEISTUNG
 	Positionstext     string                              `json:"positionstext,omitempty" validate:"required"`                          // Positionstext ist eine Bezeichung für die abgerechnete Position.
 	Zeiteinheit       zeiteinheit.Zeiteinheit             `json:"zeiteinheit,omitempty"`                                                // Zeiteinheit wird angegeben, falls sich der Preis auf eine Zeit bezieht, steht hier die Einheit, z.B. JAHR
 	Artikelnummer     bdewartikelnummer.BDEWArtikelnummer `json:"artikelnummer,omitempty"`                                              // Artikelnummer ist eine Kennzeichnung der Rechnungsposition mit der Standard-Artikelnummer des BDEW
