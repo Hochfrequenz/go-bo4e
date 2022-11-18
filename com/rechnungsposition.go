@@ -26,7 +26,7 @@ type Rechnungsposition struct {
 	TeilsummeNetto    Betrag                              `json:"teilsummeNetto,omitempty" validate:"required"`                         // TeilsummeNetto ist das Ergebnis der Multiplikation aus einzelpreis * positionsMenge * (Faktor aus zeitbezogeneMenge). Z.B. 12,60€ * 120 kW * 3/12 (für 3 Monate).
 	TeilsummeSteuer   Steuerbetrag                        `json:"teilsummeSteuer,omitempty" validate:"required"`                        // TeilsummeSteuer ist der auf die Position entfallende Steuer, bestehend aus Steuersatz und Betrag
 	TeilrabattNetto   *Betrag                             `json:"teilrabattNetto,omitempty"`                                            // TeilrabattNetto ist der Rabatt für diese Position
-	ArtikelId         string                              `json:"artikelId,omitempty"`                                                  // Artikel-ID (ab 1.10.2022)
+	ArtikelId         string                              `json:"artikelId,omitempty"`                                                  // Die ArtikelId ist Artikel-ID (zu verwenden seit 2022-10-01)
 	Ausfuehrungsdatum time.Time                           `json:"ausfuehrungsdatum,omitempty"`                                          // Um Qualifier 203 Ausführungsdatum/-zeit abzubilden
 }
 
