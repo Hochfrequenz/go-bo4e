@@ -6,6 +6,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hochfrequenz/go-bo4e/internal"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -373,8 +375,8 @@ var completeValidRechnung = bo.Rechnung{
 		Waehrung: waehrungscode.EUR,
 	},
 	Steuerbetraege:       nil,
-	IstSelbstausgestellt: boolPointer(false),
-	IstReverseCharge:     boolPointer(false),
+	IstSelbstausgestellt: internal.Ptr(false),
+	IstReverseCharge:     internal.Ptr(false),
 	Rechnungspositionen: []com.Rechnungsposition{
 		{
 			Positionsnummer: 17,
@@ -382,7 +384,7 @@ var completeValidRechnung = bo.Rechnung{
 			LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Positionstext:   "foo",
 			Zeiteinheit:     zeiteinheit.JAHR,
-			Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
+			Artikelnummer:   internal.Ptr(bdewartikelnummer.ABGABE_KWKG),
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
@@ -419,8 +421,4 @@ func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
 
 func (s *Suite) Test_Serialized_Empty_Rechnung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.RECHNUNG))
-}
-
-func boolPointer(b bool) *bool {
-	return &b
 }
