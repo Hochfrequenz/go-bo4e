@@ -5,6 +5,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hochfrequenz/go-bo4e/internal"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -29,7 +31,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 		Positionstext:   "foo",
 		Zeiteinheit:     zeiteinheit.JAHR,
-		Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
+		Artikelnummer:   internal.Ptr(bdewartikelnummer.ABGABE_KWKG),
 		LokationsId:     "54321012345",
 		PositionsMenge: com.Menge{
 			Wert:    newDecimalFromString("20"),
@@ -152,7 +154,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 			LieferungBis:    time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
 			Positionstext:   "foo",
 			Zeiteinheit:     zeiteinheit.JAHR,
-			Artikelnummer:   bdewartikelnummer.ABGABE_KWKG,
+			Artikelnummer:   internal.Ptr(bdewartikelnummer.ABGABE_KWKG),
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),

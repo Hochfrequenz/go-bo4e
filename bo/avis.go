@@ -68,12 +68,12 @@ func AvisStructLevelValidationAbweichung(sl validator.StructLevel) {
 	avis := sl.Current().Interface().(Avis)
 	declineAvis := avis.AvisTyp == avistyp.ABGELEHNTE_FORDERUNG
 	for _, avisPosition := range avis.AvisPositionen {
-		if declineAvis && (avisPosition.Abweichung == nil || avisPosition.Abweichung.AbweichungsGrund == nil || *avisPosition.Abweichung.AbweichungsGrund == 0) {
-			sl.ReportError(avisPosition.Abweichung, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->AbgelehnteForderungRequired", "")
+		if declineAvis && (avisPosition.Abweichungen == nil || len(avisPosition.Abweichungen) == 0 || avisPosition.Abweichungen[0].AbweichungsGrund == nil || *avisPosition.Abweichungen[0].AbweichungsGrund == 0) {
+			sl.ReportError(avisPosition.Abweichungen, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->AbgelehnteForderungRequired", "")
 			return
 		}
-		if avisPosition.Abweichung != nil && !declineAvis {
-			sl.ReportError(avisPosition.Abweichung, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->ZahlungsavisRequired", "")
+		if avisPosition.Abweichungen != nil && len(avisPosition.Abweichungen) != 0 && !declineAvis {
+			sl.ReportError(avisPosition.Abweichungen, "AbweichungsGrund", "Abweichung", "Avis.AvisPositionen.Abweichung->ZahlungsavisRequired", "")
 			return
 		}
 	}

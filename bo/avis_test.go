@@ -77,7 +77,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.EUR,
 						},
-						Abweichung: nil,
+						Abweichungen: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -108,7 +108,7 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: nil,
+						Abweichungen: nil,
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -139,9 +139,9 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.Zero,
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: &com.Abweichung{
-							Referenz:         "A",
-							AbweichungsGrund: &ungleichVertragsbeginn,
+						Referenz: "A",
+						Abweichungen: []com.Abweichung{{
+							AbweichungsGrund: &ungleichVertragsbeginn},
 						},
 					},
 				},
@@ -173,10 +173,10 @@ func (s *Suite) Test_Failed_AvisValidation() {
 							Wert:     decimal.New(1, 0),
 							Waehrung: waehrungscode.AFN,
 						},
-						Abweichung: &com.Abweichung{
-							Referenz:         "A",
+						Referenz: "A",
+						Abweichungen: []com.Abweichung{{
 							AbweichungsGrund: &ungleichVertragsbeginn,
-						},
+						}},
 					},
 				},
 				ZuZahlen: com.Betrag{
@@ -199,10 +199,10 @@ func (s *Suite) Test_Failed_AvisValidation() {
 						RechnungsNummer: "2",
 						RechnungsDatum:  time.Now(),
 						Storno:          false,
-						Abweichung: &com.Abweichung{
-							Referenz:                  "A",
+						Referenz:        "A",
+						Abweichungen: []com.Abweichung{{
 							AbweichungsGrund:          &ungleichVertragsbeginn,
-							AbweichungsGrundBemerkung: &bemerkung,
+							AbweichungsGrundBemerkung: &bemerkung},
 						},
 						GesamtBrutto: com.Betrag{
 							Wert:     decimal.Zero,
@@ -249,6 +249,35 @@ func (s *Suite) Test_Failed_AvisValidation() {
 					Waehrung: waehrungscode.EUR,
 				},
 			},
+			bo.Avis{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.AVIS,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				AvisNummer: "1",
+				AvisTyp:    avistyp.ABGELEHNTE_FORDERUNG,
+				AvisPositionen: []com.AvisPosition{
+					{
+						RechnungsNummer: "3",
+						RechnungsDatum:  time.Now(),
+						Storno:          false,
+						GesamtBrutto: com.Betrag{
+							Wert:     decimal.Zero,
+							Waehrung: waehrungscode.EUR,
+						},
+						ZuZahlen: com.Betrag{
+							Wert:     decimal.New(1, 0),
+							Waehrung: waehrungscode.AFN,
+						},
+						Abweichungen: []com.Abweichung{}, // len 0
+					},
+				},
+				ZuZahlen: com.Betrag{
+					Wert:     decimal.New(1, 0),
+					Waehrung: waehrungscode.EUR,
+				},
+			},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidAvisMap)
@@ -284,10 +313,10 @@ func (s *Suite) Test_Successful_AvisValidation() {
 			Wert:     decimal.New(15, 0),
 			Waehrung: waehrungscode.EUR,
 		},
-		Abweichung: &com.Abweichung{
-			Referenz:                  "B",
+		Referenz: "B",
+		Abweichungen: []com.Abweichung{{
 			AbweichungsGrund:          &ungleichVertragsbeginn,
-			AbweichungsGrundBemerkung: &bemerkung,
+			AbweichungsGrundBemerkung: &bemerkung},
 		},
 	}
 	validAvises := []bo.BusinessObject{

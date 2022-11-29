@@ -59,10 +59,12 @@ func (s *Suite) Test_Successful_AvisPosition_Validation() {
 				Wert:     decimal.New(0, 0),
 				Waehrung: waehrungscode.EUR,
 			},
-			Abweichung: &com.Abweichung{
-				Referenz:                  "BBBB",
+			Referenz: "BBBB",
+
+			Abweichungen: []com.Abweichung{{
 				AbweichungsGrund:          &ungleichVertragsbeginn,
 				AbweichungsGrundBemerkung: &bemerkung,
+			},
 			},
 		},
 	}
