@@ -2,6 +2,7 @@ package market_communication
 
 import (
 	"fmt"
+
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 )
@@ -52,4 +53,45 @@ func (boneyComb *BOneyComb) GetSingle(typ botyp.BOTyp) (bo.BusinessObject, error
 		return nil, fmt.Errorf("There is more than one (%d) business object with type {%v}", len(allBOsOfType), typ)
 	}
 	return allBOsOfType[0], nil
+}
+
+// GetAll filters a BOneyComb's Stammdaten for business objects of a specific type, given as type parameter T. T must be a non-pointer type,
+// even if bo.BusinessObject is implemented only via pointer receivers (*T).
+func GetAll[T any, Ptr interface {
+	bo.BusinessObject
+	*T
+}](boneyComb *BOneyComb) []*T {
+	result := make([]*T, 0)
+
+	for _, businessObject := range boneyComb.Stammdaten {
+		if convertedBusinessObject, ok := businessObject.(T); ok {
+			result = append(result, &convertedBusinessObject)
+		}
+
+		if convertedBusinessObject, ok := businessObject.(Ptr); ok {
+			result = append(result, (*T)(convertedBusinessObject))
+		}
+	}
+
+	return result
+}
+
+// GetSingle searches BOneyComb's Stammdaten for the single business object of the specified type, given as type parameter T.
+// T must be non-pointer type, even if bo.BusinessObject is implemented only via pointer receivers (*T). Returns an error
+// if there is either no business object of that type or there is more than one.
+func GetSingle[T any, Ptr interface {
+	bo.BusinessObject
+	*T
+}](boneyComb *BOneyComb) (*T, error) {
+	all := GetAll[T, Ptr](boneyComb)
+
+	if len(all) == 0 {
+		return nil, fmt.Errorf("there is no business object with the given type")
+	}
+
+	if len(all) > 1 {
+		return nil, fmt.Errorf("there is more than one (%d) business object with the given type", len(all))
+	}
+
+	return all[0], nil
 }
