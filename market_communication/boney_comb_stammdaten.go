@@ -75,3 +75,23 @@ func GetAll[T any, Ptr interface {
 
 	return result
 }
+
+// GetSingle searches BOneyComb's Stammdaten for the single business object of the specified type, given as type parameter T.
+// T must be non-pointer type, even if bo.BusinessObject is implemented only via pointer receivers (*T). Returns an error
+// if there is either no business object of that type or there is more than one.
+func GetSingle[T any, Ptr interface {
+	bo.BusinessObject
+	*T
+}](boneyComb *BOneyComb) (*T, error) {
+	all := GetAll[T, Ptr](boneyComb)
+
+	if len(all) == 0 {
+		return nil, fmt.Errorf("there is no business object with the given type")
+	}
+
+	if len(all) > 1 {
+		return nil, fmt.Errorf("there is more than one (%d) business object with the given type", len(all))
+	}
+
+	return all[0], nil
+}
