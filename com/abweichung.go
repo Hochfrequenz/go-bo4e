@@ -10,6 +10,8 @@ type Abweichung struct {
 	AbweichungsGrundBemerkung *string                            `json:"abweichungsgrundBemerkung,omitempty"`
 	AbweichungsgrundCode      *string                            `json:"abweichungsgrundCode,omitempty" validate:"omitempty"`
 	AbweichungsgrundCodeliste *string                            `json:"abweichungsgrundCodeliste,omitempty" validate:"omitempty"`
+	ZugehoerigeRechnung       *string                            `json:"zugehoerigeRechnung,omitempty" validate:"omitempty"`
+	Abschlagsrechnungen       []string                           `json:"abschlagsrechnungen,omitempty" validate:"omitempty"`
 }
 
 // AbweichungStructLevelValidation does a cross check on a Abweichung object
