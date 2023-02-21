@@ -5,7 +5,7 @@ jobs:
   golangci:
     strategy:
       matrix:
-        go-version: ["1.19.x"] # linting in 1 go version is enough
+        go-version: ["1.20.x"] # linting in 1 go version is enough
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     name: lint
@@ -18,7 +18,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.50
+          version: v1.51.2
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir
