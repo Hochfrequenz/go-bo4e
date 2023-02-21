@@ -16,11 +16,12 @@ func _() {
 	_ = x[VST_19-6]
 	_ = x[VST_7-7]
 	_ = x[RCV-8]
+	_ = x[UST_SONDER-9]
 }
 
-const _Steuerkennzeichen_name = "UST_0UST_16UST_19UST_7VST_0VST_19VST_7RCV"
+const _Steuerkennzeichen_name = "UST_0UST_16UST_19UST_7VST_0VST_19VST_7RCVUST_SONDER"
 
-var _Steuerkennzeichen_index = [...]uint8{0, 5, 11, 17, 22, 27, 33, 38, 41}
+var _Steuerkennzeichen_index = [...]uint8{0, 5, 11, 17, 22, 27, 33, 38, 41, 51}
 
 func (i Steuerkennzeichen) String() string {
 	i -= 1
