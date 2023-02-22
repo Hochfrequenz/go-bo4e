@@ -8,12 +8,13 @@ type Steuerkennzeichen int
 
 const (
 	// UST0 means Keine Umsatzsteuer, bzw. nicht steuerbar.
-	UST_0  Steuerkennzeichen = iota + 1
-	UST_16                   // UST 16 is 16% Umsatzsteuer
-	UST_19                   // UST19 means Umsatzsteuer 19%
-	UST_7                    // UST7 means Umsatzsteuer 7%
-	VST_0                    // VST0 means Keine Vorsteuer, bzw. nicht steuerbar.
-	VST_19                   // VST19 means Vorsteuer 19%
-	VST_7                    // VST7 means Vorsteuer 7%
-	RCV                      // RCV means Reverse Charge Verfahren (Umkehrung der Steuerpflicht)
+	UST_0      Steuerkennzeichen = iota + 1
+	UST_16                       // UST 16 is 16% Umsatzsteuer
+	UST_19                       // UST19 means Umsatzsteuer 19%
+	UST_7                        // UST7 means Umsatzsteuer 7%
+	VST_0                        // VST0 means Keine Vorsteuer, bzw. nicht steuerbar.
+	VST_19                       // VST19 means Vorsteuer 19%
+	VST_7                        // VST7 means Vorsteuer 7%
+	RCV                          // RCV means Reverse Charge Verfahren (Umkehrung der Steuerpflicht)
+	UST_SONDER                   // UST_SONDER means Umsatzsteuer mit abweichendem Satz
 )

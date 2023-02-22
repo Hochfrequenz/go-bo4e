@@ -9,25 +9,27 @@ import (
 
 var (
 	_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
-		"UST_0":  UST_0,
-		"UST_16": UST_16,
-		"UST_19": UST_19,
-		"UST_7":  UST_7,
-		"VST_0":  VST_0,
-		"VST_19": VST_19,
-		"VST_7":  VST_7,
-		"RCV":    RCV,
+		"UST_0":      UST_0,
+		"UST_16":     UST_16,
+		"UST_19":     UST_19,
+		"UST_7":      UST_7,
+		"VST_0":      VST_0,
+		"VST_19":     VST_19,
+		"VST_7":      VST_7,
+		"RCV":        RCV,
+		"UST_SONDER": UST_SONDER,
 	}
 
 	_SteuerkennzeichenValueToName = map[Steuerkennzeichen]string{
-		UST_0:  "UST_0",
-		UST_16: "UST_16",
-		UST_19: "UST_19",
-		UST_7:  "UST_7",
-		VST_0:  "VST_0",
-		VST_19: "VST_19",
-		VST_7:  "VST_7",
-		RCV:    "RCV",
+		UST_0:      "UST_0",
+		UST_16:     "UST_16",
+		UST_19:     "UST_19",
+		UST_7:      "UST_7",
+		VST_0:      "VST_0",
+		VST_19:     "VST_19",
+		VST_7:      "VST_7",
+		RCV:        "RCV",
+		UST_SONDER: "UST_SONDER",
 	}
 )
 
@@ -35,14 +37,15 @@ func init() {
 	var v Steuerkennzeichen
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SteuerkennzeichenNameToValue = map[string]Steuerkennzeichen{
-			interface{}(UST_0).(fmt.Stringer).String():  UST_0,
-			interface{}(UST_16).(fmt.Stringer).String(): UST_16,
-			interface{}(UST_19).(fmt.Stringer).String(): UST_19,
-			interface{}(UST_7).(fmt.Stringer).String():  UST_7,
-			interface{}(VST_0).(fmt.Stringer).String():  VST_0,
-			interface{}(VST_19).(fmt.Stringer).String(): VST_19,
-			interface{}(VST_7).(fmt.Stringer).String():  VST_7,
-			interface{}(RCV).(fmt.Stringer).String():    RCV,
+			interface{}(UST_0).(fmt.Stringer).String():      UST_0,
+			interface{}(UST_16).(fmt.Stringer).String():     UST_16,
+			interface{}(UST_19).(fmt.Stringer).String():     UST_19,
+			interface{}(UST_7).(fmt.Stringer).String():      UST_7,
+			interface{}(VST_0).(fmt.Stringer).String():      VST_0,
+			interface{}(VST_19).(fmt.Stringer).String():     VST_19,
+			interface{}(VST_7).(fmt.Stringer).String():      VST_7,
+			interface{}(RCV).(fmt.Stringer).String():        RCV,
+			interface{}(UST_SONDER).(fmt.Stringer).String(): UST_SONDER,
 		}
 	}
 }

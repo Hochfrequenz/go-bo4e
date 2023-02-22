@@ -13,6 +13,7 @@ import (
 type Steuerbetrag struct {
 	Steuerkennzeichen steuerkennzeichen.Steuerkennzeichen `json:"steuerkennzeichen,omitempty" validate:"required" example:"UST19"` // Kennzeichnung des Steuersatzes, bzw. Verfahrens
 	// Basiswert and Steuerwert are _not_ marked as required because the steuerwert 0 is actually valid
+	Sondersteuersatz        *decimal.Decimal            `json:"sondersteuersatz,omitempty"`                           // Wert eines besonderen Steuersatzes, wichig wenn Steuerkennzeichen den Wert UST_SONDER hat
 	Basiswert               decimal.Decimal             `json:"basiswert" example:"100"`                              // Basiswert ist der Nettobetrag für den die Steuer berechnet wurde
 	Steuerwert              decimal.Decimal             `json:"steuerwert" example:"19"`                              // Steuerwert ist die aus dem Basiswert berechnete Steuer
 	Waehrung                waehrungscode.Waehrungscode `json:"waehrung,omitempty" example:"EUR" validate:"required"` // Waehrung is the currency
