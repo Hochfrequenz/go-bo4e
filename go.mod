@@ -6,7 +6,7 @@ require (
 	github.com/corbym/gocrest v1.0.5
 	github.com/go-playground/validator/v10 v10.11.2
 	github.com/shopspring/decimal v1.3.1
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 )
 
 require (
