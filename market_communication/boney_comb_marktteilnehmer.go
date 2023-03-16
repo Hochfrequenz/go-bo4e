@@ -67,7 +67,7 @@ func (boneyComb *BOneyComb) SetEmpfaenger(mt bo.Marktteilnehmer, useBo4eUri bool
 
 // we expect the 'marktpartner id' to usually be the 13 digits (power/gas sector) or a system internal
 // key (as for 'monopol sparten', e.g. water sector)
-var bo4eUriRegex = regexp.MustCompile(`(bo4e:\/\/Marktteilnehmer\/)?(?P<mpid>\d{13}|[\D\d_+]+)`)
+var bo4eUriRegex = regexp.MustCompile(`(bo4e:\/\/Marktteilnehmer\/)?(?P<mpid>\d{13}|\w+)`)
 
 // getMpCode returns the 13 digit ID of a Marktteilnehmer if present in the Transaktionsdaten
 func (boneyComb *BOneyComb) getMpCode(transactionDataKey string) *string {
