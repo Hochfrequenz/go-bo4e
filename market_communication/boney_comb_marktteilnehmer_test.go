@@ -26,12 +26,21 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_Without_Uri() {
 }
 
 func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
-	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
-		Transaktionsdaten: map[string]string{
-			"absender": "bo4e://Marktteilnehmer/9876543210987",
-		},
+	params := []struct{ transaktionsDatenValue, expectedId, testCaseInfo string }{
+		{"bo4e://Marktteilnehmer/9876543210987", "9876543210987", "Strom/Gas Sparten Id"},
+		{"bo4e://Marktteilnehmer/L34SWH", "L34SWH", "Wasser Sparten Id (kein offizielles Format definiert)"},
 	}
-	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
+
+	for _, testdata := range params {
+		s.Run(testdata.testCaseInfo, func() {
+			var boneyCombWithDokumentennummer = market_communication.BOneyComb{
+				Transaktionsdaten: map[string]string{
+					"absender": testdata.transaktionsDatenValue,
+				},
+			}
+			then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo(testdata.expectedId))
+		})
+	}
 }
 
 func (s *Suite) Test_SetAbsenderCode() {
