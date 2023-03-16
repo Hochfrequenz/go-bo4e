@@ -2,7 +2,9 @@ package bo
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/enum/messtechnischeeinordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
+	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
@@ -39,6 +41,15 @@ type Marktlokation struct {
 	Geoadresse                *com.Geokoordinaten          `json:"geoadresse,omitempty" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
 	Katasterinformation       *com.Katasteradresse         `json:"katasterinformation,omitempty" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address
 	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
+
+	Regelzone   *string `json:"regelzone,omitempty"`
+	Marktgebiet *string `json:"marktgebiet,omitempty"`
+
+	Zeitreihentyp                  *zeitreihentyp.Zeitreihentyp                       `json:"zeitreihentyp,omitempty"`
+	Zaehlwerke                     []com.Zaehlwerk                                    `json:"zaehlwerke,omitempty"`
+	ZaehlwerkeBeteiligteMarktrolle []com.Zaehlwerk                                    `json:"zaehlwerkeBeteiligteMarktrolle,omitempty"`
+	Messlokationen                 []Messlokation                                     `json:"messlokationen,omitempty"`
+	MesstechnischeEinordnung       *messtechnischeeinordnung.MesstechnischeEinordnung `json:"messtechnischeEinordnung,omitempty"`
 
 	Netznutzungsabrechnungsdaten []com.Netznutzungsabrechnungsdaten `json:"netznutzungsabrechnungsdaten,omitempty"` // Netznutzungsabrechnungsdaten sind Daten für die Prüfung der Netznutzungsabrechnung
 	Sperrstatus                  *sperrstatus.Sperrstatus           `json:"sperrstatus,omitempty"`
