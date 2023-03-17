@@ -4,6 +4,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/schwachlastfaehigkeit"
+	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
 	"github.com/shopspring/decimal"
 )
 
@@ -17,7 +18,7 @@ type Zaehlwerk struct {
 	Einheit           mengeneinheit.Mengeneinheit     `json:"einheit,omitempty" validate:"required"`                                   // Die Einheit der gemessenen Größe
 	Zaehlerstaende    Zaehlerstaende                  `json:"zaehlerstaende,omitempty"`                                                // A list of Zaehlerstand (Non BO4E Standard)
 	Verwendungszwecke []Verwendungszweck              `json:"verwendungszwecke,omitempty"`                                             // Verwendungungszweck der Werte Marktlokation
-
+	Verbrauchsart     verbrauchsart.Verbrauchsart     `json:"verbrauchsart,omitempty"`                                                 // Stromverbrauchsart/Verbrauchsart Marktlokation
 	// The following fields are non bo4e standard (yet)
 
 	// note that both "kommastellen" (plural) serialize as singular "...stelle" for compatability reasons (with bo4e dotnet)
