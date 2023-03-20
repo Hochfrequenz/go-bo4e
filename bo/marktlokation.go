@@ -163,3 +163,19 @@ func XorStructLevelValidation(sl validator.StructLevel) {
 		sl.ReportError(Marktlokation{}.Lokationsadresse, "", "", "onlyOneAddressType", "")
 	}
 }
+
+func (malo *Marktlokation) GetFirstZaehlwerk() *com.Zaehlwerk {
+	if len(malo.Zaehlwerke) > 0 {
+		return &malo.Zaehlwerke[0]
+	}
+
+	return nil
+}
+
+func (malo *Marktlokation) GetFirstNetznutzungsabrechnungsdatum() *com.Netznutzungsabrechnungsdaten {
+	if len(malo.Netznutzungsabrechnungsdaten) > 0 {
+		return &malo.Netznutzungsabrechnungsdaten[0]
+	}
+
+	return nil
+}

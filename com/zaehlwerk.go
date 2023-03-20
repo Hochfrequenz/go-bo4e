@@ -23,12 +23,13 @@ type Zaehlwerk struct {
 	Verbrauchsart     *verbrauchsart.Verbrauchsart         `json:"verbrauchsart,omitempty"`                                                 // Stromverbrauchsart/Verbrauchsart Marktlokation
 	Unterbrechbarkeit *unterbrechbarkeit.Unterbrechbarkeit `json:"unterbrechbarkeit,omitempty"`                                             // Stromverbrauchsart/Unterbrechbarkeit Marktlokation
 	Waermenutzung     *waermenutzung.Waermenutzung         `json:"waermenutzung,omitempty"`                                                 // Stromverbrauchsart/Wärmenutzung Marktlokation
+	Konzessionsabgabe *Konzessionsabgabe                   `json:"konzessionsabgabe,omitempty"`
 	// The following fields are non bo4e standard (yet)
 
 	// note that both "kommastellen" (plural) serialize as singular "...stelle" for compatability reasons (with bo4e dotnet)
-	Vorkommastellen   *int                                        `json:"vorkommastelle,omitempty" validate:"omitempty,min=0"`  // Vorkommastellen ist the number of pre-decimal places
-	Nachkommastellen  *int                                        `json:"nachkommastelle,omitempty" validate:"omitempty,min=0"` // Nachkommastellen is the number of post decimal places
-	Schwachlastfaehig schwachlastfaehigkeit.Schwachlastfaehigkeit `json:"schwachlastfaehig,omitempty"`
+	Vorkommastellen   *int                                         `json:"vorkommastelle,omitempty" validate:"omitempty,min=0"`  // Vorkommastellen ist the number of pre-decimal places
+	Nachkommastellen  *int                                         `json:"nachkommastelle,omitempty" validate:"omitempty,min=0"` // Nachkommastellen is the number of post decimal places
+	Schwachlastfaehig *schwachlastfaehigkeit.Schwachlastfaehigkeit `json:"schwachlastfaehig,omitempty"`
 
 	AnzahlAblesungen *int `json:"anzahlAblesungen,omitempty"`
 	// the json tag is different from the field name ("zaehlzeiten" instead of "zaehlzeit") to be consistent with the C# lib: https://github.com/Hochfrequenz/BO4E-dotnet/issues/249
