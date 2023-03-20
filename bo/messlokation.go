@@ -2,7 +2,6 @@ package bo
 
 import (
 	"encoding/json"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
