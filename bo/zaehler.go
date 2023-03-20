@@ -3,6 +3,7 @@ package bo
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/fernschaltung"
+	"github.com/hochfrequenz/go-bo4e/enum/geraetemerkmal"
 	"github.com/hochfrequenz/go-bo4e/enum/messwerterfassung"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
@@ -25,7 +26,7 @@ type Zaehler struct {
 	LetzteEichung      time.Time                             `json:"letzteEichung,omitempty"`                              // LetzteEichung ist das Datum, an dem die letzte Eichprüfung des Zählers stattfand
 	Zaehlwerke         []com.Zaehlwerk                       `json:"zaehlwerke,omitempty" validate:"required,min=1"`       // Zaehlwerke sind die Zählwerke des Zählers
 	Zaehlerhersteller  *Geschaeftspartner                    `json:"zaehlerhersteller,omitempty"`                          // Zaehlerhersteller ist der Hersteller des Zählers
-
+	Zaehlergroesse     *geraetemerkmal.Geraetemerkmal        `json:"zaehlergroesse,omitempty"`                             // Zaehlergroesse
 	// the following fields are not part of the official bo4e standard (yet)
 
 	Fernschaltung     fernschaltung.Fernschaltung         `json:"fernschaltung,omitempty"`     // Fernschaltung is set to VORHANDEN if there is a fernschaltung
