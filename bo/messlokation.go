@@ -15,7 +15,7 @@ type Messlokation struct {
 	Geschaeftsobjekt
 	MesslokationsId                 string                     `json:"messlokationsId,omitempty" example:"DE0123456789012345678901234567890" validate:"alphanum,required,len=33"` // MesslokationsId is the ID of the metering location
 	Sparte                          sparte.Sparte              `json:"sparte,omitempty" validate:"required"`                                                                      // Sparte is the division
-	NetzebeneMessung                netzebene.Netzebene        `json:"netzebeneMessung,omitempty"`                                                                                // NetzebeneMessung is the grid level of measurement
+	NetzebeneMessung                *netzebene.Netzebene       `json:"netzebeneMessung,omitempty"`                                                                                // NetzebeneMessung is the grid level of measurement
 	MessgebietNr                    string                     `json:"messgebietNr,omitempty"`                                                                                    // MessgebietNr is the number of the measurement area in ene't database
 	Geraete                         []com.Hardware             `json:"geraete,omitempty"`                                                                                         // Geraete is a list of devices
 	Messdienstleistung              *com.Dienstleistung        `json:"messdienstleistung,omitempty"`                                                                              // Messdienstleistung is a metering services
