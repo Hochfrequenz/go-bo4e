@@ -12,6 +12,17 @@ type SomeStruct struct {
 	B int
 }
 
+func (s *SomeStruct) UnmarshalJSON(bytes []byte) (err error) {
+	if s.UnmappedData.Data == nil {
+		s.UnmappedData.Data = map[string]any{}
+	}
+	return UnmarshallWithUnmappedData(s, &s.UnmappedData, bytes)
+}
+
+func (s SomeStruct) MarshalJSON() ([]byte, error) {
+	return MarshalWithUnmappedData(s)
+}
+
 type SomeStructWithMoreFields struct {
 	UnmappedData `json:"-"`
 	A            string
@@ -27,9 +38,8 @@ func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testin
 	}
 
 	bytes, _ := json.Marshal(someStructWithUnmappedData)
-	actualUnmappedData := UnmappedData{map[string]any{}}
 	actualStrongTypedFields := SomeStruct{}
-	err := UnmarshallWithUnmappedData(&actualStrongTypedFields, &actualUnmappedData, bytes)
+	err := json.Unmarshal(bytes, &actualStrongTypedFields)
 	if err != nil {
 		t.Errorf("Error occured while unmarshalling: %v", err)
 	}
@@ -37,13 +47,10 @@ func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testin
 	expectedUnmappedData := UnmappedData{Data: map[string]any{
 		"X": "very nice",
 	}}
-	expectedStrongTypedFields := SomeStruct{A: someStructWithUnmappedData.A, B: someStructWithUnmappedData.B}
+	expectedStrongTypedFields := SomeStruct{A: someStructWithUnmappedData.A, B: someStructWithUnmappedData.B, UnmappedData: expectedUnmappedData}
 
 	if !reflect.DeepEqual(actualStrongTypedFields, expectedStrongTypedFields) {
 		t.Errorf("Unmarshalling struct with unmapped data failed:\nexpected: %v,\nactual: %v", expectedStrongTypedFields, actualStrongTypedFields)
-	}
-	if !reflect.DeepEqual(actualUnmappedData, expectedUnmappedData) {
-		t.Errorf("Unmarshalling struct with unmapped data failed:\nexpected: %v,\nactual: %v", expectedUnmappedData, actualUnmappedData)
 	}
 }
 
@@ -59,7 +66,7 @@ func Test_Marshalling_WitUnmappedData_PreservesUnmappedDataInJson(t *testing.T) 
 	}}
 	structWithUnmappedData := SomeStruct{A: expectedStructWithUnmappedData.A, B: expectedStructWithUnmappedData.B, UnmappedData: unmappedData}
 
-	actual, err := MarshalWithUnmappedData(structWithUnmappedData)
+	actual, err := json.Marshal(structWithUnmappedData)
 	if err != nil {
 		t.Errorf("Error occured while marshalling: %v", err)
 	}
