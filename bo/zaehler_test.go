@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -31,9 +32,9 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 		},
 		Zaehlernummer:      "0815",
 		Sparte:             sparte.STROM,
-		Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+		Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 		Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
-		Tarifart:           tarifart.EINTARIF,
+		Tarifart:           internal.Ptr(tarifart.EINTARIF),
 		//EichungBis:         time.Time{},
 		//LetzteEichung:      time.Time{},
 		Zaehlwerke: []com.Zaehlwerk{{
@@ -75,9 +76,9 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 				},
 				Zaehlernummer:      "0815",
 				Sparte:             sparte.STROM,
-				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 				Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
-				Tarifart:           tarifart.EINTARIF,
+				Tarifart:           internal.Ptr(tarifart.EINTARIF),
 				Zaehlerkonstante:   decimal.NewNullDecimal(decimal.NewFromFloat(17)),
 				Zaehlwerke:         []com.Zaehlwerk{},
 				Zaehlerhersteller:  nil,
@@ -99,9 +100,9 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 			},
 			Zaehlernummer:      "08150",
 			Sparte:             sparte.STROM,
-			Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+			Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 			Zaehlertyp:         zaehlertyp.WECHSELSTROMZAEHLER,
-			Tarifart:           tarifart.EINTARIF,
+			Tarifart:           internal.Ptr(tarifart.EINTARIF),
 			Zaehlerkonstante:   decimal.NullDecimal{Valid: false, Decimal: decimal.NewFromFloat(0)},
 			//EichungBis:         time.Time{},
 			//LetzteEichung:      time.Time{},

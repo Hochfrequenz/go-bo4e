@@ -55,9 +55,9 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 				},
 				Zaehlernummer:      "0815",
 				Sparte:             sparte.STROM,
-				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 				Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
-				Tarifart:           tarifart.EINTARIF,
+				Tarifart:           internal.Ptr(tarifart.EINTARIF),
 				Zaehlerkonstante:   decimal.NullDecimal{},
 				Zaehlwerke: []com.Zaehlwerk{{
 					ZaehlwerkId:   "1",
