@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
@@ -59,9 +60,9 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 				},
 				Sparte:             sparte.STROM,
 				Zaehlernummer:      "1ASD23",
-				Zaehlerauspraegung: zaehlerauspraegung.EINRICHTUNGSZAEHLER,
+				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 				Zaehlertyp:         zaehlertyp.DREHKOLBENZAEHLER,
-				Tarifart:           tarifart.EINTARIF,
+				Tarifart:           internal.Ptr(tarifart.EINTARIF),
 			},
 			&bo.Energiemenge{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
