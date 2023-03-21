@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -32,7 +33,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
 		Sparte:                       sparte.STROM,
-		NetzebeneMessung:             netzebene.MD,
+		NetzebeneMessung:             internal.Ptr(netzebene.MD),
 		MessgebietNr:                 "",
 		Geraete:                      nil,
 		Messdienstleistung:           nil,
@@ -97,7 +98,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 				},
 				MesslokationsId:              "",
 				Sparte:                       0,
-				NetzebeneMessung:             0,
+				NetzebeneMessung:             nil,
 				MessgebietNr:                 "",
 				Geraete:                      nil,
 				Messdienstleistung:           nil,
@@ -120,7 +121,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 				},
 				MesslokationsId:              "",
 				Sparte:                       0,
-				NetzebeneMessung:             0,
+				NetzebeneMessung:             nil,
 				MessgebietNr:                 "",
 				Geraete:                      nil,
 				Messdienstleistung:           nil,
@@ -199,7 +200,7 @@ func (s *Suite) Test_Successful_Messlokation_Validation() {
 			},
 			MesslokationsId:              "DE0000011111222223333344444555556",
 			Sparte:                       sparte.STROM,
-			NetzebeneMessung:             netzebene.MD,
+			NetzebeneMessung:             internal.Ptr(netzebene.MD),
 			MessgebietNr:                 "",
 			Geraete:                      nil,
 			Messdienstleistung:           nil,

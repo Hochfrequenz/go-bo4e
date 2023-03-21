@@ -2,10 +2,9 @@ package bo
 
 import (
 	"encoding/json"
-	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
