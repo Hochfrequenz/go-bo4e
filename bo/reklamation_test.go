@@ -10,6 +10,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/reklamationsgrund"
+	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"reflect"
 	"time"
@@ -28,7 +29,7 @@ func (s *Suite) Test_Reklamation_Deserialization() {
 		LokationsTyp: lokationstyp.MALO,
 		ObisKennzahl: obis("1-0:1.8.0"),
 		ZeitraumMesswertanfrage: com.Zeitraum{
-			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
+			Startzeitpunkt: internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
 		}.AsPointer(),
 		Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 	}
@@ -79,10 +80,10 @@ func (s *Suite) Test_Successful_Reklamation_Validation() {
 			LokationsTyp: lokationstyp.MALO,
 			ObisKennzahl: obis("1-0:1.8.0"),
 			ZeitraumMesswertanfrage: com.Zeitraum{
-				Startzeitpunkt: time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
-				Startdatum:     time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC),
-				Endzeitpunkt:   time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
-				Enddatum:       time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
+				Startzeitpunkt: internal.Ptr(time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC)),
+				Startdatum:     internal.Ptr(time.Date(2021, 11, 30, 22, 0, 0, 0, time.UTC)),
+				Endzeitpunkt:   internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
+				Enddatum:       internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
 			}.AsPointer(),
 			Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 		},

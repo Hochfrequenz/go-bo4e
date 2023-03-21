@@ -47,8 +47,8 @@ var serializableRechnung = bo.Rechnung{
 	Rechnungsperiode: com.Zeitraum{
 		Einheit:        zeiteinheit.MINUTE,
 		Dauer:          decimal.NullDecimal{},
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	},
 	Buchungsdatum: time.Date(2022, 9, 22, 0, 0, 0, 0, time.UTC),
 	Rechnungsersteller: bo.Geschaeftspartner{
@@ -290,8 +290,8 @@ var completeValidRechnung = bo.Rechnung{
 	Rechnungsperiode: com.Zeitraum{
 		Einheit:        zeiteinheit.MINUTE,
 		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	},
 	Rechnungsersteller: bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
