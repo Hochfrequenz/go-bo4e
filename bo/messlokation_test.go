@@ -17,6 +17,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -29,7 +30,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData:     map[string]interface{}{},
+			UnmappedData:      unmappeddatamarshaller.UnmappedData{},
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
 		Sparte:                       sparte.STROM,
@@ -174,9 +175,9 @@ func (s *Suite) Test_Messlokation_DeSerialization_With_Unkonwn_Fields() {
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(meloJsonWithUnknownFields), &melo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), melo.Geschaeftsobjekt.ExtensionData, is.Not(is.Nil()))
-	then.AssertThat(s.T(), melo.ExtensionData["marktrollen"], is.Not(is.Nil()))                   // messlokation->marktrollen is NOT part of the bo4e standard ==> present in extension data
-	then.AssertThat(s.T(), melo.ExtensionData["messlokationsId"], is.Nil())                       // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), melo.Geschaeftsobjekt.UnmappedData.Data, is.Not(is.Nil()))
+	then.AssertThat(s.T(), melo.UnmappedData.Data["marktrollen"], is.Not(is.Nil()))               // messlokation->marktrollen is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(s.T(), melo.UnmappedData.Data["messlokationsId"], is.Nil())                   // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
 	then.AssertThat(s.T(), melo.MesslokationsId, is.EqualTo("DE00026930926E0000000000100763575")) // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
 

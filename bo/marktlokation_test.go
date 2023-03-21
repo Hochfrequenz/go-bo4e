@@ -18,6 +18,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -32,7 +33,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			BoTyp:             botyp.MARKTLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData:     map[string]interface{}{},
+			UnmappedData:      unmappeddatamarshaller.UnmappedData{},
 		},
 		MarktlokationsId:     "51238696781",
 		Sparte:               sparte.STROM,
@@ -164,10 +165,10 @@ func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(maloJsonWithUnknownFields), &malo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), malo.Geschaeftsobjekt.ExtensionData, is.Not(is.Nil()))
-	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.Nil()))                // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
-	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.Nil()) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
-	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272")) // but where it should be
+	then.AssertThat(s.T(), malo.Geschaeftsobjekt.UnmappedData.Data, is.Not(is.Nil()))
+	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.Nil()))                    // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(s.T(), malo.UnmappedData.Data["marktlokationsId"], is.Nil()) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272"))     // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
 
 	// marshaling tests
