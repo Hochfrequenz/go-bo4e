@@ -22,9 +22,9 @@ import (
 type Bilanzierung struct {
 	Geschaeftsobjekt
 	Lastprofile              []com.Lastprofil `json:"lastprofile,omitempty"`                                                         // Lastprofile ist eine Liste der verwendeten Lastprofile (SLP, SLP/TLP, ALP etc.)
-	Bilanzierungsbeginn      time.Time        `json:"bilanzierungsbeginn,omitempty" validate:"omitempty,ltefield=Bilanzierungsende"` // Bilanzierungsbeginn ist der inklusive Beginn der Bilanzierung
-	Bilanzierungsende        time.Time        `json:"bilanzierungsende,omitempty" validate:"omitempty,gtefield=Bilanzierungsbeginn"` // Bilanzierungsende ist das exklusive Ende der Bilanzierung
-	Bilanzkreis              string           `json:"bilanzkreis,omitempty" validate:"omitempty,len=16,eic"`                         // Bilanzkreis ist der EIC-Code des Bilanzkreises
+	Bilanzierungsbeginn      *time.Time       `json:"bilanzierungsbeginn,omitempty" validate:"omitempty,ltefield=Bilanzierungsende"` // Bilanzierungsbeginn ist der inklusive Beginn der Bilanzierung
+	Bilanzierungsende        *time.Time       `json:"bilanzierungsende,omitempty" validate:"omitempty,gtefield=Bilanzierungsbeginn"` // Bilanzierungsende ist das exklusive Ende der Bilanzierung
+	Bilanzkreis              *string          `json:"bilanzkreis,omitempty" validate:"omitempty,len=16,eic"`                         // Bilanzkreis ist der EIC-Code des Bilanzkreises
 	Jahresverbrauchsprognose *com.Menge       `json:"jahresverbrauchsprognose,omitempty"`                                            // Jahresverbrauchsprognose ist die Jahresverbrauchsprognose
 	Kundenwert               *com.Menge       `json:"kundenwert,omitempty"`                                                          // Kundenwert ist der Kundenwert
 	// Verbrauchsaufteilung beschreibt, welcher Anteil im SLP- bzw. TLP-Profil steckt
