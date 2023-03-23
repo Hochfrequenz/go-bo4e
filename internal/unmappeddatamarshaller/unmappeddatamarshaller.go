@@ -14,7 +14,7 @@ func (umd *UnmappedData) storeUnmappedData(key string, value any) {
 	umd.Data[key] = value
 }
 
-func MarshalWithUnmappedData[T any](s T) (bytes []byte, err error) {
+func MarshalWithUnmappedData[T any, TShadow interface{ *T }](s T) (bytes []byte, err error) {
 	byteArr, err := json.Marshal(s)
 	if err != nil {
 		return
@@ -45,7 +45,7 @@ func MarshalWithUnmappedData[T any](s T) (bytes []byte, err error) {
 	return json.Marshal(structFields)
 }
 
-func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStruct *UnmappedData, bytes []byte) (err error) {
+func UnmarshallWithUnmappedData[T any, TPtr interface{ *T }](targetStruct *T, shadow TPtr, unmappedDataInTargetStruct *UnmappedData, bytes []byte) (err error) {
 	var unmarshalledFields map[string]any
 	err = json.Unmarshal(bytes, &unmarshalledFields)
 	if err != nil {
@@ -74,11 +74,16 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 		}
 	}
 
+	type Shadow *T
+	s := Shadow(shadow)
+
 	byteArr, err := json.Marshal(unmarshalledFields)
-	err = json.Unmarshal(byteArr, targetStruct)
+	err = json.Unmarshal(byteArr, s)
 	if err != nil {
 		return
 	}
+
+	targetStruct = s
 
 	return
 }

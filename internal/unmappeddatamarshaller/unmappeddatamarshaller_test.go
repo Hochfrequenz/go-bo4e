@@ -12,11 +12,16 @@ type SomeStruct struct {
 	B int
 }
 
+type Shadow struct {
+	*SomeStruct
+}
+
 func (s *SomeStruct) UnmarshalJSON(bytes []byte) (err error) {
 	if s.UnmappedData.Data == nil {
 		s.UnmappedData.Data = map[string]any{}
 	}
-	return UnmarshallWithUnmappedData(s, &s.UnmappedData, bytes)
+
+	return UnmarshallWithUnmappedData(s, s, &s.UnmappedData, bytes)
 }
 
 func (s SomeStruct) MarshalJSON() ([]byte, error) {
