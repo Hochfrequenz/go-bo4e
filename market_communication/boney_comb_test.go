@@ -171,7 +171,7 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 		then.AssertThat(s.T(), boneyComb, is.Not(is.Nil()))
 		if file.Name() == "20211011.json" {
 			firstMaLo, _ := boneyComb.GetSingle(botyp.MARKTLOKATION)
-			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).UnmappedData.Data["some untyped prop"], is.EqualTo("hello world"))
+			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo("hello world"))
 			then.AssertThat(s.T(), boneyComb.Links["foo"][1], is.EqualTo("baz"))
 		}
 		if file.Name() == "20220926.json" {

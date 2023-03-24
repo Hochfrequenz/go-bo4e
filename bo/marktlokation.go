@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"encoding/json"
 	"github.com/hochfrequenz/go-bo4e/enum/messtechnischeeinordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
@@ -55,15 +56,24 @@ type Marktlokation struct {
 	Sperrstatus                  *sperrstatus.Sperrstatus           `json:"sperrstatus,omitempty"`
 }
 
+// the marktlokationForUnmarshal type is derived from Marktlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
+type marktlokationForUnmarshal Marktlokation
+
 func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
-	if malo.UnmappedData.Data == nil {
-		malo.UnmappedData.Data = map[string]any{}
+	if malo.ExtensionData == nil {
+		malo.ExtensionData = map[string]any{}
 	}
-	return unmappeddatamarshaller.UnmarshallWithUnmappedData(malo, &malo.UnmappedData, bytes)
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(malo, &malo.ExtensionData, bytes)
 }
 
-func (malo Marktlokation) MarshalJSON() ([]byte, error) {
-	return unmappeddatamarshaller.MarshalWithUnmappedData(malo)
+func (malo Marktlokation) MarshalJSON() (bytes []byte, err error) {
+	s := marktlokationForUnmarshal(malo)
+
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
 
 func (malo Marktlokation) GetDefaultJsonTags() []string {

@@ -7,7 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
-	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
+	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
@@ -30,7 +30,7 @@ var validBilanzierung = bo.Bilanzierung{
 		BoTyp:             botyp.BILANZIERUNG,
 		VersionStruktur:   "1.1",
 		ExterneReferenzen: nil,
-		UnmappedData:      unmappeddatamarshaller.UnmappedData{Data: map[string]any{}},
+		ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 	},
 	Lastprofile: []com.Lastprofil{{
 		Bezeichnung: "mein lieblingslastprofil",
@@ -84,8 +84,8 @@ func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields() {
 	var deserializedBilanzierung bo.Bilanzierung
 	err := json.Unmarshal([]byte(jsonString), &deserializedBilanzierung)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))                  // a "normal" property/field of Bilanzierung
-	then.AssertThat(s.T(), deserializedBilanzierung.UnmappedData.Data["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
+	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))              // a "normal" property/field of Bilanzierung
+	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
 	jsonStringBytes, serializationErr := json.Marshal(deserializedBilanzierung)
 	then.AssertThat(s.T(), serializationErr, is.Nil())
 	jsonString = string(jsonStringBytes)

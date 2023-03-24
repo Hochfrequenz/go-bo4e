@@ -18,7 +18,7 @@ type BusinessObject interface {
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
 type Geschaeftsobjekt struct {
-	unmappeddatamarshaller.UnmappedData
+	unmappeddatamarshaller.ExtensionData
 	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
 	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
 	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems

@@ -27,7 +27,7 @@ func (s *Suite) Test_Statusbericht_Deserialization() {
 			BoTyp:             botyp.STATUSBERICHT,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			UnmappedData:      unmappeddatamarshaller.UnmappedData{},
+			ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 		},
 		Status:          berichtstatus.ERFOLGREICH,
 		Pruefgegenstand: &gegenstand,

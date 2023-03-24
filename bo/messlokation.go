@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"encoding/json"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
@@ -51,16 +52,21 @@ func (melo Messlokation) GetDefaultJsonTags() []string {
 	return fields
 }
 
-// the below code is just copy pasted from the malo
-// so sorry
-
 func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
-	if melo.UnmappedData.Data == nil {
-		melo.UnmappedData.Data = map[string]any{}
+	if melo.ExtensionData == nil {
+		melo.ExtensionData = map[string]any{}
 	}
-	return unmappeddatamarshaller.UnmarshallWithUnmappedData(melo, &melo.UnmappedData, bytes)
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(melo, &melo.ExtensionData, bytes)
 }
 
-func (melo Messlokation) MarshalJSON() ([]byte, error) {
-	return unmappeddatamarshaller.MarshalWithUnmappedData(melo)
+// the messlokationForUnmarshal type is derived from Messlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
+type messlokationForUnmarshal Messlokation
+
+func (melo Messlokation) MarshalJSON() (bytes []byte, err error) {
+	s := messlokationForUnmarshal(melo)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }

@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"regexp"
@@ -49,14 +50,23 @@ func (bila Bilanzierung) GetDefaultJsonTags() []string {
 }
 
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {
-	if bila.UnmappedData.Data == nil {
-		bila.UnmappedData.Data = map[string]any{}
+	if bila.ExtensionData == nil {
+		bila.ExtensionData = map[string]any{}
 	}
-	return unmappeddatamarshaller.UnmarshallWithUnmappedData(bila, &bila.UnmappedData, bytes)
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(bila, &bila.ExtensionData, bytes)
 }
 
-func (bila Bilanzierung) MarshalJSON() ([]byte, error) {
-	return unmappeddatamarshaller.MarshalWithUnmappedData(bila)
+// bilanzierungForMarshal is a struct similar to the original Bilanzierung but uses a different Marshaller so that we don't run into an endless recursion
+type bilanzierungForMarshal Bilanzierung
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
+func (bila Bilanzierung) MarshalJSON() (bytes []byte, err error) {
+	s := bilanzierungForMarshal(bila)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
 
 var eicRegex = regexp.MustCompile(`(?P<vergabestelle>\d{2})(?P<typ>A|T|V|W|X|Y|Z)([-A-Z\d]{12})(?P<pruefziffer>[A-Z0-9])`)
