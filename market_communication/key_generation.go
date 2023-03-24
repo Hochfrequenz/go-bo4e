@@ -19,8 +19,6 @@ const maxCharactersBGM = 35
 
 // generateRandomString returns a random combination of the allowed characters with given length
 func generateRandomString(allowedCharacters []rune, length uint) string {
-	// source: https://stackoverflow.com/a/22892986/10009545
-	rand.Seed(time.Now().UnixNano())
 	b := make([]rune, length)
 	for i := range b {
 		b[i] = allowedCharacters[rand.Intn(len(unhAllowedCharacters))]
