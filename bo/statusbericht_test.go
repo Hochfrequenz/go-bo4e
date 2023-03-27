@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"reflect"
 	"time"
 
@@ -26,7 +27,7 @@ func (s *Suite) Test_Statusbericht_Deserialization() {
 			BoTyp:             botyp.STATUSBERICHT,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData:     nil,
+			ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 		},
 		Status:          berichtstatus.ERFOLGREICH,
 		Pruefgegenstand: &gegenstand,

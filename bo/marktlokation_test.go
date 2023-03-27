@@ -18,6 +18,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -32,7 +33,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			BoTyp:             botyp.MARKTLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData:     map[string]interface{}{},
+			ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 		},
 		MarktlokationsId:     "51238696781",
 		Sparte:               sparte.STROM,
