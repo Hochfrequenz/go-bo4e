@@ -7,7 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
-	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
+	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/profilverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -29,7 +30,7 @@ var validBilanzierung = bo.Bilanzierung{
 		BoTyp:             botyp.BILANZIERUNG,
 		VersionStruktur:   "1.1",
 		ExterneReferenzen: nil,
-		ExtensionData:     map[string]interface{}{},
+		ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 	},
 	Lastprofile: []com.Lastprofil{{
 		Bezeichnung: "mein lieblingslastprofil",
