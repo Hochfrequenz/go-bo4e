@@ -19,43 +19,10 @@ func (ed ExtensionData) storeUnmappedData(key string, value any) {
 	ed[key] = value
 }
 
-// The generic Marshalling is currently not possible due to a malfunction of the "json.Marshal" method.
-// The method resolving the '*T' pointer of the 'Shadow' type instead of treading it as its own type.
-// This is causing us to always end up in an infinite loop when calling 'json.Marshal(s)' where 's' is the 'Shadow' type.
-//func MarshalWithUnmappedData[T any](t T) (bytes []byte, err error) {
-//	type Shadow *T
-//	s := Shadow(&t)
-//
-//	byteArr, err := json.Marshal(s)
-//	if err != nil {
-//		return
-//	}
-//
-//	unmappedDataFieldNames, err := jsonfieldnames.Extract(UnmappedData{})
-//	if err != nil {
-//		return
-//	} else if len(unmappedDataFieldNames) != 1 {
-//		err = errors.New("expected exactly one field ('ExtensionData' in struct 'UnmappedData')")
-//		return
-//	}
-//	unmappedDataFieldName := unmappedDataFieldNames[0]
-//
-//	var structFields map[string]any
-//	err = json.Unmarshal(byteArr, &structFields)
-//
-//	for fieldName, value := range structFields {
-//		if fieldName == unmappedDataFieldName {
-//			unmappedDataMap := value.(map[string]any)
-//			for k, v := range unmappedDataMap {
-//				structFields[k] = v
-//			}
-//			delete(structFields, fieldName)
-//		}
-//	}
-//
-//	return json.Marshal(structFields)
-//}
-
+// HandleUnmappedDataPropertyMarshalling expects the bytes of a marshalled struct. If the marshalled struct contains
+// 'unmapped' fields meaning ones that had no corresponding, strong-typed field when initially unmarshalled, those fields
+// will be extracted again. The extracted field from the maps containing the unmapped data will be placed on the top level
+// of the marshalled struct.
 func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 	unmappedDataFieldName := reflect.TypeOf(ExtensionData{}).Name()
 
@@ -80,6 +47,8 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 	return json.Marshal(structFields)
 }
 
+// UnmarshallWithUnmappedData will unmarshal a given type by mapping all strong-typed fields to the 'targetStruct'. All
+// other fields will be preserved in the 'unmappedDataInTargetStruct' dictionary.
 func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStruct *ExtensionData, bytes []byte) (err error) {
 	var unmarshalledFields map[string]any
 	err = json.Unmarshal(bytes, &unmarshalledFields)
