@@ -104,7 +104,10 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 	var deserializedMalo bo.Marktlokation
 	err = json.Unmarshal(serializedMalo, &deserializedMalo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedMalo, is.EqualTo(malo))
+
+	expectedJson, _ := json.Marshal(malo)
+	actualJson, _ := json.Marshal(deserializedMalo)
+	then.AssertThat(s.T(), expectedJson, is.EqualTo(actualJson))
 }
 
 //nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
@@ -165,7 +168,7 @@ func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(maloJsonWithUnknownFields), &malo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), malo.Geschaeftsobjekt.ExtensionData, is.Not(is.Nil()))
+	then.AssertThat(s.T(), malo.ExtensionData, is.Not(is.Nil()))
 	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.Nil()))                // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
 	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.Nil()) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
 	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272")) // but where it should be
