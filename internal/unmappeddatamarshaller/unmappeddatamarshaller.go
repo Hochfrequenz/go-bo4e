@@ -61,6 +61,9 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 
 	var structFields map[string]any
 	err = json.Unmarshal(b, &structFields)
+	if err != nil {
+		return
+	}
 
 	for fieldName, value := range structFields {
 		if fieldName == unmappedDataFieldName {
@@ -109,12 +112,13 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 	s := Shadow(targetStruct)
 
 	byteArr, err := json.Marshal(unmarshalledFields)
+	if err != nil {
+		return
+	}
 	err = json.Unmarshal(byteArr, s)
 	if err != nil {
 		return
 	}
-
-	targetStruct = s
 
 	return
 }
