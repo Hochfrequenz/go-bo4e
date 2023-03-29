@@ -61,9 +61,6 @@ type Marktlokation struct {
 type marktlokationForUnmarshal Marktlokation
 
 func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
-	if malo.ExtensionData == nil {
-		malo.ExtensionData = map[string]any{}
-	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(malo, &malo.ExtensionData, bytes)
 }
 

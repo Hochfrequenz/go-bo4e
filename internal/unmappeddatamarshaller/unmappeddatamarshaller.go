@@ -50,6 +50,10 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 // UnmarshallWithUnmappedData will unmarshal a given type by mapping all strong-typed fields to the 'targetStruct'. All
 // other fields will be preserved in the 'unmappedDataInTargetStruct' dictionary.
 func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStruct *ExtensionData, bytes []byte) (err error) {
+	if *unmappedDataInTargetStruct == nil {
+		*unmappedDataInTargetStruct = ExtensionData{}
+	}
+
 	var unmarshalledFields map[string]any
 	err = json.Unmarshal(bytes, &unmarshalledFields)
 	if err != nil {

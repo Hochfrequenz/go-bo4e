@@ -53,9 +53,6 @@ func (melo Messlokation) GetDefaultJsonTags() []string {
 }
 
 func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
-	if melo.ExtensionData == nil {
-		melo.ExtensionData = map[string]any{}
-	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(melo, &melo.ExtensionData, bytes)
 }
 

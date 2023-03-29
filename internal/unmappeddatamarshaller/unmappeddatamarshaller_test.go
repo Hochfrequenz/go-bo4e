@@ -25,10 +25,6 @@ func (s SomeStruct) MarshalJSON() (b []byte, e error) {
 }
 
 func (s *SomeStruct) UnmarshalJSON(bytes []byte) (err error) {
-	if s.ExtensionData == nil {
-		s.ExtensionData = map[string]any{}
-	}
-
 	return UnmarshallWithUnmappedData(s, &s.ExtensionData, bytes)
 }
 
