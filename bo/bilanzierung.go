@@ -50,9 +50,6 @@ func (bila Bilanzierung) GetDefaultJsonTags() []string {
 }
 
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {
-	if bila.ExtensionData == nil {
-		bila.ExtensionData = map[string]any{}
-	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(bila, &bila.ExtensionData, bytes)
 }
 

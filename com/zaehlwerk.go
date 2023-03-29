@@ -40,9 +40,6 @@ type Zaehlwerk struct {
 }
 
 func (zw *Zaehlwerk) UnmarshalJSON(bytes []byte) (err error) {
-	if zw.ExtensionData == nil {
-		zw.ExtensionData = map[string]any{}
-	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(zw, &zw.ExtensionData, bytes)
 }
 

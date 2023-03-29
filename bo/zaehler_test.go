@@ -57,7 +57,10 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 	var deserializedMeter bo.Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedMeter, is.EqualTo(meter))
+
+	areEqual, err := internal.CompareAsJson(meter, deserializedMeter)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), areEqual, is.True())
 }
 
 // TestFailedZaehlerValidation verifies that the validators of a Zaehler work
