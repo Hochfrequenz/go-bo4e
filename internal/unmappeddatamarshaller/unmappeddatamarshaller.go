@@ -81,14 +81,11 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 		}
 	}
 
-	type Shadow *T
-	s := Shadow(targetStruct)
-
 	byteArr, err := json.Marshal(unmarshalledFields)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(byteArr, s)
+	err = json.Unmarshal(byteArr, targetStruct)
 	if err != nil {
 		return
 	}
