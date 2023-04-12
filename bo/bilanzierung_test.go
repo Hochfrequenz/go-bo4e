@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/profilverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -41,9 +42,9 @@ var validBilanzierung = bo.Bilanzierung{
 		},
 		Einspeisung: &aTrue,
 	}},
-	Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
-	Bilanzierungsende:   time.Date(2021, 2, 1, 0, 0, 0, 0, time.UTC),
-	Bilanzkreis:         "11XVE-N-GHM----Q",
+	Bilanzierungsbeginn: internal.Ptr(time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)),
+	Bilanzierungsende:   internal.Ptr(time.Date(2021, 2, 1, 0, 0, 0, 0, time.UTC)),
+	Bilanzkreis:         internal.Ptr("11XVE-N-GHM----Q"),
 	Jahresverbrauchsprognose: &com.Menge{
 		Wert:    newDecimalFromString("1500"),
 		Einheit: mengeneinheit.KWH,
@@ -83,7 +84,7 @@ func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields() {
 	var deserializedBilanzierung bo.Bilanzierung
 	err := json.Unmarshal([]byte(jsonString), &deserializedBilanzierung)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))              // a "normal" property/field of Bilanzierung
+	then.AssertThat(s.T(), *deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))             // a "normal" property/field of Bilanzierung
 	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo("293")) // an extension data key
 	jsonStringBytes, serializationErr := json.Marshal(deserializedBilanzierung)
 	then.AssertThat(s.T(), serializationErr, is.Nil())
@@ -103,23 +104,23 @@ func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 			bo.Bilanzierung{},
 		},
 		"len": {
-			bo.Bilanzierung{Bilanzkreis: "not 16 chars"},
+			bo.Bilanzierung{Bilanzkreis: internal.Ptr("not 16 chars")},
 		},
 		"eic": {
-			bo.Bilanzierung{Bilanzkreis: "FOO BAR XYZ ASD "}, // 16 chars but does not match regex
-			bo.Bilanzierung{Bilanzkreis: "1234567890123456"}, // 16 chars but does not match regex
-			bo.Bilanzierung{Bilanzkreis: "11XVE-N-GHM----R"}, // wrong check sum
+			bo.Bilanzierung{Bilanzkreis: internal.Ptr("FOO BAR XYZ ASD ")}, // 16 chars but does not match regex
+			bo.Bilanzierung{Bilanzkreis: internal.Ptr("1234567890123456")}, // 16 chars but does not match regex
+			bo.Bilanzierung{Bilanzkreis: internal.Ptr("11XVE-N-GHM----R")}, // wrong check sum
 		},
 		"gtefield": { // on ende
 			bo.Bilanzierung{
-				Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
-				Bilanzierungsende:   time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC),
+				Bilanzierungsbeginn: internal.Ptr(time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Bilanzierungsende:   internal.Ptr(time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		"ltefield": { // on beginn
 			bo.Bilanzierung{
-				Bilanzierungsbeginn: time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC),
-				Bilanzierungsende:   time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC),
+				Bilanzierungsbeginn: internal.Ptr(time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Bilanzierungsende:   internal.Ptr(time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		"maloid": { // on beginn
