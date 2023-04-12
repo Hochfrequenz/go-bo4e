@@ -3,12 +3,13 @@ package bo
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"regexp"
 	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
-	aggregationsverantwortung "github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
+	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
@@ -48,61 +49,21 @@ func (bila Bilanzierung) GetDefaultJsonTags() []string {
 	return fields
 }
 
-// the bilanzierungForMarshal type is derived from Bilanzierung but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
-type bilanzierungForUnmarshal Bilanzierung
-
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {
-	// the approach we use here is often referred to as "unmarshal twice"
-	// it's a workaround for the not-so-mature/feature rich encoding/json framework in go
-	_malo := bilanzierungForUnmarshal{}
-	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
-	if err = json.Unmarshal(bytes, &_malo); err == nil {
-		*bila = Bilanzierung(_malo)
-		// the bilanzierung contains only those fields that are defined in the Bilanzierung struct by now
-	} else {
-		return err
-	}
-
-	// now we unmarshal the same bytes into the extension data
-	if err = json.Unmarshal(bytes, &bila.ExtensionData); err != nil {
-		return nil
-	}
-	// But now the extension data also contain those fields that in fact have a representation in the Bilanzierung struct
-	bila.RemoveStronglyTypedFieldsFromExtensionData(bila.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Bilanzierung struct
-	return nil
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(bila, &bila.ExtensionData, bytes)
 }
 
 // bilanzierungForMarshal is a struct similar to the original Bilanzierung but uses a different Marshaller so that we don't run into an endless recursion
 type bilanzierungForMarshal Bilanzierung
 
 //nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
-func (bila Bilanzierung) MarshalJSON() ([]byte, error) {
-	if bila.ExtensionData == nil || len(bila.ExtensionData) == 0 {
-		// no special handling needed
-		return json.Marshal(bilanzierungForMarshal(bila)) // just marshal but use a helper type to not run into an endless recursion
+func (bila Bilanzierung) MarshalJSON() (bytes []byte, err error) {
+	s := bilanzierungForMarshal(bila)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
 	}
-	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded bila-like type and f.e. a map or
-	// we first convert the Bilanzierung into a map[string]interface{}
-	// we serialize the bilanzierung via our helper type
-	bilaDictBytes, bilaMarshalErr := json.Marshal(bilanzierungForMarshal(bila)) // we must use a different type here to not run into an endless recursion
-	if bilaMarshalErr != nil {
-		return []byte{}, bilaMarshalErr
-	}
-	// now we deserialize the malo again but we use a generic dictionary as target type
-	bilaAsMap := map[string]interface{}{}
-	extensionUnmarshalErr := json.Unmarshal(bilaDictBytes, &bilaAsMap)
-	if extensionUnmarshalErr != nil {
-		return []byte{}, extensionUnmarshalErr
-	}
-	// now we join/merge the original malo and its extension data (which is already a map[string]interface{} into a single result
-	result := map[string]interface{}{}
-	for key, value := range bilaAsMap {
-		result[key] = value
-	}
-	for key, value := range bila.ExtensionData {
-		result[key] = value
-	}
-	return json.Marshal(result)
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
 
 var eicRegex = regexp.MustCompile(`(?P<vergabestelle>\d{2})(?P<typ>A|T|V|W|X|Y|Z)([-A-Z\d]{12})(?P<pruefziffer>[A-Z0-9])`)

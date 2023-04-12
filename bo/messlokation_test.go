@@ -17,6 +17,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -29,7 +30,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			BoTyp:             botyp.MESSLOKATION,
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
-			ExtensionData:     map[string]interface{}{},
+			ExtensionData:     unmappeddatamarshaller.ExtensionData{},
 		},
 		MesslokationsId:              "DE0000011111222223333344444555556",
 		Sparte:                       sparte.STROM,
@@ -81,10 +82,13 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	var deserializedMelo bo.Messlokation
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedMelo, is.EqualTo(melo))
+
+	areEqual, err := internal.CompareAsJson(melo, deserializedMelo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), areEqual, is.True())
 }
 
-// Test_Failed_MesslokationValidation verifies that the validators of Messlokation work
+// Test_Failed_MesslokationValidation verify that the validators of Messlokation work
 func (s *Suite) Test_Failed_MesslokationValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.XorStructLevelMesslokationValidation, bo.Messlokation{})

@@ -8,6 +8,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
 // Messlokation contains information about a metering location aka "MeLo"
@@ -51,62 +52,18 @@ func (melo Messlokation) GetDefaultJsonTags() []string {
 	return fields
 }
 
-// the below code is just copy pasted from the malo
-// so sorry
+func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(melo, &melo.ExtensionData, bytes)
+}
 
 // the messlokationForUnmarshal type is derived from Messlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
 type messlokationForUnmarshal Messlokation
 
-func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {
-	// the approach we use here is often referred to as "unmarshal twice"
-	// it's a workaround for the not-so-mature/feature rich encoding/json framework in go
-	_melo := messlokationForUnmarshal{}
-	// first we deserialize into the helper/intermediate type. this is to _not_ run into this Unmarshal func in an endless recursion
-	if err = json.Unmarshal(bytes, &_melo); err == nil {
-		*melo = Messlokation(_melo)
-		// the malo contains only those fields that are defined in the Messlokation struct by now
-	} else {
-		return err
+func (melo Messlokation) MarshalJSON() (bytes []byte, err error) {
+	s := messlokationForUnmarshal(melo)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
 	}
-
-	// now we unmarshal the same bytes into the extension data
-	if err = json.Unmarshal(bytes, &melo.ExtensionData); err != nil {
-		return nil
-	}
-	// But now the extension data also contain those fields that in fact have a representation in the Messlokation struct
-	melo.RemoveStronglyTypedFieldsFromExtensionData(melo.GetDefaultJsonTags()) // remove those fields from the extension data that have a representation in the Marktlokation struct
-	return nil
-}
-
-// marktlokationForMarshal is a struct similar to the original Messlokation but uses a different Marshaller so that we don't run into an endless recursion
-type messlokationForMarshal Messlokation
-
-//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
-func (melo Messlokation) MarshalJSON() ([]byte, error) {
-	if melo.ExtensionData == nil || len(melo.ExtensionData) == 0 {
-		// no special handling needed
-		return json.Marshal(messlokationForMarshal(melo)) // just marshal but use a helper type to not run into an endless recursino
-	}
-	// there is probably a better way than this, like f.e. creating an adhoc-struct that has an embedded malo-like type and f.e. a map or
-	// we first convert the Marktlokation into a map[string]interface{}
-	// we serialize the malo via our helper type
-	maloDictBytes, maloMarhsalErr := json.Marshal(messlokationForMarshal(melo)) // we must use a different type here to not run into an endless recursion
-	if maloMarhsalErr != nil {
-		return []byte{}, maloMarhsalErr
-	}
-	// now we deserialize the malo again but we use a generic dictionary as target type
-	meloAsMap := map[string]interface{}{}
-	extensionUnmarshalErr := json.Unmarshal(maloDictBytes, &meloAsMap)
-	if extensionUnmarshalErr != nil {
-		return []byte{}, extensionUnmarshalErr
-	}
-	// now we join/merge the original malo and its extension data (which is already a map[string]interface{} into a single result
-	result := map[string]interface{}{}
-	for key, value := range meloAsMap {
-		result[key] = value
-	}
-	for key, value := range melo.ExtensionData {
-		result[key] = value
-	}
-	return json.Marshal(result)
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
