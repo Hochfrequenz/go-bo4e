@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"strings"
 	"time"
@@ -17,10 +18,10 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 	var zeitraum = com.Zeitraum{
 		Einheit:        zeiteinheit.MINUTE,
 		Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Startdatum:     internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Enddatum:       internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	}
 	serializedZeitraum, err := json.Marshal(zeitraum)
 	jsonString := string(serializedZeitraum)
@@ -36,8 +37,8 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 // TestZeitraumDeserializationWithoutEinheit
 func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	var zeitraum = com.Zeitraum{
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	}
 	serializedZeitraum, err := json.Marshal(zeitraum)
 	jsonString := string(serializedZeitraum)
@@ -56,13 +57,13 @@ func (s *Suite) Test_Zeitraum_Failed_Validation() {
 	invalidZeitraums := map[string][]interface{}{
 		"required_with": {
 			com.Zeitraum{
-				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+				Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		"gtfield": {
 			com.Zeitraum{
-				Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-				Endzeitpunkt:   time.Date(2020, 8, 1, 0, 0, 0, 0, time.UTC),
+				Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Endzeitpunkt:   internal.Ptr(time.Date(2020, 8, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -76,20 +77,20 @@ func (s *Suite) Test_Successful_Zeitraum_Validation() {
 		com.Zeitraum{
 			Einheit:        zeiteinheit.Zeiteinheit(0),
 			Dauer:          decimal.NewNullDecimal(decimal.NewFromFloat(15)),
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+			Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Startdatum:     internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Enddatum:       internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
+			Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 		},
 		com.Zeitraum{
 			Einheit: zeiteinheit.MINUTE,
 			Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 		},
 		com.Zeitraum{
-			Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-			Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-			Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+			Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
+			Startdatum:     internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Enddatum:       internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validZeitraums)

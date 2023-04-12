@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"strings"
 	"time"
@@ -20,16 +21,16 @@ var validVertragskonditionen = com.Vertragskonditionen{
 		Dauer:   decimal.NewNullDecimal(decimal.NewFromFloat(15)),
 	},
 	Kuendigungsfrist: &com.Zeitraum{
-		Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		Startdatum:     time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
-		Enddatum:       time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
+		Startdatum:     internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Enddatum:       internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	},
 	Vertragsverlaengerung: &com.Zeitraum{
-		Startzeitpunkt: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		Endzeitpunkt:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
-		Startdatum:     time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		Enddatum:       time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
+		Startzeitpunkt: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Endzeitpunkt:   internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
+		Startdatum:     internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Enddatum:       internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15)),
 	},
 	Abschlagszyklus: &com.Zeitraum{
 		Einheit: zeiteinheit.JAHR,
@@ -58,7 +59,7 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 			com.Vertragskonditionen{
 				// is only invalid if a zeitraum is invalid
 				Vertragslaufzeit: &com.Zeitraum{
-					Startzeitpunkt: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
+					Startzeitpunkt: internal.Ptr(time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
 		},

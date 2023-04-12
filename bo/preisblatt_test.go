@@ -16,6 +16,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"reflect"
 	"strings"
@@ -47,8 +48,8 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 			Makoadresse:      "test@test.com",
 		},
 		Gueltigkeit: com.Zeitraum{
-			Startzeitpunkt: time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
-			Startdatum:     time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC),
+			Startzeitpunkt: internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
+			Startdatum:     internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
 		},
 		Preispositionen: []com.Preisposition{
 			{
@@ -155,10 +156,10 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 				Makoadresse:      "test@test.com",
 			},
 			Gueltigkeit: com.Zeitraum{
-				Startzeitpunkt: time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC),
-				Startdatum:     time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC),
-				Enddatum:       time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC),
-				Endzeitpunkt:   time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC),
+				Startzeitpunkt: internal.Ptr(time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC)),
+				Startdatum:     internal.Ptr(time.Date(2021, 12, 31, 22, 00, 00, 00, time.UTC)),
+				Enddatum:       internal.Ptr(time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC)),
+				Endzeitpunkt:   internal.Ptr(time.Date(9999, 12, 31, 23, 59, 59, 00, time.UTC)),
 			},
 			Preispositionen: []com.Preisposition{},
 		},
