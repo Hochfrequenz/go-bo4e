@@ -22,6 +22,7 @@ import (
 
 // Marktlokation contains information about a market location aka "MaLo"
 type Marktlokation struct {
+	unmappeddatamarshaller.ExtensionData
 	Geschaeftsobjekt
 	MarktlokationsId     string                                    `json:"marktlokationsId,omitempty" example:"12345678913" validate:"required,numeric,len=11,maloid"` // MarktlokationsId is the ID of the market location
 	Sparte               sparte.Sparte                             `json:"sparte,omitempty" validate:"required"`                                                       // Sparte describes the Division
@@ -60,9 +61,6 @@ type Marktlokation struct {
 type marktlokationForUnmarshal Marktlokation
 
 func (malo *Marktlokation) UnmarshalJSON(bytes []byte) (err error) {
-	if malo.ExtensionData == nil {
-		malo.ExtensionData = map[string]any{}
-	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(malo, &malo.ExtensionData, bytes)
 }
 

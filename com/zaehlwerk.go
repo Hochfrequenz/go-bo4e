@@ -1,17 +1,20 @@
 package com
 
 import (
+	"encoding/json"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/schwachlastfaehigkeit"
 	"github.com/hochfrequenz/go-bo4e/enum/unterbrechbarkeit"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
 	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 )
 
 // A Zaehlwerk is the counting part of a meter. A meter consists of one or more Zaehlwerke
 type Zaehlwerk struct {
+	unmappeddatamarshaller.ExtensionData
 	ZaehlwerkId       string                               `json:"zaehlwerkId,omitempty" validate:"required" example:"47110815_1"`          // ZaehlwerkId ist die Identifikation des Zählwerks (Registers) innerhalb des Zählers. Oftmals eine laufende Nummer hinter der Zählernummer.
 	Bezeichnung       string                               `json:"bezeichnung,omitempty" validate:"required" example:"Zählwerk_Wirkarbeit"` // Bezeichnung ist eine zusätzliche Bezeichnung
 	Richtung          energierichtung.Energierichtung      `json:"richtung,omitempty" validate:"required"`                                  // Richtung beschreibt die Energierichtung: Einspeisung oder Ausspeisung.
@@ -34,4 +37,21 @@ type Zaehlwerk struct {
 	// the json tag is different from the field name ("zaehlzeiten" instead of "zaehlzeit") to be consistent with the C# lib: https://github.com/Hochfrequenz/BO4E-dotnet/issues/249
 	Zaehlzeit     *Zaehlzeit `json:"zaehlzeiten,omitempty"`
 	Konfiguration *string    `json:"konfiguration,omitempty"`
+}
+
+func (zw *Zaehlwerk) UnmarshalJSON(bytes []byte) (err error) {
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(zw, &zw.ExtensionData, bytes)
+}
+
+// This shadow type is necessary to prevent a deadlock in json.Marshal
+type zaehlwerkForMarshal Zaehlwerk
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
+func (zw Zaehlwerk) MarshalJSON() (bytes []byte, err error) {
+	s := zaehlwerkForMarshal(zw)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }

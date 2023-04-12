@@ -83,16 +83,12 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(s.T(), err, is.Nil())
 
-	// compare maps by value not by reference
-	isUnmappedDataEqual := melo.ExtensionData.CompareTo(deserializedMelo.ExtensionData)
-	then.AssertThat(s.T(), isUnmappedDataEqual, is.True())
-
-	// ignore reference inequality for 'Melo.UnmappedData.ExtensionData' field
-	deserializedMelo.ExtensionData = melo.ExtensionData
-	then.AssertThat(s.T(), deserializedMelo, is.EqualTo(melo))
+	areEqual, err := internal.CompareAsJson(melo, deserializedMelo)
+	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(s.T(), areEqual, is.True())
 }
 
-// Test_Failed_MesslokationValidation verifies that the validators of Messlokation work
+// Test_Failed_MesslokationValidation verify that the validators of Messlokation work
 func (s *Suite) Test_Failed_MesslokationValidation() {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.XorStructLevelMesslokationValidation, bo.Messlokation{})
