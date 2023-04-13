@@ -9,27 +9,27 @@ import (
 
 var (
 	_AbgabeArtNameToValue = map[string]AbgabeArt{
-		"AbgabeArtKAS": AbgabeArtKAS,
-		"AbgabeArtSA":  AbgabeArtSA,
-		"AbgabeArtSAS": AbgabeArtSAS,
-		"AbgabeArtTA":  AbgabeArtTA,
-		"AbgabeArtTAS": AbgabeArtTAS,
-		"AbgabeArtTK":  AbgabeArtTK,
-		"AbgabeArtTKS": AbgabeArtTKS,
-		"AbgabeArtTS":  AbgabeArtTS,
-		"AbgabeArtTSS": AbgabeArtTSS,
+		"KAS": KAS,
+		"SA":  SA,
+		"SAS": SAS,
+		"TA":  TA,
+		"TAS": TAS,
+		"TK":  TK,
+		"TKS": TKS,
+		"TS":  TS,
+		"TSS": TSS,
 	}
 
 	_AbgabeArtValueToName = map[AbgabeArt]string{
-		AbgabeArtKAS: "AbgabeArtKAS",
-		AbgabeArtSA:  "AbgabeArtSA",
-		AbgabeArtSAS: "AbgabeArtSAS",
-		AbgabeArtTA:  "AbgabeArtTA",
-		AbgabeArtTAS: "AbgabeArtTAS",
-		AbgabeArtTK:  "AbgabeArtTK",
-		AbgabeArtTKS: "AbgabeArtTKS",
-		AbgabeArtTS:  "AbgabeArtTS",
-		AbgabeArtTSS: "AbgabeArtTSS",
+		KAS: "KAS",
+		SA:  "SA",
+		SAS: "SAS",
+		TA:  "TA",
+		TAS: "TAS",
+		TK:  "TK",
+		TKS: "TKS",
+		TS:  "TS",
+		TSS: "TSS",
 	}
 )
 
@@ -37,15 +37,15 @@ func init() {
 	var v AbgabeArt
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_AbgabeArtNameToValue = map[string]AbgabeArt{
-			interface{}(AbgabeArtKAS).(fmt.Stringer).String(): AbgabeArtKAS,
-			interface{}(AbgabeArtSA).(fmt.Stringer).String():  AbgabeArtSA,
-			interface{}(AbgabeArtSAS).(fmt.Stringer).String(): AbgabeArtSAS,
-			interface{}(AbgabeArtTA).(fmt.Stringer).String():  AbgabeArtTA,
-			interface{}(AbgabeArtTAS).(fmt.Stringer).String(): AbgabeArtTAS,
-			interface{}(AbgabeArtTK).(fmt.Stringer).String():  AbgabeArtTK,
-			interface{}(AbgabeArtTKS).(fmt.Stringer).String(): AbgabeArtTKS,
-			interface{}(AbgabeArtTS).(fmt.Stringer).String():  AbgabeArtTS,
-			interface{}(AbgabeArtTSS).(fmt.Stringer).String(): AbgabeArtTSS,
+			interface{}(KAS).(fmt.Stringer).String(): KAS,
+			interface{}(SA).(fmt.Stringer).String():  SA,
+			interface{}(SAS).(fmt.Stringer).String(): SAS,
+			interface{}(TA).(fmt.Stringer).String():  TA,
+			interface{}(TAS).(fmt.Stringer).String(): TAS,
+			interface{}(TK).(fmt.Stringer).String():  TK,
+			interface{}(TKS).(fmt.Stringer).String(): TKS,
+			interface{}(TS).(fmt.Stringer).String():  TS,
+			interface{}(TSS).(fmt.Stringer).String(): TSS,
 		}
 	}
 }

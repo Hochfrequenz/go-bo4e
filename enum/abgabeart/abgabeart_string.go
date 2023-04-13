@@ -8,20 +8,20 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[AbgabeArtKAS-0]
-	_ = x[AbgabeArtSA-1]
-	_ = x[AbgabeArtSAS-2]
-	_ = x[AbgabeArtTA-3]
-	_ = x[AbgabeArtTAS-4]
-	_ = x[AbgabeArtTK-5]
-	_ = x[AbgabeArtTKS-6]
-	_ = x[AbgabeArtTS-7]
-	_ = x[AbgabeArtTSS-8]
+	_ = x[KAS-0]
+	_ = x[SA-1]
+	_ = x[SAS-2]
+	_ = x[TA-3]
+	_ = x[TAS-4]
+	_ = x[TK-5]
+	_ = x[TKS-6]
+	_ = x[TS-7]
+	_ = x[TSS-8]
 }
 
-const _AbgabeArt_name = "AbgabeArtKASAbgabeArtSAAbgabeArtSASAbgabeArtTAAbgabeArtTASAbgabeArtTKAbgabeArtTKSAbgabeArtTSAbgabeArtTSS"
+const _AbgabeArt_name = "KASSASASTATASTKTKSTSTSS"
 
-var _AbgabeArt_index = [...]uint8{0, 12, 23, 35, 46, 58, 69, 81, 92, 104}
+var _AbgabeArt_index = [...]uint8{0, 3, 5, 8, 10, 13, 15, 18, 20, 23}
 
 func (i AbgabeArt) String() string {
 	if i < 0 || i >= AbgabeArt(len(_AbgabeArt_index)-1) {
