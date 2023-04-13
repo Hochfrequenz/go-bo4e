@@ -1,9 +1,12 @@
 package com
 
-import "github.com/hochfrequenz/go-bo4e/enum/abgabeart"
+import (
+	"github.com/hochfrequenz/go-bo4e/enum/abgabeart"
+	"github.com/shopspring/decimal"
+)
 
 type Konzessionsabgabe struct {
 	Satz      abgabeart.AbgabeArt
-	Kosten    *float64
+	Kosten    *decimal.Decimal
 	Kategorie *string
 }

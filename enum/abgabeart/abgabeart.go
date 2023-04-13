@@ -5,13 +5,13 @@ package abgabeart
 type AbgabeArt int
 
 const (
-	AbgabeArtKAS AbgabeArt = iota
-	AbgabeArtSA
-	AbgabeArtSAS
-	AbgabeArtTA
-	AbgabeArtTAS
-	AbgabeArtTK
-	AbgabeArtTKS
-	AbgabeArtTS
-	AbgabeArtTSS
+	KAS AbgabeArt = iota
+	SA
+	SAS
+	TA
+	TAS
+	TK
+	TKS
+	TS
+	TSS
 )
