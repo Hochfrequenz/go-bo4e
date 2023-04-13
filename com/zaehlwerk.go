@@ -35,8 +35,9 @@ type Zaehlwerk struct {
 
 	AnzahlAblesungen *int `json:"anzahlAblesungen,omitempty"`
 	// the json tag is different from the field name ("zaehlzeiten" instead of "zaehlzeit") to be consistent with the C# lib: https://github.com/Hochfrequenz/BO4E-dotnet/issues/249
-	Zaehlzeit     *Zaehlzeit `json:"zaehlzeiten,omitempty"`
-	Konfiguration *string    `json:"konfiguration,omitempty"`
+	Zaehlzeit         *Zaehlzeit         `json:"zaehlzeiten,omitempty"`
+	Konfiguration     *string            `json:"konfiguration,omitempty"`
+	Konzessionsabgabe *Konzessionsabgabe `json:"konzessionsabgabe,omitempty"`
 }
 
 func (zw *Zaehlwerk) UnmarshalJSON(bytes []byte) (err error) {
