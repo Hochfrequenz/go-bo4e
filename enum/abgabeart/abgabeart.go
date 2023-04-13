@@ -6,7 +6,7 @@ type AbgabeArt int
 
 const (
 	KAS AbgabeArt = iota
-	SA
+	KAS AbgabeArt = iota + 1
 	SAS
 	TA
 	TAS

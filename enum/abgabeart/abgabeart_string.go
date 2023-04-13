@@ -8,15 +8,15 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[KAS-0]
-	_ = x[SA-1]
-	_ = x[SAS-2]
-	_ = x[TA-3]
-	_ = x[TAS-4]
-	_ = x[TK-5]
-	_ = x[TKS-6]
-	_ = x[TS-7]
-	_ = x[TSS-8]
+	_ = x[KAS-1]
+	_ = x[SA-2]
+	_ = x[SAS-3]
+	_ = x[TA-4]
+	_ = x[TAS-5]
+	_ = x[TK-6]
+	_ = x[TKS-7]
+	_ = x[TS-8]
+	_ = x[TSS-9]
 }
 
 const _AbgabeArt_name = "KASSASASTATASTKTKSTSTSS"
@@ -24,8 +24,9 @@ const _AbgabeArt_name = "KASSASASTATASTKTKSTSTSS"
 var _AbgabeArt_index = [...]uint8{0, 3, 5, 8, 10, 13, 15, 18, 20, 23}
 
 func (i AbgabeArt) String() string {
+	i -= 1
 	if i < 0 || i >= AbgabeArt(len(_AbgabeArt_index)-1) {
-		return "AbgabeArt(" + strconv.FormatInt(int64(i), 10) + ")"
+		return "AbgabeArt(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
 	return _AbgabeArt_name[_AbgabeArt_index[i]:_AbgabeArt_index[i+1]]
 }
