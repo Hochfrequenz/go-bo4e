@@ -34,7 +34,7 @@ func TestExtractFromInvalidTypes(t *testing.T) {
 			func(t *testing.T) {
 				fields, err := jsonfieldnames.Extract(input)
 
-				then.AssertThat(t, fields, is.Nil())
+				then.AssertThat(t, fields, is.NilArray[string]())
 				then.AssertThat(t, err, is.Not(is.Nil()))
 			},
 		)
