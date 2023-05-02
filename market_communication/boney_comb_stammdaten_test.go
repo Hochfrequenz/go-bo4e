@@ -78,14 +78,14 @@ func (s *Suite) Test_GetSingle() {
 		},
 	}
 	marktteilnehmer, marktteilnehmerErr := boneyComb.GetSingle(botyp.MARKTTEILNEHMER) // there are 2 marktteilnehmers
-	then.AssertThat(s.T(), marktteilnehmer, is.Nil())
+	then.AssertThat(s.T(), marktteilnehmer, is.EqualTo[bo.BusinessObject](nil))
 	then.AssertThat(s.T(), marktteilnehmerErr, is.Not(is.Nil()))
 
 	preisblatt, preisblattErr := boneyComb.GetSingle(botyp.PREISBLATT) // there are 0 preisblatts
-	then.AssertThat(s.T(), preisblatt, is.Nil())
+	then.AssertThat(s.T(), preisblatt, is.EqualTo[bo.BusinessObject](nil))
 	then.AssertThat(s.T(), preisblattErr, is.Not(is.Nil()))
 
 	lastgang, lastgangErr := boneyComb.GetSingle(botyp.LASTGANG) // there is 1 lastgang
-	then.AssertThat(s.T(), lastgang, is.Not(is.Nil()))
+	then.AssertThat(s.T(), lastgang, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), lastgangErr, is.Nil())
 }
