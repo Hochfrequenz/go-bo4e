@@ -55,7 +55,7 @@ func (s *Suite) Test_Ansprechpartner_Deserialization() {
 	jsonString := string(serializedAp)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "PROF"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAp, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedAp, is.Not(is.NilArray[byte]()))
 	var deserializedAp bo.Ansprechpartner
 	err = json.Unmarshal(serializedAp, &deserializedAp)
 	then.AssertThat(s.T(), err, is.Nil())
