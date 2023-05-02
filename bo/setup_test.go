@@ -54,7 +54,7 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 				}
 			}
 			if !tagFound {
-				then.AssertThat(s.T(), validationTag, is.Nil())
+				then.AssertThat(s.T(), validationTag, is.EmptyString())
 			}
 			then.AssertThat(s.T(), tagFound, is.True())
 		}
