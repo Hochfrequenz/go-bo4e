@@ -180,7 +180,7 @@ func (s *Suite) Test_Messlokation_DeSerialization_With_Unkonwn_Fields() {
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), melo.Geschaeftsobjekt.ExtensionData, is.Not(is.EqualTo[unmappeddatamarshaller.ExtensionData](nil)))
 	then.AssertThat(s.T(), melo.ExtensionData["marktrollen"], is.Not(is.EqualTo[any](nil)))       // messlokation->marktrollen is NOT part of the bo4e standard ==> present in extension data
-	then.AssertThat(s.T(), melo.ExtensionData["messlokationsId"], is.Not(is.EqualTo[any](nil)))   // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), melo.ExtensionData["messlokationsId"], is.EqualTo[any](nil))           // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
 	then.AssertThat(s.T(), melo.MesslokationsId, is.EqualTo("DE00026930926E0000000000100763575")) // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
 
