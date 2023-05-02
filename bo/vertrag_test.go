@@ -86,7 +86,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 	}
 	serializedContract, err := json.Marshal(contract)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedContract, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedContract, is.Not(is.NilArray[byte]()))
 	var deserializedVertrag bo.Vertrag
 	err = json.Unmarshal(serializedContract, &deserializedVertrag)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -183,7 +183,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 
 func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.VERTRAG)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Vertrag{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.VERTRAG))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))

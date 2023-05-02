@@ -53,7 +53,7 @@ func (s *Suite) Test_Statusbericht_Deserialization() {
 
 	serializedBericht, err := json.Marshal(bericht)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBericht, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedBericht, is.Not(is.NilArray[byte]()))
 	var deserializedBericht bo.Statusbericht
 	err = json.Unmarshal(serializedBericht, &deserializedBericht)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -73,7 +73,7 @@ func (s *Suite) Test_Successful_Statusbericht_Validation() {
 
 func (s *Suite) Test_Empty_Statusbericht_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.STATUSBERICHT)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Statusbericht{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.STATUSBERICHT))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))

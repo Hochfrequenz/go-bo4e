@@ -34,11 +34,10 @@ func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
 		SingulaereBetriebsmittel:      &singulaereBetriebsmittel,
 		PreisSingulaereBetriebsmittel: &preisSingulaereBetriebsmittel,
 	}
-	then.AssertThat(s.T(), netznutzungsabrechnungsdaten, is.Not(is.Nil()))
 
 	serializedNnad, err := json.Marshal(netznutzungsabrechnungsdaten)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedNnad, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedNnad, is.Not(is.NilArray[byte]()))
 
 	var deserializedNnad com.Netznutzungsabrechnungsdaten
 	err = json.Unmarshal(serializedNnad, &deserializedNnad)

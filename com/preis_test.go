@@ -27,7 +27,7 @@ func (s *Suite) Test_Preis_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ENDGUELTIG"), is.True()) // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "EUR"), is.True())        // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedPreis, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedPreis, is.Not(is.NilArray[byte]()))
 	var deserializedPreis com.Preis
 	err = json.Unmarshal(serializedPreis, &deserializedPreis)
 	then.AssertThat(s.T(), err, is.Nil())

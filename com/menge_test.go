@@ -21,11 +21,11 @@ func (s *Suite) Test_Menge_Deserialization() {
 	jsonString := string(serializedMenge)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KUBIKMETER"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedMenge, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedMenge, is.Not(is.NilArray[byte]()))
 	var deserializedVerbrauch com.Menge
 	err = json.Unmarshal(serializedMenge, &deserializedVerbrauch)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(menge))
+	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo[com.Menge](menge))
 }
 
 // Test_Successful_Menge_Validation asserts that the validation does not fail for a valid Menge
