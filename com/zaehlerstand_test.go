@@ -28,7 +28,7 @@ func (s *Suite) Test_Zaehlerstand_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())          // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zustandszahl"), is.True()) // is not omitted
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZaehlerstand, is.Not(is.NilArray[byte]()))
 	var deserializedZaehlerstand com.Zaehlerstand
 	err = json.Unmarshal(serializedZaehlerstand, &deserializedZaehlerstand)
 	then.AssertThat(s.T(), err, is.Nil())

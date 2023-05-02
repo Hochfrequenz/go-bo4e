@@ -44,7 +44,7 @@ func (s *Suite) Test_Vertragskonditionen_Deserialization() {
 	jsonString := string(serializedVertragskonditionen)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.NilArray[byte]()))
 	var deserializedVertragskonditionen com.Vertragskonditionen
 	err = json.Unmarshal(serializedVertragskonditionen, &deserializedVertragskonditionen)
 	then.AssertThat(s.T(), err, is.Nil())

@@ -31,7 +31,7 @@ func (s *Suite) Test_Verbrauch_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
 	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2023-01-01T00:00:00Z\""), is.True()) // ISO8601 ftw
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVerbrauch, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedVerbrauch, is.Not(is.NilArray[byte]()))
 	var deserializedVerbrauch com.Verbrauch
 	err = json.Unmarshal(serializedVerbrauch, &deserializedVerbrauch)
 	then.AssertThat(s.T(), err, is.Nil())

@@ -64,7 +64,7 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	jsonString := string(serializedRechnungsposition)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ABGABE_KWKG"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedRechnungsposition, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedRechnungsposition, is.Not(is.NilArray[byte]()))
 	var deserializedRechnungsposition com.Rechnungsposition
 	err = json.Unmarshal(serializedRechnungsposition, &deserializedRechnungsposition)
 	then.AssertThat(s.T(), err, is.Nil())

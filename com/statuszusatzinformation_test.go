@@ -24,7 +24,7 @@ func (s *Suite) Test_StatusZusatzInformation_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "GASQUALITAET"), is.True())
 	then.AssertThat(s.T(), strings.Contains(jsonString, "BRENNWERTKORREKTUR"), is.True())
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedSts, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedSts, is.Not(is.NilArray[byte]()))
 	var deserializedSts com.StatusZusatzInformation
 	err = json.Unmarshal(serializedSts, &deserializedSts)
 	then.AssertThat(s.T(), err, is.Nil())

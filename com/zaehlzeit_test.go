@@ -19,7 +19,7 @@ func (s *Suite) Test_Zaehlzeit_Deserialization() {
 		Zaehlzeitregister:   &_bar,
 	}
 	serializedZaehlzeit, err := json.Marshal(zaehlzeit)
-	then.AssertThat(s.T(), serializedZaehlzeit, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZaehlzeit, is.Not(is.NilArray[byte]()))
 	then.AssertThat(s.T(), err, is.Nil())
 	deserializedZaehlzeit := com.Zaehlzeit{}
 	err = json.Unmarshal(serializedZaehlzeit, &deserializedZaehlzeit)
