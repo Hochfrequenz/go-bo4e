@@ -27,7 +27,7 @@ func (s *Suite) Test_Zeitraum_Deserialization() {
 	jsonString := string(serializedZeitraum)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.NilArray[byte]()))
 	var deserializedZeitreihenwert com.Zeitraum
 	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -44,7 +44,7 @@ func (s *Suite) Test_Zeitraum_DeserializationWithoutEinheit() {
 	jsonString := string(serializedZeitraum)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "zeiteinheit"), is.False())
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZeitraum, is.Not(is.NilArray[byte]()))
 	var deserializedZeitreihenwert com.Zeitraum
 	err = json.Unmarshal(serializedZeitraum, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())
