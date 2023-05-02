@@ -25,7 +25,7 @@ func (s *Suite) Test_Address_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAdresse, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedAdresse, is.Not(is.NilArray[byte]()))
 	var deserializedAdresse com.Adresse
 	err = json.Unmarshal(serializedAdresse, &deserializedAdresse)
 	then.AssertThat(s.T(), err, is.Nil())

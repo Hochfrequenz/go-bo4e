@@ -9,8 +9,8 @@ import (
 
 func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Nil_Transaktionsdaten() {
 	var emptyBoneyComb = market_communication.BOneyComb{}
-	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.Nil())
-	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Nil())
+	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.NilMap[string, string]())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.NilPtr[string]())
 }
 
 func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Not_Found_Key_And_Value_Otherwise() {
@@ -19,18 +19,18 @@ func (s *Suite) Test_GetTransactionData_Returns_Nil_For_Not_Found_Key_And_Value_
 			"foo": "bar",
 		},
 	}
-	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("asd"), is.Nil())
-	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData(""), is.Nil())
-	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Not(is.Nil()))
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("asd"), is.NilPtr[string]())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData(""), is.NilPtr[string]())
+	then.AssertThat(s.T(), emptyBoneyComb.GetTransactionData("foo"), is.Not(is.NilPtr[string]()))
 	then.AssertThat(s.T(), *emptyBoneyComb.GetTransactionData("foo"), is.EqualTo("bar"))
 }
 
 func (s *Suite) Test_GetNachrichtendatum_Returns_Nil_For_Nil_Transaktionsdaten() {
 	var emptyBoneyComb = market_communication.BOneyComb{}
-	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.Nil())
+	then.AssertThat(s.T(), emptyBoneyComb.Transaktionsdaten, is.NilMap[string, string]())
 	nachrichtendatum, err := emptyBoneyComb.GetNachrichtendatum()
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), nachrichtendatum, is.Nil())
+	then.AssertThat(s.T(), nachrichtendatum, is.NilPtr[time.Time]())
 }
 
 func (s *Suite) Test_GetNachrichtendatum_Returns_Error_For_Unparsable_Date() {
@@ -40,7 +40,7 @@ func (s *Suite) Test_GetNachrichtendatum_Returns_Error_For_Unparsable_Date() {
 		},
 	}
 	nachrichtendatum, err := boneyCombWithMalformedDate.GetNachrichtendatum()
-	then.AssertThat(s.T(), nachrichtendatum, is.Nil())
+	then.AssertThat(s.T(), nachrichtendatum, is.NilPtr[time.Time]())
 	then.AssertThat(s.T(), err, is.Not(is.Nil()))
 }
 

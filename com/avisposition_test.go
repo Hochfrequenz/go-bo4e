@@ -30,7 +30,7 @@ func (s *Suite) Test_AvisPosition_Deserialization() {
 		},
 	}
 	serializedAvisPosition, err := json.Marshal(avisPosition)
-	then.AssertThat(s.T(), serializedAvisPosition, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedAvisPosition, is.Not(is.NilArray[byte]()))
 	jsonString := string(serializedAvisPosition)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), strings.Contains(jsonString, "AAAA"), is.True())

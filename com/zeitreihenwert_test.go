@@ -28,7 +28,7 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 	jsonString := string(serializedZeitreihenwert)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ENERGIEMENGESUMMIERT"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.NilArray[byte]()))
 	var deserializedZeitreihenwert com.Zeitreihenwert
 	err = json.Unmarshal(serializedZeitreihenwert, &deserializedZeitreihenwert)
 	then.AssertThat(s.T(), err, is.Nil())

@@ -35,7 +35,7 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 	jsonString := string(serializedVertragsteil)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "KUBIKMETER"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVertragsteil, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedVertragsteil, is.Not(is.NilArray[byte]()))
 	var deserializedVertragsteil com.Vertragsteil
 	err = json.Unmarshal(serializedVertragsteil, &deserializedVertragsteil)
 	then.AssertThat(s.T(), err, is.Nil())

@@ -25,7 +25,7 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 		AbweichungsgrundCodeliste: &codeliste,
 	}
 	serializedAbweichung, err := json.Marshal(abweichung)
-	then.AssertThat(s.T(), serializedAbweichung, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedAbweichung, is.Not(is.NilArray[byte]()))
 	jsonString := string(serializedAbweichung)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ZZZZ"), is.False())

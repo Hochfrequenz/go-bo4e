@@ -93,7 +93,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 	serializedBoneyComb, err := json.Marshal(boneyComb)
 	//jsonString := string(serializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.NilArray[byte]()))
 	var deserializedBoneyComb market_communication.BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -145,7 +145,7 @@ func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
 	}
 	serializedBoneyComb, err := json.Marshal(boneyCombWithEmptyStammdaten)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.NilArray[byte]()))
 	var deserializedBoneyComb market_communication.BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -164,14 +164,14 @@ func (s *Suite) Test_BOneyComb_Deserialization() {
 	for _, file := range jsonFiles {
 		fileContent, readErr := os.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
 		then.AssertThat(s.T(), readErr, is.Nil())
-		then.AssertThat(s.T(), fileContent, is.Not(is.Nil()))
+		then.AssertThat(s.T(), fileContent, is.Not(is.NilArray[byte]()))
 		var boneyComb market_communication.BOneyComb
 		err = json.Unmarshal(fileContent, &boneyComb)
 		then.AssertThat(s.T(), err, is.Nil())
-		then.AssertThat(s.T(), boneyComb, is.Not(is.Nil()))
+		//then.AssertThat(s.T(), boneyComb, is.Not(is.Nil())) // boneyComb is not nullable
 		if file.Name() == "20211011.json" {
 			firstMaLo, _ := boneyComb.GetSingle(botyp.MARKTLOKATION)
-			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo("hello world"))
+			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo[any]("hello world"))
 			then.AssertThat(s.T(), boneyComb.Links["foo"][1], is.EqualTo("baz"))
 		}
 		if file.Name() == "20220926.json" {

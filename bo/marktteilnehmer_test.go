@@ -76,7 +76,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "DVGW"), is.True()) // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "LF"), is.True())   // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedMarktteilnehmer, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedMarktteilnehmer, is.Not(is.NilArray[byte]()))
 	var deserializedMarktteilnehmer bo.Marktteilnehmer
 	err = json.Unmarshal(serializedMarktteilnehmer, &deserializedMarktteilnehmer)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -138,7 +138,7 @@ func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 
 func (s *Suite) Test_Empty_Markteilnehmer_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.MARKTTEILNEHMER)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Marktteilnehmer{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.MARKTTEILNEHMER))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))

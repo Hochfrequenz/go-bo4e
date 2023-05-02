@@ -22,7 +22,7 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_Without_Uri() {
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetAbsenderCode(), is.EqualTo("9876543210987"))
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.Nil())
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.NilPtr[bo.Marktteilnehmer]())
 }
 
 func (s *Suite) Test_GetAbsenderCode_Returns_Correct_Value_With_Uri() {
@@ -62,7 +62,7 @@ func (s *Suite) Test_GetEmpfaengerCode_Returns_Correct_Value_With_Uri() {
 		},
 	}
 	then.AssertThat(s.T(), *boneyCombWithDokumentennummer.GetEmpfaengerCode(), is.EqualTo("9876543210987"))
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.Nil())
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.NilPtr[bo.Marktteilnehmer]())
 }
 
 func (s *Suite) Test_SetEmpfaengerCode() {
@@ -159,8 +159,8 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 			"absender":   "9903100000007",
 		},
 	}
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[0]))
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.EqualTo(boneyCombWithDokumentennummer.Stammdaten[1]))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetEmpfaenger().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[0].GetBoTyp()))
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[1].GetBoTyp()))
 }
 
 func (s *Suite) Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data() {
@@ -169,8 +169,8 @@ func (s *Suite) Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data() {
 			"Absender": "asdasd",
 		},
 	}
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsenderCode(), is.Nil())
-	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.Nil())
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsenderCode(), is.NilPtr[string]())
+	then.AssertThat(s.T(), boneyCombWithDokumentennummer.GetAbsender(), is.NilPtr[bo.Marktteilnehmer]())
 }
 
 func (s *Suite) Test_SetAbsender() {

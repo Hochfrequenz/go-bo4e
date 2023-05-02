@@ -90,7 +90,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 	}
 	serializedMalo, err := json.Marshal(malo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedMalo, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedMalo, is.Not(is.NilArray[byte]()))
 	stringSerializedMalo := string(serializedMalo)
 	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "STROM"), is.True())
 	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "AUSSP"), is.True())
@@ -168,10 +168,10 @@ func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(maloJsonWithUnknownFields), &malo)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), malo.ExtensionData, is.Not(is.Nil()))
-	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.Nil()))                // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
-	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.Nil()) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
-	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272")) // but where it should be
+	//then.AssertThat(s.T(), malo.ExtensionData, is.Not(is.Nil()))             // ExtensionData is not nullable
+	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.NilArray[com.Zaehlwerk]()))        // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.EqualTo[any](nil)) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272"))             // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
 
 	// marshaling tests
@@ -266,7 +266,7 @@ func (s *Suite) Test_Get_MaloId_Checksum() {
 
 func (s *Suite) Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.MARKTLOKATION)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Marktlokation{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.MARKTLOKATION))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))

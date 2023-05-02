@@ -23,7 +23,7 @@ func (s *Suite) Test_Unterschrift_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "Max Mustermann"), is.True())           // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedUnterschrift, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedUnterschrift, is.Not(is.NilArray[byte]()))
 	var deserializedUnterschrift com.Unterschrift
 	err = json.Unmarshal(serializedUnterschrift, &deserializedUnterschrift)
 	then.AssertThat(s.T(), err, is.Nil())

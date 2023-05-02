@@ -19,10 +19,8 @@ func (s *Suite) Test_Messlokationszuordnung_Deserialization() {
 		GueltigSeit:     time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC),
 		GueltigBis:      time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
 	}
-	then.AssertThat(s.T(), messlokationszuordnung, is.Not(is.Nil()))
-
 	serializedMesslokationszuordnung, err := json.Marshal(messlokationszuordnung)
-	then.AssertThat(s.T(), serializedMesslokationszuordnung, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedMesslokationszuordnung, is.Not(is.NilArray[byte]()))
 
 	jsonString := string(serializedMesslokationszuordnung)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "ADDITION"), is.True()) // stringified enum

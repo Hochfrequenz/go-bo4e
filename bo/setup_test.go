@@ -6,6 +6,7 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
+	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -31,7 +32,7 @@ func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObject
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
 		err := vali.Struct(validObject)
-		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo(0))) // 0 would be iota/uninitialized botyp.BOTyp
+		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo[botyp.BOTyp](0))) // 0 would be iota/uninitialized botyp.BOTyp
 		then.AssertThat(s.T(), err, is.Nil())
 	}
 }
@@ -45,7 +46,7 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 			then.AssertThat(s.T(), err, is.Not(is.Nil()))
 			tagFound := false
 			for _, validationError := range err.(validator.ValidationErrors) {
-				then.AssertThat(s.T(), validationError, is.Not(is.Nil()))
+				then.AssertThat(s.T(), validationError, is.Not(is.EqualTo[validator.FieldError](nil)))
 				// sometimes there's more than one tag/validation error
 				if validationError.Tag() == validationTag {
 					tagFound = true
@@ -53,7 +54,7 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 				}
 			}
 			if !tagFound {
-				then.AssertThat(s.T(), validationTag, is.Nil())
+				then.AssertThat(s.T(), validationTag, is.EmptyString())
 			}
 			then.AssertThat(s.T(), tagFound, is.True())
 		}

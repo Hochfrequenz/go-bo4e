@@ -55,7 +55,7 @@ func (s *Suite) Test_Ansprechpartner_Deserialization() {
 	jsonString := string(serializedAp)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "PROF"), is.True()) // stringified enum
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAp, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedAp, is.Not(is.NilArray[byte]()))
 	var deserializedAp bo.Ansprechpartner
 	err = json.Unmarshal(serializedAp, &deserializedAp)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -90,7 +90,7 @@ func (s *Suite) Test_Successful_Ansprechpartner_Validation() {
 
 func (s *Suite) Test_Empty_Ansprechpartner_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.ANSPRECHPARTNER)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Ansprechpartner{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.ANSPRECHPARTNER))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))

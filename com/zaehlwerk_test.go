@@ -29,7 +29,7 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 	then.AssertThat(s.T(), strings.Contains(jsonString, "AUSSP"), is.True())               // stringified enum
 	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":1.2"), is.True()) // no quotes around the decimal
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedZaehlwerk, is.Not(is.NilArray[byte]()))
 	var deserializedZaehlwerk com.Zaehlwerk
 	err = json.Unmarshal(serializedZaehlwerk, &deserializedZaehlwerk)
 	then.AssertThat(s.T(), err, is.Nil())

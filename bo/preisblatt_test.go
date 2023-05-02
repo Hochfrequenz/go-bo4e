@@ -76,7 +76,7 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 	}
 	serializedPricat, err := json.Marshal(pricat)
 	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedPricat, is.Not(is.Nil()))
+	then.AssertThat(s.T(), serializedPricat, is.Not(is.NilArray[byte]()))
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "STROM"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "MSB_INKL_MESSUNG"), is.True())
 	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "EUR"), is.True())
@@ -169,7 +169,7 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 
 func (s *Suite) Test_Empty_Preisblatt_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.PREISBLATT)
-	then.AssertThat(s.T(), object, is.Not(is.Nil()))
+	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
 	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Preisblatt{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.PREISBLATT))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
