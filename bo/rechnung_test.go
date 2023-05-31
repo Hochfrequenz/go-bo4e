@@ -78,7 +78,7 @@ var serializableRechnung = bo.Rechnung{
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
@@ -108,7 +108,7 @@ var serializableRechnung = bo.Rechnung{
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	},
 	GesamtNetto: com.Betrag{
@@ -320,7 +320,7 @@ var completeValidRechnung = bo.Rechnung{
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	},
 	Rechnungsempfaenger: bo.Geschaeftspartner{
@@ -350,7 +350,7 @@ var completeValidRechnung = bo.Rechnung{
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	},
 	GesamtNetto: com.Betrag{

@@ -57,7 +57,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 		Ansprechpartner: &bo.Ansprechpartner{
@@ -126,7 +126,7 @@ func (s *Suite) Test_Successful_Marktteilnehmer_Validation() {
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
 					Hausnummer:   "27A",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,

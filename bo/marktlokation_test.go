@@ -18,6 +18,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 	"reflect"
@@ -60,7 +61,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.DIENSTLEISTER,
@@ -71,7 +72,7 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 			Ort:          "Grünwald",
 			Strasse:      "Nördliche Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 		ZugehoerigeMesslokationen: []com.Messlokationszuordnung{
 			{
@@ -211,7 +212,7 @@ func (s *Suite) Test_Failed_MarktlokationValidation() {
 					Ort:          "Grünwald",
 					Strasse:      "Nördliche Münchner Straße",
 					Hausnummer:   "27A",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Katasterinformation: &com.Katasteradresse{
 					GemarkungFlur: "Foo",
@@ -252,7 +253,7 @@ func (s *Suite) Test_Successful_Marktlokation_Validation() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördliche Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 	}
