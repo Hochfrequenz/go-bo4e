@@ -45,7 +45,7 @@ func (s *Suite) Test_Messlokation_Deserialization() {
 			Ort:          "Grünwald",
 			Strasse:      "Nördliche Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 		Messlokationszaehler: []bo.Zaehler{
 			{
@@ -136,7 +136,7 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 					Ort:          "Neustadt",
 					Strasse:      "Neue Straße",
 					Hausnummer:   "17",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geoadresse: &com.Geokoordinaten{
 					Breitengrad: newDecimalFromString("12.34"),
@@ -215,7 +215,7 @@ func (s *Suite) Test_Successful_Messlokation_Validation() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördliche Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 	}

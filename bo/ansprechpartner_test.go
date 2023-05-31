@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
 
@@ -36,7 +37,7 @@ var validAp = bo.Ansprechpartner{
 		Ort:          "Berlin",
 		Strasse:      "Ableserstraße",
 		Hausnummer:   "17",
-		Landescode:   landescode.DE,
+		Landescode:   internal.Ptr(landescode.DE),
 	},
 	Rufnummern: []com.Rufnummer{{
 		Nummerntyp: rufnummernart.FAX_DURCHWAHL,

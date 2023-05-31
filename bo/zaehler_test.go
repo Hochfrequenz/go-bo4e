@@ -131,7 +131,7 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
 					Hausnummer:   "27A",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,

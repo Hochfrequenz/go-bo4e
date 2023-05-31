@@ -147,7 +147,7 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 						Ort:          "Testhausen",
 						Strasse:      "Testallee",
 						Hausnummer:   "12",
-						Landescode:   landescode.DE,
+						Landescode:   internal.Ptr(landescode.DE),
 					}),
 				},
 				Marktrolle:       marktrolle.NB,

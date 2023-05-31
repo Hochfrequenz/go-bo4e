@@ -48,7 +48,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Hausnummer:   "28A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.DIENSTLEISTER,
@@ -68,7 +68,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.DIENSTLEISTER,
@@ -142,7 +142,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
 					Hausnummer:   "27A",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,
@@ -161,7 +161,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					Ort:          "Grünwald",
 					Strasse:      "Nördlicher Münchner Straße",
 					Hausnummer:   "27A",
-					Landescode:   landescode.DE,
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,

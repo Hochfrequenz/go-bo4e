@@ -2,6 +2,7 @@ package com_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"strings"
 
 	"github.com/corbym/gocrest/is"
@@ -18,7 +19,7 @@ func (s *Suite) Test_Address_Deserialization() {
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
-		Landescode:   landescode.DE,
+		Landescode:   internal.Ptr(landescode.DE),
 	}
 	serializedAdresse, err := json.Marshal(adresse)
 	jsonString := string(serializedAdresse)
@@ -43,14 +44,14 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// no strasse given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 		"StrasseXORPostfach": {
@@ -61,20 +62,20 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 				Ort:          "Grünwald",
 				Strasse:      "Nördlicher Münchner Straße",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// neither postfach not strasse+hausnummer given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// no strasse given
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
 				Hausnummer:   "27A",
-				Landescode:   landescode.DE,
+				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 	}
@@ -90,7 +91,7 @@ func (s *Suite) Test_Successful_Adresse_Validation() {
 			Ort:          "Grünwald",
 			Hausnummer:   "27A",
 			Strasse:      "Nördliche Münchner Straße",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validAddresses)

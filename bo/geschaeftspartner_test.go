@@ -48,7 +48,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 			Ort:          "Grünwald",
 			Strasse:      "Nördlicher Münchner Straße",
 			Hausnummer:   "27A",
-			Landescode:   landescode.DE,
+			Landescode:   internal.Ptr(landescode.DE),
 		},
 	}
 	serializedGp, err := json.Marshal(gp)
@@ -69,7 +69,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
-		Landescode:   landescode.DE,
+		Landescode:   internal.Ptr(landescode.DE),
 	}
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
@@ -161,7 +161,7 @@ var validGp = bo.Geschaeftspartner{
 		Ort:          "Grünwald",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
-		Landescode:   landescode.DE,
+		Landescode:   internal.Ptr(landescode.DE),
 	},
 	Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 		geschaeftspartnerrolle.DIENSTLEISTER,
