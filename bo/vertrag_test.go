@@ -14,6 +14,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"time"
 )
@@ -40,7 +41,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				ExterneReferenzen: nil,
 			},
 			Name1:                "Mustermann",
-			Anrede:               anrede.HERR,
+			Anrede:               internal.Ptr(anrede.HERR),
 			Gewerbekennzeichnung: false,
 			Partneradresse: &com.Adresse{
 				Postleitzahl: "82031",
@@ -59,7 +60,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Anrede:               anrede.FRAU,
+			Anrede:               internal.Ptr(anrede.FRAU),
 			Name1:                "Musterfrau",
 			Gewerbekennzeichnung: false,
 			Partneradresse: &com.Adresse{

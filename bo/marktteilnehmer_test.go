@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
 
@@ -33,7 +34,7 @@ func (s *Suite) Test_Marktteilnehmer_Deserialization() {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Anrede:               anrede.DIVERS,
+			Anrede:               internal.Ptr(anrede.DIVERS),
 			Name1:                "Müller",
 			Name2:                "Lieschen",
 			Name3:                "",

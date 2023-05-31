@@ -12,6 +12,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 )
 
@@ -91,7 +92,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						VersionStruktur:   "1",
 						ExterneReferenzen: nil,
 					},
-					Anrede:               anrede.DIVERS,
+					Anrede:               internal.Ptr(anrede.DIVERS),
 					Name1:                "Müller",
 					Name2:                "Lieschen",
 					Name3:                "",
@@ -127,7 +128,7 @@ func (s *Suite) Test_GetEmpfaenger_Returns_Correct_Value_If_Present() {
 						VersionStruktur:   "1",
 						ExterneReferenzen: nil,
 					},
-					Anrede:               anrede.DIVERS,
+					Anrede:               internal.Ptr(anrede.DIVERS),
 					Name1:                "Müller",
 					Name2:                "Lieschen",
 					Name3:                "",
