@@ -12,6 +12,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
 )
@@ -24,7 +25,7 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
-		Anrede:               anrede.DIVERS,
+		Anrede:               internal.Ptr(anrede.DIVERS),
 		Name1:                "Müller",
 		Name2:                "Lieschen",
 		Name3:                "",
@@ -79,7 +80,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Anrede:                  0,
+				Anrede:                  nil,
 				Name1:                   "",
 				Name2:                   "",
 				Name3:                   "",
@@ -100,7 +101,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 					VersionStruktur:   "",
 					ExterneReferenzen: nil,
 				},
-				Anrede:                  0,
+				Anrede:                  nil,
 				Name1:                   "",
 				Name2:                   "",
 				Name3:                   "",

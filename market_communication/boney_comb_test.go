@@ -49,7 +49,7 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 					BoTyp:           botyp.GESCHAEFTSPARTNER,
 					VersionStruktur: "1",
 				},
-				Anrede: anrede.FRAU,
+				Anrede: internal.Ptr(anrede.FRAU),
 				Name1:  "Musterfrau",
 				Name2:  "Erika",
 			},
