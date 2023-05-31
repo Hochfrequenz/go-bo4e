@@ -10,7 +10,7 @@ import (
 // Geschaeftspartner models business partners, both companies and private persons.
 type Geschaeftspartner struct {
 	Geschaeftsobjekt
-	Anrede                  anrede.Anrede                                   `json:"anrede,omitempty"`                                                               // Die Anrede für den Geschaeftspartner, Z.B. HERR
+	Anrede                  *anrede.Anrede                                  `json:"anrede,omitempty"`                                                               // Die Anrede für den Geschaeftspartner, Z.B. HERR
 	Name1                   string                                          `json:"name1,omitempty" validate:"required" example:"Yellow Strom GmbH,Hagen"`          // Name1 ist der erste Teil des Namens. Hier kann der Firmenname oder bei Privatpersonen beispielsweise der Nachname dargestellt werden.
 	Name2                   string                                          `json:"name2,omitempty" example:"'Bereich Süd','Nina'"`                                 // Name2 ist der zweite Teil des Namens. Hier kann der eine Erweiterung zum Firmennamen oder bei Privatpersonen beispielsweise der Vorname dargestellt werden.
 	Name3                   string                                          `json:"name3,omitempty" example:"Afrika,Sängerin"`                                      // Name3 enthält weitere Ergänzungen zum Firmennamen oder bei Privatpersonen Zusätze zum Namen dargestellt werden
