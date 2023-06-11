@@ -33,6 +33,7 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) int {
 	// d) 87 + 28 = 115
 	// e) 120 - 115 = 5 => Prüfziffer 5
 	// Identifikationsnummer: A 1 1 3 7 3 5 5 9 2 5
+	// Find an online tool for the check here: https://bdew-codes.de/Codenumbers/NetLocationId (click "Prüfziffernrechner" on the right sidebar)
 	inputMatchesRegex := neloIdRegexWithoutChecksum.MatchString(neloIdWithoutCheckSum)
 	if !inputMatchesRegex {
 		panic("You must provide a string that matches ^E[A-Z\\d]{9}$")
