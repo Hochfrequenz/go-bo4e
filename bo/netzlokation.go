@@ -12,7 +12,7 @@ import (
 // neloIdRegex is a regex that all Netzlokation-IDs must match: An "E" followed by 9 upper case letters or digits and a trailing checksum
 var neloIdRegex = regexp.MustCompile(`^E[A-Z\d]{9}\d{1}$`)
 
-// neloIdRegexWithoutChecksum is a regex that all Netzlokation-IDs must match: An "E" followed by 9 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
+// neloIdRegexWithoutChecksum is a regex that all Netzlokation-IDs[0:10] must match: An "E" followed by 9 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
 var neloIdRegexWithoutChecksum = regexp.MustCompile(`^E[A-Z\d]{9}$`)
 
 // GetNeLoIdCheckSum returns the checksum (11th character of the nelo ID) that matches the first ten characters long provided in neloIdWithoutCheckSum. This is going to crash if the length of the neloIdWithoutCheckSum is <10. Use neloIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a NeLoId
