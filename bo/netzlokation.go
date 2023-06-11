@@ -42,7 +42,7 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) int {
 	for index, digitRune := range neloIdWithoutCheckSum[0:10] {
 		var digit int
 		if !unicode.IsDigit(digitRune) {
-			// if the digitRune is a letter , then we du the usual ASCII conversion
+			// if the digitRune is a letter, then we du the usual ASCII conversion
 			digit = int(digitRune) // digit is 65 for digitRune='A'
 		} else {
 			//, but if it's a "digit" character, then we use the digits value. einmal mit profis arbeiten
