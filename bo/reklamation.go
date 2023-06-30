@@ -15,6 +15,7 @@ type Reklamation struct {
 	ObisKennzahl               *string                             `json:"obisKennzahl,omitempty" validate:"required" example:"1-0:1.8.1"`                                               // ObisKennzahl für das Zählwerk, die festlegt, welche auf die gemessene Größe mit dem Stand gemeldet wird. Nur Zählwerkstände mit dieser OBIS-Kennzahl werden an diesem Zählwerk registriert.
 	ZeitraumMesswertanfrage    *com.Zeitraum                       `json:"zeitraumMesswertanfrage,omitempty" validate:"required"`                                                        // ZeitraumMesswertanfrage gibt den com.Zeitraum an, auf die sich die Reklamation bezieht.
 	ReklamationsgrundBemerkung string                              `json:"reklamationsgrundBemerkung,omitempty" validate:"omitempty"`                                                    // ReklamationsgrundBemerkung ist ein Freitext für eine weitere Beschreibung des Reklamationsgrunds
+	Positionsnummer            int                                 `json:"positionsnummer,omitempty" validate:"omitempty"`                                                               // Positionsnummer ist eine fortlaufende Nummer für die Position
 }
 
 func (_ Reklamation) GetDefaultJsonTags() []string {
