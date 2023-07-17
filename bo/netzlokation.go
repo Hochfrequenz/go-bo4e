@@ -57,7 +57,7 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) int {
 		}
 	}
 	stepD := oddSum + (evenSum * 2)
-	result := ((stepD/10)+1)*10 - stepD
+	result := (((stepD/10)+1)*10 - stepD) % 10
 	resultMatchesRegex := neloIdRegex.MatchString(neloIdWithoutCheckSum + strconv.Itoa(result))
 	if !resultMatchesRegex {
 		panic("This function is broken; And this should never happen")
