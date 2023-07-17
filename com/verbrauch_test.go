@@ -2,15 +2,18 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
+	"github.com/shopspring/decimal"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/enum/tarifstufe"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
-	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 // Test_Deserialization deserializes an Verbrauch json
@@ -24,6 +27,7 @@ func (s *Suite) Test_Verbrauch_Deserialization() {
 		Einheit:                  mengeneinheit.KWH,
 		Nutzungszeitpunkt:        time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
 		Ausfuehrungszeitpunkt:    time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
+		Tarifstufe:               tarifstufe.TARIFSTUFE_3,
 	}
 	serializedVerbrauch, err := json.Marshal(verbrauch)
 	jsonString := string(serializedVerbrauch)
