@@ -1,11 +1,14 @@
 package com
 
 import (
+	"time"
+
+	"github.com/shopspring/decimal"
+
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
+	"github.com/hochfrequenz/go-bo4e/enum/tarifstufe"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
-	"github.com/shopspring/decimal"
-	"time"
 )
 
 // Verbrauch is a a consumption during a specific time frame
@@ -39,4 +42,6 @@ type Verbrauch struct {
 
 	Nutzungszeitpunkt     time.Time `json:"nutzungszeitpunkt"`     // Der Nutzungszeitpunkt wird verwendet, um einen Zählerstand eindeutig einem Prozesszeitpunkt zuzuordnen. Dieser Prozesszeitpunkt kann entweder ein Zeitpunkt einer Stammdatenänderung sein(z. B.bei einem Gerätewechsel, in der die Änderung vor dem Versand des Zählerstandes übermittelt wurde) oder die Bestellung eines Wertes aufgrund eines eingetretenen Ereignisses(z.B. Lieferantenwechsel). Der  Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B.Zuordnung bei Empfänger anhand der Zuordnungstupel)
 	Ausfuehrungszeitpunkt time.Time `json:"ausfuehrungszeitpunkt"` // Der Ausfuehrungszeitpunkt wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde. Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).
+
+	Tarifstufe tarifstufe.Tarifstufe `json:"tarifstufe,omitempty" validate:"omitempty" example:"TARIFSTUFE_0"`
 }
