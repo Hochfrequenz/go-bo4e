@@ -2,8 +2,10 @@ package com_test
 
 import (
 	"encoding/json"
-	"github.com/hochfrequenz/go-bo4e/internal"
+	"strconv"
 	"strings"
+
+	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -17,14 +19,15 @@ func (s *Suite) Test_Address_Deserialization() {
 	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
+		Ortsteil:     "Geiselgasteig",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
 		Landescode:   internal.Ptr(landescode.DE),
 	}
 	serializedAdresse, err := json.Marshal(adresse)
 	jsonString := string(serializedAdresse)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())                              // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, strconv.Itoa(int(landescode.DE))), is.False()) // no raw int enum value
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.NilArray[byte]()))
 	var deserializedAdresse com.Adresse
