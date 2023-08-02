@@ -2,6 +2,7 @@ package com_test
 
 import (
 	"encoding/json"
+	"strconv"
 	"strings"
 
 	"github.com/hochfrequenz/go-bo4e/internal"
@@ -25,8 +26,8 @@ func (s *Suite) Test_Address_Deserialization() {
 	}
 	serializedAdresse, err := json.Marshal(adresse)
 	jsonString := string(serializedAdresse)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())  // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "61"), is.False()) // no "61" for DE
+	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())                              // stringified enum
+	then.AssertThat(s.T(), strings.Contains(jsonString, strconv.Itoa(int(landescode.DE))), is.False()) // no raw int enum value
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedAdresse, is.Not(is.NilArray[byte]()))
 	var deserializedAdresse com.Adresse
