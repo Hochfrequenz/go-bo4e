@@ -2,8 +2,9 @@ package com_test
 
 import (
 	"encoding/json"
-	"github.com/hochfrequenz/go-bo4e/internal"
 	"strings"
+
+	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -17,6 +18,7 @@ func (s *Suite) Test_Address_Deserialization() {
 	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
+		Ortsteil:     "Geiselgasteig",
 		Strasse:      "Nördlicher Münchner Straße",
 		Hausnummer:   "27A",
 		Landescode:   internal.Ptr(landescode.DE),

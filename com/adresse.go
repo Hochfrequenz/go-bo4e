@@ -9,6 +9,7 @@ import (
 type Adresse struct {
 	Postleitzahl string                 `json:"postleitzahl,omitempty" example:"82031" validate:"numeric,required"` // Postleitzahl is the zip code, mandatory
 	Ort          string                 `json:"ort,omitempty" example:"Grünwald" validate:"alphaunicode,required"`  // Ort is the city name, mandatory
+	Ortsteil     string                 `json:"ortsteil,omitempty" example:"Geiselgasteig"`                         // Ortsteil is the city part, optional
 	Strasse      string                 `json:"strasse,omitempty" example:"Nördliche Münchner Straße 27A"`          // Strasse is the street name
 	Hausnummer   string                 `json:"hausnummer,omitempty" example:"27A"`                                 // Hausnummer is the house number including suffixes like "a" or "-1"
 	Postfach     string                 `json:"postfach,omitempty"`                                                 // Postfach is a post box
