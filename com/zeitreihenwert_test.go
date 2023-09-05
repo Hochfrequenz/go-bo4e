@@ -38,18 +38,20 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 // Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
 func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 	validate := validator.New()
+	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
-		"required": {
-			//com.Zeitreihenwert{
-			//	Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
-			//		Wert:         decimal.NewFromFloat(17),
-			//		Status:       0,
-			//		Statuszusatz: 0,
-			//	},
-			//	DatumUhrzeitVon: time.Time{},
-			//	DatumUhrzeitBis: time.Time{},
-			//},
-			//todo: fix problems with required vs. time.Time
+		"timenotzero": {
+			com.Zeitreihenwert{
+				Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
+					Wert:         decimal.NewFromFloat(17),
+					Status:       0,
+					Statuszusatz: 0,
+				},
+				DatumUhrzeitVon: time.Time{},
+				DatumUhrzeitBis: time.Time{},
+			},
+			//custom timenotzero and not required because time is initialized with 0 value -> todo: required validator for time.Time
+			//todo: implement required dive for Zeitreihenwertkompakt?
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidZeitreihenwertkompakts)
@@ -58,6 +60,7 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 // Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
 func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 	validate := validator.New()
+	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
 	validAddresses := []interface{}{
 		com.Zeitreihenwert{
 			Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{

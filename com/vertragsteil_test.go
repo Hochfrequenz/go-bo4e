@@ -45,18 +45,19 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 // Test_Vertragsteil_Failed_Validation verifies that the validation fails for invalid Vertragsteil
 func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	validate := validator.New()
+	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
 	invalidVertragsteile := map[string][]interface{}{
-		//"required": {
-		//	com.Vertragsteil{
-		//		Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		//		Vertragsteilende:   time.Time{},
-		//	},
-		//	com.Vertragsteil{
-		//		Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		//		Vertragsteilbeginn: time.Time{},
-		//	},
-		//},
-		// todo: fix issues time.Time{} vs required
+		"timenotzero": { //gt and not required because time is initialized with 0 value -> todo: required validator for time.Time
+			com.Vertragsteil{
+				Vertragsteilbeginn: time.Time{},
+				Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+			},
+			com.Vertragsteil{
+				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilende:   time.Time{},
+			},
+		},
+
 		"min": {
 			com.Vertragsteil{
 				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -91,6 +92,7 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 // Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
 func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	validate := validator.New()
+	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
 	validVertragsteile := []interface{}{
 		com.Vertragsteil{
 			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),

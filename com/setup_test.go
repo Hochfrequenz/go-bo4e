@@ -7,7 +7,9 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
+	"reflect"
 	"testing"
+	"time"
 )
 
 type Suite struct {
@@ -64,4 +66,13 @@ func newDecimalFromString(s string) decimal.Decimal {
 		panic(fmt.Errorf("Error while converting '%s'", s))
 	}
 	return result
+}
+
+func valTimeNotZero(fl validator.FieldLevel) bool {
+	field := fl.Field()
+	// check if the field is time.Time
+	if field.Kind() == reflect.Struct && field.Type() == reflect.TypeOf(time.Time{}) {
+		return !field.Interface().(time.Time).IsZero() //check whether time is not zero
+	}
+	return false
 }
