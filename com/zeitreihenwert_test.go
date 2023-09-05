@@ -2,6 +2,7 @@ package com_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -38,7 +39,10 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 // Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
 func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 	validate := validator.New()
-	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
+	if err := validate.RegisterValidation("timenotzero", valTimeNotZero); err != nil { //add custom validator tag for time not zero and handle error of registration
+		//generate error if registration of validation failed
+		fmt.Println("Failed to register custom validation for checking time != 0:", err) //todo:optimize errorhandling
+	}
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
 		"timenotzero": {
 			com.Zeitreihenwert{
@@ -60,7 +64,10 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 // Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
 func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 	validate := validator.New()
-	validate.RegisterValidation("timenotzero", valTimeNotZero) //add custom validator tag for time not zero
+	if err := validate.RegisterValidation("timenotzero", valTimeNotZero); err != nil { //add custom validator tag for time not zero and handle error of registration
+		//generate error if registration of validation failed
+		fmt.Println("Failed to register custom validation for checking time != 0:", err) //todo:optimize errorhandling
+	}
 	validAddresses := []interface{}{
 		com.Zeitreihenwert{
 			Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
