@@ -2,13 +2,13 @@ package com_test
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/shopspring/decimal"
+	"log"
 	"strings"
 	"time"
 )
@@ -48,7 +48,7 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 	validate := validator.New()
 	if err := validate.RegisterValidation("timenotzero", valTimeNotZero); err != nil { //add custom validator tag for time not zero and handle error of registration
 		//generate error if registration of validation failed
-		fmt.Println("Failed to register custom validation for checking time != 0:", err) //todo:optimize errorhandling
+		log.Fatalln("Failed to register custom validation for checking time != 0:", err)
 	}
 	invalidVertragsteile := map[string][]interface{}{
 		"timenotzero": { //gt and not required because time is initialized with 0 value -> todo: required validator for time.Time
@@ -98,7 +98,7 @@ func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 	validate := validator.New()
 	if err := validate.RegisterValidation("timenotzero", valTimeNotZero); err != nil { //add custom validator tag for time not zero and handle error of registration
 		//generate error if registration of validation failed
-		fmt.Println("Failed to register custom validation for checking time != 0:", err) //todo:optimize errorhandling
+		log.Fatalln("Failed to register custom validation for checking time != 0:", err)
 	}
 	validVertragsteile := []interface{}{
 		com.Vertragsteil{
