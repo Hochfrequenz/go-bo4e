@@ -72,7 +72,7 @@ func valTimeNotZero(fl validator.FieldLevel) bool {
 	field := fl.Field()
 	// check if the field is time.Time
 	if field.Kind() == reflect.Struct && field.Type() == reflect.TypeOf(time.Time{}) {
-		return !field.Interface().(time.Time).IsZero() //check whether time is not zero
+		return !field.Interface().(time.Time).IsZero()
 	}
 	return false
 }
