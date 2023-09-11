@@ -139,8 +139,8 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 					Landescode:   internal.Ptr(landescode.DE),
 				},
 				Geoadresse: &com.Geokoordinaten{
-					Breitengrad: newDecimalFromString("12.34").String(), //validation langitude against decimal.decimal wont work
-					Laengengrad: newDecimalFromString("45.67").String(),
+					Breitengrad: newDecimalFromString("12.34"),
+					Laengengrad: newDecimalFromString("45.67"),
 					//todo: remove .String -> validator tags in geokoordinaten.go
 				},
 				Katasterinformation: nil,
