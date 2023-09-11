@@ -51,7 +51,7 @@ func (s *Suite) Test_Vertragsteil_Failed_Validation() {
 		log.Fatalln("Failed to register custom validation for checking time != 0:", err)
 	}
 	invalidVertragsteile := map[string][]interface{}{
-		"timenotzero": { //gt and not required because time is initialized with 0 value -> todo: required validator for time.Time
+		"timenotzero": { //todo: required validator for time.Time
 			com.Vertragsteil{
 				Vertragsteilbeginn: time.Time{},
 				Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
