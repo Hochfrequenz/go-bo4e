@@ -141,7 +141,6 @@ func (s *Suite) Test_Failed_MesslokationValidation() {
 				Geoadresse: &com.Geokoordinaten{
 					Breitengrad: newDecimalFromString("12.34"),
 					Laengengrad: newDecimalFromString("45.67"),
-					//todo: remove .String -> validator tags in geokoordinaten.go
 				},
 				Katasterinformation: nil,
 			},
