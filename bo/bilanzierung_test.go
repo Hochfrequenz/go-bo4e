@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/abwicklungsmodell"
 	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
@@ -65,6 +66,7 @@ var validBilanzierung = bo.Bilanzierung{
 	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
 	Prioritaet:                 &seventeen,
 	MarktlokationsId:           "51238696781",
+	Abwicklungsmodell:          abwicklungsmodell.MODELL_1,
 }
 
 // Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
