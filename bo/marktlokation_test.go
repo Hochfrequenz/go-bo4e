@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -21,8 +24,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
 )
 
 // Test_Marktlokation_Deserialization tests serialization and deserialization of Marktlokation
@@ -38,16 +39,16 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 		},
 		MarktlokationsId:     "51238696781",
 		Sparte:               sparte.STROM,
-		Energierichtung:      energierichtung.AUSSP,
-		Bilanzierungsmethode: bilanzierungsmethode.RLM,
+		Energierichtung:      internal.Ptr(energierichtung.AUSSP),
+		Bilanzierungsmethode: internal.Ptr(bilanzierungsmethode.RLM),
 		Verbrauchsart:        verbrauchsart.KL,
 		Unterbrechbar:        &f,
 		Netzebene:            netzebene.MSP,
-		Netzbetreibercodenr:  "0815",
+		Netzbetreibercodenr:  internal.Ptr("0815"),
 		Gebiettyp:            gebiettyp.GRUNDVERSORGUNGSGEBIET,
-		Netzgebietnr:         "1234",
-		Bilanzierungsgebiet:  "Foo",
-		Grundversorgercodenr: "5678",
+		Netzgebietnr:         internal.Ptr("1234"),
+		Bilanzierungsgebiet:  internal.Ptr("Foo"),
+		Grundversorgercodenr: internal.Ptr("5678"),
 		Endkunde: &bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.GESCHAEFTSPARTNER,
@@ -200,8 +201,8 @@ func (s *Suite) Test_Failed_MarktlokationValidation() {
 				},
 				MarktlokationsId:     "",
 				Sparte:               0,
-				Energierichtung:      0,
-				Bilanzierungsmethode: 0,
+				Energierichtung:      internal.Ptr[energierichtung.Energierichtung](0),
+				Bilanzierungsmethode: internal.Ptr[bilanzierungsmethode.Bilanzierungsmethode](0),
 				Netzebene:            0,
 			},
 		},
@@ -217,6 +218,27 @@ func (s *Suite) Test_Failed_MarktlokationValidation() {
 				Katasterinformation: &com.Katasteradresse{
 					GemarkungFlur: "Foo",
 					Flurstueck:    "Bar",
+				},
+			},
+		},
+		"ne": {
+			bo.Marktlokation{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:             botyp.MARKTLOKATION,
+					VersionStruktur:   "1",
+					ExterneReferenzen: nil,
+				},
+				MarktlokationsId:     "12345678913",
+				Sparte:               sparte.STROM,
+				Energierichtung:      internal.Ptr[energierichtung.Energierichtung](0),
+				Bilanzierungsmethode: internal.Ptr[bilanzierungsmethode.Bilanzierungsmethode](0),
+				Netzebene:            netzebene.NSP,
+				Lokationsadresse: &com.Adresse{
+					Postleitzahl: "82031",
+					Ort:          "Grünwald",
+					Strasse:      "Nördliche Münchner Straße",
+					Hausnummer:   "27A",
+					Landescode:   internal.Ptr(landescode.DE),
 				},
 			},
 		},
@@ -245,9 +267,27 @@ func (s *Suite) Test_Successful_Marktlokation_Validation() {
 			},
 			MarktlokationsId:     "12345678913",
 			Sparte:               sparte.STROM,
-			Energierichtung:      energierichtung.EINSP,
-			Bilanzierungsmethode: bilanzierungsmethode.SLP,
+			Energierichtung:      internal.Ptr(energierichtung.EINSP),
+			Bilanzierungsmethode: internal.Ptr(bilanzierungsmethode.SLP),
 			Netzebene:            netzebene.NSP,
+			Lokationsadresse: &com.Adresse{
+				Postleitzahl: "82031",
+				Ort:          "Grünwald",
+				Strasse:      "Nördliche Münchner Straße",
+				Hausnummer:   "27A",
+				Landescode:   internal.Ptr(landescode.DE),
+			},
+		},
+		// Some nullable values
+		bo.Marktlokation{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:             botyp.MARKTLOKATION,
+				VersionStruktur:   "1",
+				ExterneReferenzen: nil,
+			},
+			MarktlokationsId: "12345678913",
+			Sparte:           sparte.STROM,
+			Netzebene:        netzebene.NSP,
 			Lokationsadresse: &com.Adresse{
 				Postleitzahl: "82031",
 				Ort:          "Grünwald",
