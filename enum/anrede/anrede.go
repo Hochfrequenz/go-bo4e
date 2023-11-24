@@ -8,11 +8,15 @@ type Anrede int
 
 const (
 	// HERR (male)
-	HERR             Anrede = iota + 1
-	FRAU                    // FRAU (female)
-	DIVERS                  // DIVERS (non-binary)
-	EHELEUTE                // EHELEUTE (married couple)
-	FIRMA                   // FIRMA (company)
-	WOHNGEMEINSCHAFT        // WOHNGEMEINSCHAFT is a share flat/WG
-	INDIVIDUELL             // INDIVIDUELL festgelegt
+	HERR                    Anrede = iota + 1
+	FRAU                           // FRAU (female)
+	DIVERS                         // DIVERS (non-binary)
+	EHELEUTE                       // EHELEUTE (married couple)
+	FIRMA                          // FIRMA (company)
+	WOHNGEMEINSCHAFT               // WOHNGEMEINSCHAFT is a share flat/WG
+	INDIVIDUELL                    // INDIVIDUELL festgelegt
+	FAMILIE                        // FAMILIE (family)
+	ERBENGEMEINSCHAFT              // ERBENGEMEINSCHAFT (community of heirs, community of co-heirs, community of joint heirs)
+	GRUNDSTUECKGEMEINSCHAFT        // GRUNDSTUECKGEMEINSCHAFT
+	DR                             // DR (doctor)
 )
