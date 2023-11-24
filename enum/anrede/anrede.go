@@ -13,10 +13,10 @@ const (
 	DIVERS                         // DIVERS (non-binary)
 	EHELEUTE                       // EHELEUTE (married couple)
 	FIRMA                          // FIRMA (company)
-	WOHNGEMEINSCHAFT               // WOHNGEMEINSCHAFT is a share flat/WG
+	WOHNGEMEINSCHAFT               // WOHNGEMEINSCHAFT is a share flat/WG - Unofficial / Customer requirement, not part of the BO4E standard yet.
 	INDIVIDUELL                    // INDIVIDUELL festgelegt
-	FAMILIE                        // FAMILIE (family)
-	ERBENGEMEINSCHAFT              // ERBENGEMEINSCHAFT (community of heirs, community of co-heirs, community of joint heirs)
-	GRUNDSTUECKGEMEINSCHAFT        // GRUNDSTUECKGEMEINSCHAFT
-	DR                             // DR (doctor)
+	FAMILIE                        // FAMILIE (family) - Unofficial / Customer requirement, not part of the BO4E standard yet.
+	ERBENGEMEINSCHAFT              // ERBENGEMEINSCHAFT (community of heirs, community of co-heirs, community of joint heirs) - Unofficial / Customer requirement, not part of the BO4E standard yet.
+	GRUNDSTUECKGEMEINSCHAFT        // GRUNDSTUECKGEMEINSCHAFT - Unofficial / Customer requirement, not part of the BO4E standard yet.
+	DR                             // DR (doctor) - Unofficial / Customer requirement, not part of the BO4E standard yet.
 )
