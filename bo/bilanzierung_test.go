@@ -148,6 +148,7 @@ func (s *Suite) Test_Successful_Bilanzierung_Validation() {
 	then.AssertThat(s.T(), err, is.Nil())
 	validMarktteilnehmers := []bo.BusinessObject{
 		validBilanzierung,
+		bilanzierungWithNilAbwicklungsmodell(validBilanzierung),
 	}
 	VerfiySuccessfulValidations(s, validate, validMarktteilnehmers)
 }
@@ -162,4 +163,10 @@ func (s *Suite) Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp() {
 
 func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.BILANZIERUNG))
+}
+
+// bilanzierungWithNilAbwicklungsmodell returns a copy of bilanzierung with Abwicklungsmodell set to nil.
+func bilanzierungWithNilAbwicklungsmodell(bilanzierung bo.Bilanzierung) bo.Bilanzierung {
+	bilanzierung.Abwicklungsmodell = nil
+	return bilanzierung
 }
