@@ -3,11 +3,12 @@ package bo
 import (
 	"encoding/json"
 	"fmt"
+	"regexp"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/abwicklungsmodell"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
-	"regexp"
-	"time"
 
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
@@ -42,7 +43,7 @@ type Bilanzierung struct {
 	Fallgruppenzuordnung       fallgruppenzuordnung.Fallgruppenzuordnung           `json:"fallgruppenzuordnung,omitempty"`                         // Fallgruppenzuordnung (für Gas RLM)
 	Prioritaet                 *int                                                `json:"prioritaet,omitempty"`                                   // Prioritaet ist die Priorität des Bilanzkreises für Gas
 	MarktlokationsId           string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
-	Abwicklungsmodell          abwicklungsmodell.Abwicklungsmodell                 `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
+	Abwicklungsmodell          *abwicklungsmodell.Abwicklungsmodell                `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
 
 }
 

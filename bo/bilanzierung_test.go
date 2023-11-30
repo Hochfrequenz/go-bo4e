@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -19,9 +23,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
-	"time"
 )
 
 var aFalse = false
@@ -66,7 +67,7 @@ var validBilanzierung = bo.Bilanzierung{
 	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
 	Prioritaet:                 &seventeen,
 	MarktlokationsId:           "51238696781",
-	Abwicklungsmodell:          abwicklungsmodell.MODELL_1,
+	Abwicklungsmodell:          internal.Ptr(abwicklungsmodell.MODELL_1),
 }
 
 // Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
