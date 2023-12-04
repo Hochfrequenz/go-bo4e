@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -19,9 +23,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
-	"time"
 )
 
 var aFalse = false
@@ -66,7 +67,7 @@ var validBilanzierung = bo.Bilanzierung{
 	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
 	Prioritaet:                 &seventeen,
 	MarktlokationsId:           "51238696781",
-	Abwicklungsmodell:          abwicklungsmodell.MODELL_1,
+	Abwicklungsmodell:          internal.Ptr(abwicklungsmodell.MODELL_1),
 }
 
 // Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
@@ -147,6 +148,7 @@ func (s *Suite) Test_Successful_Bilanzierung_Validation() {
 	then.AssertThat(s.T(), err, is.Nil())
 	validMarktteilnehmers := []bo.BusinessObject{
 		validBilanzierung,
+		bilanzierungWithNilAbwicklungsmodell(validBilanzierung),
 	}
 	VerfiySuccessfulValidations(s, validate, validMarktteilnehmers)
 }
@@ -161,4 +163,10 @@ func (s *Suite) Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp() {
 
 func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
 	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.BILANZIERUNG))
+}
+
+// bilanzierungWithNilAbwicklungsmodell returns a copy of bilanzierung with Abwicklungsmodell set to nil.
+func bilanzierungWithNilAbwicklungsmodell(bilanzierung bo.Bilanzierung) bo.Bilanzierung {
+	bilanzierung.Abwicklungsmodell = nil
+	return bilanzierung
 }
