@@ -98,15 +98,15 @@ func (s *Suite) Test_Successful_Vertragsteil_Validation() {
 			Lokation:           "DE0123456789012345678901234567890",
 			VertraglichFixierteMenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(42),
-				Einheit: mengeneinheit.KUBIKMETER,
+				Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 			},
 			MinimaleAbnahmemenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(17),
-				Einheit: mengeneinheit.MW,
+				Einheit: internal.Ptr(mengeneinheit.MW),
 			},
 			MaximaleAbnahmemenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(-3),
-				Einheit: mengeneinheit.MONAT,
+				Einheit: internal.Ptr(mengeneinheit.MONAT),
 			},
 		},
 		com.Vertragsteil{
