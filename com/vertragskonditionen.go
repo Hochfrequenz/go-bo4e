@@ -27,6 +27,6 @@ type Vertragskonditionen struct {
 	Netznutzungsvertragsart netznutzungsvertragsart.Netznutzungsvertragsart `json:"netznutzungsvertrag,omitempty"`                                // Netznutzungsvertragsart beschreibt, zwischen welchen Vertragspartnern der Vertrag besteht
 	// the json tag is "netznutzungsvertrag" for consistency with the dotnet-implementation
 	Netznutzungszahler               netznutzungszahler.Netznutzungszahler                             `json:"netznutzungszahler,omitempty"`
-	Netznutzungsabrechnungsvariante  netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante   `json:"netznutzungsabrechnungsvariante,omitempty"`
+	Netznutzungsabrechnungsvariante  *netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante  `json:"netznutzungsabrechnungsvariante,omitempty"`
 	Netznutzungsabrechnungsgrundlage netznutzungsabrechnungsgrundlage.Netznutzungsabrechnungsgrundlage `json:"netznutzungsabrechnungsgrundlage,omitempty"`
 }
