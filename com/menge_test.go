@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"strings"
 )
@@ -15,7 +16,7 @@ import (
 func (s *Suite) Test_Menge_Deserialization() {
 	var menge = com.Menge{
 		Wert:    decimal.NewFromFloat(42),
-		Einheit: mengeneinheit.KUBIKMETER,
+		Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 	}
 	serializedMenge, err := json.Marshal(menge)
 	jsonString := string(serializedMenge)
@@ -34,11 +35,11 @@ func (s *Suite) Test_Successful_Menge_Validation() {
 	validMenges := []interface{}{
 		com.Menge{
 			Wert:    decimal.NewFromFloat(42),
-			Einheit: mengeneinheit.KUBIKMETER,
+			Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 		},
 		com.Menge{
 			Wert:    decimal.NewFromFloat(0), // 0 is a valid value
-			Einheit: mengeneinheit.W,
+			Einheit: internal.Ptr(mengeneinheit.W),
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validMenges)
