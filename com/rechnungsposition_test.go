@@ -35,11 +35,11 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 		LokationsId:     "54321012345",
 		PositionsMenge: com.Menge{
 			Wert:    newDecimalFromString("20"),
-			Einheit: mengeneinheit.KWH,
+			Einheit: internal.Ptr(mengeneinheit.KWH),
 		},
 		ZeitbezogeneMenge: &com.Menge{
 			Wert:    newDecimalFromString("23"),
-			Einheit: mengeneinheit.KUBIKMETER,
+			Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 		},
 		Korrekturfaktor: &korrekturfaktor,
 		Einzelpreis: com.Preis{
@@ -98,7 +98,7 @@ func (s *Suite) Test_Failed_RechnungspositionValidation() {
 		"PositionsMenge.Einheit==Einzelpreis.Bezugswert": {
 			com.Rechnungsposition{
 				PositionsMenge: com.Menge{
-					Einheit: mengeneinheit.KW,
+					Einheit: internal.Ptr(mengeneinheit.KW),
 				},
 				Einzelpreis: com.Preis{
 					Bezugswert: mengeneinheit.KUBIKMETER,
@@ -108,13 +108,13 @@ func (s *Suite) Test_Failed_RechnungspositionValidation() {
 		"ZeitbezogeneMenge.Einheit==Einzelpreis.Bezugswert": {
 			com.Rechnungsposition{
 				PositionsMenge: com.Menge{
-					Einheit: mengeneinheit.KW,
+					Einheit: internal.Ptr(mengeneinheit.KW),
 				},
 				Einzelpreis: com.Preis{
 					Bezugswert: mengeneinheit.KW,
 				},
 				ZeitbezogeneMenge: &com.Menge{
-					Einheit: mengeneinheit.KUBIKMETER,
+					Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 				},
 			},
 		},
@@ -122,7 +122,7 @@ func (s *Suite) Test_Failed_RechnungspositionValidation() {
 			com.Rechnungsposition{
 				PositionsMenge: com.Menge{
 					Wert:    decimal.NewFromFloat(10),
-					Einheit: mengeneinheit.KWH,
+					Einheit: internal.Ptr(mengeneinheit.KWH),
 				},
 				Einzelpreis: com.Preis{
 					Wert:       decimal.NewFromFloat(1.5),
@@ -131,7 +131,7 @@ func (s *Suite) Test_Failed_RechnungspositionValidation() {
 				},
 				ZeitbezogeneMenge: &com.Menge{
 					Wert:    decimal.NewFromFloat(3),
-					Einheit: mengeneinheit.KWH,
+					Einheit: internal.Ptr(mengeneinheit.KWH),
 				},
 				TeilsummeNetto: com.Betrag{
 					Wert:     decimal.NewFromFloat(44), // expected 45 = 3*1.5*10 => validation error
@@ -158,7 +158,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
-				Einheit: mengeneinheit.KWH,
+				Einheit: internal.Ptr(mengeneinheit.KWH),
 			},
 			Einzelpreis: com.Preis{
 				Wert:       decimal.NewFromFloat(12),

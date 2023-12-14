@@ -9,6 +9,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/artikelidtyp"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 )
 
@@ -18,7 +19,7 @@ func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
 	anzahl := 17
 	singulaereBetriebsmittel := com.Menge{
 		Wert:    decimal.NewFromFloat(12.34),
-		Einheit: mengeneinheit.KWH,
+		Einheit: internal.Ptr(mengeneinheit.KWH),
 	}
 	preisSingulaereBetriebsmittel := com.Preis{
 		Wert:    decimal.NewFromFloat(12.34),

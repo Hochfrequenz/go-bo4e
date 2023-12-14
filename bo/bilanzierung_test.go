@@ -50,11 +50,11 @@ var validBilanzierung = bo.Bilanzierung{
 	Bilanzkreis:         internal.Ptr("11XVE-N-GHM----Q"),
 	Jahresverbrauchsprognose: &com.Menge{
 		Wert:    newDecimalFromString("1500"),
-		Einheit: mengeneinheit.KWH,
+		Einheit: internal.Ptr(mengeneinheit.KWH),
 	},
 	Kundenwert: &com.Menge{
 		Wert:    newDecimalFromString("0.17"),
-		Einheit: mengeneinheit.MWH,
+		Einheit: internal.Ptr(mengeneinheit.MWH),
 	},
 	Verbrauchsaufteilung:      decimal.NewNullDecimal(newDecimalFromString("0.17")),
 	Zeitreihentyp:             zeitreihentyp.LGS,

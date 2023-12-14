@@ -33,7 +33,7 @@ type Rechnungsposition struct {
 // RechnungspositionStructLevelValidation does a cross check on a Rechnungsposition object
 func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 	rp := sl.Current().Interface().(Rechnungsposition)
-	if rp.Einzelpreis.Bezugswert != rp.PositionsMenge.Einheit {
+	if rp.PositionsMenge.Einheit != nil && rp.Einzelpreis.Bezugswert != *rp.PositionsMenge.Einheit {
 		sl.ReportError(rp.PositionsMenge.Einheit, "Einheit", "PositionsMenge", "PositionsMenge.Einheit==Einzelpreis.Bezugswert", "")
 	}
 	expectedTeilsummeNetto := Menge{
@@ -41,7 +41,7 @@ func RechnungspositionStructLevelValidation(sl validator.StructLevel) {
 		Einheit: rp.PositionsMenge.Einheit,
 	}
 	if rp.ZeitbezogeneMenge != nil {
-		if rp.ZeitbezogeneMenge.Einheit != rp.Einzelpreis.Bezugswert {
+		if rp.ZeitbezogeneMenge.Einheit != nil && *rp.ZeitbezogeneMenge.Einheit != rp.Einzelpreis.Bezugswert {
 			sl.ReportError(rp.ZeitbezogeneMenge.Einheit, "Einheit", "ZeitbezogeneMenge", "ZeitbezogeneMenge.Einheit==Einzelpreis.Bezugswert", "")
 			// further checks are not meaningful at this point because there is no implicit conversion like: "1 year = 12 months"
 			return
