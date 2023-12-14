@@ -388,7 +388,7 @@ var completeValidRechnung = bo.Rechnung{
 			LokationsId:     "54321012345",
 			PositionsMenge: com.Menge{
 				Wert:    decimal.NewFromFloat(20),
-				Einheit: mengeneinheit.KWH,
+				Einheit: internal.Ptr(mengeneinheit.KWH),
 			},
 			Einzelpreis: com.Preis{
 				Wert:       decimal.NewFromFloat(12),

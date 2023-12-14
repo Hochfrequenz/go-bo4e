@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 	"strings"
 	"time"
@@ -20,15 +21,15 @@ func (s *Suite) Test_Vertragsteil_Deserialization() {
 		Lokation:           "DE0123456789012345678901234567890",
 		VertraglichFixierteMenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(42),
-			Einheit: mengeneinheit.KUBIKMETER,
+			Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
 		},
 		MinimaleAbnahmemenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(17),
-			Einheit: mengeneinheit.MW,
+			Einheit: internal.Ptr(mengeneinheit.MW),
 		},
 		MaximaleAbnahmemenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(-3),
-			Einheit: mengeneinheit.MONAT,
+			Einheit: internal.Ptr(mengeneinheit.MONAT),
 		},
 	}
 	serializedVertragsteil, err := json.Marshal(vertraqsteil)
