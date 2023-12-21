@@ -117,6 +117,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Statusbericht)
 		bo.(*Statusbericht).BoTyp = typ
 		bo.(*Statusbericht).VersionStruktur = defaultVersionStruktur
+	case botyp.STEUERBARERESSOURCE:
+		bo = new(Steuerbareressource)
+		bo.(*Steuerbareressource).BoTyp = typ
+		bo.(*Steuerbareressource).VersionStruktur = defaultVersionStruktur
 	default:
 		return nil
 	}
