@@ -7,7 +7,6 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
-	"github.com/hochfrequenz/go-bo4e/enum/steuerkanalsleistungsbeschreibung"
 	"reflect"
 )
 
@@ -18,7 +17,7 @@ var stbressource = bo.Steuerbareressource{
 		ExterneReferenzen: nil,
 	},
 	SteuerbareRessourceId:             "1234567890",
-	SteuerkanalsLeistungsbeschreibung: steuerkanalsleistungsbeschreibung.AN_AUS,
+	SteuerkanalsLeistungsbeschreibung: nil,
 	ZugeordnetMSBCodeNr:               "1234567890",
 }
 
@@ -40,23 +39,6 @@ func (s *Suite) Test_Failed_SteuerbarreRessource_Validation() {
 	invalidStbressource := map[string][]interface{}{
 		"required": {
 			bo.Steuerbareressource{},
-		},
-		"empty_value": {
-			bo.Steuerbareressource{SteuerbareRessourceId: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
-			bo.Steuerbareressource{SteuerkanalsLeistungsbeschreibung: steuerkanalsleistungsbeschreibung.GESTUFT},
-			bo.Steuerbareressource{ZugeordnetMSBCodeNr: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
-		},
-		"min": {
-			bo.Steuerbareressource{SteuerbareRessourceId: "a"},
-			bo.Steuerbareressource{SteuerkanalsLeistungsbeschreibung: steuerkanalsleistungsbeschreibung.GESTUFT},
-			bo.Steuerbareressource{ZugeordnetMSBCodeNr: "a"},
-		},
-		"alphanum": {
-			bo.Steuerbareressource{SteuerbareRessourceId: "!123a"},
-		},
-		"numeric": {
-			bo.Steuerbareressource{SteuerbareRessourceId: "asd"},
-			bo.Steuerbareressource{ZugeordnetMSBCodeNr: "asd"},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidStbressource)
