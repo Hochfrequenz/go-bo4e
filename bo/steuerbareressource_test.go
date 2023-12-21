@@ -10,7 +10,7 @@ import (
 	"reflect"
 )
 
-var stbressource = bo.Steuerbareressource{
+var stbressource = bo.SteuerbareRessource{
 	Geschaeftsobjekt: bo.Geschaeftsobjekt{
 		BoTyp:             botyp.STEUERBARERESSOURCE,
 		VersionStruktur:   "1.1",
@@ -18,27 +18,27 @@ var stbressource = bo.Steuerbareressource{
 	},
 	SteuerbareRessourceId:             "1234567890",
 	SteuerkanalsLeistungsbeschreibung: nil,
-	ZugeordnetMSBCodeNr:               "1234567890",
+	ZugeordnetMSBCodeNr:               nil,
 }
 
-// Test_Steuerbareressource_Deserialization deserializes an Steuerbareressource json
+// Test_Steuerbareressource_Deserialization deserializes an SteuerbareRessource json
 func (s *Suite) Test_Steuerbareressource_Deserialization() {
 	serializedStbressource, err := json.Marshal(stbressource)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), serializedStbressource, is.Not(is.NilArray[byte]()))
-	var deserializedStbressource bo.Steuerbareressource
+	var deserializedStbressource bo.SteuerbareRessource
 	err = json.Unmarshal(serializedStbressource, &deserializedStbressource)
 	then.AssertThat(s.T(), err, is.Nil())
 	then.AssertThat(s.T(), deserializedStbressource, is.EqualTo(stbressource))
 
 }
 
-// Test_Failed_SteuerbarreRessource_Validation verifies that the validators of a Steuerbareressource work
+// Test_Failed_SteuerbarreRessource_Validation verifies that the validators of a SteuerbareRessource work
 func (s *Suite) Test_Failed_SteuerbarreRessource_Validation() {
 	validate := validator.New()
 	invalidStbressource := map[string][]interface{}{
 		"required": {
-			bo.Steuerbareressource{},
+			bo.SteuerbareRessource{},
 		},
 	}
 	VerfiyFailedValidations(s, validate, invalidStbressource)
@@ -56,7 +56,7 @@ func (s *Suite) Test_Successful_SteuerbarreRessource_Validation() {
 func (s *Suite) Test_Empty_SteuerbarreRessource_Is_Creatable_Using_BoTyp() {
 	object := bo.NewBusinessObject(botyp.STEUERBARERESSOURCE)
 	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Steuerbareressource{})))
+	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.SteuerbareRessource{})))
 	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.STEUERBARERESSOURCE))
 	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
