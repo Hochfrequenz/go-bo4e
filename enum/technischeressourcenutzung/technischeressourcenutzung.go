@@ -1,12 +1,14 @@
 package technischeressourcenutzung
 
-//go:generate stringer --type Technischeressourcenutzung
-//go:generate jsonenums --type Technischeressourcenutzung
+// Art und Nutzung der Technischen Ressource
+//
+//go:generate stringer --type TechnischeRessourceNutzung
+//go:generate jsonenums --type TechnischeRessourceNutzung
 
-type Technischeressourcenutzung int
+type TechnischeRessourceNutzung int
 
 const (
-	STROMVERBRAUCHSART Technischeressourcenutzung = iota + 1 //Stromverbrauchsart
+	STROMVERBRAUCHSART TechnischeRessourceNutzung = iota + 1 //Stromverbrauchsart
 	STROMERZEUGUNGSART                                       //Stromerzeugungsart
 	SPEICHER                                                 //Speicher
 )
