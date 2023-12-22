@@ -3,6 +3,7 @@ package bo
 import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/emobilitaetsart"
+	"github.com/hochfrequenz/go-bo4e/enum/erzeugungsart"
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourcenutzung"
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourceverbrauchsart"
 	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
@@ -21,5 +22,6 @@ type TechnischeRessource struct {
 	Verbrauchsart                    technischeressourceverbrauchsart.TechnischeRessourceVerbrauchsart `json:"verbrauchsart" example:"CAV+Z64" `                                                                                      //Verbrauchsart der Technischen Ressource
 	Waermenutzung                    waermenutzung.Waermenutzung                                       `json:"waermenutzung" example:"CAV+Z56"`                                                                                       //Wärmenutzung
 	EMobilitaetsart                  emobilitaetsart.EMobilitaetsart                                   `json:"eMobilitaetsart" example:"CAV+Z87"`                                                                                     //Art der E-Mobilität  Das Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren
-	Erzeugungsart
+	Erzeugungsart                    erzeugungsart.Erzeugungsart                                       `json:"erzeugungsart" example:"CAV+ZF5"`                                                                                       //Art der Erzeugung der Energie
+	Speicherart
 }
