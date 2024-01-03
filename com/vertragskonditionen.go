@@ -19,12 +19,12 @@ type Vertragskonditionen struct {
 
 	// the fields below are not bo4e standard (yet)
 
-	StartAbrechnungsjahr    time.Time                                       `json:"startAbrechnungsjahr,omitempty"`                               // StartAbrechnungsjahr ist der Beginn des Abrechnungsjahres
-	GeplanteTurnusablesung  *Zeitraum                                       `json:"geplanteTurnusablesung,omitempty" validate:"omitempty"`        // GeplanteTurnusablesung beschreibt die geplante Turnusablesung
-	TurnusablesungIntervall *int                                            `json:"turnusablesungIntervall,omitempty" validate:"omitempty,min=1"` // Das TurnusablesungIntervall beschreibt die Anzahl Monate die zwischen zwei Ablesungen liegen
-	Netznutzungsabrechnung  *Zeitraum                                       `json:"netznutzungsabrechnung,omitempty" validate:"omitempty"`        // Netznutzungsabrechnung ist der Zeitraum der bei der Netznutzung abgerechnet wird
-	Haushaltskunde          *bool                                           `json:"haushaltskunde,omitempty" validate:"omitempty"`                // Haushaltskunde ist true, wenn es sich um einen privat/Haushaltskunden handelt
-	Netznutzungsvertragsart netznutzungsvertragsart.Netznutzungsvertragsart `json:"netznutzungsvertrag,omitempty"`                                // Netznutzungsvertragsart beschreibt, zwischen welchen Vertragspartnern der Vertrag besteht
+	StartAbrechnungsjahr    time.Time                                        `json:"startAbrechnungsjahr,omitempty"`                               // StartAbrechnungsjahr ist der Beginn des Abrechnungsjahres
+	GeplanteTurnusablesung  *Zeitraum                                        `json:"geplanteTurnusablesung,omitempty" validate:"omitempty"`        // GeplanteTurnusablesung beschreibt die geplante Turnusablesung
+	TurnusablesungIntervall *int                                             `json:"turnusablesungIntervall,omitempty" validate:"omitempty,min=1"` // Das TurnusablesungIntervall beschreibt die Anzahl Monate die zwischen zwei Ablesungen liegen
+	Netznutzungsabrechnung  *Zeitraum                                        `json:"netznutzungsabrechnung,omitempty" validate:"omitempty"`        // Netznutzungsabrechnung ist der Zeitraum der bei der Netznutzung abgerechnet wird
+	Haushaltskunde          *bool                                            `json:"haushaltskunde,omitempty" validate:"omitempty"`                // Haushaltskunde ist true, wenn es sich um einen privat/Haushaltskunden handelt
+	Netznutzungsvertragsart *netznutzungsvertragsart.Netznutzungsvertragsart `json:"netznutzungsvertrag,omitempty"`                                // Netznutzungsvertragsart beschreibt, zwischen welchen Vertragspartnern der Vertrag besteht
 	// the json tag is "netznutzungsvertrag" for consistency with the dotnet-implementation
 	Netznutzungszahler               *netznutzungszahler.Netznutzungszahler                             `json:"netznutzungszahler,omitempty"`
 	Netznutzungsabrechnungsvariante  *netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante   `json:"netznutzungsabrechnungsvariante,omitempty"`
