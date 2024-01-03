@@ -26,7 +26,7 @@ type Vertragskonditionen struct {
 	Haushaltskunde          *bool                                            `json:"haushaltskunde,omitempty" validate:"omitempty"`                // Haushaltskunde ist true, wenn es sich um einen privat/Haushaltskunden handelt
 	Netznutzungsvertragsart *netznutzungsvertragsart.Netznutzungsvertragsart `json:"netznutzungsvertrag,omitempty"`                                // Netznutzungsvertragsart beschreibt, zwischen welchen Vertragspartnern der Vertrag besteht
 	// the json tag is "netznutzungsvertrag" for consistency with the dotnet-implementation
-	Netznutzungszahler               netznutzungszahler.Netznutzungszahler                             `json:"netznutzungszahler,omitempty"`
-	Netznutzungsabrechnungsvariante  *netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante  `json:"netznutzungsabrechnungsvariante,omitempty"`
-	Netznutzungsabrechnungsgrundlage netznutzungsabrechnungsgrundlage.Netznutzungsabrechnungsgrundlage `json:"netznutzungsabrechnungsgrundlage,omitempty"`
+	Netznutzungszahler               *netznutzungszahler.Netznutzungszahler                             `json:"netznutzungszahler,omitempty"`
+	Netznutzungsabrechnungsvariante  *netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante   `json:"netznutzungsabrechnungsvariante,omitempty"`
+	Netznutzungsabrechnungsgrundlage *netznutzungsabrechnungsgrundlage.Netznutzungsabrechnungsgrundlage `json:"netznutzungsabrechnungsgrundlage,omitempty"`
 }
