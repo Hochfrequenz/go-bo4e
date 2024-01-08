@@ -123,7 +123,7 @@ as described f.e. in [issue 21 there](https://github.com/shopspring/decimal/issu
 ## Contributing
 
 Contributions are welcome. Feel free to open a Pull Request against the main branch of this repository. Please provide
-unit tests if you contribute logic beyond bare bare business object definitions. We do track our modification proposals
+unit tests if you contribute logic beyond bare business object definitions. We do track our modification proposals
 to the official BO4E standard in a separate
 repository: [BO4E-modification-proposals](https://github.com/Hochfrequenz/bo4e-modification-proposals).
 
