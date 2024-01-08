@@ -12,7 +12,7 @@ import (
 
 type TechnischeRessource struct {
 	Geschaeftsobjekt
-	TechnischeRessourceId            *string                                                           `json:"technischeRessourceId" validate:"required"`                                                                             //Identifikationsnummer einer TechnischeRessource
+	TechnischeRessourceId            string                                                            `json:"technischeRessourceId" validate:"required"`                                                                             //Identifikationsnummer einer TechnischeRessource
 	VorgelagerteMesslokationsId      string                                                            `json:"vorgelagerteMesslokationsId,omitempty" example:"DE00713739359S0000000000001222221" validate:"alphanum,required,len=33"` // Vorgelagerte Messlokation ID
 	ZugeordneteMarktlokationsId      string                                                            `json:"zugeordneteMarktlokationsId,omitempty" example:"20072281644"`                                                           // ZugeordneteMarktlokationsId Messlokation ID
 	ZugeordneteSteuerbareRessourceId string                                                            `json:"zugeordneteSteuerbareRessourceId" example:"20072281644"`                                                                // Referenz auf die der Technischen Ressource zugeordneten Steuerbaren Ressource
