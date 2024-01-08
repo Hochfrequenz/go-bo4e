@@ -25,28 +25,28 @@ var tressource = bo.TechnischeRessource{
 		VersionStruktur:   "1.1",
 		ExterneReferenzen: nil,
 	},
-	TechnischeRessourceId:            "C816417ST77",
-	VorgelagerteMesslokationsId:      "DE00713739359S0000000000001222221",
-	ZugeordneteMarktlokationsId:      "20072281644",
-	ZugeordneteSteuerbareRessourceId: "20072281644",
-	NennleistungAufnahme: com.Menge{
+	TechnischeRessourceId:            internal.Ptr("C816417ST77"),
+	VorgelagerteMesslokationsId:      internal.Ptr("DE00713739359S0000000000001222221"),
+	ZugeordneteMarktlokationsId:      internal.Ptr("20072281644"),
+	ZugeordneteSteuerbareRessourceId: internal.Ptr("20072281644"),
+	NennleistungAufnahme: &com.Menge{
 		Wert:    newDecimalFromString("100"),
 		Einheit: internal.Ptr(mengeneinheit.KW),
 	},
-	NennleistungAbgabe: com.Menge{
+	NennleistungAbgabe: &com.Menge{
 		Wert:    newDecimalFromString("100"),
 		Einheit: internal.Ptr(mengeneinheit.KW),
 	},
-	Speicherkapazitaet: com.Menge{
+	Speicherkapazitaet: &com.Menge{
 		Wert:    newDecimalFromString("100"),
 		Einheit: internal.Ptr(mengeneinheit.KWH),
 	},
-	TechnischeRessourceNutzung: technischeressourcenutzung.SPEICHER,
-	Verbrauchsart:              technischeressourceverbrauchsart.E_MOBILITAET,
-	Waermenutzung:              waermenutzung.DIREKTHEIZUNG,
-	EMobilitaetsart:            emobilitaetsart.LADEPARK,
-	Erzeugungsart:              erzeugungsart.SOLAR,
-	Speicherart:                speicherart.PUMPSPEICHER,
+	TechnischeRessourceNutzung: internal.Ptr(technischeressourcenutzung.SPEICHER),
+	Verbrauchsart:              internal.Ptr(technischeressourceverbrauchsart.E_MOBILITAET),
+	Waermenutzung:              internal.Ptr(waermenutzung.DIREKTHEIZUNG),
+	EMobilitaetsart:            internal.Ptr(emobilitaetsart.LADEPARK),
+	Erzeugungsart:              internal.Ptr(erzeugungsart.SOLAR),
+	Speicherart:                internal.Ptr(speicherart.PUMPSPEICHER),
 }
 
 // Test_TechnischeRessource_Deserialization deserializes an TechnischeRessource json
