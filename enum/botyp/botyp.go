@@ -36,4 +36,5 @@ const (
 	AVIS                              // AVIS is a REMADV
 	STATUSBERICHT                     // Statusbericht states the status of a process and can be used for APERAK or IFTSTA
 	STEUERBARERESSOURCE               // Steuerbare Ressource BO
+	TECHNISCHERESSOURCE               // Technische Ressource BO
 )
