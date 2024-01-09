@@ -20,7 +20,7 @@ var tranche = bo.Tranche{
 		ExterneReferenzen: nil,
 	},
 	TrancheId:        "20232281644",
-	Sparte:           sparte.STROM,
+	Sparte:           internal.Ptr(sparte.STROM),
 	Aufteilungsmenge: decimal.NewNullDecimal(decimal.NewFromInt(50)),
 	ObisKennzahl:     internal.Ptr("1-1:1.9.0"),
 }
