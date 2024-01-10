@@ -5,6 +5,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -25,6 +26,7 @@ type Vertrag struct {
 	UnterzeichnerVp2    []com.Unterschrift       `json:"unterzeichnervp2,omitempty"`                                        // UnterzeichnerVp2 ist der Unterzeichner des Vertragspartner2
 	Vertragskonditionen *com.Vertragskonditionen `json:"vertragskonditionen,omitempty"`                                     // Vertragskonditionen ist eine Festlegungen zu Laufzeiten und Kündigungsfristen
 	Vertragsteile       []com.Vertragsteil       `json:"vertragsteile,omitempty" validate:"required,min=1"`                 // Vertragsteile sind die Vertragsteile, die dazu verwendet werden, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
+	Gemeinderabatt      decimal.NullDecimal      `json:"gemeinderabatt" validate:"required"`                                // Gemeinderabatt für EDIFACT mapping.
 }
 
 func (_ Vertrag) GetDefaultJsonTags() []string {

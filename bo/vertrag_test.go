@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/shopspring/decimal"
 	"reflect"
 	"time"
 )
@@ -84,6 +85,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 				Lokation:           "DE0123456789012345678901234567890",
 			},
 		},
+		Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
 	}
 	serializedContract, err := json.Marshal(contract)
 	then.AssertThat(s.T(), err, is.Nil())
@@ -177,6 +179,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 					Lokation:           "DE0123456789012345678901234567890",
 				},
 			},
+			Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
 		},
 	}
 	VerfiySuccessfulValidations(s, validate, validVertrag)
