@@ -1,0 +1,16 @@
+{
+    "description": "List of possible Gebiettypen.",
+    "enum": [
+        "REGELZONE",
+        "MARKTGEBIET",
+        "BILANZIERUNGSGEBIET",
+        "VERTEILNETZ",
+        "TRANSPORTNETZ",
+        "REGIONALNETZ",
+        "AREALNETZ",
+        "GRUNDVERSORGUNGSGEBIET",
+        "VERSORGUNGSGEBIET"
+    ],
+    "title": "Gebiettyp",
+    "type": "string"
+}

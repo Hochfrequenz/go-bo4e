@@ -1,0 +1,10 @@
+{
+    "description": "Wärmenutzung Marktlokation",
+    "enum": [
+        "SPEICHERHEIZUNG",
+        "WAERMEPUMPE",
+        "DIREKTHEIZUNG"
+    ],
+    "title": "Waermenutzung",
+    "type": "string"
+}

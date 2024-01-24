@@ -1,0 +1,84 @@
+{
+    "additionalProperties": true,
+    "description": "Modelliert die regionalen und spartenspezifischen Eigenschaften einer gegebenen Adresse.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Standorteigenschaften.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Standorteigenschaften JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Standorteigenschaften.json>`_",
+    "properties": {
+        "_id": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": " Id"
+        },
+        "_typ": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/enum/Typ.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": "STANDORTEIGENSCHAFTEN"
+        },
+        "_version": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": "202401.0.0",
+            "title": " Version"
+        },
+        "eigenschaftenGas": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/StandorteigenschaftenGas.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "eigenschaftenStrom": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/StandorteigenschaftenStrom.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Eigenschaftenstrom"
+        },
+        "zusatzAttribute": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Zusatzattribute"
+        }
+    },
+    "title": "Standorteigenschaften",
+    "type": "object"
+}

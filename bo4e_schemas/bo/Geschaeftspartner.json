@@ -1,0 +1,230 @@
+{
+  "description": "Mit diesem Objekt können Geschäftspartner übertragen werden.\nSowohl Unternehmen, als auch Privatpersonen können Geschäftspartner sein.\nHinweis: Marktteilnehmer haben ein eigenes BO, welches sich von diesem BO ableitet.\nHier sollte daher keine Zuordnung zu Marktrollen erfolgen.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Geschaeftspartner.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Geschaeftspartner JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Geschaeftspartner.json>`_",
+  "title": "Geschaeftspartner",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "GESCHAEFTSPARTNER",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "amtsgericht": {
+      "title": "Amtsgericht",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anrede": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Anrede.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "eMailAdresse": {
+      "title": "Emailadresse",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "geschaeftspartnerrolle": {
+      "title": "Geschaeftspartnerrolle",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Geschaeftspartnerrolle.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "glaeubigerId": {
+      "title": "Glaeubigerid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "hrnummer": {
+      "title": "Hrnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istGewerbe": {
+      "title": "Istgewerbe",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kontaktweg": {
+      "title": "Kontaktweg",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Kontaktart.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name1": {
+      "title": "Name1",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name2": {
+      "title": "Name2",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name3": {
+      "title": "Name3",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "partneradresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Adresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "umsatzsteuerId": {
+      "title": "Umsatzsteuerid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "website": {
+      "title": "Website",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "description": "Die Variante des Preisblattmodells zur Abbildung von allgemeinen Abgaben\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/PreisblattKonzessionsabgabe.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `PreisblattKonzessionsabgabe JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/PreisblattKonzessionsabgabe.json>`_",
+  "title": "PreisblattKonzessionsabgabe",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "PREISBLATTKONZESSIONSABGABE",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gueltigkeit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "herausgeber": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Marktteilnehmer.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kundengruppeKA": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/KundengruppeKA.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preispositionen": {
+      "title": "Preispositionen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Preisposition.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preisstatus": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Preisstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

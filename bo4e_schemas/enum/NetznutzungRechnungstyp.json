@@ -1,0 +1,16 @@
+{
+  "description": "Abbildung verschiedener in der INVOIC angegebenen Rechnungstypen.",
+  "title": "NetznutzungRechnungstyp",
+  "type": "string",
+  "enum": [
+    "ABSCHLUSSRECHNUNG",
+    "ABSCHLAGSRECHNUNG",
+    "TURNUSRECHNUNG",
+    "MONATSRECHNUNG",
+    "WIMRECHNUNG",
+    "ZWISCHENRECHNUNG",
+    "INTEGRIERTE_13TE_RECHNUNG",
+    "ZUSAETZLICHE_13TE_RECHNUNG",
+    "MEHRMINDERMENGENRECHNUNG"
+  ]
+}

@@ -1,0 +1,206 @@
+{
+    "additionalProperties": true,
+    "description": "Object containing information about a Messlokation\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Messlokation.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Messlokation JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Messlokation.json>`_",
+    "properties": {
+        "_id": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": " Id"
+        },
+        "_typ": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/enum/Typ.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": "MESSLOKATION"
+        },
+        "_version": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": "202401.0.0",
+            "title": " Version"
+        },
+        "geoadresse": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/Geokoordinaten.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "geraete": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/bo/Geraet.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Geraete"
+        },
+        "grundzustaendigerMsbCodenr": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Grundzustaendigermsbcodenr"
+        },
+        "grundzustaendigerMsbimCodenr": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Grundzustaendigermsbimcodenr"
+        },
+        "katasterinformation": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/Katasteradresse.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "messadresse": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/Adresse.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "messdienstleistung": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/com/Dienstleistung.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Messdienstleistung"
+        },
+        "messgebietnr": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Messgebietnr"
+        },
+        "messlokationsId": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Messlokationsid"
+        },
+        "messlokationszaehler": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/bo/Zaehler.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Messlokationszaehler"
+        },
+        "netzebeneMessung": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/enum/Netzebene.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "sparte": {
+            "anyOf": [
+                {
+                    "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/enum/Sparte.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "zusatzAttribute": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "title": "Zusatzattribute"
+        }
+    },
+    "title": "Messlokation",
+    "type": "object"
+}

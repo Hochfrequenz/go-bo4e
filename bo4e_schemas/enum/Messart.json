@@ -1,0 +1,10 @@
+{
+  "description": "Gibt an, auf welche Art gemessen wurde.",
+  "title": "Messart",
+  "type": "string",
+  "enum": [
+    "AKTUELLERWERT",
+    "MITTELWERT",
+    "MAXIMALWERT"
+  ]
+}

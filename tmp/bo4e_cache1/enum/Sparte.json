@@ -1,0 +1,14 @@
+{
+    "description": "Unterscheidungsmöglichkeiten für die Sparte.",
+    "enum": [
+        "STROM",
+        "GAS",
+        "FERNWAERME",
+        "NAHWAERME",
+        "WASSER",
+        "ABWASSER",
+        "STROM_UND_GAS"
+    ],
+    "title": "Sparte",
+    "type": "string"
+}

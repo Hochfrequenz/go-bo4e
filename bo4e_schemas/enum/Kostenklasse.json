@@ -1,0 +1,12 @@
+{
+  "description": "Kostenklassen bilden die oberste Ebene der verschiedenen Kosten.\nIn der Regel werden die Gesamtkosten einer Kostenklasse in einer App berechnet.",
+  "title": "Kostenklasse",
+  "type": "string",
+  "enum": [
+    "FREMDKOSTEN",
+    "BESCHAFFUNG",
+    "SELBSTKOSTEN",
+    "MARGEN",
+    "ENERGIEVERSORGUNGSKOSTEN"
+  ]
+}

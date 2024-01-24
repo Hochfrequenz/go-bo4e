@@ -1,0 +1,122 @@
+{
+  "description": "Mit dieser Komponente wird ein Teil einer Angebotsvariante abgebildet.\nHier werden alle Angebotspositionen aggregiert.\nAngebotsteile werden im einfachsten Fall für eine Marktlokation oder Lieferstellenadresse erzeugt.\nHier werden die Mengen und Gesamtkosten aller Angebotspositionen zusammengefasst.\nEine Variante besteht mindestens aus einem Angebotsteil.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Angebotsteil.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Angebotsteil JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Angebotsteil.json>`_",
+  "title": "Angebotsteil",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anfrageSubreferenz": {
+      "title": "Anfragesubreferenz",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtkostenangebotsteil": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtmengeangebotsteil": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferstellenangebotsteil": {
+      "title": "Lieferstellenangebotsteil",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../bo/Marktlokation.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferzeitraum": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "positionen": {
+      "title": "Positionen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "Angebotsposition.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

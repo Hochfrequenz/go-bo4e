@@ -1,0 +1,9 @@
+{
+    "description": "Unterscheidung für hoch- und niedrig-kalorisches Gas.",
+    "enum": [
+        "H_GAS",
+        "L_GAS"
+    ],
+    "title": "Gasqualitaet",
+    "type": "string"
+}

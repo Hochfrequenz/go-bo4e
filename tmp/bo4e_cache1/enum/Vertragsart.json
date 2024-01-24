@@ -1,0 +1,12 @@
+{
+    "description": "Aufzählung der Vertragsarten.",
+    "enum": [
+        "ENERGIELIEFERVERTRAG",
+        "NETZNUTZUNGSVERTRAG",
+        "BILANZIERUNGSVERTRAG",
+        "MESSSTELLENBETRIEBSVERTRAG",
+        "BUENDELVERTRAG"
+    ],
+    "title": "Vertragsart",
+    "type": "string"
+}

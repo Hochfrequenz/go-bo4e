@@ -1,0 +1,19 @@
+{
+    "description": "Bei diesem Enum handelt es sich um die Abbildung von Zählertypen der Sparten Strom und Gas.",
+    "enum": [
+        "DREHSTROMZAEHLER",
+        "BALGENGASZAEHLER",
+        "DREHKOLBENZAEHLER",
+        "LEISTUNGSZAEHLER",
+        "MAXIMUMZAEHLER",
+        "TURBINENRADGASZAEHLER",
+        "ULTRASCHALLGASZAEHLER",
+        "WECHSELSTROMZAEHLER",
+        "MODERNE_MESSEINRICHTUNG",
+        "INTELLIGENTES_MESSSYSTEM",
+        "ELEKTRONISCHER_ZAEHLER",
+        "WIRBELGASZAEHLER"
+    ],
+    "title": "Zaehlertyp",
+    "type": "string"
+}

@@ -1,0 +1,28 @@
+{
+    "description": "Einheit: Messgrößen, die per Messung oder Vorgabe ermittelt werden können.",
+    "enum": [
+        "W",
+        "WH",
+        "KW",
+        "KWH",
+        "KVARH",
+        "MW",
+        "MWH",
+        "STUECK",
+        "KUBIKMETER",
+        "SEKUNDE",
+        "MINUTE",
+        "STUNDE",
+        "VIERTEL_STUNDE",
+        "TAG",
+        "WOCHE",
+        "MONAT",
+        "QUARTAL",
+        "HALBJAHR",
+        "JAHR",
+        "PROZENT",
+        "KVAR"
+    ],
+    "title": "Mengeneinheit",
+    "type": "string"
+}

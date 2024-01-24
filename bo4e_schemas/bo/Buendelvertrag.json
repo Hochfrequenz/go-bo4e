@@ -1,0 +1,223 @@
+{
+  "description": "Abbildung eines Bündelvertrags.\nEs handelt sich hierbei um eine Liste von Einzelverträgen, die in einem Vertragsobjekt gebündelt sind.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Buendelvertrag.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Buendelvertrag JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Buendelvertrag.json>`_",
+  "title": "Buendelvertrag",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "BUENDELVERTRAG",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "beschreibung": {
+      "title": "Beschreibung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einzelvertraege": {
+      "title": "Einzelvertraege",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "Vertrag.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "unterzeichnervp1": {
+      "title": "Unterzeichnervp1",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Unterschrift.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "unterzeichnervp2": {
+      "title": "Unterzeichnervp2",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Unterschrift.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Vertragsart.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsbeginn": {
+      "title": "Vertragsbeginn",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsende": {
+      "title": "Vertragsende",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragskonditionen": {
+      "title": "Vertragskonditionen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Vertragskonditionen.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsnummer": {
+      "title": "Vertragsnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragspartner1": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragspartner2": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsstatus": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Vertragsstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

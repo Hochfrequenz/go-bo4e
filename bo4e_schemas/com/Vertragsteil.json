@@ -1,0 +1,118 @@
+{
+  "description": "Abbildung für einen Vertragsteil. Der Vertragsteil wird dazu verwendet,\neine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Vertragsteil.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Vertragsteil JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Vertragsteil.json>`_",
+  "title": "Vertragsteil",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lokation": {
+      "title": "Lokation",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "maximaleAbnahmemenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "minimaleAbnahmemenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertraglichFixierteMenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsteilbeginn": {
+      "title": "Vertragsteilbeginn",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragsteilende": {
+      "title": "Vertragsteilende",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

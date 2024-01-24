@@ -1,0 +1,10 @@
+{
+    "description": "Übersicht möglicher Titel, z.B. eines Geschäftspartners.",
+    "enum": [
+        "DR",
+        "PROF",
+        "PROF_DR"
+    ],
+    "title": "Titel",
+    "type": "string"
+}

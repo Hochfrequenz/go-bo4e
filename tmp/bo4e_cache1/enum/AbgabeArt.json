@@ -1,0 +1,16 @@
+{
+    "description": "Art der Konzessionsabgabe",
+    "enum": [
+        "KAS",
+        "SA",
+        "SAS",
+        "TA",
+        "TAS",
+        "TK",
+        "TKS",
+        "TS",
+        "TSS"
+    ],
+    "title": "AbgabeArt",
+    "type": "string"
+}

@@ -1,0 +1,16 @@
+{
+    "description": "Abbildung verschiedener Rufnummerntypen.",
+    "enum": [
+        "RUF_ZENTRALE",
+        "FAX_ZENTRALE",
+        "SAMMELRUF",
+        "SAMMELFAX",
+        "ABTEILUNGRUF",
+        "ABTEILUNGFAX",
+        "RUF_DURCHWAHL",
+        "FAX_DURCHWAHL",
+        "MOBIL_NUMMER"
+    ],
+    "title": "Rufnummernart",
+    "type": "string"
+}

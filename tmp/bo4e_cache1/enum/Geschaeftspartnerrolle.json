@@ -1,0 +1,12 @@
+{
+    "description": "Diese Rollen kann ein Geschäftspartner einnehmen.",
+    "enum": [
+        "LIEFERANT",
+        "DIENSTLEISTER",
+        "KUNDE",
+        "INTERESSENT",
+        "MARKTPARTNER"
+    ],
+    "title": "Geschaeftspartnerrolle",
+    "type": "string"
+}

@@ -1,0 +1,10 @@
+{
+    "description": "Zur Kennzeichnung verschiedener Tarifzeiten, beispielsweise zur Bepreisung oder zur Verbrauchsermittlung.",
+    "enum": [
+        "TZ_STANDARD",
+        "TZ_HT",
+        "TZ_NT"
+    ],
+    "title": "Tarifzeit",
+    "type": "string"
+}

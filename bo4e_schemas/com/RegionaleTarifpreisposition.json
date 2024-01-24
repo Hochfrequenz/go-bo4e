@@ -1,0 +1,106 @@
+{
+  "description": "Mit dieser Komponente können Tarifpreise verschiedener Typen im Zusammenhang mit regionalen Gültigkeiten abgebildet\nwerden.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/RegionaleTarifpreisposition.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `RegionaleTarifpreisposition JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/RegionaleTarifpreisposition.json>`_",
+  "title": "RegionaleTarifpreisposition",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezugseinheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Mengeneinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Waehrungseinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "mengeneinheitstaffel": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Mengeneinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preisstaffeln": {
+      "title": "Preisstaffeln",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "RegionalePreisstaffel.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preistyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Preistyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Angabe, wie eine Menge in Bezug auf einen Wert zu bilden ist.",
+  "title": "Mengenoperator",
+  "type": "string",
+  "enum": [
+    "KLEINER_ALS",
+    "GROESSER_ALS",
+    "GLEICH"
+  ]
+}

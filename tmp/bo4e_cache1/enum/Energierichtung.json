@@ -1,0 +1,9 @@
+{
+    "description": "Spezifiziert die Energierichtung einer Markt- und/oder Messlokation",
+    "enum": [
+        "AUSSP",
+        "EINSP"
+    ],
+    "title": "Energierichtung",
+    "type": "string"
+}

@@ -1,0 +1,362 @@
+{
+  "description": "Modell für die Abbildung von Rechnungen und Netznutzungsrechnungen im Kontext der Energiewirtschaft;\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Rechnung.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Rechnung JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Rechnung.json>`_",
+  "title": "Rechnung",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "RECHNUNG",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "faelligkeitsdatum": {
+      "title": "Faelligkeitsdatum",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtbrutto": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtnetto": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtsteuer": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istOriginal": {
+      "title": "Istoriginal",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istSimuliert": {
+      "title": "Istsimuliert",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istStorno": {
+      "title": "Iststorno",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "marktlokation": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Marktlokation.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "messlokation": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Messlokation.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netznutzungrechnungsart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/NetznutzungRechnungsart.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netznutzungrechnungstyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/NetznutzungRechnungstyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "originalRechnungsnummer": {
+      "title": "Originalrechnungsnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rabattBrutto": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsdatum": {
+      "title": "Rechnungsdatum",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsempfaenger": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsersteller": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsnummer": {
+      "title": "Rechnungsnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsperiode": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungspositionen": {
+      "title": "Rechnungspositionen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Rechnungsposition.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsstatus": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Rechnungsstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungstitel": {
+      "title": "Rechnungstitel",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungstyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Rechnungstyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "steuerbetraege": {
+      "title": "Steuerbetraege",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Steuerbetrag.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vorausgezahlt": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zuZahlen": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

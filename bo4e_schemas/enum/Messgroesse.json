@@ -1,0 +1,20 @@
+{
+  "description": "Gibt die physikalische Größe an, die gemessen wurde.",
+  "title": "Messgroesse",
+  "type": "string",
+  "enum": [
+    "STROM",
+    "SPANNUNG",
+    "WIRKLEISTUNG",
+    "BLINDLEISTUNG",
+    "DRUCK",
+    "LASTGANG",
+    "LASTPROFIL",
+    "TEMPERATUR",
+    "ZZAHL",
+    "BRENNWERT",
+    "GRADTZAGSZAHLEN",
+    "VOLUMENSTROM",
+    "PREISE"
+  ]
+}

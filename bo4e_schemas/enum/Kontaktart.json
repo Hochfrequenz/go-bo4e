@@ -1,0 +1,12 @@
+{
+  "description": "Art des Kontaktes zwischen Geschäftspartnern.",
+  "title": "Kontaktart",
+  "type": "string",
+  "enum": [
+    "ANSCHREIBEN",
+    "TELEFONAT",
+    "FAX",
+    "E_MAIL",
+    "SMS"
+  ]
+}

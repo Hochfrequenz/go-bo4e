@@ -1,0 +1,15 @@
+{
+  "description": "Zur Kennzeichnung verschiedener Steuersätze und Verfahren.",
+  "title": "Steuerkennzeichen",
+  "type": "string",
+  "enum": [
+    "UST_0",
+    "UST_19",
+    "UST_16",
+    "UST_7",
+    "VST_0",
+    "VST_19",
+    "VST_7",
+    "RCV"
+  ]
+}

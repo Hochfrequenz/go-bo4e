@@ -1,0 +1,9 @@
+{
+    "description": "Abbildung verschiedener in der INVOIC angegebenen Rechnungsarten.",
+    "enum": [
+        "HANDELSRECHNUNG",
+        "SELBSTAUSGESTELLT"
+    ],
+    "title": "NetznutzungRechnungsart",
+    "type": "string"
+}

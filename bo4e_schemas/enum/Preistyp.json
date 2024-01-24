@@ -1,0 +1,17 @@
+{
+  "description": "Aufschlüsselung der Preistypen in Tarifen.",
+  "title": "Preistyp",
+  "type": "string",
+  "enum": [
+    "GRUNDPREIS",
+    "ARBEITSPREIS_EINTARIF",
+    "ARBEITSPREIS_HT",
+    "ARBEITSPREIS_NT",
+    "LEISTUNGSPREIS",
+    "MESSPREIS",
+    "ENTGELT_ABLESUNG",
+    "ENTGELT_ABRECHNUNG",
+    "ENTGELT_MSB",
+    "PROVISION"
+  ]
+}

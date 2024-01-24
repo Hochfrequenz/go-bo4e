@@ -1,0 +1,12 @@
+{
+  "description": "Mit diesen Kriterien können regionale Bereiche definiert werden.",
+  "title": "Tarifregionskriterium",
+  "type": "string",
+  "enum": [
+    "NETZ_NUMMER",
+    "POSTLEITZAHL",
+    "ORT",
+    "GRUNDVERSORGER_NUMMER",
+    "REGION"
+  ]
+}

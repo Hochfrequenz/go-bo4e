@@ -1,0 +1,17 @@
+{
+  "description": "Auflistung möglicher Netzebenen innerhalb der Energiearten Strom und Gas.",
+  "title": "Netzebene",
+  "type": "string",
+  "enum": [
+    "NSP",
+    "MSP",
+    "HSP",
+    "HSS",
+    "MSP_NSP_UMSP",
+    "HSP_MSP_UMSP",
+    "HSS_HSP_UMSP",
+    "HD",
+    "MD",
+    "ND"
+  ]
+}

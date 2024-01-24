@@ -1,0 +1,12 @@
+{
+    "description": "Befestigungsart von Zählern",
+    "enum": [
+        "STECKTECHNIK",
+        "DREIPUNKT",
+        "HUTSCHIENE",
+        "EINSTUTZEN",
+        "ZWEISTUTZEN"
+    ],
+    "title": "Befestigungsart",
+    "type": "string"
+}

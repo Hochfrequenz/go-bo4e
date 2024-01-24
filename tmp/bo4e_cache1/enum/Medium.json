@@ -1,0 +1,11 @@
+{
+    "description": "Gibt ein physikalisches Medium an.",
+    "enum": [
+        "STROM",
+        "GAS",
+        "WASSER",
+        "DAMPF"
+    ],
+    "title": "Medium",
+    "type": "string"
+}

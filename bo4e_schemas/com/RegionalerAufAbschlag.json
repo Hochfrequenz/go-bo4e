@@ -1,0 +1,228 @@
+{
+  "description": "Mit dieser Komponente können Auf- und Abschläge verschiedener Typen im Zusammenhang mit regionalen Gültigkeiten\nabgebildet werden.\nHier sind auch die Auswirkungen auf verschiedene Tarifparameter modelliert, die sich durch die Auswahl eines Auf-\noder Abschlags ergeben.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/RegionalerAufAbschlag.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `RegionalerAufAbschlag JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/RegionalerAufAbschlag.json>`_",
+  "title": "RegionalerAufAbschlag",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "aufAbschlagstyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/AufAbschlagstyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "aufAbschlagsziel": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/AufAbschlagsziel.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "beschreibung": {
+      "title": "Beschreibung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Waehrungseinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einschraenkungsaenderung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Tarifeinschraenkung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "energiemixaenderung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Energiemix.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "garantieaenderung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Preisgarantie.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gueltigkeitszeitraum": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "staffeln": {
+      "title": "Staffeln",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "RegionalePreisstaffel.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tarifnamensaenderungen": {
+      "title": "Tarifnamensaenderungen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertagskonditionsaenderung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Vertragskonditionen.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "voraussetzungen": {
+      "title": "Voraussetzungen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "website": {
+      "title": "Website",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzprodukte": {
+      "title": "Zusatzprodukte",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

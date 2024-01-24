@@ -1,0 +1,11 @@
+{
+    "description": "Zur Differenzierung von Grund/Ersatzversorgungstarifen und sonstigen angebotenen Tarifen.",
+    "enum": [
+        "GRUND_ERSATZVERSORGUNG",
+        "GRUNDVERSORGUNG",
+        "ERSATZVERSORGUNG",
+        "SONDERTARIF"
+    ],
+    "title": "Tariftyp",
+    "type": "string"
+}

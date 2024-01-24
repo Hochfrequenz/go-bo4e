@@ -1,0 +1,184 @@
+{
+  "description": "Object containing information about a Ansprechpartner\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Ansprechpartner.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Ansprechpartner JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Ansprechpartner.json>`_",
+  "title": "Ansprechpartner",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "ANSPRECHPARTNER",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "adresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Adresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anrede": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Anrede.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "eMailAdresse": {
+      "title": "Emailadresse",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "geschaeftspartner": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "individuelleAnrede": {
+      "title": "Individuelleanrede",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kommentar": {
+      "title": "Kommentar",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nachname": {
+      "title": "Nachname",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rufnummer": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Rufnummer.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "titel": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Titel.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vorname": {
+      "title": "Vorname",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zustaendigkeit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zustaendigkeit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

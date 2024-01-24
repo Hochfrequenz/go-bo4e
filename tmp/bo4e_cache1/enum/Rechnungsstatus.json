@@ -1,0 +1,12 @@
+{
+    "description": "Abbildung verschiedener Zustände, die im Rahmen der Rechnungsbearbeitung durchlaufen werden.",
+    "enum": [
+        "UNGEPRUEFT",
+        "GEPRUEFT_OK",
+        "GEPRUEFT_FEHLERHAFT",
+        "GEBUCHT",
+        "BEZAHLT"
+    ],
+    "title": "Rechnungsstatus",
+    "type": "string"
+}

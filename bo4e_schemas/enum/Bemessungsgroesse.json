@@ -1,0 +1,19 @@
+{
+  "description": "Zur Abbildung von Messgrössen und zur Verwendung in energiewirtschaftlichen Berechnungen.",
+  "title": "Bemessungsgroesse",
+  "type": "string",
+  "enum": [
+    "WIRKARBEIT_EL",
+    "LEISTUNG_EL",
+    "BLINDARBEIT_KAP",
+    "BLINDARBEIT_IND",
+    "BLINDLEISTUNG_KAP",
+    "BLINDLEISTUNG_IND",
+    "WIRKARBEIT_TH",
+    "LEISTUNG_TH",
+    "VOLUMEN",
+    "VOLUMENSTROM",
+    "BENUTZUNGSDAUER",
+    "ANZAHL"
+  ]
+}

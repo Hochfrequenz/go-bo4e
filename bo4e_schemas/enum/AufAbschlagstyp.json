@@ -1,0 +1,9 @@
+{
+  "description": "Festlegung, ob der Auf- oder Abschlag mit relativen oder absoluten Werten erfolgt.",
+  "title": "AufAbschlagstyp",
+  "type": "string",
+  "enum": [
+    "RELATIV",
+    "ABSOLUT"
+  ]
+}

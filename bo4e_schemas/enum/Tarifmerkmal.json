@@ -1,0 +1,16 @@
+{
+  "description": "Produktmerkmale im Zusammenhang mit der Tarifdefinition.",
+  "title": "Tarifmerkmal",
+  "type": "string",
+  "enum": [
+    "STANDARD",
+    "VORKASSE",
+    "PAKET",
+    "KOMBI",
+    "FESTPREIS",
+    "BAUSTROM",
+    "HAUSLICHT",
+    "HEIZSTROM",
+    "ONLINE"
+  ]
+}

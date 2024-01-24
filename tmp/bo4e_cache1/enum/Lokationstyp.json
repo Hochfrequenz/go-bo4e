@@ -1,0 +1,9 @@
+{
+    "description": "Gibt an, ob es sich um eine Markt- oder Messlokation handelt.",
+    "enum": [
+        "MALO",
+        "MELO"
+    ],
+    "title": "Lokationstyp",
+    "type": "string"
+}

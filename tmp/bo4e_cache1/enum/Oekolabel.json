@@ -1,0 +1,19 @@
+{
+    "description": "Aufzählung der Labels für Öko-Strom von verschiedenen Herausgebern.",
+    "enum": [
+        "ENERGREEN",
+        "GASGREEN_GRUENER_STROM",
+        "GASGREEN",
+        "GRUENER_STROM_GOLD",
+        "GRUENER_STROM_SILBER",
+        "GRUENER_STROM",
+        "GRUENES_GAS",
+        "NATURWATT_STROM",
+        "OK_POWER",
+        "RENEWABLE_PLUS",
+        "WATERGREEN",
+        "WATERGREEN_PLUS"
+    ],
+    "title": "Oekolabel",
+    "type": "string"
+}

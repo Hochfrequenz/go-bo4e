@@ -1,0 +1,10 @@
+{
+    "description": "Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen.",
+    "enum": [
+        "ONLINE",
+        "DIREKT",
+        "FAX"
+    ],
+    "title": "Vertragsform",
+    "type": "string"
+}

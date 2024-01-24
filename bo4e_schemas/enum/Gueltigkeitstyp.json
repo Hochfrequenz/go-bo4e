@@ -1,0 +1,10 @@
+{
+  "description": "Übersicht der verschiedenen Gültigkeiten zur Umsetzung von Positiv- bzw. Negativlisten.",
+  "title": "Gueltigkeitstyp",
+  "type": "string",
+  "enum": [
+    "NUR_IN",
+    "NICHT_IN",
+    "NUR_IN_KOMBINATION_MIT"
+  ]
+}

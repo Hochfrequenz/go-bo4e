@@ -1,0 +1,10 @@
+{
+  "description": "Die Registeranzahl wird verwendet zur Charakterisierung von Zählern und daraus resultierenden Tarifen.",
+  "title": "Registeranzahl",
+  "type": "string",
+  "enum": [
+    "EINTARIF",
+    "ZWEITARIF",
+    "MEHRTARIF"
+  ]
+}

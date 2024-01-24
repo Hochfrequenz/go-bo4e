@@ -1,0 +1,11 @@
+{
+  "description": "Bezeichnungen für die Ausschreibungsphasen",
+  "title": "Ausschreibungsstatus",
+  "type": "string",
+  "enum": [
+    "PHASE1",
+    "PHASE2",
+    "PHASE3",
+    "PHASE4"
+  ]
+}
