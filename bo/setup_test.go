@@ -14,6 +14,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// VerifySuccessfulValidations asserts that the vali validator does not fail for all objects provided
 func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
@@ -23,6 +24,7 @@ func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validOb
 	}
 }
 
+// VerifyFailedValidations asserts that the vali validator fails with the expected tag for every object
 func VerifyFailedValidations(t *testing.T, vali *validator.Validate, tagInvalidObjectsMap map[string][]interface{}) {
 	// ToDo: use generics as soon as golangs allows to
 	for validationTag, invalidObjects := range tagInvalidObjectsMap {
