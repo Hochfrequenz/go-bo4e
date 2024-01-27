@@ -16,7 +16,7 @@ import (
 )
 
 // Test_Deserialization deserializes an address json
-func (s *Suite) Test_Address_Deserialization() {
+func Test_Address_Deserialization(t *testing.T) {
 	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
@@ -27,18 +27,18 @@ func (s *Suite) Test_Address_Deserialization() {
 	}
 	serializedAdresse, err := json.Marshal(adresse)
 	jsonString := string(serializedAdresse)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DE"), is.True())                              // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, strconv.Itoa(int(landescode.DE))), is.False()) // no raw int enum value
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAdresse, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "DE"), is.True())                              // stringified enum
+	then.AssertThat(t, strings.Contains(jsonString, strconv.Itoa(int(landescode.DE))), is.False()) // no raw int enum value
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedAdresse, is.Not(is.NilArray[byte]()))
 	var deserializedAdresse com.Adresse
 	err = json.Unmarshal(serializedAdresse, &deserializedAdresse)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedAdresse, is.EqualTo(adresse))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedAdresse, is.EqualTo(adresse))
 }
 
 // Test_StrasseXorPostfach_Validation verifies that the Strasse XOR Postfach validation works
-func (s *Suite) Test_Strasse_XorPostfachValidation() {
+func Test_Strasse_XorPostfachValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.AdresseStructLevelValidation, com.Adresse{})
 	invalidAdressMaps := map[string][]interface{}{
@@ -83,11 +83,11 @@ func (s *Suite) Test_Strasse_XorPostfachValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidAdressMaps)
+	VerifyFailedValidations(t, validate, invalidAdressMaps)
 }
 
 // Test_Successful_Validation asserts that the validation does not fail for a valid Adresse
-func (s *Suite) Test_Successful_Adresse_Validation() {
+func Test_Successful_Adresse_Validation(t *testing.T) {
 	validate := validator.New()
 	validAddresses := []interface{}{
 		com.Adresse{
@@ -98,7 +98,7 @@ func (s *Suite) Test_Successful_Adresse_Validation() {
 			Landescode:   internal.Ptr(landescode.DE),
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validAddresses)
+	VerifySuccessfulValidations(t, validate, validAddresses)
 }
 
 func Test_Serialized_Empty_Adresse_Contains_No_Enum_Defaults(t *testing.T) {
