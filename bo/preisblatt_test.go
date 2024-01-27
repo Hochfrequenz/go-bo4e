@@ -2,6 +2,11 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -18,13 +23,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
-	"time"
 )
 
 // Test_Preisblatt_Deserialization tests serialization and deserialization of Preisblatt
-func (s *Suite) Test_Preisblatt_Deserialization() {
+func Test_Preisblatt_Deserialization(t *testing.T) {
 	artikel := func(i bdewartikelnummer.BDEWArtikelnummer) *bdewartikelnummer.BDEWArtikelnummer { return &i }
 	var pricat = bo.Preisblatt{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -75,26 +77,26 @@ func (s *Suite) Test_Preisblatt_Deserialization() {
 		},
 	}
 	serializedPricat, err := json.Marshal(pricat)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedPricat, is.Not(is.NilArray[byte]()))
-	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "STROM"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "MSB_INKL_MESSUNG"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "EUR"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedPricat), "BDEW"), is.True())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedPricat, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(string(serializedPricat), "STROM"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedPricat), "MSB_INKL_MESSUNG"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedPricat), "EUR"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedPricat), "BDEW"), is.True())
 	var deserializedPricat bo.Preisblatt
 	err = json.Unmarshal(serializedPricat, &deserializedPricat)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 
 	// The following lines prepare the deserialized pricat for the equality; The capacity of the slices is different, so the slice has to be created manually
 	// Also somehow the Preisstaffel raises the assertion, therefore it is replaced with the original
 	deserializedPricat.Preispositionen = []com.Preisposition{deserializedPricat.Preispositionen[0]}
 	//deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{deserializedPricat.Preispositionen[0].Preisstaffeln[0]}
 	deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{pricat.Preispositionen[0].Preisstaffeln[0]}
-	then.AssertThat(s.T(), deserializedPricat, is.EqualTo(pricat))
+	then.AssertThat(t, deserializedPricat, is.EqualTo(pricat))
 }
 
 // Test_Failed_PreisblattValidation verifies that the validators of Preisblatt work
-func (s *Suite) Test_Failed_PreisblattValidation() {
+func Test_Failed_PreisblattValidation(t *testing.T) {
 	validate := validator.New()
 	invalidPreisblattMap := map[string][]interface{}{
 		"required": {
@@ -116,11 +118,11 @@ func (s *Suite) Test_Failed_PreisblattValidation() {
 			bo.Preisblatt{},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidPreisblattMap)
+	VerifyFailedValidations(t, validate, invalidPreisblattMap)
 }
 
 // Test_Successful_Preisblatt_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Preisblatt_Validation() {
+func Test_Successful_Preisblatt_Validation(t *testing.T) {
 	ad := func(adresse com.Adresse) *com.Adresse { return &adresse }
 	validate := validator.New()
 	validPricat := []bo.BusinessObject{
@@ -164,15 +166,15 @@ func (s *Suite) Test_Successful_Preisblatt_Validation() {
 			Preispositionen: []com.Preisposition{},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validPricat)
+	VerifySuccessfulValidations(t, validate, validPricat)
 }
 
-func (s *Suite) Test_Empty_Preisblatt_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Preisblatt_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.PREISBLATT)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Preisblatt{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.PREISBLATT))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Preisblatt{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.PREISBLATT))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Preisblatt_Contains_No_Enum_Defaults() {
