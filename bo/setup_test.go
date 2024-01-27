@@ -12,16 +12,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/suite"
 )
-
-type Suite struct {
-	suite.Suite
-}
-
-func TestInit(t *testing.T) {
-	suite.Run(t, new(Suite))
-}
 
 func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
