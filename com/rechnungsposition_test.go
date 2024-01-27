@@ -3,6 +3,7 @@ package com_test
 import (
 	"encoding/json"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/hochfrequenz/go-bo4e/internal"
@@ -24,7 +25,7 @@ import (
 var korrekturfaktor float32 = -1
 
 // Test_Rechnungsposition_Deserialization deserializes an Rechnungsposition json
-func (s *Suite) Test_Rechnungsposition_Deserialization() {
+func Test_Rechnungsposition_Deserialization(t *testing.T) {
 	var rechnungsposition = com.Rechnungsposition{
 		Positionsnummer: 17,
 		LieferungVon:    time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -62,17 +63,17 @@ func (s *Suite) Test_Rechnungsposition_Deserialization() {
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
 	jsonString := string(serializedRechnungsposition)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ABGABE_KWKG"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedRechnungsposition, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "ABGABE_KWKG"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedRechnungsposition, is.Not(is.NilArray[byte]()))
 	var deserializedRechnungsposition com.Rechnungsposition
 	err = json.Unmarshal(serializedRechnungsposition, &deserializedRechnungsposition)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedRechnungsposition, is.EqualTo(rechnungsposition))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedRechnungsposition, is.EqualTo(rechnungsposition))
 }
 
 // TestFailedRechnungspositionValidation asserts that the validation fails for invalid Rechnungsposition
-func (s *Suite) Test_Failed_RechnungspositionValidation() {
+func Test_Failed_RechnungspositionValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.RechnungspositionStructLevelValidation, com.Rechnungsposition{})
 	invalidRechnungsposition := map[string][]interface{}{
@@ -140,11 +141,11 @@ func (s *Suite) Test_Failed_RechnungspositionValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidRechnungsposition)
+	VerifyFailedValidations(t, validate, invalidRechnungsposition)
 }
 
 // TestSuccessfulRechnungspositionValidation asserts that the validation does not fail for a valid Rechnungsposition
-func (s *Suite) Test_Successful_RechnungspositionValidation() {
+func Test_Successful_RechnungspositionValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.RechnungspositionStructLevelValidation, com.Rechnungsposition{})
 	validRechnungsposition := []interface{}{
@@ -179,7 +180,7 @@ func (s *Suite) Test_Successful_RechnungspositionValidation() {
 			TeilrabattNetto: nil,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validRechnungsposition)
+	VerifySuccessfulValidations(t, validate, validRechnungsposition)
 }
 
 func (s *Suite) Test_Serialized_Empty_Rechnungspositionen_Contains_No_Enum_Defaults() {
