@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/hochfrequenz/go-bo4e/internal"
@@ -134,20 +135,20 @@ var serializableRechnung = bo.Rechnung{
 }
 
 // Test_Rechnung_Deserialization deserializes an Rechnung json
-func (s *Suite) Test_Rechnung_Deserialization() {
+func Test_Rechnung_Deserialization(t *testing.T) {
 	serializedRechnung, err := json.Marshal(serializableRechnung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedRechnung, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedRechnung, is.Not(is.NilArray[byte]()))
 	rechnungJsonString := string(serializedRechnung)
-	then.AssertThat(s.T(), strings.Contains(rechnungJsonString, "\"buchungsdatum\":\"2022-09-22T00:00:00Z\""), is.True())
+	then.AssertThat(t, strings.Contains(rechnungJsonString, "\"buchungsdatum\":\"2022-09-22T00:00:00Z\""), is.True())
 	var deserializedRechnung bo.Rechnung
 	err = json.Unmarshal(serializedRechnung, &deserializedRechnung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(serializableRechnung))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedRechnung, is.EqualTo(serializableRechnung))
 }
 
 // TestFailedRechnungValidation verifies that the validators of a Rechnung work
-func (s *Suite) Test_Failed_RechnungValidation() {
+func Test_Failed_RechnungValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})
 	invalidRechnungs := map[string][]interface{}{
@@ -260,17 +261,17 @@ func (s *Suite) Test_Failed_RechnungValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidRechnungs)
+	VerifyFailedValidations(t, validate, invalidRechnungs)
 }
 
 // Test_Successful_Rechnung_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Rechnung_Validation() {
+func Test_Successful_Rechnung_Validation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.RechnungStructLevelValidation, bo.Rechnung{})
 	validRechnung := []bo.BusinessObject{
 		completeValidRechnung,
 	}
-	VerfiySuccessfulValidations(s, validate, validRechnung)
+	VerifySuccessfulValidations(t, validate, validRechnung)
 }
 
 var completeValidRechnung = bo.Rechnung{
@@ -411,12 +412,12 @@ var completeValidRechnung = bo.Rechnung{
 	},
 }
 
-func (s *Suite) Test_Empty_Rechnung_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Rechnung_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.RECHNUNG)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Rechnung{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.RECHNUNG))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Rechnung{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.RECHNUNG))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Rechnung_Contains_No_Enum_Defaults() {
