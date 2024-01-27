@@ -16,6 +16,10 @@ import (
 
 // TestZaehlwerkDeserialization deserializes a Zaehlwerk json
 func (s *Suite) Test_Zaehlwerk_Deserialization() {
+	// Warning: This test makes use of global variables of a package (3rd-party). It must not be parallelized!
+
+	decimal.MarshalJSONWithoutQuotes = true
+
 	var zaehlwerk = com.Zaehlwerk{
 		ZaehlwerkId:    "1",
 		Bezeichnung:    "bestes Zählwerk",
@@ -42,16 +46,19 @@ func (s *Suite) Test_Zaehlwerk_Deserialization() {
 
 // Test_Zaehlwerk_Decimal_As_Number_Serialization serializes a Zaehlwerk, once with the wandlerfaktor as string (default), once as number
 func (s *Suite) Test_Zaehlwerk_Decimal_As_Number_Serialization() {
+	// Warning: This test makes use of global variables of a package (3rd-party). It must not be parallelized!
+
 	var zaehlwerk = com.Zaehlwerk{
 		Wandlerfaktor: decimal.NewFromFloat(1.2),
 	}
+
+	decimal.MarshalJSONWithoutQuotes = false
 	serializedZaehlwerk, err := json.Marshal(zaehlwerk)
 	then.AssertThat(s.T(), err, is.Nil())
 	jsonString := string(serializedZaehlwerk)
 	then.AssertThat(s.T(), strings.Contains(jsonString, "wandlerfaktor\":\"1.2\""), is.True()) // decimal as string by default: https://github.com/shopspring/decimal/issues/21
 
 	decimal.MarshalJSONWithoutQuotes = true // https://github.com/shopspring/decimal/blob/fa3b22f4d484d626ee81919285cf3d22ad3a4000/decimal.go#L47
-
 	serializedZaehlwerk, err = json.Marshal(zaehlwerk)
 	then.AssertThat(s.T(), err, is.Nil())
 	jsonString = string(serializedZaehlwerk)
