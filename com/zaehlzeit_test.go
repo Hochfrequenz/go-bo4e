@@ -2,6 +2,8 @@ package com_test
 
 import (
 	"encoding/json"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -11,7 +13,7 @@ import (
 const foo = "foo"
 const bar = "bar"
 
-func (s *Suite) Test_Zaehlzeit_Deserialization() {
+func Test_Zaehlzeit_Deserialization(t *testing.T) {
 	_foo := foo
 	_bar := bar
 	zaehlzeit := com.Zaehlzeit{
@@ -19,15 +21,15 @@ func (s *Suite) Test_Zaehlzeit_Deserialization() {
 		Zaehlzeitregister:   &_bar,
 	}
 	serializedZaehlzeit, err := json.Marshal(zaehlzeit)
-	then.AssertThat(s.T(), serializedZaehlzeit, is.Not(is.NilArray[byte]()))
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, serializedZaehlzeit, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
 	deserializedZaehlzeit := com.Zaehlzeit{}
 	err = json.Unmarshal(serializedZaehlzeit, &deserializedZaehlzeit)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedZaehlzeit, is.EqualTo(zaehlzeit))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedZaehlzeit, is.EqualTo(zaehlzeit))
 }
 
-func (s *Suite) Test_Successful_Zaehlzeit_Validation() {
+func Test_Successful_Zaehlzeit_Validation(t *testing.T) {
 	validate := validator.New()
 	_foo := foo
 	_bar := bar
@@ -44,7 +46,7 @@ func (s *Suite) Test_Successful_Zaehlzeit_Validation() {
 		},
 		com.Zaehlzeit{},
 	}
-	VerfiySuccessfulValidations(s, validate, validAbweichung)
+	VerifySuccessfulValidations(t, validate, validAbweichung)
 }
 
 func (s *Suite) Test_Serialized_Empty_Zaehlzeit_Contains_No_Enum_Defaults() {
