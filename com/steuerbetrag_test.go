@@ -1,6 +1,8 @@
 package com_test
 
 import (
+	"testing"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkennzeichen"
@@ -9,7 +11,7 @@ import (
 )
 
 // TestFailedSteuerbetragValidation asserts that the validation fails for invalid Steuerbetrag
-func (s *Suite) Test_Failed_SteuerbetragValidation() {
+func Test_Failed_SteuerbetragValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.SteuerbetragStructLevelValidation, com.Steuerbetrag{})
 	invalidSteuerbetrag := map[string][]interface{}{
@@ -30,11 +32,11 @@ func (s *Suite) Test_Failed_SteuerbetragValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidSteuerbetrag)
+	VerifyFailedValidations(t, validate, invalidSteuerbetrag)
 }
 
 // TestSuccessfulSteuerbetragValidation asserts that the validation does not fail for a valid Steuerbetrag
-func (s *Suite) Test_Successful_SteuerbetragValidation() {
+func Test_Successful_SteuerbetragValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.SteuerbetragStructLevelValidation, com.Steuerbetrag{})
 	validSteuerbetraege := []interface{}{
@@ -61,7 +63,7 @@ func (s *Suite) Test_Successful_SteuerbetragValidation() {
 			Waehrung:          waehrungscode.EUR,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validSteuerbetraege)
+	VerifySuccessfulValidations(t, validate, validSteuerbetraege)
 }
 
 func (s *Suite) Test_Serialized_Empty_Steuerbetrag_Contains_No_Enum_Defaults() {
