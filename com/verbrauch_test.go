@@ -3,6 +3,7 @@ package com_test
 import (
 	"encoding/json"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/corbym/gocrest/is"
@@ -17,7 +18,7 @@ import (
 )
 
 // Test_Deserialization deserializes an Verbrauch json
-func (s *Suite) Test_Verbrauch_Deserialization() {
+func Test_Verbrauch_Deserialization(t *testing.T) {
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
 		Enddatum:                 time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
@@ -31,19 +32,19 @@ func (s *Suite) Test_Verbrauch_Deserialization() {
 	}
 	serializedVerbrauch, err := json.Marshal(verbrauch)
 	jsonString := string(serializedVerbrauch)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "KWH"), is.True())                      // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
-	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2023-01-01T00:00:00Z\""), is.True()) // ISO8601 ftw
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVerbrauch, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "KWH"), is.True())                      // stringified enum
+	then.AssertThat(t, strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
+	then.AssertThat(t, strings.Contains(jsonString, "\"2023-01-01T00:00:00Z\""), is.True()) // ISO8601 ftw
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedVerbrauch, is.Not(is.NilArray[byte]()))
 	var deserializedVerbrauch com.Verbrauch
 	err = json.Unmarshal(serializedVerbrauch, &deserializedVerbrauch)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVerbrauch, is.EqualTo(verbrauch))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedVerbrauch, is.EqualTo(verbrauch))
 }
 
 // Test_Successful_Verbrauch_Validation asserts that the validation does not fail for a valid Verbrauch
-func (s *Suite) Test_Successful_Verbrauch_Validation() {
+func Test_Successful_Verbrauch_Validation(t *testing.T) {
 	validate := validator.New()
 	validVerbrauch := []interface{}{
 		com.Verbrauch{
@@ -57,11 +58,11 @@ func (s *Suite) Test_Successful_Verbrauch_Validation() {
 			Ausfuehrungszeitpunkt:    time.Now(),
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validVerbrauch)
+	VerifySuccessfulValidations(t, validate, validVerbrauch)
 }
 
 // TestVerbrauchFailedValidation verifies that invalid verbrauch values are considered invalid
-func (s *Suite) Test_Verbrauch_FailedValidation() {
+func Test_Verbrauch_FailedValidation(t *testing.T) {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
@@ -85,7 +86,7 @@ func (s *Suite) Test_Verbrauch_FailedValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
+	VerifyFailedValidations(t, validate, invalidVerbrauchMap)
 }
 
 func (s *Suite) Test_Serialized_Empty_Verbrauch_Contains_No_Enum_Defaults() {
