@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"testing"
 
 	"github.com/go-playground/validator/v10"
 
@@ -19,7 +20,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func (s *Suite) Test_Handelsunstimmigkeit_Deserialization() {
+func Test_Handelsunstimmigkeit_Deserialization(t *testing.T) {
 	h := bo.Handelsunstimmigkeit{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:           botyp.HANDELSUNSTIMMIGKEIT,
@@ -38,19 +39,19 @@ func (s *Suite) Test_Handelsunstimmigkeit_Deserialization() {
 	}
 
 	serialized, err := json.Marshal(h)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serialized, is.Not(is.NilArray[byte]()))
-	then.AssertThat(s.T(), strings.Contains(string(serialized), "NN_MSCONS_UEBERSENDET"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serialized), "HANDELSRECHNUNG"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serialized), "456"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serialized), "123"), is.True())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serialized, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(string(serialized), "NN_MSCONS_UEBERSENDET"), is.True())
+	then.AssertThat(t, strings.Contains(string(serialized), "HANDELSRECHNUNG"), is.True())
+	then.AssertThat(t, strings.Contains(string(serialized), "456"), is.True())
+	then.AssertThat(t, strings.Contains(string(serialized), "123"), is.True())
 	var deserialized bo.Handelsunstimmigkeit
 	err = json.Unmarshal(serialized, &deserialized)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserialized, is.EqualTo(h))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserialized, is.EqualTo(h))
 }
 
-func (s *Suite) Test_Failed_Handelsunstimmigkeit_Validation() {
+func Test_Failed_Handelsunstimmigkeit_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidMap := map[string][]interface{}{
 		"required": {
@@ -66,10 +67,10 @@ func (s *Suite) Test_Failed_Handelsunstimmigkeit_Validation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidMap)
+	VerifyFailedValidations(t, validate, invalidMap)
 }
 
-func (s *Suite) Test_Successful_Handelsunstimmigkeit_Validation() {
+func Test_Successful_Handelsunstimmigkeit_Validation(t *testing.T) {
 	validate := validator.New()
 	validBO := []bo.BusinessObject{
 		bo.Handelsunstimmigkeit{
@@ -86,15 +87,15 @@ func (s *Suite) Test_Successful_Handelsunstimmigkeit_Validation() {
 			},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validBO)
+	VerifySuccessfulValidations(t, validate, validBO)
 }
 
-func (s *Suite) Test_Empty_Handelsunstimmigkeit_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Handelsunstimmigkeit_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.HANDELSUNSTIMMIGKEIT)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Handelsunstimmigkeit{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.HANDELSUNSTIMMIGKEIT))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Handelsunstimmigkeit{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.HANDELSUNSTIMMIGKEIT))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Handelsunstimmigkeit_Contains_No_Enum_Defaults() {
