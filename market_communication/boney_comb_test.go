@@ -2,6 +2,11 @@ package market_communication_test
 
 import (
 	"encoding/json"
+	"os"
+	"path/filepath"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -20,21 +25,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
-	"os"
-	"path/filepath"
-	"testing"
-	"time"
 )
 
 type Suite struct {
 	suite.Suite
-}
-
-// SetupSuite sets up the tests
-func (s *Suite) SetupSuite() {
-}
-
-func (s *Suite) AfterTest(_, _ string) {
 }
 
 func TestInit(t *testing.T) {

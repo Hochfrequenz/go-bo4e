@@ -2,23 +2,17 @@ package com_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/suite"
-	"testing"
 )
 
 type Suite struct {
 	suite.Suite
-}
-
-// SetupSuite sets up the tests
-func (s *Suite) SetupSuite() {
-}
-
-func (s *Suite) AfterTest(_, _ string) {
 }
 
 func TestInit(t *testing.T) {
