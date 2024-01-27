@@ -10,16 +10,7 @@ import (
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/suite"
 )
-
-type Suite struct {
-	suite.Suite
-}
-
-func TestInit(t *testing.T) {
-	suite.Run(t, new(Suite))
-}
 
 // VerifySuccessfulValidations asserts that the vali validator does not fail for all objects provided
 func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []interface{}) {
