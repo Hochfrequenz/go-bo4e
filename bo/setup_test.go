@@ -23,11 +23,6 @@ func TestInit(t *testing.T) {
 	suite.Run(t, new(Suite))
 }
 
-// VerfiySuccessfulValidations asserts that the vali validator does not fail for all objects provided
-func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObjects []bo.BusinessObject) {
-	VerifySuccessfulValidations(s.T(), vali, validObjects)
-}
-
 func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
@@ -35,11 +30,6 @@ func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validOb
 		then.AssertThat(t, validObject.GetBoTyp(), is.Not(is.EqualTo[botyp.BOTyp](0))) // 0 would be iota/uninitialized botyp.BOTyp
 		then.AssertThat(t, err, is.Nil())
 	}
-}
-
-// VerfiyFailedValidations asserts that the vali validator fails with the expected tag for every object
-func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjectsMap map[string][]interface{}) {
-	VerifyFailedValidations(s.T(), vali, tagInvalidObjectsMap)
 }
 
 func VerifyFailedValidations(t *testing.T, vali *validator.Validate, tagInvalidObjectsMap map[string][]interface{}) {
