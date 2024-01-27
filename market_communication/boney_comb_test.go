@@ -24,16 +24,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/suite"
 )
-
-type Suite struct {
-	suite.Suite
-}
-
-func TestInit(t *testing.T) {
-	suite.Run(t, new(Suite))
-}
 
 func Test_BOneyComb_DeSerialization(t *testing.T) {
 	boneyComb := market_communication.BOneyComb{
