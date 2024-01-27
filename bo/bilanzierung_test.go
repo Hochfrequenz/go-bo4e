@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/corbym/gocrest/is"
@@ -71,38 +72,38 @@ var validBilanzierung = bo.Bilanzierung{
 }
 
 // Test_Bilanzierung_Deserialization deserializes an Bilanzierung json
-func (s *Suite) Test_Bilanzierung_Deserialization() {
+func Test_Bilanzierung_Deserialization(t *testing.T) {
 	serializedBilanzierung, err := json.Marshal(validBilanzierung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBilanzierung, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedBilanzierung, is.Not(is.NilArray[byte]()))
 	jsonString := string(serializedBilanzierung)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "SLP_SEP"), is.True()) // stringified enum
+	then.AssertThat(t, strings.Contains(jsonString, "SLP_SEP"), is.True()) // stringified enum
 	var deserializedBilanzierung bo.Bilanzierung
 	err = json.Unmarshal(serializedBilanzierung, &deserializedBilanzierung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBilanzierung, is.EqualTo(validBilanzierung))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedBilanzierung, is.EqualTo(validBilanzierung))
 }
 
-func (s *Suite) Test_Bilanzierung_Deserializes_Unknown_Fields() {
+func Test_Bilanzierung_Deserializes_Unknown_Fields(t *testing.T) {
 	jsonString := `{"jahresverbrauchsprognose":{"wert":2345},"kundenwert":{"wert":38},"bilanzierungsbeginn":"2021-12-31T23:00:00+00:00","bilanzkreis":"THE0BFL002410004","prognosegrundlage":"PROFILE","detailsPrognosegrundlage":["SLP_SEP"],"boTyp":"BILANZIERUNG","versionStruktur":"1","Klassentyp":"Z12","Verfahren":"SYNTHETISCH","Profil":"D13","Lastprofil_Codeliste":"293","Temperaturmessstelle_Klassentyp":"Z99","Temperaturmessstelle_ID":"107290","Temperaturmessstelle_Anbieter":"ZT3","Temperaturmessstelle_Codeliste":"293"}`
 	var deserializedBilanzierung bo.Bilanzierung
 	err := json.Unmarshal([]byte(jsonString), &deserializedBilanzierung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), *deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))                  // a "normal" property/field of Bilanzierung
-	then.AssertThat(s.T(), deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo[any]("293")) // an extension data key
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, *deserializedBilanzierung.Bilanzkreis, is.EqualTo("THE0BFL002410004"))                  // a "normal" property/field of Bilanzierung
+	then.AssertThat(t, deserializedBilanzierung.ExtensionData["Lastprofil_Codeliste"], is.EqualTo[any]("293")) // an extension data key
 	jsonStringBytes, serializationErr := json.Marshal(deserializedBilanzierung)
-	then.AssertThat(s.T(), serializationErr, is.Nil())
+	then.AssertThat(t, serializationErr, is.Nil())
 	jsonString = string(jsonStringBytes)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "\"Lastprofil_Codeliste\""), is.True())
+	then.AssertThat(t, strings.Contains(jsonString, "\"Lastprofil_Codeliste\""), is.True())
 }
 
 // Test_Failed_Bilanzierung_Validation verifies that the validators of a Bilanzierung BO work
-func (s *Suite) Test_Failed_Bilanzierung_Validation() {
+func Test_Failed_Bilanzierung_Validation(t *testing.T) {
 	validate := validator.New()
 	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 	err = validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 	invalidBilanzierungs := map[string][]interface{}{
 		"required": {
 			bo.Bilanzierung{},
@@ -136,29 +137,29 @@ func (s *Suite) Test_Failed_Bilanzierung_Validation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidBilanzierungs)
+	VerifyFailedValidations(t, validate, invalidBilanzierungs)
 }
 
 // Test_Successful_Bilanzierung_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Bilanzierung_Validation() {
+func Test_Successful_Bilanzierung_Validation(t *testing.T) {
 	validate := validator.New()
 	err := validate.RegisterValidation("eic", bo.EICFieldLevelValidation)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 	err = validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 	validMarktteilnehmers := []bo.BusinessObject{
 		validBilanzierung,
 		bilanzierungWithNilAbwicklungsmodell(validBilanzierung),
 	}
-	VerfiySuccessfulValidations(s, validate, validMarktteilnehmers)
+	VerifySuccessfulValidations(t, validate, validMarktteilnehmers)
 }
 
-func (s *Suite) Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.BILANZIERUNG)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Bilanzierung{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.BILANZIERUNG))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Bilanzierung{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.BILANZIERUNG))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
