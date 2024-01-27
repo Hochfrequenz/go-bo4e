@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -18,12 +22,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"strings"
 )
 
 // Test_Zaehler_Deserialization deserializes an Zaehler json
-func (s *Suite) Test_Zaehler_Deserialization() {
+func Test_Zaehler_Deserialization(t *testing.T) {
 	var meter = bo.Zaehler{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.ZAEHLER,
@@ -49,22 +51,22 @@ func (s *Suite) Test_Zaehler_Deserialization() {
 		Zaehlerhersteller: nil,
 	}
 	serializedMeter, err := json.Marshal(meter)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedMeter, is.Not(is.NilArray[byte]()))
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINRICHTUNGSZAEHLER"), is.True())
-	then.AssertThat(s.T(), strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedMeter, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINRICHTUNGSZAEHLER"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
 	var deserializedMeter bo.Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 
 	areEqual, err := internal.CompareAsJson(meter, deserializedMeter)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), areEqual, is.True())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, areEqual, is.True())
 }
 
 // TestFailedZaehlerValidation verifies that the validators of a Zaehler work
-func (s *Suite) Test_Failed_ZaehlerValidation() {
+func Test_Failed_ZaehlerValidation(t *testing.T) {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
@@ -88,11 +90,11 @@ func (s *Suite) Test_Failed_ZaehlerValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVertrags)
+	VerifyFailedValidations(t, validate, invalidVertrags)
 }
 
 // Test_Successful_Zaehler_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Zaehler_Validation() {
+func Test_Successful_Zaehler_Validation(t *testing.T) {
 	validate := validator.New()
 	validZaehler := []bo.BusinessObject{
 		bo.Zaehler{
@@ -139,15 +141,15 @@ func (s *Suite) Test_Successful_Zaehler_Validation() {
 			},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validZaehler)
+	VerifySuccessfulValidations(t, validate, validZaehler)
 }
 
-func (s *Suite) Test_Empty_Zaehler_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Zaehler_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.ZAEHLER)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Zaehler{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.ZAEHLER))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Zaehler{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.ZAEHLER))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Zaehler_Contains_No_Enum_Defaults() {
