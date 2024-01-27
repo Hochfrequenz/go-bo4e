@@ -2,6 +2,10 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -9,12 +13,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
 	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 // TestZeitreihenwertDeserialization deserializes a Zeitreihenwert json
-func (s *Suite) Test_Zeitreihenwert_Deserialization() {
+func Test_Zeitreihenwert_Deserialization(t *testing.T) {
 	var zeitreihenwert = com.Zeitreihenwert{
 		Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 			Wert:         decimal.NewFromFloat(17.43),
@@ -26,17 +28,17 @@ func (s *Suite) Test_Zeitreihenwert_Deserialization() {
 	}
 	serializedZeitreihenwert, err := json.Marshal(zeitreihenwert)
 	jsonString := string(serializedZeitreihenwert)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ENERGIEMENGESUMMIERT"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedZeitreihenwert, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "ENERGIEMENGESUMMIERT"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedZeitreihenwert, is.Not(is.NilArray[byte]()))
 	var deserializedZeitreihenwert com.Zeitreihenwert
 	err = json.Unmarshal(serializedZeitreihenwert, &deserializedZeitreihenwert)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedZeitreihenwert, is.EqualTo(zeitreihenwert))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedZeitreihenwert, is.EqualTo(zeitreihenwert))
 }
 
 // Test_Zeitreihenwert_Failed_Validation verifies that the validation fails for invalid Zeitreihenwert s
-func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
+func Test_Zeitreihenwert_Failed_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidZeitreihenwertkompakts := map[string][]interface{}{
 		"required": {
@@ -51,11 +53,11 @@ func (s *Suite) Test_Zeitreihenwert_Failed_Validation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidZeitreihenwertkompakts)
+	VerifyFailedValidations(t, validate, invalidZeitreihenwertkompakts)
 }
 
 // Test_Successful_Zeitreihenwert_Validation asserts that the validation does not fail for a valid Zeitreihenwert
-func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
+func Test_Successful_Zeitreihenwert_Validation(t *testing.T) {
 	validate := validator.New()
 	validAddresses := []interface{}{
 		com.Zeitreihenwert{
@@ -68,7 +70,7 @@ func (s *Suite) Test_Successful_Zeitreihenwert_Validation() {
 			DatumUhrzeitBis: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC).Add(time.Minute * 15),
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validAddresses)
+	VerifySuccessfulValidations(t, validate, validAddresses)
 }
 
 func (s *Suite) Test_Serialized_Empty_Zeitreihenwert_Contains_No_Enum_Defaults() {
