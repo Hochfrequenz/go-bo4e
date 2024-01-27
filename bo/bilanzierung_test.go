@@ -162,8 +162,8 @@ func Test_Empty_Bilanzierung_Is_Creatable_Using_BoTyp(t *testing.T) {
 	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.BILANZIERUNG))
+func Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.BILANZIERUNG))
 }
 
 // bilanzierungWithNilAbwicklungsmodell returns a copy of bilanzierung with Abwicklungsmodell set to nil.

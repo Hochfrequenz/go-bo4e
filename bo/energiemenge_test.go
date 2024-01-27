@@ -1,9 +1,7 @@
 package bo_test
 
 import (
-	"encoding/json"
 	"reflect"
-	"strings"
 	"testing"
 	"time"
 
@@ -111,13 +109,6 @@ func Test_Empty_Something_Is_Creatable_Using_BoTyp(t *testing.T) {
 	then.AssertThat(t, object, is.EqualTo[bo.BusinessObject](nil))
 }
 
-func (s *Suite) Test_Serialized_Empty_Energiemenge_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ENERGIEMENGE))
-}
-
-func (s *Suite) assert_Does_Not_Serialize_Default_Enums(bo bo.BusinessObject) {
-	jsonBytes, err := json.Marshal(bo)
-	then.AssertThat(s.T(), err, is.Nil())
-	jsonString := string(jsonBytes)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "(0)"), is.False())
+func Test_Serialized_Empty_Energiemenge_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.ENERGIEMENGE))
 }

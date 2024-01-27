@@ -314,6 +314,6 @@ func Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp(t *testing.T) {
 	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Marktlokation_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.MARKTLOKATION))
+func Test_Serialized_Empty_Marktlokation_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.MARKTLOKATION))
 }
