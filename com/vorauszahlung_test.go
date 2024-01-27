@@ -1,14 +1,16 @@
 package com_test
 
 import (
+	"testing"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
-func (s *Suite) Test_Failed_VorauszahlungValidation() {
+func Test_Failed_VorauszahlungValidation(t *testing.T) {
 	validate := validator.New()
 	invalidVorauszahlungMap := map[string][]interface{}{
 		"required": {
@@ -17,10 +19,10 @@ func (s *Suite) Test_Failed_VorauszahlungValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVorauszahlungMap)
+	VerifyFailedValidations(t, validate, invalidVorauszahlungMap)
 }
 
-func (s *Suite) Test_Successful_VorauszahlungValidation() {
+func Test_Successful_VorauszahlungValidation(t *testing.T) {
 	validate := validator.New()
 	arbitraryReferenz := "foo"
 	arbitraryDate := time.Date(2022, 9, 1, 0, 0, 0, 0, time.UTC)
@@ -40,7 +42,7 @@ func (s *Suite) Test_Successful_VorauszahlungValidation() {
 			ReferenzDatum: &arbitraryDate,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validBetraege)
+	VerifySuccessfulValidations(t, validate, validBetraege)
 }
 
 func (s *Suite) Test_Serialized_Empty_Vorauszahlung_Contains_No_Enum_Defaults() {
