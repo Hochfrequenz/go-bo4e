@@ -88,7 +88,7 @@ func Test_Successful_Ansprechpartner_Validation(t *testing.T) {
 	validAnsprechpartners := []bo.BusinessObject{
 		validAp,
 	}
-	VerifySuccessValidations(t, validate, validAnsprechpartners)
+	VerifySuccessfulValidations(t, validate, validAnsprechpartners)
 }
 
 func Test_Empty_Ansprechpartner_Is_Creatable_Using_BoTyp(t *testing.T) {

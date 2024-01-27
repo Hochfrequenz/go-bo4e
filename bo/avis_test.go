@@ -344,7 +344,7 @@ func Test_Successful_AvisValidation(t *testing.T) {
 			ZuZahlen:       avisPositive.GesamtBrutto,
 		},
 	}
-	VerifySuccessValidations(t, validate, validAvises)
+	VerifySuccessfulValidations(t, validate, validAvises)
 }
 
 func Test_Empty_Avis_Is_Creatable_Using_BoTyp(t *testing.T) {

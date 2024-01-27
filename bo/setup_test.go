@@ -23,10 +23,10 @@ func TestInit(t *testing.T) {
 
 // VerfiySuccessfulValidations asserts that the vali validator does not fail for all objects provided
 func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObjects []bo.BusinessObject) {
-	VerifySuccessValidations(s.T(), vali, validObjects)
+	VerifySuccessfulValidations(s.T(), vali, validObjects)
 }
 
-func VerifySuccessValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
+func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
 		err := vali.Struct(validObject)
