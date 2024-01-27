@@ -61,6 +61,6 @@ func Test_UnSuccessful_Abweichung_Validation(t *testing.T) {
 	VerifyFailedValidations(t, validate, invalidAbweichung)
 }
 
-func (s *Suite) Test_Serialized_Empty_Abweichung_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Abweichung{})
+func Test_Serialized_Empty_Abweichung_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Abweichung{})
 }

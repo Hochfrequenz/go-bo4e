@@ -78,6 +78,6 @@ func Test_Successful_Vertragkonditionen_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validVertragskonditionens)
 }
 
-func (s *Suite) Test_Serialized_Empty_Vertragskonditionen_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Vertragskonditionen{})
+func Test_Serialized_Empty_Vertragskonditionen_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Vertragskonditionen{})
 }

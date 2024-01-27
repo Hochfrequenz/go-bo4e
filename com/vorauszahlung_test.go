@@ -45,6 +45,6 @@ func Test_Successful_VorauszahlungValidation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validBetraege)
 }
 
-func (s *Suite) Test_Serialized_Empty_Vorauszahlung_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Vorauszahlung{})
+func Test_Serialized_Empty_Vorauszahlung_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Vorauszahlung{})
 }

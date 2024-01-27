@@ -65,6 +65,6 @@ func Test_StatusZusatzInformation_FailedValidation(t *testing.T) {
 	VerifyFailedValidations(t, validate, invalidVerbrauchMap)
 }
 
-func (s *Suite) Test_Serialized_Empty_StatusZusatzInformation_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.StatusZusatzInformation{})
+func Test_Serialized_Empty_StatusZusatzInformation_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.StatusZusatzInformation{})
 }

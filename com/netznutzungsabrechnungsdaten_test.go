@@ -58,6 +58,6 @@ func Test_Successful_Netznutzungsabrechnungsdaten_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validNetznutzungsabrechnungsdaten)
 }
 
-func (s *Suite) Test_Serialized_Empty_Netznutzungsabrechnungsdaten_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Netznutzungsabrechnungsdaten{})
+func Test_Serialized_Empty_Netznutzungsabrechnungsdaten_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Netznutzungsabrechnungsdaten{})
 }

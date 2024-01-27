@@ -72,6 +72,6 @@ func Test_Successful_AvisPosition_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validAvisPosition)
 }
 
-func (s *Suite) Test_Serialized_Empty_AvisPosition_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.AvisPosition{})
+func Test_Serialized_Empty_AvisPosition_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.AvisPosition{})
 }

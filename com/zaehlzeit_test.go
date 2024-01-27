@@ -49,6 +49,6 @@ func Test_Successful_Zaehlzeit_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validAbweichung)
 }
 
-func (s *Suite) Test_Serialized_Empty_Zaehlzeit_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Zaehlzeit{})
+func Test_Serialized_Empty_Zaehlzeit_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Zaehlzeit{})
 }

@@ -1,7 +1,9 @@
 package com_test
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/corbym/gocrest/is"
@@ -68,4 +70,11 @@ func newDecimalFromString(s string) decimal.Decimal {
 		panic(fmt.Errorf("Error while converting '%s'", s))
 	}
 	return result
+}
+
+func assertDoesNotSerializeDefaultEnums(t *testing.T, com interface{}) {
+	jsonBytes, err := json.Marshal(com)
+	then.AssertThat(t, err, is.Nil())
+	jsonString := string(jsonBytes)
+	then.AssertThat(t, strings.Contains(jsonString, "(0)"), is.False())
 }

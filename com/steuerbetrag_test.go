@@ -66,6 +66,6 @@ func Test_Successful_SteuerbetragValidation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validSteuerbetraege)
 }
 
-func (s *Suite) Test_Serialized_Empty_Steuerbetrag_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Steuerbetrag{})
+func Test_Serialized_Empty_Steuerbetrag_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Steuerbetrag{})
 }

@@ -2,6 +2,9 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -9,7 +12,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/shopspring/decimal"
-	"strings"
 )
 
 // TestZaehlwerkDeserialization deserializes a Zaehlwerk json
@@ -89,6 +91,6 @@ func (s *Suite) Test_Successful_Zaehlwerk_Validation() {
 	VerfiySuccessfulValidations(s, validate, validZaehlwerke)
 }
 
-func (s *Suite) Test_Serialized_Empty_Zaehlwerk_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Zaehlwerk{})
+func Test_Serialized_Empty_Zaehlwerk_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Zaehlwerk{})
 }

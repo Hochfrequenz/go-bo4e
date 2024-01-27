@@ -41,6 +41,6 @@ func Test_Successful_ExterneReferenzValidation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validReferences)
 }
 
-func (s *Suite) Test_Serialized_Empty_Externe_Referenz_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.ExterneReferenz{})
+func Test_Serialized_Empty_Externe_Referenz_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.ExterneReferenz{})
 }

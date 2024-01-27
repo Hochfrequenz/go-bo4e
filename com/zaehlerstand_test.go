@@ -64,6 +64,6 @@ func Test_Successful_Zaehlerstand_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validZaehlerstaende)
 }
 
-func (s *Suite) Test_Serialized_Empty_Zaehlerstand_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Zaehlerstand{})
+func Test_Serialized_Empty_Zaehlerstand_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Zaehlerstand{})
 }

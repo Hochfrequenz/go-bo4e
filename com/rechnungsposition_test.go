@@ -183,6 +183,6 @@ func Test_Successful_RechnungspositionValidation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validRechnungsposition)
 }
 
-func (s *Suite) Test_Serialized_Empty_Rechnungspositionen_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Rechnungsposition{})
+func Test_Serialized_Empty_Rechnungspositionen_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Rechnungsposition{})
 }

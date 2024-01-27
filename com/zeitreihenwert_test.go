@@ -73,6 +73,6 @@ func Test_Successful_Zeitreihenwert_Validation(t *testing.T) {
 	VerifySuccessfulValidations(t, validate, validAddresses)
 }
 
-func (s *Suite) Test_Serialized_Empty_Zeitreihenwert_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Zeitreihenwert{})
+func Test_Serialized_Empty_Zeitreihenwert_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Zeitreihenwert{})
 }
