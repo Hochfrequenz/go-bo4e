@@ -2,16 +2,18 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
-	"strings"
-	"time"
 )
 
 // TestUnterschriftDeserialization deserializes an Unterschrift json
-func (s *Suite) Test_Unterschrift_Deserialization() {
+func Test_Unterschrift_Deserialization(t *testing.T) {
 	var unterschrift = com.Unterschrift{
 		Name:  "Max Mustermann",
 		Datum: time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -20,18 +22,18 @@ func (s *Suite) Test_Unterschrift_Deserialization() {
 
 	serializedUnterschrift, err := json.Marshal(unterschrift)
 	jsonString := string(serializedUnterschrift)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "Max Mustermann"), is.True())           // stringified enum
-	then.AssertThat(s.T(), strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedUnterschrift, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "Max Mustermann"), is.True())           // stringified enum
+	then.AssertThat(t, strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedUnterschrift, is.Not(is.NilArray[byte]()))
 	var deserializedUnterschrift com.Unterschrift
 	err = json.Unmarshal(serializedUnterschrift, &deserializedUnterschrift)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedUnterschrift, is.EqualTo(unterschrift))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedUnterschrift, is.EqualTo(unterschrift))
 }
 
 // Test_Successful_Unterschrift_Validation asserts that the validation does not fail for a valid Unterschrift
-func (s *Suite) Test_Successful_Unterschrift_Validation() {
+func Test_Successful_Unterschrift_Validation(t *testing.T) {
 	validate := validator.New()
 	validUnterschrift := []interface{}{
 		com.Unterschrift{
@@ -43,11 +45,11 @@ func (s *Suite) Test_Successful_Unterschrift_Validation() {
 			Name: "Max Mustermann",
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validUnterschrift)
+	VerifySuccessfulValidations(t, validate, validUnterschrift)
 }
 
 // TestUnterschriftFailedValidation verifies that invalid Unterschrift values are considered invalid
-func (s *Suite) Test_Unterschrift_FailedValidation() {
+func Test_Unterschrift_FailedValidation(t *testing.T) {
 	validate := validator.New()
 	invalidVerbrauchMap := map[string][]interface{}{
 		"required": {
@@ -58,7 +60,7 @@ func (s *Suite) Test_Unterschrift_FailedValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVerbrauchMap)
+	VerifyFailedValidations(t, validate, invalidVerbrauchMap)
 }
 
 func (s *Suite) Test_Serialized_Empty_Unterschrift_Contains_No_Enum_Defaults() {
