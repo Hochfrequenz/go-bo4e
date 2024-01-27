@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -10,11 +13,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungsart"
 	"github.com/hochfrequenz/go-bo4e/enum/nnrechnungstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
-	"reflect"
 )
 
 // Test_Netznutzungsrechnung_Deserialization deserializes an Netznutzungsrechnung json
-func (s *Suite) Test_Netznutzungsrechnung_Deserialization() {
+func Test_Netznutzungsrechnung_Deserialization(t *testing.T) {
 	var nnrechnung = bo.Netznutzungsrechnung{
 		Rechnung:             serializableRechnung,
 		Sparte:               sparte.GAS,
@@ -27,16 +29,16 @@ func (s *Suite) Test_Netznutzungsrechnung_Deserialization() {
 		LokationsId:          "DE0123456789012345678901234567890",
 	}
 	serializedNnrechnung, err := json.Marshal(nnrechnung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedNnrechnung, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedNnrechnung, is.Not(is.NilArray[byte]()))
 	var deserializedRechnung bo.Netznutzungsrechnung
 	err = json.Unmarshal(serializedNnrechnung, &deserializedRechnung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedRechnung, is.EqualTo(nnrechnung))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedRechnung, is.EqualTo(nnrechnung))
 }
 
 // Test_Failed_Netznutzungsrechnung_Validation verifies that the validators of a Netznutzungsrechnung work
-func (s *Suite) Test_Failed_Netznutzungsrechnung_Validation() {
+func Test_Failed_Netznutzungsrechnung_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidNnrs := map[string][]interface{}{
 		"required": {
@@ -60,11 +62,11 @@ func (s *Suite) Test_Failed_Netznutzungsrechnung_Validation() {
 			bo.Netznutzungsrechnung{Empfaengercodenummer: "asd"},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidNnrs)
+	VerifyFailedValidations(t, validate, invalidNnrs)
 }
 
 // Test_Successful_Netznutzungsrechnung_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
+func Test_Successful_Netznutzungsrechnung_Validation(t *testing.T) {
 	validate := validator.New()
 	validNnrs := []bo.BusinessObject{
 		bo.Netznutzungsrechnung{
@@ -79,15 +81,15 @@ func (s *Suite) Test_Successful_Netznutzungsrechnung_Validation() {
 			LokationsId:          "DE0123456789012345678901234567890",
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validNnrs)
+	VerifySuccessfulValidations(t, validate, validNnrs)
 }
 
-func (s *Suite) Test_Empty_NNR_Is_Creatable_Using_BoTyp() {
+func Test_Empty_NNR_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.NETZNUTZUNGSRECHNUNG)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Netznutzungsrechnung{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.NETZNUTZUNGSRECHNUNG))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Netznutzungsrechnung{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.NETZNUTZUNGSRECHNUNG))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_Netznutzungsrechnung_Contains_No_Enum_Defaults() {
