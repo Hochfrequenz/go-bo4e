@@ -22,6 +22,7 @@ import (
 
 // Test_Vertragspartner_Deserialization deserializes an Vertrag json
 func (s *Suite) Test_Vertrag_Deserialization() {
+	randomStartDate := time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)
 	var contract = bo.Vertrag{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.VERTRAG,
@@ -80,7 +81,7 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		Vertragskonditionen: nil,
 		Vertragsteile: []com.Vertragsteil{
 			{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: &randomStartDate,
 				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 				Lokation:           "DE0123456789012345678901234567890",
 			},
@@ -115,7 +116,7 @@ func (s *Suite) Test_Failed_VertragValidation() {
 
 // Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
 func (s *Suite) Test_Successful_Vertrag_Validation() {
-
+	randomStartDate := time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)
 	validate := validator.New()
 	validVertrag := []bo.BusinessObject{
 		bo.Vertrag{
@@ -174,7 +175,7 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			Vertragskonditionen: nil,
 			Vertragsteile: []com.Vertragsteil{
 				{
-					Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
+					Vertragsteilbeginn: &randomStartDate,
 					Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
 					Lokation:           "DE0123456789012345678901234567890",
 				},
