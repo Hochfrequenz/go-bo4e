@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -16,7 +19,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourceverbrauchsart"
 	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
 	"github.com/hochfrequenz/go-bo4e/internal"
-	"reflect"
 )
 
 var tressource = bo.TechnischeRessource{
@@ -50,43 +52,43 @@ var tressource = bo.TechnischeRessource{
 }
 
 // Test_TechnischeRessource_Deserialization deserializes an TechnischeRessource json
-func (s *Suite) Test_TechnischeRessource_Deserialization() {
+func Test_TechnischeRessource_Deserialization(t *testing.T) {
 	serializedTressource, err := json.Marshal(tressource)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedTressource, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedTressource, is.Not(is.NilArray[byte]()))
 	var deserializedTressource bo.TechnischeRessource
 	err = json.Unmarshal(serializedTressource, &deserializedTressource)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedTressource, is.EqualTo(tressource))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedTressource, is.EqualTo(tressource))
 
 }
 
 // Test_Failed_TechnischeRessource_Validation verifies that the validators of a TechnischeRessource work
-func (s *Suite) Test_Failed_TechnischeRessource_Validation() {
+func Test_Failed_TechnischeRessource_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidTressource := map[string][]interface{}{
 		"required": {
 			bo.TechnischeRessource{},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidTressource)
+	VerifyFailedValidations(t, validate, invalidTressource)
 }
 
 // Test_Successful_TechnischeRessource_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_TechnischeRessource_Validation() {
+func Test_Successful_TechnischeRessource_Validation(t *testing.T) {
 	validate := validator.New()
 	validTechnischeRessource := []bo.BusinessObject{
 		tressource,
 	}
-	VerfiySuccessfulValidations(s, validate, validTechnischeRessource)
+	VerifySuccessfulValidations(t, validate, validTechnischeRessource)
 }
 
-func (s *Suite) Test_Empty_TechnischeRessource_Is_Creatable_Using_BoTyp() {
+func Test_Empty_TechnischeRessource_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.TECHNISCHERESSOURCE)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.TechnischeRessource{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.TECHNISCHERESSOURCE))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.TechnischeRessource{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.TECHNISCHERESSOURCE))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
 func (s *Suite) Test_Serialized_Empty_TechnischeRessource_Contains_No_Enum_Defaults() {
