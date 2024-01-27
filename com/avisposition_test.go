@@ -3,6 +3,7 @@ package com_test
 import (
 	"encoding/json"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/corbym/gocrest/is"
@@ -15,7 +16,7 @@ import (
 )
 
 // Test_Deserialization deserializes an avisposition json
-func (s *Suite) Test_AvisPosition_Deserialization() {
+func Test_AvisPosition_Deserialization(t *testing.T) {
 	avisPosition := com.AvisPosition{
 		RechnungsNummer: "AAAA",
 		RechnungsDatum:  time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
@@ -30,19 +31,19 @@ func (s *Suite) Test_AvisPosition_Deserialization() {
 		},
 	}
 	serializedAvisPosition, err := json.Marshal(avisPosition)
-	then.AssertThat(s.T(), serializedAvisPosition, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, serializedAvisPosition, is.Not(is.NilArray[byte]()))
 	jsonString := string(serializedAvisPosition)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "AAAA"), is.True())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ZZZZ"), is.False())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, strings.Contains(jsonString, "AAAA"), is.True())
+	then.AssertThat(t, strings.Contains(jsonString, "ZZZZ"), is.False())
 	deserializedAvisPosition := com.AvisPosition{}
 	err = json.Unmarshal(serializedAvisPosition, &deserializedAvisPosition)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedAvisPosition, is.EqualTo(avisPosition))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedAvisPosition, is.EqualTo(avisPosition))
 }
 
 // Test_Successful_Validation asserts that the validation does not fail for a valid AvisPosition
-func (s *Suite) Test_Successful_AvisPosition_Validation() {
+func Test_Successful_AvisPosition_Validation(t *testing.T) {
 	bemerkung := "CCCC"
 	validate := validator.New()
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
@@ -68,7 +69,7 @@ func (s *Suite) Test_Successful_AvisPosition_Validation() {
 			},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validAvisPosition)
+	VerifySuccessfulValidations(t, validate, validAvisPosition)
 }
 
 func (s *Suite) Test_Serialized_Empty_AvisPosition_Contains_No_Enum_Defaults() {
