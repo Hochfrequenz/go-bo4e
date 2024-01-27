@@ -35,7 +35,7 @@ func TestInit(t *testing.T) {
 	suite.Run(t, new(Suite))
 }
 
-func (s *Suite) Test_BOneyComb_DeSerialization() {
+func Test_BOneyComb_DeSerialization(t *testing.T) {
 	boneyComb := market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
 			&bo.Geschaeftspartner{
@@ -83,96 +83,96 @@ func (s *Suite) Test_BOneyComb_DeSerialization() {
 	}
 	validate := validator.New()
 	validationErr := validate.Struct(boneyComb)
-	then.AssertThat(s.T(), validationErr, is.Nil())
+	then.AssertThat(t, validationErr, is.Nil())
 	serializedBoneyComb, err := json.Marshal(boneyComb)
 	//jsonString := string(serializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedBoneyComb, is.Not(is.NilArray[byte]()))
 	var deserializedBoneyComb market_communication.BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[0], is.EqualTo(boneyComb.Stammdaten[0]))
-	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[1], is.EqualTo(boneyComb.Stammdaten[1]))
-	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten[2], is.EqualTo(boneyComb.Stammdaten[2]))
-	then.AssertThat(s.T(), deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyComb.Transaktionsdaten))
-	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyComb))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedBoneyComb.Stammdaten[0], is.EqualTo(boneyComb.Stammdaten[0]))
+	then.AssertThat(t, deserializedBoneyComb.Stammdaten[1], is.EqualTo(boneyComb.Stammdaten[1]))
+	then.AssertThat(t, deserializedBoneyComb.Stammdaten[2], is.EqualTo(boneyComb.Stammdaten[2]))
+	then.AssertThat(t, deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyComb.Transaktionsdaten))
+	then.AssertThat(t, deserializedBoneyComb, is.EqualTo(boneyComb))
 }
 
-func (s *Suite) Test_Empty_BOneyComb_Is_Invalid() {
+func Test_Empty_BOneyComb_Is_Invalid(t *testing.T) {
 	validate := validator.New()
 	var emptyBoneyComb = market_communication.BOneyComb{}
 	err := validate.Struct(emptyBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	then.AssertThat(t, err, is.Not(is.Nil()))
 }
 
-func (s *Suite) Test_BOneyComb_Without_Pruefi_Is_Invalid() {
+func Test_BOneyComb_Without_Pruefi_Is_Invalid(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
 	var emptyBoneyComb = market_communication.BOneyComb{}
 	err := validate.Struct(emptyBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	then.AssertThat(t, err, is.Not(is.Nil()))
 }
 
-func (s *Suite) Test_BOneyComb_With_Wrong_Pruefi_Is_Invalid() {
+func Test_BOneyComb_With_Wrong_Pruefi_Is_Invalid(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
 	var boneyComb = market_communication.BOneyComb{}
 	boneyComb.SetPruefidentifikator("asdfg")
 	err := validate.Struct(boneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	then.AssertThat(t, err, is.Not(is.Nil()))
 }
 
-func (s *Suite) Test_BOneyComb_With_Correct_Pruefi_Is_Valid() {
+func Test_BOneyComb_With_Correct_Pruefi_Is_Valid(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(market_communication.PruefidentifikatorInTransaktionsdatenValidation, market_communication.BOneyComb{})
 	var boneyComb = market_communication.BOneyComb{}
 	boneyComb.SetPruefidentifikator("11042")
 	boneyComb.Stammdaten = []bo.BusinessObject{} // empty slice because nil is invalid
 	err := validate.Struct(boneyComb)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 }
 
-func (s *Suite) Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable() {
+func Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable(t *testing.T) {
 	var boneyCombWithEmptyStammdaten = market_communication.BOneyComb{
 		Stammdaten:        []bo.BusinessObject{},
 		Transaktionsdaten: map[string]string{"foo": "bar"},
 	}
 	serializedBoneyComb, err := json.Marshal(boneyCombWithEmptyStammdaten)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBoneyComb, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedBoneyComb, is.Not(is.NilArray[byte]()))
 	var deserializedBoneyComb market_communication.BOneyComb
 	err = json.Unmarshal(serializedBoneyComb, &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBoneyComb.Stammdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Stammdaten))
-	then.AssertThat(s.T(), deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Transaktionsdaten))
-	then.AssertThat(s.T(), deserializedBoneyComb, is.EqualTo(boneyCombWithEmptyStammdaten))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedBoneyComb.Stammdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Stammdaten))
+	then.AssertThat(t, deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyCombWithEmptyStammdaten.Transaktionsdaten))
+	then.AssertThat(t, deserializedBoneyComb, is.EqualTo(boneyCombWithEmptyStammdaten))
 }
 
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
-func (s *Suite) Test_BOneyComb_Deserialization() {
+func Test_BOneyComb_Deserialization(t *testing.T) {
 	const dirName = "test_boney_combs"
 	jsonFiles, err := os.ReadDir(dirName)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), len(jsonFiles), is.Not(is.EqualTo(0)))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, len(jsonFiles), is.Not(is.EqualTo(0)))
 
 	for _, file := range jsonFiles {
 		fileContent, readErr := os.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
-		then.AssertThat(s.T(), readErr, is.Nil())
-		then.AssertThat(s.T(), fileContent, is.Not(is.NilArray[byte]()))
+		then.AssertThat(t, readErr, is.Nil())
+		then.AssertThat(t, fileContent, is.Not(is.NilArray[byte]()))
 		var boneyComb market_communication.BOneyComb
 		err = json.Unmarshal(fileContent, &boneyComb)
-		then.AssertThat(s.T(), err, is.Nil())
-		//then.AssertThat(s.T(), boneyComb, is.Not(is.Nil())) // boneyComb is not nullable
+		then.AssertThat(t, err, is.Nil())
+		//then.AssertThat(t, boneyComb, is.Not(is.Nil())) // boneyComb is not nullable
 		if file.Name() == "20211011.json" {
 			firstMaLo, _ := boneyComb.GetSingle(botyp.MARKTLOKATION)
-			then.AssertThat(s.T(), firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo[any]("hello world"))
-			then.AssertThat(s.T(), boneyComb.Links["foo"][1], is.EqualTo("baz"))
+			then.AssertThat(t, firstMaLo.(*bo.Marktlokation).ExtensionData["some untyped prop"], is.EqualTo[any]("hello world"))
+			then.AssertThat(t, boneyComb.Links["foo"][1], is.EqualTo("baz"))
 		}
 		if file.Name() == "20220926.json" {
 			firstRechnung, _ := boneyComb.GetSingle(botyp.RECHNUNG)
 			expectedBuchungsdatum := time.Date(2022, 6, 01, 13, 37, 0, 0, time.UTC)
 			actualBuchungsdatum := firstRechnung.(*bo.Rechnung).Buchungsdatum
-			then.AssertThat(s.T(), actualBuchungsdatum.Unix(), is.EqualTo(expectedBuchungsdatum.Unix()))
+			then.AssertThat(t, actualBuchungsdatum.Unix(), is.EqualTo(expectedBuchungsdatum.Unix()))
 		}
 	}
 }
