@@ -2,6 +2,9 @@ package bo_test
 
 import (
 	"encoding/json"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/hochfrequenz/go-bo4e/bo"
@@ -18,7 +21,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 var SliceWithThreeValidBos = bo.BusinessObjectSlice{
@@ -62,27 +64,27 @@ var SliceWithThreeValidBos = bo.BusinessObjectSlice{
 	},
 }
 
-func (s *Suite) Test_Successful_Slice_Deserialization() {
+func Test_Successful_Slice_Deserialization(t *testing.T) {
 	boList := SliceWithThreeValidBos
 	jsonBytes, err := json.Marshal(boList)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 	var unmarshalledSlice bo.BusinessObjectSlice
 	err = json.Unmarshal(jsonBytes, &unmarshalledSlice)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), len(unmarshalledSlice), is.EqualTo(3))
-	then.AssertThat(s.T(), unmarshalledSlice, is.EqualTo(boList))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, len(unmarshalledSlice), is.EqualTo(3))
+	then.AssertThat(t, unmarshalledSlice, is.EqualTo(boList))
 }
 
-func (s *Suite) Test_Slice_Deserialization_Fails_For_Invalid_BoTyps() {
+func Test_Slice_Deserialization_Fails_For_Invalid_BoTyps(t *testing.T) {
 	jsonWithInvalidBoTyp := "[{\"boTyp\":\"foo\"}]" // foo is not a valid boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithInvalidBoTyp), &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	then.AssertThat(t, err, is.Not(is.Nil()))
 }
 
-func (s *Suite) Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps() {
+func Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps(t *testing.T) {
 	jsonWithUnimplementedBoTyp := "[{\"boTyp\":\"PREISBLATTUMLAGEN\"}]" // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
-	then.AssertThat(s.T(), err, is.Not(is.Nil()))
+	then.AssertThat(t, err, is.Not(is.Nil()))
 }

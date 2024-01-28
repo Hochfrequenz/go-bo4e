@@ -2,17 +2,19 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/arithmetischeoperation"
-	"strings"
-	"time"
 )
 
 // Test_Messlokationszuordnung_Deserialization deserializes an MesslokationszuordnungMesslokationszuordnung json
-func (s *Suite) Test_Messlokationszuordnung_Deserialization() {
+func Test_Messlokationszuordnung_Deserialization(t *testing.T) {
 	var messlokationszuordnung = com.Messlokationszuordnung{
 		MesslokationsId: "DE0123456789012345678901234567890",
 		Arithmetik:      arithmetischeoperation.ADDITION,
@@ -20,20 +22,20 @@ func (s *Suite) Test_Messlokationszuordnung_Deserialization() {
 		GueltigBis:      time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
 	}
 	serializedMesslokationszuordnung, err := json.Marshal(messlokationszuordnung)
-	then.AssertThat(s.T(), serializedMesslokationszuordnung, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, serializedMesslokationszuordnung, is.Not(is.NilArray[byte]()))
 
 	jsonString := string(serializedMesslokationszuordnung)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ADDITION"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, strings.Contains(jsonString, "ADDITION"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
 
 	var deserializedMesslokationszuordnung com.Messlokationszuordnung
 	err = json.Unmarshal(serializedMesslokationszuordnung, &deserializedMesslokationszuordnung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedMesslokationszuordnung, is.EqualTo(messlokationszuordnung))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedMesslokationszuordnung, is.EqualTo(messlokationszuordnung))
 }
 
 // Test_Failed_Validation asserts that the validation fails for invalid Messlokationszuordnung
-func (s *Suite) Test_Failed_MesslokationszuordnungValidation() {
+func Test_Failed_MesslokationszuordnungValidation(t *testing.T) {
 	validate := validator.New()
 	invalidMesslokationszuordnung := map[string][]interface{}{
 		"required": {
@@ -55,11 +57,11 @@ func (s *Suite) Test_Failed_MesslokationszuordnungValidation() {
 				GueltigBis:  time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidMesslokationszuordnung)
+	VerifyFailedValidations(t, validate, invalidMesslokationszuordnung)
 }
 
 // Test_Successful_Validation asserts that the validation does not fail for a valid Messlokationszuordnung
-func (s *Suite) Test_Successful_Messlokationszuordnung_Validation() {
+func Test_Successful_Messlokationszuordnung_Validation(t *testing.T) {
 	validate := validator.New()
 	validMesslokationszuordnung := []interface{}{
 		com.Messlokationszuordnung{
@@ -73,9 +75,9 @@ func (s *Suite) Test_Successful_Messlokationszuordnung_Validation() {
 			GueltigBis:      time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validMesslokationszuordnung)
+	VerifySuccessfulValidations(t, validate, validMesslokationszuordnung)
 }
 
-func (s *Suite) Test_Serialized_Empty_Messlokationszuordnung_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Messlokationszuordnung{})
+func Test_Serialized_Empty_Messlokationszuordnung_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Messlokationszuordnung{})
 }

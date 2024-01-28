@@ -3,6 +3,7 @@ package com_test
 import (
 	"encoding/json"
 	"strings"
+	"testing"
 
 	"github.com/go-playground/validator/v10"
 
@@ -13,7 +14,7 @@ import (
 )
 
 // Test_Deserialization deserializes an abweichung json
-func (s *Suite) Test_Abweichung_Deserialization() {
+func Test_Abweichung_Deserialization(t *testing.T) {
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	bemerkung := "BBBB"
 	code := "A99"
@@ -25,18 +26,18 @@ func (s *Suite) Test_Abweichung_Deserialization() {
 		AbweichungsgrundCodeliste: &codeliste,
 	}
 	serializedAbweichung, err := json.Marshal(abweichung)
-	then.AssertThat(s.T(), serializedAbweichung, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, serializedAbweichung, is.Not(is.NilArray[byte]()))
 	jsonString := string(serializedAbweichung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), strings.Contains(jsonString, "ZZZZ"), is.False())
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, strings.Contains(jsonString, "ZZZZ"), is.False())
 	deserializedAbweichung := com.Abweichung{}
 	err = json.Unmarshal(serializedAbweichung, &deserializedAbweichung)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedAbweichung, is.EqualTo(abweichung))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedAbweichung, is.EqualTo(abweichung))
 }
 
 // Test_Successful_Validation asserts that the validation does not fail for a valid Abweichung
-func (s *Suite) Test_Successful_Abweichung_Validation() {
+func Test_Successful_Abweichung_Validation(t *testing.T) {
 	validate := validator.New()
 	bilanzierteMengeFehlt := abweichungsgrund.BILANZIERTE_MENGE_FEHLT
 	validAbweichung := []interface{}{
@@ -44,10 +45,10 @@ func (s *Suite) Test_Successful_Abweichung_Validation() {
 			AbweichungsGrund: &bilanzierteMengeFehlt,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validAbweichung)
+	VerifySuccessfulValidations(t, validate, validAbweichung)
 }
 
-func (s *Suite) Test_UnSuccessful_Abweichung_Validation() {
+func Test_UnSuccessful_Abweichung_Validation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(com.AbweichungStructLevelValidation, com.Abweichung{})
 	code := "A99"
@@ -57,9 +58,9 @@ func (s *Suite) Test_UnSuccessful_Abweichung_Validation() {
 			AbweichungsgrundCode: &code,
 		}},
 	}
-	VerfiyFailedValidations(s, validate, invalidAbweichung)
+	VerifyFailedValidations(t, validate, invalidAbweichung)
 }
 
-func (s *Suite) Test_Serialized_Empty_Abweichung_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Abweichung{})
+func Test_Serialized_Empty_Abweichung_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Abweichung{})
 }

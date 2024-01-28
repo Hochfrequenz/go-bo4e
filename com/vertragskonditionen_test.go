@@ -2,6 +2,10 @@ package com_test
 
 import (
 	"encoding/json"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -9,8 +13,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 var validVertragskonditionen = com.Vertragskonditionen{
@@ -39,20 +41,20 @@ var validVertragskonditionen = com.Vertragskonditionen{
 }
 
 // TestVertragskonditionenDeserialization deserializes a Vertragskonditionen json
-func (s *Suite) Test_Vertragskonditionen_Deserialization() {
+func Test_Vertragskonditionen_Deserialization(t *testing.T) {
 	serializedVertragskonditionen, err := json.Marshal(validVertragskonditionen)
 	jsonString := string(serializedVertragskonditionen)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedVertragskonditionen, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "MINUTE"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedVertragskonditionen, is.Not(is.NilArray[byte]()))
 	var deserializedVertragskonditionen com.Vertragskonditionen
 	err = json.Unmarshal(serializedVertragskonditionen, &deserializedVertragskonditionen)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVertragskonditionen, is.EqualTo(validVertragskonditionen))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedVertragskonditionen, is.EqualTo(validVertragskonditionen))
 }
 
 // Test_Vertragskonditionen_Failed_Validation verifies that the validation fails for invalid Vertragskonditionen s
-func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
+func Test_Vertragskonditionen_Failed_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidZeitraums := map[string][]interface{}{
 		"required_with": {
@@ -64,18 +66,18 @@ func (s *Suite) Test_Vertragskonditionen_Failed_Validation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidZeitraums)
+	VerifyFailedValidations(t, validate, invalidZeitraums)
 }
 
 // Test_Successful_Vertragskonditionen_Validation asserts that the validation does not fail for a valid Vertragskonditionen
-func (s *Suite) Test_Successful_Vertragkonditionen_Validation() {
+func Test_Successful_Vertragkonditionen_Validation(t *testing.T) {
 	validate := validator.New()
 	validVertragskonditionens := []interface{}{
 		validVertragskonditionen,
 	}
-	VerfiySuccessfulValidations(s, validate, validVertragskonditionens)
+	VerifySuccessfulValidations(t, validate, validVertragskonditionens)
 }
 
-func (s *Suite) Test_Serialized_Empty_Vertragskonditionen_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Vertragskonditionen{})
+func Test_Serialized_Empty_Vertragskonditionen_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Vertragskonditionen{})
 }

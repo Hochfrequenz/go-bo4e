@@ -1,6 +1,10 @@
 package bo_test
 
 import (
+	"reflect"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -14,12 +18,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"time"
 )
 
 // TestFailedLastgangValidation verifies that the validators of a Lastgang work
-func (s *Suite) Test_Failed_LastgangValidation() {
+func Test_Failed_LastgangValidation(t *testing.T) {
 	var zeitreihenwert = com.Zeitreihenwert{
 		Zeitreihenwertkompakt: com.Zeitreihenwertkompakt{
 			Wert:         decimal.NewFromFloat(17.43),
@@ -80,11 +82,11 @@ func (s *Suite) Test_Failed_LastgangValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidLastgangMap)
+	VerifyFailedValidations(t, validate, invalidLastgangMap)
 }
 
 // Test_Successful_Lastgang_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Lastgang_Validation() {
+func Test_Successful_Lastgang_Validation(t *testing.T) {
 	validate := validator.New()
 	var verbrauch = com.Verbrauch{
 		Startdatum:               time.Now(),
@@ -106,17 +108,17 @@ func (s *Suite) Test_Successful_Lastgang_Validation() {
 			Verbrauch:    []com.Verbrauch{verbrauch},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validLastgang)
+	VerifySuccessfulValidations(t, validate, validLastgang)
 }
 
-func (s *Suite) Test_Empty_Lastgang_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Lastgang_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.LASTGANG)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Lastgang{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.LASTGANG))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Lastgang{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.LASTGANG))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Lastgang_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.LASTGANG))
+func Test_Serialized_Empty_Lastgang_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.LASTGANG))
 }

@@ -1,6 +1,8 @@
 package com_test
 
 import (
+	"testing"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
@@ -8,7 +10,7 @@ import (
 )
 
 // TestFailedBetragValidation asserts that the validation fails, if not both Betrag.Wert and Betrag.Waehrung are provided
-func (s *Suite) Test_Failed_BetragValidation() {
+func Test_Failed_BetragValidation(t *testing.T) {
 	validate := validator.New()
 	invalidBetragMap := map[string][]interface{}{
 		"required": {
@@ -22,11 +24,11 @@ func (s *Suite) Test_Failed_BetragValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidBetragMap)
+	VerifyFailedValidations(t, validate, invalidBetragMap)
 }
 
 // TestSuccessfulBetragValidation asserts that the validation does not fail for a valid Betrag
-func (s *Suite) Test_Successful_BetragValidation() {
+func Test_Successful_BetragValidation(t *testing.T) {
 	validate := validator.New()
 	validBetraege := []interface{}{
 		com.Betrag{
@@ -38,9 +40,9 @@ func (s *Suite) Test_Successful_BetragValidation() {
 			Waehrung: waehrungscode.ANG,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validBetraege)
+	VerifySuccessfulValidations(t, validate, validBetraege)
 }
 
-func (s *Suite) Test_Serialized_Empty_Betrag_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Betrag{})
+func Test_Serialized_Empty_Betrag_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Betrag{})
 }

@@ -2,6 +2,8 @@ package com_test
 
 import (
 	"encoding/json"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -13,7 +15,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
+func Test_Netznutzungsabrechnungsdaten_Deserialization(t *testing.T) {
 	artikelId := "foo"
 	artikelIdTyp := artikelidtyp.GRUPPENARTIKELID
 	anzahl := 17
@@ -37,25 +39,25 @@ func (s *Suite) Test_Netznutzungsabrechnungsdaten_Deserialization() {
 	}
 
 	serializedNnad, err := json.Marshal(netznutzungsabrechnungsdaten)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedNnad, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedNnad, is.Not(is.NilArray[byte]()))
 
 	var deserializedNnad com.Netznutzungsabrechnungsdaten
 	err = json.Unmarshal(serializedNnad, &deserializedNnad)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedNnad, is.EqualTo(netznutzungsabrechnungsdaten))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedNnad, is.EqualTo(netznutzungsabrechnungsdaten))
 }
 
 // Test_Successful_Validation asserts that the validation does not fail for a valid Netznutzungsabrechnungsdaten
-func (s *Suite) Test_Successful_Netznutzungsabrechnungsdaten_Validation() {
+func Test_Successful_Netznutzungsabrechnungsdaten_Validation(t *testing.T) {
 	validate := validator.New()
 	validNetznutzungsabrechnungsdaten := []interface{}{
 		com.Netznutzungsabrechnungsdaten{},
 		// add more when there's something like a serious validation. as of now, all fields are optional
 	}
-	VerfiySuccessfulValidations(s, validate, validNetznutzungsabrechnungsdaten)
+	VerifySuccessfulValidations(t, validate, validNetznutzungsabrechnungsdaten)
 }
 
-func (s *Suite) Test_Serialized_Empty_Netznutzungsabrechnungsdaten_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.Netznutzungsabrechnungsdaten{})
+func Test_Serialized_Empty_Netznutzungsabrechnungsdaten_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.Netznutzungsabrechnungsdaten{})
 }

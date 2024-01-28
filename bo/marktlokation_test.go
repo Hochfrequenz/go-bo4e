@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"testing"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -27,7 +28,7 @@ import (
 )
 
 // Test_Marktlokation_Deserialization tests serialization and deserialization of Marktlokation
-func (s *Suite) Test_Marktlokation_Deserialization() {
+func Test_Marktlokation_Deserialization(t *testing.T) {
 	f := false
 	gesperrt := sperrstatus.GESPERRT
 	var malo = bo.Marktlokation{
@@ -91,29 +92,29 @@ func (s *Suite) Test_Marktlokation_Deserialization() {
 		Sperrstatus: &gesperrt,
 	}
 	serializedMalo, err := json.Marshal(malo)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedMalo, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedMalo, is.Not(is.NilArray[byte]()))
 	stringSerializedMalo := string(serializedMalo)
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "STROM"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "AUSSP"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "RLM"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "KL"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "MSP"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "GRUNDVERSORGUNGSGEBIET"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "DE"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "ADDITION"), is.True())
-	then.AssertThat(s.T(), strings.Contains(stringSerializedMalo, "\"unterbrechbar\":false"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "STROM"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "AUSSP"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "RLM"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "KL"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "MSP"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "GRUNDVERSORGUNGSGEBIET"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "DE"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "ADDITION"), is.True())
+	then.AssertThat(t, strings.Contains(stringSerializedMalo, "\"unterbrechbar\":false"), is.True())
 	var deserializedMalo bo.Marktlokation
 	err = json.Unmarshal(serializedMalo, &deserializedMalo)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 
 	expectedJson, _ := json.Marshal(malo)
 	actualJson, _ := json.Marshal(deserializedMalo)
-	then.AssertThat(s.T(), expectedJson, is.EqualTo(actualJson))
+	then.AssertThat(t, expectedJson, is.EqualTo(actualJson))
 }
 
 //nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
-func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
+func Test_Marktlokation_DeSerialization_With_Unkonwn_Fields(t *testing.T) {
 	// this is a json that contains fields/keys that are not part of the official bo4e standard.
 	// our expectation is that they are deserialized into the "ExtensionData" field.
 	// They should also be serialized from there / not be lost during a marshalling/unmarshalling round trip
@@ -169,26 +170,26 @@ func (s *Suite) Test_Marktlokation_DeSerialization_With_Unkonwn_Fields() {
 
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(maloJsonWithUnknownFields), &malo)
-	then.AssertThat(s.T(), err, is.Nil())
-	//then.AssertThat(s.T(), malo.ExtensionData, is.Not(is.Nil()))             // ExtensionData is not nullable
-	then.AssertThat(s.T(), malo.Zaehlwerke, is.Not(is.NilArray[com.Zaehlwerk]()))        // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
-	then.AssertThat(s.T(), malo.ExtensionData["marktlokationsId"], is.EqualTo[any](nil)) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
-	then.AssertThat(s.T(), malo.MarktlokationsId, is.EqualTo("10024073272"))             // but where it should be
+	then.AssertThat(t, err, is.Nil())
+	//then.AssertThat(t, malo.ExtensionData, is.Not(is.Nil()))             // ExtensionData is not nullable
+	then.AssertThat(t, malo.Zaehlwerke, is.Not(is.NilArray[com.Zaehlwerk]()))        // marktloktion->zaehlwerke is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(t, malo.ExtensionData["marktlokationsId"], is.EqualTo[any](nil)) // marktlokation->marklokationsId is part of the bo4e standard ==> not present in extension data
+	then.AssertThat(t, malo.MarktlokationsId, is.EqualTo("10024073272"))             // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
 
 	// marshaling tests
 	serializedMaloBytes, errSerializing := json.Marshal(malo)
-	then.AssertThat(s.T(), errSerializing, is.Nil())
+	then.AssertThat(t, errSerializing, is.Nil())
 	serializedMaLo := string(serializedMaloBytes)
-	then.AssertThat(s.T(), strings.Contains(serializedMaLo, "zaehlwerke"), is.True())       // unmapped fields should be part of the serialized malo
-	then.AssertThat(s.T(), strings.Contains(serializedMaLo, "marktlokationsId"), is.True()) // mapped fields should be part of the serialized malo
+	then.AssertThat(t, strings.Contains(serializedMaLo, "zaehlwerke"), is.True())       // unmapped fields should be part of the serialized malo
+	then.AssertThat(t, strings.Contains(serializedMaLo, "marktlokationsId"), is.True()) // mapped fields should be part of the serialized malo
 }
 
 // TestFailedMarktlokationValidation verifies that the validators of Marktlokation work
-func (s *Suite) Test_Failed_MarktlokationValidation() {
+func Test_Failed_MarktlokationValidation(t *testing.T) {
 	validate := validator.New()
 	registerError := validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
-	then.AssertThat(s.T(), registerError, is.Nil())
+	then.AssertThat(t, registerError, is.Nil())
 	validate.RegisterStructValidation(bo.XorStructLevelValidation, bo.Marktlokation{})
 
 	invalidMarktlokationMap := map[string][]interface{}{
@@ -248,14 +249,14 @@ func (s *Suite) Test_Failed_MarktlokationValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidMarktlokationMap)
+	VerifyFailedValidations(t, validate, invalidMarktlokationMap)
 }
 
 // Test_Successful_Marktlokation_Validation verifies that a valid Marktlokation is validated without errors
-func (s *Suite) Test_Successful_Marktlokation_Validation() {
+func Test_Successful_Marktlokation_Validation(t *testing.T) {
 	validate := validator.New()
 	registerError := validate.RegisterValidation("maloid", bo.MaloIdFieldLevelValidation)
-	then.AssertThat(s.T(), registerError, is.Nil())
+	then.AssertThat(t, registerError, is.Nil())
 	validate.RegisterStructValidation(bo.XorStructLevelValidation, bo.Marktlokation{})
 	validMalos := []bo.BusinessObject{
 		// Minimal attributes
@@ -297,22 +298,22 @@ func (s *Suite) Test_Successful_Marktlokation_Validation() {
 			},
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validMalos)
+	VerifySuccessfulValidations(t, validate, validMalos)
 }
 
-func (s *Suite) Test_Get_MaloId_Checksum() {
+func Test_Get_MaloId_Checksum(t *testing.T) {
 	actual := bo.GetMaLoIdCheckSum("5123869678")
-	then.AssertThat(s.T(), actual, is.EqualTo(1))
+	then.AssertThat(t, actual, is.EqualTo(1))
 }
 
-func (s *Suite) Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.MARKTLOKATION)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Marktlokation{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.MARKTLOKATION))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Marktlokation{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.MARKTLOKATION))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Marktlokation_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.MARKTLOKATION))
+func Test_Serialized_Empty_Marktlokation_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.MARKTLOKATION))
 }

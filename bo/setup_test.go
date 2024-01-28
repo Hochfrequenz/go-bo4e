@@ -1,52 +1,39 @@
 package bo_test
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/suite"
-	"testing"
 )
 
-type Suite struct {
-	suite.Suite
-}
-
-// SetupSuite sets up the tests
-func (s *Suite) SetupSuite() {
-}
-
-func (s *Suite) AfterTest(_, _ string) {
-}
-
-func TestInit(t *testing.T) {
-	suite.Run(t, new(Suite))
-}
-
-// VerfiySuccessfulValidations asserts that the vali validator does not fail for all objects provided
-func VerfiySuccessfulValidations(s *Suite, vali *validator.Validate, validObjects []bo.BusinessObject) {
+// VerifySuccessfulValidations asserts that the vali validator does not fail for all objects provided
+func VerifySuccessfulValidations(t *testing.T, vali *validator.Validate, validObjects []bo.BusinessObject) {
 	// ToDo: use generics as soon as golangs allows to
 	for _, validObject := range validObjects {
 		err := vali.Struct(validObject)
-		then.AssertThat(s.T(), validObject.GetBoTyp(), is.Not(is.EqualTo[botyp.BOTyp](0))) // 0 would be iota/uninitialized botyp.BOTyp
-		then.AssertThat(s.T(), err, is.Nil())
+		then.AssertThat(t, validObject.GetBoTyp(), is.Not(is.EqualTo[botyp.BOTyp](0))) // 0 would be iota/uninitialized botyp.BOTyp
+		then.AssertThat(t, err, is.Nil())
 	}
 }
 
-// VerfiyFailedValidations asserts that the vali validator fails with the expected tag for every object
-func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjectsMap map[string][]interface{}) {
+// VerifyFailedValidations asserts that the vali validator fails with the expected tag for every object
+func VerifyFailedValidations(t *testing.T, vali *validator.Validate, tagInvalidObjectsMap map[string][]interface{}) {
 	// ToDo: use generics as soon as golangs allows to
 	for validationTag, invalidObjects := range tagInvalidObjectsMap {
 		for _, invalidObject := range invalidObjects {
 			err := vali.Struct(invalidObject)
-			then.AssertThat(s.T(), err, is.Not(is.Nil()))
+			then.AssertThat(t, err, is.Not(is.Nil()))
 			tagFound := false
 			for _, validationError := range err.(validator.ValidationErrors) {
-				then.AssertThat(s.T(), validationError, is.Not(is.EqualTo[validator.FieldError](nil)))
+				then.AssertThat(t, validationError, is.Not(is.EqualTo[validator.FieldError](nil)))
 				// sometimes there's more than one tag/validation error
 				if validationError.Tag() == validationTag {
 					tagFound = true
@@ -54,9 +41,9 @@ func VerfiyFailedValidations(s *Suite, vali *validator.Validate, tagInvalidObjec
 				}
 			}
 			if !tagFound {
-				then.AssertThat(s.T(), validationTag, is.EmptyString())
+				then.AssertThat(t, validationTag, is.EmptyString())
 			}
-			then.AssertThat(s.T(), tagFound, is.True())
+			then.AssertThat(t, tagFound, is.True())
 		}
 	}
 }
@@ -70,4 +57,11 @@ func newDecimalFromString(s string) decimal.Decimal {
 		panic(fmt.Errorf("Error while converting '%s'", s))
 	}
 	return result
+}
+
+func assertDoesNotSerializeDefaultEnums(t *testing.T, bo bo.BusinessObject) {
+	jsonBytes, err := json.Marshal(bo)
+	then.AssertThat(t, err, is.Nil())
+	jsonString := string(jsonBytes)
+	then.AssertThat(t, strings.Contains(jsonString, "(0)"), is.False())
 }

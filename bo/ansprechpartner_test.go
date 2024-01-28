@@ -2,9 +2,11 @@ package bo_test
 
 import (
 	"encoding/json"
-	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
+	"testing"
+
+	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -51,20 +53,20 @@ var validAp = bo.Ansprechpartner{
 }
 
 // Test_Ansprechpartner_Deserialization deserializes an Ansprechpartner json
-func (s *Suite) Test_Ansprechpartner_Deserialization() {
+func Test_Ansprechpartner_Deserialization(t *testing.T) {
 	serializedAp, err := json.Marshal(validAp)
 	jsonString := string(serializedAp)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "PROF"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedAp, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "PROF"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedAp, is.Not(is.NilArray[byte]()))
 	var deserializedAp bo.Ansprechpartner
 	err = json.Unmarshal(serializedAp, &deserializedAp)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedAp, is.EqualTo(validAp))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedAp, is.EqualTo(validAp))
 }
 
 // Test_Failed_Ansprechpartner_Validation verifies that the validators of an Ansprechpartner work
-func (s *Suite) Test_Failed_Ansprechpartner_Validation() {
+func Test_Failed_Ansprechpartner_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidAps := map[string][]interface{}{
 		"required": {
@@ -77,26 +79,26 @@ func (s *Suite) Test_Failed_Ansprechpartner_Validation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidAps)
+	VerifyFailedValidations(t, validate, invalidAps)
 }
 
 // Test_Successful_Ansprechpartner_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Ansprechpartner_Validation() {
+func Test_Successful_Ansprechpartner_Validation(t *testing.T) {
 	validate := validator.New()
 	validAnsprechpartners := []bo.BusinessObject{
 		validAp,
 	}
-	VerfiySuccessfulValidations(s, validate, validAnsprechpartners)
+	VerifySuccessfulValidations(t, validate, validAnsprechpartners)
 }
 
-func (s *Suite) Test_Empty_Ansprechpartner_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Ansprechpartner_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.ANSPRECHPARTNER)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Ansprechpartner{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.ANSPRECHPARTNER))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Ansprechpartner{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.ANSPRECHPARTNER))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Ansprechpartner_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.ANSPRECHPARTNER))
+func Test_Serialized_Empty_Ansprechpartner_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.ANSPRECHPARTNER))
 }

@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"reflect"
+	"testing"
 	"time"
 
 	"github.com/corbym/gocrest/is"
@@ -17,7 +18,7 @@ import (
 )
 
 // TestFailedAvisValidation verifies that the validators of Avis work
-func (s *Suite) Test_Failed_AvisValidation() {
+func Test_Failed_AvisValidation(t *testing.T) {
 	validate := validator.New()
 	validate.RegisterStructValidation(bo.AvisStructLevelValidation, bo.Avis{})
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
@@ -280,11 +281,11 @@ func (s *Suite) Test_Failed_AvisValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidAvisMap)
+	VerifyFailedValidations(t, validate, invalidAvisMap)
 }
 
 // TestSuccessfulMesslokationValidation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_AvisValidation() {
+func Test_Successful_AvisValidation(t *testing.T) {
 	validate := validator.New()
 	ungleichVertragsbeginn := abweichungsgrund.ABRECHNUNGSBEGINN_UNGLEICH_VERTRAGSBEGINN
 	bemerkung := "C"
@@ -343,17 +344,17 @@ func (s *Suite) Test_Successful_AvisValidation() {
 			ZuZahlen:       avisPositive.GesamtBrutto,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validAvises)
+	VerifySuccessfulValidations(t, validate, validAvises)
 }
 
-func (s *Suite) Test_Empty_Avis_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Avis_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.AVIS)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Avis{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.AVIS))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Avis{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.AVIS))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Avis_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.AVIS))
+func Test_Serialized_Empty_Avis_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.AVIS))
 }

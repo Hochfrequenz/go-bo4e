@@ -2,9 +2,11 @@ package bo_test
 
 import (
 	"encoding/json"
-	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"reflect"
+	"testing"
 	"time"
+
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/fehlercode"
@@ -20,7 +22,7 @@ import (
 )
 
 // Test_Statusbericht_Deserialization deserializes an Statusbericht json
-func (s *Suite) Test_Statusbericht_Deserialization() {
+func Test_Statusbericht_Deserialization(t *testing.T) {
 	gegenstand := "Nachricht123"
 	var bericht = bo.Statusbericht{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -52,35 +54,35 @@ func (s *Suite) Test_Statusbericht_Deserialization() {
 	}
 
 	serializedBericht, err := json.Marshal(bericht)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedBericht, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedBericht, is.Not(is.NilArray[byte]()))
 	var deserializedBericht bo.Statusbericht
 	err = json.Unmarshal(serializedBericht, &deserializedBericht)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedBericht, is.EqualTo(bericht))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedBericht, is.EqualTo(bericht))
 }
 
 // Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Statusbericht_Validation() {
+func Test_Successful_Statusbericht_Validation(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.STATUSBERICHT).(*bo.Statusbericht)
 	object.Status = berichtstatus.ERFOLGREICH
 	validate := validator.New()
 	validVertrag := []bo.BusinessObject{
 		*object,
 	}
-	VerfiySuccessfulValidations(s, validate, validVertrag)
+	VerifySuccessfulValidations(t, validate, validVertrag)
 }
 
-func (s *Suite) Test_Empty_Statusbericht_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Statusbericht_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.STATUSBERICHT)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Statusbericht{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.STATUSBERICHT))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Statusbericht{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.STATUSBERICHT))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Statusbericht_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.STATUSBERICHT))
+func Test_Serialized_Empty_Statusbericht_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.STATUSBERICHT))
 }
 
 func stringAsPointer(s string) *string {

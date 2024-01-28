@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"strings"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -13,12 +17,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/kontaktart"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
 	"github.com/hochfrequenz/go-bo4e/internal"
-	"reflect"
-	"strings"
 )
 
 // Test_Geschaeftspartner_Deserialization deserializes an Geschaeftspartner json
-func (s *Suite) Test_Geschaeftspartner_Deserialization() {
+func Test_Geschaeftspartner_Deserialization(t *testing.T) {
 	var gp = bo.Geschaeftspartner{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.GESCHAEFTSPARTNER,
@@ -53,17 +55,17 @@ func (s *Suite) Test_Geschaeftspartner_Deserialization() {
 	}
 	serializedGp, err := json.Marshal(gp)
 	jsonString := string(serializedGp)
-	then.AssertThat(s.T(), strings.Contains(jsonString, "DIVERS"), is.True()) // stringified enum
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedGp, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, strings.Contains(jsonString, "DIVERS"), is.True()) // stringified enum
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedGp, is.Not(is.NilArray[byte]()))
 	var deserializedGp bo.Geschaeftspartner
 	err = json.Unmarshal(serializedGp, &deserializedGp)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedGp, is.EqualTo(gp))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedGp, is.EqualTo(gp))
 }
 
 // TestFailedGeschaeftspartnerValidation verifies that the validators of a Geschaeftspartner work
-func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
+func Test_Failed_GeschaeftspartnerValidation(t *testing.T) {
 	var adresse = com.Adresse{
 		Postleitzahl: "82031",
 		Ort:          "Grünwald",
@@ -145,7 +147,7 @@ func (s *Suite) Test_Failed_GeschaeftspartnerValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVertrags)
+	VerifyFailedValidations(t, validate, invalidVertrags)
 }
 
 var validGp = bo.Geschaeftspartner{
@@ -169,23 +171,23 @@ var validGp = bo.Geschaeftspartner{
 }
 
 // Test_Successful_Geschaeftspartner_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Geschaeftspartner_Validation() {
+func Test_Successful_Geschaeftspartner_Validation(t *testing.T) {
 
 	validate := validator.New()
 	validGeschaeftspartners := []bo.BusinessObject{
 		validGp,
 	}
-	VerfiySuccessfulValidations(s, validate, validGeschaeftspartners)
+	VerifySuccessfulValidations(t, validate, validGeschaeftspartners)
 }
 
-func (s *Suite) Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Geschaeftspartner_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.GESCHAEFTSPARTNER)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Geschaeftspartner{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.GESCHAEFTSPARTNER))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Geschaeftspartner{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.GESCHAEFTSPARTNER))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Geschaeftspartner_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.GESCHAEFTSPARTNER))
+func Test_Serialized_Empty_Geschaeftspartner_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.GESCHAEFTSPARTNER))
 }

@@ -1,12 +1,14 @@
 package com_test
 
 import (
+	"testing"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 )
 
 // TestFailedExterneReferenzValidation asserts that the validation fails, if not both name and value are provided
-func (s *Suite) Test_Failed_ExterneReferenzValidation() {
+func Test_Failed_ExterneReferenzValidation(t *testing.T) {
 	validate := validator.New()
 	invalidReferenzMap := map[string][]interface{}{
 		"required": {
@@ -24,11 +26,11 @@ func (s *Suite) Test_Failed_ExterneReferenzValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidReferenzMap)
+	VerifyFailedValidations(t, validate, invalidReferenzMap)
 }
 
 // TestSuccessfulExterneReferenzValidation asserts that the validation does not fail for a valid ExterneReferenz
-func (s *Suite) Test_Successful_ExterneReferenzValidation() {
+func Test_Successful_ExterneReferenzValidation(t *testing.T) {
 	validate := validator.New()
 	validReferences := []interface{}{
 		com.ExterneReferenz{
@@ -36,9 +38,9 @@ func (s *Suite) Test_Successful_ExterneReferenzValidation() {
 			ExRefWert: "bar",
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validReferences)
+	VerifySuccessfulValidations(t, validate, validReferences)
 }
 
-func (s *Suite) Test_Serialized_Empty_Externe_Referenz_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(com.ExterneReferenz{})
+func Test_Serialized_Empty_Externe_Referenz_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, com.ExterneReferenz{})
 }

@@ -2,6 +2,8 @@ package bo_test
 
 import (
 	"encoding/json"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -17,7 +19,7 @@ import (
 )
 
 // Test_Reklamation_Deserialization tests serialization and deserialization of Reklamation
-func (s *Suite) Test_Reklamation_Deserialization() {
+func Test_Reklamation_Deserialization(t *testing.T) {
 	obis := func(s string) *string { return &s }
 	var reklamation = bo.Reklamation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -34,17 +36,17 @@ func (s *Suite) Test_Reklamation_Deserialization() {
 		Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 	}
 	serializedReklamation, err := json.Marshal(reklamation)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedReklamation, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedReklamation, is.Not(is.NilArray[byte]()))
 	var deserializedReklamation bo.Reklamation
 	err = json.Unmarshal(serializedReklamation, &deserializedReklamation)
-	then.AssertThat(s.T(), err, is.Nil())
+	then.AssertThat(t, err, is.Nil())
 
-	then.AssertThat(s.T(), deserializedReklamation, is.EqualTo(reklamation))
+	then.AssertThat(t, deserializedReklamation, is.EqualTo(reklamation))
 }
 
 // Test_Failed_ReklamationValidation verifies that the validators of Reklamation work
-func (s *Suite) Test_Failed_ReklamationValidation() {
+func Test_Failed_ReklamationValidation(t *testing.T) {
 	validate := validator.New()
 	invalidReklamationMap := map[string][]interface{}{
 		"required": {
@@ -62,11 +64,11 @@ func (s *Suite) Test_Failed_ReklamationValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidReklamationMap)
+	VerifyFailedValidations(t, validate, invalidReklamationMap)
 }
 
 // Test_Successful_Reklamation_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Reklamation_Validation() {
+func Test_Successful_Reklamation_Validation(t *testing.T) {
 	obis := func(s string) *string { return &s }
 	validate := validator.New()
 	validPricat := []bo.BusinessObject{
@@ -88,17 +90,17 @@ func (s *Suite) Test_Successful_Reklamation_Validation() {
 			Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validPricat)
+	VerifySuccessfulValidations(t, validate, validPricat)
 }
 
-func (s *Suite) Test_Empty_Reklamation_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Reklamation_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.REKLAMATION)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Reklamation{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.REKLAMATION))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Reklamation{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.REKLAMATION))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Reklamation_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.REKLAMATION))
+func Test_Serialized_Empty_Reklamation_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.REKLAMATION))
 }

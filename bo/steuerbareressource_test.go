@@ -2,12 +2,14 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
-	"reflect"
 )
 
 var stbressource = bo.SteuerbareRessource{
@@ -22,45 +24,45 @@ var stbressource = bo.SteuerbareRessource{
 }
 
 // Test_Steuerbareressource_Deserialization deserializes an SteuerbareRessource json
-func (s *Suite) Test_Steuerbareressource_Deserialization() {
+func Test_Steuerbareressource_Deserialization(t *testing.T) {
 	serializedStbressource, err := json.Marshal(stbressource)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedStbressource, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedStbressource, is.Not(is.NilArray[byte]()))
 	var deserializedStbressource bo.SteuerbareRessource
 	err = json.Unmarshal(serializedStbressource, &deserializedStbressource)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedStbressource, is.EqualTo(stbressource))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedStbressource, is.EqualTo(stbressource))
 
 }
 
 // Test_Failed_SteuerbarreRessource_Validation verifies that the validators of a SteuerbareRessource work
-func (s *Suite) Test_Failed_SteuerbarreRessource_Validation() {
+func Test_Failed_SteuerbarreRessource_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidStbressource := map[string][]interface{}{
 		"required": {
 			bo.SteuerbareRessource{},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidStbressource)
+	VerifyFailedValidations(t, validate, invalidStbressource)
 }
 
 // Test_Successful_SteuerbarreRessource_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_SteuerbarreRessource_Validation() {
+func Test_Successful_SteuerbarreRessource_Validation(t *testing.T) {
 	validate := validator.New()
 	validSteuerbarreRessource := []bo.BusinessObject{
 		stbressource,
 	}
-	VerfiySuccessfulValidations(s, validate, validSteuerbarreRessource)
+	VerifySuccessfulValidations(t, validate, validSteuerbarreRessource)
 }
 
-func (s *Suite) Test_Empty_SteuerbarreRessource_Is_Creatable_Using_BoTyp() {
+func Test_Empty_SteuerbarreRessource_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.STEUERBARERESSOURCE)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.SteuerbareRessource{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.STEUERBARERESSOURCE))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.SteuerbareRessource{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.STEUERBARERESSOURCE))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_SteuerbarreRessource_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.STEUERBARERESSOURCE))
+func Test_Serialized_Empty_SteuerbarreRessource_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.STEUERBARERESSOURCE))
 }

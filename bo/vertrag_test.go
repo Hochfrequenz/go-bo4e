@@ -2,6 +2,10 @@ package bo_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"testing"
+	"time"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -16,12 +20,10 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
-	"reflect"
-	"time"
 )
 
 // Test_Vertragspartner_Deserialization deserializes an Vertrag json
-func (s *Suite) Test_Vertrag_Deserialization() {
+func Test_Vertrag_Deserialization(t *testing.T) {
 	var contract = bo.Vertrag{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp:             botyp.VERTRAG,
@@ -88,16 +90,16 @@ func (s *Suite) Test_Vertrag_Deserialization() {
 		Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
 	}
 	serializedContract, err := json.Marshal(contract)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), serializedContract, is.Not(is.NilArray[byte]()))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, serializedContract, is.Not(is.NilArray[byte]()))
 	var deserializedVertrag bo.Vertrag
 	err = json.Unmarshal(serializedContract, &deserializedVertrag)
-	then.AssertThat(s.T(), err, is.Nil())
-	then.AssertThat(s.T(), deserializedVertrag, is.EqualTo(contract))
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, deserializedVertrag, is.EqualTo(contract))
 }
 
 // TestFailedGVertragValidation verifies that the validators of a Vertrag work
-func (s *Suite) Test_Failed_VertragValidation() {
+func Test_Failed_VertragValidation(t *testing.T) {
 	validate := validator.New()
 	invalidVertrags := map[string][]interface{}{
 		"required": {
@@ -110,11 +112,11 @@ func (s *Suite) Test_Failed_VertragValidation() {
 			},
 		},
 	}
-	VerfiyFailedValidations(s, validate, invalidVertrags)
+	VerifyFailedValidations(t, validate, invalidVertrags)
 }
 
 // Test_Successful_Vertrag_Validation verifies that a valid BO is validated without errors
-func (s *Suite) Test_Successful_Vertrag_Validation() {
+func Test_Successful_Vertrag_Validation(t *testing.T) {
 
 	validate := validator.New()
 	validVertrag := []bo.BusinessObject{
@@ -182,17 +184,17 @@ func (s *Suite) Test_Successful_Vertrag_Validation() {
 			Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
 		},
 	}
-	VerfiySuccessfulValidations(s, validate, validVertrag)
+	VerifySuccessfulValidations(t, validate, validVertrag)
 }
 
-func (s *Suite) Test_Empty_Vertrag_Is_Creatable_Using_BoTyp() {
+func Test_Empty_Vertrag_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.VERTRAG)
-	then.AssertThat(s.T(), object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
-	then.AssertThat(s.T(), reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Vertrag{})))
-	then.AssertThat(s.T(), object.GetBoTyp(), is.EqualTo(botyp.VERTRAG))
-	then.AssertThat(s.T(), object.GetVersionStruktur(), is.EqualTo("1.1"))
+	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
+	then.AssertThat(t, reflect.TypeOf(object), is.EqualTo(reflect.TypeOf(&bo.Vertrag{})))
+	then.AssertThat(t, object.GetBoTyp(), is.EqualTo(botyp.VERTRAG))
+	then.AssertThat(t, object.GetVersionStruktur(), is.EqualTo("1.1"))
 }
 
-func (s *Suite) Test_Serialized_Empty_Vertrag_Contains_No_Enum_Defaults() {
-	s.assert_Does_Not_Serialize_Default_Enums(bo.NewBusinessObject(botyp.VERTRAG))
+func Test_Serialized_Empty_Vertrag_Contains_No_Enum_Defaults(t *testing.T) {
+	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.VERTRAG))
 }
