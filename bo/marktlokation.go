@@ -99,6 +99,8 @@ func MaloIdFieldLevelValidation(fl validator.FieldLevel) bool {
 }
 
 // GetMaLoIdCheckSum returns the checksum (11th character of the malo ID) that matches the first ten characters long provided in maloIdWithoutCheckSum. This is going to crash if the length of the maloIdWithoutCheckSum is <10
+//
+// Deprecated: Use CalculateMaLoIdCheckSum which provides error handling and doesn't panic.
 func GetMaLoIdCheckSum(maloIdWithoutCheckSum string) int {
 	evenSum := 0
 	oddSum := 0
