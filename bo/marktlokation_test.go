@@ -306,6 +306,76 @@ func Test_Get_MaloId_Checksum(t *testing.T) {
 	then.AssertThat(t, actual, is.EqualTo(1))
 }
 
+func TestCalculateMaLoIdCheckSum(t *testing.T) {
+	t.Run(
+		"success",
+		func(t *testing.T) {
+			testcases := map[string]struct {
+				maLoID                string
+				expectedChecksumDigit int
+			}{
+				"checksum digit not included": {
+					maLoID:                "5123869678",
+					expectedChecksumDigit: 1,
+				},
+				"checksum digit included": {
+					maLoID:                "51238696781",
+					expectedChecksumDigit: 1,
+				},
+			}
+
+			for name := range testcases {
+				testcase := testcases[name]
+
+				t.Run(
+					name,
+					func(t *testing.T) {
+						checksumDigit, err := bo.CalculateMaLoIdCheckSum(testcase.maLoID)
+
+						then.AssertThat(t, err, is.Nil())
+						then.AssertThat(t, checksumDigit, is.EqualTo(testcase.expectedChecksumDigit))
+					},
+				)
+			}
+		},
+	)
+
+	t.Run(
+		"failure",
+		func(t *testing.T) {
+			testcases := map[string]struct {
+				maloID string
+			}{
+				"too short": {
+					maloID: "12345",
+				},
+				"too long": {
+					maloID: "12345678901234567890",
+				},
+				"first digit is 0": {
+					maloID: "0123456789",
+				},
+				"invalid character in ID": {
+					"1234XXX890",
+				},
+			}
+
+			for name := range testcases {
+				testcase := testcases[name]
+
+				t.Run(
+					name,
+					func(t *testing.T) {
+						_, err := bo.CalculateMaLoIdCheckSum(testcase.maloID)
+
+						then.AssertThat(t, err, is.Not(is.Nil()))
+					},
+				)
+			}
+		},
+	)
+}
+
 func Test_Empty_Marktlokation_Is_Creatable_Using_BoTyp(t *testing.T) {
 	object := bo.NewBusinessObject(botyp.MARKTLOKATION)
 	then.AssertThat(t, object, is.Not(is.EqualTo[bo.BusinessObject](nil)))
