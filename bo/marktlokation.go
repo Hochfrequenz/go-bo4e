@@ -2,6 +2,8 @@ package bo
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"regexp"
 
 	"github.com/hochfrequenz/go-bo4e/enum/messtechnischeeinordnung"
@@ -97,6 +99,8 @@ func MaloIdFieldLevelValidation(fl validator.FieldLevel) bool {
 }
 
 // GetMaLoIdCheckSum returns the checksum (11th character of the malo ID) that matches the first ten characters long provided in maloIdWithoutCheckSum. This is going to crash if the length of the maloIdWithoutCheckSum is <10
+//
+// Deprecated: Use CalculateMaLoIdCheckSum which provides error handling and doesn't panic.
 func GetMaLoIdCheckSum(maloIdWithoutCheckSum string) int {
 	evenSum := 0
 	oddSum := 0
@@ -110,6 +114,48 @@ func GetMaLoIdCheckSum(maloIdWithoutCheckSum string) int {
 	}
 	stepC := oddSum + (evenSum * 2)
 	return (10 - (stepC % 10)) % 10
+}
+
+// CalculateMaLoIdCheckSum calculates the checksum (last digit) for the given malo ID. Takes both the 10-digit part of a MaLo or the whole MaLo (11 digits).
+// Returns an error if maloID's length is neither 10 nor 11, or if the first ten characters do not constitute a maloID.
+func CalculateMaLoIdCheckSum(maloID string) (int, error) {
+	if len(maloID) < 10 {
+		return -1, fmt.Errorf("given maloID '%s' is too short", maloID)
+	}
+	if len(maloID) > 11 {
+		return -1, fmt.Errorf("given maloID '%s' is too long", maloID)
+	}
+
+	errs := make([]error, 0)
+	if first := maloID[0] - '0'; first < 1 || first > 9 {
+		errs = append(errs, fmt.Errorf("first char must be a digit from 1-9, is '%c'", maloID[0]))
+	}
+
+	evenSum, oddSum := 0, 0
+
+	for index, digitRune := range maloID[:10] {
+		digit := int(digitRune - '0')
+		if digit < 0 || digit > 9 {
+			errs = append(errs, fmt.Errorf("char at index %d must be a digit from 0-9, is '%c'", index, digitRune))
+		}
+
+		// Note: The specification for the MaLo defines the position such that the first digit has the position 1,
+		// unlike indexing in Go, which starts at 0. To avoid confusion, we explicitly define the position here.
+		position := index + 1
+
+		if position%2 == 0 {
+			evenSum += digit
+		} else {
+			oddSum += digit
+		}
+	}
+
+	if err := errors.Join(errs...); err != nil {
+		return -1, fmt.Errorf("could not calculate MaLo checksum for '%s': %w", maloID, err)
+	}
+
+	sum := oddSum + (evenSum * 2)
+	return (10 - (sum % 10)) % 10, nil
 }
 
 // XorStructLevelValidation ensures that only one of the possible address types is given
