@@ -3,38 +3,42 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
 
-func copyDirStructure(source, destination string) error {
-	err := filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-
-		relPath := strings.Replace(path, source, "", 1)
-		destPath := filepath.Join(destination, relPath)
-
-		if info.IsDir() {
-			if err := os.MkdirAll(destPath, 0755); err != nil {
-				return err
-			}
-		}
-		return nil
-	})
-
-	return err
+func runQuicktype(jsonPath, outputFile string) error {
+	cmd := exec.Command("quicktype", "--lang", "go", "--src", jsonPath, "--out", outputFile)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("error running quicktype: %s\nOutput:\n%s", err, output)
+	}
+	return nil
 }
 
 func main() {
-	source := "./bo4e_schemas"
-	destination := "./destination"
+	jsonPath := "./bo4e_schemas/bo/Angebot.json"
+	temporaryDestination := "./temp"
 
-	err := copyDirStructure(source, destination)
-	if err != nil {
-		fmt.Println("Error:", err)
-	} else {
-		fmt.Println("Directory structure copied successfully.")
+	// Extract the file name without extension
+	jsonFileName := strings.TrimSuffix(filepath.Base(jsonPath), filepath.Ext(jsonPath))
+
+	// Create temporary directory if it doesn't exist
+	if err := os.MkdirAll(temporaryDestination, os.ModePerm); err != nil {
+		fmt.Println("Error creating temporary directory:", err)
+		return
 	}
+
+	// Specify the output file path
+	outputFilePath := filepath.Join(temporaryDestination, fmt.Sprintf("%s.go", jsonFileName))
+
+	// Run quicktype
+	err := runQuicktype(jsonPath, outputFilePath)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Printf("Go file generated successfully for %s\n", jsonFileName)
 }
