@@ -84,5 +84,5 @@ func main() {
 		return
 	}
 
-	fmt.Printf("Go files generated and copied successfully for %s\n", jsonFileName)
+	fmt.Printf("Go files generated and copied s for %s\n", jsonFileName)
 }
