@@ -71,6 +71,33 @@ func copyFile(src, dst string) error {
 	return nil
 }
 
+// Empty directory function
+func emptyDirectory(directoryPath string) error {
+	// Open the directory
+	dir, err := os.Open(directoryPath)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
+
+	// Read all entries in the directory
+	entries, err := dir.Readdirnames(-1)
+	if err != nil {
+		return err
+	}
+
+	// Remove each entry in the directory
+	for _, entry := range entries {
+		entryPath := filepath.Join(directoryPath, entry)
+		err := os.RemoveAll(entryPath)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func main() {
 	jsonPath := "bo4e_schemas/bo/Angebot.json"
 	temporaryDestination := "temp/bo/Angebot.go"
@@ -85,6 +112,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+
 	// Trim "/Angebot.go" from temporaryDestination
 	temporaryDest := strings.TrimSuffix(temporaryDestination, "/Angebot.go")
 
@@ -92,6 +120,13 @@ func main() {
 	err = copyGoFileToDestination(temporaryDest, finalDestination, jsonFileName)
 	if err != nil {
 		fmt.Println("Error copying Go file to destination:", err)
+		return
+	}
+
+	// Empty the temp/bo directory
+	err = emptyDirectory(temporaryDest)
+	if err != nil {
+		fmt.Println("Error emptying temp/bo directory:", err)
 		return
 	}
 
