@@ -41,25 +41,34 @@ func copyGoFileToDestination(temporaryPath, destinationPath, jsonFileName string
 }
 
 // Copy file function
-func copyFile(src, dest string) error {
-	sourceFile, err := os.Open(src)
+func copyFile(src, dst string) error {
+	srcFile, err := os.Open(src)
 	if err != nil {
 		return err
 	}
-	defer sourceFile.Close()
+	defer srcFile.Close()
 
-	destFile, err := os.Create(dest)
-	if err != nil {
-		return err
-	}
-	defer destFile.Close()
-
-	_, err = io.Copy(destFile, sourceFile)
+	srcFileInfo, err := srcFile.Stat()
 	if err != nil {
 		return err
 	}
 
-	return destFile.Sync()
+	if !srcFileInfo.Mode().IsRegular() {
+		return fmt.Errorf("%s is not a regular file", src)
+	}
+
+	dstFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer dstFile.Close()
+
+	_, err = io.Copy(dstFile, srcFile)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func main() {
@@ -76,13 +85,15 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	// Trim "/Angebot.go" from temporaryDestination
+	temporaryDest := strings.TrimSuffix(temporaryDestination, "/Angebot.go")
 
 	// Copy the generated Go file to the final destination
-	err = copyGoFileToDestination(temporaryDestination, finalDestination, jsonFileName)
+	err = copyGoFileToDestination(temporaryDest, finalDestination, jsonFileName)
 	if err != nil {
 		fmt.Println("Error copying Go file to destination:", err)
 		return
 	}
 
-	fmt.Printf("Go files generated and copied s for %s\n", jsonFileName)
+	fmt.Printf("Go files generated and copied successfully for %s\n", jsonFileName)
 }
