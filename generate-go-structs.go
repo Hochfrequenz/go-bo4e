@@ -71,26 +71,17 @@ func copyFile(src, dst string) error {
 	return nil
 }
 
-// Empty directory function
-func emptyDirectory(directoryPath string) error {
-	// Open the directory
-	dir, err := os.Open(directoryPath)
-	if err != nil {
-		return err
-	}
-	defer dir.Close()
-
-	// Read all entries in the directory
-	entries, err := dir.Readdirnames(-1)
+// Remove contents in directory function
+func removeContentsInDirectory(directoryPath string) error {
+	entries, err := os.ReadDir(directoryPath)
 	if err != nil {
 		return err
 	}
 
-	// Remove each entry in the directory
 	for _, entry := range entries {
-		entryPath := filepath.Join(directoryPath, entry)
-		err := os.RemoveAll(entryPath)
-		if err != nil {
+		entryPath := filepath.Join(directoryPath, entry.Name())
+
+		if err := os.RemoveAll(entryPath); err != nil {
 			return err
 		}
 	}
@@ -123,10 +114,10 @@ func main() {
 		return
 	}
 
-	// Empty the temp/bo directory
-	err = emptyDirectory(temporaryDest)
+	// Remove contents in the temp/bo directory
+	err = removeContentsInDirectory(temporaryDest)
 	if err != nil {
-		fmt.Println("Error emptying temp/bo directory:", err)
+		fmt.Println("Error removing contents in temp/bo directory:", err)
 		return
 	}
 
