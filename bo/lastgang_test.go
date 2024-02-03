@@ -17,6 +17,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatuszusatz"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 )
 
@@ -104,7 +105,7 @@ func Test_Successful_Lastgang_Validation(t *testing.T) {
 				ExterneReferenzen: nil,
 			},
 			LokationsId:  "54321098765",
-			LokationsTyp: lokationstyp.MELO,
+			LokationsTyp: internal.Ptr(lokationstyp.MELO),
 			Verbrauch:    []com.Verbrauch{verbrauch},
 		},
 	}
