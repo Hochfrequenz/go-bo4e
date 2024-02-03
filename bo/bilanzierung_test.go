@@ -84,7 +84,7 @@ func Test_Bilanzierung_Deserialization(t *testing.T) {
 	then.AssertThat(t, deserializedBilanzierung, is.EqualTo(validBilanzierung))
 }
 
-func TestBilanzierungDeserializeExplitNulls(t *testing.T) {
+func TestBilanzierungDeserializeExplicitNulls(t *testing.T) {
 	testcases := map[string]struct {
 		raw string
 	}{
