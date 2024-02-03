@@ -58,16 +58,16 @@ var validBilanzierung = bo.Bilanzierung{
 		Einheit: internal.Ptr(mengeneinheit.MWH),
 	},
 	Verbrauchsaufteilung:      decimal.NewNullDecimal(newDecimalFromString("0.17")),
-	Zeitreihentyp:             zeitreihentyp.LGS,
-	Aggregationsverantwortung: aggregationsverantwortung.VNB,
-	Prognosegrundlage:         prognosegrundlage.WERTE,
+	Zeitreihentyp:             internal.Ptr(zeitreihentyp.LGS),
+	Aggregationsverantwortung: internal.Ptr(aggregationsverantwortung.VNB),
+	Prognosegrundlage:         internal.Ptr(prognosegrundlage.WERTE),
 	DetailsPrognosegrundlage: []profiltyp.Profiltyp{
 		profiltyp.SLP_SEP,
 	},
 	WahlrechtPrognosegrundlage: &aFalse,
-	Fallgruppenzuordnung:       fallgruppenzuordnung.GABI_RLMoT,
+	Fallgruppenzuordnung:       internal.Ptr(fallgruppenzuordnung.GABI_RLMoT),
 	Prioritaet:                 &seventeen,
-	MarktlokationsId:           "51238696781",
+	MarktlokationsId:           internal.Ptr("51238696781"),
 	Abwicklungsmodell:          internal.Ptr(abwicklungsmodell.MODELL_1),
 }
 
@@ -82,6 +82,59 @@ func Test_Bilanzierung_Deserialization(t *testing.T) {
 	err = json.Unmarshal(serializedBilanzierung, &deserializedBilanzierung)
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, deserializedBilanzierung, is.EqualTo(validBilanzierung))
+}
+
+func TestBilanzierungDeserializeExplitNulls(t *testing.T) {
+	testcases := map[string]struct {
+		raw string
+	}{
+		"marktlokationsId": {
+			raw: `{
+				"boTyp":"BILANZIERUNG",
+				"versionStruktur":"1",
+				"marktlokationsId": null
+			}`,
+		},
+		"zeitreihentyp": {
+			raw: `{
+				"boTyp":"BILANZIERUNG",
+				"versionStruktur":"1",
+				"zeitreihentyp": null
+			}`,
+		},
+		"aggregationsverantwortung": {
+			raw: `{
+				"boTyp":"BILANZIERUNG",
+				"versionStruktur":"1",
+				"aggregationsverantwortung": null
+			}`,
+		},
+		"prognosegrundlage": {
+			raw: `{
+				"boTyp":"BILANZIERUNG",
+				"versionStruktur":"1",
+				"prognosegrundlage":null
+			}`,
+		},
+		"fallgruppenzuordnung": {
+			raw: `{
+				"boTyp":"BILANZIERUNG",
+				"versionStruktur":"1",
+				"fallgruppenzuordnung":null
+			}`,
+		},
+	}
+
+	for name := range testcases {
+		testcase := testcases[name]
+
+		t.Run(
+			name,
+			func(t *testing.T) {
+				then.AssertThat(t, json.Unmarshal([]byte(testcase.raw), &bo.Bilanzierung{}), is.Nil())
+			},
+		)
+	}
 }
 
 func Test_Bilanzierung_Deserializes_Unknown_Fields(t *testing.T) {
@@ -130,10 +183,10 @@ func Test_Failed_Bilanzierung_Validation(t *testing.T) {
 		},
 		"maloid": { // on beginn
 			bo.Bilanzierung{
-				MarktlokationsId: "asdasd", // not numeric, not len 11
+				MarktlokationsId: internal.Ptr("asdasd"), // not numeric, not len 11
 			},
 			bo.Bilanzierung{
-				MarktlokationsId: "12345678901", // wrong checksum
+				MarktlokationsId: internal.Ptr("12345678901"), // wrong checksum
 			},
 		},
 	}
