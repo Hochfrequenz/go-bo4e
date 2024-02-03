@@ -55,7 +55,7 @@ func Test_BOneyComb_DeSerialization(t *testing.T) {
 					VersionStruktur: "1",
 				},
 				LokationsId:  "54321012345",
-				LokationsTyp: lokationstyp.MALO,
+				LokationsTyp: internal.Ptr(lokationstyp.MALO),
 				Verbrauch: []com.Verbrauch{
 					{
 						Startdatum:               time.Date(2021, 8, 1, 0, 0, 0, 0, time.UTC),

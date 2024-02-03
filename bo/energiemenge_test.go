@@ -1,6 +1,7 @@
 package bo_test
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 	"time"
@@ -14,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/shopspring/decimal"
 )
 
@@ -37,7 +39,7 @@ func Test_Failed_EnergiemengeValidation(t *testing.T) {
 					ExterneReferenzen: nil,
 				},
 				LokationsId:  "",
-				LokationsTyp: 0,
+				LokationsTyp: internal.Ptr(lokationstyp.Lokationstyp(0)),
 				Verbrauch:    nil,
 			},
 		},
@@ -49,7 +51,7 @@ func Test_Failed_EnergiemengeValidation(t *testing.T) {
 					ExterneReferenzen: nil,
 				},
 				LokationsId:  "not11len",
-				LokationsTyp: lokationstyp.MELO,
+				LokationsTyp: internal.Ptr(lokationstyp.MELO),
 				Verbrauch:    []com.Verbrauch{verbrauch},
 			},
 		},
@@ -61,7 +63,7 @@ func Test_Failed_EnergiemengeValidation(t *testing.T) {
 					ExterneReferenzen: nil,
 				},
 				LokationsId:  "not alpha numeric",
-				LokationsTyp: lokationstyp.MELO,
+				LokationsTyp: internal.Ptr(lokationstyp.MELO),
 				Verbrauch:    []com.Verbrauch{verbrauch},
 			},
 		},
@@ -88,11 +90,36 @@ func Test_Successful_EnergiemengeValidation(t *testing.T) {
 				ExterneReferenzen: nil,
 			},
 			LokationsId:  "54321098765",
-			LokationsTyp: lokationstyp.MELO,
+			LokationsTyp: internal.Ptr(lokationstyp.MELO),
 			Verbrauch:    []com.Verbrauch{verbrauch},
 		},
 	}
 	VerifySuccessfulValidations(t, validate, validEnergiemengen)
+}
+
+func TestEnergiemengeDeserializeExplicitNulls(t *testing.T) {
+	testcases := map[string]struct {
+		raw string
+	}{
+		"lokationstyp": {
+			raw: `{
+				"boTyp": "ENERGIEMENGE",
+				"versionStruktur":"1",
+				"lokationsTyp": null
+			}`,
+		},
+	}
+
+	for name := range testcases {
+		testcase := testcases[name]
+
+		t.Run(
+			name,
+			func(t *testing.T) {
+				then.AssertThat(t, json.Unmarshal([]byte(testcase.raw), &bo.Energiemenge{}), is.Nil())
+			},
+		)
+	}
 }
 
 func Test_Empty_Energiemenge_Is_Creatable_Using_BoTyp(t *testing.T) {
