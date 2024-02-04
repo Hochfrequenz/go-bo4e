@@ -13,7 +13,7 @@ import (
 type Preisblatt struct {
 	Geschaeftsobjekt
 	Bezeichnung     string                   `json:"bezeichnung" validate:"required"`           // Rechnungstitel ist die Bezeichnung für die vorliegende Rechnung.
-	Sparte          sparte.Sparte            `json:"sparte,omitempty" validate:"required"`      // Preisblatt gilt für angegebene Sparte.
+	Sparte          *sparte.Sparte           `json:"sparte,omitempty" validate:"required"`      // Preisblatt gilt für angegebene Sparte.
 	Preisstatus     *preisstatus.Preisstatus `json:"preisstatus,omitempty" validate:"required"` // Merkmal, das anzeigt, ob es sich um vorläufige oder endgültige Preise handelt
 	Herausgeber     Marktteilnehmer          `json:"herausgeber" validate:"required"`           // Der Marktteilnehmer, der die Preise veröffentlicht hat. Details zum Marktteilnehmer
 	Gueltigkeit     com.Zeitraum             `json:"gueltigkeit" validate:"required"`           // Der Zeitraum für den der Preis festgelegt ist

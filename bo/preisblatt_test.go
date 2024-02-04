@@ -36,7 +36,7 @@ func Test_Preisblatt_Deserialization(t *testing.T) {
 			ExterneReferenzen: nil,
 		},
 		Bezeichnung: "Preisblatt",
-		Sparte:      sparte.STROM,
+		Sparte:      internal.Ptr(sparte.STROM),
 		Preisstatus: internal.Ptr(preisstatus.ENDGUELTIG),
 		Herausgeber: bo.Marktteilnehmer{
 			Geschaeftspartner: bo.Geschaeftspartner{
@@ -108,7 +108,7 @@ func Test_Failed_PreisblattValidation(t *testing.T) {
 					ExterneReferenzen: nil,
 				},
 				Bezeichnung:     "",
-				Sparte:          0,
+				Sparte:          internal.Ptr(sparte.Sparte(0)),
 				Preisstatus:     internal.Ptr(preisstatus.Preisstatus(0)),
 				Herausgeber:     bo.Marktteilnehmer{},
 				Gueltigkeit:     com.Zeitraum{},
@@ -134,7 +134,7 @@ func Test_Successful_Preisblatt_Validation(t *testing.T) {
 				ExterneReferenzen: nil,
 			},
 			Bezeichnung: "Preisblatt",
-			Sparte:      sparte.STROM,
+			Sparte:      internal.Ptr(sparte.STROM),
 			Preisstatus: internal.Ptr(preisstatus.ENDGUELTIG),
 			Herausgeber: bo.Marktteilnehmer{
 				Geschaeftspartner: bo.Geschaeftspartner{
@@ -188,6 +188,11 @@ func TestPreisblattDeserializeExplicitNulls(t *testing.T) {
 			"boTyp": "PREISBLATT",
 			"versionStruktur": "1",
 			"preisstatus": null
+		}`,
+		"sparte": `{
+			"boTyp": "PREISBLATT",
+			"versionStruktur": "1",
+			"sparte": null
 		}`,
 	}
 
