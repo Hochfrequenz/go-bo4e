@@ -22,6 +22,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/testcase"
 	"github.com/shopspring/decimal"
 )
 
@@ -36,7 +37,7 @@ func Test_Preisblatt_Deserialization(t *testing.T) {
 		},
 		Bezeichnung: "Preisblatt",
 		Sparte:      sparte.STROM,
-		Preisstatus: preisstatus.ENDGUELTIG,
+		Preisstatus: internal.Ptr(preisstatus.ENDGUELTIG),
 		Herausgeber: bo.Marktteilnehmer{
 			Geschaeftspartner: bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -108,7 +109,7 @@ func Test_Failed_PreisblattValidation(t *testing.T) {
 				},
 				Bezeichnung:     "",
 				Sparte:          0,
-				Preisstatus:     0,
+				Preisstatus:     internal.Ptr(preisstatus.Preisstatus(0)),
 				Herausgeber:     bo.Marktteilnehmer{},
 				Gueltigkeit:     com.Zeitraum{},
 				Preispositionen: nil,
@@ -134,7 +135,7 @@ func Test_Successful_Preisblatt_Validation(t *testing.T) {
 			},
 			Bezeichnung: "Preisblatt",
 			Sparte:      sparte.STROM,
-			Preisstatus: preisstatus.ENDGUELTIG,
+			Preisstatus: internal.Ptr(preisstatus.ENDGUELTIG),
 			Herausgeber: bo.Marktteilnehmer{
 				Geschaeftspartner: bo.Geschaeftspartner{
 					Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -179,4 +180,16 @@ func Test_Empty_Preisblatt_Is_Creatable_Using_BoTyp(t *testing.T) {
 
 func Test_Serialized_Empty_Preisblatt_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.PREISBLATT))
+}
+
+func TestPreisblattDeserializeExplicitNulls(t *testing.T) {
+	testcases := testcase.Map[testcase.JSONDeserializationSucceeds[bo.Preisblatt]]{
+		"preisstatus": `{
+			"boTyp": "PREISBLATT",
+			"versionStruktur": "1",
+			"preisstatus": null
+		}`,
+	}
+
+	testcases.Run(t)
 }
