@@ -1,7 +1,6 @@
 package bo_test
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
 	"time"
@@ -16,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/testcase"
 	"github.com/shopspring/decimal"
 )
 
@@ -98,28 +98,15 @@ func Test_Successful_EnergiemengeValidation(t *testing.T) {
 }
 
 func TestEnergiemengeDeserializeExplicitNulls(t *testing.T) {
-	testcases := map[string]struct {
-		raw string
-	}{
-		"lokationstyp": {
-			raw: `{
-				"boTyp": "ENERGIEMENGE",
-				"versionStruktur":"1",
-				"lokationsTyp": null
-			}`,
-		},
+	testcases := testcase.Map[testcase.JSONDeserializationSucceeds[bo.Energiemenge]]{
+		"lokationstyp": `{
+			"boTyp": "ENERGIEMENGE",
+			"versionStruktur":"1",
+			"lokationsTyp": null
+		}`,
 	}
 
-	for name := range testcases {
-		testcase := testcases[name]
-
-		t.Run(
-			name,
-			func(t *testing.T) {
-				then.AssertThat(t, json.Unmarshal([]byte(testcase.raw), &bo.Energiemenge{}), is.Nil())
-			},
-		)
-	}
+	testcases.Run(t)
 }
 
 func Test_Empty_Energiemenge_Is_Creatable_Using_BoTyp(t *testing.T) {
