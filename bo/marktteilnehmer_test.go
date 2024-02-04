@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/testcase"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -26,7 +27,7 @@ import (
 // Test_Marktteilnehmer_Deserialization deserializes an Marktteilnehmer json
 func Test_Marktteilnehmer_Deserialization(t *testing.T) {
 	var mt = bo.Marktteilnehmer{
-		Marktrolle:       marktrolle.LF,
+		Marktrolle:       internal.Ptr(marktrolle.LF),
 		Makoadresse:      "edifact@my-favourite-marketpartner.de",
 		Rollencodetyp:    rollencodetyp.DVGW,
 		Rollencodenummer: "9903100000006",
@@ -111,7 +112,7 @@ func Test_Successful_Marktteilnehmer_Validation(t *testing.T) {
 	validate := validator.New()
 	validMarktteilnehmers := []bo.BusinessObject{
 		bo.Marktteilnehmer{
-			Marktrolle: marktrolle.LF,
+			Marktrolle: internal.Ptr(marktrolle.LF),
 			// mako adresse might be empty
 			Rollencodetyp:    rollencodetyp.DVGW,
 			Rollencodenummer: "9903100000006",
@@ -149,4 +150,16 @@ func Test_Empty_Markteilnehmer_Is_Creatable_Using_BoTyp(t *testing.T) {
 
 func Test_Serialized_Empty_Marktteilnehmer_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.MARKTTEILNEHMER))
+}
+
+func TestMarktteilnehmerDeserializeExplicitNulls(t *testing.T) {
+	testcases := testcase.Map[testcase.JSONDeserializationSucceeds[bo.Marktteilnehmer]]{
+		"marktrolle": `{
+			"boTyp": "MARKTTEILNEHMER",
+			"versionStruktur":"1",
+			"marktrolle": null
+		}`,
+	}
+
+	testcases.Run(t)
 }

@@ -84,7 +84,7 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 	var boneyCombWithDokumentennummer = market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
 			&bo.Marktteilnehmer{
-				Marktrolle:       marktrolle.LF,
+				Marktrolle:       internal.Ptr(marktrolle.LF),
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
 				Rollencodetyp:    rollencodetyp.DVGW,
 				Rollencodenummer: "9903100000006",
@@ -120,7 +120,7 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 				},
 			},
 			&bo.Marktteilnehmer{
-				Marktrolle:       marktrolle.LF,
+				Marktrolle:       internal.Ptr(marktrolle.LF),
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
 				Rollencodetyp:    rollencodetyp.DVGW,
 				Rollencodenummer: "9903100000007",
