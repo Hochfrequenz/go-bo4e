@@ -46,7 +46,7 @@ func Test_BOneyComb_DeSerialization(t *testing.T) {
 				Sparte:             sparte.STROM,
 				Zaehlernummer:      "1ASD23",
 				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
-				Zaehlertyp:         zaehlertyp.DREHKOLBENZAEHLER,
+				Zaehlertyp:         internal.Ptr(zaehlertyp.DREHKOLBENZAEHLER),
 				Tarifart:           internal.Ptr(tarifart.EINTARIF),
 			},
 			&bo.Energiemenge{

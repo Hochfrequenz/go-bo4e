@@ -1,6 +1,8 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/fernschaltung"
 	"github.com/hochfrequenz/go-bo4e/enum/geraetemerkmal"
@@ -10,7 +12,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 // Zaehler ist ein Modell für die Abbildung der Informationen zu einem Zähler
@@ -19,7 +20,7 @@ type Zaehler struct {
 	Zaehlernummer      string                                 `json:"zaehlernummer,omitempty" validate:"required,alphanum"` // Zaehlernummer ist eine Nummerierung des Zaehlers, vergeben durch den Messstellenbetreiber
 	Sparte             sparte.Sparte                          `json:"sparte,omitempty" validate:"required"`                 // Sparte ist eine Unterscheidungsmöglichkeit für die Sparte
 	Zaehlerauspraegung *zaehlerauspraegung.Zaehlerauspraegung `json:"zaehlerauspraegung,omitempty"`                         // Zaehlerauspraegung ist eine Spezifikation die Richtung des Zählers betreffend
-	Zaehlertyp         zaehlertyp.Zaehlertyp                  `json:"zaehlertyp,omitempty" validate:"required"`             // Zaehlertyp erlaubt eine Typisierung des Zählers
+	Zaehlertyp         *zaehlertyp.Zaehlertyp                 `json:"zaehlertyp,omitempty" validate:"required"`             // Zaehlertyp erlaubt eine Typisierung des Zählers
 	Tarifart           *tarifart.Tarifart                     `json:"tarifart,omitempty"`                                   // Tarifart erlaubt eine Spezifikation bezüglich unterstützter Tarifarten
 	Zaehlerkonstante   decimal.NullDecimal                    `json:"zaehlerkonstante,omitempty"`                           // Zaehlerkonstante ist die Zählerkonstante auf dem Zähler
 	EichungBis         time.Time                              `json:"eichungBis,omitempty"`                                 // EichungBis ist das exklusive Enddatum bis zu dem der Zähler geeicht ist

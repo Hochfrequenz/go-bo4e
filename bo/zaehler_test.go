@@ -21,6 +21,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/testcase"
 	"github.com/shopspring/decimal"
 )
 
@@ -35,7 +36,7 @@ func Test_Zaehler_Deserialization(t *testing.T) {
 		Zaehlernummer:      "0815",
 		Sparte:             sparte.STROM,
 		Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
-		Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
+		Zaehlertyp:         internal.Ptr(zaehlertyp.DREHSTROMZAEHLER),
 		Tarifart:           internal.Ptr(tarifart.EINTARIF),
 		//EichungBis:         time.Time{},
 		//LetzteEichung:      time.Time{},
@@ -82,7 +83,7 @@ func Test_Failed_ZaehlerValidation(t *testing.T) {
 				Zaehlernummer:      "0815",
 				Sparte:             sparte.STROM,
 				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
-				Zaehlertyp:         zaehlertyp.DREHSTROMZAEHLER,
+				Zaehlertyp:         internal.Ptr(zaehlertyp.DREHSTROMZAEHLER),
 				Tarifart:           internal.Ptr(tarifart.EINTARIF),
 				Zaehlerkonstante:   decimal.NewNullDecimal(decimal.NewFromFloat(17)),
 				Zaehlwerke:         []com.Zaehlwerk{},
@@ -106,7 +107,7 @@ func Test_Successful_Zaehler_Validation(t *testing.T) {
 			Zaehlernummer:      "08150",
 			Sparte:             sparte.STROM,
 			Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
-			Zaehlertyp:         zaehlertyp.WECHSELSTROMZAEHLER,
+			Zaehlertyp:         internal.Ptr(zaehlertyp.WECHSELSTROMZAEHLER),
 			Tarifart:           internal.Ptr(tarifart.EINTARIF),
 			Zaehlerkonstante:   decimal.NullDecimal{Valid: false, Decimal: decimal.NewFromFloat(0)},
 			//EichungBis:         time.Time{},
@@ -154,4 +155,16 @@ func Test_Empty_Zaehler_Is_Creatable_Using_BoTyp(t *testing.T) {
 
 func Test_Serialized_Empty_Zaehler_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.ZAEHLER))
+}
+
+func TestZaehlerDeserializeExplicitNulls(t *testing.T) {
+	testcases := testcase.Map[testcase.JSONDeserializationSucceeds[bo.Zaehler]]{
+		"zaehlertyp": `{
+			"boTyp": "ZAEHLER",
+			"versionStruktur":"1",
+			"zaehlertyp": null
+		}`,
+	}
+
+	testcases.Run(t)
 }
