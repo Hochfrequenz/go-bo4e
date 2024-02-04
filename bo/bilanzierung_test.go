@@ -22,6 +22,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/testcase"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 )
@@ -85,56 +86,35 @@ func Test_Bilanzierung_Deserialization(t *testing.T) {
 }
 
 func TestBilanzierungDeserializeExplicitNulls(t *testing.T) {
-	testcases := map[string]struct {
-		raw string
-	}{
-		"marktlokationsId": {
-			raw: `{
-				"boTyp":"BILANZIERUNG",
-				"versionStruktur":"1",
-				"marktlokationsId": null
-			}`,
-		},
-		"zeitreihentyp": {
-			raw: `{
-				"boTyp":"BILANZIERUNG",
-				"versionStruktur":"1",
-				"zeitreihentyp": null
-			}`,
-		},
-		"aggregationsverantwortung": {
-			raw: `{
-				"boTyp":"BILANZIERUNG",
-				"versionStruktur":"1",
-				"aggregationsverantwortung": null
-			}`,
-		},
-		"prognosegrundlage": {
-			raw: `{
-				"boTyp":"BILANZIERUNG",
-				"versionStruktur":"1",
-				"prognosegrundlage":null
-			}`,
-		},
-		"fallgruppenzuordnung": {
-			raw: `{
-				"boTyp":"BILANZIERUNG",
-				"versionStruktur":"1",
-				"fallgruppenzuordnung":null
-			}`,
-		},
+	testcases := testcase.Map[testcase.JSONDeserializationSucceeds[bo.Bilanzierung]]{
+		"marktlokationsId": `{
+			"boTyp":"BILANZIERUNG",
+			"versionStruktur":"1",
+			"marktlokationsId": null
+		}`,
+		"zeitreihentyp": `{
+			"boTyp":"BILANZIERUNG",
+			"versionStruktur":"1",
+			"zeitreihentyp": null
+		}`,
+		"aggregationsverantwortung": `{
+			"boTyp":"BILANZIERUNG",
+			"versionStruktur":"1",
+			"aggregationsverantwortung": null
+		}`,
+		"prognosegrundlage": `{
+			"boTyp":"BILANZIERUNG",
+			"versionStruktur":"1",
+			"prognosegrundlage":null
+		}`,
+		"fallgruppenzuordnung": `{
+			"boTyp":"BILANZIERUNG",
+			"versionStruktur":"1",
+			"fallgruppenzuordnung":null
+		}`,
 	}
 
-	for name := range testcases {
-		testcase := testcases[name]
-
-		t.Run(
-			name,
-			func(t *testing.T) {
-				then.AssertThat(t, json.Unmarshal([]byte(testcase.raw), &bo.Bilanzierung{}), is.Nil())
-			},
-		)
-	}
+	testcases.Run(t)
 }
 
 func Test_Bilanzierung_Deserializes_Unknown_Fields(t *testing.T) {
