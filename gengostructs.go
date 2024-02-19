@@ -92,7 +92,7 @@ func copyFile(src, dst string) error {
 func main() {
 	root := "bo4e_schemas"
 	tempDir := "temp"
-	finalDir := "destination"
+	finalDir := "final"
 
 	// Create a temporary directory with 0777 permission (full access)
 	errTemp := os.Mkdir(tempDir, 0777)
@@ -118,16 +118,17 @@ func main() {
 		// check if it is a regular file
 		if !info.IsDir() {
 			// get the file name
-			jsonFileName := filepath.Base(path)
-			filename := strings.TrimSuffix(jsonFileName, ".json")
-
+			// Calculate the corresponding path in the temporary directory
+			pathToFile := filepath.Join(tempDir, path[len(root):])
+			pathWithoutExt := strings.TrimSuffix(pathToFile, ".json")
+			goPathToFile := pathWithoutExt + ".go"
 			// Run quicktype
-			err := runQuicktype(path, tempDir)
+			err := runQuicktype(path, goPathToFile)
 			if err != nil {
 				fmt.Println(err)
 				return nil
 			}
-			fmt.Println("Directory:", filename)
+			fmt.Println("goPathToFile:", goPathToFile)
 
 		}
 		return nil
