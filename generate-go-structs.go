@@ -49,6 +49,13 @@ func copyFile(src, dst string) error {
 
 	return nil
 }
+func createDir(dirPath string) error {
+	if err := os.MkdirAll(dirPath, 0755); err != nil && !os.IsExist(err) {
+		return err
+	}
+	fmt.Println("directory created successfully")
+	return nil
+}
 
 // Remove contents in directory function
 func removeContentsInDirectory(directoryPath string) error {
@@ -69,54 +76,91 @@ func removeContentsInDirectory(directoryPath string) error {
 }
 
 func main() {
-	pathToJsons := "bo4e_schemas/bo"
-	tempDir := "temp/bo"
-	finalDir := "destination/bo"
+	sourcePath := "bo4e_schemas"
+	tempDir := "temp"
+	finalDir := "bo4e_structs"
 
 	// Open the directory
-	dir, err := os.Open(pathToJsons)
+	dir, err := os.Open(sourcePath)
 	if err != nil {
 		fmt.Println("Error opening directory:", err)
 		return
 	}
 	defer dir.Close()
 
-	jsonEntries, err := dir.ReadDir(-1)
+	sourceEntries, err := dir.ReadDir(-1)
 	if err != nil {
 		fmt.Println("error reading directory:")
 		return
 	}
+	// iterate over source entries
+	for _, entry := range sourceEntries {
+		entryName := filepath.Base(entry.Name())
+		fmt.Println("source entry:", entry)
 
-	//Iterate over the json schemas
-	for _, jsonEntry := range jsonEntries {
+		tempDirPath := filepath.Join(tempDir, entryName)
+		fmt.Println("temporary directory path:", tempDirPath)
 
-		jsonFileName := filepath.Base(jsonEntry.Name())
-		// name of the file without extension
-		fileName := strings.TrimSuffix(jsonFileName, ".json")
-		// go file name
-		goFileName := fileName + ".go"
-		// make paths to jsons and go files in tempDir and finalDir
-		pathToJson := strings.Replace(filepath.Join(pathToJsons, jsonFileName), "\\", "/", -1)
-		tempFilePath := strings.Replace(filepath.Join(tempDir, goFileName), "\\", "/", -1)
-		finalFilePath := strings.Replace(filepath.Join(finalDir, goFileName), "\\", "/", -1)
+		finalDirPath := filepath.Join(finalDir, entryName)
+		fmt.Println("finalDirPath:", finalDirPath)
 
-		//Run quicktype
-		err := runQuicktype(pathToJson, tempFilePath)
+		err := createDir(tempDirPath)
 		if err != nil {
-			fmt.Println(err)
-			return
+			fmt.Printf("Error creating %s %v", tempDirPath, err)
+			return // skip this file or dir
 		}
-		// Copy the generated go file to the final directory
-		if err := copyFile(tempFilePath, finalFilePath); err != nil {
-			return
+
+		err = createDir(finalDirPath)
+		if err != nil {
+			fmt.Printf("Error creating %s %v", finalDirPath, err)
+			return // skip this file or dir
 		}
+
 	}
 
-	// Remove contents in the temp/bo directory
-	err = removeContentsInDirectory(tempDir)
-	if err != nil {
-		fmt.Println("Error removing contents in temp/bo directory:", err)
-		return
+	walkFunc := func(path string, info os.FileInfo, err error) error {
+		// check if there was an error accessing the file or dir
+		if err != nil {
+			fmt.Printf("Error accessing %s %v", path, err)
+			return nil // skip this file or dir
+		}
+
+		// check if it is a regular file
+		if !info.IsDir() {
+			subFolder := strings.Split(path, "\\")[1]
+			fileName := strings.TrimSuffix(filepath.Base(path), ".json")
+			goName := fileName + ".go"
+			jsonPathRev := strings.Replace(path, "\\", "/", -1)
+			tempGoPath := tempDir + "/" + subFolder + "/" + goName
+			finalGoPath := finalDir + "/" + subFolder + "/" + goName
+
+			//Run quicktype
+			err := runQuicktype(jsonPathRev, tempGoPath)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			// Copy the generated go file to the final directory
+			if err := copyFile(tempGoPath, finalGoPath); err != nil {
+				return err
+			}
+
+		}
+		return nil
+
 	}
+
+	// Traverse the directory tree using Walk
+	err = filepath.Walk(sourcePath, walkFunc)
+	if err != nil {
+		fmt.Printf("Error walking the path %s: %v\n", sourcePath, err)
+	}
+
+	//// Remove contents in the temp/bo directory
+	//err = removeContentsInDirectory(tempDir)
+	//if err != nil {
+	//	fmt.Println("Error removing contents in temp/bo directory:", err)
+	//	return
+	//}
 
 }
