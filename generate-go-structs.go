@@ -57,24 +57,6 @@ func createDir(dirPath string) error {
 	return nil
 }
 
-// Remove contents in directory function
-func removeContentsInDirectory(directoryPath string) error {
-	entries, err := os.ReadDir(directoryPath)
-	if err != nil {
-		return err
-	}
-
-	for _, entry := range entries {
-		entryPath := filepath.Join(directoryPath, entry.Name())
-
-		if err := os.RemoveAll(entryPath); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 func main() {
 	sourcePath := "bo4e_schemas"
 	tempDir := "temp"
@@ -93,16 +75,11 @@ func main() {
 		fmt.Println("error reading directory:")
 		return
 	}
-	// iterate over source entries
+	// iterate over source entries and create empty dirs
 	for _, entry := range sourceEntries {
 		entryName := filepath.Base(entry.Name())
-		fmt.Println("source entry:", entry)
-
 		tempDirPath := filepath.Join(tempDir, entryName)
-		fmt.Println("temporary directory path:", tempDirPath)
-
 		finalDirPath := filepath.Join(finalDir, entryName)
-		fmt.Println("finalDirPath:", finalDirPath)
 
 		err := createDir(tempDirPath)
 		if err != nil {
@@ -156,11 +133,11 @@ func main() {
 		fmt.Printf("Error walking the path %s: %v\n", sourcePath, err)
 	}
 
-	//// Remove contents in the temp/bo directory
-	//err = removeContentsInDirectory(tempDir)
-	//if err != nil {
-	//	fmt.Println("Error removing contents in temp/bo directory:", err)
-	//	return
-	//}
+	// Remove temp directory and all the subdirectories
+	err = os.RemoveAll(tempDir)
+	if err != nil {
+		fmt.Println("Error removing contents in temp/bo directory:", err)
+		return
+	}
 
 }
