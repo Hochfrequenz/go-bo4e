@@ -1,9 +1,0 @@
-{
-    "description": "Die Messwerterfassung des Zählers",
-    "enum": [
-        "FERNAUSLESBAR",
-        "MANUELL_AUSGELESENE"
-    ],
-    "title": "Messwerterfassung",
-    "type": "string"
-}
