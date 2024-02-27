@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -54,6 +55,33 @@ func createDir(dirPath string) error {
 		return err
 	}
 	fmt.Println("directory created successfully")
+	return nil
+}
+
+func processGoFile(filePath string) error {
+	// Read the contents of the Go file
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+	// Modify the package name based on the directory it was generated from
+	dir := filepath.Dir(filePath)
+	parts := strings.Split(dir, string(os.PathSeparator))
+
+	if len(parts) < 2 {
+		return fmt.Errorf("unexpected directory structure: %s", dir)
+	}
+	packageName := parts[1]
+	
+	// Replace the package declaration in the file content
+	newContent := bytes.Replace(content, []byte("package main"), []byte("package "+packageName), 1)
+
+	// Write the modified content back to the file
+	err = os.WriteFile(filePath, newContent, 0644)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -117,6 +145,12 @@ func main() {
 				fmt.Println(err)
 				return err
 			}
+			err = processGoFile(tempGoPath)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+
 			// Copy the generated go file to the final directory
 			if err := copyFile(tempGoPath, finalGoPath); err != nil {
 				return err
