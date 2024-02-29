@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
@@ -54,7 +55,6 @@ func createDir(dirPath string) error {
 	if err := os.MkdirAll(dirPath, 0755); err != nil && !os.IsExist(err) {
 		return err
 	}
-	fmt.Println("directory created successfully")
 	return nil
 }
 
@@ -72,7 +72,7 @@ func processGoFile(filePath string) error {
 		return fmt.Errorf("unexpected directory structure: %s", dir)
 	}
 	packageName := parts[1]
-	
+
 	// Replace the package declaration in the file content
 	newContent := bytes.Replace(content, []byte("package main"), []byte("package "+packageName), 1)
 
@@ -85,29 +85,43 @@ func processGoFile(filePath string) error {
 	return nil
 }
 
+func getSubDir(path string, subFolders []string) string {
+	pathLower := strings.ToLower(path)
+
+	for _, entry := range subFolders {
+		pattern := fmt.Sprintf(`\b%s\b`, regexp.QuoteMeta(entry))
+		regex := regexp.MustCompile(pattern)
+		if strings.Contains(pathLower, entry) && regex.MatchString(pathLower) {
+			return entry
+		}
+	}
+	return "sub directory ot found"
+}
+
+func getBaseName(filepath string) string {
+	parts := strings.Split(filepath, "\\")
+	filename := parts[len(parts)-1]
+	base := strings.TrimSuffix(filename, ".json")
+	parts2 := strings.Split(base, ".")
+	if len(parts2) > 1 {
+		// Return the last element
+		return parts2[len(parts2)-1]
+	}
+
+	return base
+}
+
 func main() {
 	sourcePath := "bo4e_schemas"
 	tempDir := "temp"
 	finalDir := "bo4e_structs"
 
-	// Open the directory
-	dir, err := os.Open(sourcePath)
-	if err != nil {
-		fmt.Println("Error opening directory:", err)
-		return
-	}
-	defer dir.Close()
+	subfolders := []string{"bo", "com", "enum"}
 
-	sourceEntries, err := dir.ReadDir(-1)
-	if err != nil {
-		fmt.Println("error reading directory:")
-		return
-	}
-	// iterate over source entries and create empty dirs
-	for _, entry := range sourceEntries {
-		entryName := filepath.Base(entry.Name())
-		tempDirPath := filepath.Join(tempDir, entryName)
-		finalDirPath := filepath.Join(finalDir, entryName)
+	// create tempDir and finalDir
+	for _, folder := range subfolders {
+		tempDirPath := filepath.Join(tempDir, folder)
+		finalDirPath := filepath.Join(finalDir, folder)
 
 		err := createDir(tempDirPath)
 		if err != nil {
@@ -120,7 +134,6 @@ func main() {
 			fmt.Printf("Error creating %s %v", finalDirPath, err)
 			return // skip this file or dir
 		}
-
 	}
 
 	walkFunc := func(path string, info os.FileInfo, err error) error {
@@ -131,13 +144,13 @@ func main() {
 		}
 
 		// check if it is a regular file
-		if !info.IsDir() {
-			subFolder := strings.Split(path, "\\")[1]
-			fileName := strings.TrimSuffix(filepath.Base(path), ".json")
+		if !info.IsDir() && filepath.Ext(path) == ".json" {
+			subDir := getSubDir(path, subfolders)
+			fileName := getBaseName(path)
 			goName := fileName + ".go"
 			jsonPathRev := strings.Replace(path, "\\", "/", -1)
-			tempGoPath := tempDir + "/" + subFolder + "/" + goName
-			finalGoPath := finalDir + "/" + subFolder + "/" + goName
+			tempGoPath := tempDir + "/" + subDir + "/" + goName
+			finalGoPath := finalDir + "/" + subDir + "/" + goName
 
 			//Run quicktype
 			err := runQuicktype(jsonPathRev, tempGoPath)
@@ -162,16 +175,16 @@ func main() {
 	}
 
 	// Traverse the directory tree using Walk
-	err = filepath.Walk(sourcePath, walkFunc)
+	err := filepath.Walk(sourcePath, walkFunc)
 	if err != nil {
 		fmt.Printf("Error walking the path %s: %v\n", sourcePath, err)
 	}
 
 	// Remove temp directory and all the subdirectories
-	err = os.RemoveAll(tempDir)
-	if err != nil {
-		fmt.Println("Error removing contents in temp/bo directory:", err)
-		return
-	}
+	//err = os.RemoveAll(tempDir)
+	//if err != nil {
+	//	fmt.Println("Error removing  temp directory:", err)
+	//	return
+	//}
 
 }
