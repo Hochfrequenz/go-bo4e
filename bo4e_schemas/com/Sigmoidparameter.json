@@ -1,0 +1,107 @@
+{
+  "description": "Die Sigmoid-Funktion, beispielsweise zur Berechnung eines Leistungspreises hat die Form:\nLP=A/(1+(P/B)^C)+D\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Sigmoidparameter.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Sigmoidparameter JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Sigmoidparameter.json>`_",
+  "title": "Sigmoidparameter",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "A": {
+      "title": "A",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "B": {
+      "title": "B",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "C": {
+      "title": "C",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "D": {
+      "title": "D",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

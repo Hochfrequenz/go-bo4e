@@ -1,0 +1,95 @@
+{
+  "description": "Abbildung eines Zeitreihenwertes bestehend aus Zeitraum, Wert und Statusinformationen.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Zeitreihenwert.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Zeitreihenwert JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Zeitreihenwert.json>`_",
+  "title": "Zeitreihenwert",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Messwertstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "statuszusatz": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Messwertstatuszusatz.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wert": {
+      "title": "Wert",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zeitspanne": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitspanne.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

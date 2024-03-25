@@ -1,0 +1,22 @@
+{
+  "description": "Auflistung der Typen von Endkunden. Daraus kann das Verbrauchsprofil abgeleitet werden.",
+  "title": "Kundentyp",
+  "type": "string",
+  "enum": [
+    "GEWERBE",
+    "PRIVAT",
+    "LANDWIRT",
+    "SONSTIGE",
+    "HAUSHALT",
+    "DIREKTHEIZUNG",
+    "GEMEINSCHAFT_MFH",
+    "KIRCHE",
+    "KWK",
+    "LADESAEULE",
+    "BELEUCHTUNG_OEFFENTLICH",
+    "BELEUCHTUNG_STRASSE",
+    "SPEICHERHEIZUNG",
+    "UNTERBR_EINRICHTUNG",
+    "WAERMEPUMPE"
+  ]
+}
