@@ -41,7 +41,7 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 		err := fmt.Errorf("Validation of Steuerkennzeichen %v is not implemented", steuerbetrag.Steuerkennzeichen)
 		panic(err)
 	}
-	if !expectedSteuerwert.Equals(steuerbetrag.Steuerwert) {
+	if !expectedSteuerwert.Equal(steuerbetrag.Steuerwert) {
 		sl.ReportError(steuerbetrag.Steuerwert, "Steuerwert", "Steuerwert", "Steuerwert=Basiswert*Steuerkennzeichen", "")
 	}
 }

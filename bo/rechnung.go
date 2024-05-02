@@ -71,7 +71,7 @@ func RechnungStructLevelValidationGesamtNetto(sl validator.StructLevel) {
 			}
 			expectedGesamtNetto.Wert = expectedGesamtNetto.Wert.Add(rp.TeilsummeNetto.Wert)
 		}
-		if expectedGesamtNetto.Waehrung != rechnung.GesamtNetto.Waehrung || !expectedGesamtNetto.Wert.Equals(rechnung.GesamtNetto.Wert) {
+		if expectedGesamtNetto.Waehrung != rechnung.GesamtNetto.Waehrung || !expectedGesamtNetto.Wert.Equal(rechnung.GesamtNetto.Wert) {
 			sl.ReportError(rechnung.GesamtNetto, "Wert", "GesamtNetto", "GesamtNetto==sum(TeilsummeNetto)", "")
 		}
 	}
@@ -98,7 +98,7 @@ func RechnungStructLevelValidationZuZahlen(sl validator.StructLevel) {
 		}
 		expectedZuZahlen.Wert = expectedZuZahlen.Wert.Sub(rechnung.RabattBrutto.Wert)
 	}
-	if expectedZuZahlen.Waehrung != rechnung.Zuzahlen.Waehrung || !expectedZuZahlen.Wert.Equals(rechnung.Zuzahlen.Wert) {
+	if expectedZuZahlen.Waehrung != rechnung.Zuzahlen.Waehrung || !expectedZuZahlen.Wert.Equal(rechnung.Zuzahlen.Wert) {
 		sl.ReportError(rechnung.Zuzahlen, "Wert", "Zuzahlen", "Zuzahlen==GesamtBrutto-Rechnung.Vorausgezahlt-Rechnung.RabattBrutto", "")
 	}
 }
@@ -122,7 +122,7 @@ func RechnungStructLevelValidationGesamtBrutto(sl validator.StructLevel) {
 			}
 			expectedGesamtBrutto.Wert = expectedGesamtBrutto.Wert.Add(rp.TeilsummeSteuer.Basiswert).Add(rp.TeilsummeSteuer.Steuerwert)
 		}
-		if expectedGesamtBrutto.Waehrung != rechnung.GesamtBrutto.Waehrung || !expectedGesamtBrutto.Wert.Equals(rechnung.GesamtBrutto.Wert) {
+		if expectedGesamtBrutto.Waehrung != rechnung.GesamtBrutto.Waehrung || !expectedGesamtBrutto.Wert.Equal(rechnung.GesamtBrutto.Wert) {
 			sl.ReportError(rechnung.GesamtBrutto, "Wert", "GesamtBrutto", "GesamtBrutto==sum(TeilsummeSteuer)", "")
 		}
 	}
@@ -148,7 +148,7 @@ func RechnungStructLevelValidationGesamtSteuer(sl validator.StructLevel) {
 			}
 			expectedGesamtSteuer.Wert = expectedGesamtSteuer.Wert.Add(sb.Steuerwert)
 		}
-		if expectedGesamtSteuer.Waehrung != rechnung.GesamtSteuer.Waehrung || !expectedGesamtSteuer.Wert.Equals(rechnung.GesamtSteuer.Wert) {
+		if expectedGesamtSteuer.Waehrung != rechnung.GesamtSteuer.Waehrung || !expectedGesamtSteuer.Wert.Equal(rechnung.GesamtSteuer.Wert) {
 			sl.ReportError(rechnung.GesamtSteuer, "Wert", "GesamtSteuer", "GesamtSteuer==sum(Steuerbetraege)", "")
 		}
 	}
