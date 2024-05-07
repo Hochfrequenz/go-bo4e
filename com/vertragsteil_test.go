@@ -18,9 +18,9 @@ import (
 // TestVertragsteilDeserialization deserializes a Vertragsteil json
 func Test_Vertragsteil_Deserialization(t *testing.T) {
 	var vertraqsteil = com.Vertragsteil{
-		Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-		Lokation:           "DE0123456789012345678901234567890",
+		Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Lokation:           internal.Ptr("DE0123456789012345678901234567890"),
 		VertraglichFixierteMenge: &com.Menge{
 			Wert:    decimal.NewFromFloat(42),
 			Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
@@ -49,41 +49,31 @@ func Test_Vertragsteil_Deserialization(t *testing.T) {
 func Test_Vertragsteil_Failed_Validation(t *testing.T) {
 	validate := validator.New()
 	invalidVertragsteile := map[string][]interface{}{
-		"required": {
-			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Time{},
-			},
-			com.Vertragsteil{
-				Vertragsteilende:   time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilbeginn: time.Time{},
-			},
-		},
 		"min": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-				Lokation:           "tooshort",
+				Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Lokation:           internal.Ptr("tooshort"),
 			},
 		},
 		"max": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-				Lokation:           "tooooooooooooooooooooooooooooooolong",
+				Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Lokation:           internal.Ptr("tooooooooooooooooooooooooooooooolong"),
 			},
 		},
 		"alphanum": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-				Lokation:           "not!alpha&num",
+				Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Lokation:           internal.Ptr("not!alpha&num"),
 			},
 		},
 		"gtfield": {
 			com.Vertragsteil{
-				Vertragsteilbeginn: time.Date(2024, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
+				Vertragsteilbeginn: internal.Ptr(time.Date(2024, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -95,9 +85,9 @@ func Test_Successful_Vertragsteil_Validation(t *testing.T) {
 	validate := validator.New()
 	validVertragsteile := []interface{}{
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-			Lokation:           "DE0123456789012345678901234567890",
+			Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Lokation:           internal.Ptr("DE0123456789012345678901234567890"),
 			VertraglichFixierteMenge: &com.Menge{
 				Wert:    decimal.NewFromFloat(42),
 				Einheit: internal.Ptr(mengeneinheit.KUBIKMETER),
@@ -112,13 +102,13 @@ func Test_Successful_Vertragsteil_Validation(t *testing.T) {
 			},
 		},
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
+			Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		com.Vertragsteil{
-			Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-			Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-			Lokation:           "543231012345",
+			Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+			Lokation:           internal.Ptr("543231012345"),
 		},
 	}
 	VerifySuccessfulValidations(t, validate, validVertragsteile)

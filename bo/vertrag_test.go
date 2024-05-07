@@ -30,14 +30,14 @@ func Test_Vertrag_Deserialization(t *testing.T) {
 			VersionStruktur:   "2",
 			ExterneReferenzen: nil,
 		},
-		Vertragsnummer: "",
-		Beschreibung:   "",
-		Vertragsstatus: vertragsstatus.ABGELEHNT,
-		Vertragsart:    vertragsart.BUENDELVERTRAG,
+		Vertragsnummer: internal.Ptr(""),
+		Beschreibung:   internal.Ptr(""),
+		Vertragsstatus: internal.Ptr(vertragsstatus.ABGELEHNT),
+		Vertragsart:    internal.Ptr(vertragsart.BUENDELVERTRAG),
 		Sparte:         sparte.STROM,
 		Vertragsbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-		Vertragsende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-		Vertragspartner1: bo.Geschaeftspartner{
+		Vertragsende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+		Vertragspartner1: internal.Ptr(bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
@@ -56,8 +56,8 @@ func Test_Vertrag_Deserialization(t *testing.T) {
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.DIENSTLEISTER,
 			},
-		},
-		Vertragspartner2: bo.Geschaeftspartner{
+		}),
+		Vertragspartner2: internal.Ptr(bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.GESCHAEFTSPARTNER,
 				VersionStruktur:   "1",
@@ -76,15 +76,15 @@ func Test_Vertrag_Deserialization(t *testing.T) {
 			Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 				geschaeftspartnerrolle.DIENSTLEISTER,
 			},
-		},
+		}),
 		UnterzeichnerVp1:    nil,
 		UnterzeichnerVp2:    nil,
 		Vertragskonditionen: nil,
 		Vertragsteile: []com.Vertragsteil{
 			{
-				Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-				Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-				Lokation:           "DE0123456789012345678901234567890",
+				Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+				Lokation:           internal.Ptr("DE0123456789012345678901234567890"),
 			},
 		},
 		Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
@@ -108,7 +108,7 @@ func Test_Failed_VertragValidation(t *testing.T) {
 		"gtfield": {
 			bo.Vertrag{
 				Vertragsbeginn: time.Now(),
-				Vertragsende:   time.Now().Add(time.Hour * -12),
+				Vertragsende:   internal.Ptr(time.Now().Add(time.Hour * -12)),
 			},
 		},
 	}
@@ -126,14 +126,14 @@ func Test_Successful_Vertrag_Validation(t *testing.T) {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Vertragsnummer: "asd",
-			Beschreibung:   "",
-			Vertragsstatus: vertragsstatus.ANGENOMMEN,
-			Vertragsart:    vertragsart.BUENDELVERTRAG,
+			Vertragsnummer: internal.Ptr("asd"),
+			Beschreibung:   internal.Ptr("asd"),
+			Vertragsstatus: internal.Ptr(vertragsstatus.ANGENOMMEN),
+			Vertragsart:    internal.Ptr(vertragsart.BUENDELVERTRAG),
 			Sparte:         sparte.STROM,
 			Vertragsbeginn: time.Now(),
-			Vertragsende:   time.Now().Add(time.Hour * 24),
-			Vertragspartner1: bo.Geschaeftspartner{
+			Vertragsende:   internal.Ptr(time.Now().Add(time.Hour * 24)),
+			Vertragspartner1: internal.Ptr(bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
@@ -151,8 +151,8 @@ func Test_Successful_Vertrag_Validation(t *testing.T) {
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
-			},
-			Vertragspartner2: bo.Geschaeftspartner{
+			}),
+			Vertragspartner2: internal.Ptr(bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.GESCHAEFTSPARTNER,
 					VersionStruktur:   "1",
@@ -170,15 +170,15 @@ func Test_Successful_Vertrag_Validation(t *testing.T) {
 				Geschaeftspartnerrollen: []geschaeftspartnerrolle.Geschaeftspartnerrolle{
 					geschaeftspartnerrolle.DIENSTLEISTER,
 				},
-			},
+			}),
 			UnterzeichnerVp1:    nil,
 			UnterzeichnerVp2:    nil,
 			Vertragskonditionen: nil,
 			Vertragsteile: []com.Vertragsteil{
 				{
-					Vertragsteilbeginn: time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC),
-					Vertragsteilende:   time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC),
-					Lokation:           "DE0123456789012345678901234567890",
+					Vertragsteilbeginn: internal.Ptr(time.Date(2022, 8, 1, 0, 0, 0, 0, time.UTC)),
+					Vertragsteilende:   internal.Ptr(time.Date(2023, 8, 1, 0, 0, 0, 0, time.UTC)),
+					Lokation:           internal.Ptr("DE0123456789012345678901234567890"),
 				},
 			},
 			Gemeinderabatt: decimal.NewNullDecimal(decimal.NewFromInt(50)),
