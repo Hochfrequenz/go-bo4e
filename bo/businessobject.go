@@ -99,8 +99,6 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Vertrag)
 		bo.(*Vertrag).BoTyp = typ
 		bo.(*Vertrag).VersionStruktur = defaultVersionStruktur
-		bo.(*Vertrag).Vertragspartner1.BoTyp = botyp.GESCHAEFTSPARTNER
-		bo.(*Vertrag).Vertragspartner2.BoTyp = botyp.GESCHAEFTSPARTNER
 	case botyp.ZAEHLER:
 		bo = new(Zaehler)
 		bo.(*Zaehler).BoTyp = typ
