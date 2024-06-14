@@ -1,0 +1,171 @@
+{
+  "description": "In dieser Komponente sind die Berechnungsparameter für die Ermittlung der Tarifkosten zusammengefasst.\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Tarifberechnungsparameter.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Tarifberechnungsparameter JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Tarifberechnungsparameter.json>`_",
+  "title": "Tarifberechnungsparameter",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "berechnungsmethode": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Tarifkalkulationsmethode.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "hoechstpreisHT": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Preis.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "hoechstpreisNT": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Preis.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istMesspreisInGrundpreisEnthalten": {
+      "title": "Istmesspreisingrundpreisenthalten",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istMesspreisZuBeruecksichtigen": {
+      "title": "Istmesspreiszuberuecksichtigen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kwInklusive": {
+      "title": "Kwinklusive",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kwWeitereMengen": {
+      "title": "Kwweiteremengen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "messpreistyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Messpreistyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "mindestpreis": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Preis.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzpreise": {
+      "title": "Zusatzpreise",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "Tarifpreis.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

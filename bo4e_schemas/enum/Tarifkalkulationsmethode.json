@@ -1,0 +1,12 @@
+{
+  "description": "Auflistung der verschiedenen Berechnungsmethoden für ein Preisblatt.",
+  "title": "Tarifkalkulationsmethode",
+  "type": "string",
+  "enum": [
+    "KEINE",
+    "STAFFELN",
+    "ZONEN",
+    "BESTABRECHNUNG_STAFFEL",
+    "PAKETPREIS"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "description": "In diesem Enum werden die Währungen und ihre Untereinheiten definiert, beispielsweise für die Verwendung in Preisen.",
+  "title": "Waehrungseinheit",
+  "type": "string",
+  "enum": [
+    "EUR",
+    "CT"
+  ]
+}
