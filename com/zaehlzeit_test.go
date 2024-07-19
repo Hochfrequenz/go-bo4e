@@ -2,6 +2,11 @@ package com_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/enum/ermittlungleistungsmaximum"
+	"github.com/hochfrequenz/go-bo4e/enum/haeufigkeitzaehlzeit"
+	"github.com/hochfrequenz/go-bo4e/enum/uebermittelbarkeitzaehlzeit"
+	"github.com/hochfrequenz/go-bo4e/enum/zaehlzeitdefinitiontyp"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"testing"
 
 	"github.com/corbym/gocrest/is"
@@ -10,15 +15,15 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 )
 
-const foo = "foo"
-const bar = "bar"
-
 func Test_Zaehlzeit_Deserialization(t *testing.T) {
-	_foo := foo
-	_bar := bar
 	zaehlzeit := com.Zaehlzeit{
-		Zaehlzeitdefinition: &_foo,
-		Zaehlzeitregister:   &_bar,
+		Code:                       internal.Ptr("HL1"),
+		Haeufigkeit:                internal.Ptr(haeufigkeitzaehlzeit.JAEHRLICH),
+		Uebermittelbarkeit:         internal.Ptr(uebermittelbarkeitzaehlzeit.ELEKTRONISCH),
+		ErmittlungLeistungsmaximum: internal.Ptr(ermittlungleistungsmaximum.VERWENDUNG_HOCHLASTFENSTER),
+		IstBestellbar:              internal.Ptr(true),
+		Typ:                        internal.Ptr(zaehlzeitdefinitiontyp.HOCHLASTZEITFENSTER),
+		BeschreibungTyp:            internal.Ptr("EineBeschreibung"),
 	}
 	serializedZaehlzeit, err := json.Marshal(zaehlzeit)
 	then.AssertThat(t, serializedZaehlzeit, is.Not(is.NilArray[byte]()))
@@ -31,18 +36,15 @@ func Test_Zaehlzeit_Deserialization(t *testing.T) {
 
 func Test_Successful_Zaehlzeit_Validation(t *testing.T) {
 	validate := validator.New()
-	_foo := foo
-	_bar := bar
+
 	validAbweichung := []interface{}{
-		com.Zaehlzeit{
-			Zaehlzeitdefinition: &_foo,
-			Zaehlzeitregister:   &_bar,
-		},
-		com.Zaehlzeit{
-			Zaehlzeitregister: &_bar,
-		},
-		com.Zaehlzeit{
-			Zaehlzeitdefinition: &_foo,
+		com.Zaehlzeit{Code: internal.Ptr("HL1"),
+			Haeufigkeit:                internal.Ptr(haeufigkeitzaehlzeit.JAEHRLICH),
+			Uebermittelbarkeit:         internal.Ptr(uebermittelbarkeitzaehlzeit.ELEKTRONISCH),
+			ErmittlungLeistungsmaximum: internal.Ptr(ermittlungleistungsmaximum.VERWENDUNG_HOCHLASTFENSTER),
+			IstBestellbar:              internal.Ptr(true),
+			Typ:                        internal.Ptr(zaehlzeitdefinitiontyp.HOCHLASTZEITFENSTER),
+			BeschreibungTyp:            internal.Ptr("EineBeschreibung"),
 		},
 		com.Zaehlzeit{},
 	}

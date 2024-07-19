@@ -38,4 +38,5 @@ const (
 	STEUERBARERESSOURCE               // Steuerbare Ressource BO
 	TECHNISCHERESSOURCE               // Technische Ressource BO
 	TRANCHE                           // Objekt zur Aufnahme der Informationen zu einer Tranche
+	ZAEHLZEITDEFINITION               // ZAEHLZEITDEFINITION contains collections of Zaehlzeiten, Zaehlzeitregister and ausgerollten Zaehlzeiten
 )
