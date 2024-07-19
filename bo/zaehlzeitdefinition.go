@@ -6,12 +6,9 @@ import (
 	"time"
 )
 
-// / <summary>
-// / Der NB bzw. LF nutzt Zählzeitdefinitionen für die Tarifierung von Werten.
-// / <remarks>Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt</remarks>
-// / Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten,
-// / den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird)
-// / </summary>
+// Zaehlzeitdefinition en nutzt der NB bzw. LF  für die Tarifierung von Werten.
+// Zaehlzeitdefinitionen werden in der Marktkommunikation mit Prüfidentifikator 25001 (UTILTS) übermittelt.
+// Eine Zählzeitdefinition umfasst dabei eine Liste von möglichen Zählzeiten, den dazugehörigen Registern und der tatsächlich ausgerollten Zählzeit (wenn diese elektronisch übermittelt wird).
 type Zaehlzeitdefinition struct {
 	Geschaeftsobjekt
 	Beginndatum            *time.Time                                           `json:"beginndatum,omitempty"`
