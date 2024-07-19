@@ -39,6 +39,7 @@ var (
 		"STEUERBARERESSOURCE":         STEUERBARERESSOURCE,
 		"TECHNISCHERESSOURCE":         TECHNISCHERESSOURCE,
 		"TRANCHE":                     TRANCHE,
+		"ZAEHLZEITDEFINITION":         ZAEHLZEITDEFINITION,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -72,6 +73,7 @@ var (
 		STEUERBARERESSOURCE:         "STEUERBARERESSOURCE",
 		TECHNISCHERESSOURCE:         "TECHNISCHERESSOURCE",
 		TRANCHE:                     "TRANCHE",
+		ZAEHLZEITDEFINITION:         "ZAEHLZEITDEFINITION",
 	}
 )
 
@@ -109,6 +111,7 @@ func init() {
 			interface{}(STEUERBARERESSOURCE).(fmt.Stringer).String():         STEUERBARERESSOURCE,
 			interface{}(TECHNISCHERESSOURCE).(fmt.Stringer).String():         TECHNISCHERESSOURCE,
 			interface{}(TRANCHE).(fmt.Stringer).String():                     TRANCHE,
+			interface{}(ZAEHLZEITDEFINITION).(fmt.Stringer).String():         ZAEHLZEITDEFINITION,
 		}
 	}
 }

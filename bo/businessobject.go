@@ -127,6 +127,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Tranche)
 		bo.(*Tranche).BoTyp = typ
 		bo.(*Tranche).VersionStruktur = defaultVersionStruktur
+	case botyp.ZAEHLZEITDEFINITION:
+		bo = new(Zaehlzeitdefinition)
+		bo.(*Zaehlzeitdefinition).BoTyp = typ
+		bo.(*Zaehlzeitdefinition).VersionStruktur = defaultVersionStruktur
 	default:
 		return nil
 	}
