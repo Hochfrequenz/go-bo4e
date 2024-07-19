@@ -20,7 +20,7 @@ type Zaehlzeitdefinition struct {
 	Notwendigkeit          *definitionennotwendigkeit.DefinitionenNotwendigkeit `json:"notwendigkeit,omitempty"`
 	Zaehlzeiten            []com.Zaehlzeit                                      `json:"zaehlzeiten,omitempty"`
 	Zaehlzeitregister      []com.Zaehlzeitregister                              `json:"zaehlzeitregister,omitempty"`
-	AusgerollteZaehlzeiten []com.AusgerollteZaehlzeit                           `json:"ausgerolltezaehlzeiten,omitempty"`
+	AusgerollteZaehlzeiten []com.AusgerollteZaehlzeit                           `json:"ausgerollteZaehlzeiten,omitempty"`
 }
 
 func (_ Zaehlzeitdefinition) GetDefaultJsonTags() []string {
