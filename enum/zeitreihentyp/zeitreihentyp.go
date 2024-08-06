@@ -9,11 +9,13 @@ package zeitreihentyp
 type Zeitreihentyp int
 
 const (
-	EGS Zeitreihentyp = iota + 1 // EGS ist eine Einspeisegangsumme
-	LGS                          // LGS ist eine Lastgangsumme
-	NZR                          // NZR ist eine Netzzeitreihe
-	SES                          // SES ist eine Standardeinspeiseprofilsumme
-	SLS                          // SLS ist eine Standardlastsumme
-	TES                          // TES ist eine tagesparameter-abhängige Einspeiseprofilsumme
-	TLS                          // TLS ist eine tagesparameter-abhängige Lastprofilsumme
+	EGS     Zeitreihentyp = iota + 1 // EGS ist eine Einspeisegangsumme
+	LGS                              // LGS ist eine Lastgangsumme
+	NZR                              // NZR ist eine Netzzeitreihe
+	SES                              // SES ist eine Standardeinspeiseprofilsumme
+	SLS                              // SLS ist eine Standardlastsumme
+	TES                              // TES ist eine tagesparameter-abhängige Einspeiseprofilsumme
+	TLS                              // TLS ist eine tagesparameter-abhängige Lastprofilsumme
+	SLS_TLS                          // SLS_TLS ist die gemeinsame Messung aus SLS und TLS
+	SES_TES                          // SES_TES ist die gemeinsame Messung aus SES und TES
 )

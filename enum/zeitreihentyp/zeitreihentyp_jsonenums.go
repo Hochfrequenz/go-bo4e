@@ -9,23 +9,27 @@ import (
 
 var (
 	_ZeitreihentypNameToValue = map[string]Zeitreihentyp{
-		"EGS": EGS,
-		"LGS": LGS,
-		"NZR": NZR,
-		"SES": SES,
-		"SLS": SLS,
-		"TES": TES,
-		"TLS": TLS,
+		"EGS":     EGS,
+		"LGS":     LGS,
+		"NZR":     NZR,
+		"SES":     SES,
+		"SLS":     SLS,
+		"TES":     TES,
+		"TLS":     TLS,
+		"SLS_TLS": SLS_TLS,
+		"SES_TES": SES_TES,
 	}
 
 	_ZeitreihentypValueToName = map[Zeitreihentyp]string{
-		EGS: "EGS",
-		LGS: "LGS",
-		NZR: "NZR",
-		SES: "SES",
-		SLS: "SLS",
-		TES: "TES",
-		TLS: "TLS",
+		EGS:     "EGS",
+		LGS:     "LGS",
+		NZR:     "NZR",
+		SES:     "SES",
+		SLS:     "SLS",
+		TES:     "TES",
+		TLS:     "TLS",
+		SLS_TLS: "SLS_TLS",
+		SES_TES: "SES_TES",
 	}
 )
 
@@ -33,13 +37,15 @@ func init() {
 	var v Zeitreihentyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_ZeitreihentypNameToValue = map[string]Zeitreihentyp{
-			interface{}(EGS).(fmt.Stringer).String(): EGS,
-			interface{}(LGS).(fmt.Stringer).String(): LGS,
-			interface{}(NZR).(fmt.Stringer).String(): NZR,
-			interface{}(SES).(fmt.Stringer).String(): SES,
-			interface{}(SLS).(fmt.Stringer).String(): SLS,
-			interface{}(TES).(fmt.Stringer).String(): TES,
-			interface{}(TLS).(fmt.Stringer).String(): TLS,
+			interface{}(EGS).(fmt.Stringer).String():     EGS,
+			interface{}(LGS).(fmt.Stringer).String():     LGS,
+			interface{}(NZR).(fmt.Stringer).String():     NZR,
+			interface{}(SES).(fmt.Stringer).String():     SES,
+			interface{}(SLS).(fmt.Stringer).String():     SLS,
+			interface{}(TES).(fmt.Stringer).String():     TES,
+			interface{}(TLS).(fmt.Stringer).String():     TLS,
+			interface{}(SLS_TLS).(fmt.Stringer).String(): SLS_TLS,
+			interface{}(SES_TES).(fmt.Stringer).String(): SES_TES,
 		}
 	}
 }
