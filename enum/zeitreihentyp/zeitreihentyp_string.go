@@ -15,11 +15,13 @@ func _() {
 	_ = x[SLS-5]
 	_ = x[TES-6]
 	_ = x[TLS-7]
+	_ = x[SLS_TLS-8]
+	_ = x[SES_TES-9]
 }
 
-const _Zeitreihentyp_name = "EGSLGSNZRSESSLSTESTLS"
+const _Zeitreihentyp_name = "EGSLGSNZRSESSLSTESTLSSLS_TLSSES_TES"
 
-var _Zeitreihentyp_index = [...]uint8{0, 3, 6, 9, 12, 15, 18, 21}
+var _Zeitreihentyp_index = [...]uint8{0, 3, 6, 9, 12, 15, 18, 21, 28, 35}
 
 func (i Zeitreihentyp) String() string {
 	i -= 1
