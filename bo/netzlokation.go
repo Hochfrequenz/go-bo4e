@@ -64,3 +64,13 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) int {
 	}
 	return result
 }
+
+// Netzlokation is a minimalistic implementation of the BO Netzlokation. But this small implementation alone, allows use to unmarshall boneycombs that contain Netzlokation-BOs
+type Netzlokation struct {
+	Geschaeftsobjekt
+	NetzlokationsId string `json:"netzlokationsId,omitempty" example:"EOI05HSBJG0" validate:"alphanum,required,len=11"` // NetzlokationsId is the ID of the Netzlokation
+}
+
+func (_ Netzlokation) GetDefaultJsonTags() []string {
+	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+}
