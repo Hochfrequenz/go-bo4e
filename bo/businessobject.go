@@ -50,6 +50,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Bilanzierung)
 		bo.(*Bilanzierung).BoTyp = typ
 		bo.(*Bilanzierung).VersionStruktur = defaultVersionStruktur
+	case botyp.EINSPEISUNG:
+		bo = new(Einspeisung)
+		bo.(*Einspeisung).BoTyp = typ
+		bo.(*Einspeisung).VersionStruktur = defaultVersionStruktur
 	case botyp.ENERGIEMENGE:
 		bo = new(Energiemenge)
 		bo.(*Energiemenge).BoTyp = typ
@@ -74,6 +78,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(Messlokation)
 		bo.(*Messlokation).BoTyp = typ
 		bo.(*Messlokation).VersionStruktur = defaultVersionStruktur
+	case botyp.NETZLOKATION:
+		bo = new(Netzlokation)
+		bo.(*Netzlokation).BoTyp = typ
+		bo.(*Netzlokation).VersionStruktur = defaultVersionStruktur
 	case botyp.NETZNUTZUNGSRECHNUNG:
 		bo = new(Netznutzungsrechnung)
 		bo.(*Netznutzungsrechnung).BoTyp = typ
@@ -119,6 +127,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo = new(SteuerbareRessource)
 		bo.(*SteuerbareRessource).BoTyp = typ
 		bo.(*SteuerbareRessource).VersionStruktur = defaultVersionStruktur
+	case botyp.SUMMENZEITREIHE:
+		bo = new(Summenzeitreihe)
+		bo.(*Summenzeitreihe).BoTyp = typ
+		bo.(*Summenzeitreihe).VersionStruktur = defaultVersionStruktur
 	case botyp.TECHNISCHERESSOURCE:
 		bo = new(TechnischeRessource)
 		bo.(*TechnischeRessource).BoTyp = typ

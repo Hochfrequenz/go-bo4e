@@ -40,6 +40,9 @@ var (
 		"TECHNISCHERESSOURCE":         TECHNISCHERESSOURCE,
 		"TRANCHE":                     TRANCHE,
 		"ZAEHLZEITDEFINITION":         ZAEHLZEITDEFINITION,
+		"NETZLOKATION":                NETZLOKATION,
+		"SUMMENZEITREIHE":             SUMMENZEITREIHE,
+		"EINSPEISUNG":                 EINSPEISUNG,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -74,6 +77,9 @@ var (
 		TECHNISCHERESSOURCE:         "TECHNISCHERESSOURCE",
 		TRANCHE:                     "TRANCHE",
 		ZAEHLZEITDEFINITION:         "ZAEHLZEITDEFINITION",
+		NETZLOKATION:                "NETZLOKATION",
+		SUMMENZEITREIHE:             "SUMMENZEITREIHE",
+		EINSPEISUNG:                 "EINSPEISUNG",
 	}
 )
 
@@ -112,6 +118,9 @@ func init() {
 			interface{}(TECHNISCHERESSOURCE).(fmt.Stringer).String():         TECHNISCHERESSOURCE,
 			interface{}(TRANCHE).(fmt.Stringer).String():                     TRANCHE,
 			interface{}(ZAEHLZEITDEFINITION).(fmt.Stringer).String():         ZAEHLZEITDEFINITION,
+			interface{}(NETZLOKATION).(fmt.Stringer).String():                NETZLOKATION,
+			interface{}(SUMMENZEITREIHE).(fmt.Stringer).String():             SUMMENZEITREIHE,
+			interface{}(EINSPEISUNG).(fmt.Stringer).String():                 EINSPEISUNG,
 		}
 	}
 }
