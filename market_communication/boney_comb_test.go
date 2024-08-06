@@ -5,6 +5,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -147,6 +148,9 @@ func Test_BOneyComb_Deserialization(t *testing.T) {
 	then.AssertThat(t, len(jsonFiles), is.Not(is.EqualTo(0)))
 
 	for _, file := range jsonFiles {
+		if !strings.HasSuffix(file.Name(), ".bo.json") {
+			continue
+		}
 		fileContent, readErr := os.ReadFile(filepath.FromSlash(dirName + "/" + file.Name()))
 		then.AssertThat(t, readErr, is.Nil())
 		then.AssertThat(t, fileContent, is.Not(is.NilArray[byte]()))
