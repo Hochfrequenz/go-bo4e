@@ -2,6 +2,7 @@ package market_communication_test
 
 import (
 	"encoding/json"
+	"github.com/go-playground/validator/v10"
 	"os"
 	"path/filepath"
 	"testing"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
@@ -141,7 +141,7 @@ func Test_Empty_BOneyComb_With_Empty_Stammdaten_Is_Serializable(t *testing.T) {
 
 // Test_BOneyComb_Deserialization loops over the test_boney_combs directory and tries to deserialize all the json files there as boneycomb
 func Test_BOneyComb_Deserialization(t *testing.T) {
-	const dirName = "test_boney_combs"
+	const dirName = "../../example_market_communication_bo4e_transactions/UTILMD/FV2310" // assuming you have checked out the example-repo side by side with go-bo4e
 	jsonFiles, err := os.ReadDir(dirName)
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, len(jsonFiles), is.Not(is.EqualTo(0)))
