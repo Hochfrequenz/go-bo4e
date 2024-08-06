@@ -2,6 +2,7 @@ package market_communication_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -253,6 +254,9 @@ func Test_Submodule_Example_Messages(t *testing.T) {
 		then.AssertThat(t, fileContent, is.Not(is.NilArray[byte]()))
 		var boneyComb market_communication.BOneyComb
 		err = json.Unmarshal(fileContent, &boneyComb)
+		if err != nil {
+			fmt.Printf("Failed to unmarshal file content from %s: %v\n", fileName, err)
+		}
 		then.AssertThat(t, err, is.Nil())
 	}
 
