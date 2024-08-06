@@ -8,8 +8,8 @@ package messwerterfassung
 type Messwerterfassung int
 
 const (
-	// FERN_AUSLESBAR describes automatic meter readings (EDIFACT AMR)
-	FERN_AUSLESBAR Messwerterfassung = iota + 1
+	// FERNAUSLESBAR describes automatic meter readings (EDIFACT AMR)
+	FERNAUSLESBAR Messwerterfassung = iota + 1
 	// MANUELL_AUSGELESENE describes manual meter readings (EDIFACT MMR)
 	MANUELL_AUSGELESENE
 )
