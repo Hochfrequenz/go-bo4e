@@ -8,13 +8,13 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[FERN_AUSLESBAR-1]
+	_ = x[FERNAUSLESBAR-1]
 	_ = x[MANUELL_AUSGELESENE-2]
 }
 
-const _Messwerterfassung_name = "FERN_AUSLESBARMANUELL_AUSGELESENE"
+const _Messwerterfassung_name = "FERNAUSLESBARMANUELL_AUSGELESENE"
 
-var _Messwerterfassung_index = [...]uint8{0, 14, 33}
+var _Messwerterfassung_index = [...]uint8{0, 13, 32}
 
 func (i Messwerterfassung) String() string {
 	i -= 1
