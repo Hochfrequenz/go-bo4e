@@ -9,12 +9,12 @@ import (
 
 var (
 	_MesswerterfassungNameToValue = map[string]Messwerterfassung{
-		"FERN_AUSLESBAR":      FERN_AUSLESBAR,
+		"FERNAUSLESBAR":       FERNAUSLESBAR,
 		"MANUELL_AUSGELESENE": MANUELL_AUSGELESENE,
 	}
 
 	_MesswerterfassungValueToName = map[Messwerterfassung]string{
-		FERN_AUSLESBAR:      "FERN_AUSLESBAR",
+		FERNAUSLESBAR:       "FERNAUSLESBAR",
 		MANUELL_AUSGELESENE: "MANUELL_AUSGELESENE",
 	}
 )
@@ -23,7 +23,7 @@ func init() {
 	var v Messwerterfassung
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_MesswerterfassungNameToValue = map[string]Messwerterfassung{
-			interface{}(FERN_AUSLESBAR).(fmt.Stringer).String():      FERN_AUSLESBAR,
+			interface{}(FERNAUSLESBAR).(fmt.Stringer).String():       FERNAUSLESBAR,
 			interface{}(MANUELL_AUSGELESENE).(fmt.Stringer).String(): MANUELL_AUSGELESENE,
 		}
 	}
