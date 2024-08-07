@@ -2,6 +2,7 @@ package bo
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
@@ -16,20 +17,31 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 	}
 
 	*boSlice = make(BusinessObjectSlice, len(array))
+	errs := make([]error, 0)
+
 	for i := range array {
 		base := Geschaeftsobjekt{}
 		data := []byte(array[i])
+
 		if err := json.Unmarshal(data, &base); err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		elem := NewBusinessObject(base.GetBoTyp())
+
 		if elem == nil {
-			return fmt.Errorf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp())
+			errs = append(errs, fmt.Errorf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp()))
+			continue
 		}
+
 		if err := json.Unmarshal(data, elem); err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		(*boSlice)[i] = elem
 	}
-	return nil
+
+	return errors.Join(errs...)
 }
