@@ -3,18 +3,19 @@ package bo
 import (
 	"encoding/json"
 	"fmt"
-	"regexp"
-	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/abwicklungsmodell"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
+	"regexp"
+	"time"
 
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
 	"github.com/hochfrequenz/go-bo4e/enum/fallgruppenzuordnung"
 	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
+	"github.com/hochfrequenz/go-bo4e/enum/wahlrechtprognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
 	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 	"github.com/shopspring/decimal"
@@ -34,16 +35,16 @@ type Bilanzierung struct {
 	// 1. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] * [Verbrauchsaufteilung in % / 100%] = [zu verlagernde Energiemenge]
 	// 2. [Gemessene Energiemenge der OBIS "Schwachlast"] - [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für Schwachlast]
 	// 3. [Gemessene Energiemenge der OBIS "nicht Schwachlast"] + [zu verlagernde Energiemenge] = [Ermittelte Energiemenge für nicht Schwachlast]
-	Verbrauchsaufteilung       decimal.NullDecimal                                  `json:"verbrauchsaufteilung,omitempty"`
-	Zeitreihentyp              *zeitreihentyp.Zeitreihentyp                         `json:"zeitreihentyp,omitempty"`                                // Zeitreihentyp beschreibt den verwendeten Zeitreihentyp (SLS, TLS...)
-	Aggregationsverantwortung  *aggregationsverantwortung.Aggregationsverantwortung `json:"aggregationsverantwortung,omitempty"`                    // Aggregationsverantwortung benennt, bei wem die Aggregationsverantwortung liegt
-	Prognosegrundlage          *prognosegrundlage.Prognosegrundlage                 `json:"prognosegrundlage,omitempty"`                            // Die Prognosegrundlage beschreibt die Prognosegrundlage
-	DetailsPrognosegrundlage   []profiltyp.Profiltyp                                `json:"detailsPrognosegrundlage,omitempty"`                     // ?
-	WahlrechtPrognosegrundlage *bool                                                `json:"wahlrechtPrognosegrundlage,omitempty"`                   // WahlrechtPrognosegrundlage ist true, falls der Lieferant das Wahlrecht hat
-	Fallgruppenzuordnung       *fallgruppenzuordnung.Fallgruppenzuordnung           `json:"fallgruppenzuordnung,omitempty"`                         // Fallgruppenzuordnung (für Gas RLM)
-	Prioritaet                 *int                                                 `json:"prioritaet,omitempty"`                                   // Prioritaet ist die Priorität des Bilanzkreises für Gas
-	MarktlokationsId           *string                                              `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
-	Abwicklungsmodell          *abwicklungsmodell.Abwicklungsmodell                 `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
+	Verbrauchsaufteilung       decimal.NullDecimal                                    `json:"verbrauchsaufteilung,omitempty"`
+	Zeitreihentyp              *zeitreihentyp.Zeitreihentyp                           `json:"zeitreihentyp,omitempty"`                                // Zeitreihentyp beschreibt den verwendeten Zeitreihentyp (SLS, TLS...)
+	Aggregationsverantwortung  *aggregationsverantwortung.Aggregationsverantwortung   `json:"aggregationsverantwortung,omitempty"`                    // Aggregationsverantwortung benennt, bei wem die Aggregationsverantwortung liegt
+	Prognosegrundlage          *prognosegrundlage.Prognosegrundlage                   `json:"prognosegrundlage,omitempty"`                            // Die Prognosegrundlage beschreibt die Prognosegrundlage
+	DetailsPrognosegrundlage   []profiltyp.Profiltyp                                  `json:"detailsPrognosegrundlage,omitempty"`                     // ?
+	WahlrechtPrognosegrundlage *wahlrechtprognosegrundlage.WahlrechtPrognosegrundlage `json:"wahlrechtPrognosegrundlage,omitempty"`                   // WahlrechtPrognosegrundlage
+	Fallgruppenzuordnung       *fallgruppenzuordnung.Fallgruppenzuordnung             `json:"fallgruppenzuordnung,omitempty"`                         // Fallgruppenzuordnung (für Gas RLM)
+	Prioritaet                 *int                                                   `json:"prioritaet,omitempty"`                                   // Prioritaet ist die Priorität des Bilanzkreises für Gas
+	MarktlokationsId           *string                                                `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
+	Abwicklungsmodell          *abwicklungsmodell.Abwicklungsmodell                   `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
 
 }
 
