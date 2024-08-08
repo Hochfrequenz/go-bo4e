@@ -1,0 +1,243 @@
+{
+  "description": "Eine Komponente zur Abbildung einzelner Lose einer Ausschreibung\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Ausschreibungslos.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Ausschreibungslos JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Ausschreibungslos.json>`_",
+  "title": "Ausschreibungslos",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anzahlLieferstellen": {
+      "title": "Anzahllieferstellen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bemerkung": {
+      "title": "Bemerkung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "betreutDurch": {
+      "title": "Betreutdurch",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "energieart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gesamtMenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferstellen": {
+      "title": "Lieferstellen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "Ausschreibungsdetail.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferzeitraum": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "losnummer": {
+      "title": "Losnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preismodell": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Preismodell.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wiederholungsintervall": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschKuendingungsfrist": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschMaximalmenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschMindestmenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschRechnungslegung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Rechnungslegung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschVertragsform": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Vertragsform.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wunschZahlungsziel": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

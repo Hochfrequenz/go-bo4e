@@ -1,0 +1,209 @@
+{
+  "description": "Über Rechnungspositionen werden Rechnungen strukturiert.\nIn einem Rechnungsteil wird jeweils eine in sich geschlossene Leistung abgerechnet.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Rechnungsposition.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Rechnungsposition JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Rechnungsposition.json>`_",
+  "title": "Rechnungsposition",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artikelId": {
+      "title": "Artikelid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artikelnummer": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/BDEWArtikelnummer.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einzelpreis": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Preis.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferungBis": {
+      "title": "Lieferungbis",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferungVon": {
+      "title": "Lieferungvon",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lokationsId": {
+      "title": "Lokationsid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "positionsMenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "positionsnummer": {
+      "title": "Positionsnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "positionstext": {
+      "title": "Positionstext",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "teilrabattNetto": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "teilsummeNetto": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Betrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "teilsummeSteuer": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Steuerbetrag.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zeitbezogeneMenge": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zeiteinheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Mengeneinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
