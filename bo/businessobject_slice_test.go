@@ -76,15 +76,49 @@ func Test_Successful_Slice_Deserialization(t *testing.T) {
 }
 
 func Test_Slice_Deserialization_Fails_For_Invalid_BoTyps(t *testing.T) {
-	jsonWithInvalidBoTyp := "[{\"boTyp\":\"foo\"}]" // foo is not a valid boTyp => deserialization should fail
+	jsonWithInvalidBoTyp := `{"stammdaten": [{"boTyp":"foo"}]}` // foo is not a valid boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithInvalidBoTyp), &deserializedBoneyComb)
 	then.AssertThat(t, err, is.Not(is.Nil()))
 }
 
 func Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps(t *testing.T) {
-	jsonWithUnimplementedBoTyp := "[{\"boTyp\":\"PREISBLATTUMLAGEN\"}]" // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
+	jsonWithUnimplementedBoTyp := `{"stammdaten": [{"boTyp":"PREISBLATTUMLAGEN"}]}` // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
 	then.AssertThat(t, err, is.Not(is.Nil()))
+}
+
+func TestBusinessObjectSliceUnmarshalErrors(t *testing.T) {
+	rawJSON := `
+	[
+		{
+			"boTyp": "foo"
+		},
+		{
+			"boTyp": "PREISBLATT",
+			"Herausgeber": true,
+			"Gueltigkeit": "always"
+		},
+		{
+			"boTyp": 5000
+		}
+	]
+	`
+
+	var boSlice bo.BusinessObjectSlice
+
+	err := json.Unmarshal([]byte(rawJSON), &boSlice)
+
+	unwrapper, ok := err.(interface{ Unwrap() []error })
+	if !ok {
+		t.Errorf("expected error to provide wrapped errors, got %+v (%T)", err, err)
+	}
+
+	errs := unwrapper.Unwrap()
+	if len(errs) != 3 {
+		t.Errorf("expected 3 errors, got %+v (%d errors)", errs, len(errs))
+	}
+
+	// We do not check the types of errors as there's no reliable error API yet.
 }
