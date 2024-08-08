@@ -2,8 +2,10 @@ package market_communication_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -166,4 +168,96 @@ func Test_BOneyComb_Deserialization(t *testing.T) {
 			then.AssertThat(t, actualBuchungsdatum.Unix(), is.EqualTo(expectedBuchungsdatum.Unix()))
 		}
 	}
+}
+
+func processJSONFilesInDir(dir string, processFunc func(path string) error) error {
+	return filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if !d.IsDir() && filepath.Ext(d.Name()) == ".json" {
+			return processFunc(path)
+		}
+
+		return nil
+	})
+}
+
+// submoduleIsCheckedOut returns true if the 'example_market_communication_bo4e_transactions' submodule is checked out
+func submoduleIsCheckedOut(dir string) (bool, error) {
+	var hasJSONFiles bool
+	err := processJSONFilesInDir(dir, func(path string) error {
+		hasJSONFiles = true
+		// Return an error to stop further traversal
+		return filepath.SkipDir
+	})
+
+	if err != nil {
+		if err == filepath.SkipDir {
+			return hasJSONFiles, nil
+		}
+		return false, err
+	}
+
+	return hasJSONFiles, nil
+}
+
+// getJsonFilePathsFromSubmodule returns a list of JSON file paths from the specified directory
+func getJsonFilePathsFromSubmodule(dir string) ([]string, error) {
+	var jsonFiles []string
+	err := processJSONFilesInDir(dir, func(path string) error {
+		jsonFiles = append(jsonFiles, path)
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return jsonFiles, nil
+}
+
+var formatAllowList = []string{"UTILMD"}
+var formatVersionAllowList = []string{"FV2404"}
+
+func matchesAllowLists(fileName string) bool {
+	for _, format := range formatAllowList {
+		if !strings.Contains(fileName, format) {
+			continue
+		}
+		for _, formatVersion := range formatVersionAllowList {
+			if strings.Contains(fileName, formatVersion) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func Test_Submodule_Example_Messages(t *testing.T) {
+	const relativeSubmodulePath = "example_market_communication_bo4e_transactions"
+	submoduleIsCheckedOut, submoduleCheckoutErr := submoduleIsCheckedOut(relativeSubmodulePath)
+	then.AssertThat(t, submoduleCheckoutErr, is.Nil())
+	if !submoduleIsCheckedOut {
+		// happens if you don't have access to the submodule => exit silently
+		return
+	}
+	jsonFiles, err := getJsonFilePathsFromSubmodule(relativeSubmodulePath)
+	then.AssertThat(t, err, is.Nil())
+	for _, fileName := range jsonFiles {
+		isBoneyCombFile := strings.HasSuffix(fileName, ".bo.json")
+		if !isBoneyCombFile || !matchesAllowLists(fileName) {
+			continue
+		}
+		fileContent, readErr := os.ReadFile(filepath.FromSlash(fileName))
+		then.AssertThat(t, readErr, is.Nil())
+		then.AssertThat(t, fileContent, is.Not(is.NilArray[byte]()))
+		var boneyComb market_communication.BOneyComb
+		err = json.Unmarshal(fileContent, &boneyComb)
+		if err != nil {
+			fmt.Printf("Failed to unmarshal file content from %s: %v\n", fileName, err)
+		}
+		then.AssertThat(t, err, is.Nil())
+	}
+
 }

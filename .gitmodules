@@ -1,0 +1,3 @@
+[submodule "market_communication/example_market_communication_bo4e_transactions"]
+	path = market_communication/example_market_communication_bo4e_transactions
+	url = https://github.com/enercity/example_market_communication_bo4e_transactions
