@@ -28,7 +28,6 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-var aFalse = false
 var aTrue = true
 var seventeen = 17
 var validBilanzierung = bo.Bilanzierung{
