@@ -20,6 +20,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/profiltyp"
 	"github.com/hochfrequenz/go-bo4e/enum/profilverfahren"
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
+	"github.com/hochfrequenz/go-bo4e/enum/wahlrechtprognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/internal/testcase"
@@ -65,7 +66,7 @@ var validBilanzierung = bo.Bilanzierung{
 	DetailsPrognosegrundlage: []profiltyp.Profiltyp{
 		profiltyp.SLP_SEP,
 	},
-	WahlrechtPrognosegrundlage: &aFalse,
+	WahlrechtPrognosegrundlage: internal.Ptr(wahlrechtprognosegrundlage.DURCH_LF_NICHT_GEGEBEN),
 	Fallgruppenzuordnung:       internal.Ptr(fallgruppenzuordnung.GABI_RLMoT),
 	Prioritaet:                 &seventeen,
 	MarktlokationsId:           internal.Ptr("51238696781"),
