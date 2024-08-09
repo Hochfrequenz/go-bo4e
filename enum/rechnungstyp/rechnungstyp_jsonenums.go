@@ -24,6 +24,7 @@ var (
 		"SPERRUNG_INBETRIEBNAHME":    SPERRUNG_INBETRIEBNAHME,
 		"VERZUGSKOSTEN":              VERZUGSKOSTEN,
 		"BLINDARBEIT":                BLINDARBEIT,
+		"ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS": ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS,
 	}
 
 	_RechnungstypValueToName = map[Rechnungstyp]string{
@@ -42,6 +43,7 @@ var (
 		SPERRUNG_INBETRIEBNAHME:    "SPERRUNG_INBETRIEBNAHME",
 		VERZUGSKOSTEN:              "VERZUGSKOSTEN",
 		BLINDARBEIT:                "BLINDARBEIT",
+		ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS: "ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS",
 	}
 )
 
@@ -49,21 +51,22 @@ func init() {
 	var v Rechnungstyp
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_RechnungstypNameToValue = map[string]Rechnungstyp{
-			interface{}(ABSCHLAGSRECHNUNG).(fmt.Stringer).String():          ABSCHLAGSRECHNUNG,
-			interface{}(TURNUSRECHNUNG).(fmt.Stringer).String():             TURNUSRECHNUNG,
-			interface{}(MONATSRECHNUNG).(fmt.Stringer).String():             MONATSRECHNUNG,
-			interface{}(WIMRECHNUNG).(fmt.Stringer).String():                WIMRECHNUNG,
-			interface{}(ZWISCHENRECHNUNG).(fmt.Stringer).String():           ZWISCHENRECHNUNG,
-			interface{}(INTEGRIERTE_13TE_RECHNUNG).(fmt.Stringer).String():  INTEGRIERTE_13TE_RECHNUNG,
-			interface{}(ZUSAETZLICHE_13TE_RECHNUNG).(fmt.Stringer).String(): ZUSAETZLICHE_13TE_RECHNUNG,
-			interface{}(MEHRMINDERMENGENRECHNUNG).(fmt.Stringer).String():   MEHRMINDERMENGENRECHNUNG,
-			interface{}(ABSCHLUSSRECHNUNG).(fmt.Stringer).String():          ABSCHLUSSRECHNUNG,
-			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                MSBRECHNUNG,
-			interface{}(KAPAZITAETSRECHNUNG).(fmt.Stringer).String():        KAPAZITAETSRECHNUNG,
-			interface{}(SONDERRECHNUNG).(fmt.Stringer).String():             SONDERRECHNUNG,
-			interface{}(SPERRUNG_INBETRIEBNAHME).(fmt.Stringer).String():    SPERRUNG_INBETRIEBNAHME,
-			interface{}(VERZUGSKOSTEN).(fmt.Stringer).String():              VERZUGSKOSTEN,
-			interface{}(BLINDARBEIT).(fmt.Stringer).String():                BLINDARBEIT,
+			interface{}(ABSCHLAGSRECHNUNG).(fmt.Stringer).String():                                      ABSCHLAGSRECHNUNG,
+			interface{}(TURNUSRECHNUNG).(fmt.Stringer).String():                                         TURNUSRECHNUNG,
+			interface{}(MONATSRECHNUNG).(fmt.Stringer).String():                                         MONATSRECHNUNG,
+			interface{}(WIMRECHNUNG).(fmt.Stringer).String():                                            WIMRECHNUNG,
+			interface{}(ZWISCHENRECHNUNG).(fmt.Stringer).String():                                       ZWISCHENRECHNUNG,
+			interface{}(INTEGRIERTE_13TE_RECHNUNG).(fmt.Stringer).String():                              INTEGRIERTE_13TE_RECHNUNG,
+			interface{}(ZUSAETZLICHE_13TE_RECHNUNG).(fmt.Stringer).String():                             ZUSAETZLICHE_13TE_RECHNUNG,
+			interface{}(MEHRMINDERMENGENRECHNUNG).(fmt.Stringer).String():                               MEHRMINDERMENGENRECHNUNG,
+			interface{}(ABSCHLUSSRECHNUNG).(fmt.Stringer).String():                                      ABSCHLUSSRECHNUNG,
+			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                                            MSBRECHNUNG,
+			interface{}(KAPAZITAETSRECHNUNG).(fmt.Stringer).String():                                    KAPAZITAETSRECHNUNG,
+			interface{}(SONDERRECHNUNG).(fmt.Stringer).String():                                         SONDERRECHNUNG,
+			interface{}(SPERRUNG_INBETRIEBNAHME).(fmt.Stringer).String():                                SPERRUNG_INBETRIEBNAHME,
+			interface{}(VERZUGSKOSTEN).(fmt.Stringer).String():                                          VERZUGSKOSTEN,
+			interface{}(BLINDARBEIT).(fmt.Stringer).String():                                            BLINDARBEIT,
+			interface{}(ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS).(fmt.Stringer).String(): ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS,
 		}
 	}
 }
