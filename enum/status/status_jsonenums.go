@@ -75,6 +75,7 @@ var (
 		"ANGABEN_MESSLOKATION":                                 ANGABEN_MESSLOKATION,
 		"BASIS_MME":                                            BASIS_MME,
 		"GRUND_ANGABEN_MESSLOKATION":                           GRUND_ANGABEN_MESSLOKATION,
+		"ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR": ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR,
 	}
 
 	_StatusValueToName = map[Status]string{
@@ -144,6 +145,7 @@ var (
 		ANGABEN_MESSLOKATION:                                 "ANGABEN_MESSLOKATION",
 		BASIS_MME:                                            "BASIS_MME",
 		GRUND_ANGABEN_MESSLOKATION:                           "GRUND_ANGABEN_MESSLOKATION",
+		ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR: "ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR",
 	}
 )
 
@@ -217,6 +219,7 @@ func init() {
 			interface{}(ANGABEN_MESSLOKATION).(fmt.Stringer).String():                                                                     ANGABEN_MESSLOKATION,
 			interface{}(BASIS_MME).(fmt.Stringer).String():                                                                                BASIS_MME,
 			interface{}(GRUND_ANGABEN_MESSLOKATION).(fmt.Stringer).String():                                                               GRUND_ANGABEN_MESSLOKATION,
+			interface{}(ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR).(fmt.Stringer).String():         ANFORDERUNG_IN_DIE_VERGANGENHEIT_ZUM_ANGEFORDERTEN_ZEITPUNKT_LIEGT_KEIN_WERT_VOR,
 		}
 	}
 }
