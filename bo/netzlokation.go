@@ -1,6 +1,9 @@
 package bo
 
 import (
+	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"regexp"
 	"strconv"
 	"unicode"
@@ -68,7 +71,16 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) int {
 // Netzlokation is a minimalistic implementation of the BO Netzlokation. But this small implementation alone, allows use to unmarshall boneycombs that contain Netzlokation-BOs
 type Netzlokation struct {
 	Geschaeftsobjekt
-	NetzlokationsId string `json:"netzlokationsId,omitempty" example:"EOI05HSBJG0" validate:"alphanum,required,len=11"` // NetzlokationsId is the ID of the Netzlokation
+	NetzlokationsId            string                    `json:"netzlokationsId,omitempty" example:"EOI05HSBJG0" validate:"alphanum,required,len=11"` // NetzlokationsId is the ID of the Netzlokation
+	Sparte                     sparte.Sparte             `json:"sparte,omitempty" validate:"required"`                                                // Sparte describes the Division
+	Netzanschlussleistung      com.Menge                 `json:"netzanschlussleistung,omitempty"`                                                     // Netzanschlussleistungsmenge der Netzlokation
+	GrundzustaendigerMSBCodeNr string                    `json:"grundzustaendigerMSBCodeNr,omitempty"`                                                // Codenummer des grundzuständigen Messstellenbetreibers, der für diese Netzlokation zuständig ist.
+	Steuerkanal                *bool                     `json:"steuerkanal,omitempty"`                                                               // Ob ein Steuerkanal der Netzlokation zugeordnet ist und somit die Netzlokation gesteuert werden kann. ZF2: Kein Steuerkanal vorhanden. ZF3: Steuerkanal vorhanden.
+	ObisKennzahl               string                    `json:"obisKennzahl,omitempty"`                                                              // Die OBIS-Kennzahl für die Netzlokation
+	Verwendungszweck           com.Verwendungszweck      `json:"verwendungszweck,omitempty"`                                                          // Verwendungungszweck der Werte Netzlokation
+	Konfigurationsprodukte     com.Konfigurationsprodukt `json:"konfigurationsprodukte,omitempty"`                                                    // Produkt-Daten der Netzlokation
+	EigenschaftMSBLokation     marktrolle.Marktrolle     `json:"eigenschaftMSBLokation,omitempty"`                                                    // Eigenschaft des Messstellenbetreibers an der Lokation
+	LokationsbuendelObjektcode string                    `json:"lokationsbuendelObjektcode,omitempty"`                                                // Lokationsbuendel-Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
 }
 
 func (_ Netzlokation) GetDefaultJsonTags() []string {
