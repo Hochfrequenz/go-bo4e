@@ -1,6 +1,6 @@
 module github.com/hochfrequenz/go-bo4e
 
-go 1.20
+go 1.22
 
 require (
 	github.com/corbym/gocrest v1.1.1
