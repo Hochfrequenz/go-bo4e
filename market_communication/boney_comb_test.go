@@ -218,7 +218,7 @@ func getJsonFilePathsFromSubmodule(dir string) ([]string, error) {
 }
 
 var formatAllowList = []string{"UTILMD", "MSCONS", "INVOIC", "COMDIS", "PRICAT", "QUOTES"}
-var formatVersionAllowList = []string{"FV2310", "FV2404", "FV2210"}
+var formatVersionAllowList = []string{"FV2210", "FV2310", "FV2404"}
 
 func matchesAllowLists(fileName string) bool {
 	for _, format := range formatAllowList {
