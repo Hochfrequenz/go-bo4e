@@ -3,6 +3,7 @@ package bo_test
 import (
 	"encoding/json"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
 	"testing"
@@ -21,11 +22,11 @@ var validAngebot = bo.Angebot{
 		BoTyp:           botyp.ANGEBOT,
 		VersionStruktur: "1.1",
 	},
-
 	Angebotsnummer:              "2345678",
-	Anfragereferenz:             "Z432342425",
+	Anfragereferenz:             internal.Ptr("Z432342425"),
 	Angebotsdatum:               time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
 	Sparte:                      sparte.GAS,
+	Bindefrist:                  nil,
 	Angebotgeber:                &validGp,
 	Angebotnehmer:               &validGp,
 	UnterzeichnerAngebotsnehmer: &validAp,
