@@ -79,9 +79,9 @@ type Netzlokation struct {
 	ObisKennzahl               string               `json:"obisKennzahl,omitempty"`                                                              // Die OBIS-Kennzahl für die Netzlokation
 	Verwendungszweck           com.Verwendungszweck `json:"verwendungszweck,omitempty"`                                                          // Verwendungungszweck der Werte Netzlokation
 	// Konfigurationsprodukte is missing the Marktteilnehmer because adding it causes a serious issue: "could not import github.com/hochfrequenz/go-bo4e/bo (-: import cycle not allowed in test) (typecheck)".
-	Konfigurationsprodukte     com.Konfigurationsprodukt `json:"konfigurationsprodukte,omitempty"`     // Produkt-Daten der Netzlokation
-	EigenschaftMSBLokation     marktrolle.Marktrolle     `json:"eigenschaftMSBLokation,omitempty"`     // Eigenschaft des Messstellenbetreibers an der Lokation
-	LokationsbuendelObjektcode string                    `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel-Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+	Konfigurationsprodukte     []com.Konfigurationsprodukt `json:"konfigurationsprodukte,omitempty"`     // Produkt-Daten der Netzlokation
+	EigenschaftMSBLokation     marktrolle.Marktrolle       `json:"eigenschaftMSBLokation,omitempty"`     // Eigenschaft des Messstellenbetreibers an der Lokation
+	LokationsbuendelObjektcode string                      `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel-Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
 }
 
 func (_ Netzlokation) GetDefaultJsonTags() []string {
