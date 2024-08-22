@@ -26,14 +26,14 @@ func Test_Netzlokation_Deserialization(t *testing.T) {
 		},
 		NetzlokationsId: "E3XS7NXYTL6",
 		Sparte:          sparte.STROM,
-		Netzanschlussleistung: com.Menge{
+		Netzanschlussleistung: &com.Menge{
 			Wert:    decimal.NewFromFloat(125),
 			Einheit: internal.Ptr(mengeneinheit.KW),
 		},
-		GrundzustaendigerMSBCodeNr: "codenummer",
+		GrundzustaendigerMSBCodeNr: internal.Ptr("codenummer"),
 		Steuerkanal:                internal.Ptr(false),
-		ObisKennzahl:               "Obis",
-		Verwendungszweck: com.Verwendungszweck{
+		ObisKennzahl:               internal.Ptr("Obis"),
+		Verwendungszweck: &com.Verwendungszweck{
 			Zweck:      nil,
 			Marktrolle: marktrolle.MSB,
 		},
@@ -43,8 +43,8 @@ func Test_Netzlokation_Deserialization(t *testing.T) {
 			Leistungskurvendefinition: "leistkurvcode",
 			Schaltzeitdefinition:      "schaltzeitdef",
 		}},
-		EigenschaftMSBLokation:     marktrolle.MSB,
-		LokationsbuendelObjektcode: "lokbücode",
+		EigenschaftMSBLokation:     internal.Ptr(marktrolle.MSB),
+		LokationsbuendelObjektcode: internal.Ptr("lokbücode"),
 	}
 	serializedNetzlokation, err := json.Marshal(nelo)
 	jsonString := string(serializedNetzlokation)

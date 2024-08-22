@@ -23,12 +23,12 @@ func Test_Einspeisung_Deserialization(t *testing.T) {
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp: botyp.EINSPEISUNG,
 		},
-		MarktlokationsId:        "84443210210",
-		TrancheId:               "20232281644",
-		Verguetungsempfaenger:   geschaeftspartnerrolle.LIEFERANT,
-		EEGVermarktungsform:     eegvermarktungsform.KWKG_VERGUETUNG,
+		MarktlokationsId:        internal.Ptr("84443210210"),
+		TrancheId:               internal.Ptr("20232281644"),
+		Verguetungsempfaenger:   internal.Ptr(geschaeftspartnerrolle.LIEFERANT),
+		EEGVermarktungsform:     internal.Ptr(eegvermarktungsform.KWKG_VERGUETUNG),
 		Landescode:              internal.Ptr(landescode.DE),
-		FernsteuerbarkeitStatus: fernsteuerbarkeitstatus.NICHT_FERNSTEUERBAR,
+		FernsteuerbarkeitStatus: internal.Ptr(fernsteuerbarkeitstatus.NICHT_FERNSTEUERBAR),
 	}
 	serializedEinspeisung, err := json.Marshal(einsp)
 	jsonString := string(serializedEinspeisung)
