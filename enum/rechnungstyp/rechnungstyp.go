@@ -21,8 +21,8 @@ const (
 	MSBRECHNUNG
 	KAPAZITAETSRECHNUNG
 	SONDERRECHNUNG
-	SPERRUNG_INBETRIEBNAHME // Rechnung für Sperren und Wiederinbetriebnahme
-	VERZUGSKOSTEN           // Verzugskostenrechnung
-	BLINDARBEIT             //  Blindarbeitsrechnung
-	ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS
+	SPERRUNG_INBETRIEBNAHME                                // Rechnung für Sperren und Wiederinbetriebnahme
+	VERZUGSKOSTEN                                          // Verzugskostenrechnung
+	BLINDARBEIT                                            // Blindarbeitsrechnung
+	ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS // Abrechnung von Konfigurationen (Universalbestellprozess)
 )
