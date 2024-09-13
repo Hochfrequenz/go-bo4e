@@ -10,7 +10,6 @@ import (
 )
 
 // NeLo is short for Netzlokation.
-// There should be a nelo struct in the future. for now we just add the nelo-id validation
 
 // neloIdRegex is a regex that all Netzlokation-IDs must match: An "E" followed by 9 upper case letters or digits and a trailing checksum
 var neloIdRegex = regexp.MustCompile(`^E[A-Z\d]{9}\d{1}$`)

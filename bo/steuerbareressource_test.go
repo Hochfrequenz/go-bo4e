@@ -66,3 +66,13 @@ func Test_Empty_SteuerbarreRessource_Is_Creatable_Using_BoTyp(t *testing.T) {
 func Test_Serialized_Empty_SteuerbarreRessource_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.STEUERBARERESSOURCE))
 }
+
+func Test_Get_SRId_Checksum(t *testing.T) {
+	actual := bo.GetSRIdCheckSum("C816417ST7")
+	then.AssertThat(t, actual, is.EqualTo(7))
+}
+
+func Test_Get_SRId_Doesnt_Panic(t *testing.T) {
+	actual := bo.GetSRIdCheckSum("C5345G9F6F")
+	then.AssertThat(t, actual, is.EqualTo(0))
+}
