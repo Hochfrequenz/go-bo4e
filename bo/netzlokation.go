@@ -39,7 +39,7 @@ func GetNeLoIdCheckSum(neloIdWithoutCheckSum string) (int, error) {
 	// Find an online tool for the check here: https://bdew-codes.de/Codenumbers/NetLocationId (click "Prüfziffernrechner" on the right sidebar)
 	inputMatchesRegex := neloIdRegexWithoutChecksum.MatchString(neloIdWithoutCheckSum)
 	if !inputMatchesRegex {
-		return 0, fmt.Errorf("you must provide a string that matches ^^E[A-Z\\d]{9}, but '%s' does not", neloIdWithoutCheckSum)
+		return 0, fmt.Errorf("you must provide a string that matches E[A-Z\\d]{9}, but '%s' does not", neloIdWithoutCheckSum)
 	}
 	checksum, checksumErr := internal.GetChecksum(neloIdWithoutCheckSum)
 	if checksumErr != nil {
