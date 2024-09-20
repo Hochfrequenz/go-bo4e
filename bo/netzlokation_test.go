@@ -71,11 +71,13 @@ func Test_Serialized_Empty_Netzlokation_Contains_No_Enum_Defaults(t *testing.T) 
 }
 
 func Test_Get_NeloId_Checksum(t *testing.T) {
-	actual := bo.GetNeLoIdCheckSum("E113735592")
+	actual, err := bo.GetNeLoIdCheckSum("E113735592")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(1))
 }
 
 func Test_Get_NeloId_Doesnt_Panic(t *testing.T) {
-	actual := bo.GetNeLoIdCheckSum("E5345G7F6F")
+	actual, err := bo.GetNeLoIdCheckSum("E5345G7F6F")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(0))
 }

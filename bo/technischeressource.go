@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"fmt"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/emobilitaetsart"
 	"github.com/hochfrequenz/go-bo4e/enum/erzeugungsart"
@@ -8,9 +9,9 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourcenutzung"
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourceverbrauchsart"
 	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"regexp"
 	"strconv"
-	"unicode"
 )
 
 // TR-ID is short for Technische Ressource-ID
@@ -20,8 +21,8 @@ var trIdRegex = regexp.MustCompile(`^D[A-Z\d]{9}\d{1}$`)
 // trIdRegexWithoutChecksum is a regex that all Technische Ressourcen-IDs[0:10] must match: A "D" followed by 9 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
 var trIdRegexWithoutChecksum = regexp.MustCompile(`^D[A-Z\d]{9}$`)
 
-// GeTRIdCheckSum returns the checksum (11th character of the TR ID) that matches the first ten characters long provided in trIdWithoutCheckSum. This is going to crash if the length of the trIdWithoutCheckSum is <10. Use trIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a TR ID
-func GetTRIdCheckSum(trIdWithoutCheckSum string) int {
+// GetTRIdCheckSum returns the checksum (11th character of the TR ID) that matches the first ten characters long provided in trIdWithoutCheckSum. This is going to crash if the length of the trIdWithoutCheckSum is <10. Use trIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a TR ID
+func GetTRIdCheckSum(trIdWithoutCheckSum string) (int, error) {
 	// Quote from https://bdew-codes.de/Content/Files/Anwdh_2023-01-18-AWH-Identifikatoren-MaKo-Bildungsvorschrift_Version.1.0.pdf chapter 6.2
 	// > Das ASCII-Verfahren zur Berechnung der Prüfziffer findet bei der Ressourcen-ID und der NeLo-ID Anwendung.
 	// Verfahren:
@@ -41,33 +42,18 @@ func GetTRIdCheckSum(trIdWithoutCheckSum string) int {
 	// Find an online tool for the check here: https://bdew-codes.de/Codenumbers/NetLocationId (click "Prüfziffernrechner" on the right sidebar)
 	inputMatchesRegex := trIdRegexWithoutChecksum.MatchString(trIdWithoutCheckSum)
 	if !inputMatchesRegex {
-		panic("You must provide a string that matches ^D[A-Z\\d]{9}$")
+		return 0, fmt.Errorf("you must provide a string that matches ^D[A-Z\\d]{9}, but '%s' does not", trIdWithoutCheckSum)
 	}
-	evenSum := 0
-	oddSum := 0
-	for index, digitRune := range trIdWithoutCheckSum[0:10] {
-		var digit int
-		if !unicode.IsDigit(digitRune) {
-			// if the digitRune is a letter, then we du the usual ASCII conversion
-			digit = int(digitRune) // digit is 65 for digitRune='A'
-		} else {
-			//, but if it's a "digit" character, then we use the digits value.
-			digit = int(digitRune - '0') // digit is 0 for digitRune='0'
-		}
-		if index%2 == 0 {
-			// this is "odd", because BDEW starts counting at 1, so the first index is odd
-			oddSum = oddSum + digit
-		} else {
-			evenSum = evenSum + digit
-		}
+	checksum, checksumErr := internal.GetChecksum(trIdWithoutCheckSum)
+	if checksumErr != nil {
+		return 0, checksumErr
 	}
-	stepD := oddSum + (evenSum * 2)
-	result := (((stepD/10)+1)*10 - stepD) % 10
-	resultMatchesRegex := trIdRegex.MatchString(trIdWithoutCheckSum + strconv.Itoa(result))
+	result := trIdWithoutCheckSum + checksum
+	resultMatchesRegex := trIdRegex.MatchString(result)
 	if !resultMatchesRegex {
-		panic("This function is broken; And this should never happen")
+		return 0, fmt.Errorf("this function is broken; And this should never happen")
 	}
-	return result
+	return strconv.Atoi(checksum)
 }
 
 type TechnischeRessource struct {

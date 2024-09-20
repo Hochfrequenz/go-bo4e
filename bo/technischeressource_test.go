@@ -96,11 +96,13 @@ func Test_Serialized_Empty_TechnischeRessource_Contains_No_Enum_Defaults(t *test
 }
 
 func Test_Get_TRId_Checksum(t *testing.T) {
-	actual := bo.GetTRIdCheckSum("D113735592")
+	actual, err := bo.GetTRIdCheckSum("D113735592")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(2))
 }
 
 func Test_Get_TRId_Doesnt_Panic(t *testing.T) {
-	actual := bo.GetTRIdCheckSum("D5345G7F7F")
+	actual, err := bo.GetTRIdCheckSum("D5345G7F7F")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(0))
 }

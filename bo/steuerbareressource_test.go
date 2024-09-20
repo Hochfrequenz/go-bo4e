@@ -68,11 +68,13 @@ func Test_Serialized_Empty_SteuerbarreRessource_Contains_No_Enum_Defaults(t *tes
 }
 
 func Test_Get_SRId_Checksum(t *testing.T) {
-	actual := bo.GetSRIdCheckSum("C816417ST7")
+	actual, err := bo.GetSRIdCheckSum("C816417ST7")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(7))
 }
 
 func Test_Get_SRId_Doesnt_Panic(t *testing.T) {
-	actual := bo.GetSRIdCheckSum("C5345G9F6F")
+	actual, err := bo.GetSRIdCheckSum("C5345G9F6F")
+	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, actual, is.EqualTo(0))
 }

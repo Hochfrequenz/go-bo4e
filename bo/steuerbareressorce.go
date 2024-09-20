@@ -3,9 +3,9 @@ package bo
 import (
 	"fmt"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkanalsleistungsbeschreibung"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"regexp"
 	"strconv"
-	"unicode"
 )
 
 // SR-ID is short for Steuerbare Ressource-ID
@@ -15,7 +15,7 @@ var srIdRegex = regexp.MustCompile(`^C[A-Z\d]{9}\d{1}$`)
 // srIdRegexWithoutChecksum is a regex that all Steuerbare Ressourcen-IDs[0:10] must match: A "C" followed by 9 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
 var srIdRegexWithoutChecksum = regexp.MustCompile(`^C[A-Z\d]{9}$`)
 
-// GeSRIdCheckSum returns the checksum (11th character of the SR ID) that matches the first ten characters long provided in srIdWithoutCheckSum. This is going to crash if the length of the srIdWithoutCheckSum is <10. Use srIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a SR ID
+// GetSRIdCheckSum returns the checksum (11th character of the SR ID) that matches the first ten characters long provided in srIdWithoutCheckSum. This is going to crash if the length of the srIdWithoutCheckSum is <10. Use srIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a SR ID
 func GetSRIdCheckSum(srIdWithoutCheckSum string) (int, error) {
 	// Quote from https://bdew-codes.de/Content/Files/Anwdh_2023-01-18-AWH-Identifikatoren-MaKo-Bildungsvorschrift_Version.1.0.pdf chapter 6.2
 	// > Das ASCII-Verfahren zur Berechnung der Prüfziffer findet bei der Ressourcen-ID und der NeLo-ID Anwendung.
@@ -36,33 +36,18 @@ func GetSRIdCheckSum(srIdWithoutCheckSum string) (int, error) {
 	// Find an online tool for the check here: https://bdew-codes.de/Codenumbers/NetLocationId (click "Prüfziffernrechner" on the right sidebar)
 	inputMatchesRegex := srIdRegexWithoutChecksum.MatchString(srIdWithoutCheckSum)
 	if !inputMatchesRegex {
-		return 0, fmt.Errorf("srIdWithoutCheckSum: '%s' does not match regex", srIdWithoutCheckSum)
+		return 0, fmt.Errorf("you must provide a string that matches ^C[A-Z\\d]{9}, but '%s' does not", srIdWithoutCheckSum)
 	}
-	evenSum := 0
-	oddSum := 0
-	for index, digitRune := range srIdWithoutCheckSum[0:10] {
-		var digit int
-		if !unicode.IsDigit(digitRune) {
-			// if the digitRune is a letter, then we du the usual ASCII conversion
-			digit = int(digitRune) // digit is 65 for digitRune='A'
-		} else {
-			//, but if it's a "digit" character, then we use the digits value.
-			digit = int(digitRune - '0') // digit is 0 for digitRune='0'
-		}
-		if index%2 == 0 {
-			// this is "odd", because BDEW starts counting at 1, so the first index is odd
-			oddSum = oddSum + digit
-		} else {
-			evenSum = evenSum + digit
-		}
+	checksum, checksumErr := internal.GetChecksum(srIdWithoutCheckSum)
+	if checksumErr != nil {
+		return 0, checksumErr
 	}
-	stepD := oddSum + (evenSum * 2)
-	result := (((stepD/10)+1)*10 - stepD) % 10
-	resultMatchesRegex := srIdRegex.MatchString(srIdWithoutCheckSum + strconv.Itoa(result))
+	result := srIdWithoutCheckSum + checksum
+	resultMatchesRegex := srIdRegex.MatchString(result)
 	if !resultMatchesRegex {
-		return 0, fmt.Errorf("result: '%d' does not match expectations", result)
+		return 0, fmt.Errorf("this function is broken; And this should never happen")
 	}
-	return result, nil
+	return strconv.Atoi(checksum)
 }
 
 type SteuerbareRessource struct {
