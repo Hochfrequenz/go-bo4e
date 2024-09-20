@@ -1,6 +1,7 @@
 package bo
 
 import (
+	"fmt"
 	"github.com/hochfrequenz/go-bo4e/enum/steuerkanalsleistungsbeschreibung"
 	"regexp"
 	"strconv"
@@ -15,7 +16,7 @@ var srIdRegex = regexp.MustCompile(`^C[A-Z\d]{9}\d{1}$`)
 var srIdRegexWithoutChecksum = regexp.MustCompile(`^C[A-Z\d]{9}$`)
 
 // GeSRIdCheckSum returns the checksum (11th character of the SR ID) that matches the first ten characters long provided in srIdWithoutCheckSum. This is going to crash if the length of the srIdWithoutCheckSum is <10. Use srIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a SR ID
-func GetSRIdCheckSum(srIdWithoutCheckSum string) int {
+func GetSRIdCheckSum(srIdWithoutCheckSum string) (int, error) {
 	// Quote from https://bdew-codes.de/Content/Files/Anwdh_2023-01-18-AWH-Identifikatoren-MaKo-Bildungsvorschrift_Version.1.0.pdf chapter 6.2
 	// > Das ASCII-Verfahren zur Berechnung der Prüfziffer findet bei der Ressourcen-ID und der NeLo-ID Anwendung.
 	// Verfahren:
@@ -35,7 +36,7 @@ func GetSRIdCheckSum(srIdWithoutCheckSum string) int {
 	// Find an online tool for the check here: https://bdew-codes.de/Codenumbers/NetLocationId (click "Prüfziffernrechner" on the right sidebar)
 	inputMatchesRegex := srIdRegexWithoutChecksum.MatchString(srIdWithoutCheckSum)
 	if !inputMatchesRegex {
-		panic("You must provide a string that matches ^C[A-Z\\d]{9}$")
+		return 0, fmt.Errorf("srIdWithoutCheckSum: '%s' does not match regex", srIdWithoutCheckSum)
 	}
 	evenSum := 0
 	oddSum := 0
@@ -59,9 +60,9 @@ func GetSRIdCheckSum(srIdWithoutCheckSum string) int {
 	result := (((stepD/10)+1)*10 - stepD) % 10
 	resultMatchesRegex := srIdRegex.MatchString(srIdWithoutCheckSum + strconv.Itoa(result))
 	if !resultMatchesRegex {
-		panic("This function is broken; And this should never happen")
+		return 0, fmt.Errorf("result: '%d' does not match expectations", result)
 	}
-	return result
+	return result, nil
 }
 
 type SteuerbareRessource struct {
