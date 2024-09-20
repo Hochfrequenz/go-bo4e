@@ -94,3 +94,15 @@ func Test_Empty_TechnischeRessource_Is_Creatable_Using_BoTyp(t *testing.T) {
 func Test_Serialized_Empty_TechnischeRessource_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.TECHNISCHERESSOURCE))
 }
+
+func Test_Get_TRId_Checksum(t *testing.T) {
+	actual, err := bo.GetTRIdCheckSum("D113735592")
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, actual, is.EqualTo(2))
+}
+
+func Test_Get_TRId_Doesnt_Panic(t *testing.T) {
+	actual, err := bo.GetTRIdCheckSum("D5345G7F7F")
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, actual, is.EqualTo(0))
+}
