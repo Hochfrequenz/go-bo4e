@@ -1,0 +1,302 @@
+{
+  "description": "Tarifinformation mit Preisen, Aufschlägen und Berechnungssystematik\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Tarifpreisblatt.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Tarifpreisblatt JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Tarifpreisblatt.json>`_",
+  "title": "Tarifpreisblatt",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "TARIFPREISBLATT",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anbieter": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Marktteilnehmer.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anbietername": {
+      "title": "Anbietername",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anwendungVon": {
+      "title": "Anwendungvon",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bemerkung": {
+      "title": "Bemerkung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "berechnungsparameter": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Tarifberechnungsparameter.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "energiemix": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Energiemix.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kundentypen": {
+      "title": "Kundentypen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Kundentyp.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preisgarantie": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Preisgarantie.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preisstand": {
+      "title": "Preisstand",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "registeranzahl": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Registeranzahl.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tarifAufAbschlaege": {
+      "title": "Tarifaufabschlaege",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/AufAbschlag.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tarifeinschraenkung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Tarifeinschraenkung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tarifmerkmale": {
+      "title": "Tarifmerkmale",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Tarifmerkmal.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tarifpreise": {
+      "title": "Tarifpreise",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Tarifpreisposition.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tariftyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Tariftyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertragskonditionen": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Vertragskonditionen.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "website": {
+      "title": "Website",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zeitlicheGueltigkeit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

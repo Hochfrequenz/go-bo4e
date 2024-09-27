@@ -1,0 +1,10 @@
+{
+  "description": "Gibt den Codetyp einer Rolle, beispielsweise einer Marktrolle, an.",
+  "title": "Rollencodetyp",
+  "type": "string",
+  "enum": [
+    "BDEW",
+    "DVGW",
+    "GLN"
+  ]
+}
