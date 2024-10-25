@@ -24,6 +24,9 @@ type Geschaeftspartner struct {
 	Website                 string                                          `json:"website,omitempty" validate:"omitempty,url" example:"https://www.mp-energie.de"` // Website ist die Internetseite des Marktpartners
 	Geschaeftspartnerrollen []geschaeftspartnerrolle.Geschaeftspartnerrolle `json:"geschaeftspartnerrollen,omitempty" validate:"required,min=1"`                    // Geschaeftspartnerrollen sind die Rollen, die der Geschäftspartner hat
 	Partneradresse          *com.Adresse                                    `json:"partneradresse,omitempty" validate:"required"`                                   // Partneradresse ist die Adresse des Geschäftspartners, an der sich der Hauptsitz befindet.
+	Bankverbindung          *com.Bankverbindung                             `json:"bankverbindung,omitempty"`                                                       //Bankverbindung ist die Bankverbindung des Geschäftspartners
+	Steuernummer            string                                          `json:"steuernummer,omitempty"`                                                         //Steuernummer ist die Steuernummer des Geschäftspartners
+	Erreichbarkeit          *com.Erreichbarkeit                             `json:"erreichbarkeit,omitempty"`                                                       //Erreichbarkeit ist die Erreichbarkeit des Geschäftspartners
 }
 
 func (_ Geschaeftspartner) GetDefaultJsonTags() []string {
