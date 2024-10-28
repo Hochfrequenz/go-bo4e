@@ -19,7 +19,7 @@ type Ansprechpartner struct {
 	Kommentar          string               `json:"kommentar,omitempty"`                                // Kommentar sind zusätzlich Freitextinformationen zum Ansprechpartner
 	Geschaeftspartner  *Geschaeftspartner   `json:"geschaeftspartner,omitempty" validate:"required"`    // Geschaeftspartner ist der Geschäftspartner für den der Ansprechpartner modelliert wird
 	Adresse            *com.Adresse         `json:"adresse,omitempty"`                                  // Adresse des Ansprechpartners, falls diese von der Adresse des Geschaeftspartner s abweicht
-	Rufnummern         []com.Rufnummer      `json:"rufnummer,omitempty" validate:"omitempty,dive"`      // Rufnummern ist eine Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist
+	Rufnummern         []com.Rufnummer      `json:"rufnummern,omitempty" validate:"omitempty,dive"`     // Rufnummern ist eine Liste der Telefonnummern, unter denen der Ansprechpartner erreichbar ist
 	Zustaendigkeiten   []com.Zustaendigkeit `json:"zustaendigkeit,omitempty" validate:"omitempty,dive"` // Zustaendigkeiten ist eine Liste der Abteilungen und Zuständigkeiten des Ansprechpartner
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
