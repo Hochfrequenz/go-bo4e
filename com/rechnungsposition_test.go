@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionszuschlag"
+
 	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"github.com/corbym/gocrest/is"
@@ -60,7 +62,7 @@ func Test_Rechnungsposition_Deserialization(t *testing.T) {
 			Waehrung:          waehrungscode.EUR,
 		},
 		TeilrabattNetto:         nil,
-		Zuschlag:                internal.Ptr("Z05"),
+		Zuschlag:                internal.Ptr(rechnungspositionszuschlag.ANPASSUNG_PAUSCHALE_NETZENTGELTREDUZIERUNG),
 		Gesamtzuabschlagsbetrag: internal.Ptr(newDecimalFromString("13.5")),
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
