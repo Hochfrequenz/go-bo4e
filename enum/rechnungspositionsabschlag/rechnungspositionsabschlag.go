@@ -8,6 +8,6 @@ package rechnungspositionsabschlag
 type RechnungspositionsAbschlag int
 
 const (
-	GEMEINDERABATT     RechnungspositionsAbschlag = iota + 1 // Gemeinderabatt nach Konzessionsabgabenverordnung
-	ABSCHLAG_ANPASSUNG                                       // Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung
+	GEMEINDERABATT           RechnungspositionsAbschlag = iota + 1 // Gemeinderabatt nach Konzessionsabgabenverordnung
+	ANPASSUNG_STROM_NEV_19_2                                       // Anpassung nach § 19, Absatz 2 Stromnetzentgeltverordnung
 )

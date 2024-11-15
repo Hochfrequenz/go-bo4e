@@ -9,13 +9,13 @@ import (
 
 var (
 	_RechnungspositionsAbschlagNameToValue = map[string]RechnungspositionsAbschlag{
-		"GEMEINDERABATT":     GEMEINDERABATT,
-		"ABSCHLAG_ANPASSUNG": ABSCHLAG_ANPASSUNG,
+		"GEMEINDERABATT":           GEMEINDERABATT,
+		"ANPASSUNG_STROM_NEV_19_2": ANPASSUNG_STROM_NEV_19_2,
 	}
 
 	_RechnungspositionsAbschlagValueToName = map[RechnungspositionsAbschlag]string{
-		GEMEINDERABATT:     "GEMEINDERABATT",
-		ABSCHLAG_ANPASSUNG: "ABSCHLAG_ANPASSUNG",
+		GEMEINDERABATT:           "GEMEINDERABATT",
+		ANPASSUNG_STROM_NEV_19_2: "ANPASSUNG_STROM_NEV_19_2",
 	}
 )
 
@@ -23,8 +23,8 @@ func init() {
 	var v RechnungspositionsAbschlag
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_RechnungspositionsAbschlagNameToValue = map[string]RechnungspositionsAbschlag{
-			interface{}(GEMEINDERABATT).(fmt.Stringer).String():     GEMEINDERABATT,
-			interface{}(ABSCHLAG_ANPASSUNG).(fmt.Stringer).String(): ABSCHLAG_ANPASSUNG,
+			interface{}(GEMEINDERABATT).(fmt.Stringer).String():           GEMEINDERABATT,
+			interface{}(ANPASSUNG_STROM_NEV_19_2).(fmt.Stringer).String(): ANPASSUNG_STROM_NEV_19_2,
 		}
 	}
 }
