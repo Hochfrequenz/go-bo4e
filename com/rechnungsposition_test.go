@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionszuschlag"
+
 	"github.com/hochfrequenz/go-bo4e/internal"
 
 	"github.com/corbym/gocrest/is"
@@ -59,11 +61,14 @@ func Test_Rechnungsposition_Deserialization(t *testing.T) {
 			Steuerwert:        newDecimalFromString("7"),
 			Waehrung:          waehrungscode.EUR,
 		},
-		TeilrabattNetto: nil,
+		TeilrabattNetto:         nil,
+		Zuschlag:                internal.Ptr(rechnungspositionszuschlag.ANPASSUNG_PAUSCHALE_NETZENTGELTREDUZIERUNG),
+		Gesamtzuabschlagsbetrag: internal.Ptr(newDecimalFromString("13.5")),
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
 	jsonString := string(serializedRechnungsposition)
 	then.AssertThat(t, strings.Contains(jsonString, "ABGABE_KWKG"), is.True()) // stringified enum
+	then.AssertThat(t, strings.Contains(jsonString, "zuschlag"), is.True())
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, serializedRechnungsposition, is.Not(is.NilArray[byte]()))
 	var deserializedRechnungsposition com.Rechnungsposition
