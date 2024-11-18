@@ -1,8 +1,11 @@
 package bo
 
 import (
+	"encoding/json"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
+	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
 // Marktteilnehmer models participants of the German energy market
@@ -15,6 +18,25 @@ type Marktteilnehmer struct {
 	Ansprechpartner  *Ansprechpartner            `json:"ansprechpartner,omitempty" validate:"omitempty"`                       // Ansprechpartner ist ein Kontakt zur bilateralen Klärung
 }
 
-func (_ Marktteilnehmer) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
+func (marktteilnehmer Marktteilnehmer) GetDefaultJsonTags() []string {
+	// We know we pass a struct here so ignore the error.
+	fields, _ := jsonfieldnames.Extract(marktteilnehmer)
+	return fields
+}
+
+func (marktteilnehmer *Marktteilnehmer) UnmarshalJSON(bytes []byte) (err error) {
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(marktteilnehmer, &marktteilnehmer.ExtensionData, bytes)
+}
+
+// martktteilnehmerForMarshal is a struct similar to the original Marktteilnehmer but uses a different Marshaller so that we don't run into an endless recursion
+type marktteilnehmerForMarshal Marktteilnehmer
+
+//nolint:dupl // This can only be simplified if we use generics. anything else seems overly complicated but maybe it's just me
+func (marktteilnehmer Marktteilnehmer) MarshalJSON() (bytes []byte, err error) {
+	s := marktteilnehmerForMarshal(marktteilnehmer)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
