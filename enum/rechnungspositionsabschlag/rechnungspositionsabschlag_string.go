@@ -9,12 +9,12 @@ func _() {
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
 	_ = x[GEMEINDERABATT-1]
-	_ = x[ABSCHLAG_ANPASSUNG-2]
+	_ = x[ANPASSUNG_STROM_NEV_19_2-2]
 }
 
-const _RechnungspositionsAbschlag_name = "GEMEINDERABATTABSCHLAG_ANPASSUNG"
+const _RechnungspositionsAbschlag_name = "GEMEINDERABATTANPASSUNG_STROM_NEV_19_2"
 
-var _RechnungspositionsAbschlag_index = [...]uint8{0, 14, 32}
+var _RechnungspositionsAbschlag_index = [...]uint8{0, 14, 38}
 
 func (i RechnungspositionsAbschlag) String() string {
 	i -= 1

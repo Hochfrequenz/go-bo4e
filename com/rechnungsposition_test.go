@@ -62,7 +62,7 @@ func Test_Rechnungsposition_Deserialization(t *testing.T) {
 			Waehrung:          waehrungscode.EUR,
 		},
 		TeilrabattNetto:         nil,
-		Zuschlag:                internal.Ptr(rechnungspositionszuschlag.ANPASSUNG_PAUSCHALE_NETZENTGELTREDUZIERUNG),
+		Zuschlag:                internal.Ptr(rechnungspositionszuschlag.PAUSCHALE_NETZENTGELTREDUZIERUNG_ENWG_14A),
 		Gesamtzuabschlagsbetrag: internal.Ptr(newDecimalFromString("13.5")),
 	}
 	serializedRechnungsposition, err := json.Marshal(rechnungsposition)
