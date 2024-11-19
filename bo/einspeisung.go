@@ -17,7 +17,3 @@ type Einspeisung struct {
 	Landescode              *landescode.Landescode                           `json:"landescode,omitempty"`              // Land der Förderung
 	FernsteuerbarkeitStatus *fernsteuerbarkeitstatus.FernsteuerbarkeitStatus `json:"fernsteuerbarkeitStatus,omitempty"` // Status der Fernsteuerbarkeit einer Marktlokation
 }
-
-func (_ Einspeisung) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

@@ -20,7 +20,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
-	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 )
 
 // Marktlokation contains information about a market location aka "MaLo"
@@ -75,12 +74,6 @@ func (malo Marktlokation) MarshalJSON() (bytes []byte, err error) {
 		return
 	}
 	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
-}
-
-func (malo Marktlokation) GetDefaultJsonTags() []string {
-	// We know we pass a struct here so ignore the error.
-	fields, _ := jsonfieldnames.Extract(malo)
-	return fields
 }
 
 var elevenDigitsRegex = regexp.MustCompile(`^[1-9]\d{10}$`)
