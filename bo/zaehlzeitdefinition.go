@@ -1,9 +1,10 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/definitionennotwendigkeit"
-	"time"
 )
 
 // Zaehlzeitdefinition en nutzt der NB bzw. LF  für die Tarifierung von Werten.
@@ -18,8 +19,4 @@ type Zaehlzeitdefinition struct {
 	Zaehlzeiten            []com.Zaehlzeit                                      `json:"zaehlzeiten,omitempty"`
 	Zaehlzeitregister      []com.Zaehlzeitregister                              `json:"zaehlzeitregister,omitempty"`
 	AusgerollteZaehlzeiten []com.AusgerollteZaehlzeit                           `json:"ausgerollteZaehlzeiten,omitempty"`
-}
-
-func (_ Zaehlzeitdefinition) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }

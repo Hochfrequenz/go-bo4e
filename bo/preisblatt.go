@@ -19,7 +19,3 @@ type Preisblatt struct {
 	Gueltigkeit     com.Zeitraum             `json:"gueltigkeit" validate:"required"`           // Der Zeitraum für den der Preis festgelegt ist
 	Preispositionen []com.Preisposition      `json:"preispositionen" validate:"required"`       // Die einzelnen Positionen, die mit dem Preisblatt abgerechnet werden können. Z.B. Arbeitspreis, Grundpreis etc
 }
-
-func (_ Preisblatt) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

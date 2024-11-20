@@ -2,6 +2,9 @@ package bo
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/emobilitaetsart"
 	"github.com/hochfrequenz/go-bo4e/enum/erzeugungsart"
@@ -10,8 +13,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/technischeressourceverbrauchsart"
 	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
 	"github.com/hochfrequenz/go-bo4e/internal"
-	"regexp"
-	"strconv"
 )
 
 // TR-ID is short for Technische Ressource-ID
@@ -71,8 +72,4 @@ type TechnischeRessource struct {
 	EMobilitaetsart                  *emobilitaetsart.EMobilitaetsart                                   `json:"emobilitaetsart" example:"CAV+Z87"`                                                                                     //Art der E-Mobilität  Das Segment dient dazu, im Falle der E-Mobilität eine genauere Angabe über die Art der E-Mobilität zu definieren
 	Erzeugungsart                    *erzeugungsart.Erzeugungsart                                       `json:"erzeugungsart" example:"CAV+ZF5"`                                                                                       //Art der Erzeugung der Energie
 	Speicherart                      *speicherart.Speicherart                                           `json:"speicherart" example:"CAV+ZF7"`                                                                                         //Art der speicher. Details <see cref="ENUM.Speicherart" />
-}
-
-func (_ TechnischeRessource) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }

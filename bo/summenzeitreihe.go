@@ -4,7 +4,3 @@ package bo
 type Summenzeitreihe struct {
 	Geschaeftsobjekt
 }
-
-func (_ Summenzeitreihe) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

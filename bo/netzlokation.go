@@ -2,12 +2,13 @@ package bo
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/internal"
-	"regexp"
-	"strconv"
 )
 
 // NeLo is short for Netzlokation.
@@ -67,8 +68,4 @@ type Netzlokation struct {
 	Konfigurationsprodukte     []com.Konfigurationsprodukt `json:"konfigurationsprodukte,omitempty"`     // Produkt-Daten der Netzlokation
 	EigenschaftMSBLokation     *marktrolle.Marktrolle      `json:"eigenschaftMSBLokation,omitempty"`     // Eigenschaft des Messstellenbetreibers an der Lokation
 	LokationsbuendelObjektcode *string                     `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel-Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
-}
-
-func (_ Netzlokation) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }

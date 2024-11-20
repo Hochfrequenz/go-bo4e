@@ -12,7 +12,3 @@ type Energiemenge struct {
 	LokationsTyp *lokationstyp.Lokationstyp `json:"lokationsTyp,omitempty" example:"MELO" validate:"required"`                                                    // LokationsTyp is the type of the location in LokationsId
 	Verbrauch    []com.Verbrauch            `json:"energieverbrauch,omitempty" validate:"required,min=1"`                                                         // Verbrauch are consumption data
 }
-
-func (_ Energiemenge) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

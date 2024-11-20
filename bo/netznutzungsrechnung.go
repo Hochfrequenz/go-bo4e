@@ -18,7 +18,3 @@ type Netznutzungsrechnung struct {
 	Simuliert            bool                          `json:"simuliert"`                                                                // Simuliert ist ein Kennzeichen, ob es sich um eine simulierte Rechnung, z.B. zur Rechnungsprüfung handelt.
 	LokationsId          string                        `json:"lokationsId,omitempty" validate:"omitempty,alphanum,max=33,min=11"`        // LokationsId ist die Markt- oder Messlokations-Identifikation (als Malo/Melo-Id) der Lokation, auf die sich die Rechnung bezieht.
 }
-
-func (_ Netznutzungsrechnung) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

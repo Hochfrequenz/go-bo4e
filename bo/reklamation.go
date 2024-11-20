@@ -17,7 +17,3 @@ type Reklamation struct {
 	ReklamationsgrundBemerkung string                              `json:"reklamationsgrundBemerkung,omitempty" validate:"omitempty"`                                                    // ReklamationsgrundBemerkung ist ein Freitext für eine weitere Beschreibung des Reklamationsgrunds
 	Positionsnummer            int                                 `json:"positionsnummer,omitempty" validate:"omitempty"`                                                               // Positionsnummer ist eine fortlaufende Nummer für die Position
 }
-
-func (_ Reklamation) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

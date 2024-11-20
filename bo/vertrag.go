@@ -1,12 +1,13 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
 	"github.com/shopspring/decimal"
-	"time"
 )
 
 // Vertrag ist ein Modell für die Abbildung von Vertragsbeziehungen. Das Objekt dient dazu, alle Arten von Verträgen, die in der Energiewirtschaft Verwendung finden, abzubilden.
@@ -27,8 +28,4 @@ type Vertrag struct {
 	Vertragskonditionen *com.Vertragskonditionen `json:"vertragskonditionen,omitempty"`                                     // Vertragskonditionen ist eine Festlegungen zu Laufzeiten und Kündigungsfristen
 	Vertragsteile       []com.Vertragsteil       `json:"vertragsteile,omitempty" validate:"required,min=1"`                 // Vertragsteile sind die Vertragsteile, die dazu verwendet werden, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
 	Gemeinderabatt      decimal.NullDecimal      `json:"gemeinderabatt" validate:"required"`                                // Gemeinderabatt für EDIFACT mapping.
-}
-
-func (_ Vertrag) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }
