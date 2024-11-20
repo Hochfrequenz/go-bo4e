@@ -16,7 +16,3 @@ type Statusbericht struct {
 	DatumPruefung   time.Time                   `json:"datumPruefung"`                         // Pruefdatum (wann wurde der Pruefgegenstand geprüft)
 	Fehler          *com.Fehler                 `json:"fehler,omitempty"`                      // Liste der Fehler
 }
-
-func (s Statusbericht) GetDefaultJsonTags() []string {
-	panic("implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

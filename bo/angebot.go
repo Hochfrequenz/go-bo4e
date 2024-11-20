@@ -1,9 +1,10 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
-	"time"
 )
 
 // THIS IS STILL WIP - missing Angebotsvariante, Angebotsteil, Angebotsstatus etc.
@@ -23,8 +24,4 @@ type Angebot struct {
 	UnterzeichnerAngebotsnehmer *Ansprechpartner       `json:"unterzeichnerAngebotsnehmer,omitempty"`        // Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
 	UnterzeichnerAngebotsgeber  *Ansprechpartner       `json:"unterzeichnerAngebotsgeber,omitempty"`         // Link auf die Person, die als Angebotsgeber das Angebot ausgestellt hat.
 	Varianten                   []com.Angebotsvariante `json:"varianten,omitempty"`                          // Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
-}
-
-func (_ Angebot) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }

@@ -2,12 +2,12 @@ package bo
 
 import (
 	"encoding/json"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
-	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
@@ -44,12 +44,6 @@ func XorStructLevelMesslokationValidation(sl validator.StructLevel) {
 	if numberOfAdresses > 1 {
 		sl.ReportError(Messlokation{}.Messadresse, "", "", "onlyOneAddressType", "")
 	}
-}
-
-func (melo Messlokation) GetDefaultJsonTags() []string {
-	// We know we pass a struct here so ignore the error.
-	fields, _ := jsonfieldnames.Extract(melo)
-	return fields
 }
 
 func (melo *Messlokation) UnmarshalJSON(bytes []byte) (err error) {

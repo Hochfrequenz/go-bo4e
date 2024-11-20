@@ -30,7 +30,3 @@ type Geschaeftspartner struct {
 	Erreichbarkeit                   *com.Erreichbarkeit                                             `json:"erreichbarkeit,omitempty"`
 	GruendeDerPrivilegierungNachEnFG []grundderprivilegierungnachenfg.GrundDerPrivilegierungNachEnFG `json:"gruendeDerPrivilegierungNachEnFG,omitempty"` //Erreichbarkeit ist die Erreichbarkeit des Geschäftspartners
 }
-
-func (_ Geschaeftspartner) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

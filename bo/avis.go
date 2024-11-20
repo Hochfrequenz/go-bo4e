@@ -15,10 +15,6 @@ type Avis struct {
 	ZuZahlen       com.Betrag         `json:"zuZahlen,omitempty" validate:"required"`         // Summenbetrag
 }
 
-func (_ Avis) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}
-
 // AvisStructLevelValidation combines all the single validators
 func AvisStructLevelValidation(sl validator.StructLevel) {
 	AvisStructLevelValidationZuZahlen(sl)
