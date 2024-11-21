@@ -10,4 +10,7 @@ type Vertragsteil struct {
 	VertraglichFixierteMenge *Menge     `json:"vertraglichFixierteMenge,omitempty"`                               // VertraglichFixierteMenge ist die für die Lokation festgeschriebene Abnahmemenge
 	MinimaleAbnahmemenge     *Menge     `json:"minimaleAbnahmemenge,omitempty"`                                   // MinimaleAbnahmemenge ist die, für die Lokation festgelegte Mindestabnahmemenge
 	MaximaleAbnahmemenge     *Menge     `json:"maximaleAbnahmemenge,omitempty"`                                   // MaximaleAbnahmemenge ist die, für die Lokation festgelegte maximale Abnahmemenge
+	Jahresverbrauchsprognose *Menge     `json:"jahresverbrauchsprognose,omitempty"`                               // Jahresverbrauchsprognose ist die vorhergesagte Verbrauchsmenge der Lokation für ein Jahr
+	Kundenwert               *Menge     `json:"kundenwert,omitempty"`                                             // Kundenwert ist analog zur Jahresverbrauchsprognose hat aber eine andere Einheit um TUM Profile zu skalieren
+	Verbrauchsaufteilung     *string    `json:"verbrauchsaufteilung,omitempty"`                                   // Verbrauchsaufteilung gibt bei gemischt temparaturabhängigen Lokationen an wie viel des Verbrauchs auf TLP entfällt
 }
