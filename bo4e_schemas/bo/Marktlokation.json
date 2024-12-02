@@ -1,0 +1,277 @@
+{
+  "description": "Object containing information about a Marktlokation\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Marktlokation.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Marktlokation JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Marktlokation.json>`_",
+  "title": "Marktlokation",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "MARKTLOKATION",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bilanzierungsgebiet": {
+      "title": "Bilanzierungsgebiet",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bilanzierungsmethode": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Bilanzierungsmethode.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "endkunde": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "energierichtung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Energierichtung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gasqualitaet": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Gasqualitaet.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gebietstyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Gebiettyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "geoadresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Geokoordinaten.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "grundversorgercodenr": {
+      "title": "Grundversorgercodenr",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istUnterbrechbar": {
+      "title": "Istunterbrechbar",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "katasterinformation": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Katasteradresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kundengruppen": {
+      "title": "Kundengruppen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Kundentyp.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lokationsadresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Adresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "marktlokationsId": {
+      "title": "Marktlokationsid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzbetreibercodenr": {
+      "title": "Netzbetreibercodenr",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzebene": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Netzebene.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzgebietsnr": {
+      "title": "Netzgebietsnr",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verbrauchsart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Verbrauchsart.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zugehoerigeMesslokation": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Messlokationszuordnung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

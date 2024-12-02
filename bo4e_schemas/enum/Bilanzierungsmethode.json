@@ -1,0 +1,12 @@
+{
+  "description": "Mit dieser Aufzählung kann zwischen den Bilanzierungsmethoden bzw. -grundlagen unterschieden werden.",
+  "title": "Bilanzierungsmethode",
+  "type": "string",
+  "enum": [
+    "RLM",
+    "SLP",
+    "TLP_GEMEINSAM",
+    "TLP_GETRENNT",
+    "PAUSCHAL"
+  ]
+}

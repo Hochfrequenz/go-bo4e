@@ -1,0 +1,220 @@
+{
+  "description": "Die Komponente Ausschreibungsdetail wird verwendet um die Informationen zu einer Abnahmestelle innerhalb eines\nAusschreibungsloses abzubilden.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Ausschreibungsdetail.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Ausschreibungsdetail JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Ausschreibungsdetail.json>`_",
+  "title": "Ausschreibungsdetail",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istLastgangVorhanden": {
+      "title": "Istlastgangvorhanden",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kunde": {
+      "title": "Kunde",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lieferzeitraum": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "marktlokationsId": {
+      "title": "Marktlokationsid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "marktlokationsadresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Adresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "marktlokationsbezeichnung": {
+      "title": "Marktlokationsbezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzbetreiber": {
+      "title": "Netzbetreiber",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzebeneLieferung": {
+      "title": "Netzebenelieferung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "netzebeneMessung": {
+      "title": "Netzebenemessung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prognoseArbeitLieferzeitraum": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prognoseJahresarbeit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prognoseLeistung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Menge.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rechnungsadresse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Adresse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zaehlernummer": {
+      "title": "Zaehlernummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zaehlertechnik": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Zaehlertyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
