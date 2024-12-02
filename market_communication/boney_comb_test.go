@@ -3,6 +3,7 @@ package market_communication_test
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -26,6 +27,8 @@ import (
 	"github.com/hochfrequenz/go-bo4e/internal"
 	"github.com/hochfrequenz/go-bo4e/market_communication"
 	"github.com/shopspring/decimal"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_BOneyComb_DeSerialization(t *testing.T) {
@@ -260,4 +263,32 @@ func Test_Submodule_Example_Messages(t *testing.T) {
 		then.AssertThat(t, err, is.Nil())
 	}
 
+}
+
+func TestUnmarshalBoneycomb(t *testing.T) {
+	boneycombJSON := `{
+    "transaktionsdaten": {
+
+        "pruefidentifikator": "93001"
+
+    },
+    "stammdaten": [
+
+        { "aktiv": true, "boTyp": "MARKTTEILNEHMER", "marktrolle": "NB", "name1": "Vorarlberger Energienetze GmbH", "rollencodenummer": "9907722000006", "sparte": "STROM" }
+
+    ]
+}`
+
+	var bc market_communication.BOneyComb
+
+	if err := json.Unmarshal([]byte(boneycombJSON), &bc); err != nil {
+		print("shit went south")
+		log.Fatal(err)
+	}
+
+	mp, err := market_communication.GetSingle[bo.Marktteilnehmer](&bc)
+	require.NoError(t, err)
+
+	assert.Len(t, bc.Stammdaten, 1)
+	assert.Equal(t, "STROM", mp.ExtensionData["sparte"])
 }
