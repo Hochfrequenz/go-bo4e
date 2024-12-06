@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"regexp"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/abwicklungsmodell"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
-	"regexp"
-	"time"
 
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/aggregationsverantwortung"
@@ -17,7 +18,6 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/prognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/wahlrechtprognosegrundlage"
 	"github.com/hochfrequenz/go-bo4e/enum/zeitreihentyp"
-	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 	"github.com/shopspring/decimal"
 )
 
@@ -46,12 +46,6 @@ type Bilanzierung struct {
 	MarktlokationsId           *string                                                `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 	Abwicklungsmodell          *abwicklungsmodell.Abwicklungsmodell                   `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
 
-}
-
-func (bila Bilanzierung) GetDefaultJsonTags() []string {
-	// We know we pass a struct here so ignore the error.
-	fields, _ := jsonfieldnames.Extract(bila)
-	return fields
 }
 
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {

@@ -1,6 +1,7 @@
 package market_communication_test
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/corbym/gocrest/is"
@@ -206,4 +207,29 @@ func Test_SetEmpfaenger(t *testing.T) {
 	bc.SetEmpfaenger(mt, true)
 	then.AssertThat(t, *bc.GetEmpfaengerCode(), is.EqualTo("9903100000006"))
 	then.AssertThat(t, bc.GetEmpfaenger(), is.EqualTo(&mt))
+}
+
+func Test_ExtensionData(t *testing.T) {
+	mt := bo.Marktteilnehmer{
+		Rollencodenummer: "9903100000006",
+		Geschaeftspartner: bo.Geschaeftspartner{
+			Geschaeftsobjekt: bo.Geschaeftsobjekt{
+				BoTyp:           botyp.MARKTTEILNEHMER,
+				VersionStruktur: "1.1",
+			},
+		},
+	}
+	mt.ExtensionData = map[string]any{}
+	mt.ExtensionData["sparte"] = "STROM"
+	bc := market_communication.BOneyComb{}
+	bc.SetEmpfaenger(mt, true)
+	bcJson, _ := json.Marshal(bc)
+
+	unmarshalBc := market_communication.BOneyComb{}
+	err := json.Unmarshal(bcJson, &unmarshalBc)
+	if err != nil {
+		t.Errorf("Error occured while unmarshalling: %v", err)
+	}
+	empfaenger := unmarshalBc.GetEmpfaenger()
+	then.AssertThat(t, empfaenger.ExtensionData["sparte"].(string), is.EqualTo("STROM"))
 }

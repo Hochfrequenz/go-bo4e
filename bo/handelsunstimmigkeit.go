@@ -21,7 +21,3 @@ type Handelsunstimmigkeit struct {
 	// Betrag is the requested sum amount (optional).
 	Betrag *com.Betrag `json:"zuZahlen,omitempty"`
 }
-
-func (_ Handelsunstimmigkeit) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
-}

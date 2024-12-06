@@ -1,8 +1,9 @@
 package bo
 
 import (
-	"github.com/hochfrequenz/go-bo4e/enum/sonderrechnungsart"
 	"time"
+
+	"github.com/hochfrequenz/go-bo4e/enum/sonderrechnungsart"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
@@ -38,10 +39,6 @@ type Rechnung struct {
 	Vorauszahlungen         []com.Vorauszahlung                    `json:"vorauszahlungen,omitempty"`                               // Vorauszahlungen sind evtl. vorausgezahlte Beträge, z.B. Abschläge. Angabe als Bruttowert
 	Sonderrechnungsart      *sonderrechnungsart.Sonderrechnungsart `json:"sonderrechnungsart,omitempty"`
 	Buchungsdatum           time.Time                              `json:"buchungsdatum,omitempty"` // Buchungsdatum ist das Datum, zu dem die Zahlung fällig ist
-}
-
-func (_ Rechnung) GetDefaultJsonTags() []string {
-	panic("todo: implement me") // this is needed for (un)marshaling of non-default/unknown json fields
 }
 
 // RechnungStructLevelValidation combines all the single validators
