@@ -13,7 +13,7 @@ func _() {
 	_ = x[MSB-3]
 	_ = x[DL-4]
 	_ = x[BKV-5]
-	_ = x[BKO-6]
+	_ = x[BIKO-6]
 	_ = x[UENB-7]
 	_ = x[KUNDE_SELBST_NN-8]
 	_ = x[MGV-9]
@@ -24,9 +24,9 @@ func _() {
 	_ = x[GMSB-14]
 }
 
-const _Marktrolle_name = "NBLFMSBDLBKVBKOUENBKUNDE_SELBST_NNMGVEIVRBKUNDEINTERESSENTGMSB"
+const _Marktrolle_name = "NBLFMSBDLBKVBIKOUENBKUNDE_SELBST_NNMGVEIVRBKUNDEINTERESSENTGMSB"
 
-var _Marktrolle_index = [...]uint8{0, 2, 4, 7, 9, 12, 15, 19, 34, 37, 40, 42, 47, 58, 62}
+var _Marktrolle_index = [...]uint8{0, 2, 4, 7, 9, 12, 16, 20, 35, 38, 41, 43, 48, 59, 63}
 
 func (i Marktrolle) String() string {
 	i -= 1
