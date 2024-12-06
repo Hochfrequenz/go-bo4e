@@ -13,7 +13,7 @@ const (
 	MSB                        // MSB is a Messstellenbetreiber
 	DL                         // DL is a Dienstleister
 	BKV                        // BKV is a Bilanzkreisverantwortlicher
-	BKO                        // BKO is a Bilanzkoordinator/Marktgebietsverantwortlicher
+	BIKO                       // BIKO is a Bilanzkoordinator/Marktgebietsverantwortlicher
 	UENB                       // UENB is a Übertragungsnetzbetreiber
 	KUNDE_SELBST_NN            // KUNDE_SELBST_NN is a Kunden die NN-Entgelte selbst zahlen
 	MGV                        // MGV is a Marktgebietsverantwortlicher
