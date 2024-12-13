@@ -14,6 +14,7 @@ var (
 		"TLP_GEMEINSAM": TLP_GEMEINSAM,
 		"TLP_GETRENNT":  TLP_GETRENNT,
 		"PAUSCHAL":      PAUSCHAL,
+		"IMS":           IMS,
 	}
 
 	_BilanzierungsmethodeValueToName = map[Bilanzierungsmethode]string{
@@ -22,6 +23,7 @@ var (
 		TLP_GEMEINSAM: "TLP_GEMEINSAM",
 		TLP_GETRENNT:  "TLP_GETRENNT",
 		PAUSCHAL:      "PAUSCHAL",
+		IMS:           "IMS",
 	}
 )
 
@@ -34,6 +36,7 @@ func init() {
 			interface{}(TLP_GEMEINSAM).(fmt.Stringer).String(): TLP_GEMEINSAM,
 			interface{}(TLP_GETRENNT).(fmt.Stringer).String():  TLP_GETRENNT,
 			interface{}(PAUSCHAL).(fmt.Stringer).String():      PAUSCHAL,
+			interface{}(IMS).(fmt.Stringer).String():           IMS,
 		}
 	}
 }

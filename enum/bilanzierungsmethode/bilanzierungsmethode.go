@@ -14,4 +14,5 @@ const (
 	TLP_GEMEINSAM                      // TLP_GEMEINSAM is a TLP gemeinsame Messung
 	TLP_GETRENNT                       // TLP_GETRENNT is a TLP getrennte Messung
 	PAUSCHAL                           // PAUSCHAL is a Pauschale Betrachtung (Band)
+	IMS                                // IMS is a Intelligentes Messsystem
 )
