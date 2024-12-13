@@ -13,11 +13,12 @@ func _() {
 	_ = x[TLP_GEMEINSAM-3]
 	_ = x[TLP_GETRENNT-4]
 	_ = x[PAUSCHAL-5]
+	_ = x[IMS-6]
 }
 
-const _Bilanzierungsmethode_name = "RLMSLPTLP_GEMEINSAMTLP_GETRENNTPAUSCHAL"
+const _Bilanzierungsmethode_name = "RLMSLPTLP_GEMEINSAMTLP_GETRENNTPAUSCHALIMS"
 
-var _Bilanzierungsmethode_index = [...]uint8{0, 3, 6, 19, 31, 39}
+var _Bilanzierungsmethode_index = [...]uint8{0, 3, 6, 19, 31, 39, 42}
 
 func (i Bilanzierungsmethode) String() string {
 	i -= 1
