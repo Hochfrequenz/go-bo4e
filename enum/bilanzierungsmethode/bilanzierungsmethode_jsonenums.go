@@ -22,6 +22,7 @@ var (
 		TLP_GEMEINSAM: "TLP_GEMEINSAM",
 		TLP_GETRENNT:  "TLP_GETRENNT",
 		PAUSCHAL:      "PAUSCHAL",
+		IMS:           "IMS",
 	}
 )
 
