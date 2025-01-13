@@ -9,6 +9,8 @@ import (
 // BusinessObjectSlice is a slice that contains 0-n BusinessObject s
 type BusinessObjectSlice []BusinessObject
 
+var ErrorUnimplementedBusinessObject = errors.New("unimplemented business object")
+
 func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 	// https://stackoverflow.com/a/69557652/10009545
 	var array []json.RawMessage
@@ -16,7 +18,7 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	*boSlice = make(BusinessObjectSlice, len(array))
+	*boSlice = BusinessObjectSlice{}
 	errs := make([]error, 0)
 
 	for i := range array {
@@ -31,7 +33,7 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 		elem := NewBusinessObject(base.GetBoTyp())
 
 		if elem == nil {
-			errs = append(errs, fmt.Errorf("The BusinessObject with type %v is not implemented (or not mapped yet)", base.GetBoTyp()))
+			errs = append(errs, fmt.Errorf("%w: BusinessObject of type %v at index %v not implemented (or not mapped yet)", ErrorUnimplementedBusinessObject, base.GetBoTyp(), i))
 			continue
 		}
 
@@ -40,7 +42,7 @@ func (boSlice *BusinessObjectSlice) UnmarshalJSON(data []byte) error {
 			continue
 		}
 
-		(*boSlice)[i] = elem
+		*boSlice = append(*boSlice, elem)
 	}
 
 	return errors.Join(errs...)

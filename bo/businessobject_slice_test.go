@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"encoding/json"
+	"errors"
 	"testing"
 	"time"
 
@@ -87,8 +88,11 @@ func Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps(t *testing.T) {
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
 	then.AssertThat(t, err, is.Not(is.Nil()))
+	then.AssertThat(t, errors.Is(err, bo.ErrorUnimplementedBusinessObject), is.True())
+	then.AssertThat(t, err.Error(), is.StringContaining("PREISBLATTUMLAGEN"))
 	then.AssertThat(t, len(deserializedBoneyComb.Transaktionsdaten), is.EqualTo(1))
-	then.AssertThat(t, deserializedBoneyComb.Transaktionsdaten["pruefidentifikator"], is.EqualTo("12345"))
+	then.AssertThat(t, deserializedBoneyComb.GetPruefidentifikator(), is.Not(is.NilPtr[string]()))
+	then.AssertThat(t, *deserializedBoneyComb.GetPruefidentifikator(), is.EqualTo("12345"))
 }
 
 func TestBusinessObjectSliceUnmarshalErrors(t *testing.T) {

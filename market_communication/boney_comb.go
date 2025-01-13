@@ -3,7 +3,6 @@ package market_communication
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
@@ -19,8 +18,6 @@ type BOneyComb struct {
 }
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
-
-var ErrorBOneyCombIncludesUnimplementedBusinessObjects = errors.New("BOneyComb includes unimplemented business objects")
 
 // PruefidentifikatorInTransaktionsdatenValidation returns true iff a valid Pruefidentifikator (see GetPruefidentifikator) is present
 func PruefidentifikatorInTransaktionsdatenValidation(sl validator.StructLevel) {
@@ -46,7 +43,7 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 
 	stammdaten := bo.BusinessObjectSlice{}
 	if err := json.Unmarshal(boneyComb.Stammdaten, &stammdaten); err != nil {
-		errs = errors.Join(errs, fmt.Errorf("%w: %w", ErrorBOneyCombIncludesUnimplementedBusinessObjects, err))
+		errs = errors.Join(errs, err)
 	}
 
 	*boc = BOneyComb{
