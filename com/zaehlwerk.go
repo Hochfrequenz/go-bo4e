@@ -33,9 +33,8 @@ type Zaehlwerk struct {
 	Nachkommastellen  *int                                        `json:"nachkommastelle,omitempty" validate:"omitempty,min=0"` // Nachkommastellen is the number of post decimal places
 	Schwachlastfaehig schwachlastfaehigkeit.Schwachlastfaehigkeit `json:"schwachlastfaehig,omitempty"`
 
-	AnzahlAblesungen *int `json:"anzahlAblesungen,omitempty"`
-	// the json tag is different from the field name ("zaehlzeiten" instead of "zaehlzeit") to be consistent with the C# lib: https://github.com/Hochfrequenz/BO4E-dotnet/issues/249
-	Zaehlzeit         *Zaehlzeit         `json:"zaehlzeiten,omitempty"`
+	AnzahlAblesungen  *int               `json:"anzahlAblesungen,omitempty"`
+	Zaehlzeiten       *Zaehlzeitregister `json:"zaehlzeiten,omitempty"`
 	Konfiguration     *string            `json:"konfiguration,omitempty"`
 	Konzessionsabgabe *Konzessionsabgabe `json:"konzessionsabgabe,omitempty"`
 }
