@@ -1,9 +1,13 @@
 package market_communication
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"regexp"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
-	"regexp"
 )
 
 // BOneyComb is a structure that is used when dealing with business objects that are embedded into market communication messages.
@@ -16,6 +20,8 @@ type BOneyComb struct {
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
 
+var ErrorBOneyCombIncludesUnimplementedBusinessObjects = errors.New("BOneyComb includes unimplemented business objects")
+
 // PruefidentifikatorInTransaktionsdatenValidation returns true iff a valid Pruefidentifikator (see GetPruefidentifikator) is present
 func PruefidentifikatorInTransaktionsdatenValidation(sl validator.StructLevel) {
 	boneyComb := sl.Current().Interface().(BOneyComb)
@@ -25,4 +31,29 @@ func PruefidentifikatorInTransaktionsdatenValidation(sl validator.StructLevel) {
 	} else if !pruefiPattern.MatchString(*pruefi) {
 		sl.ReportError(boneyComb.Stammdaten, "Pruefidentifikator", "Pruefidentifikator", "Pruefi must be set and 5 digits long", "")
 	}
+}
+
+// UnmarshalJSON is a custom method which enables the caller to ignore unimplemented business objects.
+// This is handy for cases where the consumer of the BOneyComb does only care about specific BOs inside the BoneyComb.
+func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
+	var boneyComb struct {
+		Stammdaten        json.RawMessage     `json:"stammdaten" validate:"required"`
+		Transaktionsdaten map[string]string   `json:"transaktionsdaten" validate:"required"`
+		Links             map[string][]string `json:"links"`
+	}
+
+	errs := errors.Join(json.Unmarshal(data, &boneyComb))
+
+	stammdaten := bo.BusinessObjectSlice{}
+	if err := json.Unmarshal(boneyComb.Stammdaten, &stammdaten); err != nil {
+		errs = errors.Join(errs, fmt.Errorf("%w: %w", ErrorBOneyCombIncludesUnimplementedBusinessObjects, err))
+	}
+
+	*boc = BOneyComb{
+		Stammdaten:        stammdaten,
+		Transaktionsdaten: boneyComb.Transaktionsdaten,
+		Links:             boneyComb.Links,
+	}
+
+	return errs
 }

@@ -83,10 +83,12 @@ func Test_Slice_Deserialization_Fails_For_Invalid_BoTyps(t *testing.T) {
 }
 
 func Test_Slice_Deserialization_Fails_For_Unimplemented_BoTyps(t *testing.T) {
-	jsonWithUnimplementedBoTyp := `{"stammdaten": [{"boTyp":"PREISBLATTUMLAGEN"}]}` // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
+	jsonWithUnimplementedBoTyp := `{"stammdaten": [{"boTyp":"PREISBLATTUMLAGEN"}], "transaktionsdaten": {"pruefidentifikator": "12345"}}` // PREISBLATTUMLAGEN is not (yet) an implemented boTyp => deserialization should fail
 	var deserializedBoneyComb market_communication.BOneyComb
 	err := json.Unmarshal([]byte(jsonWithUnimplementedBoTyp), &deserializedBoneyComb)
 	then.AssertThat(t, err, is.Not(is.Nil()))
+	then.AssertThat(t, len(deserializedBoneyComb.Transaktionsdaten), is.EqualTo(1))
+	then.AssertThat(t, deserializedBoneyComb.Transaktionsdaten["pruefidentifikator"], is.EqualTo("12345"))
 }
 
 func TestBusinessObjectSliceUnmarshalErrors(t *testing.T) {
