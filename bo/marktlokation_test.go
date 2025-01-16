@@ -216,12 +216,13 @@ func Test_Failed_MarktlokationValidation(t *testing.T) {
 					Hausnummer:   "27A",
 					Landescode:   internal.Ptr(landescode.DE),
 				},
-				Katasterinformation: &com.Katasteradresse{
-					GemarkungFlur: "Foo",
-					Flurstueck:    "Bar",
+				Katasterinformation: []com.Katasteradresse{
+					{
+						GemarkungFlur: "Foo",
+						Flurstueck:    "Bar",
+					},
 				},
-			},
-		},
+			}},
 		"ne": {
 			bo.Marktlokation{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
