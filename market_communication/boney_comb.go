@@ -15,6 +15,7 @@ type BOneyComb struct {
 	Stammdaten        bo.BusinessObjectSlice `json:"stammdaten" validate:"required"`        // Stammdaten is an array of business objects
 	Transaktionsdaten map[string]string      `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
 	Links             map[string][]string    `json:"links"`                                 // Links describes relations between different BusinessObjects in Stammdaten
+	Anfrage           *BOneyComb             `json:"anfrage"`                               // Anfrage can contain the related market communication message e.g. ORDERS => ORDRSP or MSCONS => Storno
 }
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
