@@ -11,11 +11,14 @@ func _() {
 	_ = x[SPEICHERHEIZUNG-1]
 	_ = x[WAERMEPUMPE-2]
 	_ = x[DIREKTHEIZUNG-3]
+	_ = x[WAERMEPUMPE_WAERME_KAELTE-4]
+	_ = x[WAERMEPUMPE_KAELTE-5]
+	_ = x[WAERMEPUMPE_WAERME-6]
 }
 
-const _Waermenutzung_name = "SPEICHERHEIZUNGWAERMEPUMPEDIREKTHEIZUNG"
+const _Waermenutzung_name = "SPEICHERHEIZUNGWAERMEPUMPEDIREKTHEIZUNGWAERMEPUMPE_WAERME_KAELTEWAERMEPUMPE_KAELTEWAERMEPUMPE_WAERME"
 
-var _Waermenutzung_index = [...]uint8{0, 15, 26, 39}
+var _Waermenutzung_index = [...]uint8{0, 15, 26, 39, 64, 82, 100}
 
 func (i Waermenutzung) String() string {
 	i -= 1

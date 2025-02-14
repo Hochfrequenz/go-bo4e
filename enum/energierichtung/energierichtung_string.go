@@ -10,11 +10,13 @@ func _() {
 	var x [1]struct{}
 	_ = x[AUSSP-1]
 	_ = x[EINSP-2]
+	_ = x[RUHEND-3]
+	_ = x[KUNDENANLAGE-4]
 }
 
-const _Energierichtung_name = "AUSSPEINSP"
+const _Energierichtung_name = "AUSSPEINSPRUHENDKUNDENANLAGE"
 
-var _Energierichtung_index = [...]uint8{0, 5, 10}
+var _Energierichtung_index = [...]uint8{0, 5, 10, 16, 28}
 
 func (i Energierichtung) String() string {
 	i -= 1
