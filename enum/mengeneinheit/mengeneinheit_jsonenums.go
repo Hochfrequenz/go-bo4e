@@ -24,6 +24,7 @@ var (
 		"MONAT":      MONAT,
 		"JAHR":       JAHR,
 		"PROZENT":    PROZENT,
+		"ZERO":       ZERO,
 	}
 
 	_MengeneinheitValueToName = map[Mengeneinheit]string{
@@ -42,6 +43,7 @@ var (
 		MONAT:      "MONAT",
 		JAHR:       "JAHR",
 		PROZENT:    "PROZENT",
+		ZERO:       "ZERO",
 	}
 )
 
@@ -64,6 +66,7 @@ func init() {
 			interface{}(MONAT).(fmt.Stringer).String():      MONAT,
 			interface{}(JAHR).(fmt.Stringer).String():       JAHR,
 			interface{}(PROZENT).(fmt.Stringer).String():    PROZENT,
+			interface{}(ZERO).(fmt.Stringer).String():       ZERO,
 		}
 	}
 }
