@@ -23,4 +23,5 @@ const (
 	MONAT                    // MONAT is 1 month
 	JAHR                     // JAHR is year
 	PROZENT                  // PROZENT is percent
+	ZERO                     // ZERO should not be used and is just here for full-compatability with the bo4e.net lib
 )
