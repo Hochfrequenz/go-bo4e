@@ -9,15 +9,21 @@ import (
 
 var (
 	_WaermenutzungNameToValue = map[string]Waermenutzung{
-		"SPEICHERHEIZUNG": SPEICHERHEIZUNG,
-		"WAERMEPUMPE":     WAERMEPUMPE,
-		"DIREKTHEIZUNG":   DIREKTHEIZUNG,
+		"SPEICHERHEIZUNG":           SPEICHERHEIZUNG,
+		"WAERMEPUMPE":               WAERMEPUMPE,
+		"DIREKTHEIZUNG":             DIREKTHEIZUNG,
+		"WAERMEPUMPE_WAERME_KAELTE": WAERMEPUMPE_WAERME_KAELTE,
+		"WAERMEPUMPE_KAELTE":        WAERMEPUMPE_KAELTE,
+		"WAERMEPUMPE_WAERME":        WAERMEPUMPE_WAERME,
 	}
 
 	_WaermenutzungValueToName = map[Waermenutzung]string{
-		SPEICHERHEIZUNG: "SPEICHERHEIZUNG",
-		WAERMEPUMPE:     "WAERMEPUMPE",
-		DIREKTHEIZUNG:   "DIREKTHEIZUNG",
+		SPEICHERHEIZUNG:           "SPEICHERHEIZUNG",
+		WAERMEPUMPE:               "WAERMEPUMPE",
+		DIREKTHEIZUNG:             "DIREKTHEIZUNG",
+		WAERMEPUMPE_WAERME_KAELTE: "WAERMEPUMPE_WAERME_KAELTE",
+		WAERMEPUMPE_KAELTE:        "WAERMEPUMPE_KAELTE",
+		WAERMEPUMPE_WAERME:        "WAERMEPUMPE_WAERME",
 	}
 )
 
@@ -25,9 +31,12 @@ func init() {
 	var v Waermenutzung
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_WaermenutzungNameToValue = map[string]Waermenutzung{
-			interface{}(SPEICHERHEIZUNG).(fmt.Stringer).String(): SPEICHERHEIZUNG,
-			interface{}(WAERMEPUMPE).(fmt.Stringer).String():     WAERMEPUMPE,
-			interface{}(DIREKTHEIZUNG).(fmt.Stringer).String():   DIREKTHEIZUNG,
+			interface{}(SPEICHERHEIZUNG).(fmt.Stringer).String():           SPEICHERHEIZUNG,
+			interface{}(WAERMEPUMPE).(fmt.Stringer).String():               WAERMEPUMPE,
+			interface{}(DIREKTHEIZUNG).(fmt.Stringer).String():             DIREKTHEIZUNG,
+			interface{}(WAERMEPUMPE_WAERME_KAELTE).(fmt.Stringer).String(): WAERMEPUMPE_WAERME_KAELTE,
+			interface{}(WAERMEPUMPE_KAELTE).(fmt.Stringer).String():        WAERMEPUMPE_KAELTE,
+			interface{}(WAERMEPUMPE_WAERME).(fmt.Stringer).String():        WAERMEPUMPE_WAERME,
 		}
 	}
 }
