@@ -1,0 +1,263 @@
+{
+  "description": "Mit dieser Komponente werden Zählwerke modelliert.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/com/Zaehlwerk.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Zaehlwerk JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/com/Zaehlwerk.json>`_",
+  "title": "Zaehlwerk",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "anzahlAblesungen": {
+      "title": "Anzahlablesungen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Mengeneinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istAbrechnungsrelevant": {
+      "title": "Istabrechnungsrelevant",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istSchwachlastfaehig": {
+      "title": "Istschwachlastfaehig",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istSteuerbefreit": {
+      "title": "Iststeuerbefreit",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istUnterbrechbar": {
+      "title": "Istunterbrechbar",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "konzessionsabgabe": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Konzessionsabgabe.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nachkommastelle": {
+      "title": "Nachkommastelle",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "obisKennzahl": {
+      "title": "Obiskennzahl",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "richtung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Energierichtung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verbrauchsart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Verbrauchsart.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verwendungszwecke": {
+      "title": "Verwendungszwecke",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "VerwendungszweckProMarktrolle.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vorkommastelle": {
+      "title": "Vorkommastelle",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "waermenutzung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Waermenutzung.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wandlerfaktor": {
+      "title": "Wandlerfaktor",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zaehlwerkId": {
+      "title": "Zaehlwerkid",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zaehlzeitregister": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Zaehlzeitregister.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Mit dieser Aufzählung können arithmetische Operationen festgelegt werden.",
+  "title": "ArithmetischeOperation",
+  "type": "string",
+  "enum": [
+    "ADDITION",
+    "SUBTRAKTION",
+    "MULTIPLIKATION",
+    "DIVISION"
+  ]
+}

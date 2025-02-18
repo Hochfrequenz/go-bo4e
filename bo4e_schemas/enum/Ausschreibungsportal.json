@@ -1,0 +1,17 @@
+{
+  "description": "Aufzählung der unterstützten Ausschreibungsportale.",
+  "title": "Ausschreibungsportal",
+  "type": "string",
+  "enum": [
+    "ENPORTAL",
+    "ENERGIE_AGENTUR",
+    "BMWI",
+    "ENERGIE_HANDELSPLATZ",
+    "BUND",
+    "VERA_ONLINE",
+    "ISPEX",
+    "ENERGIEMARKTPLATZ",
+    "EVERGABE",
+    "DTAD"
+  ]
+}
