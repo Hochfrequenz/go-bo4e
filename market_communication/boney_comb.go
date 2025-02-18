@@ -3,6 +3,7 @@ package market_communication
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
@@ -15,7 +16,7 @@ type BOneyComb struct {
 	Stammdaten        bo.BusinessObjectSlice `json:"stammdaten" validate:"required"`        // Stammdaten is an array of business objects
 	Transaktionsdaten map[string]string      `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
 	Links             map[string][]string    `json:"links"`                                 // Links describes relations between different BusinessObjects in Stammdaten
-	Anfrage           *BOneyComb             `json:"anfrage"`                               // Anfrage can contain the related market communication message e.g. ORDERS => ORDRSP or MSCONS => Storno
+	Anfrage           *BOneyComb             `json:"anfrage,omitempty"`                     // Anfrage can contain the related market communication message e.g. ORDERS => ORDRSP or MSCONS => Storno
 }
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
@@ -38,6 +39,7 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 		Stammdaten        json.RawMessage     `json:"stammdaten" validate:"required"`
 		Transaktionsdaten map[string]string   `json:"transaktionsdaten" validate:"required"`
 		Links             map[string][]string `json:"links"`
+		Anfrage           json.RawMessage     `json:"anfrage"`
 	}
 
 	errs := errors.Join(json.Unmarshal(data, &boneyComb))
@@ -51,6 +53,15 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 		Stammdaten:        stammdaten,
 		Transaktionsdaten: boneyComb.Transaktionsdaten,
 		Links:             boneyComb.Links,
+	}
+
+	if boneyComb.Anfrage != nil {
+		var anfrage BOneyComb
+		if err := json.Unmarshal(boneyComb.Anfrage, &anfrage); err != nil {
+			errs = errors.Join(errs, fmt.Errorf("anfrage: %w", err))
+		} else {
+			boc.Anfrage = &anfrage
+		}
 	}
 
 	return errs
