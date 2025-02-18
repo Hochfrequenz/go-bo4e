@@ -12,14 +12,17 @@ type BusinessObject interface {
 	GetBoTyp() botyp.BOTyp
 	// GetVersionStruktur returns the Geschaeftsobjekt.VersionStruktur
 	GetVersionStruktur() string
+	// GetGueltigkeitszeitraum returns the Geschaeftsobjekt.Gueltigkeitszeitraum
+	GetGueltigkeitszeitraum() *com.Zeitraum
 }
 
 // Geschaeftsobjekt is the common base struct of all Business Objects
 type Geschaeftsobjekt struct {
 	unmappeddatamarshaller.ExtensionData
-	BoTyp             botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
-	VersionStruktur   string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
-	ExterneReferenzen []com.ExterneReferenz `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems
+	BoTyp                botyp.BOTyp           `json:"boTyp" validate:"required"`           // BoTyp is the type of business object, may be used as discriminator
+	VersionStruktur      string                `json:"versionStruktur" validate:"required"` // VersionStruktur is the version of BO4E used
+	ExterneReferenzen    []com.ExterneReferenz `json:"externeReferenzen,omitempty"`         // ExterneReferenzen are external references of this object in various systems
+	Gueltigkeitszeitraum *com.Zeitraum         `json:"gueltigkeitszeitraum,omitempty"`      // Defines the validity of a business object in terms of time (maybe multiple versions exist).
 }
 
 func (gob Geschaeftsobjekt) GetBoTyp() botyp.BOTyp {
@@ -31,6 +34,10 @@ func (gob Geschaeftsobjekt) GetVersionStruktur() string {
 		return defaultVersionStruktur
 	}
 	return gob.VersionStruktur
+}
+
+func (gob Geschaeftsobjekt) GetGueltigkeitszeitraum() *com.Zeitraum {
+	return gob.Gueltigkeitszeitraum
 }
 
 // defaultVersionStruktur is the Geschaeftsobjekt.VersionStruktur that a NewBusinessObject has by default
