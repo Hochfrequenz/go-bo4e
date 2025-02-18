@@ -29,6 +29,12 @@ import (
 )
 
 func Test_BOneyComb_DeSerialization(t *testing.T) {
+	anfrage := market_communication.BOneyComb{
+		Stammdaten: []bo.BusinessObject{},
+		Transaktionsdaten: map[string]string{
+			"Bar": "Bar",
+		},
+	}
 	boneyComb := market_communication.BOneyComb{
 		Stammdaten: []bo.BusinessObject{
 			&bo.Geschaeftspartner{
@@ -73,6 +79,7 @@ func Test_BOneyComb_DeSerialization(t *testing.T) {
 		Transaktionsdaten: map[string]string{
 			"Foo": "Bar",
 		},
+		Anfrage: &anfrage,
 	}
 	validate := validator.New()
 	validationErr := validate.Struct(boneyComb)
@@ -89,6 +96,7 @@ func Test_BOneyComb_DeSerialization(t *testing.T) {
 	then.AssertThat(t, deserializedBoneyComb.Stammdaten[2], is.EqualTo(boneyComb.Stammdaten[2]))
 	then.AssertThat(t, deserializedBoneyComb.Transaktionsdaten, is.EqualTo(boneyComb.Transaktionsdaten))
 	then.AssertThat(t, deserializedBoneyComb, is.EqualTo(boneyComb))
+	then.AssertThat(t, *deserializedBoneyComb.Anfrage, is.EqualTo(anfrage))
 }
 
 func Test_Empty_BOneyComb_Is_Invalid(t *testing.T) {
