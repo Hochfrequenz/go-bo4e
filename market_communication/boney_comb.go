@@ -3,6 +3,7 @@ package market_communication
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
@@ -38,6 +39,7 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 		Stammdaten        json.RawMessage     `json:"stammdaten" validate:"required"`
 		Transaktionsdaten map[string]string   `json:"transaktionsdaten" validate:"required"`
 		Links             map[string][]string `json:"links"`
+		Anfrage           json.RawMessage     `json:"anfrage"`
 	}
 
 	errs := errors.Join(json.Unmarshal(data, &boneyComb))
@@ -51,6 +53,15 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 		Stammdaten:        stammdaten,
 		Transaktionsdaten: boneyComb.Transaktionsdaten,
 		Links:             boneyComb.Links,
+	}
+
+	if boneyComb.Anfrage != nil {
+		var anfrage *BOneyComb
+		if err := json.Unmarshal(boneyComb.Anfrage, &anfrage); err != nil {
+			errs = errors.Join(errs, fmt.Errorf("anfrage: %w", err))
+		} else {
+			boc.Anfrage = anfrage
+		}
 	}
 
 	return errs
