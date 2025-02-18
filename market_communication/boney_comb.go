@@ -16,7 +16,7 @@ type BOneyComb struct {
 	Stammdaten        bo.BusinessObjectSlice `json:"stammdaten" validate:"required"`        // Stammdaten is an array of business objects
 	Transaktionsdaten map[string]string      `json:"transaktionsdaten" validate:"required"` // Transaktionsdaten are data relevant only in the context of this market communication message
 	Links             map[string][]string    `json:"links"`                                 // Links describes relations between different BusinessObjects in Stammdaten
-	Anfrage           *BOneyComb             `json:"anfrage"`                               // Anfrage can contain the related market communication message e.g. ORDERS => ORDRSP or MSCONS => Storno
+	Anfrage           *BOneyComb             `json:"anfrage,omitempty"`                     // Anfrage can contain the related market communication message e.g. ORDERS => ORDRSP or MSCONS => Storno
 }
 
 var pruefiPattern = regexp.MustCompile(`^[1-9]\d{4}$`)
@@ -56,11 +56,11 @@ func (boc *BOneyComb) UnmarshalJSON(data []byte) error {
 	}
 
 	if boneyComb.Anfrage != nil {
-		var anfrage *BOneyComb
+		var anfrage BOneyComb
 		if err := json.Unmarshal(boneyComb.Anfrage, &anfrage); err != nil {
 			errs = errors.Join(errs, fmt.Errorf("anfrage: %w", err))
 		} else {
-			boc.Anfrage = anfrage
+			boc.Anfrage = &anfrage
 		}
 	}
 
