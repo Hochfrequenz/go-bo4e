@@ -137,4 +137,4 @@ const (
 	BILDUNG
 	// INTEGRATION represents code 9991 00000 320
 	INTEGRATION
-) 
+)
