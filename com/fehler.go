@@ -6,6 +6,6 @@ import (
 
 // Die Komponente wird dazu verwendet Fehler innerhalb eines bo.Statusbericht abzubilden
 type Fehler struct {
-	Typ           fehlertyp.FehlerTyp `json:"typ" validate:"required"` //
-	FehlerDetails []FehlerDetail      `json:"fehlerDetails"`           //
+	Typ           fehlertyp.FehlerTyp `json:"typ,omitempty"` //
+	FehlerDetails []FehlerDetail      `json:"fehlerDetails"` //
 }
