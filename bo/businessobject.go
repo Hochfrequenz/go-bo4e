@@ -106,6 +106,10 @@ func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 		bo.(*Preisblatt).BoTyp = typ
 		bo.(*Preisblatt).VersionStruktur = defaultVersionStruktur
 		bo.(*Preisblatt).Herausgeber.BoTyp = botyp.MARKTTEILNEHMER
+	case botyp.PRODUKTPAKET:
+		bo = new(Produktpaket)
+		bo.(*Produktpaket).BoTyp = typ
+		bo.(*Produktpaket).VersionStruktur = defaultVersionStruktur
 	case botyp.RECHNUNG:
 		bo = new(Rechnung)
 		bo.(*Rechnung).BoTyp = typ

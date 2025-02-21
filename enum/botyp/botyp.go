@@ -26,6 +26,7 @@ const (
 	PREISBLATTKONZESSIONSABGABE // PREISBLATTKONZESSIONSABGABE is a PREISBLATT for concession fees
 	PREISBLATTMESSUNG           // PREISBLATTMESSUNG is a PREISBLATT for metering
 	PREISBLATTUMLAGEN           // PREISBLATTUMLAGEN is a PREISBLATT for allocations
+	PRODUKTPAKET                // PRODUKTPAKET is a product package
 	RECHNUNG                    // RECHNUNG is a Invoice
 	REKLAMATION                 // REKLAMATION is the complaint, that an ENERGIEMENGE is missing or unplausible
 	TARIFINFO                   // TARIFINFO Are information about tariffs
