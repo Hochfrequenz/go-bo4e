@@ -45,6 +45,7 @@ var (
 		"NETZLOKATION":                NETZLOKATION,
 		"SUMMENZEITREIHE":             SUMMENZEITREIHE,
 		"EINSPEISUNG":                 EINSPEISUNG,
+		"ANFRAGE":                     ANFRAGE,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -84,6 +85,7 @@ var (
 		NETZLOKATION:                "NETZLOKATION",
 		SUMMENZEITREIHE:             "SUMMENZEITREIHE",
 		EINSPEISUNG:                 "EINSPEISUNG",
+		ANFRAGE:                     "ANFRAGE",
 	}
 )
 
@@ -127,6 +129,7 @@ func init() {
 			interface{}(NETZLOKATION).(fmt.Stringer).String():                NETZLOKATION,
 			interface{}(SUMMENZEITREIHE).(fmt.Stringer).String():             SUMMENZEITREIHE,
 			interface{}(EINSPEISUNG).(fmt.Stringer).String():                 EINSPEISUNG,
+			interface{}(ANFRAGE).(fmt.Stringer).String():                     ANFRAGE,
 		}
 	}
 }
