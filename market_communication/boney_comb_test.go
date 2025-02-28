@@ -9,6 +9,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/hochfrequenz/go-bo4e/enum/anfragekategorie"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/go-playground/validator/v10"
@@ -74,6 +76,18 @@ func Test_BOneyComb_DeSerialization(t *testing.T) {
 						Einheit:                  mengeneinheit.KWH,
 					},
 				},
+			},
+			&bo.Anfrage{
+				Geschaeftsobjekt: bo.Geschaeftsobjekt{
+					BoTyp:           botyp.ANFRAGE,
+					VersionStruktur: "1",
+				},
+				LokationsId:             "015111111",
+				Lokationstyp:            lokationstyp.MALO,
+				OBISKennzahl:            internal.Ptr("1-0:1.8.1"),
+				ZeitraumMesswertanfrage: nil,
+				Anfragekategorie:        anfragekategorie.ENTSPERRUNG,
+				Anfragetyp:              nil,
 			},
 		},
 		Transaktionsdaten: map[string]string{
