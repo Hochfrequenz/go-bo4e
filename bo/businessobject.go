@@ -57,23 +57,13 @@ func newBoTypAndVersion[T BusinessObject](typ botyp.BOTyp) *T {
 	}
 	return a
 }
-func setBoTypAndVersion[T BusinessObject](in T, typ botyp.BOTyp) T {
-	a := new(T)
-	gob := Geschaeftsobjekt{
-		BoTyp:           typ,
-		VersionStruktur: defaultVersionStruktur,
-	}
-	field := reflect.ValueOf(a).Elem().FieldByName("Geschaeftsobjekt")
-	if field.CanSet() {
-		field.Set(reflect.ValueOf(gob))
-	}
-	return *a
-}
 
 // defaultVersionStruktur is the Geschaeftsobjekt.VersionStruktur that a NewBusinessObject has by default
 const defaultVersionStruktur = "1.1" // because Geschaeftsobjekt.ExterneReferenzen (plural) was introduced in v1.1. In v1.0 the name was "externeReferenz" (singular)
 
 // NewBusinessObject creates an empty BusinessObject based on the provided type; Returns nil if the type is not implemented.
+//
+//nolint:gocyclo // not really complex but mapping
 func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 	var bo BusinessObject
 	switch typ {
