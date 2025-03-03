@@ -17,6 +17,7 @@ func ExampleGetAll() {
 			bo.NewBusinessObject(botyp.RECHNUNG),
 			bo.NewBusinessObject(botyp.MESSLOKATION),
 			bo.NewBusinessObject(botyp.LASTGANG),
+			bo.NewBusinessObject(botyp.ANFRAGE),
 
 			// Business objects created via bo.NewBusinessObject are pointers, but the concrete types implement
 			// bo.BusinessObject via value receivers, so a slice of these objects may contain non-pointer values

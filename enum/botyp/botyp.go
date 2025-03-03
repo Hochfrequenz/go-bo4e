@@ -12,7 +12,7 @@ const (
 	ANSPRECHPARTNER         // ANSPRECHPARTNER is the type of a contact person, see bo.ANSPRECHPARTNER
 	AUSSCHREIBUNG           // AUSSCHREIBUNG is a tender offer
 	BILANZIERUNG            // BILANZIERUNG contains balancing information (this is not BO4E standard, yet)
-	ENERGIEMENGE            // ENERGIEMENGE is the tpye of an energy amount, see bo.ENERGIEMENGE
+	ENERGIEMENGE            // ENERGIEMENGE is the type of an energy amount, see bo.ENERGIEMENGE
 	GESCHAEFTSPARTNER       // GESCHAEFTSPARTNER is a business partner
 	KOSTEN                  // KOSTEN are costs
 	LASTGANG                // LASTGANG is the type of bo.LASTGANG
@@ -45,4 +45,5 @@ const (
 	SUMMENZEITREIHE
 	EINSPEISUNG
 	ANFRAGE
+	// der letzte enum muss in bo_test.TestNewBusinessObject eingetragen werden!
 )
