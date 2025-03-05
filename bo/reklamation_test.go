@@ -20,6 +20,7 @@ import (
 
 // Test_Reklamation_Deserialization tests serialization and deserialization of Reklamation
 func Test_Reklamation_Deserialization(t *testing.T) {
+	zfw := time.Date(2021, 12, 30, 22, 0, 0, 0, time.UTC)
 	obis := func(s string) *string { return &s }
 	var reklamation = bo.Reklamation{
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -33,7 +34,8 @@ func Test_Reklamation_Deserialization(t *testing.T) {
 		ZeitraumMesswertanfrage: com.Zeitraum{
 			Startzeitpunkt: internal.Ptr(time.Date(2021, 12, 31, 22, 0, 0, 0, time.UTC)),
 		}.AsPointer(),
-		Reklamationsgrund: reklamationsgrund.WERTE_FEHLEN,
+		Reklamationsgrund:        reklamationsgrund.WERTE_FEHLEN,
+		ZeitpunktFuerWertanfrage: internal.Ptr(zfw),
 	}
 	serializedReklamation, err := json.Marshal(reklamation)
 	then.AssertThat(t, err, is.Nil())
@@ -41,8 +43,8 @@ func Test_Reklamation_Deserialization(t *testing.T) {
 	var deserializedReklamation bo.Reklamation
 	err = json.Unmarshal(serializedReklamation, &deserializedReklamation)
 	then.AssertThat(t, err, is.Nil())
-
 	then.AssertThat(t, deserializedReklamation, is.EqualTo(reklamation))
+	then.AssertThat(t, *deserializedReklamation.ZeitpunktFuerWertanfrage, is.EqualTo(zfw))
 }
 
 // Test_Failed_ReklamationValidation verifies that the validators of Reklamation work
