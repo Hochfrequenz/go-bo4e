@@ -4,6 +4,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
+	"reflect"
 )
 
 // BusinessObject is the interface that all Business Objects implement.
@@ -40,126 +41,102 @@ func (gob Geschaeftsobjekt) GetGueltigkeitszeitraum() *com.Zeitraum {
 	return gob.Gueltigkeitszeitraum
 }
 
+func newBoTypAndVersion[T BusinessObject](typ botyp.BOTyp) *T {
+	a := new(T)
+	gob := Geschaeftsobjekt{
+		BoTyp:           typ,
+		VersionStruktur: defaultVersionStruktur,
+	}
+	val := reflect.ValueOf(a)
+	if val.CanInterface() {
+		val = val.Elem()
+	}
+	field := val.FieldByName("Geschaeftsobjekt")
+	if field.CanSet() {
+		field.Set(reflect.ValueOf(gob))
+	}
+	return a
+}
+
 // defaultVersionStruktur is the Geschaeftsobjekt.VersionStruktur that a NewBusinessObject has by default
 const defaultVersionStruktur = "1.1" // because Geschaeftsobjekt.ExterneReferenzen (plural) was introduced in v1.1. In v1.0 the name was "externeReferenz" (singular)
 
 // NewBusinessObject creates an empty BusinessObject based on the provided type; Returns nil if the type is not implemented.
+//
+//nolint:gocyclo // not really complex but mapping
 func NewBusinessObject(typ botyp.BOTyp) BusinessObject {
 	var bo BusinessObject
 	switch typ {
+	case botyp.ANFRAGE:
+		bo = newBoTypAndVersion[Anfrage](typ)
 	case botyp.ANGEBOT:
-		bo = new(Angebot)
-		bo.(*Angebot).BoTyp = typ
-		bo.(*Angebot).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Angebot](typ)
 	case botyp.ANSPRECHPARTNER:
-		bo = new(Ansprechpartner)
-		bo.(*Ansprechpartner).BoTyp = typ
-		bo.(*Ansprechpartner).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Ansprechpartner](typ)
 	case botyp.BILANZIERUNG:
-		bo = new(Bilanzierung)
-		bo.(*Bilanzierung).BoTyp = typ
-		bo.(*Bilanzierung).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Bilanzierung](typ)
 	case botyp.EINSPEISUNG:
-		bo = new(Einspeisung)
-		bo.(*Einspeisung).BoTyp = typ
-		bo.(*Einspeisung).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Einspeisung](typ)
 	case botyp.ENERGIEMENGE:
-		bo = new(Energiemenge)
-		bo.(*Energiemenge).BoTyp = typ
-		bo.(*Energiemenge).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Energiemenge](typ)
 	case botyp.GESCHAEFTSPARTNER:
-		bo = new(Geschaeftspartner)
-		bo.(*Geschaeftspartner).BoTyp = typ
-		bo.(*Geschaeftspartner).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Geschaeftspartner](typ)
 	case botyp.LASTGANG:
-		bo = new(Lastgang)
-		bo.(*Lastgang).BoTyp = typ
-		bo.(*Lastgang).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Lastgang](typ)
 	case botyp.LOKATIONSZUORDNUNG:
-		bo = new(Lokationszuordnung)
-		bo.(*Lokationszuordnung).BoTyp = typ
-		bo.(*Lokationszuordnung).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Lokationszuordnung](typ)
 	case botyp.MARKTLOKATION:
-		bo = new(Marktlokation)
-		bo.(*Marktlokation).BoTyp = typ
-		bo.(*Marktlokation).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Marktlokation](typ)
 	case botyp.MARKTTEILNEHMER:
-		bo = new(Marktteilnehmer)
-		bo.(*Marktteilnehmer).BoTyp = typ
-		bo.(*Marktteilnehmer).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Marktteilnehmer](typ)
 	case botyp.MESSLOKATION:
-		bo = new(Messlokation)
-		bo.(*Messlokation).BoTyp = typ
-		bo.(*Messlokation).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Messlokation](typ)
 	case botyp.NETZLOKATION:
-		bo = new(Netzlokation)
-		bo.(*Netzlokation).BoTyp = typ
-		bo.(*Netzlokation).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Netzlokation](typ)
 	case botyp.NETZNUTZUNGSRECHNUNG:
-		bo = new(Netznutzungsrechnung)
-		bo.(*Netznutzungsrechnung).BoTyp = typ
-		bo.(*Netznutzungsrechnung).VersionStruktur = defaultVersionStruktur
-		bo.(*Netznutzungsrechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
-		bo.(*Netznutzungsrechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
+		bo = newBoTypAndVersion[Netznutzungsrechnung](typ)
+		bo.(*Netznutzungsrechnung).Rechnungsempfaenger = *newBoTypAndVersion[Geschaeftspartner](botyp.GESCHAEFTSPARTNER)
+		bo.(*Netznutzungsrechnung).Rechnungsersteller = *newBoTypAndVersion[Geschaeftspartner](botyp.GESCHAEFTSPARTNER)
 	case botyp.PREISBLATT:
-		bo = new(Preisblatt)
-		bo.(*Preisblatt).BoTyp = typ
-		bo.(*Preisblatt).VersionStruktur = defaultVersionStruktur
-		bo.(*Preisblatt).Herausgeber.BoTyp = botyp.MARKTTEILNEHMER
+		bo = newBoTypAndVersion[Preisblatt](typ)
+		bo.(*Preisblatt).Herausgeber = *NewBusinessObject(botyp.MARKTTEILNEHMER).(*Marktteilnehmer)
 	case botyp.PRODUKTPAKET:
-		bo = new(Produktpaket)
-		bo.(*Produktpaket).BoTyp = typ
-		bo.(*Produktpaket).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Produktpaket](typ)
 	case botyp.RECHNUNG:
-		bo = new(Rechnung)
-		bo.(*Rechnung).BoTyp = typ
-		bo.(*Rechnung).VersionStruktur = defaultVersionStruktur
-		bo.(*Rechnung).Rechnungsempfaenger.BoTyp = botyp.GESCHAEFTSPARTNER
-		bo.(*Rechnung).Rechnungsersteller.BoTyp = botyp.GESCHAEFTSPARTNER
+		bo = newBoTypAndVersion[Rechnung](typ)
+		bo.(*Rechnung).Rechnungsempfaenger = *newBoTypAndVersion[Geschaeftspartner](botyp.GESCHAEFTSPARTNER)
+		bo.(*Rechnung).Rechnungsersteller = *newBoTypAndVersion[Geschaeftspartner](botyp.GESCHAEFTSPARTNER)
 	case botyp.REKLAMATION:
-		bo = new(Reklamation)
-		bo.(*Reklamation).BoTyp = typ
-		bo.(*Reklamation).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Reklamation](typ)
 	case botyp.VERTRAG:
-		bo = new(Vertrag)
-		bo.(*Vertrag).BoTyp = typ
-		bo.(*Vertrag).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Vertrag](typ)
 	case botyp.ZAEHLER:
-		bo = new(Zaehler)
-		bo.(*Zaehler).BoTyp = typ
-		bo.(*Zaehler).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Zaehler](typ)
 	case botyp.HANDELSUNSTIMMIGKEIT:
-		bo = new(Handelsunstimmigkeit)
-		bo.(*Handelsunstimmigkeit).BoTyp = typ
-		bo.(*Handelsunstimmigkeit).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Handelsunstimmigkeit](typ)
 	case botyp.AVIS:
-		bo = new(Avis)
-		bo.(*Avis).BoTyp = typ
-		bo.(*Avis).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Avis](typ)
 	case botyp.STATUSBERICHT:
-		bo = new(Statusbericht)
-		bo.(*Statusbericht).BoTyp = typ
-		bo.(*Statusbericht).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Statusbericht](typ)
 	case botyp.STEUERBARERESSOURCE:
-		bo = new(SteuerbareRessource)
-		bo.(*SteuerbareRessource).BoTyp = typ
-		bo.(*SteuerbareRessource).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[SteuerbareRessource](typ)
 	case botyp.SUMMENZEITREIHE:
-		bo = new(Summenzeitreihe)
-		bo.(*Summenzeitreihe).BoTyp = typ
-		bo.(*Summenzeitreihe).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Summenzeitreihe](typ)
 	case botyp.TECHNISCHERESSOURCE:
-		bo = new(TechnischeRessource)
-		bo.(*TechnischeRessource).BoTyp = typ
-		bo.(*TechnischeRessource).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[TechnischeRessource](typ)
 	case botyp.TRANCHE:
-		bo = new(Tranche)
-		bo.(*Tranche).BoTyp = typ
-		bo.(*Tranche).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Tranche](typ)
 	case botyp.ZAEHLZEITDEFINITION:
-		bo = new(Zaehlzeitdefinition)
-		bo.(*Zaehlzeitdefinition).BoTyp = typ
-		bo.(*Zaehlzeitdefinition).VersionStruktur = defaultVersionStruktur
+		bo = newBoTypAndVersion[Zaehlzeitdefinition](typ)
+	case botyp.PREISBLATTUMLAGEN:
+		bo = newBoTypAndVersion[PreisblattUmlagen](typ)
+	case botyp.PREISBLATTMESSUNG:
+		bo = newBoTypAndVersion[PreisblattMessung](typ)
+	case botyp.PREISBLATTKONZESSIONSABGABE:
+		bo = newBoTypAndVersion[PreisblattKonzessionsabgabe](typ)
+	case botyp.AUSSCHREIBUNG, botyp.KOSTEN, botyp.PREISBLATTDIENSTLEISTUNG, botyp.TARIFINFO, botyp.TARIFPREISBLATT, botyp.ZEITREIHE:
+		// TODO: diese Typen könnten noch in BO4E dotnet und hier implementiert oder im Standard deprecated werden
+		return nil
 	default:
 		return nil
 	}
