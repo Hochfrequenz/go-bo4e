@@ -1,6 +1,8 @@
 package bo
 
 import (
+	"time"
+
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/lokationstyp"
 	"github.com/hochfrequenz/go-bo4e/enum/reklamationsgrund"
@@ -16,4 +18,5 @@ type Reklamation struct {
 	ZeitraumMesswertanfrage    *com.Zeitraum                       `json:"zeitraumMesswertanfrage,omitempty" validate:"required"`                                                        // ZeitraumMesswertanfrage gibt den com.Zeitraum an, auf die sich die Reklamation bezieht.
 	ReklamationsgrundBemerkung string                              `json:"reklamationsgrundBemerkung,omitempty" validate:"omitempty"`                                                    // ReklamationsgrundBemerkung ist ein Freitext für eine weitere Beschreibung des Reklamationsgrunds
 	Positionsnummer            int                                 `json:"positionsnummer,omitempty" validate:"omitempty"`                                                               // Positionsnummer ist eine fortlaufende Nummer für die Position
+	ZeitpunktFuerWertanfrage   *time.Time                          `json:"zeitpunktFuerWertanfrage,omitempty" validate:"omitempty"`                                                      // ZeitpunktFuerWertanfrage gibt den com.Zeitpunkt an, zu dem die Wertanfrage erfolgt ist.
 }
