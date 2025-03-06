@@ -13,6 +13,7 @@ import (
 
 // Messlokation contains information about a metering location aka "MeLo"
 type Messlokation struct {
+	unmappeddatamarshaller.ExtensionData
 	Geschaeftsobjekt
 	MesslokationsId                 string                     `json:"messlokationsId,omitempty" example:"DE0123456789012345678901234567890" validate:"alphanum,required,len=33"` // MesslokationsId is the ID of the metering location
 	Sparte                          sparte.Sparte              `json:"sparte,omitempty" validate:"required"`                                                                      // Sparte is the division
