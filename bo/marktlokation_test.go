@@ -18,6 +18,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/gebiettyp"
 	"github.com/hochfrequenz/go-bo4e/enum/geschaeftspartnerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/sperrstatus"
@@ -89,6 +90,14 @@ func Test_Marktlokation_Deserialization(t *testing.T) {
 				Abschlag:       decimal.NewNullDecimal(decimal.NewFromFloat(9.10)),
 			},
 		},
+		Marktrollen: []com.MarktpartnerDetails{
+			{
+				Rollencodenummer:   internal.Ptr("RC1"),
+				Code:               internal.Ptr("Code1"),
+				Marktrolle:         internal.Ptr(marktrolle.MSB),
+				Weiterverpflichtet: internal.Ptr(true),
+			},
+		},
 		Sperrstatus: &gesperrt,
 	}
 	serializedMalo, err := json.Marshal(malo)
@@ -104,6 +113,10 @@ func Test_Marktlokation_Deserialization(t *testing.T) {
 	then.AssertThat(t, strings.Contains(stringSerializedMalo, "DE"), is.True())
 	then.AssertThat(t, strings.Contains(stringSerializedMalo, "ADDITION"), is.True())
 	then.AssertThat(t, strings.Contains(stringSerializedMalo, "\"unterbrechbar\":false"), is.True())
+	then.AssertThat(t, stringSerializedMalo, is.StringContaining("RC1"))                // MarktpartnerDetails
+	then.AssertThat(t, stringSerializedMalo, is.StringContaining("Code1"))              // MarktpartnerDetails
+	then.AssertThat(t, stringSerializedMalo, is.StringContaining("MSB"))                // MarktpartnerDetails
+	then.AssertThat(t, stringSerializedMalo, is.StringContaining("weiterverpflichtet")) // MarktpartnerDetails
 	var deserializedMalo bo.Marktlokation
 	err = json.Unmarshal(serializedMalo, &deserializedMalo)
 	then.AssertThat(t, err, is.Nil())

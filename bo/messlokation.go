@@ -24,6 +24,7 @@ type Messlokation struct {
 	GrundzustaendigerMsbImCodeNr    string                     `json:"GrundzustaendigerMsbImCodeNr,omitempty" validate:"omitempty,numeric,len=13"`                                // GrundzustaendigerMsbImCodeNr si the code number of the "grundzuständige Messsstellenbetreiber", responsible for intelligent meters at this MeLo
 	Messlokationszaehler            []Zaehler                  `json:"messlokationszaehler,omitempty"`                                                                            // Messlokationszaehler meters associated to this Messlokation
 	Gasqualitaet                    *gasqualitaet.Gasqualitaet `json:"gasqualitaet,omitempty"`                                                                                    // gasqualitaet für EDIFACT mapping
+	Marktrollen                     []com.MarktpartnerDetails  `json:"marktrollen,omitempty"`                                                                                     // marktrollen für EDIFACT mapping
 	Abrechnungmessstellenbetriebnna *bool                      `json:"abrechnungmessstellenbetriebnna,omitempty"`                                                                 //Dieser Wert ist true, falls die Abrechnungs des Messstellenbetriebs die Netznutzungsabrechnung enthält. false andernfalls
 	// only one of the following three optional address attributes can be set
 	Messadresse         *com.Adresse         `json:"messadresse,omitempty" validate:"required_without_all=Geoadresse Katasterinformation"` // Messadresse is a street address of the Messlokation

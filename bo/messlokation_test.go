@@ -14,6 +14,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/landescode"
+	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
@@ -49,6 +50,14 @@ func Test_Messlokation_Deserialization(t *testing.T) {
 			Hausnummer:   "27A",
 			Landescode:   internal.Ptr(landescode.DE),
 		},
+		Marktrollen: []com.MarktpartnerDetails{
+			{
+				Rollencodenummer:   internal.Ptr("Rollencodenummer"),
+				Code:               internal.Ptr("Code"),
+				Marktrolle:         internal.Ptr(marktrolle.MSB),
+				Weiterverpflichtet: internal.Ptr(true),
+			},
+		},
 		Messlokationszaehler: []bo.Zaehler{
 			{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
@@ -81,6 +90,7 @@ func Test_Messlokation_Deserialization(t *testing.T) {
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "EINTARIF"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "EINRICHTUNGSZAEHLER"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "EINTARIF"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedMelo), "Rollencodenummer"), is.True())
 	var deserializedMelo bo.Messlokation
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(t, err, is.Nil())
@@ -172,6 +182,7 @@ func Test_Messlokation_DeSerialization_With_Unkonwn_Fields(t *testing.T) {
           "marktrolle": "MSB"
         }
       ],
+	  "verlustfaktor": 1.8,
       "boTyp": "MESSLOKATION",
       "versionStruktur": "1"
     }`
@@ -181,7 +192,7 @@ func Test_Messlokation_DeSerialization_With_Unkonwn_Fields(t *testing.T) {
 	err := json.Unmarshal([]byte(meloJsonWithUnknownFields), &melo)
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, melo.Geschaeftsobjekt.ExtensionData, is.Not(is.EqualTo[unmappeddatamarshaller.ExtensionData](nil)))
-	then.AssertThat(t, melo.ExtensionData["marktrollen"], is.Not(is.EqualTo[any](nil)))       // messlokation->marktrollen is NOT part of the bo4e standard ==> present in extension data
+	then.AssertThat(t, melo.ExtensionData["verlustfaktor"], is.Not(is.EqualTo[any](nil)))     // messlokation->verlustfaktor is NOT part of the bo4e standard ==> present in extension data
 	then.AssertThat(t, melo.ExtensionData["messlokationsId"], is.EqualTo[any](nil))           // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
 	then.AssertThat(t, melo.MesslokationsId, is.EqualTo("DE00026930926E0000000000100763575")) // but where it should be
 	// the other fields should be fine, too, without explicit tests; Add them if you feel like it doesn't work
@@ -190,7 +201,7 @@ func Test_Messlokation_DeSerialization_With_Unkonwn_Fields(t *testing.T) {
 	serializedMeLoBytes, errSerializing := json.Marshal(melo)
 	then.AssertThat(t, errSerializing, is.Nil())
 	serializedMeLo := string(serializedMeLoBytes)
-	then.AssertThat(t, strings.Contains(serializedMeLo, "marktrollen"), is.True())     // unmapped fields should be part of the serialized melo
+	then.AssertThat(t, strings.Contains(serializedMeLo, "verlustfaktor"), is.True())   // unmapped fields should be part of the serialized melo
 	then.AssertThat(t, strings.Contains(serializedMeLo, "messlokationsId"), is.True()) // mapped fields should be part of the serialized melo
 }
 

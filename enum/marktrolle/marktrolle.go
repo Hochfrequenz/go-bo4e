@@ -22,4 +22,5 @@ const (
 	KUNDE                      // KUNDE is a Kunde
 	INTERESSENT                // INTERESSENT is a Interessent
 	GMSB                       // GMSB stands for "Grundzuständiger MSB"
+	AMSB                       // AMSB stands for "Auffangmessstellenbetreiber"
 )

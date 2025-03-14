@@ -54,6 +54,7 @@ type Marktlokation struct {
 	ZaehlwerkeBeteiligteMarktrolle []com.Zaehlwerk                                    `json:"zaehlwerkeBeteiligteMarktrolle,omitempty"`
 	Messlokationen                 []Messlokation                                     `json:"messlokationen,omitempty"`
 	MesstechnischeEinordnung       *messtechnischeeinordnung.MesstechnischeEinordnung `json:"messtechnischeEinordnung,omitempty"`
+	Marktrollen                    []com.MarktpartnerDetails                          `json:"marktrollen,omitempty"`
 
 	Netznutzungsabrechnungsdaten []com.Netznutzungsabrechnungsdaten `json:"netznutzungsabrechnungsdaten,omitempty"` // Netznutzungsabrechnungsdaten sind Daten für die Prüfung der Netznutzungsabrechnung
 	Sperrstatus                  *sperrstatus.Sperrstatus           `json:"sperrstatus,omitempty"`
