@@ -15,4 +15,5 @@ const (
 	P19_STROM_NEV_UMLAGE                                        // § 19 StromNEV-Umlage
 	P18_ABLAV                                                   // §18 AbLaV
 	KONZESSIONSABGABE_WECHSEL_RLM                               // Konzessionsabgabe (Wechsel auf Lastgangmessung)
+	PRIVILEGIERUNG_NACH_ENFG                                    // Privilegierung nach EnFG
 )
