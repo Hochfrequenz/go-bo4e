@@ -1,0 +1,177 @@
+{
+  "description": "Variante des Preisblattmodells zur Abbildung der Preise für wahlfreie Dienstleistungen\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/PreisblattDienstleistung.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `PreisblattDienstleistung JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/PreisblattDienstleistung.json>`_",
+  "title": "PreisblattDienstleistung",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "PREISBLATTDIENSTLEISTUNG",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "basisdienstleistung": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Dienstleistungstyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bilanzierungsmethode": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Bilanzierungsmethode.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "geraetedetails": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geraet.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gueltigkeit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "herausgeber": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Marktteilnehmer.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "inklusiveDienstleistungen": {
+      "title": "Inklusivedienstleistungen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../enum/Dienstleistungstyp.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preispositionen": {
+      "title": "Preispositionen",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Preisposition.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preisstatus": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Preisstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sparte": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Sparte.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

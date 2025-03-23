@@ -1,0 +1,12 @@
+{
+  "description": "Aufzählung der Möglichkeiten zur Rechnungslegung in Ausschreibungen.",
+  "title": "Rechnungslegung",
+  "type": "string",
+  "enum": [
+    "MONATSRECHN",
+    "ABSCHL_MONATSRECHN",
+    "ABSCHL_JAHRESRECHN",
+    "MONATSRECHN_JAHRESRECHN",
+    "VORKASSE"
+  ]
+}

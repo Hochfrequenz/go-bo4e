@@ -1,0 +1,12 @@
+{
+  "description": "Bei diesem Enum handelt es sich um die Abbildung von besonderen Zählertyp-Spezifikationen der Sparten Strom und Gas.",
+  "title": "ZaehlertypSpezifikation",
+  "type": "string",
+  "enum": [
+    "EDL40",
+    "EDL21",
+    "SONSTIGER_EHZ",
+    "MME_STANDARD",
+    "MME_MEDA"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "description": "Verwendungszweck der Werte Marktlokation",
+  "title": "Verwendungszweck",
+  "type": "string",
+  "enum": [
+    "NETZNUTZUNGSABRECHNUNG",
+    "BILANZKREISABRECHNUNG",
+    "MEHRMINDERMENGENABRECHNUNG",
+    "ENDKUNDENABRECHNUNG",
+    "UEBERMITTLUNG_AN_DAS_HKNR",
+    "ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS"
+  ]
+}
