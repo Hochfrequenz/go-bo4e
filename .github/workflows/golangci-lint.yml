@@ -16,9 +16,9 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@v4
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
-          version: v1.64.2
+          version: v2.0.0
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir
