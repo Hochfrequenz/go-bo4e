@@ -35,6 +35,7 @@ var validAnfrage = bo.Anfrage{
 	},
 	Anfragekategorie: anfragekategorie.ENTSPERRUNG,
 	Anfragetyp:       internal.Ptr(anfragetyp.ZAEHLERSTAENDE),
+	Positionsnummer:  13,
 }
 
 // Test_Anfrage_Deserialization deserializes an Anfrage json
@@ -48,4 +49,5 @@ func Test_Anfrage_Deserialization(t *testing.T) {
 	err = json.Unmarshal(serializedAnfrage, &deserializedAnfrage)
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, deserializedAnfrage, is.EqualTo(validAnfrage))
+	then.AssertThat(t, deserializedAnfrage.Positionsnummer, is.EqualTo(validAnfrage.Positionsnummer))
 }
