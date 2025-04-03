@@ -16,19 +16,15 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@v4
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
-          version: v1.64.2
-
-          # Optional: working directory, useful for monorepos
-          # working-directory: somedir
-
-          # Optional: golangci-lint command line arguments. see https://golangci-lint.run/usage/quick-start
-          args: --enable gofmt,dupl,goconst,goconst,gocyclo
-          #--issues-exit-code=0
-
-          # Optional: show only new issues if it's a pull request. The default value is `false`.
-          # only-new-issues: true
-
-          # Optional: if set to true then the action will use pre-installed Go
-          # skip-go-installation: true
+          version: v2.0.2
+          args: --enable dupl,goconst,goconst,gocyclo
+      - name: Check gofmt # since this is no linter anymore since golangci-lint v2
+        run: |
+          UNFORMATTED=$(gofmt -l .)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "The following files are not properly formatted:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
