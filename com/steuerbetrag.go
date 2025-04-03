@@ -38,7 +38,7 @@ func SteuerbetragStructLevelValidation(sl validator.StructLevel) {
 	case steuerkennzeichen.VST_0, steuerkennzeichen.UST_0:
 		expectedSteuerwert = steuerbetrag.Basiswert.Mul(decimal.Zero)
 	default:
-		err := fmt.Errorf("Validation of Steuerkennzeichen %v is not implemented", steuerbetrag.Steuerkennzeichen)
+		err := fmt.Errorf("validation of Steuerkennzeichen %v is not implemented", steuerbetrag.Steuerkennzeichen)
 		panic(err)
 	}
 	if !expectedSteuerwert.Equal(steuerbetrag.Steuerwert) {

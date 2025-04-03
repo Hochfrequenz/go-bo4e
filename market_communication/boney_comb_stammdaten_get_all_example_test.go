@@ -26,13 +26,13 @@ func ExampleGetAll() {
 		},
 	}
 
-	var preisblattValues []*bo.Preisblatt = market_communication.GetAll[bo.Preisblatt](boneyComb)
+	var preisblattValues = market_communication.GetAll[bo.Preisblatt](boneyComb)
 	fmt.Printf("objects of type Preisblatt     : %d\n", len(preisblattValues))
 
-	var marktteilnehmerValues []*bo.Marktteilnehmer = market_communication.GetAll[bo.Marktteilnehmer](boneyComb)
+	var marktteilnehmerValues = market_communication.GetAll[bo.Marktteilnehmer](boneyComb)
 	fmt.Printf("objects of type Marktteilnehmer: %d\n", len(marktteilnehmerValues))
 
-	var lastgangValues []*bo.Lastgang = market_communication.GetAll[bo.Lastgang](boneyComb)
+	var lastgangValues = market_communication.GetAll[bo.Lastgang](boneyComb)
 	fmt.Printf("objects of type Lastgang       : %d\n", len(lastgangValues))
 
 	// Output:

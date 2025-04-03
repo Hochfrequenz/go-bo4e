@@ -47,10 +47,10 @@ func (boneyComb *BOneyComb) GetAll(typ botyp.BOTyp) bo.BusinessObjectSlice {
 func (boneyComb *BOneyComb) GetSingle(typ botyp.BOTyp) (bo.BusinessObject, error) {
 	allBOsOfType := boneyComb.GetAll(typ)
 	if len(allBOsOfType) == 0 {
-		return nil, fmt.Errorf("There is no business object with type {%v}", typ)
+		return nil, fmt.Errorf("there is no business object with type {%v}", typ)
 	}
 	if len(allBOsOfType) > 1 {
-		return nil, fmt.Errorf("There is more than one (%d) business object with type {%v}", len(allBOsOfType), typ)
+		return nil, fmt.Errorf("there is more than one (%d) business object with type {%v}", len(allBOsOfType), typ)
 	}
 	return allBOsOfType[0], nil
 }

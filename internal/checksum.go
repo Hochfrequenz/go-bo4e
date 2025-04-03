@@ -9,7 +9,7 @@ import (
 // GetChecksum calculates the checksum of a (Netzlokation/Technische Ressource/Steuerbare Ressource) ID for a given 10-digit ID string (that does not contain a without checksum yet)
 func GetChecksum(idWithoutChecksum string) (string, error) {
 	if len(idWithoutChecksum) != 10 {
-		return "", fmt.Errorf("You must provide a string that is 10 characters long but '%s' is %d characters long", idWithoutChecksum, len(idWithoutChecksum))
+		return "", fmt.Errorf("vou must provide a string that is 10 characters long but '%s' is %d characters long", idWithoutChecksum, len(idWithoutChecksum))
 	}
 	evenSum := 0
 	oddSum := 0
