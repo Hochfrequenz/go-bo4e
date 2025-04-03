@@ -12,9 +12,9 @@ import (
 func TestExtractFromInvalidTypes(t *testing.T) {
 	t.Parallel()
 
-	var stringValue string = "foobar"
-	var intValue int = 42
-	var boolValue bool = true
+	var stringValue = "foobar"
+	var intValue = 42
+	var boolValue = true
 
 	inputs := map[string]interface{}{
 		"nil":               nil,
