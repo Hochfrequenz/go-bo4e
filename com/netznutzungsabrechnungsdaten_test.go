@@ -2,6 +2,8 @@ package com_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
+	"github.com/hochfrequenz/go-bo4e/enum/schwachlastfaehigkeit"
 	"testing"
 
 	"github.com/corbym/gocrest/is"
@@ -27,6 +29,17 @@ func Test_Netznutzungsabrechnungsdaten_Deserialization(t *testing.T) {
 		Wert:    decimal.NewFromFloat(12.34),
 		Einheit: waehrungseinheit.EUR,
 	}
+	zaehlzeit := com.Zaehlzeitregister{
+		ZaehlzeitDefinition: internal.Ptr("Zaehlzeitdefinition"),
+		Register:            internal.Ptr("Register"),
+		Schwachlastfaehig:   internal.Ptr(schwachlastfaehigkeit.SCHWACHLASTFAEHIG),
+	}
+	marktrolle := com.MarktpartnerDetails{
+		Rollencodenummer:   internal.Ptr("RC1"),
+		Code:               internal.Ptr("C1"),
+		Marktrolle:         internal.Ptr(marktrolle.MSB),
+		Weiterverpflichtet: internal.Ptr(true),
+	}
 	var netznutzungsabrechnungsdaten = com.Netznutzungsabrechnungsdaten{
 		ArtikelId:                     &artikelId,
 		ArtikelIdTyp:                  &artikelIdTyp,
@@ -36,6 +49,9 @@ func Test_Netznutzungsabrechnungsdaten_Deserialization(t *testing.T) {
 		Abschlag:                      decimal.NewNullDecimal(decimal.NewFromFloat(9.10)),
 		SingulaereBetriebsmittel:      &singulaereBetriebsmittel,
 		PreisSingulaereBetriebsmittel: &preisSingulaereBetriebsmittel,
+		Zaehlzeit:                     &zaehlzeit,
+		IstDifferenz:                  internal.Ptr(true),
+		Marktrollen:                   &[]com.MarktpartnerDetails{marktrolle},
 	}
 
 	serializedNnad, err := json.Marshal(netznutzungsabrechnungsdaten)
