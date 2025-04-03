@@ -12,6 +12,17 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
+      - uses: actions/checkout@v4
+      - name: Verify commit signature.
+        run: |
+          curl -s https://github.com/web-flow.gpg | gpg --import
+          echo "Imported GitHub keys."
+          
+          echo "Verifying signature of commit: $GITHUB_SHA"
+          if ! git verify-commit "$GITHUB_SHA"; then
+            echo "Commit signature verification failed."
+            exit 1
+          fi
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
       - name: Enable auto-merge for Dependabot PRs
