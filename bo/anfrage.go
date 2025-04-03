@@ -16,4 +16,5 @@ type Anfrage struct {
 	ZeitraumMesswertanfrage *com.Zeitraum                     `json:"ZeitraumMesswertanfrage,omitempty"`
 	Anfragekategorie        anfragekategorie.Anfragekategorie `json:"anfragekategorie,omitempty" validate:"required"`
 	Anfragetyp              *anfragetyp.Anfragetyp            `json:"anfragetyp,omitempty"`
+	Positionsnummer         int                               `json:"positionsnummer,omitempty" validate:"omitempty"`
 }
