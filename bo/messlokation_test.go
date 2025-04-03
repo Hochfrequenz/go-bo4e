@@ -191,7 +191,7 @@ func Test_Messlokation_DeSerialization_With_Unkonwn_Fields(t *testing.T) {
 	// unmarshalling tests
 	err := json.Unmarshal([]byte(meloJsonWithUnknownFields), &melo)
 	then.AssertThat(t, err, is.Nil())
-	then.AssertThat(t, melo.Geschaeftsobjekt.ExtensionData, is.Not(is.EqualTo[unmappeddatamarshaller.ExtensionData](nil)))
+	then.AssertThat(t, melo.ExtensionData, is.Not(is.EqualTo[unmappeddatamarshaller.ExtensionData](nil)))
 	then.AssertThat(t, melo.ExtensionData["verlustfaktor"], is.Not(is.EqualTo[any](nil)))     // messlokation->verlustfaktor is NOT part of the bo4e standard ==> present in extension data
 	then.AssertThat(t, melo.ExtensionData["messlokationsId"], is.EqualTo[any](nil))           // messlokation->messlokationsId is part of the bo4e standard ==> not present in extension data
 	then.AssertThat(t, melo.MesslokationsId, is.EqualTo("DE00026930926E0000000000100763575")) // but where it should be
