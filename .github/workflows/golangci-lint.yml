@@ -20,11 +20,5 @@ jobs:
         with:
           version: v2.0.2
           args: --enable dupl,goconst,goconst,gocyclo
-      - name: Check gofmt # since this is no linter anymore since golangci-lint v2
-        run: |
-          UNFORMATTED=$(gofmt -l .)
-          if [ -n "$UNFORMATTED" ]; then
-            echo "The following files are not properly formatted:"
-            echo "$UNFORMATTED"
-            exit 1
-          fi
+      - name: fmt
+        run: golangci-lint fmt --diff --enable gofmt
