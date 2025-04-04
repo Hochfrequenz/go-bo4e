@@ -50,7 +50,9 @@ func (boneyComb *BOneyComb) GetAbsender() *bo.Marktteilnehmer {
 
 // SetAbsender sets sending bo.Marktteilnehmer in both the Transaktionsdaten _and_ Stammdaten
 func (boneyComb *BOneyComb) SetAbsender(mt bo.Marktteilnehmer, useBo4eUri bool) {
-	boneyComb.SetAbsenderCode(mt.Rollencodenummer, useBo4eUri)
+	if mt.Rollencodenummer != nil {
+		boneyComb.SetAbsenderCode(*mt.Rollencodenummer, useBo4eUri)
+	}
 	boneyComb.setMarktteilnehmer(mt)
 }
 
@@ -61,7 +63,10 @@ func (boneyComb *BOneyComb) GetEmpfaenger() *bo.Marktteilnehmer {
 
 // SetEmpfaenger sets receiving bo.Marktteilnehmer in both the Transaktionsdaten _and_ Stammdaten
 func (boneyComb *BOneyComb) SetEmpfaenger(mt bo.Marktteilnehmer, useBo4eUri bool) {
-	boneyComb.SetEmpfaengerCode(mt.Rollencodenummer, useBo4eUri)
+	if mt.Rollencodenummer != nil {
+
+		boneyComb.SetEmpfaengerCode(*mt.Rollencodenummer, useBo4eUri)
+	}
 	boneyComb.setMarktteilnehmer(mt)
 }
 
@@ -97,7 +102,7 @@ func (boneyComb *BOneyComb) getMarktteilnehmer(marktteilnehmerId *string) *bo.Ma
 	}
 	for _, businessObject := range boneyComb.Stammdaten {
 		if businessObject.GetBoTyp() == botyp.MARKTTEILNEHMER {
-			if businessObject.(*bo.Marktteilnehmer).Rollencodenummer == *marktteilnehmerId {
+			if *(businessObject.(*bo.Marktteilnehmer).Rollencodenummer) == *marktteilnehmerId {
 				mtn := businessObject.(*bo.Marktteilnehmer)
 				return mtn
 			}
