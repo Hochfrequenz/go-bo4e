@@ -18,11 +18,11 @@ import (
 // Test_Deserialization deserializes an address json
 func Test_Address_Deserialization(t *testing.T) {
 	var adresse = com.Adresse{
-		Postleitzahl: "82031",
-		Ort:          "Grünwald",
-		Ortsteil:     "Geiselgasteig",
-		Strasse:      "Nördlicher Münchner Straße",
-		Hausnummer:   "27A",
+		Postleitzahl: internal.Ptr("82031"),
+		Ort:          internal.Ptr("Grünwald"),
+		Ortsteil:     internal.Ptr("Geiselgasteig"),
+		Strasse:      internal.Ptr("Nördlicher Münchner Straße"),
+		Hausnummer:   internal.Ptr("27A"),
 		Landescode:   internal.Ptr(landescode.DE),
 	}
 	serializedAdresse, err := json.Marshal(adresse)
@@ -45,40 +45,40 @@ func Test_Strasse_XorPostfachValidation(t *testing.T) {
 		"StrasseRequiresHausnummer": {
 			com.Adresse{
 				// no hausnummer given
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Strasse:      "Nördlicher Münchner Straße",
+				Postleitzahl: internal.Ptr("82031"),
+				Ort:          internal.Ptr("Grünwald"),
+				Strasse:      internal.Ptr("Nördlicher Münchner Straße"),
 				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// no strasse given
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Hausnummer:   "27A",
+				Postleitzahl: internal.Ptr("82031"),
+				Ort:          internal.Ptr("Grünwald"),
+				Hausnummer:   internal.Ptr("27A"),
 				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
 		"StrasseXORPostfach": {
 			com.Adresse{
 				// both postfach and strasse+hausnummer given
-				Postfach:     "Foo-Fach",
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Strasse:      "Nördlicher Münchner Straße",
-				Hausnummer:   "27A",
+				Postfach:     internal.Ptr("Foo-Fach"),
+				Postleitzahl: internal.Ptr("82031"),
+				Ort:          internal.Ptr("Grünwald"),
+				Strasse:      internal.Ptr("Nördlicher Münchner Straße"),
+				Hausnummer:   internal.Ptr("27A"),
 				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// neither postfach not strasse+hausnummer given
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
+				Postleitzahl: internal.Ptr("82031"),
+				Ort:          internal.Ptr("Grünwald"),
 				Landescode:   internal.Ptr(landescode.DE),
 			},
 			com.Adresse{
 				// no strasse given
-				Postleitzahl: "82031",
-				Ort:          "Grünwald",
-				Hausnummer:   "27A",
+				Postleitzahl: internal.Ptr("82031"),
+				Ort:          internal.Ptr("Grünwald"),
+				Hausnummer:   internal.Ptr("27A"),
 				Landescode:   internal.Ptr(landescode.DE),
 			},
 		},
@@ -91,10 +91,10 @@ func Test_Successful_Adresse_Validation(t *testing.T) {
 	validate := validator.New()
 	validAddresses := []interface{}{
 		com.Adresse{
-			Postleitzahl: "82031",
-			Ort:          "Grünwald",
-			Hausnummer:   "27A",
-			Strasse:      "Nördliche Münchner Straße",
+			Postleitzahl: internal.Ptr("82031"),
+			Ort:          internal.Ptr("Grünwald"),
+			Hausnummer:   internal.Ptr("27A"),
+			Strasse:      internal.Ptr("Nördliche Münchner Straße"),
 			Landescode:   internal.Ptr(landescode.DE),
 		},
 	}
