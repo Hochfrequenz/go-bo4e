@@ -24,8 +24,8 @@ func Test_Netzlokation_Deserialization(t *testing.T) {
 		Geschaeftsobjekt: bo.Geschaeftsobjekt{
 			BoTyp: botyp.NETZLOKATION,
 		},
-		NetzlokationsId: "E3XS7NXYTL6",
-		Sparte:          sparte.STROM,
+		NetzlokationsId: internal.Ptr("E3XS7NXYTL6"),
+		Sparte:          internal.Ptr(sparte.STROM),
 		Netzanschlussleistung: &com.Menge{
 			Wert:    decimal.NewFromFloat(125),
 			Einheit: internal.Ptr(mengeneinheit.KW),
