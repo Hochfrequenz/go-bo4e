@@ -31,7 +31,7 @@ func Test_Handelsunstimmigkeit_Deserialization(t *testing.T) {
 		Typ:    handelsunstimmigkeitstyp.HANDELSRECHNUNG,
 		Begruendung: com.Handelsunstimmigkeitsbegruendung{
 			Referenzen: []string{"ref1", "ref2"},
-			Grund:      handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET,
+			Grund:      internal.Ptr(handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET),
 		},
 		Betrag: &com.Betrag{
 			Wert:     decimal.NewFromInt(456),
