@@ -79,8 +79,8 @@ func Test_Marktlokation_Deserialization(t *testing.T) {
 		},
 		ZugehoerigeMesslokationen: []com.Messlokationszuordnung{
 			{
-				MesslokationsId: "DE0123456789012345678901234567890",
-				Arithmetik:      arithmetischeoperation.ADDITION,
+				MesslokationsId: internal.Ptr("DE0123456789012345678901234567890"),
+				Arithmetik:      internal.Ptr(arithmetischeoperation.ADDITION),
 			},
 		},
 		Netznutzungsabrechnungsdaten: []com.Netznutzungsabrechnungsdaten{
