@@ -46,8 +46,8 @@ func Test_Preisblatt_Deserialization(t *testing.T) {
 					ExterneReferenzen: nil,
 				}},
 			Marktrolle:       internal.Ptr(marktrolle.NB),
-			Rollencodenummer: "0815",
-			Rollencodetyp:    rollencodetyp.BDEW,
+			Rollencodenummer: internal.Ptr("0815"),
+			Rollencodetyp:    internal.Ptr(rollencodetyp.BDEW),
 			Makoadresse:      "test@test.com",
 		},
 		Gueltigkeit: com.Zeitraum{
@@ -154,8 +154,8 @@ func Test_Successful_Preisblatt_Validation(t *testing.T) {
 					}),
 				},
 				Marktrolle:       internal.Ptr(marktrolle.NB),
-				Rollencodenummer: "0815081508151",
-				Rollencodetyp:    rollencodetyp.BDEW,
+				Rollencodenummer: internal.Ptr("0815081508151"),
+				Rollencodetyp:    internal.Ptr(rollencodetyp.BDEW),
 				Makoadresse:      "test@test.com",
 			},
 			Gueltigkeit: com.Zeitraum{

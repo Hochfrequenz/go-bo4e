@@ -29,8 +29,8 @@ func Test_Marktteilnehmer_Deserialization(t *testing.T) {
 	var mt = bo.Marktteilnehmer{
 		Marktrolle:       internal.Ptr(marktrolle.LF),
 		Makoadresse:      "edifact@my-favourite-marketpartner.de",
-		Rollencodetyp:    rollencodetyp.DVGW,
-		Rollencodenummer: "9903100000006",
+		Rollencodetyp:    internal.Ptr(rollencodetyp.DVGW),
+		Rollencodenummer: internal.Ptr("9903100000006"),
 		Geschaeftspartner: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:             botyp.GESCHAEFTSPARTNER,
@@ -95,13 +95,13 @@ func Test_Failed_Marktteilnehmer_Validation(t *testing.T) {
 			bo.Marktteilnehmer{},
 		},
 		"min": {
-			bo.Marktteilnehmer{Rollencodenummer: "012345678901"},
+			bo.Marktteilnehmer{Rollencodenummer: internal.Ptr("012345678901")},
 		},
 		"max": {
-			bo.Marktteilnehmer{Rollencodenummer: "01234567890123"},
+			bo.Marktteilnehmer{Rollencodenummer: internal.Ptr("01234567890123")},
 		},
 		"numeric": {
-			bo.Marktteilnehmer{Rollencodenummer: "asd"},
+			bo.Marktteilnehmer{Rollencodenummer: internal.Ptr("asd")},
 		},
 	}
 	VerifyFailedValidations(t, validate, invalidMarktteilnehmer)
@@ -114,8 +114,8 @@ func Test_Successful_Marktteilnehmer_Validation(t *testing.T) {
 		bo.Marktteilnehmer{
 			Marktrolle: internal.Ptr(marktrolle.LF),
 			// mako adresse might be empty
-			Rollencodetyp:    rollencodetyp.DVGW,
-			Rollencodenummer: "9903100000006",
+			Rollencodetyp:    internal.Ptr(rollencodetyp.DVGW),
+			Rollencodenummer: internal.Ptr("9903100000006"),
 			Geschaeftspartner: bo.Geschaeftspartner{
 				Geschaeftsobjekt: bo.Geschaeftsobjekt{
 					BoTyp:             botyp.GESCHAEFTSPARTNER,
