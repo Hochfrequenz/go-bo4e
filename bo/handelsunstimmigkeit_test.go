@@ -2,6 +2,7 @@ package bo_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"reflect"
 	"strings"
 	"testing"
@@ -83,7 +84,7 @@ func Test_Successful_Handelsunstimmigkeit_Validation(t *testing.T) {
 			Typ:    handelsunstimmigkeitstyp.LIEFERSCHEIN_HANDELSUNSTIMMIGKEITSTYP,
 			Begruendung: com.Handelsunstimmigkeitsbegruendung{
 				Referenzen: nil,
-				Grund:      handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET,
+				Grund:      internal.Ptr(handelsunstimmigkeitsgrund.NN_MSCONS_UEBERSENDET),
 			},
 		},
 	}
