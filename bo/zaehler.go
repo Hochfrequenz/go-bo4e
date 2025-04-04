@@ -17,8 +17,8 @@ import (
 // Zaehler ist ein Modell für die Abbildung der Informationen zu einem Zähler
 type Zaehler struct {
 	Geschaeftsobjekt
-	Zaehlernummer      string                                 `json:"zaehlernummer,omitempty" validate:"required,alphanum"` // Zaehlernummer ist eine Nummerierung des Zaehlers, vergeben durch den Messstellenbetreiber
-	Sparte             sparte.Sparte                          `json:"sparte,omitempty" validate:"required"`                 // Sparte ist eine Unterscheidungsmöglichkeit für die Sparte
+	Zaehlernummer      *string                                `json:"zaehlernummer,omitempty" validate:"required,alphanum"` // Zaehlernummer ist eine Nummerierung des Zaehlers, vergeben durch den Messstellenbetreiber
+	Sparte             *sparte.Sparte                         `json:"sparte,omitempty"`                                     // Sparte ist eine Unterscheidungsmöglichkeit für die Sparte
 	Zaehlerauspraegung *zaehlerauspraegung.Zaehlerauspraegung `json:"zaehlerauspraegung,omitempty"`                         // Zaehlerauspraegung ist eine Spezifikation die Richtung des Zählers betreffend
 	Zaehlertyp         *zaehlertyp.Zaehlertyp                 `json:"zaehlertyp,omitempty" validate:"required"`             // Zaehlertyp erlaubt eine Typisierung des Zählers
 	Tarifart           *tarifart.Tarifart                     `json:"tarifart,omitempty"`                                   // Tarifart erlaubt eine Spezifikation bezüglich unterstützter Tarifarten
