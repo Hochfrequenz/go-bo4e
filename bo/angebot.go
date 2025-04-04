@@ -14,14 +14,14 @@ import (
 // die jeweils für eine oder mehrere Marktlokationen erstellt werden.
 type Angebot struct {
 	Geschaeftsobjekt
-	Angebotsnummer              string                 `json:"angebotsnummer,omitempty" validate:"required"` // Eindeutige Nummer des Angebotes.
-	Anfragereferenz             *string                `json:"anfragereferenz,omitempty"`                    // Referenz auf eine Anfrage oder Ausschreibung. Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur Anfrage bzw.Ausschreibung helfen.
-	Angebotsdatum               time.Time              `json:"angebotsdatum,omitempty"`                      // Erstellungsdatum des Angebots
-	Sparte                      sparte.Sparte          `json:"sparte,omitempty" validate:"required"`         // Sparte, für die das Angebot abgegeben wird (Strom/Gas).
-	Bindefrist                  *time.Time             `json:"bindefrist,omitempty"`                         // Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot.
-	Angebotgeber                *Geschaeftspartner     `json:"angebotgeber,omitempty" validate:"required"`   // Link auf den Ersteller des Angebots.
-	Angebotnehmer               *Geschaeftspartner     `json:"angebotnehmer,omitempty" validate:"required"`  // Link auf den Empfänger des Angebots.
-	UnterzeichnerAngebotsnehmer *Ansprechpartner       `json:"unterzeichnerAngebotsnehmer,omitempty"`        // Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
-	UnterzeichnerAngebotsgeber  *Ansprechpartner       `json:"unterzeichnerAngebotsgeber,omitempty"`         // Link auf die Person, die als Angebotsgeber das Angebot ausgestellt hat.
-	Varianten                   []com.Angebotsvariante `json:"varianten,omitempty"`                          // Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
+	Angebotsnummer              *string                `json:"angebotsnummer,omitempty"`                    // Eindeutige Nummer des Angebotes.
+	Anfragereferenz             *string                `json:"anfragereferenz,omitempty"`                   // Referenz auf eine Anfrage oder Ausschreibung. Kann dem Empfänger des Angebotes bei Zuordnung des Angebotes zur Anfrage bzw.Ausschreibung helfen.
+	Angebotsdatum               time.Time              `json:"angebotsdatum,omitempty"`                     // Erstellungsdatum des Angebots
+	Sparte                      sparte.Sparte          `json:"sparte,omitempty" validate:"required"`        // Sparte, für die das Angebot abgegeben wird (Strom/Gas).
+	Bindefrist                  *time.Time             `json:"bindefrist,omitempty"`                        // Bis zu diesem Zeitpunkt(Tag/Uhrzeit) inklusive gilt das Angebot.
+	Angebotgeber                *Geschaeftspartner     `json:"angebotgeber,omitempty" validate:"required"`  // Link auf den Ersteller des Angebots.
+	Angebotnehmer               *Geschaeftspartner     `json:"angebotnehmer,omitempty" validate:"required"` // Link auf den Empfänger des Angebots.
+	UnterzeichnerAngebotsnehmer *Ansprechpartner       `json:"unterzeichnerAngebotsnehmer,omitempty"`       // Link auf die Person, die als Angebotsnehmer das Angebot angenommen hat.
+	UnterzeichnerAngebotsgeber  *Ansprechpartner       `json:"unterzeichnerAngebotsgeber,omitempty"`        // Link auf die Person, die als Angebotsgeber das Angebot ausgestellt hat.
+	Varianten                   []com.Angebotsvariante `json:"varianten,omitempty"`                         // Eine oder mehrere Varianten des Angebots mit den Angebotsteilen. Ein Angebot besteht mindestens aus einer Variante.
 }

@@ -22,7 +22,7 @@ var validAngebot = bo.Angebot{
 		BoTyp:           botyp.ANGEBOT,
 		VersionStruktur: "1.1",
 	},
-	Angebotsnummer:              "2345678",
+	Angebotsnummer:              internal.Ptr("2345678"),
 	Anfragereferenz:             internal.Ptr("Z432342425"),
 	Angebotsdatum:               time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
 	Sparte:                      sparte.GAS,
