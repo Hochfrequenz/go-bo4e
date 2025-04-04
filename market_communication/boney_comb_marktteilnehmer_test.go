@@ -88,7 +88,7 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 				Marktrolle:       internal.Ptr(marktrolle.LF),
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
 				Rollencodetyp:    internal.Ptr(rollencodetyp.DVGW),
-				Rollencodenummer: internal.Ptr("9903100000006l"),
+				Rollencodenummer: internal.Ptr("9903100000006"),
 				Geschaeftspartner: bo.Geschaeftspartner{
 					Geschaeftsobjekt: bo.Geschaeftsobjekt{
 						BoTyp:             botyp.MARKTTEILNEHMER,
@@ -163,6 +163,7 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 			"absender":   "9903100000007",
 		},
 	}
+	then.AssertThat(t, boneyCombWithDokumentennummer.GetEmpfaenger(), is.Not(is.NilPtr[bo.Marktteilnehmer]()))
 	then.AssertThat(t, boneyCombWithDokumentennummer.GetEmpfaenger().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[0].GetBoTyp()))
 	then.AssertThat(t, boneyCombWithDokumentennummer.GetAbsender().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[1].GetBoTyp()))
 }
