@@ -2,13 +2,13 @@ package bo_test
 
 import (
 	"encoding/json"
+	"github.com/go-playground/validator/v10"
 	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
-	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
@@ -33,8 +33,8 @@ func Test_Zaehler_Deserialization(t *testing.T) {
 			VersionStruktur:   "1",
 			ExterneReferenzen: nil,
 		},
-		Zaehlernummer:      "0815",
-		Sparte:             sparte.STROM,
+		Zaehlernummer:      internal.Ptr("0815"),
+		Sparte:             internal.Ptr(sparte.STROM),
 		Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 		Zaehlertyp:         internal.Ptr(zaehlertyp.DREHSTROMZAEHLER),
 		Tarifart:           internal.Ptr(tarifart.EINTARIF),
@@ -80,8 +80,8 @@ func Test_Failed_ZaehlerValidation(t *testing.T) {
 					VersionStruktur:   "1",
 					ExterneReferenzen: nil,
 				},
-				Zaehlernummer:      "0815",
-				Sparte:             sparte.STROM,
+				Zaehlernummer:      internal.Ptr("0815"),
+				Sparte:             internal.Ptr(sparte.STROM),
 				Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 				Zaehlertyp:         internal.Ptr(zaehlertyp.DREHSTROMZAEHLER),
 				Tarifart:           internal.Ptr(tarifart.EINTARIF),
@@ -104,8 +104,8 @@ func Test_Successful_Zaehler_Validation(t *testing.T) {
 				VersionStruktur:   "1",
 				ExterneReferenzen: nil,
 			},
-			Zaehlernummer:      "08150",
-			Sparte:             sparte.STROM,
+			Zaehlernummer:      internal.Ptr("08150"),
+			Sparte:             internal.Ptr(sparte.STROM),
 			Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 			Zaehlertyp:         internal.Ptr(zaehlertyp.WECHSELSTROMZAEHLER),
 			Tarifart:           internal.Ptr(tarifart.EINTARIF),

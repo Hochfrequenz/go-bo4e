@@ -2,6 +2,7 @@ package com_test
 
 import (
 	"encoding/json"
+	"github.com/hochfrequenz/go-bo4e/internal"
 	"strings"
 	"testing"
 	"time"
@@ -16,10 +17,10 @@ import (
 // Test_Messlokationszuordnung_Deserialization deserializes an MesslokationszuordnungMesslokationszuordnung json
 func Test_Messlokationszuordnung_Deserialization(t *testing.T) {
 	var messlokationszuordnung = com.Messlokationszuordnung{
-		MesslokationsId: "DE0123456789012345678901234567890",
-		Arithmetik:      arithmetischeoperation.ADDITION,
-		GueltigSeit:     time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC),
-		GueltigBis:      time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
+		MesslokationsId: internal.Ptr("DE0123456789012345678901234567890"),
+		Arithmetik:      internal.Ptr(arithmetischeoperation.ADDITION),
+		GueltigSeit:     internal.Ptr(time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)),
+		GueltigBis:      internal.Ptr(time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	serializedMesslokationszuordnung, err := json.Marshal(messlokationszuordnung)
 	then.AssertThat(t, serializedMesslokationszuordnung, is.Not(is.NilArray[byte]()))
@@ -38,24 +39,23 @@ func Test_Messlokationszuordnung_Deserialization(t *testing.T) {
 func Test_Failed_MesslokationszuordnungValidation(t *testing.T) {
 	validate := validator.New()
 	invalidMesslokationszuordnung := map[string][]interface{}{
-		"required": {
-			com.Messlokationszuordnung{},
-		},
 		"len": {
 			com.Messlokationszuordnung{
-				MesslokationsId: "not33",
+				MesslokationsId: internal.Ptr("not33"),
 			},
 		},
-		"ltefield": {
-			com.Messlokationszuordnung{
-				GueltigSeit: time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
-				GueltigBis:  time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)},
-		},
-		"gtefield": {
-			com.Messlokationszuordnung{
-				GueltigSeit: time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
-				GueltigBis:  time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)},
-		},
+		// removed validation at least until https://github.com/go-playground/validator/issues/972 is resolved
+		/*
+			"ltefield": {
+				com.Messlokationszuordnung{
+					GueltigSeit: internal.Ptr(time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC)),
+					GueltigBis:  internal.Ptr(time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC))},
+			},
+			"gtefield": {
+				com.Messlokationszuordnung{
+					GueltigSeit: internal.Ptr(time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC)),
+					GueltigBis:  internal.Ptr(time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC))},
+			},*/
 	}
 	VerifyFailedValidations(t, validate, invalidMesslokationszuordnung)
 }
@@ -65,14 +65,14 @@ func Test_Successful_Messlokationszuordnung_Validation(t *testing.T) {
 	validate := validator.New()
 	validMesslokationszuordnung := []interface{}{
 		com.Messlokationszuordnung{
-			MesslokationsId: "DE0123456789012345678901234567890",
-			Arithmetik:      arithmetischeoperation.ADDITION,
+			MesslokationsId: internal.Ptr("DE0123456789012345678901234567890"),
+			Arithmetik:      internal.Ptr(arithmetischeoperation.ADDITION),
 		},
 		com.Messlokationszuordnung{
-			MesslokationsId: "DE0123456789012345678901234567890",
-			Arithmetik:      arithmetischeoperation.ADDITION,
-			GueltigSeit:     time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC),
-			GueltigBis:      time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC),
+			MesslokationsId: internal.Ptr("DE0123456789012345678901234567890"),
+			Arithmetik:      internal.Ptr(arithmetischeoperation.ADDITION),
+			GueltigSeit:     internal.Ptr(time.Date(2021, 4, 1, 0, 0, 0, 0, time.UTC)),
+			GueltigBis:      internal.Ptr(time.Date(2022, 4, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	VerifySuccessfulValidations(t, validate, validMesslokationszuordnung)
