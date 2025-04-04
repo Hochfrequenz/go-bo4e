@@ -15,6 +15,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifstufe"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
+	"github.com/hochfrequenz/go-bo4e/internal"
 )
 
 // Test_Deserialization deserializes an Verbrauch json
@@ -27,7 +28,6 @@ func Test_Verbrauch_Deserialization(t *testing.T) {
 		Wert:                     decimal.NewFromFloat(17),
 		Einheit:                  mengeneinheit.KWH,
 		Nutzungszeitpunkt:        time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
-		Ausfuehrungszeitpunkt:    time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC),
 		Tarifstufe:               tarifstufe.TARIFSTUFE_3,
 	}
 	serializedVerbrauch, err := json.Marshal(verbrauch)
@@ -35,6 +35,7 @@ func Test_Verbrauch_Deserialization(t *testing.T) {
 	then.AssertThat(t, strings.Contains(jsonString, "KWH"), is.True())                      // stringified enum
 	then.AssertThat(t, strings.Contains(jsonString, "\"2021-08-01T00:00:00Z\""), is.True()) // ISO8601 ftw
 	then.AssertThat(t, strings.Contains(jsonString, "\"2023-01-01T00:00:00Z\""), is.True()) // ISO8601 ftw
+	then.AssertThat(t, strings.Contains(jsonString, "\"0001-01-01T00:00:00Z\""), is.False())
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, serializedVerbrauch, is.Not(is.NilArray[byte]()))
 	var deserializedVerbrauch com.Verbrauch
@@ -55,7 +56,7 @@ func Test_Successful_Verbrauch_Validation(t *testing.T) {
 			Wert:                     decimal.NewFromFloat(17),
 			Einheit:                  mengeneinheit.KWH,
 			Nutzungszeitpunkt:        time.Now(),
-			Ausfuehrungszeitpunkt:    time.Now(),
+			Ausfuehrungszeitpunkt:    internal.Ptr(time.Now()),
 		},
 	}
 	VerifySuccessfulValidations(t, validate, validVerbrauch)
