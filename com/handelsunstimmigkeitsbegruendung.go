@@ -8,5 +8,5 @@ type Handelsunstimmigkeitsbegruendung struct {
 	Referenzen []string `json:"referenzen,omitempty"`
 
 	// Grund describes the reaseon for a "Handelsunstimmigkeit".
-	Grund handelsunstimmigkeitsgrund.Handelsunstimmigkeitsgrund `json:"grund,omitempty" validate:"required"`
+	Grund *handelsunstimmigkeitsgrund.Handelsunstimmigkeitsgrund `json:"grund,omitempty" validate:"required"`
 }
