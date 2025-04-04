@@ -1,0 +1,9 @@
+{
+  "description": "Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung.",
+  "title": "Preismodell",
+  "type": "string",
+  "enum": [
+    "FESTPREIS",
+    "TRANCHE"
+  ]
+}

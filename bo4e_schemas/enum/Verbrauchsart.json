@@ -1,0 +1,12 @@
+{
+  "description": "Verbrauchsart einer Marktlokation.",
+  "title": "Verbrauchsart",
+  "type": "string",
+  "enum": [
+    "KL",
+    "KLW",
+    "KLWS",
+    "W",
+    "WS"
+  ]
+}

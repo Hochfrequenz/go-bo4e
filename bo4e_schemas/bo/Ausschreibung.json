@@ -1,0 +1,188 @@
+{
+  "description": "Das BO Ausschreibung dient zur detaillierten Darstellung von ausgeschriebenen Energiemengen in der Energiewirtschaft\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Ausschreibung.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Ausschreibung JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Ausschreibung.json>`_",
+  "title": "Ausschreibung",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "AUSSCHREIUNG",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_version": {
+      "title": " Version",
+      "default": "v202401.0.0",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "abgabefrist": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ausschreibender": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "Geschaeftspartner.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ausschreibungportal": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Ausschreibungsportal.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ausschreibungsnummer": {
+      "title": "Ausschreibungsnummer",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ausschreibungsstatus": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Ausschreibungsstatus.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ausschreibungstyp": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Ausschreibungstyp.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bindefrist": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../com/Zeitraum.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "istKostenpflichtig": {
+      "title": "Istkostenpflichtig",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lose": {
+      "title": "Lose",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Ausschreibungslos.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "veroeffentlichungszeitpunkt": {
+      "title": "Veroeffentlichungszeitpunkt",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "webseite": {
+      "title": "Webseite",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

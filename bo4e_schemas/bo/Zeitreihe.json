@@ -1,0 +1,152 @@
+{
+  "description": "Abbildung einer allgemeinen Zeitreihe mit einem Wertvektor.\nDie Werte können mit wahlfreier zeitlicher Distanz im Vektor abgelegt sein.\n\n.. raw:: html\n\n    <object data=\"../_static/images/bo4e/bo/Zeitreihe.svg\" type=\"image/svg+xml\"></object>\n\n.. HINT::\n    `Zeitreihe JSON Schema <https://json-schema.app/view/%23?url=https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0-/src/bo4e_schemas/bo/Zeitreihe.json>`_",
+  "title": "Zeitreihe",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "_typ": {
+      "default": "ZEITREIHE",
+      "anyOf": [
+        {
+          "$ref": "../enum/Typ.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "beschreibung": {
+      "title": "Beschreibung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bezeichnung": {
+      "title": "Bezeichnung",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "einheit": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Mengeneinheit.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "medium": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Medium.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "messart": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Messart.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "messgroesse": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Messgroesse.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "version": {
+      "title": "Version",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "werte": {
+      "title": "Werte",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../com/Zeitreihenwert.json#"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "wertherkunft": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "../enum/Wertermittlungsverfahren.json#"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zusatzAttribute": {
+      "title": "Zusatzattribute",
+      "default": null,
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/Hochfrequenz/BO4E-Schemas/v202401.0.0/src/bo4e_schemas/ZusatzAttribut.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
