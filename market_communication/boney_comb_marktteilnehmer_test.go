@@ -87,8 +87,8 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 			&bo.Marktteilnehmer{
 				Marktrolle:       internal.Ptr(marktrolle.LF),
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
-				Rollencodetyp:    rollencodetyp.DVGW,
-				Rollencodenummer: "9903100000006",
+				Rollencodetyp:    internal.Ptr(rollencodetyp.DVGW),
+				Rollencodenummer: internal.Ptr("9903100000006"),
 				Geschaeftspartner: bo.Geschaeftspartner{
 					Geschaeftsobjekt: bo.Geschaeftsobjekt{
 						BoTyp:             botyp.MARKTTEILNEHMER,
@@ -123,8 +123,8 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 			&bo.Marktteilnehmer{
 				Marktrolle:       internal.Ptr(marktrolle.LF),
 				Makoadresse:      "edifact@my-favourite-marketpartner.de",
-				Rollencodetyp:    rollencodetyp.DVGW,
-				Rollencodenummer: "9903100000007",
+				Rollencodetyp:    internal.Ptr(rollencodetyp.DVGW),
+				Rollencodenummer: internal.Ptr("9903100000007"),
 				Geschaeftspartner: bo.Geschaeftspartner{
 					Geschaeftsobjekt: bo.Geschaeftsobjekt{
 						BoTyp:             botyp.MARKTTEILNEHMER,
@@ -163,6 +163,7 @@ func Test_GetEmpfaenger_Returns_Correct_Value_If_Present(t *testing.T) {
 			"absender":   "9903100000007",
 		},
 	}
+	then.AssertThat(t, boneyCombWithDokumentennummer.GetEmpfaenger(), is.Not(is.NilPtr[bo.Marktteilnehmer]()))
 	then.AssertThat(t, boneyCombWithDokumentennummer.GetEmpfaenger().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[0].GetBoTyp()))
 	then.AssertThat(t, boneyCombWithDokumentennummer.GetAbsender().BoTyp, is.EqualTo[botyp.BOTyp](boneyCombWithDokumentennummer.Stammdaten[1].GetBoTyp()))
 }
@@ -179,7 +180,7 @@ func Test_GetAbsenderCode_Returns_Nil_For_Malformed_Data(t *testing.T) {
 
 func Test_SetAbsender(t *testing.T) {
 	mt := bo.Marktteilnehmer{
-		Rollencodenummer: "9903100000006",
+		Rollencodenummer: internal.Ptr("9903100000006"),
 		Geschaeftspartner: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:           botyp.MARKTTEILNEHMER,
@@ -195,7 +196,7 @@ func Test_SetAbsender(t *testing.T) {
 
 func Test_SetEmpfaenger(t *testing.T) {
 	mt := bo.Marktteilnehmer{
-		Rollencodenummer: "9903100000006",
+		Rollencodenummer: internal.Ptr("9903100000006"),
 		Geschaeftspartner: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:           botyp.MARKTTEILNEHMER,
@@ -211,7 +212,7 @@ func Test_SetEmpfaenger(t *testing.T) {
 
 func Test_ExtensionData(t *testing.T) {
 	mt := bo.Marktteilnehmer{
-		Rollencodenummer: "9903100000006",
+		Rollencodenummer: internal.Ptr("9903100000006"),
 		Geschaeftspartner: bo.Geschaeftspartner{
 			Geschaeftsobjekt: bo.Geschaeftsobjekt{
 				BoTyp:           botyp.MARKTTEILNEHMER,
