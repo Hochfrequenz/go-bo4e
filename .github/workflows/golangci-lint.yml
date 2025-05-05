@@ -16,9 +16,9 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@v4
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.0.2
+          version: v2.1.6
           args: --enable dupl,goconst,goconst,gocyclo
       - name: fmt
         run: golangci-lint fmt --diff --enable gofmt
