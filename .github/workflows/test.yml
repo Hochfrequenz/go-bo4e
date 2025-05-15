@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-          token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2025-08-01
+          token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
           # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
           # PAT has repo scope
           submodules: "recursive"
