@@ -30,6 +30,9 @@ type Messlokation struct {
 	Messadresse         *com.Adresse         `json:"messadresse,omitempty" validate:"required_without_all=Geoadresse Katasterinformation"` // Messadresse is a street address of the Messlokation
 	Geoadresse          *com.Geokoordinaten  `json:"geoadresse,omitempty" validate:"required_without_all=Messadresse Katasterinformation"` // Geoadresse are gps coordinates of the Messlokation
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
+
+	// IstFuerLieferanmeldungRelevant ist ein Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).
+	IstFuerLieferanmeldungRelevant *bool `json:"istFuerLieferanmeldungRelevant,omitempty"`
 }
 
 // XorStructLevelMesslokationValidation ensures that only one of the possible address types is given
