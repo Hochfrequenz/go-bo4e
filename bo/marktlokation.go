@@ -58,6 +58,8 @@ type Marktlokation struct {
 
 	Netznutzungsabrechnungsdaten []com.Netznutzungsabrechnungsdaten `json:"netznutzungsabrechnungsdaten,omitempty"` // Netznutzungsabrechnungsdaten sind Daten für die Prüfung der Netznutzungsabrechnung
 	Sperrstatus                  *sperrstatus.Sperrstatus           `json:"sperrstatus,omitempty"`
+
+	LokationsbuendelCode *string `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
 }
 
 // the marktlokationForUnmarshal type is derived from Marktlokation but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
