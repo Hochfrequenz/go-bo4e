@@ -31,6 +31,8 @@ type Messlokation struct {
 	Geoadresse          *com.Geokoordinaten  `json:"geoadresse,omitempty" validate:"required_without_all=Messadresse Katasterinformation"` // Geoadresse are gps coordinates of the Messlokation
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
 
+	LokationsbuendelCode *string `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+
 	// IstFuerLieferanmeldungRelevant ist ein Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).
 	IstFuerLieferanmeldungRelevant *bool `json:"istFuerLieferanmeldungRelevant,omitempty"`
 }
