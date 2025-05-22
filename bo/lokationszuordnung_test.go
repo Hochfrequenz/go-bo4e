@@ -1,12 +1,14 @@
 package bo_test
 
 import (
+	"encoding/json"
+	"reflect"
+	"testing"
+
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
 	"github.com/hochfrequenz/go-bo4e/bo"
 	"github.com/hochfrequenz/go-bo4e/enum/botyp"
-	"reflect"
-	"testing"
 )
 
 func Test_Empty_Lokationszuordnung_Is_Creatable_Using_BoTyp(t *testing.T) {
@@ -19,4 +21,67 @@ func Test_Empty_Lokationszuordnung_Is_Creatable_Using_BoTyp(t *testing.T) {
 
 func Test_Serialized_Empty_Lokationszuordnung_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.LOKATIONSZUORDNUNG))
+}
+
+func TestUnmarshalLokationsZuordnungExtensionData(t *testing.T) {
+	raw := `
+	{
+		"boTyp": "LOKATIONSZUORDNUNG",
+		"versionStruktur": "1.1",
+		"extensionProperty": "This is a custom value."
+	}
+	`
+
+	var lokationsZuordnung bo.Lokationszuordnung
+
+	if err := json.Unmarshal([]byte(raw), &lokationsZuordnung); err != nil {
+		t.Fatalf("could not unmarshal lokationszuordnung: %+v", err)
+	}
+
+	if lokationsZuordnung.ExtensionData == nil {
+		t.Fatalf("lokationsZuordnung.ExtensionData must not be nil")
+	}
+
+	extensionProperty, ok := lokationsZuordnung.ExtensionData["extensionProperty"]
+	if !ok {
+		t.Fatalf(`lokationsZuordnung.ExtensionData["extensionProperty"] not set`)
+	}
+
+	customValue, ok := extensionProperty.(string)
+	if !ok {
+		t.Fatalf(`lokationsZuordnung.ExtensionData["extensionProperty"] is %T instead of string`, extensionProperty)
+	}
+
+	then.AssertThat(t, customValue, is.EqualTo("This is a custom value."))
+}
+
+func TestMarshalLokationsZuordnungExtensionData(t *testing.T) {
+	lokationsZuordnung := bo.Lokationszuordnung{}
+	lokationsZuordnung.BoTyp = botyp.LOKATIONSZUORDNUNG
+	lokationsZuordnung.VersionStruktur = "1.1"
+	lokationsZuordnung.Geschaeftsobjekt.ExtensionData = map[string]any{
+		"extensionProperty": "This is a custom value",
+	}
+
+	data, err := json.Marshal(lokationsZuordnung)
+	if err != nil {
+		t.Fatalf("could not marshal lokationsZuordnung: %+v", err)
+	}
+
+	var m map[string]any
+	if err := json.Unmarshal(data, &m); err != nil {
+		t.Fatalf("could not unmarshal back into map: %+v", err)
+	}
+
+	extensionProperty, ok := m["extensionProperty"]
+	if !ok {
+		t.Fatalf("extensionProperty is missing in JSON root: %s", data)
+	}
+
+	extensionPropertyValue, ok := extensionProperty.(string)
+	if !ok {
+		t.Fatalf("expected extensionProperty to be string, got %T", extensionProperty)
+	}
+
+	then.AssertThat(t, extensionPropertyValue, is.EqualTo("This is a custom value"))
 }
