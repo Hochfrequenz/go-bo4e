@@ -1,6 +1,11 @@
 package bo
 
-import "github.com/hochfrequenz/go-bo4e/com"
+import (
+	"encoding/json"
+
+	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
+)
 
 // The Lokationszuordnung ist ein Modell für die Abbildung der Referenz auf die Lokationsbündelstruktur. Diese gibt an welche Marktlokationen, Messlokationen, Netzlokationen, technische/steuerbaren Ressourcen an einer Lokation vorhanden sind.
 type Lokationszuordnung struct {
@@ -28,4 +33,20 @@ type Lokationszuordnung struct {
 
 	// LokationsbuendelCode ist der Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
 	LokationsbuendelCode string `json:"lokationsbuendelcode,omitempty"`
+}
+
+func (lokZu *Lokationszuordnung) UnmarshalJSON(bytes []byte) (err error) {
+	return unmappeddatamarshaller.UnmarshallWithUnmappedData(lokZu, &lokZu.ExtensionData, bytes)
+}
+
+// lokationsZuordnungForUnmarshal is derived from Lokationszuordnung but uses a different unmarshaler/deserializer so that we don't run into an endless recursion when overriding the UnmarshalJSON func to include our hacky workaround
+type lokationsZuordnungForUnmarshal Lokationszuordnung
+
+func (lokZu Lokationszuordnung) MarshalJSON() (bytes []byte, err error) {
+	s := lokationsZuordnungForUnmarshal(lokZu)
+	byteArr, err := json.Marshal(s)
+	if err != nil {
+		return
+	}
+	return unmappeddatamarshaller.HandleUnmappedDataPropertyMarshalling(byteArr)
 }
