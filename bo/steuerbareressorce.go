@@ -56,4 +56,5 @@ type SteuerbareRessource struct {
 	SteuerbareRessourceId             string                                                               `json:"steuerbareRessourceId" validate:"required"` // Identifikationsnummer einer SteuerbareRessource
 	SteuerkanalsLeistungsbeschreibung *steuerkanalsleistungsbeschreibung.Steuerkanalsleistungsbeschreibung `json:"steuerkanalsLeistungsbeschreibung"`         // Leistungsbeschreibung des Steuerkanals
 	ZugeordnetMSBCodeNr               *string                                                              `json:"zugeordnetMSBCodeNr"`                       // Angabe des Messstellenbetreibers, der der Steuerbaren Ressource zugeordnet ist
+	LokationsbuendelObjektcode        *string                                                              `json:"lokationsbuendelObjektcode,omitempty"`      // Lokationsbuendel-Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
 }
