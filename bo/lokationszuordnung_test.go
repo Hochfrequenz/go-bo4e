@@ -59,7 +59,7 @@ func TestMarshalLokationsZuordnungExtensionData(t *testing.T) {
 	lokationsZuordnung := bo.Lokationszuordnung{}
 	lokationsZuordnung.BoTyp = botyp.LOKATIONSZUORDNUNG
 	lokationsZuordnung.VersionStruktur = "1.1"
-	lokationsZuordnung.Geschaeftsobjekt.ExtensionData = map[string]any{
+	lokationsZuordnung.ExtensionData = map[string]any{
 		"extensionProperty": "This is a custom value",
 	}
 
