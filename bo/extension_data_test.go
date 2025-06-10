@@ -14,7 +14,11 @@ import (
 
 func TestMarshalBusinessObjectTypesExtensionData(t *testing.T) {
 	boTypes := []botyp.BOTyp{
+		botyp.BILANZIERUNG,
 		botyp.LOKATIONSZUORDNUNG,
+		botyp.MARKTLOKATION,
+		botyp.MARKTTEILNEHMER,
+		botyp.MESSLOKATION,
 	}
 
 	for _, boType := range boTypes {
