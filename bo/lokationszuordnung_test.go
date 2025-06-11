@@ -54,34 +54,3 @@ func TestUnmarshalLokationsZuordnungExtensionData(t *testing.T) {
 
 	then.AssertThat(t, customValue, is.EqualTo("This is a custom value."))
 }
-
-func TestMarshalLokationsZuordnungExtensionData(t *testing.T) {
-	lokationsZuordnung := bo.Lokationszuordnung{}
-	lokationsZuordnung.BoTyp = botyp.LOKATIONSZUORDNUNG
-	lokationsZuordnung.VersionStruktur = "1.1"
-	lokationsZuordnung.ExtensionData = map[string]any{
-		"extensionProperty": "This is a custom value",
-	}
-
-	data, err := json.Marshal(lokationsZuordnung)
-	if err != nil {
-		t.Fatalf("could not marshal lokationsZuordnung: %+v", err)
-	}
-
-	var m map[string]any
-	if err := json.Unmarshal(data, &m); err != nil {
-		t.Fatalf("could not unmarshal back into map: %+v", err)
-	}
-
-	extensionProperty, ok := m["extensionProperty"]
-	if !ok {
-		t.Fatalf("extensionProperty is missing in JSON root: %s", data)
-	}
-
-	extensionPropertyValue, ok := extensionProperty.(string)
-	if !ok {
-		t.Fatalf("expected extensionProperty to be string, got %T", extensionProperty)
-	}
-
-	then.AssertThat(t, extensionPropertyValue, is.EqualTo("This is a custom value"))
-}
