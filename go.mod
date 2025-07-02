@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/corbym/gocrest v1.1.2
-	github.com/go-playground/validator/v10 v10.26.0
+	github.com/go-playground/validator/v10 v10.27.0
 	github.com/shopspring/decimal v1.4.0
 )
 
