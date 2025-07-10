@@ -1,29 +1,36 @@
-on: [ pull_request ]
+on: [pull_request]
 name: Unittests
 jobs:
   test:
     strategy:
       matrix:
-        go-version: [ "1.23.x", "1.24.x" ]
-        os: [ ubuntu-latest ]
-        use_private_example_data_submodule: [ "true", "false" ]
+        go-version: ["1.23.x", "1.24.x"]
+        os: [ubuntu-latest]
+        use_private_example_data_submodule: ["true", "false"]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Go
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
+
+      # PAT has repo scope
+      # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
+      - name: Configure Git for private submodules
+        if: matrix.use_private_example_data_submodule == 'true'
+        run: |
+          git config --global url."https://${{ secrets.EXAMPLE_DATA_SUBMODULE_PAT }}@github.com/".insteadOf "https://github.com/"
       - name: Checkout code AND submodule
         if: matrix.use_private_example_data_submodule == 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-          token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
-          # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
-          # PAT has repo scope
+          token: ${{ secrets.EXAMPLE_DATA_SUBMODULE_PAT }}
           submodules: "recursive"
+
       - name: Checkout code without submodule
         if: matrix.use_private_example_data_submodule == 'false'
         uses: actions/checkout@v4
+
       - name: Test
         run: go test ./...
