@@ -2,10 +2,11 @@ package bo_test
 
 import (
 	"encoding/json"
-	"github.com/go-playground/validator/v10"
 	"reflect"
 	"strings"
 	"testing"
+
+	"github.com/go-playground/validator/v10"
 
 	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gocrest/then"
@@ -34,6 +35,7 @@ func Test_Zaehler_Deserialization(t *testing.T) {
 			ExterneReferenzen: nil,
 		},
 		Zaehlernummer:      internal.Ptr("0815"),
+		Gateway:            internal.Ptr("EPPC0002606004"),
 		Sparte:             internal.Ptr(sparte.STROM),
 		Zaehlerauspraegung: internal.Ptr(zaehlerauspraegung.EINRICHTUNGSZAEHLER),
 		Zaehlertyp:         internal.Ptr(zaehlertyp.DREHSTROMZAEHLER),
@@ -57,6 +59,7 @@ func Test_Zaehler_Deserialization(t *testing.T) {
 	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINRICHTUNGSZAEHLER"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMeter), "EINTARIF"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedMeter), "EPPC0002606004"), is.True())
 	var deserializedMeter bo.Zaehler
 	err = json.Unmarshal(serializedMeter, &deserializedMeter)
 	then.AssertThat(t, err, is.Nil())

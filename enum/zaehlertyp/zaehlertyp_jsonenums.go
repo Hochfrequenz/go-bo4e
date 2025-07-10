@@ -25,6 +25,7 @@ var (
 		"WASSERZAEHLER":                  WASSERZAEHLER,
 		"MODERNEMESSEINRICHTUNG":         MODERNEMESSEINRICHTUNG,
 		"NEUEMESSEINRICHTUNGGAS":         NEUEMESSEINRICHTUNGGAS,
+		"MENGENUMWERTER":                 MENGENUMWERTER,
 	}
 
 	_ZaehlertypValueToName = map[Zaehlertyp]string{
@@ -44,6 +45,7 @@ var (
 		WASSERZAEHLER:                  "WASSERZAEHLER",
 		MODERNEMESSEINRICHTUNG:         "MODERNEMESSEINRICHTUNG",
 		NEUEMESSEINRICHTUNGGAS:         "NEUEMESSEINRICHTUNGGAS",
+		MENGENUMWERTER:                 "MENGENUMWERTER",
 	}
 )
 
@@ -67,6 +69,7 @@ func init() {
 			interface{}(WASSERZAEHLER).(fmt.Stringer).String():                  WASSERZAEHLER,
 			interface{}(MODERNEMESSEINRICHTUNG).(fmt.Stringer).String():         MODERNEMESSEINRICHTUNG,
 			interface{}(NEUEMESSEINRICHTUNGGAS).(fmt.Stringer).String():         NEUEMESSEINRICHTUNGGAS,
+			interface{}(MENGENUMWERTER).(fmt.Stringer).String():                 MENGENUMWERTER,
 		}
 	}
 }
