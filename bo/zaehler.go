@@ -18,7 +18,7 @@ import (
 type Zaehler struct {
 	Geschaeftsobjekt
 	Zaehlernummer      *string                                `json:"zaehlernummer,omitempty" validate:"required,alphanum"` // Zaehlernummer ist eine Nummerierung des Zaehlers, vergeben durch den Messstellenbetreiber
-	Gateway            *string                                `json:"gateway,omitempty`                                     // Gateway ist eine Referenz auf das Smartmeter-Gateway
+	Gateway            *string                                `json:"gateway,omitempty"`                                    // Gateway ist eine Referenz auf das Smartmeter-Gateway
 	Sparte             *sparte.Sparte                         `json:"sparte,omitempty"`                                     // Sparte ist eine Unterscheidungsmöglichkeit für die Sparte
 	Zaehlerauspraegung *zaehlerauspraegung.Zaehlerauspraegung `json:"zaehlerauspraegung,omitempty"`                         // Zaehlerauspraegung ist eine Spezifikation die Richtung des Zählers betreffend
 	Zaehlertyp         *zaehlertyp.Zaehlertyp                 `json:"zaehlertyp,omitempty" validate:"required"`             // Zaehlertyp erlaubt eine Typisierung des Zählers
