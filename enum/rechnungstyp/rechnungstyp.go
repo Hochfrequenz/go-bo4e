@@ -25,4 +25,5 @@ const (
 	VERZUGSKOSTEN                                          // Verzugskostenrechnung
 	BLINDARBEIT                                            // Blindarbeitsrechnung
 	ABRECHNUNG_VON_KONFIGURATIONEN_UNIVERSALBESTELLPROZESS // Abrechnung von Konfigurationen (Universalbestellprozess)
+	ABRECHNUNG_TECHNIK
 )
