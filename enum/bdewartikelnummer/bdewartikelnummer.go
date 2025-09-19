@@ -60,4 +60,5 @@ const (
 	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_4_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 4 MsbG with article number 9990001000847
 	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG with article number 9990001000855
 	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG                     // Zusatzdienstleistung nach § 35 Abs. 3 MsbG with article number 9990001000863
+	EINBAU_IMS                                                   // EINBAU_IMS has the BDEW article number 9991000002305
 )
