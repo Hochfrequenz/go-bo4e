@@ -65,7 +65,7 @@ const (
 	EINBAU_WANDLER                                               // EINBAU_WANDLER has the BDEW article number 9991000002321
 	WEITERE_ENERGIEFLUSSRICHTUNG                                 // WEITERE_ENERGIEFLUSSRICHTUNG has the BDEW article number 9991000002339
 	VERGLEICHSMESSUNG                                            // VERGLEICHSMESSUNG has the BDEW article number 9991000002347
-	AENDERUNG_MESSEBENE                                          // AENDERUNG_MESSEBENE has the BDEW article number 9991000002355
+	ÄNDERUNG_MESSEBENE                                           // ÄNDERUNG_MESSEBENE has the BDEW article number 9991000002355
 	EINBAU_STEUERBOX                                             // EINBAU_STEUERBOX has the BDEW article number 9991000002363
 	ANSCHLUSS_TR_STEUERBOX_SR                                    // ANSCHLUSS_TR_STEUERBOX_SR has the BDEW article number 9991000002371
 )

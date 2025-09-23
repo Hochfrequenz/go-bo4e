@@ -66,7 +66,7 @@ var (
 		"EINBAU_WANDLER":                             EINBAU_WANDLER,
 		"WEITERE_ENERGIEFLUSSRICHTUNG":               WEITERE_ENERGIEFLUSSRICHTUNG,
 		"VERGLEICHSMESSUNG":                          VERGLEICHSMESSUNG,
-		"AENDERUNG_MESSEBENE":                        AENDERUNG_MESSEBENE,
+		"ÄNDERUNG_MESSEBENE":                         ÄNDERUNG_MESSEBENE,
 		"EINBAU_STEUERBOX":                           EINBAU_STEUERBOX,
 		"ANSCHLUSS_TR_STEUERBOX_SR":                  ANSCHLUSS_TR_STEUERBOX_SR,
 	}
@@ -129,7 +129,7 @@ var (
 		EINBAU_WANDLER:                             "EINBAU_WANDLER",
 		WEITERE_ENERGIEFLUSSRICHTUNG:               "WEITERE_ENERGIEFLUSSRICHTUNG",
 		VERGLEICHSMESSUNG:                          "VERGLEICHSMESSUNG",
-		AENDERUNG_MESSEBENE:                        "AENDERUNG_MESSEBENE",
+		ÄNDERUNG_MESSEBENE:                         "ÄNDERUNG_MESSEBENE",
 		EINBAU_STEUERBOX:                           "EINBAU_STEUERBOX",
 		ANSCHLUSS_TR_STEUERBOX_SR:                  "ANSCHLUSS_TR_STEUERBOX_SR",
 	}
@@ -196,7 +196,7 @@ func init() {
 			interface{}(EINBAU_WANDLER).(fmt.Stringer).String():                             EINBAU_WANDLER,
 			interface{}(WEITERE_ENERGIEFLUSSRICHTUNG).(fmt.Stringer).String():               WEITERE_ENERGIEFLUSSRICHTUNG,
 			interface{}(VERGLEICHSMESSUNG).(fmt.Stringer).String():                          VERGLEICHSMESSUNG,
-			interface{}(AENDERUNG_MESSEBENE).(fmt.Stringer).String():                        AENDERUNG_MESSEBENE,
+			interface{}(ÄNDERUNG_MESSEBENE).(fmt.Stringer).String():                         ÄNDERUNG_MESSEBENE,
 			interface{}(EINBAU_STEUERBOX).(fmt.Stringer).String():                           EINBAU_STEUERBOX,
 			interface{}(ANSCHLUSS_TR_STEUERBOX_SR).(fmt.Stringer).String():                  ANSCHLUSS_TR_STEUERBOX_SR,
 		}
