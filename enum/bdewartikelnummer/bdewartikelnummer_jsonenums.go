@@ -62,6 +62,13 @@ var (
 		"ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG": ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG,
 		"ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG":   ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG,
 		"EINBAU_IMS":                                 EINBAU_IMS,
+		"EINBAU_KME_RLM":                             EINBAU_KME_RLM,
+		"EINBAU_WANDLER":                             EINBAU_WANDLER,
+		"WEITERE_ENERGIEFLUSSRICHTUNG":               WEITERE_ENERGIEFLUSSRICHTUNG,
+		"VERGLEICHSMESSUNG":                          VERGLEICHSMESSUNG,
+		"ÄNDERUNG_MESSEBENE":                         ÄNDERUNG_MESSEBENE,
+		"EINBAU_STEUERBOX":                           EINBAU_STEUERBOX,
+		"ANSCHLUSS_TR_STEUERBOX_SR":                  ANSCHLUSS_TR_STEUERBOX_SR,
 	}
 
 	_BDEWArtikelnummerValueToName = map[BDEWArtikelnummer]string{
@@ -118,6 +125,13 @@ var (
 		ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG: "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG",
 		ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG:   "ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG",
 		EINBAU_IMS:                                 "EINBAU_IMS",
+		EINBAU_KME_RLM:                             "EINBAU_KME_RLM",
+		EINBAU_WANDLER:                             "EINBAU_WANDLER",
+		WEITERE_ENERGIEFLUSSRICHTUNG:               "WEITERE_ENERGIEFLUSSRICHTUNG",
+		VERGLEICHSMESSUNG:                          "VERGLEICHSMESSUNG",
+		ÄNDERUNG_MESSEBENE:                         "ÄNDERUNG_MESSEBENE",
+		EINBAU_STEUERBOX:                           "EINBAU_STEUERBOX",
+		ANSCHLUSS_TR_STEUERBOX_SR:                  "ANSCHLUSS_TR_STEUERBOX_SR",
 	}
 )
 
@@ -178,6 +192,13 @@ func init() {
 			interface{}(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG).(fmt.Stringer).String(): ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG,
 			interface{}(ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG).(fmt.Stringer).String():   ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG,
 			interface{}(EINBAU_IMS).(fmt.Stringer).String():                                 EINBAU_IMS,
+			interface{}(EINBAU_KME_RLM).(fmt.Stringer).String():                             EINBAU_KME_RLM,
+			interface{}(EINBAU_WANDLER).(fmt.Stringer).String():                             EINBAU_WANDLER,
+			interface{}(WEITERE_ENERGIEFLUSSRICHTUNG).(fmt.Stringer).String():               WEITERE_ENERGIEFLUSSRICHTUNG,
+			interface{}(VERGLEICHSMESSUNG).(fmt.Stringer).String():                          VERGLEICHSMESSUNG,
+			interface{}(ÄNDERUNG_MESSEBENE).(fmt.Stringer).String():                         ÄNDERUNG_MESSEBENE,
+			interface{}(EINBAU_STEUERBOX).(fmt.Stringer).String():                           EINBAU_STEUERBOX,
+			interface{}(ANSCHLUSS_TR_STEUERBOX_SR).(fmt.Stringer).String():                  ANSCHLUSS_TR_STEUERBOX_SR,
 		}
 	}
 }
