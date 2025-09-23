@@ -61,4 +61,11 @@ const (
 	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_2_5_MSBG                   // Zusatzdienstleistung nach § 35 Abs. 2 Nr. 5 MsbG with article number 9990001000855
 	ZUSATZDIENSTLEISTUNG_PARAGRAPH_35_3_MSBG                     // Zusatzdienstleistung nach § 35 Abs. 3 MsbG with article number 9990001000863
 	EINBAU_IMS                                                   // EINBAU_IMS has the BDEW article number 9991000002305
+	EINBAU_KME_RLM                                               // EINBAU_KME_RLM has the BDEW article number 9991000002313
+	EINBAU_WANDLER                                               // EINBAU_WANDLER has the BDEW article number 9991000002321
+	WEITERE_ENERGIEFLUSSRICHTUNG                                 // WEITERE_ENERGIEFLUSSRICHTUNG has the BDEW article number 9991000002339
+	VERGLEICHSMESSUNG                                            // VERGLEICHSMESSUNG has the BDEW article number 9991000002347
+	AENDERUNG_MESSEBENE                                          // AENDERUNG_MESSEBENE has the BDEW article number 9991000002355
+	EINBAU_STEUERBOX                                             // EINBAU_STEUERBOX has the BDEW article number 9991000002363
+	ANSCHLUSS_TR_STEUERBOX_SR                                    // ANSCHLUSS_TR_STEUERBOX_SR has the BDEW article number 9991000002371
 )
