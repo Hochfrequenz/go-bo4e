@@ -2,12 +2,17 @@ package bo
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/emobilitaetsart"
 	"github.com/hochfrequenz/go-bo4e/enum/gasqualitaet"
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
+	"github.com/hochfrequenz/go-bo4e/enum/unterbrechbarkeit"
+	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsart"
+	"github.com/hochfrequenz/go-bo4e/enum/waermenutzung"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
@@ -31,10 +36,25 @@ type Messlokation struct {
 	Geoadresse          *com.Geokoordinaten  `json:"geoadresse,omitempty" validate:"required_without_all=Messadresse Katasterinformation"` // Geoadresse are gps coordinates of the Messlokation
 	Katasterinformation *com.Katasteradresse `json:"katasterinformation,omitempty" validate:"required_without_all=Messadresse Geoadresse"` // Katasterinformation is a cadastre address of the Messlokation
 
-	LokationsbuendelCode *string `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+	LokationsbuendelCode *string       `json:"lokationsbuendelObjektcode,omitempty"` // Lokationsbuendel Code, der die Funktion dieses BOs an der Lokationsbuendelstruktur beschreibt.
+	Messprodukte         []Messprodukt `json:"messprodukte,omitempty"`               // Messprodukte is a list of erforderliche Produkte der Messlokation
 
 	// IstFuerLieferanmeldungRelevant ist ein Behelfs-Flag das anzeigt, ob eine Messlokation für die Lieferanmeldung relevant ist (true).
 	IstFuerLieferanmeldungRelevant *bool `json:"istFuerLieferanmeldungRelevant,omitempty"`
+}
+
+type Messprodukt struct {
+	Emobilitaetsart        *emobilitaetsart.EMobilitaetsart     `json:"emobilitaetsart,omitempty"`
+	GUID                   *string                              `json:"guid,omitempty"`
+	MessproduktID          *string                              `json:"messproduktId,omitempty"`
+	Timestamp              *time.Time                           `json:"timestamp,omitempty"`
+	Unterbrechbarkeit      *unterbrechbarkeit.Unterbrechbarkeit `json:"unterbrechbarkeit,omitempty"`
+	Verbrauchsart          *verbrauchsart.Verbrauchsart         `json:"verbrauchsart,omitempty"`
+	Verwendungszwecke      []com.Verwendungszweck               `json:"verwendungszwecke,omitempty"`
+	Waermenutzung          *waermenutzung.Waermenutzung         `json:"waermenutzung,omitempty"`
+	WerteuebermittlungAnNB *bool                                `json:"werteuebermittlungAnNB,omitempty"`
+	Zaehlzeiten            *com.Zaehlzeitregister               `json:"zaehlzeiten,omitempty"`
+	ZweiteMessung          *bool                                `json:"zweiteMessung,omitempty"`
 }
 
 // XorStructLevelMesslokationValidation ensures that only one of the possible address types is given
