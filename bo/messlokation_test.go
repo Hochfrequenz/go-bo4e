@@ -19,6 +19,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/netzebene"
 	"github.com/hochfrequenz/go-bo4e/enum/sparte"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifart"
+	"github.com/hochfrequenz/go-bo4e/enum/verwendungszweck"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlerauspraegung"
 	"github.com/hochfrequenz/go-bo4e/enum/zaehlertyp"
 	"github.com/hochfrequenz/go-bo4e/internal"
@@ -81,6 +82,20 @@ func Test_Messlokation_Deserialization(t *testing.T) {
 				}},
 			},
 		},
+		Messprodukte: []com.Messprodukt{
+			{
+				MessproduktID: internal.Ptr("9991000000044"),
+				Verwendungszwecke: []com.Verwendungszweck{
+					{
+						Marktrolle: marktrolle.NB,
+						Zweck: []verwendungszweck.Verwendungszweck{
+							verwendungszweck.NETZNUTZUNGSABRECHNUNG,
+							verwendungszweck.MEHRMINDERMENGENABRECHNUNG,
+						},
+					},
+				},
+			},
+		},
 	}
 	serializedMelo, err := json.Marshal(melo)
 	then.AssertThat(t, err, is.Nil())
@@ -91,6 +106,7 @@ func Test_Messlokation_Deserialization(t *testing.T) {
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "EINRICHTUNGSZAEHLER"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "EINTARIF"), is.True())
 	then.AssertThat(t, strings.Contains(string(serializedMelo), "Rollencodenummer"), is.True())
+	then.AssertThat(t, strings.Contains(string(serializedMelo), "messproduktId"), is.True())
 	var deserializedMelo bo.Messlokation
 	err = json.Unmarshal(serializedMelo, &deserializedMelo)
 	then.AssertThat(t, err, is.Nil())
