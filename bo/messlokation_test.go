@@ -82,7 +82,7 @@ func Test_Messlokation_Deserialization(t *testing.T) {
 				}},
 			},
 		},
-		Messprodukte: []bo.Messprodukt{
+		Messprodukte: []com.Messprodukt{
 			{
 				MessproduktID: internal.Ptr("9991000000044"),
 				Verwendungszwecke: []com.Verwendungszweck{
