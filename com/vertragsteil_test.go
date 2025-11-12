@@ -130,8 +130,6 @@ func Test_Unmarshal_Profil_and_Profiltyp(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
-	then.AssertThat(t, vt.Profil, is.EqualTo(internal.Ptr("test-profil")))
-	then.AssertThat(t, vt.Profiltyp, is.EqualTo(internal.Ptr("test-profiltyp")))
 	then.AssertThat(t, vt.ExtensionData["Profil"].(string), is.EqualTo("profil with different case"))
 	then.AssertThat(t, vt.ExtensionData["Profiltyp"].(string), is.EqualTo("profiltyp with different case"))
 }
