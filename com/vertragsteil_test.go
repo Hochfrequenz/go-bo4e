@@ -120,8 +120,6 @@ func Test_Serialized_Empty_Vertragsteil_Contains_No_Enum_Defaults(t *testing.T) 
 
 func Test_Unmarshal_Profil_and_Profiltyp(t *testing.T) {
 	jsonData := `{
-		"profil": "test-profil",
-		"profiltyp": "test-profiltyp",
 		"Profil": "profil with different case",
 		"Profiltyp": "profiltyp with different case"
 	}`
