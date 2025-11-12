@@ -9,6 +9,8 @@ import (
 
 // Vertragsteil wird dazu verwendet, eine vertragliche Leistung in Bezug zu einer Lokation (Markt- oder Messlokation) festzulegen.
 type Vertragsteil struct {
+	// Hier werden alle übrigen Felder gespeichert wie z.B. Profil und Profiltyp.
+	// Das Gegenstück dazu sind die Userproperties in .NET Library.
 	unmappeddatamarshaller.ExtensionData
 	Vertragsteilbeginn       *time.Time `json:"vertragsteilbeginn,omitempty"`                                     // Vertragsteilbeginn ist der inklusive Start der Gültigkeit des Vertragsteils
 	Vertragsteilende         *time.Time `json:"vertragsteilende,omitempty" validate:"gtfield=Vertragsteilbeginn"` // Vertragsteilende ist das exklusive Ende der Gültigkeit des Vertragsteils
@@ -19,8 +21,6 @@ type Vertragsteil struct {
 	Jahresverbrauchsprognose *Menge     `json:"jahresverbrauchsprognose,omitempty"`                               // Jahresverbrauchsprognose ist die vorhergesagte Verbrauchsmenge der Lokation für ein Jahr
 	Kundenwert               *Menge     `json:"kundenwert,omitempty"`                                             // Kundenwert ist analog zur Jahresverbrauchsprognose hat aber eine andere Einheit um TUM Profile zu skalieren
 	Verbrauchsaufteilung     *string    `json:"verbrauchsaufteilung,omitempty"`                                   // Verbrauchsaufteilung gibt bei gemischt temparaturabhängigen Lokationen an wie viel des Verbrauchs auf TLP entfällt
-	Profil                   *string    `json:"profil,omitempty"`                                                 // Profile ist das Profil, das für die Lokation verwendet wird
-	Profiltyp                *string    `json:"profiltyp,omitempty"`                                              // Profiltyp gibt an um welche Art von Profil es sich handelt
 }
 
 func (vt *Vertragsteil) UnmarshalJSON(bytes []byte) (err error) {
