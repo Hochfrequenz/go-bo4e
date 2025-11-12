@@ -117,3 +117,17 @@ func Test_Successful_Vertragsteil_Validation(t *testing.T) {
 func Test_Serialized_Empty_Vertragsteil_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, com.Vertragsteil{})
 }
+
+func Test_Unmarshal_Profil_and_Profiltyp(t *testing.T) {
+	jsonData := `{
+		"Profil": "profil with different case",
+		"Profiltyp": "profiltyp with different case"
+	}`
+	var vt com.Vertragsteil
+	err := json.Unmarshal([]byte(jsonData), &vt)
+	if err != nil {
+		t.Fatalf("Failed to unmarshal JSON: %v", err)
+	}
+	then.AssertThat(t, vt.ExtensionData["Profil"].(string), is.EqualTo("profil with different case"))
+	then.AssertThat(t, vt.ExtensionData["Profiltyp"].(string), is.EqualTo("profiltyp with different case"))
+}
