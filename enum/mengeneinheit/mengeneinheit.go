@@ -11,6 +11,7 @@ const (
 	W          Mengeneinheit = iota + 1
 	WH                       // WH is for Watt hour
 	KW                       // KW is for Kilo watt
+	KWT                      // KWT is also for Kilo watt
 	KWH                      // KWH is for Kilo watt hour
 	KVARH                    // KVARH is the abbreviation for Kilovarstunde
 	MW                       // MW is for Megawatt
