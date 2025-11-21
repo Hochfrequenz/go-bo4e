@@ -12,7 +12,7 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Verify commit signature.
         run: |
           curl -s https://github.com/web-flow.gpg | gpg --import
