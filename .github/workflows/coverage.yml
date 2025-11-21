@@ -11,7 +11,7 @@ jobs:
         with:
           go-version: "1.25"
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Calc coverage
         run: go test ./bo ./com -v -covermode=count -coverprofile=coverage.out
       - name: Convert coverage to lcov

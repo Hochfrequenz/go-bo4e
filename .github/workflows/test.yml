@@ -15,7 +15,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code AND submodule
         if: matrix.use_private_example_data_submodule == 'true'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
           token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
@@ -24,6 +24,6 @@ jobs:
           submodules: "recursive"
       - name: Checkout code without submodule
         if: matrix.use_private_example_data_submodule == 'false'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Test
         run: go test ./...
