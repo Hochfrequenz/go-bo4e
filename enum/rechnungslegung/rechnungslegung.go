@@ -1,6 +1,6 @@
 package rechnungslegung
 
-// Rechnungslegung is an enum
+// Rechnungslegung Aufzählung der Möglichkeiten zur Rechnungslegung in Ausschreibungen.
 //
 //go:generate stringer --type Rechnungslegung
 //go:generate jsonenums --type Rechnungslegung
