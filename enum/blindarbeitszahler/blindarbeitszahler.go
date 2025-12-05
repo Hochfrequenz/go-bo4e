@@ -1,6 +1,6 @@
 package blindarbeitszahler
 
-// Blindarbeitszahler is an enum
+// Blindarbeitszahler Zahlung der Blindarbeit
 //
 //go:generate stringer --type Blindarbeitszahler
 //go:generate jsonenums --type Blindarbeitszahler
