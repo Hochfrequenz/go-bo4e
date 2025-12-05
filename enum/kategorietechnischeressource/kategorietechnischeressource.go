@@ -1,6 +1,6 @@
 package kategorietechnischeressource
 
-// KategorieTechnischeRessource is an enum
+// KategorieTechnischeRessource Kategorisierung der technischen Ressource in Hinblick auf §14a EnWG.
 //
 //go:generate stringer --type KategorieTechnischeRessource
 //go:generate jsonenums --type KategorieTechnischeRessource
