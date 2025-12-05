@@ -1,6 +1,6 @@
 package preistyp
 
-// Preistyp is an enum
+// Preistyp Aufschlüsselung der Preistypen in Tarifen.
 //
 //go:generate stringer --type Preistyp
 //go:generate jsonenums --type Preistyp
