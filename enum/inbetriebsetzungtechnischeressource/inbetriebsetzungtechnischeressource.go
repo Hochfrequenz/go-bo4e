@@ -1,6 +1,6 @@
 package inbetriebsetzungtechnischeressource
 
-// InbetriebsetzungTechnischeRessource is an enum
+// InbetriebsetzungTechnischeRessource Inbetriebsetzungsdatum der verbrauchenden Technischen Ressource nach § 14a EnWG
 //
 //go:generate stringer --type InbetriebsetzungTechnischeRessource
 //go:generate jsonenums --type InbetriebsetzungTechnischeRessource
