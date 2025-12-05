@@ -1,6 +1,6 @@
 package ausschreibungsportal
 
-// Ausschreibungsportal is an enum
+// Ausschreibungsportal Aufzählung der unterstützten Ausschreibungsportale.
 //
 //go:generate stringer --type Ausschreibungsportal
 //go:generate jsonenums --type Ausschreibungsportal
