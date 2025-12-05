@@ -1,6 +1,6 @@
 package tarifregionskriterium
 
-// Tarifregionskriterium is an enum
+// Tarifregionskriterium Mit diesen Kriterien können regionale Bereiche definiert werden.
 //
 //go:generate stringer --type Tarifregionskriterium
 //go:generate jsonenums --type Tarifregionskriterium
