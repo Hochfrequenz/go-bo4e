@@ -1,6 +1,6 @@
 package kundengruppe
 
-// Kundengruppe is an enum
+// Kundengruppe Kundengruppe für eine Marktlokation (orientiert sich an den Standard-Lastprofilen).
 //
 //go:generate stringer --type Kundengruppe
 //go:generate jsonenums --type Kundengruppe
