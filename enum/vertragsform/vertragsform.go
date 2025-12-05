@@ -1,6 +1,6 @@
 package vertragsform
 
-// Vertragsform is an enum
+// Vertragsform Aufzählung der Möglichkeiten zu Vertragsformen in Ausschreibungen.
 //
 //go:generate stringer --type Vertragsform
 //go:generate jsonenums --type Vertragsform
