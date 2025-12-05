@@ -1,6 +1,6 @@
 package einordnungtechnischeressource
 
-// EinordnungTechnischeRessource is an enum
+// EinordnungTechnischeRessource Einordnung der verbrauchenden Technischen Ressource nach § 14a EnWG mit Inbetriebsetzung vor 2024
 //
 //go:generate stringer --type EinordnungTechnischeRessource
 //go:generate jsonenums --type EinordnungTechnischeRessource
