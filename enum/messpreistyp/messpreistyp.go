@@ -1,6 +1,6 @@
 package messpreistyp
 
-// Messpreistyp is an enum
+// Messpreistyp Messpreistyp
 //
 //go:generate stringer --type Messpreistyp
 //go:generate jsonenums --type Messpreistyp
