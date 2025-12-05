@@ -1,6 +1,6 @@
 package informationweiteretechnischeressource
 
-// InformationWeitereTechnischeRessource is an enum
+// InformationWeitereTechnischeRessource Information zu weiteren technischen Einrichtungen
 //
 //go:generate stringer --type InformationWeitereTechnischeRessource
 //go:generate jsonenums --type InformationWeitereTechnischeRessource
