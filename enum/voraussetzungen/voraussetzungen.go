@@ -1,6 +1,6 @@
 package voraussetzungen
 
-// Voraussetzungen is an enum
+// Voraussetzungen Voraussetzungen, die erfüllt sein müssen, damit dieser Tarif zur Anwendung kommen kann.
 //
 //go:generate stringer --type Voraussetzungen
 //go:generate jsonenums --type Voraussetzungen
