@@ -1,6 +1,6 @@
 package qualitaet
 
-// Qualitaet is an enum
+// Qualitaet Qualitätsstufen eines Business-Objektes, v.a. aus Sicht Marktkommunikation 
 //
 //go:generate stringer --type Qualitaet
 //go:generate jsonenums --type Qualitaet
