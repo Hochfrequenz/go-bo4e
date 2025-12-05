@@ -1,6 +1,6 @@
 package angebotsstatus
 
-// Angebotsstatus is an enum
+// Angebotsstatus gibt den Status eines Angebotes an.
 //
 //go:generate stringer --type Angebotsstatus
 //go:generate jsonenums --type Angebotsstatus
