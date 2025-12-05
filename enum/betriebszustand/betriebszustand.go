@@ -1,6 +1,6 @@
 package betriebszustand
 
-// Betriebszustand is an enum
+// Betriebszustand Betriebszustand der Messlokation
 //
 //go:generate stringer --type Betriebszustand
 //go:generate jsonenums --type Betriebszustand
