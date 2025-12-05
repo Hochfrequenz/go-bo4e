@@ -1,6 +1,6 @@
 package schwachlastfaehig
 
-// Schwachlastfaehig is an enum
+// Schwachlastfaehig Schwachlastfähigkeit Marktlokation
 //
 //go:generate stringer --type Schwachlastfaehig
 //go:generate jsonenums --type Schwachlastfaehig
