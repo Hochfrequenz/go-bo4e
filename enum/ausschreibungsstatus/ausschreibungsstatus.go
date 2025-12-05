@@ -1,6 +1,6 @@
 package ausschreibungsstatus
 
-// Ausschreibungsstatus is an enum
+// Ausschreibungsstatus Ausschreibungsstatus
 //
 //go:generate stringer --type Ausschreibungsstatus
 //go:generate jsonenums --type Ausschreibungsstatus
