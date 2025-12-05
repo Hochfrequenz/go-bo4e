@@ -1,6 +1,6 @@
 package tarifkalkulationsmethode
 
-// Tarifkalkulationsmethode is an enum
+// Tarifkalkulationsmethode Aulistung der verschiedenen Berechnungsmethoden für ein Preisblatt.
 //
 //go:generate stringer --type Tarifkalkulationsmethode
 //go:generate jsonenums --type Tarifkalkulationsmethode
