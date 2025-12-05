@@ -1,6 +1,6 @@
 package oekozertifikat
 
-// Oekozertifikat is an enum
+// Oekozertifikat Zertifikate für Ökostrom von verschiedenen Herausgebern.
 //
 //go:generate stringer --type Oekozertifikat
 //go:generate jsonenums --type Oekozertifikat
