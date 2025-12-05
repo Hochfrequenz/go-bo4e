@@ -1,6 +1,6 @@
 package befestigungsart
 
-// Befestigungsart is an enum
+// Befestigungsart Befestigungsart
 //
 //go:generate stringer --type Befestigungsart
 //go:generate jsonenums --type Befestigungsart
