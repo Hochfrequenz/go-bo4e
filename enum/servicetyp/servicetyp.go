@@ -1,6 +1,6 @@
 package servicetyp
 
-// Servicetyp is an enum
+// Servicetyp Typ eines Services (Hochfrequenz-eigene Erweiterung des BO4E-Standards.
 //
 //go:generate stringer --type Servicetyp
 //go:generate jsonenums --type Servicetyp
