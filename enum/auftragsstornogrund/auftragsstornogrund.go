@@ -1,6 +1,6 @@
 package auftragsstornogrund
 
-// Auftragsstornogrund is an enum
+// Auftragsstornogrund Auftragsstornogrund für Sperr- bzw. Entsperrauftragsstornoantworten for 19128 and 19129
 //
 //go:generate stringer --type Auftragsstornogrund
 //go:generate jsonenums --type Auftragsstornogrund
