@@ -1,6 +1,6 @@
 package preismodell
 
-// Preismodell is an enum
+// Preismodell Bezeichnung der Preismodelle in Ausschreibungen für die Energielieferung.
 //
 //go:generate stringer --type Preismodell
 //go:generate jsonenums --type Preismodell
