@@ -1,6 +1,6 @@
 package preisgarantietyp
 
-// Preisgarantietyp is an enum
+// Preisgarantietyp Aufzählung der Möglichkeiten für die Vergabe von Preisgarantien
 //
 //go:generate stringer --type Preisgarantietyp
 //go:generate jsonenums --type Preisgarantietyp
