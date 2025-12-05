@@ -1,6 +1,6 @@
 package oekolabel
 
-// Oekolabel is an enum
+// Oekolabel Aufzählung der Labels für Öko-Strom von verschiedenen Herausgebern.
 //
 //go:generate stringer --type Oekolabel
 //go:generate jsonenums --type Oekolabel
