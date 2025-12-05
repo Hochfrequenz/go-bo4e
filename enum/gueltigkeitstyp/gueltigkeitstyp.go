@@ -1,6 +1,6 @@
 package gueltigkeitstyp
 
-// Gueltigkeitstyp is an enum
+// Gueltigkeitstyp Übersicht der verschiedenen Gültigkeiten zur Umsetzung von Positiv- bzw. Negativlisten.
 //
 //go:generate stringer --type Gueltigkeitstyp
 //go:generate jsonenums --type Gueltigkeitstyp
