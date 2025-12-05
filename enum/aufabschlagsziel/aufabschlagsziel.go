@@ -1,6 +1,6 @@
 package aufabschlagsziel
 
-// AufAbschlagsziel is an enum
+// AufAbschlagsziel Der Preis, auf den sich ein Auf- oder Abschlag bezieht.
 //
 //go:generate stringer --type AufAbschlagsziel
 //go:generate jsonenums --type AufAbschlagsziel
