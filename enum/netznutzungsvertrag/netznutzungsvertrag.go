@@ -1,6 +1,6 @@
 package netznutzungsvertrag
 
-// Netznutzungsvertrag is an enum
+// Netznutzungsvertrag Art des Netznutzungsvertrags
 //
 //go:generate stringer --type Netznutzungsvertrag
 //go:generate jsonenums --type Netznutzungsvertrag
