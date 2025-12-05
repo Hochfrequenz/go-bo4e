@@ -1,7 +1,5 @@
 package regionskriteriumtyp
 
-// Regionskriteriumtyp is an enum
-//
 //go:generate stringer --type Regionskriteriumtyp
 //go:generate jsonenums --type Regionskriteriumtyp
 type Regionskriteriumtyp int

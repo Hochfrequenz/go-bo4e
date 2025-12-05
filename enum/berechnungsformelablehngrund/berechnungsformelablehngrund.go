@@ -1,7 +1,5 @@
 package berechnungsformelablehngrund
 
-// BerechnungsformelAblehngrund is an enum
-//
 //go:generate stringer --type BerechnungsformelAblehngrund
 //go:generate jsonenums --type BerechnungsformelAblehngrund
 type BerechnungsformelAblehngrund int

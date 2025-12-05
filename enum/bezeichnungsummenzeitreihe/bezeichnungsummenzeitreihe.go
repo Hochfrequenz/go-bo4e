@@ -1,7 +1,5 @@
 package bezeichnungsummenzeitreihe
 
-// BezeichnungSummenzeitreihe is an enum
-//
 //go:generate stringer --type BezeichnungSummenzeitreihe
 //go:generate jsonenums --type BezeichnungSummenzeitreihe
 type BezeichnungSummenzeitreihe int

@@ -1,7 +1,5 @@
 package grundlagezurverringerungderumlagennachenfg
 
-// GrundlageZurVerringerungDerUmlagenNachEnfg is an enum
-//
 //go:generate stringer --type GrundlageZurVerringerungDerUmlagenNachEnfg
 //go:generate jsonenums --type GrundlageZurVerringerungDerUmlagenNachEnfg
 type GrundlageZurVerringerungDerUmlagenNachEnfg int

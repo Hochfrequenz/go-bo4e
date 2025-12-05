@@ -1,7 +1,5 @@
 package mengenoperator
 
-// Mengenoperator is an enum
-//
 //go:generate stringer --type Mengenoperator
 //go:generate jsonenums --type Mengenoperator
 type Mengenoperator int

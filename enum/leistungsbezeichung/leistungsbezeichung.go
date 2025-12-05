@@ -1,7 +1,5 @@
 package leistungsbezeichung
 
-// Leistungsbezeichung is an enum
-//
 //go:generate stringer --type Leistungsbezeichung
 //go:generate jsonenums --type Leistungsbezeichung
 type Leistungsbezeichung int

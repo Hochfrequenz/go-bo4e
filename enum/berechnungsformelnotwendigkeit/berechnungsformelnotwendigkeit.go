@@ -1,7 +1,5 @@
 package berechnungsformelnotwendigkeit
 
-// BerechnungsformelNotwendigkeit is an enum
-//
 //go:generate stringer --type BerechnungsformelNotwendigkeit
 //go:generate jsonenums --type BerechnungsformelNotwendigkeit
 type BerechnungsformelNotwendigkeit int

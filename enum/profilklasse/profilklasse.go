@@ -1,7 +1,5 @@
 package profilklasse
 
-// Profilklasse is an enum
-//
 //go:generate stringer --type Profilklasse
 //go:generate jsonenums --type Profilklasse
 type Profilklasse int

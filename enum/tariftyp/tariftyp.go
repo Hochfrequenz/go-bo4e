@@ -1,7 +1,5 @@
 package tariftyp
 
-// Tariftyp is an enum
-//
 //go:generate stringer --type Tariftyp
 //go:generate jsonenums --type Tariftyp
 type Tariftyp int

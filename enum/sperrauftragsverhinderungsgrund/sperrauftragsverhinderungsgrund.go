@@ -1,7 +1,5 @@
 package sperrauftragsverhinderungsgrund
 
-// Sperrauftragsverhinderungsgrund is an enum
-//
 //go:generate stringer --type Sperrauftragsverhinderungsgrund
 //go:generate jsonenums --type Sperrauftragsverhinderungsgrund
 type Sperrauftragsverhinderungsgrund int

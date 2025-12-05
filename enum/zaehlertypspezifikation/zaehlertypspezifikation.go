@@ -1,7 +1,5 @@
 package zaehlertypspezifikation
 
-// ZaehlertypSpezifikation is an enum
-//
 //go:generate stringer --type ZaehlertypSpezifikation
 //go:generate jsonenums --type ZaehlertypSpezifikation
 type ZaehlertypSpezifikation int

@@ -1,7 +1,5 @@
 package kundentyp
 
-// Kundentyp is an enum
-//
 //go:generate stringer --type Kundentyp
 //go:generate jsonenums --type Kundentyp
 type Kundentyp int

@@ -1,7 +1,5 @@
 package prioritaet
 
-// Prioritaet is an enum
-//
 //go:generate stringer --type Prioritaet
 //go:generate jsonenums --type Prioritaet
 type Prioritaet int

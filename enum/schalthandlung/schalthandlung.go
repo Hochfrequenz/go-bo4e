@@ -1,7 +1,5 @@
 package schalthandlung
 
-// Schalthandlung is an enum
-//
 //go:generate stringer --type Schalthandlung
 //go:generate jsonenums --type Schalthandlung
 type Schalthandlung int

@@ -1,7 +1,5 @@
 package auftragsstatus
 
-// Auftragsstatus is an enum
-//
 //go:generate stringer --type Auftragsstatus
 //go:generate jsonenums --type Auftragsstatus
 type Auftragsstatus int

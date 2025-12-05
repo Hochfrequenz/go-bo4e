@@ -1,7 +1,5 @@
 package normierungsfaktor
 
-// Normierungsfaktor is an enum
-//
 //go:generate stringer --type Normierungsfaktor
 //go:generate jsonenums --type Normierungsfaktor
 type Normierungsfaktor int

@@ -1,7 +1,5 @@
 package bearbeitungsstatus
 
-// Bearbeitungsstatus is an enum
-//
 //go:generate stringer --type Bearbeitungsstatus
 //go:generate jsonenums --type Bearbeitungsstatus
 type Bearbeitungsstatus int

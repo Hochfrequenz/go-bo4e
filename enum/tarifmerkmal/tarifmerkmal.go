@@ -1,7 +1,5 @@
 package tarifmerkmal
 
-// Tarifmerkmal is an enum
-//
 //go:generate stringer --type Tarifmerkmal
 //go:generate jsonenums --type Tarifmerkmal
 type Tarifmerkmal int
