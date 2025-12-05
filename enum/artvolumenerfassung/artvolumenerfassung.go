@@ -1,6 +1,6 @@
 package artvolumenerfassung
 
-// ArtVolumenerfassung is an enum
+// ArtVolumenerfassung Auflistung möglicher Arten der Volumenerfassung (bzgl. Mengenumwerter)
 //
 //go:generate stringer --type ArtVolumenerfassung
 //go:generate jsonenums --type ArtVolumenerfassung
