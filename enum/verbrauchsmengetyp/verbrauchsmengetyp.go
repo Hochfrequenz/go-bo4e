@@ -1,6 +1,6 @@
 package verbrauchsmengetyp
 
-// Verbrauchsmengetyp is an enum
+// Verbrauchsmengetyp type von Verbrauchsmenge
 //
 //go:generate stringer --type Verbrauchsmengetyp
 //go:generate jsonenums --type Verbrauchsmengetyp
