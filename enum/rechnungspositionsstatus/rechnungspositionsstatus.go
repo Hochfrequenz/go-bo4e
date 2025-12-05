@@ -1,6 +1,6 @@
 package rechnungspositionsstatus
 
-// RechnungspositionsStatus is an enum
+// RechnungspositionsStatus Status einer Rechnungsposition (konkret SAP Convergent Invoicing).
 //
 //go:generate stringer --type RechnungspositionsStatus
 //go:generate jsonenums --type RechnungspositionsStatus
