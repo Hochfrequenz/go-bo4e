@@ -1,6 +1,6 @@
 package ausschreibungstyp
 
-// Ausschreibungstyp is an enum
+// Ausschreibungstyp Aufzählung für die Typisierung von Ausschreibungen.
 //
 //go:generate stringer --type Ausschreibungstyp
 //go:generate jsonenums --type Ausschreibungstyp
