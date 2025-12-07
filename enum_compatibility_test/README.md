@@ -35,13 +35,19 @@ The GitHub Actions workflow [`.github/workflows/enum_compatibility.yml`](../.git
 
 ## Updating BO4E-dotnet Version
 
-The NuGet package version is specified inline in `serialize_enums.csx`:
+The NuGet package version is specified in two places that must be kept in sync:
 
-```csharp
-#r "nuget: Hochfrequenz.BO4Enet, 0.45.1"
-```
+1. **`serialize_enums.csx`** - The actual script uses this version:
+   ```csharp
+   #r "nuget: Hochfrequenz.BO4Enet, 0.45.1"
+   ```
 
-To update, change the version number in this line.
+2. **`BO4E.Version.csproj`** - A dummy project file for Dependabot:
+   ```xml
+   <PackageReference Include="Hochfrequenz.BO4Enet" Version="0.45.1" />
+   ```
+
+Dependabot will automatically create PRs to update the version in `BO4E.Version.csproj`. When merging these PRs, manually update `serialize_enums.csx` to match.
 
 ---
 

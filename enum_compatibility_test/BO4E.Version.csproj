@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    This project file exists solely to enable Dependabot to track and update
+    the BO4E-dotnet NuGet package version. The actual script (serialize_enums.csx)
+    uses dotnet-script and references the package inline.
+
+    When Dependabot updates the version here, manually sync it to serialize_enums.csx:
+      #r "nuget: Hochfrequenz.BO4Enet, X.Y.Z"
+  -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hochfrequenz.BO4Enet" Version="0.45.1" />
+  </ItemGroup>
+</Project>
