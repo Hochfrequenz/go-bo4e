@@ -11,4 +11,5 @@ const (
 	DR      Titel = iota + 1
 	PROF          // PROF is a professor
 	PROF_DR       // PROF_DR is a professor with PhD title
+	DIPLOM_INF
 )
