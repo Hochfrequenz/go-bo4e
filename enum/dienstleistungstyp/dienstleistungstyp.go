@@ -43,4 +43,25 @@ const (
 	ENTSPERRUNG                                                             // Entsperrung einer Abnahmestelle
 	MAHNKOSTEN                                                              // Mahnkosten
 	INKASSOKOSTEN                                                           // Inkassokosten
+	AUSLESUNG_LGK_MANUELL_MSB                                               // Auslesung LGK, manuell vom MSB vorgenommen
+	AUSLESUNG_MONATLICH_SLP_FERNAUSLESUNG                                   // Auslesung monatlich SLP mittels Fernauslesung
+	AUSLESUNG_JAEHRLICH_SLP_FERNAUSLESUNG                                   // Auslesung jaehrlich SLP mittels Fernauslesung
+	AUSLESUNG_MDE_SLP                                                       // Auslesung SLP mittels MDE
+	ABLESUNG_MONATLICH_SLP                                                  // Ablesung monatlich SLP
+	ABLESUNG_VIERTELJAEHRLICH_SLP                                           // Ablesung vierteljaehrlich SLP
+	ABLESUNG_HALBJAEHRLICH_SLP                                              // Ablesung halbjaehrlich SLP
+	ABLESUNG_JAEHRLICH_SLP                                                  // Ablesung jaehrlich SLP
+	AUSLESUNG_SLP_FERNAUSLESUNG                                             // Auslesung SLP mittels Fernauslesung
+	ABLESUNG_SLP_ZUSAETZLICH_MSB                                            // Ablesung SLP, zusaetzlich vom MSB vorgenommen
+	ABLESUNG_SLP_ZUSAETZLICH_KUNDE                                          // Ablesung SLP, zusaetzlich vom Kunden vorgenommen
+	AUSLESUNG_LGK_FERNAUSLESUNG_ZUSAETZLICH_MSB                             // Auslesung LGK Fernauslesung, zusaetzlich vom MSB
+	ABLESUNG_MONATLICH_LGK                                                  // Ablesung monatlich LGK
+	AUSLESUNG_TEMERATURMENGENUMWERTER                                       // Auslesung Temperaturmengenumwerter (typo in C# lib)
+	AUSLESUNG_VORGANG_SLP                                                   // Auslesung SLP je Vorgang
+	AUSLESUUNG_KOMPAKTMENGENUMWERTER                                        // Auslesung Kompaktmengenumwerter (typo in C# lib)
+	AUSLESUNG_MDE_LGK                                                       // Auslesung LGK mittels MDE
+	SPERRUNG_SLP                                                            // Sperrung SLP
+	ENTSPERRUNG_SLP                                                         // Entsperrung SLP
+	SPERRUNG_RLM                                                            // Sperrung RLM
+	ENTSPERRUNG_RLM                                                         // Entsperrung RLM
 )
