@@ -457,7 +457,10 @@ type AllEnumsTest struct {
 func TestCSharpEnumCompatibility(t *testing.T) {
 	data, err := os.ReadFile("csharp_enum_output.json")
 	if err != nil {
-		t.Fatalf("Error reading csharp_enum_output.json: %v\nMake sure to run 'dotnet script serialize_enums.csx > csharp_enum_output.json' first.", err)
+		if os.IsNotExist(err) {
+			t.Skip("Skipping test: csharp_enum_output.json not found. Run 'dotnet script serialize_enums.csx > csharp_enum_output.json' first.")
+		}
+		t.Fatalf("Error reading csharp_enum_output.json: %v", err)
 	}
 
 	var result AllEnumsTest
