@@ -13,4 +13,5 @@ const (
 	BILANZIERUNGSVERTRAG                   // BILANZIERUNGSVERTRAG
 	MESSSTELLENBETRIEBSVERTRAG             // Messstellenabetriebsvertrag
 	BUENDELVERTRAG                         // Bündelvertrag
+	NETZNUTZUNGSVERTRAG
 )
