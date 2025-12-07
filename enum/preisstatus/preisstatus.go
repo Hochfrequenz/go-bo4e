@@ -11,4 +11,5 @@ const (
 	VORLAUEFIG Preisstatus = iota + 1
 	// ENDGUELTIG means final
 	ENDGUELTIG
+	VORLAEUFIG
 )
