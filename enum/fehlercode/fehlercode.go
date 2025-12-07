@@ -28,4 +28,21 @@ const (
 	ZEITINTERVALL_NEGATIV                        // Zeitintervall ist negativ oder null
 	FORMAT_NICHT_EINGEHALTEN                     // Formatvorgaben wurden nicht eingehalten
 	GESCHAEFTSVORFALL_ABSENDER                   // Geschaeftsvorfall darf vom Absender nicht benutzt werden
+	KONFIGURATIONSID_UNBEKANNT                   // Konfigurations-ID unbekannt
+	SEGMENTWIEDERHOLUNG_UEBERSCHRITTEN           // Segmentwiederholung ueberschritten
+	ANZAHLCODES_UEBERSCHRITTEN                   // Anzahl Codes ueberschritten
+	ZEITANGABE_UNPLAUSIBEL                       // Zeitangabe unplausibel
+	SYNTAXVERSION_NICHT_UNTERSTUETZT             // Syntaxversion nicht unterstuetzt
+	FALSCHER_EMPFAENGER                          // Falscher Empfaenger
+	WERT_UNGUELTIG                               // Wert ungueltig
+	WERT_FEHLT                                   // Wert fehlt
+	WERT_UEBERFLUESSIG                           // Wert ueberfluessig
+	BEGRENZER_UNPLAUSIBEL                        // Begrenzer unplausibel
+	ZEICHEN_UNPLAUSIBEL                          // Zeichen unplausibel
+	ABSENDER_UNBEKANNT                           // Absender unbekannt
+	TESTKENNZEICHEN_UNPLAUSIBEL                  // Testkennzeichen unplausibel
+	DUPLIKAT                                     // Duplikat
+	KONTROLLZAEHLER_UNPLAUSIBEL                  // Kontrollzaehler unplausibel
+	WERT_ZU_LANG                                 // Wert zu lang
+	WIEDERHOLUNG_UNPLAUSIBEL                     // Wiederholung unplausibel
 )
