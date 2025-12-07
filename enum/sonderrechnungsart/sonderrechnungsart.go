@@ -16,4 +16,5 @@ const (
 	P18_ABLAV                                                   // §18 AbLaV
 	KONZESSIONSABGABE_WECHSEL_RLM                               // Konzessionsabgabe (Wechsel auf Lastgangmessung)
 	PRIVILEGIERUNG_NACH_ENFG                                    // Privilegierung nach EnFG
+	KONZESSIONSABGABE_WEIGEL_MENGEN
 )
