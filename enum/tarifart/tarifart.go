@@ -13,4 +13,5 @@ const (
 	MEHRTARIF                  // MEHRTARIF = multiple (>2) tariffs
 	SMARTMETER                 // SMARTMETER means Smart Meter Tariff
 	LEISTUNGSGEMESSEN          // LEISTUNGSGEMESSEN means Leistungsgemessener Tarif
+	SMART_METER
 )
