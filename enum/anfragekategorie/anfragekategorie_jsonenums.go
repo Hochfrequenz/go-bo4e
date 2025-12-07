@@ -24,6 +24,7 @@ var (
 		"LASTGANG_MALO_TRANCHE":                            LASTGANG_MALO_TRANCHE,
 		"SPERRUNG":                                         SPERRUNG,
 		"ENTSPERRUNG":                                      ENTSPERRUNG,
+		"BESTELLUNG_AENDERUNG_MELO":                        BESTELLUNG_AENDERUNG_MELO,
 	}
 
 	_AnfragekategorieValueToName = map[Anfragekategorie]string{
@@ -42,6 +43,7 @@ var (
 		LASTGANG_MALO_TRANCHE:                            "LASTGANG_MALO_TRANCHE",
 		SPERRUNG:                                         "SPERRUNG",
 		ENTSPERRUNG:                                      "ENTSPERRUNG",
+		BESTELLUNG_AENDERUNG_MELO:                        "BESTELLUNG_AENDERUNG_MELO",
 	}
 )
 
@@ -64,6 +66,7 @@ func init() {
 			interface{}(LASTGANG_MALO_TRANCHE).(fmt.Stringer).String():                            LASTGANG_MALO_TRANCHE,
 			interface{}(SPERRUNG).(fmt.Stringer).String():                                         SPERRUNG,
 			interface{}(ENTSPERRUNG).(fmt.Stringer).String():                                      ENTSPERRUNG,
+			interface{}(BESTELLUNG_AENDERUNG_MELO).(fmt.Stringer).String():                        BESTELLUNG_AENDERUNG_MELO,
 		}
 	}
 }
