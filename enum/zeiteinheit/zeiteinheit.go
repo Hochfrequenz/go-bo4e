@@ -18,4 +18,5 @@ const (
 	QUARTAL                   // QUARTAL is 1/4 year
 	HALBJAHR                  // HALBJAHR is 1/2 half year
 	JAHR                      // JAHR is 1 year
+	VIERTEL_STUNDE
 )
