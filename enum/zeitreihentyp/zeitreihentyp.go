@@ -18,4 +18,14 @@ const (
 	TLS                              // TLS ist eine tagesparameter-abhängige Lastprofilsumme
 	SLS_TLS                          // SLS_TLS ist die gemeinsame Messung aus SLS und TLS
 	SES_TES                          // SES_TES ist die gemeinsame Messung aus SES und TES
+	AUS
+	BAS
+	DBA
+	DZR
+	DZÜ
+	FPE
+	FPI
+	SRE
+	SRI
+	VZR
 )
