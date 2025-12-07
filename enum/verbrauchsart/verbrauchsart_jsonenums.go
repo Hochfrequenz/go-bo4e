@@ -14,6 +14,10 @@ var (
 		"KLWS": KLWS,
 		"W":    W,
 		"WS":   WS,
+		"WK":   WK,
+		"EM":   EM,
+		"STRB": STRB,
+		"STW":  STW,
 	}
 
 	_VerbrauchsartValueToName = map[Verbrauchsart]string{
@@ -22,6 +26,10 @@ var (
 		KLWS: "KLWS",
 		W:    "W",
 		WS:   "WS",
+		WK:   "WK",
+		EM:   "EM",
+		STRB: "STRB",
+		STW:  "STW",
 	}
 )
 
@@ -34,6 +42,10 @@ func init() {
 			interface{}(KLWS).(fmt.Stringer).String(): KLWS,
 			interface{}(W).(fmt.Stringer).String():    W,
 			interface{}(WS).(fmt.Stringer).String():   WS,
+			interface{}(WK).(fmt.Stringer).String():   WK,
+			interface{}(EM).(fmt.Stringer).String():   EM,
+			interface{}(STRB).(fmt.Stringer).String(): STRB,
+			interface{}(STW).(fmt.Stringer).String():  STW,
 		}
 	}
 }

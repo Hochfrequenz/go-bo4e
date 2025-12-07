@@ -13,4 +13,8 @@ const (
 	KLWS               // KLWS stands for Kraft/Licht/Wärme/Speicherheizung
 	W                  // W stands for Wärme
 	WS                 // WS stands for Wärme/Speicherheizung
+	WK
+	EM
+	STRB
+	STW
 )
