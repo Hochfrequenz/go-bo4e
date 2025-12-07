@@ -14,3 +14,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  # Maintain BO4E-dotnet version for enum compatibility test
+  - package-ecosystem: "nuget"
+    directory: "/enum_compatibility_test"
+    schedule:
+      interval: "weekly"
