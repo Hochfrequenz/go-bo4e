@@ -51,4 +51,11 @@ const (
 	EDL_21                                                // EDL21
 	_96_H_ZAEHLER                                         // 96 h Zähler
 	EDL_40_ZAEHLERAUFSATZ                                 // EDL 40 Zähleraufsatz für Zähler
+	DICHTEMENGENUMWERTER                                  // Dichtemengenumwerter
+	TEMPERATURMENGENUMWERTER                              // Temperaturmengenumwerter
+	ZUSTANDSMENGENUMWERTER                                // Zustandsmengenumwerter
+	IMS_ZAEHLER                                           // IMS-Zaehler
+	SMARTMETERGATEWAY                                     // Smart-Meter-Gateway
+	STEUERBOX                                             // Steuerbox
+	TECHNISCHESTEUEREINRICHTUNG                           // Technische Steuereinrichtung
 )

@@ -46,6 +46,9 @@ var (
 		"SUMMENZEITREIHE":             SUMMENZEITREIHE,
 		"EINSPEISUNG":                 EINSPEISUNG,
 		"ANFRAGE":                     ANFRAGE,
+		"GESCHAEFTSOBJEKT":            GESCHAEFTSOBJEKT,
+		"PREISBLATTNETZNUTZUNG":       PREISBLATTNETZNUTZUNG,
+		"TARIF":                       TARIF,
 	}
 
 	_BOTypValueToName = map[BOTyp]string{
@@ -86,6 +89,9 @@ var (
 		SUMMENZEITREIHE:             "SUMMENZEITREIHE",
 		EINSPEISUNG:                 "EINSPEISUNG",
 		ANFRAGE:                     "ANFRAGE",
+		GESCHAEFTSOBJEKT:            "GESCHAEFTSOBJEKT",
+		PREISBLATTNETZNUTZUNG:       "PREISBLATTNETZNUTZUNG",
+		TARIF:                       "TARIF",
 	}
 )
 
@@ -130,6 +136,9 @@ func init() {
 			interface{}(SUMMENZEITREIHE).(fmt.Stringer).String():             SUMMENZEITREIHE,
 			interface{}(EINSPEISUNG).(fmt.Stringer).String():                 EINSPEISUNG,
 			interface{}(ANFRAGE).(fmt.Stringer).String():                     ANFRAGE,
+			interface{}(GESCHAEFTSOBJEKT).(fmt.Stringer).String():            GESCHAEFTSOBJEKT,
+			interface{}(PREISBLATTNETZNUTZUNG).(fmt.Stringer).String():       PREISBLATTNETZNUTZUNG,
+			interface{}(TARIF).(fmt.Stringer).String():                       TARIF,
 		}
 	}
 }

@@ -18,11 +18,12 @@ func _() {
 	_ = x[QUARTAL-8]
 	_ = x[HALBJAHR-9]
 	_ = x[JAHR-10]
+	_ = x[VIERTEL_STUNDE-11]
 }
 
-const _Zeiteinheit_name = "SEKUNDEMINUTESTUNDEVIERTELSTUNDETAGWOCHEMONATQUARTALHALBJAHRJAHR"
+const _Zeiteinheit_name = "SEKUNDEMINUTESTUNDEVIERTELSTUNDETAGWOCHEMONATQUARTALHALBJAHRJAHRVIERTEL_STUNDE"
 
-var _Zeiteinheit_index = [...]uint8{0, 7, 13, 19, 32, 35, 40, 45, 52, 60, 64}
+var _Zeiteinheit_index = [...]uint8{0, 7, 13, 19, 32, 35, 40, 45, 52, 60, 64, 78}
 
 func (i Zeiteinheit) String() string {
 	i -= 1
