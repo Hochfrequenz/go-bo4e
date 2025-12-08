@@ -13,11 +13,15 @@ func _() {
 	_ = x[KLWS-3]
 	_ = x[W-4]
 	_ = x[WS-5]
+	_ = x[WK-6]
+	_ = x[EM-7]
+	_ = x[STRB-8]
+	_ = x[STW-9]
 }
 
-const _Verbrauchsart_name = "KLKLWKLWSWWS"
+const _Verbrauchsart_name = "KLKLWKLWSWWSWKEMSTRBSTW"
 
-var _Verbrauchsart_index = [...]uint8{0, 2, 5, 9, 10, 12}
+var _Verbrauchsart_index = [...]uint8{0, 2, 5, 9, 10, 12, 14, 16, 20, 23}
 
 func (i Verbrauchsart) String() string {
 	i -= 1

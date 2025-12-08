@@ -18,6 +18,16 @@ var (
 		"TLS":     TLS,
 		"SLS_TLS": SLS_TLS,
 		"SES_TES": SES_TES,
+		"AUS":     AUS,
+		"BAS":     BAS,
+		"DBA":     DBA,
+		"DZR":     DZR,
+		"DZÜ":     DZÜ,
+		"FPE":     FPE,
+		"FPI":     FPI,
+		"SRE":     SRE,
+		"SRI":     SRI,
+		"VZR":     VZR,
 	}
 
 	_ZeitreihentypValueToName = map[Zeitreihentyp]string{
@@ -30,6 +40,16 @@ var (
 		TLS:     "TLS",
 		SLS_TLS: "SLS_TLS",
 		SES_TES: "SES_TES",
+		AUS:     "AUS",
+		BAS:     "BAS",
+		DBA:     "DBA",
+		DZR:     "DZR",
+		DZÜ:     "DZÜ",
+		FPE:     "FPE",
+		FPI:     "FPI",
+		SRE:     "SRE",
+		SRI:     "SRI",
+		VZR:     "VZR",
 	}
 )
 
@@ -46,6 +66,16 @@ func init() {
 			interface{}(TLS).(fmt.Stringer).String():     TLS,
 			interface{}(SLS_TLS).(fmt.Stringer).String(): SLS_TLS,
 			interface{}(SES_TES).(fmt.Stringer).String(): SES_TES,
+			interface{}(AUS).(fmt.Stringer).String():     AUS,
+			interface{}(BAS).(fmt.Stringer).String():     BAS,
+			interface{}(DBA).(fmt.Stringer).String():     DBA,
+			interface{}(DZR).(fmt.Stringer).String():     DZR,
+			interface{}(DZÜ).(fmt.Stringer).String():     DZÜ,
+			interface{}(FPE).(fmt.Stringer).String():     FPE,
+			interface{}(FPI).(fmt.Stringer).String():     FPI,
+			interface{}(SRE).(fmt.Stringer).String():     SRE,
+			interface{}(SRI).(fmt.Stringer).String():     SRI,
+			interface{}(VZR).(fmt.Stringer).String():     VZR,
 		}
 	}
 }
