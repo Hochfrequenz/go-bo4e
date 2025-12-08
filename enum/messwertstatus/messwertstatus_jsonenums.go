@@ -18,6 +18,7 @@ var (
 		"PROGNOSEWERT":             PROGNOSEWERT,
 		"ENERGIEMENGESUMMIERT":     ENERGIEMENGESUMMIERT,
 		"FEHLT":                    FEHLT,
+		"GRUNDLAGE_POG_ERMITTLUNG": GRUNDLAGE_POG_ERMITTLUNG,
 	}
 
 	_MesswertstatusValueToName = map[Messwertstatus]string{
@@ -30,6 +31,7 @@ var (
 		PROGNOSEWERT:             "PROGNOSEWERT",
 		ENERGIEMENGESUMMIERT:     "ENERGIEMENGESUMMIERT",
 		FEHLT:                    "FEHLT",
+		GRUNDLAGE_POG_ERMITTLUNG: "GRUNDLAGE_POG_ERMITTLUNG",
 	}
 )
 
@@ -46,6 +48,7 @@ func init() {
 			interface{}(PROGNOSEWERT).(fmt.Stringer).String():             PROGNOSEWERT,
 			interface{}(ENERGIEMENGESUMMIERT).(fmt.Stringer).String():     ENERGIEMENGESUMMIERT,
 			interface{}(FEHLT).(fmt.Stringer).String():                    FEHLT,
+			interface{}(GRUNDLAGE_POG_ERMITTLUNG).(fmt.Stringer).String(): GRUNDLAGE_POG_ERMITTLUNG,
 		}
 	}
 }

@@ -17,11 +17,21 @@ func _() {
 	_ = x[TLS-7]
 	_ = x[SLS_TLS-8]
 	_ = x[SES_TES-9]
+	_ = x[AUS-10]
+	_ = x[BAS-11]
+	_ = x[DBA-12]
+	_ = x[DZR-13]
+	_ = x[DZÜ-14]
+	_ = x[FPE-15]
+	_ = x[FPI-16]
+	_ = x[SRE-17]
+	_ = x[SRI-18]
+	_ = x[VZR-19]
 }
 
-const _Zeitreihentyp_name = "EGSLGSNZRSESSLSTESTLSSLS_TLSSES_TES"
+const _Zeitreihentyp_name = "EGSLGSNZRSESSLSTESTLSSLS_TLSSES_TESAUSBASDBADZRDZÜFPEFPISRESRIVZR"
 
-var _Zeitreihentyp_index = [...]uint8{0, 3, 6, 9, 12, 15, 18, 21, 28, 35}
+var _Zeitreihentyp_index = [...]uint8{0, 3, 6, 9, 12, 15, 18, 21, 28, 35, 38, 41, 44, 47, 51, 54, 57, 60, 63, 66}
 
 func (i Zeitreihentyp) String() string {
 	i -= 1
