@@ -11,11 +11,13 @@ var (
 	_PreisstatusNameToValue = map[string]Preisstatus{
 		"VORLAUEFIG": VORLAUEFIG,
 		"ENDGUELTIG": ENDGUELTIG,
+		"VORLAEUFIG": VORLAEUFIG,
 	}
 
 	_PreisstatusValueToName = map[Preisstatus]string{
 		VORLAUEFIG: "VORLAUEFIG",
 		ENDGUELTIG: "ENDGUELTIG",
+		VORLAEUFIG: "VORLAEUFIG",
 	}
 )
 
@@ -25,6 +27,7 @@ func init() {
 		_PreisstatusNameToValue = map[string]Preisstatus{
 			interface{}(VORLAUEFIG).(fmt.Stringer).String(): VORLAUEFIG,
 			interface{}(ENDGUELTIG).(fmt.Stringer).String(): ENDGUELTIG,
+			interface{}(VORLAEUFIG).(fmt.Stringer).String(): VORLAEUFIG,
 		}
 	}
 }

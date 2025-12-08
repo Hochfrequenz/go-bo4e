@@ -11,11 +11,17 @@ var (
 	_LokationstypNameToValue = map[string]Lokationstyp{
 		"MALO": MALO,
 		"MELO": MELO,
+		"NELO": NELO,
+		"SR":   SR,
+		"TR":   TR,
 	}
 
 	_LokationstypValueToName = map[Lokationstyp]string{
 		MALO: "MALO",
 		MELO: "MELO",
+		NELO: "NELO",
+		SR:   "SR",
+		TR:   "TR",
 	}
 )
 
@@ -25,6 +31,9 @@ func init() {
 		_LokationstypNameToValue = map[string]Lokationstyp{
 			interface{}(MALO).(fmt.Stringer).String(): MALO,
 			interface{}(MELO).(fmt.Stringer).String(): MELO,
+			interface{}(NELO).(fmt.Stringer).String(): NELO,
+			interface{}(SR).(fmt.Stringer).String():   SR,
+			interface{}(TR).(fmt.Stringer).String():   TR,
 		}
 	}
 }

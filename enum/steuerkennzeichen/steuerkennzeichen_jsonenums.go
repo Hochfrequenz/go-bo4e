@@ -18,6 +18,7 @@ var (
 		"VST_7":      VST_7,
 		"RCV":        RCV,
 		"UST_SONDER": UST_SONDER,
+		"VST_16":     VST_16,
 	}
 
 	_SteuerkennzeichenValueToName = map[Steuerkennzeichen]string{
@@ -30,6 +31,7 @@ var (
 		VST_7:      "VST_7",
 		RCV:        "RCV",
 		UST_SONDER: "UST_SONDER",
+		VST_16:     "VST_16",
 	}
 )
 
@@ -46,6 +48,7 @@ func init() {
 			interface{}(VST_7).(fmt.Stringer).String():      VST_7,
 			interface{}(RCV).(fmt.Stringer).String():        RCV,
 			interface{}(UST_SONDER).(fmt.Stringer).String(): UST_SONDER,
+			interface{}(VST_16).(fmt.Stringer).String():     VST_16,
 		}
 	}
 }

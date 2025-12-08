@@ -10,11 +10,12 @@ func _() {
 	var x [1]struct{}
 	_ = x[VORLAUEFIG-1]
 	_ = x[ENDGUELTIG-2]
+	_ = x[VORLAEUFIG-3]
 }
 
-const _Preisstatus_name = "VORLAUEFIGENDGUELTIG"
+const _Preisstatus_name = "VORLAUEFIGENDGUELTIGVORLAEUFIG"
 
-var _Preisstatus_index = [...]uint8{0, 10, 20}
+var _Preisstatus_index = [...]uint8{0, 10, 20, 30}
 
 func (i Preisstatus) String() string {
 	i -= 1

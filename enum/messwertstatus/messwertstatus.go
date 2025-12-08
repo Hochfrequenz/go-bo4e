@@ -33,4 +33,7 @@ const (
 
 	// FEHLT corresponds to "Fehlender Wert: Z30"
 	FEHLT
+
+	// GRUNDLAGE_POG_ERMITTLUNG indicates that the value is used as basis for PoG determination
+	GRUNDLAGE_POG_ERMITTLUNG
 )
