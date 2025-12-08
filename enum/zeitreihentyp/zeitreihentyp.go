@@ -18,4 +18,14 @@ const (
 	TLS                              // TLS ist eine tagesparameter-abhängige Lastprofilsumme
 	SLS_TLS                          // SLS_TLS ist die gemeinsame Messung aus SLS und TLS
 	SES_TES                          // SES_TES ist die gemeinsame Messung aus SES und TES
+	AUS                              // AUS ist eine Ausfallarbeitssumme
+	BAS                              // BAS ist ein Bilanzkreisabweichungssaldo
+	DBA                              // DBA ist eine Differenzzeitreihe
+	DZR                              // DZR ist eine Deltazeitreihe
+	DZÜ                              // DZÜ ist ein Deltazeitreihenübertrag
+	FPE                              // FPE ist eine Fahrplanentnahmesumme
+	FPI                              // FPI ist eine Fahrplaneinspeisesumme
+	SRE                              // SRE ist eine Überführungszeitreihe Sekundärregelleistung (Export)
+	SRI                              // SRI ist eine Überführungszeitreihe Sekundärregelleistung (Import)
+	VZR                              // VZR ist eine Verlustzeitreihe
 )
