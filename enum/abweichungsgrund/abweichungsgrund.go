@@ -35,4 +35,11 @@ const (
 	ANGEGEBENE_QUOTES_AN_MARKTLOKATION_NICHT_VORHANDEN                                                                     // Z52
 	RECHNUNGSABWICKLUNG_NICHT_VEREINBART                                                                                   // Z53
 	COMDIS_WIRD_ABGELEHNT                                                                                                  // Z63
+	BEGINN_DES_ABRECHNUNGSZEITRAUMS_VOR_2024                                                                               // AE6: Der Beginn des Abrechnungszeitraums ist kleiner als 01.01.2024 00:00 Uhr
+	ERWARTETE_POSITION_NICHT_VORHANDEN                                                                                     // AE7: Erwartete Position nicht vorhanden
+	KEIN_IMS_IM_GESAMTEN_ABRECHNUNGSZEITRAUM                                                                               // AE8: Im gesamten Abrechnungszeitraum ist an keiner Messlokation der Marktlokation ein iMS eingebaut
+	MSB_IM_ABRECHNUNGSZEITRAUM_NICHT_IMMER_ZUGEORDNET                                                                      // AE9: Der MSB ist der Marktlokation nicht einen Tag des Abrechnungszeitraumes zugeordnet
+	MSB_IM_GESAMTEN_ABRECHNUNGSZEITRAUM_NICHT_ZUGEORDNET                                                                   // AF0: Der MSB ist im gesamten Abrechnungszeitraum nicht der Marktlokation zugeordnet
+	ARTIKELID_DER_POSITION_NICHT_IM_GESAMTEN_POSITIONSZEITRAUM_GUELTIG                                                     // AF1: Die in der angegebenen Position verwendete Artikel-ID haette nicht fuer den gesamten Positionszeitraum aufgefuehrt werden sollen
+	ARTIKELID_FUER_RECHNUNGSTYP_IM_POSITIONSZEITRAUM_NICHT_ZULAESSIG                                                       // AF2: Diese Artikel-ID ist fuer diesen Rechnungstyp in dem besagten Positionszeitraum nicht zulaessig
 )

@@ -25,11 +25,17 @@ func _() {
 	_ = x[JAHR-15]
 	_ = x[PROZENT-16]
 	_ = x[ZERO-17]
+	_ = x[VAR-18]
+	_ = x[KVAR-19]
+	_ = x[VARH-20]
+	_ = x[KWHK-21]
+	_ = x[W_M2-22]
+	_ = x[M_S-23]
 }
 
-const _Mengeneinheit_name = "WWHKWKWTKWHKVARHMWMWHSTUECKANZAHLKUBIKMETERSTUNDETAGMONATJAHRPROZENTZERO"
+const _Mengeneinheit_name = "WWHKWKWTKWHKVARHMWMWHSTUECKANZAHLKUBIKMETERSTUNDETAGMONATJAHRPROZENTZEROVARKVARVARHKWHKW_M2M_S"
 
-var _Mengeneinheit_index = [...]uint8{0, 1, 3, 5, 8, 11, 16, 18, 21, 27, 33, 43, 49, 52, 57, 61, 68, 72}
+var _Mengeneinheit_index = [...]uint8{0, 1, 3, 5, 8, 11, 16, 18, 21, 27, 33, 43, 49, 52, 57, 61, 68, 72, 75, 79, 83, 87, 91, 94}
 
 func (i Mengeneinheit) String() string {
 	i -= 1

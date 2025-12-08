@@ -13,11 +13,12 @@ func _() {
 	_ = x[MEHRTARIF-3]
 	_ = x[SMARTMETER-4]
 	_ = x[LEISTUNGSGEMESSEN-5]
+	_ = x[SMART_METER-6]
 }
 
-const _Tarifart_name = "EINTARIFZWEITARIFMEHRTARIFSMARTMETERLEISTUNGSGEMESSEN"
+const _Tarifart_name = "EINTARIFZWEITARIFMEHRTARIFSMARTMETERLEISTUNGSGEMESSENSMART_METER"
 
-var _Tarifart_index = [...]uint8{0, 8, 17, 26, 36, 53}
+var _Tarifart_index = [...]uint8{0, 8, 17, 26, 36, 53, 64}
 
 func (i Tarifart) String() string {
 	i -= 1
