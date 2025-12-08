@@ -14,6 +14,7 @@ var (
 		"MEHRTARIF":         MEHRTARIF,
 		"SMARTMETER":        SMARTMETER,
 		"LEISTUNGSGEMESSEN": LEISTUNGSGEMESSEN,
+		"SMART_METER":       SMART_METER,
 	}
 
 	_TarifartValueToName = map[Tarifart]string{
@@ -22,6 +23,7 @@ var (
 		MEHRTARIF:         "MEHRTARIF",
 		SMARTMETER:        "SMARTMETER",
 		LEISTUNGSGEMESSEN: "LEISTUNGSGEMESSEN",
+		SMART_METER:       "SMART_METER",
 	}
 )
 
@@ -34,6 +36,7 @@ func init() {
 			interface{}(MEHRTARIF).(fmt.Stringer).String():         MEHRTARIF,
 			interface{}(SMARTMETER).(fmt.Stringer).String():        SMARTMETER,
 			interface{}(LEISTUNGSGEMESSEN).(fmt.Stringer).String(): LEISTUNGSGEMESSEN,
+			interface{}(SMART_METER).(fmt.Stringer).String():       SMART_METER,
 		}
 	}
 }
