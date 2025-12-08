@@ -17,5 +17,5 @@ const (
 	VST_7                        // VST7 means Vorsteuer 7%
 	RCV                          // RCV means Reverse Charge Verfahren (Umkehrung der Steuerpflicht)
 	UST_SONDER                   // UST_SONDER means Umsatzsteuer mit abweichendem Satz
-	VST_16
+	VST_16                       // VST_16 means Vorsteuer 16%
 )
