@@ -11,11 +11,12 @@ func _() {
 	_ = x[DR-1]
 	_ = x[PROF-2]
 	_ = x[PROF_DR-3]
+	_ = x[DIPLOM_INF-4]
 }
 
-const _Titel_name = "DRPROFPROF_DR"
+const _Titel_name = "DRPROFPROF_DRDIPLOM_INF"
 
-var _Titel_index = [...]uint8{0, 2, 6, 13}
+var _Titel_index = [...]uint8{0, 2, 6, 13, 23}
 
 func (i Titel) String() string {
 	i -= 1
