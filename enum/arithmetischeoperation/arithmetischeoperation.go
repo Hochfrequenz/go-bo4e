@@ -11,5 +11,7 @@ const (
 	ADDITION       ArithmetischeOperation = iota + 1
 	SUBTRAKTION                           // SUBTRAKTION means subtraction
 	MULTIPLIKATION                        // MULTIPLIKATION means multipication
-	DIVISION                              // DIVISION means division
+	DIVISION                              // DIVISION means division (divisor)
+	DIVIDEND                              // DIVIDEND means division (dividend)
+	POSITIVWERT                           // POSITIVWERT means positive value
 )

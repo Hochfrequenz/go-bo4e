@@ -25,4 +25,10 @@ const (
 	JAHR                     // JAHR is year
 	PROZENT                  // PROZENT is percent
 	ZERO                     // ZERO should not be used and is just here for full-compatability with the bo4e.net lib
+	VAR                      // VAR is for Voltampere reaktiv
+	KVAR                     // KVAR is for Kilovoltampere reaktiv
+	VARH                     // VARH is for Voltampere reaktiv Stunde
+	KWHK                     // KWHK is for Kilowattstunde Kelvin
+	W_M2                     // W_M2 is for Watt pro Quadratmeter
+	M_S                      // M_S is for Meter pro Sekunde
 )

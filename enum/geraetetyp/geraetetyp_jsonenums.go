@@ -53,6 +53,13 @@ var (
 		"EDL_21":                          EDL_21,
 		"_96_H_ZAEHLER":                   _96_H_ZAEHLER,
 		"EDL_40_ZAEHLERAUFSATZ":           EDL_40_ZAEHLERAUFSATZ,
+		"DICHTEMENGENUMWERTER":            DICHTEMENGENUMWERTER,
+		"TEMPERATURMENGENUMWERTER":        TEMPERATURMENGENUMWERTER,
+		"ZUSTANDSMENGENUMWERTER":          ZUSTANDSMENGENUMWERTER,
+		"IMS_ZAEHLER":                     IMS_ZAEHLER,
+		"SMARTMETERGATEWAY":               SMARTMETERGATEWAY,
+		"STEUERBOX":                       STEUERBOX,
+		"TECHNISCHESTEUEREINRICHTUNG":     TECHNISCHESTEUEREINRICHTUNG,
 	}
 
 	_GeraetetypValueToName = map[Geraetetyp]string{
@@ -100,6 +107,13 @@ var (
 		EDL_21:                          "EDL_21",
 		_96_H_ZAEHLER:                   "_96_H_ZAEHLER",
 		EDL_40_ZAEHLERAUFSATZ:           "EDL_40_ZAEHLERAUFSATZ",
+		DICHTEMENGENUMWERTER:            "DICHTEMENGENUMWERTER",
+		TEMPERATURMENGENUMWERTER:        "TEMPERATURMENGENUMWERTER",
+		ZUSTANDSMENGENUMWERTER:          "ZUSTANDSMENGENUMWERTER",
+		IMS_ZAEHLER:                     "IMS_ZAEHLER",
+		SMARTMETERGATEWAY:               "SMARTMETERGATEWAY",
+		STEUERBOX:                       "STEUERBOX",
+		TECHNISCHESTEUEREINRICHTUNG:     "TECHNISCHESTEUEREINRICHTUNG",
 	}
 )
 
@@ -151,6 +165,13 @@ func init() {
 			interface{}(EDL_21).(fmt.Stringer).String():                          EDL_21,
 			interface{}(_96_H_ZAEHLER).(fmt.Stringer).String():                   _96_H_ZAEHLER,
 			interface{}(EDL_40_ZAEHLERAUFSATZ).(fmt.Stringer).String():           EDL_40_ZAEHLERAUFSATZ,
+			interface{}(DICHTEMENGENUMWERTER).(fmt.Stringer).String():            DICHTEMENGENUMWERTER,
+			interface{}(TEMPERATURMENGENUMWERTER).(fmt.Stringer).String():        TEMPERATURMENGENUMWERTER,
+			interface{}(ZUSTANDSMENGENUMWERTER).(fmt.Stringer).String():          ZUSTANDSMENGENUMWERTER,
+			interface{}(IMS_ZAEHLER).(fmt.Stringer).String():                     IMS_ZAEHLER,
+			interface{}(SMARTMETERGATEWAY).(fmt.Stringer).String():               SMARTMETERGATEWAY,
+			interface{}(STEUERBOX).(fmt.Stringer).String():                       STEUERBOX,
+			interface{}(TECHNISCHESTEUEREINRICHTUNG).(fmt.Stringer).String():     TECHNISCHESTEUEREINRICHTUNG,
 		}
 	}
 }

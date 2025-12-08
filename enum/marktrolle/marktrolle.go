@@ -23,4 +23,5 @@ const (
 	INTERESSENT                // INTERESSENT is a Interessent
 	GMSB                       // GMSB stands for "Grundzuständiger MSB"
 	AMSB                       // AMSB stands for "Auffangmessstellenbetreiber"
+	MDL                        // MDL is Messdienstleister
 )

@@ -10,11 +10,14 @@ func _() {
 	var x [1]struct{}
 	_ = x[MALO-1]
 	_ = x[MELO-2]
+	_ = x[NELO-3]
+	_ = x[SR-4]
+	_ = x[TR-5]
 }
 
-const _Lokationstyp_name = "MALOMELO"
+const _Lokationstyp_name = "MALOMELONELOSRTR"
 
-var _Lokationstyp_index = [...]uint8{0, 4, 8}
+var _Lokationstyp_index = [...]uint8{0, 4, 8, 12, 14, 16}
 
 func (i Lokationstyp) String() string {
 	i -= 1
