@@ -9,27 +9,29 @@ import (
 
 var (
 	_SonderrechnungsartNameToValue = map[string]Sonderrechnungsart{
-		"KONZESSIONSABGABE_TESTAT":      KONZESSIONSABGABE_TESTAT,
-		"INDIVIDUELL_ATYPISCH":          INDIVIDUELL_ATYPISCH,
-		"INDIVIDUELL_SINGULAER":         INDIVIDUELL_SINGULAER,
-		"KWKG_UMLAGE":                   KWKG_UMLAGE,
-		"OFFSHORE_UMLAGE":               OFFSHORE_UMLAGE,
-		"P19_STROM_NEV_UMLAGE":          P19_STROM_NEV_UMLAGE,
-		"P18_ABLAV":                     P18_ABLAV,
-		"KONZESSIONSABGABE_WECHSEL_RLM": KONZESSIONSABGABE_WECHSEL_RLM,
-		"PRIVILEGIERUNG_NACH_ENFG":      PRIVILEGIERUNG_NACH_ENFG,
+		"KONZESSIONSABGABE_TESTAT":        KONZESSIONSABGABE_TESTAT,
+		"INDIVIDUELL_ATYPISCH":            INDIVIDUELL_ATYPISCH,
+		"INDIVIDUELL_SINGULAER":           INDIVIDUELL_SINGULAER,
+		"KWKG_UMLAGE":                     KWKG_UMLAGE,
+		"OFFSHORE_UMLAGE":                 OFFSHORE_UMLAGE,
+		"P19_STROM_NEV_UMLAGE":            P19_STROM_NEV_UMLAGE,
+		"P18_ABLAV":                       P18_ABLAV,
+		"KONZESSIONSABGABE_WECHSEL_RLM":   KONZESSIONSABGABE_WECHSEL_RLM,
+		"PRIVILEGIERUNG_NACH_ENFG":        PRIVILEGIERUNG_NACH_ENFG,
+		"KONZESSIONSABGABE_WEIGEL_MENGEN": KONZESSIONSABGABE_WEIGEL_MENGEN,
 	}
 
 	_SonderrechnungsartValueToName = map[Sonderrechnungsart]string{
-		KONZESSIONSABGABE_TESTAT:      "KONZESSIONSABGABE_TESTAT",
-		INDIVIDUELL_ATYPISCH:          "INDIVIDUELL_ATYPISCH",
-		INDIVIDUELL_SINGULAER:         "INDIVIDUELL_SINGULAER",
-		KWKG_UMLAGE:                   "KWKG_UMLAGE",
-		OFFSHORE_UMLAGE:               "OFFSHORE_UMLAGE",
-		P19_STROM_NEV_UMLAGE:          "P19_STROM_NEV_UMLAGE",
-		P18_ABLAV:                     "P18_ABLAV",
-		KONZESSIONSABGABE_WECHSEL_RLM: "KONZESSIONSABGABE_WECHSEL_RLM",
-		PRIVILEGIERUNG_NACH_ENFG:      "PRIVILEGIERUNG_NACH_ENFG",
+		KONZESSIONSABGABE_TESTAT:        "KONZESSIONSABGABE_TESTAT",
+		INDIVIDUELL_ATYPISCH:            "INDIVIDUELL_ATYPISCH",
+		INDIVIDUELL_SINGULAER:           "INDIVIDUELL_SINGULAER",
+		KWKG_UMLAGE:                     "KWKG_UMLAGE",
+		OFFSHORE_UMLAGE:                 "OFFSHORE_UMLAGE",
+		P19_STROM_NEV_UMLAGE:            "P19_STROM_NEV_UMLAGE",
+		P18_ABLAV:                       "P18_ABLAV",
+		KONZESSIONSABGABE_WECHSEL_RLM:   "KONZESSIONSABGABE_WECHSEL_RLM",
+		PRIVILEGIERUNG_NACH_ENFG:        "PRIVILEGIERUNG_NACH_ENFG",
+		KONZESSIONSABGABE_WEIGEL_MENGEN: "KONZESSIONSABGABE_WEIGEL_MENGEN",
 	}
 )
 
@@ -37,15 +39,16 @@ func init() {
 	var v Sonderrechnungsart
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SonderrechnungsartNameToValue = map[string]Sonderrechnungsart{
-			interface{}(KONZESSIONSABGABE_TESTAT).(fmt.Stringer).String():      KONZESSIONSABGABE_TESTAT,
-			interface{}(INDIVIDUELL_ATYPISCH).(fmt.Stringer).String():          INDIVIDUELL_ATYPISCH,
-			interface{}(INDIVIDUELL_SINGULAER).(fmt.Stringer).String():         INDIVIDUELL_SINGULAER,
-			interface{}(KWKG_UMLAGE).(fmt.Stringer).String():                   KWKG_UMLAGE,
-			interface{}(OFFSHORE_UMLAGE).(fmt.Stringer).String():               OFFSHORE_UMLAGE,
-			interface{}(P19_STROM_NEV_UMLAGE).(fmt.Stringer).String():          P19_STROM_NEV_UMLAGE,
-			interface{}(P18_ABLAV).(fmt.Stringer).String():                     P18_ABLAV,
-			interface{}(KONZESSIONSABGABE_WECHSEL_RLM).(fmt.Stringer).String(): KONZESSIONSABGABE_WECHSEL_RLM,
-			interface{}(PRIVILEGIERUNG_NACH_ENFG).(fmt.Stringer).String():      PRIVILEGIERUNG_NACH_ENFG,
+			interface{}(KONZESSIONSABGABE_TESTAT).(fmt.Stringer).String():        KONZESSIONSABGABE_TESTAT,
+			interface{}(INDIVIDUELL_ATYPISCH).(fmt.Stringer).String():            INDIVIDUELL_ATYPISCH,
+			interface{}(INDIVIDUELL_SINGULAER).(fmt.Stringer).String():           INDIVIDUELL_SINGULAER,
+			interface{}(KWKG_UMLAGE).(fmt.Stringer).String():                     KWKG_UMLAGE,
+			interface{}(OFFSHORE_UMLAGE).(fmt.Stringer).String():                 OFFSHORE_UMLAGE,
+			interface{}(P19_STROM_NEV_UMLAGE).(fmt.Stringer).String():            P19_STROM_NEV_UMLAGE,
+			interface{}(P18_ABLAV).(fmt.Stringer).String():                       P18_ABLAV,
+			interface{}(KONZESSIONSABGABE_WECHSEL_RLM).(fmt.Stringer).String():   KONZESSIONSABGABE_WECHSEL_RLM,
+			interface{}(PRIVILEGIERUNG_NACH_ENFG).(fmt.Stringer).String():        PRIVILEGIERUNG_NACH_ENFG,
+			interface{}(KONZESSIONSABGABE_WEIGEL_MENGEN).(fmt.Stringer).String(): KONZESSIONSABGABE_WEIGEL_MENGEN,
 		}
 	}
 }
