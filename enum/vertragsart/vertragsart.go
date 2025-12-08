@@ -9,9 +9,10 @@ type Vertragsart int
 const (
 	// ENERGIELIEFERVERTRAG is an energy supply contract
 	ENERGIELIEFERVERTRAG       Vertragsart = iota + 1
-	NETZNUTZUNG                            // Netznutzungsvertrag
+	NETZNUTZUNG                            // Deprecated: Netznutzungsvertrag (use NETZNUTZUNGSVERTRAG instead)
 	BILANZIERUNGSVERTRAG                   // BILANZIERUNGSVERTRAG
 	MESSSTELLENBETRIEBSVERTRAG             // Messstellenabetriebsvertrag
 	BUENDELVERTRAG                         // Bündelvertrag
-	NETZNUTZUNGSVERTRAG
+	NETZNUTZUNGSVERTRAG                    // NETZNUTZUNGSVERTRAG means Netznutzungsvertrag
+	// because we like good docstrings
 )
