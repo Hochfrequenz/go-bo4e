@@ -13,6 +13,8 @@ var (
 		"SUBTRAKTION":    SUBTRAKTION,
 		"MULTIPLIKATION": MULTIPLIKATION,
 		"DIVISION":       DIVISION,
+		"DIVIDEND":       DIVIDEND,
+		"POSITIVWERT":    POSITIVWERT,
 	}
 
 	_ArithmetischeOperationValueToName = map[ArithmetischeOperation]string{
@@ -20,6 +22,8 @@ var (
 		SUBTRAKTION:    "SUBTRAKTION",
 		MULTIPLIKATION: "MULTIPLIKATION",
 		DIVISION:       "DIVISION",
+		DIVIDEND:       "DIVIDEND",
+		POSITIVWERT:    "POSITIVWERT",
 	}
 )
 
@@ -31,6 +35,8 @@ func init() {
 			interface{}(SUBTRAKTION).(fmt.Stringer).String():    SUBTRAKTION,
 			interface{}(MULTIPLIKATION).(fmt.Stringer).String(): MULTIPLIKATION,
 			interface{}(DIVISION).(fmt.Stringer).String():       DIVISION,
+			interface{}(DIVIDEND).(fmt.Stringer).String():       DIVIDEND,
+			interface{}(POSITIVWERT).(fmt.Stringer).String():    POSITIVWERT,
 		}
 	}
 }
