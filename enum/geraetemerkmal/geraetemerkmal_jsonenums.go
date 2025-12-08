@@ -65,6 +65,12 @@ var (
 		"WASSER_VWZ06":         WASSER_VWZ06,
 		"WASSER_VWZ07":         WASSER_VWZ07,
 		"WASSER_VWZ10":         WASSER_VWZ10,
+		"GAS_G350":             GAS_G350,
+		"GAS_G4000":            GAS_G4000,
+		"GAS_G6500":            GAS_G6500,
+		"GAS_G10000":           GAS_G10000,
+		"GAS_G12500":           GAS_G12500,
+		"GAS_G16000":           GAS_G16000,
 	}
 
 	_GeraetemerkmalValueToName = map[Geraetemerkmal]string{
@@ -124,6 +130,12 @@ var (
 		WASSER_VWZ06:         "WASSER_VWZ06",
 		WASSER_VWZ07:         "WASSER_VWZ07",
 		WASSER_VWZ10:         "WASSER_VWZ10",
+		GAS_G350:             "GAS_G350",
+		GAS_G4000:            "GAS_G4000",
+		GAS_G6500:            "GAS_G6500",
+		GAS_G10000:           "GAS_G10000",
+		GAS_G12500:           "GAS_G12500",
+		GAS_G16000:           "GAS_G16000",
 	}
 )
 
@@ -187,6 +199,12 @@ func init() {
 			interface{}(WASSER_VWZ06).(fmt.Stringer).String():         WASSER_VWZ06,
 			interface{}(WASSER_VWZ07).(fmt.Stringer).String():         WASSER_VWZ07,
 			interface{}(WASSER_VWZ10).(fmt.Stringer).String():         WASSER_VWZ10,
+			interface{}(GAS_G350).(fmt.Stringer).String():             GAS_G350,
+			interface{}(GAS_G4000).(fmt.Stringer).String():            GAS_G4000,
+			interface{}(GAS_G6500).(fmt.Stringer).String():            GAS_G6500,
+			interface{}(GAS_G10000).(fmt.Stringer).String():           GAS_G10000,
+			interface{}(GAS_G12500).(fmt.Stringer).String():           GAS_G12500,
+			interface{}(GAS_G16000).(fmt.Stringer).String():           GAS_G16000,
 		}
 	}
 }

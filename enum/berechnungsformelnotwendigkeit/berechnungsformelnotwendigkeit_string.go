@@ -11,11 +11,12 @@ func _() {
 	_ = x[BERECHNUNGSFORMEL_NOTWENDIG-1]
 	_ = x[BERECHNUNGSFORMEL_TRIVIAL-2]
 	_ = x[BERECHNUNGSFORMEL_NICHT_NOTWENDIG-3]
+	_ = x[BERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN-4]
 }
 
-const _BerechnungsformelNotwendigkeit_name = "BERECHNUNGSFORMEL_NOTWENDIGBERECHNUNGSFORMEL_TRIVIALBERECHNUNGSFORMEL_NICHT_NOTWENDIG"
+const _BerechnungsformelNotwendigkeit_name = "BERECHNUNGSFORMEL_NOTWENDIGBERECHNUNGSFORMEL_TRIVIALBERECHNUNGSFORMEL_NICHT_NOTWENDIGBERECHNUNGSFORMEL_MUSS_ANGEFRAGT_WERDEN"
 
-var _BerechnungsformelNotwendigkeit_index = [...]uint8{0, 27, 52, 85}
+var _BerechnungsformelNotwendigkeit_index = [...]uint8{0, 27, 52, 85, 124}
 
 func (i BerechnungsformelNotwendigkeit) String() string {
 	i -= 1
