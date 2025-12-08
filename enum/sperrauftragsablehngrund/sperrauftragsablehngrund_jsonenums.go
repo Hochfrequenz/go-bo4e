@@ -9,29 +9,31 @@ import (
 
 var (
 	_SperrauftragsablehngrundNameToValue = map[string]Sperrauftragsablehngrund{
-		"DUPLIKAT":                       DUPLIKAT,
-		"FALSCHER_MSB":                   FALSCHER_MSB,
-		"FALSCHE_SPANNUNGSEBENE":         FALSCHE_SPANNUNGSEBENE,
-		"WEITERE_MALO_BETROFFEN":         WEITERE_MALO_BETROFFEN,
-		"ANDERER_ABLEHNGRUND":            ANDERER_ABLEHNGRUND,
-		"FRISTVERLETZUNG_TERMINGEBUNDEN": FRISTVERLETZUNG_TERMINGEBUNDEN,
-		"ANDERER_FEHLER":                 ANDERER_FEHLER,
-		"LIEGT_BEREITS_VOR":              LIEGT_BEREITS_VOR,
-		"ANDERER_ZUKUENFTIGER_LIEFERANT": ANDERER_ZUKUENFTIGER_LIEFERANT,
-		"BESTAETIGTER_LIEFERBEGINN":      BESTAETIGTER_LIEFERBEGINN,
+		"DUPLIKAT":                             DUPLIKAT,
+		"FALSCHER_MSB":                         FALSCHER_MSB,
+		"FALSCHE_SPANNUNGSEBENE":               FALSCHE_SPANNUNGSEBENE,
+		"WEITERE_MALO_BETROFFEN":               WEITERE_MALO_BETROFFEN,
+		"ANDERER_ABLEHNGRUND":                  ANDERER_ABLEHNGRUND,
+		"FRISTVERLETZUNG_TERMINGEBUNDEN":       FRISTVERLETZUNG_TERMINGEBUNDEN,
+		"ANDERER_FEHLER":                       ANDERER_FEHLER,
+		"LIEGT_BEREITS_VOR":                    LIEGT_BEREITS_VOR,
+		"ANDERER_ZUKUENFTIGER_LIEFERANT":       ANDERER_ZUKUENFTIGER_LIEFERANT,
+		"BESTAETIGTER_LIEFERBEGINN":            BESTAETIGTER_LIEFERBEGINN,
+		"FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN": FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN,
 	}
 
 	_SperrauftragsablehngrundValueToName = map[Sperrauftragsablehngrund]string{
-		DUPLIKAT:                       "DUPLIKAT",
-		FALSCHER_MSB:                   "FALSCHER_MSB",
-		FALSCHE_SPANNUNGSEBENE:         "FALSCHE_SPANNUNGSEBENE",
-		WEITERE_MALO_BETROFFEN:         "WEITERE_MALO_BETROFFEN",
-		ANDERER_ABLEHNGRUND:            "ANDERER_ABLEHNGRUND",
-		FRISTVERLETZUNG_TERMINGEBUNDEN: "FRISTVERLETZUNG_TERMINGEBUNDEN",
-		ANDERER_FEHLER:                 "ANDERER_FEHLER",
-		LIEGT_BEREITS_VOR:              "LIEGT_BEREITS_VOR",
-		ANDERER_ZUKUENFTIGER_LIEFERANT: "ANDERER_ZUKUENFTIGER_LIEFERANT",
-		BESTAETIGTER_LIEFERBEGINN:      "BESTAETIGTER_LIEFERBEGINN",
+		DUPLIKAT:                             "DUPLIKAT",
+		FALSCHER_MSB:                         "FALSCHER_MSB",
+		FALSCHE_SPANNUNGSEBENE:               "FALSCHE_SPANNUNGSEBENE",
+		WEITERE_MALO_BETROFFEN:               "WEITERE_MALO_BETROFFEN",
+		ANDERER_ABLEHNGRUND:                  "ANDERER_ABLEHNGRUND",
+		FRISTVERLETZUNG_TERMINGEBUNDEN:       "FRISTVERLETZUNG_TERMINGEBUNDEN",
+		ANDERER_FEHLER:                       "ANDERER_FEHLER",
+		LIEGT_BEREITS_VOR:                    "LIEGT_BEREITS_VOR",
+		ANDERER_ZUKUENFTIGER_LIEFERANT:       "ANDERER_ZUKUENFTIGER_LIEFERANT",
+		BESTAETIGTER_LIEFERBEGINN:            "BESTAETIGTER_LIEFERBEGINN",
+		FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN: "FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN",
 	}
 )
 
@@ -39,16 +41,17 @@ func init() {
 	var v Sperrauftragsablehngrund
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_SperrauftragsablehngrundNameToValue = map[string]Sperrauftragsablehngrund{
-			interface{}(DUPLIKAT).(fmt.Stringer).String():                       DUPLIKAT,
-			interface{}(FALSCHER_MSB).(fmt.Stringer).String():                   FALSCHER_MSB,
-			interface{}(FALSCHE_SPANNUNGSEBENE).(fmt.Stringer).String():         FALSCHE_SPANNUNGSEBENE,
-			interface{}(WEITERE_MALO_BETROFFEN).(fmt.Stringer).String():         WEITERE_MALO_BETROFFEN,
-			interface{}(ANDERER_ABLEHNGRUND).(fmt.Stringer).String():            ANDERER_ABLEHNGRUND,
-			interface{}(FRISTVERLETZUNG_TERMINGEBUNDEN).(fmt.Stringer).String(): FRISTVERLETZUNG_TERMINGEBUNDEN,
-			interface{}(ANDERER_FEHLER).(fmt.Stringer).String():                 ANDERER_FEHLER,
-			interface{}(LIEGT_BEREITS_VOR).(fmt.Stringer).String():              LIEGT_BEREITS_VOR,
-			interface{}(ANDERER_ZUKUENFTIGER_LIEFERANT).(fmt.Stringer).String(): ANDERER_ZUKUENFTIGER_LIEFERANT,
-			interface{}(BESTAETIGTER_LIEFERBEGINN).(fmt.Stringer).String():      BESTAETIGTER_LIEFERBEGINN,
+			interface{}(DUPLIKAT).(fmt.Stringer).String():                             DUPLIKAT,
+			interface{}(FALSCHER_MSB).(fmt.Stringer).String():                         FALSCHER_MSB,
+			interface{}(FALSCHE_SPANNUNGSEBENE).(fmt.Stringer).String():               FALSCHE_SPANNUNGSEBENE,
+			interface{}(WEITERE_MALO_BETROFFEN).(fmt.Stringer).String():               WEITERE_MALO_BETROFFEN,
+			interface{}(ANDERER_ABLEHNGRUND).(fmt.Stringer).String():                  ANDERER_ABLEHNGRUND,
+			interface{}(FRISTVERLETZUNG_TERMINGEBUNDEN).(fmt.Stringer).String():       FRISTVERLETZUNG_TERMINGEBUNDEN,
+			interface{}(ANDERER_FEHLER).(fmt.Stringer).String():                       ANDERER_FEHLER,
+			interface{}(LIEGT_BEREITS_VOR).(fmt.Stringer).String():                    LIEGT_BEREITS_VOR,
+			interface{}(ANDERER_ZUKUENFTIGER_LIEFERANT).(fmt.Stringer).String():       ANDERER_ZUKUENFTIGER_LIEFERANT,
+			interface{}(BESTAETIGTER_LIEFERBEGINN).(fmt.Stringer).String():            BESTAETIGTER_LIEFERBEGINN,
+			interface{}(FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN).(fmt.Stringer).String(): FRISTVERLETZUNG_NICHT_TERMINGEBUNDEN,
 		}
 	}
 }

@@ -26,6 +26,12 @@ var (
 		"JAHR":       JAHR,
 		"PROZENT":    PROZENT,
 		"ZERO":       ZERO,
+		"VAR":        VAR,
+		"KVAR":       KVAR,
+		"VARH":       VARH,
+		"KWHK":       KWHK,
+		"W_M2":       W_M2,
+		"M_S":        M_S,
 	}
 
 	_MengeneinheitValueToName = map[Mengeneinheit]string{
@@ -46,6 +52,12 @@ var (
 		JAHR:       "JAHR",
 		PROZENT:    "PROZENT",
 		ZERO:       "ZERO",
+		VAR:        "VAR",
+		KVAR:       "KVAR",
+		VARH:       "VARH",
+		KWHK:       "KWHK",
+		W_M2:       "W_M2",
+		M_S:        "M_S",
 	}
 )
 
@@ -70,6 +82,12 @@ func init() {
 			interface{}(JAHR).(fmt.Stringer).String():       JAHR,
 			interface{}(PROZENT).(fmt.Stringer).String():    PROZENT,
 			interface{}(ZERO).(fmt.Stringer).String():       ZERO,
+			interface{}(VAR).(fmt.Stringer).String():        VAR,
+			interface{}(KVAR).(fmt.Stringer).String():       KVAR,
+			interface{}(VARH).(fmt.Stringer).String():       VARH,
+			interface{}(KWHK).(fmt.Stringer).String():       KWHK,
+			interface{}(W_M2).(fmt.Stringer).String():       W_M2,
+			interface{}(M_S).(fmt.Stringer).String():        M_S,
 		}
 	}
 }

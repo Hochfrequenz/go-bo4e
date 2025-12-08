@@ -19,6 +19,7 @@ var (
 		"ZUSAETZLICHE_13TE_RECHNUNG": ZUSAETZLICHE_13TE_RECHNUNG,
 		"MEHRMINDERMENGENRECHNUNG":   MEHRMINDERMENGENRECHNUNG,
 		"MSBRECHNUNG":                MSBRECHNUNG,
+		"_13TE_RECHNUNG":             _13TE_RECHNUNG,
 	}
 
 	_NNRechnungstypValueToName = map[NNRechnungstyp]string{
@@ -32,6 +33,7 @@ var (
 		ZUSAETZLICHE_13TE_RECHNUNG: "ZUSAETZLICHE_13TE_RECHNUNG",
 		MEHRMINDERMENGENRECHNUNG:   "MEHRMINDERMENGENRECHNUNG",
 		MSBRECHNUNG:                "MSBRECHNUNG",
+		_13TE_RECHNUNG:             "_13TE_RECHNUNG",
 	}
 )
 
@@ -49,6 +51,7 @@ func init() {
 			interface{}(ZUSAETZLICHE_13TE_RECHNUNG).(fmt.Stringer).String(): ZUSAETZLICHE_13TE_RECHNUNG,
 			interface{}(MEHRMINDERMENGENRECHNUNG).(fmt.Stringer).String():   MEHRMINDERMENGENRECHNUNG,
 			interface{}(MSBRECHNUNG).(fmt.Stringer).String():                MSBRECHNUNG,
+			interface{}(_13TE_RECHNUNG).(fmt.Stringer).String():             _13TE_RECHNUNG,
 		}
 	}
 }
