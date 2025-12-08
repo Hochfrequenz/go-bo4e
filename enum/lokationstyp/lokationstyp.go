@@ -10,4 +10,7 @@ const (
 	// MALO is short for Marktlokation / market location
 	MALO Lokationstyp = iota + 1
 	MELO              // MELO is short for Messlokation / metering location
+	NELO              // NELO is short for Netzlokation / grid location
+	SR                // SR is short for Steuerbare Ressource / controllable resource
+	TR                // TR is short for Technische Ressource / technical resource
 )
