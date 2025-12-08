@@ -45,5 +45,8 @@ const (
 	SUMMENZEITREIHE
 	EINSPEISUNG
 	ANFRAGE
+	GESCHAEFTSOBJEKT      // GESCHAEFTSOBJEKT is a base/generic business object
+	PREISBLATTNETZNUTZUNG // PREISBLATTNETZNUTZUNG is a pricing sheet for network usage
+	TARIF                 // TARIF represents tariff information
 	// der letzte enum muss in bo_test.TestNewBusinessObject eingetragen werden!
 )
