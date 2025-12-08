@@ -9,15 +9,17 @@ import (
 
 var (
 	_TitelNameToValue = map[string]Titel{
-		"DR":      DR,
-		"PROF":    PROF,
-		"PROF_DR": PROF_DR,
+		"DR":         DR,
+		"PROF":       PROF,
+		"PROF_DR":    PROF_DR,
+		"DIPLOM_INF": DIPLOM_INF,
 	}
 
 	_TitelValueToName = map[Titel]string{
-		DR:      "DR",
-		PROF:    "PROF",
-		PROF_DR: "PROF_DR",
+		DR:         "DR",
+		PROF:       "PROF",
+		PROF_DR:    "PROF_DR",
+		DIPLOM_INF: "DIPLOM_INF",
 	}
 )
 
@@ -25,9 +27,10 @@ func init() {
 	var v Titel
 	if _, ok := interface{}(v).(fmt.Stringer); ok {
 		_TitelNameToValue = map[string]Titel{
-			interface{}(DR).(fmt.Stringer).String():      DR,
-			interface{}(PROF).(fmt.Stringer).String():    PROF,
-			interface{}(PROF_DR).(fmt.Stringer).String(): PROF_DR,
+			interface{}(DR).(fmt.Stringer).String():         DR,
+			interface{}(PROF).(fmt.Stringer).String():       PROF,
+			interface{}(PROF_DR).(fmt.Stringer).String():    PROF_DR,
+			interface{}(DIPLOM_INF).(fmt.Stringer).String(): DIPLOM_INF,
 		}
 	}
 }
