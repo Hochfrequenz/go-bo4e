@@ -11,7 +11,7 @@ const (
 	EINTARIF          Tarifart = iota + 1
 	ZWEITARIF                  // ZWEITARIF = two tariffs
 	MEHRTARIF                  // MEHRTARIF = multiple (>2) tariffs
-	SMARTMETER                 // SMARTMETER means Smart Meter Tariff
+	SMARTMETER                 // Deprecated: SMARTMETER means Smart Meter Tariff (use SMART_METER instead)
 	LEISTUNGSGEMESSEN          // LEISTUNGSGEMESSEN means Leistungsgemessener Tarif
-	SMART_METER
+	SMART_METER                // SMART_METER means Smart Meter Tariff
 )
