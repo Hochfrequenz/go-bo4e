@@ -63,4 +63,10 @@ const (
 	WASSER_VWZ06                                   //  Wasserzähler Größe VWZ06 Verbundwasserzähler 120m³/h
 	WASSER_VWZ07                                   //  Wasserzähler Größe VWZ07 Verbundwasserzähler 300m³/h
 	WASSER_VWZ10                                   //  Wasserzähler Größe VWZ10 Verbundwasserzähler 600m³/h
+	GAS_G350                                       //  Gaszähler Größe G350
+	GAS_G4000                                      //  Gaszähler Größe G4000
+	GAS_G6500                                      //  Gaszähler Größe G6500
+	GAS_G10000                                     //  Gaszähler Größe G10000
+	GAS_G12500                                     //  Gaszähler Größe G12500
+	GAS_G16000                                     //  Gaszähler Größe G16000
 )

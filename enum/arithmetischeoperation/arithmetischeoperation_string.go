@@ -12,11 +12,13 @@ func _() {
 	_ = x[SUBTRAKTION-2]
 	_ = x[MULTIPLIKATION-3]
 	_ = x[DIVISION-4]
+	_ = x[DIVIDEND-5]
+	_ = x[POSITIVWERT-6]
 }
 
-const _ArithmetischeOperation_name = "ADDITIONSUBTRAKTIONMULTIPLIKATIONDIVISION"
+const _ArithmetischeOperation_name = "ADDITIONSUBTRAKTIONMULTIPLIKATIONDIVISIONDIVIDENDPOSITIVWERT"
 
-var _ArithmetischeOperation_index = [...]uint8{0, 8, 19, 33, 41}
+var _ArithmetischeOperation_index = [...]uint8{0, 8, 19, 33, 41, 49, 60}
 
 func (i ArithmetischeOperation) String() string {
 	i -= 1
