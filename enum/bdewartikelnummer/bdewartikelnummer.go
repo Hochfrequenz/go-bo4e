@@ -68,4 +68,5 @@ const (
 	ÄNDERUNG_MESSEBENE                                           // ÄNDERUNG_MESSEBENE has the BDEW article number 9991000002355
 	EINBAU_STEUERBOX                                             // EINBAU_STEUERBOX has the BDEW article number 9991000002363
 	ANSCHLUSS_TR_STEUERBOX_SR                                    // ANSCHLUSS_TR_STEUERBOX_SR has the BDEW article number 9991000002371
+	KONZESSIONSABGABE_SCHWACHLAST                                // KONZESSIONSABGABE_SCHWACHLAST has the BDEW article number 9990001000730
 )

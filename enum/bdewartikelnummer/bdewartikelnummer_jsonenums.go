@@ -69,6 +69,7 @@ var (
 		"ÄNDERUNG_MESSEBENE":                         ÄNDERUNG_MESSEBENE,
 		"EINBAU_STEUERBOX":                           EINBAU_STEUERBOX,
 		"ANSCHLUSS_TR_STEUERBOX_SR":                  ANSCHLUSS_TR_STEUERBOX_SR,
+		"KONZESSIONSABGABE_SCHWACHLAST":              KONZESSIONSABGABE_SCHWACHLAST,
 	}
 
 	_BDEWArtikelnummerValueToName = map[BDEWArtikelnummer]string{
@@ -132,6 +133,7 @@ var (
 		ÄNDERUNG_MESSEBENE:                         "ÄNDERUNG_MESSEBENE",
 		EINBAU_STEUERBOX:                           "EINBAU_STEUERBOX",
 		ANSCHLUSS_TR_STEUERBOX_SR:                  "ANSCHLUSS_TR_STEUERBOX_SR",
+		KONZESSIONSABGABE_SCHWACHLAST:              "KONZESSIONSABGABE_SCHWACHLAST",
 	}
 )
 
@@ -199,6 +201,7 @@ func init() {
 			interface{}(ÄNDERUNG_MESSEBENE).(fmt.Stringer).String():                         ÄNDERUNG_MESSEBENE,
 			interface{}(EINBAU_STEUERBOX).(fmt.Stringer).String():                           EINBAU_STEUERBOX,
 			interface{}(ANSCHLUSS_TR_STEUERBOX_SR).(fmt.Stringer).String():                  ANSCHLUSS_TR_STEUERBOX_SR,
+			interface{}(KONZESSIONSABGABE_SCHWACHLAST).(fmt.Stringer).String():              KONZESSIONSABGABE_SCHWACHLAST,
 		}
 	}
 }
