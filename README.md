@@ -12,25 +12,6 @@
 - comes with builtin [validator](https://github.com/go-playground/validator) logic
 - is linted and has decent test coverage
 
-**This package (as of November 2021) implements**
-
-- BO Ansprechpartner
-- BO Bilanzierung (not official BO4E Standard yet)
-- BO Energiemenge
-- BO Geschaeftspartner
-- BO Handelsunstimmigkeit (not official BO4E Standard yet)
-- BO Lastgang
-- BO Marktlokation
-- BO Marktteilnehmer
-- BO Messlokation
-- BO Preisblatt
-- BO Rechnung
-- BO Reklamation (not official BO4E Standard yet)
-- BO Vertrag
-- BO Zaehler
-
-so far.
-
 ## Installation
 
 ```
