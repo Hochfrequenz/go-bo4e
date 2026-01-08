@@ -2,6 +2,8 @@ package com
 
 import (
 	"encoding/json"
+
+	"github.com/hochfrequenz/go-bo4e/enum/emobilitaetsart"
 	"github.com/hochfrequenz/go-bo4e/enum/energierichtung"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/schwachlastfaehigkeit"
@@ -35,8 +37,23 @@ type Zaehlwerk struct {
 
 	AnzahlAblesungen  *int               `json:"anzahlAblesungen,omitempty"`
 	Zaehlzeiten       *Zaehlzeitregister `json:"zaehlzeiten,omitempty"`
-	Konfiguration     *string            `json:"konfiguration,omitempty"`
+	Konfiguration     *string            `json:"konfiguration,omitempty"` // Konfiguration (iMSys) des Zählwerks
 	Konzessionsabgabe *Konzessionsabgabe `json:"konzessionsabgabe,omitempty"`
+
+	// Kennzahl is a deprecated OBIS code reference. Use ObisKennzahl instead.
+	Kennzahl *string `json:"kennzahl,omitempty"`
+
+	// Steuerbefreit indicates tax exemption for the meter.
+	Steuerbefreit *bool `json:"steuerbefreit,omitempty"`
+
+	// Abrechnungsrelevant indicates relevance for billing purposes.
+	Abrechnungsrelevant *bool `json:"abrechnungsrelevant,omitempty"`
+
+	// EMobilitaetsart specifies the e-mobility/charging infrastructure type (e.g. private wallbox, public charging station, charging park).
+	EMobilitaetsart *emobilitaetsart.EMobilitaetsart `json:"emobilitaetsart,omitempty"`
+
+	// Verbrauchsarten lists consumption types at the market location. Allows specification of multiple consumption classifications.
+	Verbrauchsarten []verbrauchsart.Verbrauchsart `json:"Verbrauchsarten,omitempty"`
 }
 
 func (zw *Zaehlwerk) UnmarshalJSON(bytes []byte) (err error) {
