@@ -8,6 +8,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/messwertstatus"
 	"github.com/hochfrequenz/go-bo4e/enum/tarifstufe"
+	"github.com/hochfrequenz/go-bo4e/enum/verbrauchsmengetyp"
 	"github.com/hochfrequenz/go-bo4e/enum/wertermittlungsverfahren"
 )
 
@@ -44,4 +45,13 @@ type Verbrauch struct {
 	Ausfuehrungszeitpunkt *time.Time `json:"ausfuehrungszeitpunkt,omitempty" validate:"omitempty"` // Der Ausfuehrungszeitpunkt wird verwendet, um einen Zählerstand eindeutig einer tatsächlichen Änderung zuzuordnen, z.B.bei einem Gerätewechsel oder Geräteparameteränderung der tatsächliche Zeitpunkt an dem die Änderung an der Messlokation durchgeführt wurde. Der Nutzungszeitpunkt ist für den Zählerstand der Zeitpunkt der für die weitere Verarbeitung relevant ist(z.B. Zuordnung bei Empfänger anhand der Zuordnungstupel).
 
 	Tarifstufe tarifstufe.Tarifstufe `json:"tarifstufe,omitempty" validate:"omitempty" example:"TARIFSTUFE_0"`
+
+	// Type ist der Verbrauchsmengentyp (z.B. arbeitleistungtagesparameterabhmalo, veranschlagtejahresmenge, TUMKundenwert)
+	Type *verbrauchsmengetyp.Verbrauchsmengetyp `json:"type,omitempty"`
+
+	// Temperaturmasszahl gibt die Temperaturmaßzahl (TMZ) für Profilscharen an.
+	Temperaturmasszahl *string `json:"temperaturmasszahl,omitempty"`
+
+	// Zeitfenster gibt Zeitfenster für Profilscharen an.
+	Zeitfenster *Zeitfenster `json:"zeitfenster,omitempty"`
 }
