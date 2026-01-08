@@ -8,7 +8,7 @@ import (
 
 // Zeitraum ist eine Komponente zur Abbildung von Zeiträumen in Form von Dauern oder der Angabe von Start und Ende verwendet.
 type Zeitraum struct {
-	Einheit        zeiteinheit.Zeiteinheit `json:"zeiteinheit,omitempty" validate:"omitempty,required_with=Dauer"`                                                                   // Einheit is the unit of measurement
+	Einheit        zeiteinheit.Zeiteinheit `json:"einheit,omitempty" validate:"omitempty,required_with=Dauer"`                                                                       // Einheit is the unit of measurement
 	Dauer          decimal.NullDecimal     `json:"dauer,omitempty" validate:"omitempty,required_with=Einheit"`                                                                       // Dauer ist eh duration
 	Startdatum     *time.Time              `json:"startdatum,omitempty" validate:"required_without_all=Einheit Dauer" example:"2018-01-28T10:15:00+01"`                              // Startdatum is the day and time of begin
 	Enddatum       *time.Time              `json:"enddatum,omitempty" validate:"required_without_all=Einheit Dauer" example:"2018-01-28T10:15:00+01"`                                // Enddatum is the day and time of end
