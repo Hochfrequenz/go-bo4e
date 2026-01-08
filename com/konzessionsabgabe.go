@@ -6,7 +6,7 @@ import (
 )
 
 type Konzessionsabgabe struct {
-	Satz      abgabeart.AbgabeArt
-	Kosten    *decimal.Decimal
-	Kategorie *string
+	Satz      abgabeart.AbgabeArt `json:"satz,omitempty"`
+	Kosten    *decimal.Decimal    `json:"kosten,omitempty"`
+	Kategorie *string             `json:"kategorie,omitempty"`
 }
