@@ -33,18 +33,18 @@ type Marktlokation struct {
 	Verbrauchsart        verbrauchsart.Verbrauchsart                `json:"verbrauchsart,omitempty"`                                                                    // Verbrauchsart is the consumption type
 	Unterbrechbar        *bool                                      `json:"unterbrechbar,omitempty"`                                                                    // Unterbrechbar describes whether the supply is interruptible
 	Netzebene            netzebene.Netzebene                        `json:"netzebene,omitempty" validate:"required"`                                                    // Netzebene, in der der Bezug der Energie erfolgt. Bei Strom Spannungsebene der Lieferung, bei Gas Druckstufe.
-	Netzbetreibercodenr  *string                                    `json:"netzbetreibercodenr,omitempty" validate:"omitnil,numeric,len=13"`                            // Netzbetreibercodenr is the code number of the "Netzbetreiber"
-	Gebiettyp            gebiettyp.Gebiettyp                        `json:"gebiettyp,omitempty"`                                                                        // Gebiettyp is the type of the "Netzgebiet"
-	Netzgebietnr         *string                                    `json:"netzgebietnr,omitempty"`                                                                     // Netzgebietnr is the number of the "Netzgebiet" in the enet database
+	Netzbetreibercodenr  *string                                    `json:"netzbetreiberCodeNr,omitempty" validate:"omitnil,numeric,len=13"`                            // Netzbetreibercodenr is the code number of the "Netzbetreiber"
+	Gebiettyp            gebiettyp.Gebiettyp                        `json:"gebietTyp,omitempty"`                                                                        // Gebiettyp is the type of the "Netzgebiet"
+	Netzgebietnr         *string                                    `json:"netzgebietNr,omitempty"`                                                                     // Netzgebietnr is the number of the "Netzgebiet" in the enet database
 	Bilanzierungsgebiet  *string                                    `json:"bilanzierungsgebiet,omitempty"`                                                              // Bilanzierungsgebiet, dem das Netzgebiet zugeordnet ist - im Falle eines Strom Netzes.
-	Grundversorgercodenr *string                                    `json:"grundversorgercodenr,omitempty" validate:"omitnil,numeric,len=13"`                           // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
+	Grundversorgercodenr *string                                    `json:"grundversorgerCodeNr,omitempty" validate:"omitnil,numeric,len=13"`                           // Grundversorgercodenr is the code number of the "Grundversorger" responsible for this market location
 	Gasqualitaet         gasqualitaet.Gasqualitaet                  `json:"gasqualitaet,omitempty"`                                                                     // Gasqualitaet is the gas quality
 	Endkunde             *Geschaeftspartner                         `json:"endkunde,omitempty" validate:"-"`                                                            // Endkunde is the Geschaeftspartner who owns this market location
 	// only one of the following three optional address attributes can be set
 	Lokationsadresse          *com.Adresse                 `json:"lokationsadresse,omitempty" validate:"required_without_all=Geoadresse Katasterinformation"` // Lokationsadresse is the address at which the energy supply or feed-in takes place
 	Geoadresse                *com.Geokoordinaten          `json:"geoadresse,omitempty" validate:"required_without_all=Lokationsadresse Katasterinformation"` // Geoadresse are the gps coordinates
 	Katasterinformation       []com.Katasteradresse        `json:"katasterinformation,omitempty" validate:"required_without_all=Lokationsadresse Geoadresse"` // Katasterinformation is the Cadastre address; It's a list since v0.34.0 because the MaLo Ident model classes are also list like
-	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigemesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
+	ZugehoerigeMesslokationen []com.Messlokationszuordnung `json:"zugehoerigeMesslokationen,omitempty"`                                                       // ZugehoerigeMesslokationen is a list of MeLos belonging to this market location
 
 	Regelzone   *string `json:"regelzone,omitempty"`
 	Marktgebiet *string `json:"marktgebiet,omitempty"`
