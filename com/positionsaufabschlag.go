@@ -12,7 +12,7 @@ import (
 type PositionsAufAbschlag struct {
 	Bezeichnung          string                            `json:"bezeichnung" validate:"required"`          // Bezeichnung des Auf-/Abschlags
 	Beschreibung         string                            `json:"beschreibung" validate:"required"`         // Beschreibung zum Auf-/Abschlags
-	AufAbschlagstyp      aufabschlagstyp.AufAbschlagstyp   `json:"aufabschlagstyp" validate:"required"`      // Typ des AufAbschlages
-	AufAbschlagswert     decimal.NullDecimal               `json:"aufabschlagswert" validate:"required"`     // Höhe des AufAbschlages
-	AufAbschlagswaehrung waehrungseinheit.Waehrungseinheit `json:"aufabschlagswaehrung" validate:"required"` //  Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh)
+	AufAbschlagstyp      aufabschlagstyp.AufAbschlagstyp   `json:"aufAbschlagstyp" validate:"required"`      // Typ des AufAbschlages
+	AufAbschlagswert     decimal.NullDecimal               `json:"aufAbschlagswert" validate:"required"`     // Höhe des AufAbschlages
+	AufAbschlagswaehrung waehrungseinheit.Waehrungseinheit `json:"aufAbschlagswaehrung" validate:"required"` //  Einheit, in der der Auf-/Abschlag angegeben ist (z.B. ct/kWh)
 }
