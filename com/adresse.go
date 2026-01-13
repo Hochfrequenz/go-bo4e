@@ -14,7 +14,7 @@ type Adresse struct {
 	Hausnummer   string                 `json:"hausnummer,omitempty" example:"27A"`                                 // Hausnummer is the house number including suffixes like "a" or "-1"
 	Postfach     string                 `json:"postfach,omitempty"`                                                 // Postfach is a post box
 	Adresszusatz string                 `json:"adresszusatz,omitempty" example:"3. Stock linke Wohnung"`            // Adresszusatz are additional data, like f.e. floor or "Hinterhaus"
-	CoErgaenzung string                 `json:"co_ergaenzung,omitempty" example:"c/o Veronica Hauptmieterin"`       //
+	CoErgaenzung string                 `json:"coErgaenzung,omitempty" example:"c/o Veronica Hauptmieterin"`        //
 	Landescode   *landescode.Landescode `json:"landescode,omitempty"`                                               // Landescode is a ISO 3166 country code
 }
 
