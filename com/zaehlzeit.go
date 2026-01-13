@@ -11,8 +11,8 @@ type Zaehlzeit struct {
 	Code                       *string                                                  `json:"code,omitempty"`
 	Haeufigkeit                *haeufigkeitzaehlzeit.HaeufigkeitZaehlzeit               `json:"haeufigkeit,omitempty"`
 	Uebermittelbarkeit         *uebermittelbarkeitzaehlzeit.UebermittelbarkeitZaehlzeit `json:"uebermittelbarkeit,omitempty"`
-	ErmittlungLeistungsmaximum *ermittlungleistungsmaximum.ErmittlungLeistungsmaximum   `json:"ermittlungleistungsmaximum,omitempty"`
-	IstBestellbar              *bool                                                    `json:"istbestellbar,omitempty"`
+	ErmittlungLeistungsmaximum *ermittlungleistungsmaximum.ErmittlungLeistungsmaximum   `json:"ermittlungLeistungsmaximum,omitempty"`
+	IstBestellbar              *bool                                                    `json:"istBestellbar,omitempty"`
 	Typ                        *zaehlzeitdefinitiontyp.ZaehlzeitdefinitionTyp           `json:"typ,omitempty"`
-	BeschreibungTyp            *string                                                  `json:"beschreibungtyp,omitempty"`
+	BeschreibungTyp            *string                                                  `json:"beschreibungTyp,omitempty"`
 }
