@@ -29,4 +29,10 @@ type Vertragskonditionen struct {
 	Netznutzungszahler               *netznutzungszahler.Netznutzungszahler                             `json:"netznutzungszahler,omitempty"`
 	Netznutzungsabrechnungsvariante  *netznutzungsabrechnungsvariante.Netznutzungsabrechnungsvariante   `json:"netznutzungsabrechnungsvariante,omitempty"`
 	Netznutzungsabrechnungsgrundlage *netznutzungsabrechnungsgrundlage.Netznutzungsabrechnungsgrundlage `json:"netznutzungsabrechnungsgrundlage,omitempty"`
+
+	// NetznutzungsabrechnungIntervall beschreibt das Intervall der Netznutzungsabrechnung in Monaten.
+	NetznutzungsabrechnungIntervall *int `json:"netznutzungsabrechnungIntervall,omitempty"`
+
+	// BeinhaltetSingulaerGenutzteBetriebsmittel gibt an, ob singulär genutzte Betriebsmittel in der Netznutzungsabrechnung enthalten sind.
+	BeinhaltetSingulaerGenutzteBetriebsmittel *bool `json:"beinhaltetSingulaerGenutzteBetriebsmittel,omitempty"`
 }
