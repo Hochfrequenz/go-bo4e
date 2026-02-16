@@ -9,7 +9,7 @@ jobs:
         if: success()
         uses: actions/setup-go@v6
         with:
-          go-version: "1.25"
+          go-version: "1.26"
       - name: Checkout Code
         uses: actions/checkout@v6
       - name: Calc coverage
