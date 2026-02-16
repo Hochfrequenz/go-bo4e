@@ -2,7 +2,7 @@ module github.com/hochfrequenz/go-bo4e
 
 go 1.24.0
 
-toolchain go1.24.1
+toolchain go1.26.0
 
 require (
 	github.com/corbym/gocrest v1.1.2
