@@ -35,7 +35,7 @@ var validAnfrage = bo.Anfrage{
 	},
 	Anfragekategorie: anfragekategorie.ENTSPERRUNG,
 	Anfragetyp:       internal.Ptr(anfragetyp.ZAEHLERSTAENDE),
-	Positionsnummer:  "13",
+	Positionsnummer:  13,
 }
 
 // Test_Anfrage_Deserialization deserializes an Anfrage json

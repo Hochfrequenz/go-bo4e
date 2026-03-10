@@ -3,7 +3,6 @@ package bo
 import (
 	"encoding/json"
 
-	"github.com/hochfrequenz/go-bo4e/enum/marktteilnehmerrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
@@ -17,10 +16,6 @@ type Marktteilnehmer struct {
 	Rollencodetyp    *rollencodetyp.Rollencodetyp `json:"rollencodetyp,omitempty" validate:"required"`                          // Rollencodetyp gibt den Typ des Codes an/Vergabestelle. Details siehe ENUM Rollencodetyp
 	Makoadresse      string                       `json:"makoadresse,omitempty" validate:"omitempty"`                           // Makoadresse ist die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der Marktkommunikation verwendet.
 	Ansprechpartner  *Ansprechpartner             `json:"ansprechpartner,omitempty" validate:"omitempty"`                       // Ansprechpartner ist ein Kontakt zur bilateralen Klärung
-
-	// Rolle describes the role of the Marktteilnehmer in the message context (e.g. "anderepartei" for involved market partners)
-	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Marktteilnehmer.cs#L73
-	Rolle *marktteilnehmerrolle.Marktteilnehmerrolle `json:"rolle,omitempty"`
 }
 
 func (marktteilnehmer *Marktteilnehmer) UnmarshalJSON(bytes []byte) (err error) {
