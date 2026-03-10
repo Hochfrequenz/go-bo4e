@@ -35,12 +35,10 @@ type Lokationszuordnung struct {
 	// LokationsbuendelCode ist der Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
 	LokationsbuendelCode string `json:"lokationsbuendelcode,omitempty"`
 
-	// LokationsbuendelstrukturVorhanden gibt an, ob eine Lokationsbündelstruktur vorhanden ist (Z31) oder nicht (Z39)
-	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Lokationszuordnung.cs#L97
+	// LokationsbuendelstrukturVorhanden: Gibt an, ob eine Lokationsbündelstruktur vorhanden ist (Z31) oder nicht (Z39).
 	LokationsbuendelstrukturVorhanden *lokationsbuendelstrukturvorhanden.LokationsbuendelstrukturVorhanden `json:"lokationsbuendelstrukturVorhanden,omitempty"`
 
-	// Zeilennummer is a line number for referencing within the Lokationsbündelstruktur
-	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Lokationszuordnung.cs#L107
+	// Zeilennummer zur Referenzierung innerhalb der Lokationsbündelstruktur.
 	Zeilennummer string `json:"zeilennummer,omitempty"`
 }
 

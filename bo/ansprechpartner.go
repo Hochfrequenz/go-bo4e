@@ -25,11 +25,9 @@ type Ansprechpartner struct {
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
 
-	// Gewerbekennzeichnung is true if and only if the Ansprechpartner represents a company
-	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Ansprechpartner.cs#L118
+	// Gewerbekennzeichnung: true dann und nur dann, wenn es sich um eine Firma handelt
 	Gewerbekennzeichnung *bool `json:"gewerbekennzeichnung,omitempty"`
 
-	// Unternehmensart describes the type of company the Ansprechpartner works for (mapped from PARTIN)
-	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Ansprechpartner.cs#L127
+	// Unternehmensart: aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist
 	Unternehmensart *unternehmensart.Unternehmensart `json:"unternehmensart,omitempty"`
 }
