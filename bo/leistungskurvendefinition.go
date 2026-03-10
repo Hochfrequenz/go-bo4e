@@ -27,4 +27,8 @@ type Leistungskurvendefinition struct {
 
 	// ObererSchwellwert ist der obere Schwellwert.
 	ObererSchwellwert *string `json:"obererSchwellwert,omitempty"`
+
+	// AenderungszeitpunktDateFormat is the EDIFACT date format of the Aenderungszeitpunkt (e.g. "401")
+	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Leistungskurvendefinition.cs#L95
+	AenderungszeitpunktDateFormat *string `json:"aenderungszeitpunktDateFormat,omitempty"`
 }

@@ -16,5 +16,7 @@ type Anfrage struct {
 	ZeitraumMesswertanfrage *com.Zeitraum                     `json:"ZeitraumMesswertanfrage,omitempty"`
 	Anfragekategorie        anfragekategorie.Anfragekategorie `json:"anfragekategorie,omitempty" validate:"required"`
 	Anfragetyp              *anfragetyp.Anfragetyp            `json:"anfragetyp,omitempty"`
-	Positionsnummer         int                               `json:"positionsnummer,omitempty" validate:"omitempty"`
+	// Positionsnummer is the position number from the ORDERS message
+	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/BO/Anfrage.cs#L85
+	Positionsnummer string `json:"positionsnummer,omitempty" validate:"omitempty"`
 }

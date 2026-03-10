@@ -12,4 +12,8 @@ type Geraet struct {
 
 	// Geraeteart gibt die Art des Gerätes an, z.B. ZAEHLEINRICHTUNG.
 	Geraeteart *geraeteart.Geraeteart `json:"geraeteart,omitempty"`
+
+	// Positionsnummer is a predefined position number within a request
+	// https://github.com/Hochfrequenz/BO4E-dotnet/blob/0.54.0/BO4E/COM/Geraet.cs#L42
+	Positionsnummer string `json:"positionsnummer,omitempty"`
 }
