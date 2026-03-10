@@ -11,8 +11,6 @@ var (
 	_LokationsbuendelstrukturVorhandenNameToValue = map[string]LokationsbuendelstrukturVorhanden{
 		"VORHANDEN":       VORHANDEN,
 		"NICHT_VORHANDEN": NICHT_VORHANDEN,
-		"Z31":             VORHANDEN,
-		"Z39":             NICHT_VORHANDEN,
 	}
 
 	_LokationsbuendelstrukturVorhandenValueToName = map[LokationsbuendelstrukturVorhanden]string{
@@ -27,8 +25,6 @@ func init() {
 		_LokationsbuendelstrukturVorhandenNameToValue = map[string]LokationsbuendelstrukturVorhanden{
 			interface{}(VORHANDEN).(fmt.Stringer).String():       VORHANDEN,
 			interface{}(NICHT_VORHANDEN).(fmt.Stringer).String(): NICHT_VORHANDEN,
-			"Z31": VORHANDEN,
-			"Z39": NICHT_VORHANDEN,
 		}
 	}
 }

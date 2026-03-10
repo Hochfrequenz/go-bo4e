@@ -11,8 +11,6 @@ var (
 	_MarktteilnehmerrolleNameToValue = map[string]Marktteilnehmerrolle{
 		"ANDERE_PARTEI": ANDERE_PARTEI,
 		"EMPFAENGER":    EMPFAENGER,
-		"anderepartei":  ANDERE_PARTEI,
-		"empfaenger":    EMPFAENGER,
 	}
 
 	_MarktteilnehmerrolleValueToName = map[Marktteilnehmerrolle]string{
@@ -27,8 +25,6 @@ func init() {
 		_MarktteilnehmerrolleNameToValue = map[string]Marktteilnehmerrolle{
 			interface{}(ANDERE_PARTEI).(fmt.Stringer).String(): ANDERE_PARTEI,
 			interface{}(EMPFAENGER).(fmt.Stringer).String():    EMPFAENGER,
-			"anderepartei": ANDERE_PARTEI,
-			"empfaenger":   EMPFAENGER,
 		}
 	}
 }
