@@ -18,7 +18,7 @@ type Marktteilnehmer struct {
 	Makoadresse      string                       `json:"makoadresse,omitempty" validate:"omitempty"`                           // Makoadresse ist die 1:1-Kommunikationsadresse des Marktteilnehmers. Diese wird in der Marktkommunikation verwendet.
 	Ansprechpartner  *Ansprechpartner             `json:"ansprechpartner,omitempty" validate:"omitempty"`                       // Ansprechpartner ist ein Kontakt zur bilateralen Klärung
 
-	// Rolle des Marktteilnehmers im Nachrichtenkontext (z.B. "anderepartei" für beteiligte Marktpartner).
+	// Rolle des Marktteilnehmers im Nachrichtenkontext (z.B. "ANDERE_PARTEI" für beteiligte Marktpartner).
 	Rolle *marktteilnehmerrolle.Marktteilnehmerrolle `json:"rolle,omitempty"`
 }
 
