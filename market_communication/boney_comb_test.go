@@ -242,17 +242,7 @@ func getJsonFilePathsFromSubmodule(dir string) ([]string, error) {
 var formatAllowList = []string{"COMDIS", "INVOIC", "MSCONS", "PRICAT", "QUOTES", "REMADV", "UTILMD"}
 var formatVersionAllowList = []string{"FV2210", "FV2310", "FV2404", "FV2504"}
 
-// skipList contains file name substrings to skip in the submodule test.
-// These files use enum values (e.g. "Z39" for LokationsbuendelstrukturVorhanden)
-// that are not yet supported.
-var skipList = []string{"55175_UTILMD_S2.1_EJEOGPZT7V3059_eog"}
-
 func matchesAllowLists(fileName string) bool {
-	for _, skip := range skipList {
-		if strings.Contains(fileName, skip) {
-			return false
-		}
-	}
 	for _, format := range formatAllowList {
 		if !strings.Contains(fileName, format) {
 			continue
