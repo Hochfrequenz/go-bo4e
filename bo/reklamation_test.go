@@ -106,3 +106,12 @@ func Test_Empty_Reklamation_Is_Creatable_Using_BoTyp(t *testing.T) {
 func Test_Serialized_Empty_Reklamation_Contains_No_Enum_Defaults(t *testing.T) {
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.REKLAMATION))
 }
+
+// Test_Reklamation_IntegerPositionsnummer_BackwardsCompat ensures integer positionsnummer values deserialize correctly
+func Test_Reklamation_IntegerPositionsnummer_BackwardsCompat(t *testing.T) {
+	jsonWithIntPositionsnummer := `{"boTyp":"REKLAMATION","versionStruktur":"1","lokationsId":"12345678910","lokationsTyp":"MALO","reklamationsgrund":"WERTE_FEHLEN","obisKennzahl":"1-0:1.8.0","zeitraumMesswertanfrage":{"startzeitpunkt":"2021-12-31T22:00:00Z"},"positionsnummer":42}`
+	var reklamation bo.Reklamation
+	err := json.Unmarshal([]byte(jsonWithIntPositionsnummer), &reklamation)
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, reklamation.Positionsnummer, is.EqualTo("42"))
+}

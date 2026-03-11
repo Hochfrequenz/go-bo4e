@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/lokationsbuendelstrukturvorhanden"
 	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
@@ -33,6 +34,12 @@ type Lokationszuordnung struct {
 
 	// LokationsbuendelCode ist der Code, der angibt wie die Lokationsbündelstruktur zusammengesetzt ist (zu finden unter "Codeliste der Lokationsbündelstrukturen" auf https://www.edi-energy.de/index.php?id=38)
 	LokationsbuendelCode string `json:"lokationsbuendelcode,omitempty"`
+
+	// LokationsbuendelstrukturVorhanden: Gibt an, ob eine Lokationsbündelstruktur vorhanden ist (Z31) oder nicht (Z39).
+	LokationsbuendelstrukturVorhanden *lokationsbuendelstrukturvorhanden.LokationsbuendelstrukturVorhanden `json:"lokationsbuendelstrukturVorhanden,omitempty"`
+
+	// Zeilennummer zur Referenzierung innerhalb der Lokationsbündelstruktur.
+	Zeilennummer string `json:"zeilennummer,omitempty"`
 }
 
 func (lokZu *Lokationszuordnung) UnmarshalJSON(bytes []byte) (err error) {

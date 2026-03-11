@@ -27,4 +27,7 @@ type Leistungskurvendefinition struct {
 
 	// ObererSchwellwert ist der obere Schwellwert.
 	ObererSchwellwert *string `json:"obererSchwellwert,omitempty"`
+
+	// AenderungszeitpunktDateFormat: EDIFACT-Datumsformat des Änderungszeitpunkts (z.B. "401").
+	AenderungszeitpunktDateFormat *string `json:"aenderungszeitpunktDateFormat,omitempty"`
 }

@@ -12,4 +12,7 @@ type Geraet struct {
 
 	// Geraeteart gibt die Art des Gerätes an, z.B. ZAEHLEINRICHTUNG.
 	Geraeteart *geraeteart.Geraeteart `json:"geraeteart,omitempty"`
+
+	// Positionsnummer: vorgegebene Positionsnummer innerhalb einer Anforderung
+	Positionsnummer string `json:"positionsnummer,omitempty"`
 }

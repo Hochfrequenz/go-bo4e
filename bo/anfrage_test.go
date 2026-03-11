@@ -35,7 +35,7 @@ var validAnfrage = bo.Anfrage{
 	},
 	Anfragekategorie: anfragekategorie.ENTSPERRUNG,
 	Anfragetyp:       internal.Ptr(anfragetyp.ZAEHLERSTAENDE),
-	Positionsnummer:  13,
+	Positionsnummer:  "13",
 }
 
 // Test_Anfrage_Deserialization deserializes an Anfrage json
@@ -50,4 +50,13 @@ func Test_Anfrage_Deserialization(t *testing.T) {
 	then.AssertThat(t, err, is.Nil())
 	then.AssertThat(t, deserializedAnfrage, is.EqualTo(validAnfrage))
 	then.AssertThat(t, deserializedAnfrage.Positionsnummer, is.EqualTo(validAnfrage.Positionsnummer))
+}
+
+// Test_Anfrage_IntegerPositionsnummer_BackwardsCompat ensures integer positionsnummer values deserialize correctly
+func Test_Anfrage_IntegerPositionsnummer_BackwardsCompat(t *testing.T) {
+	jsonWithIntPositionsnummer := `{"boTyp":"ANFRAGE","versionStruktur":"1.1","lokationsId":"0815","lokationsTyp":"MALO","anfragekategorie":"ENTSPERRUNG","positionsnummer":13}`
+	var anfrage bo.Anfrage
+	err := json.Unmarshal([]byte(jsonWithIntPositionsnummer), &anfrage)
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, anfrage.Positionsnummer, is.EqualTo("13"))
 }
