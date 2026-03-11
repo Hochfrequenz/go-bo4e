@@ -1,6 +1,6 @@
 package unternehmensart
 
-// Unternehmensart kategorisiert Unternehmen nach Ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)
+// Unternehmensart kategorisiert Unternehmen nach ihrer Marktrolle (basierend auf dem PARTIN-Datenmodell)
 //
 //go:generate stringer --type Unternehmensart
 //go:generate jsonenums --type Unternehmensart
