@@ -1,5 +1,5 @@
-github.com/corbym/gocrest v1.1.2 h1:HwMyOILE0E/BqC1vs/JjanEj+HXeYPGZzbppIgd1/Os=
-github.com/corbym/gocrest v1.1.2/go.mod h1:vhNebfdBGx5l0Nh0OM/CvIVqGAnR9AAbI5qA9OxRUOU=
+github.com/corbym/gocrest v1.2.0 h1:ShA32JlB/SIHs/KmBwDLK/rt1XWbLhgoqmqbBULw3jc=
+github.com/corbym/gocrest v1.2.0/go.mod h1:ee2ehptr3v4yPmxQzuPB0v5EMF9fUcgWfY4oDsBlAPI=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gabriel-vasile/mimetype v1.4.12 h1:e9hWvmLYvtp846tLHam2o++qitpguFiYCKbn0w9jyqw=

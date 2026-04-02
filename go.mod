@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.26.0
 
 require (
-	github.com/corbym/gocrest v1.1.2
+	github.com/corbym/gocrest v1.2.0
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/shopspring/decimal v1.4.0
 )
