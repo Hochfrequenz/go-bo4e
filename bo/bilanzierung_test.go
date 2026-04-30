@@ -199,6 +199,15 @@ func Test_Serialized_Empty_Bilanzierung_Contains_No_Enum_Defaults(t *testing.T) 
 	assertDoesNotSerializeDefaultEnums(t, bo.NewBusinessObject(botyp.BILANZIERUNG))
 }
 
+// Test_Bilanzierung_IntegerPositionsnummer_BackwardsCompat ensures integer positionsnummer values deserialize correctly
+func Test_Bilanzierung_IntegerPositionsnummer_BackwardsCompat(t *testing.T) {
+	jsonWithIntPositionsnummer := `{"boTyp":"BILANZIERUNG","versionStruktur":"1","positionsnummer":13}`
+	var bilanzierung bo.Bilanzierung
+	err := json.Unmarshal([]byte(jsonWithIntPositionsnummer), &bilanzierung)
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, bilanzierung.Positionsnummer, is.EqualTo("13"))
+}
+
 // bilanzierungWithNilAbwicklungsmodell returns a copy of bilanzierung with Abwicklungsmodell set to nil.
 func bilanzierungWithNilAbwicklungsmodell(bilanzierung bo.Bilanzierung) bo.Bilanzierung {
 	bilanzierung.Abwicklungsmodell = nil
