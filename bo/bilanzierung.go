@@ -46,6 +46,8 @@ type Bilanzierung struct {
 	MarktlokationsId           *string                                                `json:"marktlokationsId,omitempty" validate:"omitempty,maloid"` // MarktlokationsId referenziert eine Marktlokation
 	Abwicklungsmodell          *abwicklungsmodell.Abwicklungsmodell                   `json:"abwicklungsmodell,omitempty"`                            // Abwicklungsmodell beschreibt wo die Bilanzierung statt findet
 
+	// Positionsnummer: Aus der ORDERS gemappte Positionsnummer der Anfrage
+	Positionsnummer string `json:"positionsnummer,omitempty"`
 }
 
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {

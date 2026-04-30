@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/hochfrequenz/go-bo4e/com"
+	"github.com/hochfrequenz/go-bo4e/enum/artvolumenerfassung"
 	"github.com/hochfrequenz/go-bo4e/enum/fernschaltung"
 	"github.com/hochfrequenz/go-bo4e/enum/geraetemerkmal"
 	"github.com/hochfrequenz/go-bo4e/enum/messwerterfassung"
@@ -33,4 +34,7 @@ type Zaehler struct {
 
 	Fernschaltung     *fernschaltung.Fernschaltung         `json:"fernschaltung,omitempty"`     // Fernschaltung is set to VORHANDEN if there is a fernschaltung
 	Messwerterfassung *messwerterfassung.Messwerterfassung `json:"messwerterfassung,omitempty"` // Messwerterfassung describes if meter readings have to happen manually
+
+	// ArtVolumenerfassung: Art der Volumenerfassung bei Mengenumwertern.
+	ArtVolumenerfassung *artvolumenerfassung.ArtVolumenerfassung `json:"artVolumenerfassung,omitempty"`
 }
