@@ -50,7 +50,31 @@ type Bilanzierung struct {
 	Positionsnummer string `json:"positionsnummer,omitempty"`
 }
 
+// UnmarshalJSON supports deserializing both string and integer Positionsnummer for backwards compatibility,
+// while preserving unmapped data handling via unmappeddatamarshaller.
 func (bila *Bilanzierung) UnmarshalJSON(bytes []byte) (err error) {
+	// Pre-process: if positionsnummer is a JSON number, convert it to a string for backwards compatibility
+	var raw map[string]json.RawMessage
+	if err = json.Unmarshal(bytes, &raw); err != nil {
+		return err
+	}
+	if posRaw, ok := raw["positionsnummer"]; ok && len(posRaw) > 0 {
+		var s string
+		if json.Unmarshal(posRaw, &s) != nil {
+			// Not a string, try as number
+			var n json.Number
+			if err2 := json.Unmarshal(posRaw, &n); err2 == nil {
+				quoted, _ := json.Marshal(n.String())
+				raw["positionsnummer"] = quoted
+				bytes, err = json.Marshal(raw)
+				if err != nil {
+					return err
+				}
+			} else {
+				return fmt.Errorf("positionsnummer must be a string or number, got %s", string(posRaw))
+			}
+		}
+	}
 	return unmappeddatamarshaller.UnmarshallWithUnmappedData(bila, &bila.ExtensionData, bytes)
 }
 
