@@ -4,6 +4,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/anrede"
 	"github.com/hochfrequenz/go-bo4e/enum/titel"
+	"github.com/hochfrequenz/go-bo4e/enum/unternehmensart"
 )
 
 // Ansprechpartner sind ansprechbare Geschäftspartner (Personen)
@@ -24,4 +25,9 @@ type Ansprechpartner struct {
 	// the json tags are singular "zustaendigkeit"/"rufnummer" instead of plural "zustaendigkeiten"/"rufnummern" for compatability reasons
 	// https://github.com/Hochfrequenz/bo4e-modification-proposals/blob/master/markdown/ansprechpartner_rufnummern.md
 
+	// Gewerbekennzeichnung: true dann und nur dann, wenn es sich um eine Firma handelt
+	Gewerbekennzeichnung *bool `json:"gewerbekennzeichnung,omitempty"`
+
+	// Unternehmensart: aus PARTIN gemappt: Für welche Art von Marktteilnehmer der Ansprechpartner tätig ist
+	Unternehmensart *unternehmensart.Unternehmensart `json:"unternehmensart,omitempty"`
 }
