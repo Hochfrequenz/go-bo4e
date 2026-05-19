@@ -85,7 +85,7 @@ func Test_Marktteilnehmer_Deserialization(t *testing.T) {
 	var deserializedMarktteilnehmer bo.Marktteilnehmer
 	err = json.Unmarshal(serializedMarktteilnehmer, &deserializedMarktteilnehmer)
 	then.AssertThat(t, err, is.Nil())
-	mt.Geschaeftspartner.ExtensionData = unmappeddatamarshaller.ExtensionData{}
+	mt.ExtensionData = unmappeddatamarshaller.ExtensionData{}
 	then.AssertThat(t, deserializedMarktteilnehmer, is.EqualTo(mt))
 }
 

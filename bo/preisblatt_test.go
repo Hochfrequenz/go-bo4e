@@ -94,7 +94,7 @@ func Test_Preisblatt_Deserialization(t *testing.T) {
 	deserializedPricat.Preispositionen = []com.Preisposition{deserializedPricat.Preispositionen[0]}
 	//deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{deserializedPricat.Preispositionen[0].Preisstaffeln[0]}
 	deserializedPricat.Preispositionen[0].Preisstaffeln = []com.Preisstaffel{pricat.Preispositionen[0].Preisstaffeln[0]}
-	pricat.Herausgeber.Geschaeftspartner.ExtensionData = unmappeddatamarshaller.ExtensionData{}
+	pricat.Herausgeber.ExtensionData = unmappeddatamarshaller.ExtensionData{}
 	then.AssertThat(t, deserializedPricat, is.EqualTo(pricat))
 }
 
