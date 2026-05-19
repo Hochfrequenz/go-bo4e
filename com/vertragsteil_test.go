@@ -12,6 +12,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/com"
 	"github.com/hochfrequenz/go-bo4e/enum/mengeneinheit"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 )
 
@@ -42,6 +43,7 @@ func Test_Vertragsteil_Deserialization(t *testing.T) {
 	var deserializedVertragsteil com.Vertragsteil
 	err = json.Unmarshal(serializedVertragsteil, &deserializedVertragsteil)
 	then.AssertThat(t, err, is.Nil())
+	vertraqsteil.ExtensionData = unmappeddatamarshaller.ExtensionData{}
 	then.AssertThat(t, deserializedVertragsteil, is.EqualTo(vertraqsteil))
 }
 

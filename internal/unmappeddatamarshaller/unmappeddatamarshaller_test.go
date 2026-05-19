@@ -82,3 +82,18 @@ func Test_Marshalling_WitUnmappedData_PreservesUnmappedDataInJson(t *testing.T) 
 		t.Errorf("Marshalling struct with unmapped data failed:\nexpected: %s,\nactual: %s", expectedJson, actualJson)
 	}
 }
+
+func Test_Marshalling_WithNilUnmappedData_OmitsExtensionDataFromJson(t *testing.T) {
+	structWithoutUnmappedData := SomeStruct{A: "nice", B: 911}
+
+	actual, err := json.Marshal(structWithoutUnmappedData)
+	if err != nil {
+		t.Errorf("Error occured while marshalling: %v", err)
+	}
+
+	expectedJson := `{"A":"nice","B":911}`
+	actualJson := string(actual)
+	if expectedJson != actualJson {
+		t.Errorf("Marshalling struct with nil unmapped data failed:\nexpected: %s,\nactual: %s", expectedJson, actualJson)
+	}
+}

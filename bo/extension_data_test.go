@@ -29,6 +29,23 @@ func TestMarshalBusinessObjectTypesExtensionData(t *testing.T) {
 	}
 }
 
+func TestMarshalBusinessObjectTypesNilExtensionData(t *testing.T) {
+	boTypes := []botyp.BOTyp{
+		botyp.BILANZIERUNG,
+		botyp.LOKATIONSZUORDNUNG,
+		botyp.MARKTLOKATION,
+		botyp.MARKTTEILNEHMER,
+		botyp.MESSLOKATION,
+	}
+
+	for _, boType := range boTypes {
+		t.Run(
+			boType.String(),
+			createMarshalBusinessObjectNilExtensionDataTest(boType),
+		)
+	}
+}
+
 func createMarshalBusinessObjectExtensionDataTest(typ botyp.BOTyp) func(t *testing.T) {
 	return func(t *testing.T) {
 		businessObject := reflect.ValueOf(bo.NewBusinessObject(typ))
@@ -79,6 +96,32 @@ func createMarshalBusinessObjectExtensionDataTest(typ botyp.BOTyp) func(t *testi
 		}
 
 		then.AssertThat(t, dest["extensionField"], is.EqualTo(any("value of extension field")))
+	}
+}
+
+func createMarshalBusinessObjectNilExtensionDataTest(typ botyp.BOTyp) func(t *testing.T) {
+	return func(t *testing.T) {
+		businessObject := reflect.ValueOf(bo.NewBusinessObject(typ))
+		if businessObject.Kind() != reflect.Pointer {
+			t.Fatalf("expected bo.NewBusinessObject() to create pointer")
+		}
+		if businessObject.IsNil() {
+			t.Fatalf("could not create business object for type %s", typ)
+		}
+
+		data, err := json.Marshal(businessObject.Interface())
+		if err != nil {
+			t.Fatalf("could not marshal business object: %+v", err)
+		}
+
+		var dest map[string]any
+		if err := json.Unmarshal(data, &dest); err != nil {
+			t.Fatalf("could not unmarshal back: %+v", err)
+		}
+
+		if _, ok := dest["ExtensionData"]; ok {
+			t.Errorf("did not expect nil extension data to be marshalled as ExtensionData")
+		}
 	}
 }
 
