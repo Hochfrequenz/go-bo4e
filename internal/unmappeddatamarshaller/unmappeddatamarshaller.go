@@ -40,8 +40,8 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 					structFields[k] = v
 				}
 			}
-            // this is to avoid `"ExtensionData": null` in the json output
-            // which consumers might interpret as unmapped property
+			// this is to avoid `"ExtensionData": null` in the json output
+			// which consumers might interpret as unmapped property
 			delete(structFields, fieldName)
 		}
 	}
