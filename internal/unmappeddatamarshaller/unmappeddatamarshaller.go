@@ -39,8 +39,10 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 				for k, v := range unmappedDataMap {
 					structFields[k] = v
 				}
-				delete(structFields, fieldName)
 			}
+			// this is to avoid `"ExtensionData": null` in the json output
+			// which consumers might interpret as unmapped property
+			delete(structFields, fieldName)
 		}
 	}
 

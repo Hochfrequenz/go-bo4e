@@ -22,6 +22,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/marktrolle"
 	"github.com/hochfrequenz/go-bo4e/enum/rollencodetyp"
 	"github.com/hochfrequenz/go-bo4e/enum/titel"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 )
 
 // Test_Marktteilnehmer_Deserialization deserializes an Marktteilnehmer json
@@ -84,6 +85,7 @@ func Test_Marktteilnehmer_Deserialization(t *testing.T) {
 	var deserializedMarktteilnehmer bo.Marktteilnehmer
 	err = json.Unmarshal(serializedMarktteilnehmer, &deserializedMarktteilnehmer)
 	then.AssertThat(t, err, is.Nil())
+	mt.ExtensionData = unmappeddatamarshaller.ExtensionData{}
 	then.AssertThat(t, deserializedMarktteilnehmer, is.EqualTo(mt))
 }
 
