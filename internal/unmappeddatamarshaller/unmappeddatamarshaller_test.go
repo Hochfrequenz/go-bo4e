@@ -88,7 +88,7 @@ func Test_Marshalling_WithNilUnmappedData_OmitsExtensionDataFromJson(t *testing.
 
 	actual, err := json.Marshal(structWithoutUnmappedData)
 	if err != nil {
-		t.Errorf("Error occured while marshalling: %v", err)
+		t.Errorf("Error occurred while marshalling: %v", err)
 	}
 
 	expectedJson := `{"A":"nice","B":911}`
