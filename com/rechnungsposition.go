@@ -3,11 +3,11 @@ package com
 import (
 	"time"
 
-	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionsabschlag"
-	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionszuschlag"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/hochfrequenz/go-bo4e/enum/bdewartikelnummer"
+	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionsabschlag"
+	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionsstatus"
+	"github.com/hochfrequenz/go-bo4e/enum/rechnungspositionszuschlag"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungscode"
 	"github.com/hochfrequenz/go-bo4e/enum/waehrungseinheit"
 	"github.com/hochfrequenz/go-bo4e/enum/zeiteinheit"
@@ -35,6 +35,15 @@ type Rechnungsposition struct {
 	Zuschlag                *rechnungspositionszuschlag.RechnungspositionsZuschlag `json:"zuschlag,omitempty"`                                                   // Art des Zuschlag auf die Position
 	Abschlag                *rechnungspositionsabschlag.RechnungspositionsAbschlag `json:"abschlag,omitempty"`                                                   // Art des Abschlag auf die Position
 	Gesamtzuabschlagsbetrag *decimal.Decimal                                       `json:"gesamtzuabschlagsbetrag,omitempty"`                                    // Der Betrag des Zu/Abschlages
+
+	// VertragskontoId ermöglicht die Zuordnung der Rechnungsposition zu einem Vertragskonto für SAP Convergent Invoicing.
+	VertragskontoId *string `json:"vertragskontoId,omitempty"`
+
+	// VertragsId ermöglicht die Zuordnung der Rechnungsposition zu einem Vertrag für SAP Convergent Invoicing.
+	VertragsId *string `json:"vertragsId,omitempty"`
+
+	// Status der Rechnungsposition in SAP Convergent Invoicing.
+	Status *rechnungspositionsstatus.RechnungspositionsStatus `json:"status,omitempty"`
 }
 
 // RechnungspositionStructLevelValidation does a cross check on a Rechnungsposition object
