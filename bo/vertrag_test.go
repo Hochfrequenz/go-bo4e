@@ -19,6 +19,7 @@ import (
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsart"
 	"github.com/hochfrequenz/go-bo4e/enum/vertragsstatus"
 	"github.com/hochfrequenz/go-bo4e/internal"
+	"github.com/hochfrequenz/go-bo4e/internal/unmappeddatamarshaller"
 	"github.com/shopspring/decimal"
 )
 
@@ -95,6 +96,7 @@ func Test_Vertrag_Deserialization(t *testing.T) {
 	var deserializedVertrag bo.Vertrag
 	err = json.Unmarshal(serializedContract, &deserializedVertrag)
 	then.AssertThat(t, err, is.Nil())
+	contract.Vertragsteile[0].ExtensionData = unmappeddatamarshaller.ExtensionData{}
 	then.AssertThat(t, deserializedVertrag, is.EqualTo(contract))
 }
 
