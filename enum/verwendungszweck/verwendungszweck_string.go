@@ -15,16 +15,19 @@ func _() {
 	_ = x[UEBERMITTLUNG_AN_DAS_HKNR-5]
 	_ = x[ERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREIS-6]
 	_ = x[BLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG-7]
+	_ = x[SELBSTVERBRAUCH-8]
+	_ = x[ES_LIEGT_KEIN_VERWENDUNGSZWECK_VOR-9]
+	_ = x[KEINE_DATENLIEFERUNG_AN_MARKTROLLE-10]
 }
 
-const _Verwendungszweck_name = "NETZNUTZUNGSABRECHNUNGBILANZKREISABRECHNUNGMEHRMINDERMENGENABRECHNUNGENDKUNDENABRECHNUNGUEBERMITTLUNG_AN_DAS_HKNRERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREISBLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNG"
+const _Verwendungszweck_name = "NETZNUTZUNGSABRECHNUNGBILANZKREISABRECHNUNGMEHRMINDERMENGENABRECHNUNGENDKUNDENABRECHNUNGUEBERMITTLUNG_AN_DAS_HKNRERMITTLUNG_AUSGEGLICHENHEIT_BILANZKREISBLINDARBEITABRECHNUNG_BETRIEBSFUEHRUNGSELBSTVERBRAUCHES_LIEGT_KEIN_VERWENDUNGSZWECK_VORKEINE_DATENLIEFERUNG_AN_MARKTROLLE"
 
-var _Verwendungszweck_index = [...]uint8{0, 22, 43, 69, 88, 113, 152, 190}
+var _Verwendungszweck_index = [...]uint16{0, 22, 43, 69, 88, 113, 152, 190, 205, 239, 273}
 
 func (i Verwendungszweck) String() string {
-	i -= 1
-	if i < 0 || i >= Verwendungszweck(len(_Verwendungszweck_index)-1) {
-		return "Verwendungszweck(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	idx := int(i) - 1
+	if i < 1 || idx >= len(_Verwendungszweck_index)-1 {
+		return "Verwendungszweck(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _Verwendungszweck_name[_Verwendungszweck_index[i]:_Verwendungszweck_index[i+1]]
+	return _Verwendungszweck_name[_Verwendungszweck_index[idx]:_Verwendungszweck_index[idx+1]]
 }
