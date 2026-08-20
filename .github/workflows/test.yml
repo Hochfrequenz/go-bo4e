@@ -1,5 +1,7 @@
 on: [ pull_request ]
 name: Unittests
+permissions:
+  contents: read
 jobs:
   test:
     strategy:
@@ -17,7 +19,6 @@ jobs:
         if: matrix.use_private_example_data_submodule == 'true'
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
           token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
           # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
           # PAT has repo scope
