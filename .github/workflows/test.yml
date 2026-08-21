@@ -26,6 +26,7 @@ jobs:
         env:
           # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
           # PAT needs repo scope on enercity/example_market_communication_bo4e_transactions.
+          # Expires 2027-08-20.
           # Note: Dependabot runs read the separate Dependabot secret of the same name,
           # so both copies have to be rotated.
           SUBMODULE_PAT: ${{ secrets.EXAMPLE_DATA_SUBMODULE_PAT }}
