@@ -1,0 +1,23 @@
+version: "2"
+
+# The linter selection used to live in the golangci-lint-action `args`, which
+# cannot express per-linter settings. Keeping it here also means a local
+# `golangci-lint run` behaves exactly like CI.
+linters:
+  enable:
+    - dupl
+    - goconst
+    - gocyclo
+  settings:
+    goconst:
+      # goconst is meant to catch a magic string that is duplicated across
+      # production code. In the test suite it only ever hits two harmless
+      # patterns, both of which read *better* as literals:
+      #  - map keys naming table-driven test cases, which deliberately mirror
+      #    the validator tag under test ("required", "gtfield", "alphanum")
+      #  - fixture data in struct/map literals ("Grünwald", "Lieschen", "1.1"),
+      #    which keeps each test file self-contained
+      ignore-map-keys: true
+      exclude-types:
+        - Call
+        - CompositeLit

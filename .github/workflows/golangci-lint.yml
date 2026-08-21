@@ -15,6 +15,5 @@ jobs:
         uses: golangci/golangci-lint-action@v9
         with:
           version: v2.13.1
-          args: --enable dupl,goconst,goconst,gocyclo
       - name: fmt
         run: golangci-lint fmt --diff --enable gofmt
