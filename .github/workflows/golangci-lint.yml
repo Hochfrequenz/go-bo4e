@@ -9,12 +9,11 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v7
         with:
-          go-version: "1.26"
+          go-version: "1.27"
       - uses: actions/checkout@v7
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
-          version: v2.9.0
-          args: --enable dupl,goconst,goconst,gocyclo
+          version: v2.13.1
       - name: fmt
-        run: golangci-lint fmt --diff --enable gofmt
+        run: golangci-lint fmt --diff
