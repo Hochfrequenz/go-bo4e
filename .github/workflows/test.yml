@@ -15,16 +15,29 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Checkout code AND submodule
+      # The repository itself is always checked out with the default GITHUB_TOKEN.
+      # Using the submodule PAT here means an expired PAT breaks the checkout of
+      # go-bo4e itself with an unhelpful "could not read Username for
+      # 'https://github.com'" error instead of a clear submodule failure.
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Checkout private example data submodule
         if: matrix.use_private_example_data_submodule == 'true'
-        uses: actions/checkout@v7
-        with:
-          token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
+        env:
           # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
-          # PAT has repo scope
-          submodules: "recursive"
-      - name: Checkout code without submodule
-        if: matrix.use_private_example_data_submodule == 'false'
-        uses: actions/checkout@v7
+          # PAT needs repo scope on enercity/example_market_communication_bo4e_transactions.
+          # Note: Dependabot runs read the separate Dependabot secret of the same name,
+          # so both copies have to be rotated.
+          SUBMODULE_PAT: ${{ secrets.EXAMPLE_DATA_SUBMODULE_PAT }}
+        run: |
+          if [ -z "$SUBMODULE_PAT" ]; then
+            echo "::error::secret EXAMPLE_DATA_SUBMODULE_PAT is empty - it is either missing or not exposed to this run."
+            exit 1
+          fi
+          git config --global url."https://x-access-token:${SUBMODULE_PAT}@github.com/".insteadOf "https://github.com/"
+          if ! git submodule update --init --recursive; then
+            echo "::error::could not fetch the private example data submodule. The most likely cause is an expired EXAMPLE_DATA_SUBMODULE_PAT; rotate it in the repository secrets."
+            exit 1
+          fi
       - name: Test
         run: go test ./...
