@@ -16,4 +16,4 @@ jobs:
         with:
           version: v2.13.1
       - name: fmt
-        run: golangci-lint fmt --diff --enable gofmt
+        run: golangci-lint fmt --diff
