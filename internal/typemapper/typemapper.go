@@ -33,7 +33,7 @@ func TypeFromValue[E any](v interface{}, m map[string]E) (E, error) {
 func toString(v interface{}) string {
 	var out string
 
-	if reflect.ValueOf(v).Kind() == reflect.Ptr {
+	if reflect.ValueOf(v).Kind() == reflect.Pointer {
 		if v == nil || v.(*string) == nil {
 			return ""
 		}

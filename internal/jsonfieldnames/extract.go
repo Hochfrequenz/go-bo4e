@@ -25,7 +25,7 @@ func Extract(value interface{}) ([]string, error) {
 	// in case the dereferenced type is also invalid.
 	originalTyp := typ
 
-	if typ.Kind() == reflect.Ptr {
+	if typ.Kind() == reflect.Pointer {
 		typ = typ.Elem()
 	}
 
@@ -73,7 +73,7 @@ func extractFromField(field reflect.StructField) []string {
 		return extractFromStruct(field.Type)
 
 	// field is an embedded struct pointer without explicit JSON field name. That means its fields are merged into the embedding struct.
-	case jsonFieldName == "" && field.Anonymous && field.Type.Kind() == reflect.Ptr && field.Type.Elem().Kind() == reflect.Struct:
+	case jsonFieldName == "" && field.Anonymous && field.Type.Kind() == reflect.Pointer && field.Type.Elem().Kind() == reflect.Struct:
 		return extractFromStruct(field.Type.Elem())
 
 	// field has no explicit JSON field name, so use the field name instead. Both non-embedded fields and embedded fields that are neither

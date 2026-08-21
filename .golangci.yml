@@ -1,0 +1,30 @@
+version: "2"
+
+# The linter selection used to live in the golangci-lint-action `args`, which
+# cannot express per-linter settings. Keeping it here also means a local
+# `golangci-lint run` / `golangci-lint fmt` behaves exactly like CI.
+linters:
+  enable:
+    - dupl
+    - goconst
+    - gocyclo
+  settings:
+    goconst:
+      # goconst is meant to catch a magic string duplicated across production
+      # code. In this repo it only ever fires in the test suite, on two patterns
+      # that both read better as plain literals:
+      #  - map keys naming table-driven cases, which deliberately mirror the
+      #    validator tag under test ("required", "gtfield", "alphanum")
+      #  - fixture data ("Grünwald", "Lieschen", "1.1"), which keeps each test
+      #    file self-contained
+      # Both live inside composite literals, so excluding that context covers
+      # them. Trade-off: goconst no longer sees duplicated strings inside
+      # slice/map/struct literals in production code either; it still fires in
+      # assignment, binary, case and return contexts.
+      exclude-types:
+        - Call # the default
+        - CompositeLit
+
+formatters:
+  enable:
+    - gofmt

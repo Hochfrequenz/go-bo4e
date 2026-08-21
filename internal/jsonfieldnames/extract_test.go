@@ -77,11 +77,13 @@ func TestExtractFromValidTypes(t *testing.T) {
 			expectedFields: []string{},
 		},
 		"struct with fields that have additional options": {
+			// the trailing commas and the "-," name are deliberately malformed json
+			// tags: extracting their field names is exactly what is under test here.
 			input: struct {
 				Foo  int `json:"boo,omitempty"`
-				Bar  int `json:"far,"`
+				Bar  int `json:"far,"` //nolint:staticcheck // SA5008: malformed on purpose
 				Baz  int `json:",omitempty"`
-				Dash int `json:"-,"`
+				Dash int `json:"-,"` //nolint:staticcheck // SA5008: malformed on purpose
 			}{},
 			expectedFields: []string{"-", "Baz", "boo", "far"},
 		},
