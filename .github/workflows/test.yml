@@ -1,5 +1,7 @@
 on: [ pull_request ]
 name: Unittests
+permissions:
+  contents: read
 jobs:
   test:
     strategy:
@@ -13,17 +15,45 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Checkout code AND submodule
+      # The repository itself is always checked out with the default GITHUB_TOKEN.
+      # Using the submodule PAT here means an expired PAT breaks the checkout of
+      # go-bo4e itself with an unhelpful "could not read Username for
+      # 'https://github.com'" error instead of a clear submodule failure.
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Checkout private example data submodule
         if: matrix.use_private_example_data_submodule == 'true'
-        uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
-          token: ${{secrets.EXAMPLE_DATA_SUBMODULE_PAT}} # expires 2026-05-15
+        env:
           # https://github.com/Hochfrequenz/go-bo4e/settings/secrets/actions/EXAMPLE_DATA_SUBMODULE_PAT
-          # PAT has repo scope
-          submodules: "recursive"
-      - name: Checkout code without submodule
-        if: matrix.use_private_example_data_submodule == 'false'
-        uses: actions/checkout@v7
+          # Classic PAT with repo scope; its owner needs read access to
+          # enercity/example_market_communication_bo4e_transactions. Expires 2027-08-20.
+          # Note: Dependabot runs read the separate Dependabot secret of the same name,
+          # so both copies have to be rotated.
+          SUBMODULE_PAT: ${{ secrets.EXAMPLE_DATA_SUBMODULE_PAT }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.fork }}
+          SUBMODULE_PATH: market_communication/example_market_communication_bo4e_transactions
+        run: |
+          if [ -z "$SUBMODULE_PAT" ]; then
+            if [ "$IS_FORK" = "true" ]; then
+              echo "::notice::pull request from a fork - secrets are unavailable, skipping the private example data submodule. The use_private_example_data_submodule=false matrix leg covers this case."
+              exit 0
+            fi
+            echo "::error::secret EXAMPLE_DATA_SUBMODULE_PAT is empty - it is either missing or not exposed to this run."
+            exit 1
+          fi
+          # -c instead of --global: the credential is passed via GIT_CONFIG_PARAMETERS
+          # (which submodule subprocesses inherit) rather than written to ~/.gitconfig,
+          # and the rewrite is scoped to the enercity org.
+          if ! git -c url."https://x-access-token:${SUBMODULE_PAT}@github.com/enercity/".insteadOf="https://github.com/enercity/" \
+                   submodule update --init --recursive; then
+            echo "::error::could not fetch the private example data submodule. The most likely cause is an expired EXAMPLE_DATA_SUBMODULE_PAT; rotate it in the repository secrets."
+            exit 1
+          fi
+          # 'submodule update' also exits 0 when nothing is registered, which would
+          # silently turn this matrix leg into a duplicate of the 'false' one.
+          if [ -z "$(ls -A "$SUBMODULE_PATH" 2>/dev/null)" ]; then
+            echo "::error::$SUBMODULE_PATH is empty after 'git submodule update' - is the submodule still registered in .gitmodules?"
+            exit 1
+          fi
       - name: Test
         run: go test ./...
