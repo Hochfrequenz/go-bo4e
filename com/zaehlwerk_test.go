@@ -2,6 +2,7 @@ package com_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 	"testing"
 
@@ -39,7 +40,7 @@ func Test_Zaehlwerk_Deserialization(t *testing.T) {
 	var deserializedZaehlwerk com.Zaehlwerk
 	err = json.Unmarshal(serializedZaehlwerk, &deserializedZaehlwerk)
 	then.AssertThat(t, err, is.Nil())
-	then.AssertThat(t, deserializedZaehlwerk.CompareTo(zaehlwerk.ExtensionData), is.True())
+	then.AssertThat(t, fmt.Sprint(deserializedZaehlwerk.ExtensionData) == fmt.Sprint(zaehlwerk.ExtensionData), is.True())
 	zaehlwerk.ExtensionData = deserializedZaehlwerk.ExtensionData
 	then.AssertThat(t, deserializedZaehlwerk, is.EqualTo(zaehlwerk))
 }

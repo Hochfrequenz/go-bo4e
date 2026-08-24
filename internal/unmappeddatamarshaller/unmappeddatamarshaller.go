@@ -2,18 +2,11 @@ package unmappeddatamarshaller
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 )
 
 type ExtensionData map[string]any
-
-func (ed ExtensionData) CompareTo(otherEd ExtensionData) bool {
-	mapAContent := fmt.Sprint(ed)
-	mapBContent := fmt.Sprint(otherEd)
-	return mapAContent == mapBContent
-}
 
 // HandleUnmappedDataPropertyMarshalling expects the bytes of a marshalled struct. If the marshalled struct contains
 // 'unmapped' fields meaning ones that had no corresponding, strong-typed field when initially unmarshalled, those fields
