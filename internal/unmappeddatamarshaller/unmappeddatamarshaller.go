@@ -3,8 +3,8 @@ package unmappeddatamarshaller
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
-	"reflect"
 )
 
 type ExtensionData map[string]any
@@ -24,8 +24,6 @@ func (ed ExtensionData) storeUnmappedData(key string, value any) {
 // will be extracted again. The extracted field from the maps containing the unmapped data will be placed on the top level
 // of the marshalled struct.
 func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
-	unmappedDataFieldName := reflect.TypeOf(ExtensionData{}).Name()
-
 	var structFields map[string]any
 	err = json.Unmarshal(b, &structFields)
 	if err != nil {
@@ -48,6 +46,8 @@ func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
 
 	return json.Marshal(structFields)
 }
+
+const unmappedDataFieldName = "ExtensionData"
 
 // UnmarshallWithUnmappedData will unmarshal a given type by mapping all strong-typed fields to the 'targetStruct'. All
 // other fields will be preserved in the 'unmappedDataInTargetStruct' dictionary.
