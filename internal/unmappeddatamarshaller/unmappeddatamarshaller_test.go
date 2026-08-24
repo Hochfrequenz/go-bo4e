@@ -28,13 +28,6 @@ func (s *SomeStruct) UnmarshalJSON(bytes []byte) (err error) {
 	return UnmarshallWithUnmappedData(s, &s.ExtensionData, bytes)
 }
 
-type SomeStructWithMoreFields struct {
-	ExtensionData `json:"-"`
-	A             string
-	B             int
-	X             string
-}
-
 func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testing.T) {
 	expectedUnmappedData := map[string]any{
 		"X": "very nice",
