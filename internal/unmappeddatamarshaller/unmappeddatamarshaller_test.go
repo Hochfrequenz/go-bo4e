@@ -36,10 +36,19 @@ type SomeStructWithMoreFields struct {
 }
 
 func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testing.T) {
-	someStructWithUnmappedData := SomeStructWithMoreFields{
-		A: "nice",
-		B: 911,
-		X: "very nice",
+	expectedUnmappedData := map[string]any{
+		"X": "very nice",
+	}
+	expectedStrongTypedFields := SomeStruct{
+		A:             "nice",
+		B:             911,
+		ExtensionData: expectedUnmappedData,
+	}
+
+	someStructWithUnmappedData := map[string]any{
+		"A": expectedStrongTypedFields.A,
+		"B": expectedStrongTypedFields.B,
+		"X": expectedUnmappedData["X"],
 	}
 
 	bytes, _ := json.Marshal(someStructWithUnmappedData)
@@ -48,11 +57,6 @@ func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testin
 	if err != nil {
 		t.Errorf("Error occured while unmarshalling: %v", err)
 	}
-
-	expectedUnmappedData := map[string]any{
-		"X": "very nice",
-	}
-	expectedStrongTypedFields := SomeStruct{A: someStructWithUnmappedData.A, B: someStructWithUnmappedData.B, ExtensionData: expectedUnmappedData}
 
 	if !reflect.DeepEqual(actualStrongTypedFields, expectedStrongTypedFields) {
 		t.Errorf("Unmarshalling struct with unmapped data failed:\nexpected: %v,\nactual: %v", expectedStrongTypedFields, actualStrongTypedFields)
