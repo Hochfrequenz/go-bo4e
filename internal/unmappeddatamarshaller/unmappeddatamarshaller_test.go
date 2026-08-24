@@ -60,16 +60,10 @@ func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testin
 }
 
 func Test_Marshalling_WitUnmappedData_PreservesUnmappedDataInJson(t *testing.T) {
-	expectedStructWithUnmappedData := SomeStructWithMoreFields{
-		A: "nice",
-		B: 911,
-		X: "very nice",
-	}
-
 	unmappedData := map[string]any{
 		"X": "very nice",
 	}
-	structWithUnmappedData := SomeStruct{A: expectedStructWithUnmappedData.A, B: expectedStructWithUnmappedData.B, ExtensionData: unmappedData}
+	structWithUnmappedData := SomeStruct{A: "nice", B: 911, ExtensionData: unmappedData}
 
 	actual, err := json.Marshal(structWithUnmappedData)
 	if err != nil {
