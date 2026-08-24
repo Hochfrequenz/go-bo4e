@@ -15,10 +15,6 @@ func (ed ExtensionData) CompareTo(otherEd ExtensionData) bool {
 	return mapAContent == mapBContent
 }
 
-func (ed ExtensionData) storeUnmappedData(key string, value any) {
-	ed[key] = value
-}
-
 // HandleUnmappedDataPropertyMarshalling expects the bytes of a marshalled struct. If the marshalled struct contains
 // 'unmapped' fields meaning ones that had no corresponding, strong-typed field when initially unmarshalled, those fields
 // will be extracted again. The extracted field from the maps containing the unmapped data will be placed on the top level
@@ -72,7 +68,7 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 		}
 
 		if !isMappedField {
-			unmappedDataInTargetStruct.storeUnmappedData(fieldName, value)
+			(*unmappedDataInTargetStruct)[fieldName] = value
 			delete(unmarshalledFields, fieldName)
 		}
 	}
