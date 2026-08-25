@@ -88,3 +88,45 @@ func Test_Marshalling_WithNilUnmappedData_OmitsExtensionDataFromJson(t *testing.
 		t.Errorf("Marshalling struct with nil unmapped data failed:\nexpected: %s,\nactual: %s", expectedJson, actualJson)
 	}
 }
+
+func TestUnmarshalWithEmbeddedType(t *testing.T) {
+	type Embedded struct {
+		ExtensionData
+		A string `json:"not_a"`
+	}
+
+	type Embedder struct {
+		Embedded
+		B string `json:"not_b"`
+	}
+
+	raw := `{ "not_a": "foo", "not_b": "bar", "extra": "baz" }`
+
+	embedder := Embedder{}
+
+	if err := UnmarshallWithUnmappedData(&embedder, &embedder.ExtensionData, []byte(raw)); err != nil {
+		t.Fatalf("could not unmarshal: %v", err)
+	}
+
+	if embedder.A != "foo" {
+		t.Errorf("expected A to be '%s', got '%s'", "foo", embedder.A)
+	}
+
+	if embedder.B != "bar" {
+		t.Errorf("expected B to be '%s', got '%s'", "bar", embedder.B)
+	}
+
+	if len(embedder.ExtensionData) != 1 {
+		t.Fatalf("expected %d extension data entry, got %v", 1, embedder.ExtensionData)
+	}
+
+	extra, ok := embedder.ExtensionData["extra"]
+	if !ok {
+		t.Error("expected extra")
+	}
+
+	s, ok := extra.(string)
+	if !ok || s != "baz" {
+		t.Errorf("expected extra to be string '%[1]s', got %[2]v (%[2]T)", "baz", extra)
+	}
+}
