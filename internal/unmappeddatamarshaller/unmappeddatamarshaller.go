@@ -2,52 +2,36 @@ package unmappeddatamarshaller
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 	"reflect"
+
+	"github.com/hochfrequenz/go-bo4e/internal/jsonfieldnames"
 )
 
 type ExtensionData map[string]any
-
-func (ed ExtensionData) CompareTo(otherEd ExtensionData) bool {
-	mapAContent := fmt.Sprint(ed)
-	mapBContent := fmt.Sprint(otherEd)
-	return mapAContent == mapBContent
-}
-
-func (ed ExtensionData) storeUnmappedData(key string, value any) {
-	ed[key] = value
-}
 
 // HandleUnmappedDataPropertyMarshalling expects the bytes of a marshalled struct. If the marshalled struct contains
 // 'unmapped' fields meaning ones that had no corresponding, strong-typed field when initially unmarshalled, those fields
 // will be extracted again. The extracted field from the maps containing the unmapped data will be placed on the top level
 // of the marshalled struct.
 func HandleUnmappedDataPropertyMarshalling(b []byte) (bytes []byte, err error) {
-	unmappedDataFieldName := reflect.TypeOf(ExtensionData{}).Name()
-
 	var structFields map[string]any
 	err = json.Unmarshal(b, &structFields)
 	if err != nil {
 		return
 	}
 
-	for fieldName, value := range structFields {
-		if fieldName == unmappedDataFieldName {
-			if value != nil {
-				unmappedDataMap := value.(map[string]any)
-				for k, v := range unmappedDataMap {
-					structFields[k] = v
-				}
-			}
-			// this is to avoid `"ExtensionData": null` in the json output
-			// which consumers might interpret as unmapped property
-			delete(structFields, fieldName)
+	if unmappedDataMap, ok := structFields[unmappedDataFieldName].(map[string]any); ok {
+		for k, v := range unmappedDataMap {
+			structFields[k] = v
 		}
 	}
 
+	delete(structFields, unmappedDataFieldName)
+
 	return json.Marshal(structFields)
 }
+
+const unmappedDataFieldName = "ExtensionData"
 
 // UnmarshallWithUnmappedData will unmarshal a given type by mapping all strong-typed fields to the 'targetStruct'. All
 // other fields will be preserved in the 'unmappedDataInTargetStruct' dictionary.
@@ -78,21 +62,86 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 		}
 
 		if !isMappedField {
-			unmappedDataInTargetStruct.storeUnmappedData(fieldName, value)
+			(*unmappedDataInTargetStruct)[fieldName] = value
 			delete(unmarshalledFields, fieldName)
 		}
 	}
-
-	type Shadow *T
-	s := Shadow(targetStruct)
 
 	byteArr, err := json.Marshal(unmarshalledFields)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(byteArr, s)
-	if err != nil {
+
+	// original is the reflection value we use to set the fields of targetStruct.
+	original := reflect.Indirect(reflect.ValueOf(targetStruct))
+
+	// create reflection struct fields and field name mappers from the type we want to write to.
+	shadowFields, targetValueSetters := createFieldsForShadowType(original.Type())
+
+	shadow := reflect.New(reflect.StructOf(shadowFields))
+	if err = json.Unmarshal(byteArr, shadow.Interface()); err != nil {
 		return
+	}
+
+	for field, value := range reflect.Indirect(shadow).Fields() {
+		targetValueSetters[field.Name](value, original)
+	}
+
+	return
+}
+
+// createFieldsForShadowType takes a reflection type and returns a list of fields that represent the targetType's fields,
+// but flattened. When a target type embeds a type, both the target type's and the embedded type's fields
+// can be found in the list. This also works with nested embeddings, e.g. A embeds B, B embeds C.
+// The second return value targetValueSetters returns a map from field names to setters. When constructing a struct type
+// from the fields list via reflection and unmarshalling JSON into a value of that type, you can set the field values
+// of the target type by iterating over the shadow's fields and calling the target value setter by fieldname with
+// the shadow field value as the first argument and the target as the second.
+//
+// Non-struct embedded fields are ignored. In our case, this is fine, as the only corresponding field is ExtensionData
+// which we don't want to fill via shadow type.
+//
+// Field names may clash, i.e. an embedded type may have a field with the same name as the embedding type. In that case
+// creating a struct type from the list of fields will just crash. The bo4e tests run successfully, so such a clash does
+// not seem to exist.
+//
+// Custom unmarshalling methods on embedded types are not called, as the reflection package does not support creating
+// struct types with method-bearing embedded fields. Again, no such case does seem to exist for the bo4e module.
+func createFieldsForShadowType(targetType reflect.Type) (fields []reflect.StructField, targetValueSetters map[string]func(value reflect.Value, target reflect.Value)) {
+	targetValueSetters = make(map[string]func(value reflect.Value, target reflect.Value))
+
+	if targetType.Kind() != reflect.Struct {
+		return
+	}
+
+	for field := range targetType.Fields() {
+		// Unexported fields cannot be used with reflect.StructOf. The json package can't unmarshal into them anyway.
+		// So we take only the exported fields.
+		if field.PkgPath != "" {
+			continue
+		}
+
+		// Named fields are simple. Append them to the list of fields. Setting the value is just finding the field with the same name
+		// and setting its value.
+		if !field.Anonymous {
+			fields = append(fields, field)
+			targetValueSetters[field.Name] = func(value, target reflect.Value) {
+				target.FieldByName(field.Name).Set(value)
+			}
+
+			continue
+		}
+
+		// Anonymous fields sadly can't just be set directly as reflect.StructOf does not support embedded types with methods
+		// (which we have). So we flatten them into one big struct.
+		subFields, subMappings := createFieldsForShadowType(field.Type)
+		fields = append(fields, subFields...)
+		for name, subMapping := range subMappings {
+			targetValueSetters[name] = func(value, target reflect.Value) {
+				target = target.FieldByName(field.Name)
+				subMapping(value, target)
+			}
+		}
 	}
 
 	return

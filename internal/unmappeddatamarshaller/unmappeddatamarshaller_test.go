@@ -28,18 +28,20 @@ func (s *SomeStruct) UnmarshalJSON(bytes []byte) (err error) {
 	return UnmarshallWithUnmappedData(s, &s.ExtensionData, bytes)
 }
 
-type SomeStructWithMoreFields struct {
-	ExtensionData `json:"-"`
-	A             string
-	B             int
-	X             string
-}
-
 func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testing.T) {
-	someStructWithUnmappedData := SomeStructWithMoreFields{
-		A: "nice",
-		B: 911,
-		X: "very nice",
+	expectedUnmappedData := map[string]any{
+		"X": "very nice",
+	}
+	expectedStrongTypedFields := SomeStruct{
+		A:             "nice",
+		B:             911,
+		ExtensionData: expectedUnmappedData,
+	}
+
+	someStructWithUnmappedData := map[string]any{
+		"A": expectedStrongTypedFields.A,
+		"B": expectedStrongTypedFields.B,
+		"X": expectedUnmappedData["X"],
 	}
 
 	bytes, _ := json.Marshal(someStructWithUnmappedData)
@@ -49,27 +51,16 @@ func Test_Unmarshalling_WithUnmappedData_PreservesUnmappedDataInStruct(t *testin
 		t.Errorf("Error occured while unmarshalling: %v", err)
 	}
 
-	expectedUnmappedData := map[string]any{
-		"X": "very nice",
-	}
-	expectedStrongTypedFields := SomeStruct{A: someStructWithUnmappedData.A, B: someStructWithUnmappedData.B, ExtensionData: expectedUnmappedData}
-
 	if !reflect.DeepEqual(actualStrongTypedFields, expectedStrongTypedFields) {
 		t.Errorf("Unmarshalling struct with unmapped data failed:\nexpected: %v,\nactual: %v", expectedStrongTypedFields, actualStrongTypedFields)
 	}
 }
 
 func Test_Marshalling_WitUnmappedData_PreservesUnmappedDataInJson(t *testing.T) {
-	expectedStructWithUnmappedData := SomeStructWithMoreFields{
-		A: "nice",
-		B: 911,
-		X: "very nice",
-	}
-
 	unmappedData := map[string]any{
 		"X": "very nice",
 	}
-	structWithUnmappedData := SomeStruct{A: expectedStructWithUnmappedData.A, B: expectedStructWithUnmappedData.B, ExtensionData: unmappedData}
+	structWithUnmappedData := SomeStruct{A: "nice", B: 911, ExtensionData: unmappedData}
 
 	actual, err := json.Marshal(structWithUnmappedData)
 	if err != nil {
@@ -95,5 +86,47 @@ func Test_Marshalling_WithNilUnmappedData_OmitsExtensionDataFromJson(t *testing.
 	actualJson := string(actual)
 	if expectedJson != actualJson {
 		t.Errorf("Marshalling struct with nil unmapped data failed:\nexpected: %s,\nactual: %s", expectedJson, actualJson)
+	}
+}
+
+func TestUnmarshalWithEmbeddedType(t *testing.T) {
+	type Embedded struct {
+		ExtensionData
+		A string `json:"not_a"`
+	}
+
+	type Embedder struct {
+		Embedded
+		B string `json:"not_b"`
+	}
+
+	raw := `{ "not_a": "foo", "not_b": "bar", "extra": "baz" }`
+
+	embedder := Embedder{}
+
+	if err := UnmarshallWithUnmappedData(&embedder, &embedder.ExtensionData, []byte(raw)); err != nil {
+		t.Fatalf("could not unmarshal: %v", err)
+	}
+
+	if embedder.A != "foo" {
+		t.Errorf("expected A to be '%s', got '%s'", "foo", embedder.A)
+	}
+
+	if embedder.B != "bar" {
+		t.Errorf("expected B to be '%s', got '%s'", "bar", embedder.B)
+	}
+
+	if len(embedder.ExtensionData) != 1 {
+		t.Fatalf("expected %d extension data entry, got %v", 1, embedder.ExtensionData)
+	}
+
+	extra, ok := embedder.ExtensionData["extra"]
+	if !ok {
+		t.Error("expected extra")
+	}
+
+	s, ok := extra.(string)
+	if !ok || s != "baz" {
+		t.Errorf("expected extra to be string '%[1]s', got %[2]v (%[2]T)", "baz", extra)
 	}
 }
