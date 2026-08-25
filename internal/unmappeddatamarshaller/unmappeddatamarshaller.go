@@ -97,6 +97,16 @@ func UnmarshallWithUnmappedData[T any](targetStruct *T, unmappedDataInTargetStru
 // from the fields list via reflection and unmarshalling JSON into a value of that type, you can set the field values
 // of the target type by iterating over the shadow's fields and calling the target value setter by fieldname with
 // the shadow field value as the first argument and the target as the second.
+//
+// Non-struct embedded fields are ignored. In our case, this is fine, as the only corresponding field is ExtensionData
+// which we don't want to fill via shadow type.
+//
+// Field names may clash, i.e. an embedded type may have a field with the same name as the embedding type. In that case
+// creating a struct type from the list of fields will just crash. The bo4e tests run successfully, so such a clash does
+// not seem to exist.
+//
+// Custom unmarshalling methods on embedded types are not called, as the reflection package does not support creating
+// struct types with method-bearing embedded fields. Again, no such case does seem to exist for the bo4e module.
 func createFieldsForShadowType(targetType reflect.Type) (fields []reflect.StructField, targetValueSetters map[string]func(value reflect.Value, target reflect.Value)) {
 	targetValueSetters = make(map[string]func(value reflect.Value, target reflect.Value))
 
