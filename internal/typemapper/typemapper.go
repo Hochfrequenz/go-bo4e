@@ -2,7 +2,6 @@ package typemapper
 
 import (
 	"fmt"
-	"reflect"
 )
 
 // TypeFromValue returns a type value from v (being a string or string pointer)
@@ -31,16 +30,13 @@ func TypeFromValue[E any](v interface{}, m map[string]E) (E, error) {
 }
 
 func toString(v interface{}) string {
-	var out string
-
-	if reflect.ValueOf(v).Kind() == reflect.Pointer {
-		if v == nil || v.(*string) == nil {
-			return ""
-		}
-		out = *v.(*string)
-	} else {
-		out = v.(string)
+	if s, ok := v.(string); ok {
+		return s
 	}
 
-	return out
+	if s, ok := v.(*string); ok && s != nil {
+		return *s
+	}
+
+	return ""
 }
