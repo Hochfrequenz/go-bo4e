@@ -9,6 +9,7 @@ import (
 )
 
 // LoBü-ID is short for Lokationsbündel-Identifikationsnummer
+
 // loBueIdRegex is a regex that all Lokationsbündel-IDs must match: A "G" followed by 9 upper case letters or digits and a trailing checksum
 var loBueIdRegex = regexp.MustCompile(`^G[A-Z\d]{9}\d{1}$`)
 

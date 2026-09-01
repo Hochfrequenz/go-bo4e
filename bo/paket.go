@@ -9,6 +9,7 @@ import (
 )
 
 // Paket-ID is short for Paket-Identifikationsnummer; it identifies the Lokationen that are affected by a Netzbetreiberwechsel
+
 // paketIdRegex is a regex that all Paket-IDs must match: A "P", a "9", then 8 upper case letters or digits and a trailing checksum
 var paketIdRegex = regexp.MustCompile(`^P9[A-Z\d]{8}\d{1}$`)
 
