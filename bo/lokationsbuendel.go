@@ -15,7 +15,7 @@ var loBueIdRegex = regexp.MustCompile(`^G[A-Z\d]{9}\d{1}$`)
 // loBueIdRegexWithoutChecksum is a regex that all Lokationsbündel-IDs[0:10] must match: A "G" followed by 9 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
 var loBueIdRegexWithoutChecksum = regexp.MustCompile(`^G[A-Z\d]{9}$`)
 
-// GetLoBueIdCheckSum returns the checksum (11th character of the LoBü-ID) that matches the first ten characters long provided in loBueIdWithoutCheckSum. This is going to crash if the length of the loBueIdWithoutCheckSum is <10. Use loBueIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a LoBü-ID
+// GetLoBueIdCheckSum returns the checksum (11th character of the LoBü-ID) that matches the first ten characters provided in loBueIdWithoutCheckSum. It returns an error if loBueIdWithoutCheckSum does not match ^G[A-Z\d]{9}$. Use loBueIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a LoBü-ID
 func GetLoBueIdCheckSum(loBueIdWithoutCheckSum string) (int, error) {
 	// Quote from https://www.bdew.de/media/documents/Anwendungshilfe_Identifikatoren_in_der_Marktkommunikation_V1.3.pdf chapter 9.2
 	// > Das ASCII-Verfahren zur Berechnung der Prüfziffer findet bei der Ressourcen-ID, NeLo-ID, NeBe-ID, LoBü-ID und Paket-ID Anwendung.

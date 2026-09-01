@@ -15,7 +15,7 @@ var paketIdRegex = regexp.MustCompile(`^P9[A-Z\d]{8}\d{1}$`)
 // paketIdRegexWithoutChecksum is a regex that all Paket-IDs[0:10] must match: A "P", a "9" and 8 upper case letters or digits BUT WITHOUT A TRAILING CHECKSUM
 var paketIdRegexWithoutChecksum = regexp.MustCompile(`^P9[A-Z\d]{8}$`)
 
-// GetPaketIdCheckSum returns the checksum (11th character of the Paket-ID) that matches the first ten characters long provided in paketIdWithoutCheckSum. This is going to crash if the length of the paketIdWithoutCheckSum is <10. Use paketIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a Paket-ID
+// GetPaketIdCheckSum returns the checksum (11th character of the Paket-ID) that matches the first ten characters provided in paketIdWithoutCheckSum. It returns an error if paketIdWithoutCheckSum does not match ^P9[A-Z\d]{8}$. Use paketIdWithoutCheckSum + strconv.Itoa(returnValue) to generate a Paket-ID
 func GetPaketIdCheckSum(paketIdWithoutCheckSum string) (int, error) {
 	// Quote from https://www.bdew.de/media/documents/Anwendungshilfe_Identifikatoren_in_der_Marktkommunikation_V1.3.pdf chapter 9.2
 	// > Das ASCII-Verfahren zur Berechnung der Prüfziffer findet bei der Ressourcen-ID, NeLo-ID, NeBe-ID, LoBü-ID und Paket-ID Anwendung.
