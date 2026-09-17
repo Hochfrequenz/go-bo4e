@@ -3,7 +3,7 @@ module github.com/hochfrequenz/go-bo4e
 go 1.26.0
 
 require (
-	github.com/corbym/gocrest v1.2.2
+	github.com/corbym/gocrest v1.3.0
 	github.com/go-playground/validator/v10 v10.30.4
 	github.com/shopspring/decimal v1.4.0
 )
