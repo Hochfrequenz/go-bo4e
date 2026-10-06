@@ -43,8 +43,10 @@ jobs:
           fi
           # -c instead of --global: the credential is passed via GIT_CONFIG_PARAMETERS
           # (which submodule subprocesses inherit) rather than written to ~/.gitconfig,
-          # and the rewrite is scoped to the enercity org.
+          # and the rewrites are scoped to the two orgs hosting the submodule
+          # (enercity upstream, Hochfrequenz fork).
           if ! git -c url."https://x-access-token:${SUBMODULE_PAT}@github.com/enercity/".insteadOf="https://github.com/enercity/" \
+                   -c url."https://x-access-token:${SUBMODULE_PAT}@github.com/Hochfrequenz/".insteadOf="https://github.com/Hochfrequenz/" \
                    submodule update --init --recursive; then
             echo "::error::could not fetch the private example data submodule. The most likely cause is an expired EXAMPLE_DATA_SUBMODULE_PAT; rotate it in the repository secrets."
             exit 1
