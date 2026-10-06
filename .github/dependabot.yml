@@ -19,3 +19,9 @@ updates:
     directory: "/enum_compatibility_test"
     schedule:
       interval: "weekly"
+
+  # Keep git submodules up to date
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
